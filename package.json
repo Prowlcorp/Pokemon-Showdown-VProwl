@@ -16,7 +16,8 @@
     "permessage-deflate": "^0.1.6"
   },
   "engines": {
-    "node": ">=7.7.0"
+    "node": "10.16.x"
+    "npm": "6.9.x"
   },
   "scripts": {
     "start": "node pokemon-showdown start",
@@ -37,7 +38,7 @@
   "homepage": "http://pokemonshowdown.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Zarel/Pokemon-Showdown.git"
+    "url": "https://github.com/Prowlcorp/Pokemon-Showdown-VProwl"
   },
   "author": {
     "name": "Guangcong Luo",
