@@ -5424,7 +5424,7 @@ let BattlePokedex = {
 		otherFormes: ["flygonmega"],
 	},
 	flygonmega: {
-		num: 321,
+		num: 320,
 		species: "Flygon-Mega",
 		baseSpecies: "Flygon",
 		forme: "Mega",
@@ -5438,7 +5438,7 @@ let BattlePokedex = {
 		eggGroups: ["Bug"],
 	},
 	cacnea: {
-		num: 322,
+		num: 321,
 		species: "Cacnea",
 		types: ["Grass"],
 		baseStats: {hp: 50, atk: 85, def: 40, spa: 85, spd: 40, spe: 35},
@@ -5450,7 +5450,7 @@ let BattlePokedex = {
 		eggGroups: ["Grass", "Human-Like"],
 	},
 	cacturne: {
-		num: 323,
+		num: 322,
 		species: "Cacturne",
 		types: ["Grass", "Dark"],
 		baseStats: {hp: 70, atk: 115, def: 60, spa: 115, spd: 60, spe: 55},
@@ -5463,7 +5463,7 @@ let BattlePokedex = {
 		eggGroups: ["Grass", "Human-Like"],
 	},
 	swablu: {
-		num: 324,
+		num: 323,
 		species: "Swablu",
 		types: ["Normal", "Flying"],
 		baseStats: {hp: 45, atk: 40, def: 60, spa: 40, spd: 75, spe: 50},
@@ -5475,7 +5475,7 @@ let BattlePokedex = {
 		eggGroups: ["Flying", "Dragon"],
 	},
 	altaria: {
-		num: 325,
+		num: 324,
 		species: "Altaria",
 		types: ["Dragon", "Flying"],
 		baseStats: {hp: 75, atk: 70, def: 90, spa: 70, spd: 105, spe: 80},
@@ -5489,7 +5489,7 @@ let BattlePokedex = {
 		otherFormes: ["altariamega"],
 	},
 	altariamega: {
-		num: 325,
+		num: 324,
 		species: "Altaria-Mega",
 		baseSpecies: "Altaria",
 		forme: "Mega",
@@ -5503,7 +5503,7 @@ let BattlePokedex = {
 		eggGroups: ["Flying", "Dragon"],
 	},
 	zangoose: {
-		num: 326,
+		num: 325,
 		species: "Zangoose",
 		types: ["Normal"],
 		baseStats: {hp: 73, atk: 115, def: 60, spa: 60, spd: 60, spe: 90},
@@ -5515,7 +5515,7 @@ let BattlePokedex = {
 		otherFormes: ["zangoosemega"],
 	},
 	zangoosemega: {
-		num: 326,
+		num: 325,
 		species: "Zangoose-Mega",
 		baseSpecies: "Zangoose",
 		forme: "Mega",
@@ -5529,7 +5529,7 @@ let BattlePokedex = {
 		eggGroups: ["Field"],
 	},
 	seviper: {
-		num: 327,
+		num: 326,
 		species: "Seviper",
 		types: ["Poison"],
 		baseStats: {hp: 73, atk: 100, def: 60, spa: 100, spd: 60, spe: 65},
@@ -5541,7 +5541,7 @@ let BattlePokedex = {
 		otherFormes: ["sevipermega"],
 	},
 	sevipermega: {
-		num: 327,
+		num: 326,
 		species: "Seviper-Mega",
 		baseSpecies: "Seviper",
 		forme: "Mega",
@@ -5555,7 +5555,7 @@ let BattlePokedex = {
 		eggGroups: ["Field", "Dragon"],
 	},
 	lunatone: {
-		num: 328,
+		num: 327,
 		species: "Lunatone",
 		types: ["Rock", "Psychic"],
 		gender: "N",
@@ -5567,7 +5567,7 @@ let BattlePokedex = {
 		eggGroups: ["Mineral"],
 	},
 	solrock: {
-		num: 329,
+		num: 328,
 		species: "Solrock",
 		types: ["Rock", "Psychic"],
 		gender: "N",
@@ -5579,7 +5579,7 @@ let BattlePokedex = {
 		eggGroups: ["Mineral"],
 	},
 	barboach: {
-		num: 330,
+		num: 329,
 		species: "Barboach",
 		types: ["Water", "Ground"],
 		baseStats: {hp: 50, atk: 48, def: 43, spa: 46, spd: 41, spe: 60},
@@ -5591,7 +5591,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 2"],
 	},
 	whiscash: {
-		num: 331,
+		num: 330,
 		species: "Whiscash",
 		types: ["Water", "Ground"],
 		baseStats: {hp: 110, atk: 78, def: 73, spa: 76, spd: 71, spe: 60},
@@ -5604,7 +5604,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 2"],
 	},
 	corphish: {
-		num: 332,
+		num: 331,
 		species: "Corphish",
 		types: ["Water"],
 		baseStats: {hp: 43, atk: 80, def: 65, spa: 50, spd: 35, spe: 35},
@@ -5616,7 +5616,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 1", "Water 3"],
 	},
 	crawdaunt: {
-		num: 333,
+		num: 332,
 		species: "Crawdaunt",
 		types: ["Water", "Dark"],
 		baseStats: {hp: 63, atk: 120, def: 85, spa: 90, spd: 55, spe: 55},
@@ -5629,7 +5629,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 1", "Water 3"],
 	},
 	baltoy: {
-		num: 334,
+		num: 333,
 		species: "Baltoy",
 		types: ["Ground", "Psychic"],
 		gender: "N",
@@ -5642,7 +5642,7 @@ let BattlePokedex = {
 		eggGroups: ["Mineral"],
 	},
 	claydol: {
-		num: 335,
+		num: 334,
 		species: "Claydol",
 		types: ["Ground", "Psychic"],
 		gender: "N",
@@ -5656,7 +5656,7 @@ let BattlePokedex = {
 		eggGroups: ["Mineral"],
 	},
 	lileep: {
-		num: 336,
+		num: 335,
 		species: "Lileep",
 		types: ["Rock", "Grass"],
 		genderRatio: {M: 0.875, F: 0.125},
@@ -5669,7 +5669,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 3"],
 	},
 	cradily: {
-		num: 337,
+		num: 336,
 		species: "Cradily",
 		types: ["Rock", "Grass"],
 		genderRatio: {M: 0.875, F: 0.125},
@@ -5683,7 +5683,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 3"],
 	},
 	anorith: {
-		num: 338,
+		num: 337,
 		species: "Anorith",
 		types: ["Rock", "Bug"],
 		genderRatio: {M: 0.875, F: 0.125},
@@ -5696,7 +5696,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 3"],
 	},
 	armaldo: {
-		num: 339,
+		num: 338,
 		species: "Armaldo",
 		types: ["Rock", "Bug"],
 		genderRatio: {M: 0.875, F: 0.125},
@@ -5710,7 +5710,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 3"],
 	},
 	feebas: {
-		num: 340,
+		num: 339,
 		species: "Feebas",
 		types: ["Water"],
 		baseStats: {hp: 20, atk: 15, def: 20, spa: 10, spd: 55, spe: 80},
@@ -5722,7 +5722,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 1", "Dragon"],
 	},
 	milotic: {
-		num: 341,
+		num: 340,
 		species: "Milotic",
 		types: ["Water"],
 		baseStats: {hp: 95, atk: 60, def: 79, spa: 100, spd: 125, spe: 81},
@@ -5735,7 +5735,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 1", "Dragon"],
 	},
 	castform: {
-		num: 342,
+		num: 341,
 		species: "Castform",
 		types: ["Normal"],
 		baseStats: {hp: 70, atk: 70, def: 70, spa: 70, spd: 70, spe: 70},
@@ -5747,7 +5747,7 @@ let BattlePokedex = {
 		otherFormes: ["castformsunny", "castformrainy", "castformsnowy"],
 	},
 	castformsunny: {
-		num: 342,
+		num: 341,
 		species: "Castform-Sunny",
 		baseSpecies: "Castform",
 		forme: "Sunny",
@@ -5761,7 +5761,7 @@ let BattlePokedex = {
 		eggGroups: ["Fairy", "Amorphous"],
 	},
 	castformrainy: {
-		num: 342,
+		num: 341,
 		species: "Castform-Rainy",
 		baseSpecies: "Castform",
 		forme: "Rainy",
@@ -5775,7 +5775,7 @@ let BattlePokedex = {
 		eggGroups: ["Fairy", "Amorphous"],
 	},
 	castformsnowy: {
-		num: 342,
+		num: 341,
 		species: "Castform-Snowy",
 		baseSpecies: "Castform",
 		forme: "Snowy",
@@ -5789,7 +5789,7 @@ let BattlePokedex = {
 		eggGroups: ["Fairy", "Amorphous"],
 	},
 	kecleon: {
-		num: 343,
+		num: 342,
 		species: "Kecleon",
 		types: ["Normal"],
 		baseStats: {hp: 60, atk: 90, def: 70, spa: 60, spd: 120, spe: 40},
@@ -5800,7 +5800,7 @@ let BattlePokedex = {
 		eggGroups: ["Field"],
 	},
 	shuppet: {
-		num: 344,
+		num: 343,
 		species: "Shuppet",
 		types: ["Ghost"],
 		baseStats: {hp: 44, atk: 75, def: 35, spa: 63, spd: 33, spe: 45},
@@ -5812,7 +5812,7 @@ let BattlePokedex = {
 		eggGroups: ["Amorphous"],
 	},
 	banette: {
-		num: 345,
+		num: 344,
 		species: "Banette",
 		types: ["Ghost"],
 		baseStats: {hp: 64, atk: 115, def: 65, spa: 83, spd: 63, spe: 65},
@@ -5826,7 +5826,7 @@ let BattlePokedex = {
 		otherFormes: ["banettemega"],
 	},
 	banettemega: {
-		num: 345,
+		num: 344,
 		species: "Banette-Mega",
 		baseSpecies: "Banette",
 		forme: "Mega",
@@ -5840,7 +5840,7 @@ let BattlePokedex = {
 		eggGroups: ["Amorphous"],
 	},
 	duskull: {
-		num: 346,
+		num: 345,
 		species: "Duskull",
 		types: ["Ghost"],
 		baseStats: {hp: 20, atk: 40, def: 90, spa: 30, spd: 90, spe: 25},
@@ -5852,7 +5852,7 @@ let BattlePokedex = {
 		eggGroups: ["Amorphous"],
 	},
 	dusclops: {
-		num: 347,
+		num: 346,
 		species: "Dusclops",
 		types: ["Ghost"],
 		baseStats: {hp: 40, atk: 70, def: 130, spa: 60, spd: 130, spe: 25},
@@ -5866,7 +5866,7 @@ let BattlePokedex = {
 		eggGroups: ["Amorphous"],
 	},
 	tropius: {
-		num: 348,
+		num: 347,
 		species: "Tropius",
 		types: ["Grass", "Flying"],
 		baseStats: {hp: 99, atk: 68, def: 83, spa: 72, spd: 87, spe: 51},
@@ -5877,7 +5877,7 @@ let BattlePokedex = {
 		eggGroups: ["Monster", "Grass"],
 	},
 	chimecho: {
-		num: 349,
+		num: 348,
 		species: "Chimecho",
 		types: ["Psychic"],
 		baseStats: {hp: 75, atk: 50, def: 80, spa: 95, spd: 90, spe: 65},
@@ -5892,7 +5892,7 @@ let BattlePokedex = {
 		canHatch: true,
 	},
 	absol: {
-		num: 350,
+		num: 349,
 		species: "Absol",
 		types: ["Dark"],
 		baseStats: {hp: 65, atk: 130, def: 60, spa: 75, spd: 60, spe: 75},
@@ -5904,7 +5904,7 @@ let BattlePokedex = {
 		otherFormes: ["absolmega"],
 	},
 	absolmega: {
-		num: 350,
+		num: 349,
 		species: "Absol-Mega",
 		baseSpecies: "Absol",
 		forme: "Mega",
@@ -5918,7 +5918,7 @@ let BattlePokedex = {
 		eggGroups: ["Field"],
 	},
 	wynaut: {
-		num: 351,
+		num: 350,
 		species: "Wynaut",
 		types: ["Psychic"],
 		baseStats: {hp: 95, atk: 23, def: 48, spa: 23, spd: 48, spe: 23},
@@ -5931,7 +5931,7 @@ let BattlePokedex = {
 		canHatch: true,
 	},
 	snorunt: {
-		num: 352,
+		num: 351,
 		species: "Snorunt",
 		types: ["Ice"],
 		baseStats: {hp: 50, atk: 50, def: 50, spa: 50, spd: 50, spe: 50},
@@ -5943,7 +5943,7 @@ let BattlePokedex = {
 		eggGroups: ["Fairy", "Mineral"],
 	},
 	glalie: {
-		num: 353,
+		num: 352,
 		species: "Glalie",
 		types: ["Ice"],
 		baseStats: {hp: 80, atk: 80, def: 80, spa: 80, spd: 80, spe: 80},
@@ -5957,7 +5957,7 @@ let BattlePokedex = {
 		otherFormes: ["glaliemega"],
 	},
 	glaliemega: {
-		num: 353,
+		num: 352,
 		species: "Glalie-Mega",
 		baseSpecies: "Glalie",
 		forme: "Mega",
@@ -5971,7 +5971,7 @@ let BattlePokedex = {
 		eggGroups: ["Fairy", "Mineral"],
 	},
 	spheal: {
-		num: 354,
+		num: 353,
 		species: "Spheal",
 		types: ["Ice", "Water"],
 		baseStats: {hp: 70, atk: 40, def: 50, spa: 55, spd: 50, spe: 25},
@@ -5983,7 +5983,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 1", "Field"],
 	},
 	sealeo: {
-		num: 355,
+		num: 354,
 		species: "Sealeo",
 		types: ["Ice", "Water"],
 		baseStats: {hp: 90, atk: 60, def: 70, spa: 75, spd: 70, spe: 45},
@@ -5997,7 +5997,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 1", "Field"],
 	},
 	walrein: {
-		num: 356,
+		num: 355,
 		species: "Walrein",
 		types: ["Ice", "Water"],
 		baseStats: {hp: 110, atk: 80, def: 90, spa: 95, spd: 90, spe: 65},
@@ -6010,7 +6010,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 1", "Field"],
 	},
 	clamperl: {
-		num: 357,
+		num: 356,
 		species: "Clamperl",
 		types: ["Water"],
 		baseStats: {hp: 35, atk: 64, def: 85, spa: 74, spd: 55, spe: 32},
@@ -6022,7 +6022,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 1"],
 	},
 	huntail: {
-		num: 358,
+		num: 357,
 		species: "Huntail",
 		types: ["Water"],
 		baseStats: {hp: 55, atk: 104, def: 105, spa: 94, spd: 75, spe: 52},
@@ -6035,7 +6035,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 1"],
 	},
 	gorebyss: {
-		num: 359,
+		num: 358,
 		species: "Gorebyss",
 		types: ["Water"],
 		baseStats: {hp: 55, atk: 84, def: 105, spa: 114, spd: 75, spe: 52},
@@ -6048,7 +6048,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 1"],
 	},
 	relicanth: {
-		num: 360,
+		num: 359,
 		species: "Relicanth",
 		types: ["Water", "Rock"],
 		genderRatio: {M: 0.875, F: 0.125},
@@ -6060,7 +6060,7 @@ let BattlePokedex = {
 		eggGroups: ["Water 1", "Water 2"],
 	},
 	bagon: {
-		num: 361,
+		num: 360,
 		species: "Bagon",
 		types: ["Dragon"],
 		baseStats: {hp: 45, atk: 75, def: 60, spa: 40, spd: 30, spe: 50},
@@ -6072,7 +6072,7 @@ let BattlePokedex = {
 		eggGroups: ["Dragon"],
 	},
 	shelgon: {
-		num: 362,
+		num: 361,
 		species: "Shelgon",
 		types: ["Dragon"],
 		baseStats: {hp: 65, atk: 95, def: 100, spa: 60, spd: 50, spe: 50},
@@ -6086,7 +6086,7 @@ let BattlePokedex = {
 		eggGroups: ["Dragon"],
 	},
 	salamence: {
-		num: 363,
+		num: 362,
 		species: "Salamence",
 		types: ["Dragon", "Flying"],
 		baseStats: {hp: 95, atk: 135, def: 80, spa: 110, spd: 80, spe: 100},
@@ -6100,7 +6100,7 @@ let BattlePokedex = {
 		otherFormes: ["salamencemega"],
 	},
 	salamencemega: {
-		num: 363,
+		num: 362,
 		species: "Salamence-Mega",
 		baseSpecies: "Salamence",
 		forme: "Mega",
@@ -6114,7 +6114,7 @@ let BattlePokedex = {
 		eggGroups: ["Dragon"],
 	},
 	beldum: {
-		num: 364,
+		num: 363,
 		species: "Beldum",
 		types: ["Steel", "Psychic"],
 		gender: "N",
@@ -6127,7 +6127,7 @@ let BattlePokedex = {
 		eggGroups: ["Mineral"],
 	},
 	metang: {
-		num: 365,
+		num: 364,
 		species: "Metang",
 		types: ["Steel", "Psychic"],
 		gender: "N",
@@ -6142,7 +6142,7 @@ let BattlePokedex = {
 		eggGroups: ["Mineral"],
 	},
 	metagross: {
-		num: 366,
+		num: 365,
 		species: "Metagross",
 		types: ["Steel", "Psychic"],
 		gender: "N",
@@ -6157,7 +6157,7 @@ let BattlePokedex = {
 		otherFormes: ["metagrossmega"],
 	},
 	metagrossmega: {
-		num: 366,
+		num: 365,
 		species: "Metagross-Mega",
 		baseSpecies: "Metagross",
 		forme: "Mega",
@@ -6172,7 +6172,7 @@ let BattlePokedex = {
 		eggGroups: ["Mineral"],
 	},
 	regirock: {
-		num: 367,
+		num: 366,
 		species: "Regirock",
 		types: ["Rock"],
 		gender: "N",
@@ -6184,7 +6184,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	regice: {
-		num: 368,
+		num: 367,
 		species: "Regice",
 		types: ["Ice"],
 		gender: "N",
@@ -6196,7 +6196,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	registeel: {
-		num: 369,
+		num: 368,
 		species: "Registeel",
 		types: ["Steel"],
 		gender: "N",
@@ -6208,7 +6208,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	latias: {
-		num: 370,
+		num: 369,
 		species: "Latias",
 		types: ["Dragon", "Psychic"],
 		gender: "F",
@@ -6221,7 +6221,7 @@ let BattlePokedex = {
 		otherFormes: ["latiasmega"],
 	},
 	latiasmega: {
-		num: 370,
+		num: 369,
 		species: "Latias-Mega",
 		baseSpecies: "Latias",
 		forme: "Mega",
@@ -6236,7 +6236,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	latios: {
-		num: 371,
+		num: 370,
 		species: "Latios",
 		types: ["Dragon", "Psychic"],
 		gender: "M",
@@ -6249,7 +6249,7 @@ let BattlePokedex = {
 		otherFormes: ["latiosmega"],
 	},
 	latiosmega: {
-		num: 371,
+		num: 370,
 		species: "Latios-Mega",
 		baseSpecies: "Latios",
 		forme: "Mega",
@@ -6264,7 +6264,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	kyogre: {
-		num: 372,
+		num: 371,
 		species: "Kyogre",
 		types: ["Water"],
 		gender: "N",
@@ -6277,7 +6277,7 @@ let BattlePokedex = {
 		otherFormes: ["kyogreprimal"],
 	},
 	kyogreprimal: {
-		num: 372,
+		num: 371,
 		species: "Kyogre-Primal",
 		baseSpecies: "Kyogre",
 		forme: "Primal",
@@ -6292,7 +6292,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	groudon: {
-		num: 373,
+		num: 372,
 		species: "Groudon",
 		types: ["Ground"],
 		gender: "N",
@@ -6305,7 +6305,7 @@ let BattlePokedex = {
 		otherFormes: ["groudonprimal"],
 	},
 	groudonprimal: {
-		num: 373,
+		num: 372,
 		species: "Groudon-Primal",
 		baseSpecies: "Groudon",
 		forme: "Primal",
@@ -6320,7 +6320,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	rayquaza: {
-		num: 374,
+		num: 373,
 		species: "Rayquaza",
 		types: ["Dragon", "Flying"],
 		gender: "N",
@@ -6333,7 +6333,7 @@ let BattlePokedex = {
 		otherFormes: ["rayquazamega"],
 	},
 	rayquazamega: {
-		num: 374,
+		num: 373,
 		species: "Rayquaza-Mega",
 		baseSpecies: "Rayquaza",
 		forme: "Mega",
@@ -6348,7 +6348,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	jirachi: {
-		num: 375,
+		num: 374,
 		species: "Jirachi",
 		types: ["Steel", "Psychic"],
 		gender: "N",
@@ -6360,7 +6360,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	deoxys: {
-		num: 376,
+		num: 375,
 		species: "Deoxys",
 		baseForme: "Normal",
 		types: ["Psychic"],
@@ -6374,7 +6374,7 @@ let BattlePokedex = {
 		otherFormes: ["deoxysattack", "deoxysdefense", "deoxysspeed"],
 	},
 	deoxysattack: {
-		num: 376,
+		num: 375,
 		species: "Deoxys-Attack",
 		baseSpecies: "Deoxys",
 		forme: "Attack",
@@ -6389,7 +6389,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	deoxysdefense: {
-		num: 376,
+		num: 375,
 		species: "Deoxys-Defense",
 		baseSpecies: "Deoxys",
 		forme: "Defense",
@@ -6404,7 +6404,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	deoxysspeed: {
-		num: 376,
+		num: 375,
 		species: "Deoxys-Speed",
 		baseSpecies: "Deoxys",
 		forme: "Speed",
@@ -6419,7 +6419,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	turtwig: {
-		num: 377,
+		num: 376,
 		species: "Turtwig",
 		types: ["Grass"],
 		genderRatio: {M: 0.875, F: 0.125},
