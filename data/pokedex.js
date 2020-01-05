@@ -14540,7 +14540,7 @@ let BattlePokedex = {
 		eggGroups: ["Field", "Flying"],
 	},
 	zacian: {
-		num: 832,
+		num: 841,
 		species: "Zacian",
 		types: ["Fairy"],
 		gender: "N",
@@ -14553,7 +14553,7 @@ let BattlePokedex = {
 		otherFormes: ["zaciancrowned"],
 	},
 	zaciancrowned: {
-		num: 832,
+		num: 841,
 		species: "Zacian-Crowned",
 		baseSpecies: "Zacian",
 		forme: "Crowned",
@@ -14567,7 +14567,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	zamazenta: {
-		num: 833,
+		num: 842,
 		species: "Zamazenta",
 		types: ["Fighting"],
 		gender: "N",
@@ -14580,7 +14580,7 @@ let BattlePokedex = {
 		otherFormes: ["zamazentacrowned"],
 	},
 	zamazentacrowned: {
-		num: 833,
+		num: 842,
 		species: "Zamazenta-Crowned",
 		baseSpecies: "Zamazenta",
 		forme: "Crowned",
@@ -14594,7 +14594,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	giracario: {
-		num: 834,
+		num: 843,
 		species: "Giracario",
 		types: ["Fighting", "Steel", "Dragon"],
 		gender: "M",
@@ -14607,7 +14607,7 @@ let BattlePokedex = {
 		otherFormes: ["giracarioalt"],
 	},
 	giracarioalt: {
-		num: 834,
+		num: 843,
 		species: "Giracario-Alt",
 		baseSpecies: "Giracario",
 		forme: "Mega",
@@ -14622,7 +14622,7 @@ let BattlePokedex = {
 		eggGroups: ["Field", "Human-Like", "Dragon"],
 	},
 	kerberos: {
-		num: 834,
+		num: 844,
 		species: "Kerberos",
 		types: ["Fire", "Dark"],
 		gender: "N",
@@ -14634,7 +14634,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	shukaku: {
-		num: 834,
+		num: 845,
 		species: "Shukaku",
 		types: ["Ground"],
 		gender: "M",
@@ -14646,7 +14646,7 @@ let BattlePokedex = {
 		eggGroups: ["Undiscovered"],
 	},
 	kuramasmall: {
-		num: 834,
+		num: 846,
 		species: "Kurama-Small",
 		types: ["Fire"],
 		gender: "M",
@@ -14660,7 +14660,7 @@ let BattlePokedex = {
 		otherForms: ["kuramasmallonetail","kuramasmalltwotail","kuramasmallthreetail","kuramasmallfourtail"],
 	},
 	kuramamedium: {
-		num: 834,
+		num: 847,
 		species: "Kurama-Medium",
 		types: ["Fire"],
 		gender: "M",
@@ -14676,7 +14676,7 @@ let BattlePokedex = {
 		otherForms: ["kuramamediumfivetail","kuramamediumsixtail","kuramamediumseventail","kuramamediumeighttail"],
 	},
 	kurama: {
-		num: 834,
+		num: 848,
 		species: "Kurama",
 		types: ["Fire"],
 		gender: "M",
