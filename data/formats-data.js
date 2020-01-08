@@ -1949,7 +1949,6 @@ let BattleFormatsData = {
 	},
 	zigzagoon: {
 		randomBattleMoves: ["trick", "thunderwave", "icebeam", "thunderbolt", "gunkshot", "lastresort"],
-
 		tier: "LC",
 	},
 	zigzagoonkonor: {
@@ -5806,7 +5805,13 @@ let BattleFormatsData = {
 	},
 	kurama: {
 		tier: "Uber",
-	},
+   },
+   drake: {
+	  randomBattleMoves: ["crunch", "suckerpunch", "playrough", "firefang", "irontail"],
+	  randomDoubleBattleMoves: ["suckerpunch", "crunch", "playrough", "firefang", "taunt", "protect"],
+	  tier: "(PU)",
+	  doublesTier: "(DUU)",
+   },
 	missingno: {
 		randomBattleMoves: ["watergun", "skyattack", "doubleedge", "metronome"],
 		tier: "Illegal",

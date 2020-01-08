@@ -1159,7 +1159,7 @@ let BattleScripts = {
 
 		pokemon.formeChange(templateid, pokemon.getItem(), true);
 
-		this.runEvent('AfterMega', pokemon);
+	   this.runEvent('AfterMega', pokemon);
 		pokemon.canMegaEvo = null;
 		return true;
 	},

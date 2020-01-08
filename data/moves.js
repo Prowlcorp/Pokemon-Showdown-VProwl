@@ -11059,8 +11059,8 @@ let BattleMovedex = {
 	  accuracy: true,
 	  basePower: 0,
 	  category: "Status",
-	  desc: "Raises the user's Special Defense by 1 stage. If the user uses an Electric-type attack on the next turn, its power will be doubled.",
-	  shortDesc: "+1 SpD, user's Electric move next turn 2x power.",
+	  desc: "Enables Sattelite Strike to be used without a charge turn. Has varying chances to add an effect to a move from; lock on, guaranteed crit, choose the weaker defense, ignore ability, and boost priority.",
+	  shortDesc: "Satellite Strike skips the charge. Varying chance to add an effect to a move.",
 	  id: "hyperscan",
 	  name: "Hyper Scan",
 	  pp: 20,
@@ -11077,7 +11077,7 @@ let BattleMovedex = {
 		 if (source.volatiles['hyperscan']) return false;
 	  },
 	  onHit(pokemon) {
-		 pokemon.addVolatile('hyperscan', target);
+		 pokemon.addVolatile('hyperscan', pokemon);
 		 this.add('-activate', pokemon, 'move: Hyper Scan', '[of] ' + target);
 	  },
 	  effect: {

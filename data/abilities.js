@@ -1172,7 +1172,28 @@ let BattleAbilities = {
 		id: "elementalist",
 		name: "Elementalist",
 		rating: 4,
-	},
+   },
+   "elementnegate": {
+	  desc: "This pokemon takes half damage from fire, electric, ice, and water attacks from opponents of equal level with a 1% increase or decrease per level gap.",
+	  shortDesc: "This pokemon takes reduced damage based on the difference in levels.",
+	  onSourceModifyDamage(damage, source, target, move) {
+		 if (move.type === 'Electric' || move.type === 'Fire' || move.type === 'Water' || move.type === 'Ice') {
+			let damageAmount = 0.5;
+			let levelDiff = (source.level - target.level) / 100.0;
+			damageAmount -= levelDiff;
+			if (damageAmount > 1.0) {
+			   damageAmount = 1.0;
+			}
+			if (damageAmount < 0) {
+			   damageAmount = 0
+			}
+			return this.chainModify(damageAmount);
+		 }
+	  },
+	  id: "elementnegate",
+	  name: "Element Negate",
+	  rating: 4,
+   },
 	"emergencyexit": {
 		desc: "When this Pokemon has more than 1/2 its maximum HP and takes damage bringing it to 1/2 or less of its maximum HP, it immediately switches out to a chosen ally. This effect applies after all hits from a multi-hit move; Sheer Force prevents it from activating if the move has a secondary effect. This effect applies to both direct and indirect damage, except Curse and Substitute on use, Belly Drum, Pain Split, and confusion damage.",
 		shortDesc: "This Pokemon switches out when it reaches 1/2 or less of its maximum HP.",
@@ -1823,7 +1844,7 @@ let BattleAbilities = {
 			if(move.type === 'Dark' && move.category === "Status" && move.target === "normal" && pokemon.template.species === 'Mew-Mega') {
 				move.name = "Dark Abyss";
 				move.accuracy = 80;
-				move.status = 'slp'
+			   move.status = 'slp';
 			}
 			if(move.type === 'Dark' && move.category === "Special" && pokemon.template.species === 'Mew-Mega' && move.id !== 'hyperspacehole') {
 				move.accuracy = true;
@@ -3811,7 +3832,7 @@ let BattleAbilities = {
 		id: "serenegrace",
 		name: "Serene Grace",
 		rating: 4,
-	},
+   },
 	"shadowshield": {
 		desc: "If this Pokemon is at full HP, damage taken from attacks is halved. Moongeist Beam, Sunsteel Strike, and the Mold Breaker, Teravolt, and Turboblaze Abilities cannot ignore this Ability.",
 		shortDesc: "If this Pokemon is at full HP, damage taken from attacks is halved.",
