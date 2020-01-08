@@ -11073,11 +11073,15 @@ let BattleMovedex = {
 			return this.chainModify(currentBoost);
 		 }
 	  },
-	  volatileStatus: 'hyperscan',
+	  onTryHit(target, source) {
+		 if (source.volatiles['hyperscan']) return false;
+	  },
 	  onHit(pokemon) {
-		 this.add('-activate', pokemon, 'move: Hyper Scan');
+		 pokemon.addVolatile('hyperscan', target);
+		 this.add('-activate', pokemon, 'move: Hyper Scan', '[of] ' + target);
 	  },
 	  effect: {
+		 noCopy: true,
 		 duration: 3,
 		 onRestart(pokemon) {
 			this.effectData.duration = 3;
@@ -11085,7 +11089,7 @@ let BattleMovedex = {
 		 onModifyMovePriority: -2,
 		 onModifyMove(move, source, target) {
 			if (move.category !== "Status") {
-			   if (this.randomChance(9, 10)) {
+			   if (this.randomChance(7, 10)) {
 				  source.addVolatile('lockon');
 			   }
 			   if (this.randomChance(4, 10)) {
@@ -11098,8 +11102,9 @@ let BattleMovedex = {
 			   if (this.randomChance(6, 10)) {
 				  move.ignoreAbility = true;
 			   }
-			   if (this.randomChance(9, 10)) {
-				  move.priority = move.priority +1;
+			   if (this.randomChance(5, 10)) {
+				  if (move.priority >= 2) return;
+				  move.priority = 2;
 			   }
 			}
 		 },
