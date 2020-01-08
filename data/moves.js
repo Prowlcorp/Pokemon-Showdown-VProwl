@@ -2963,7 +2963,7 @@ let BattleMovedex = {
 		type: "Normal",
 		zMoveBoost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1},
 		contestType: "Cute",
-	},
+   },
 	"charge": {
 		accuracy: true,
 		basePower: 0,
@@ -4813,7 +4813,8 @@ let BattleMovedex = {
 				if (source.hasAbility('noguard') || target.hasAbility('noguard')) {
 					return;
 				}
-				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
+			   if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
+			   if (source.volatiles['hyperscan'] && target === source.volatiles['scan'].source) return;
 				if (move.id === 'toxic' && source.hasType('Poison')) return;
 				return false;
 			},
@@ -11054,7 +11055,65 @@ let BattleMovedex = {
 		type: "Normal",
 		zMovePower: 160,
 		contestType: "Cool",
-	},
+   },
+   "hyperscan": {
+	  accuracy: true,
+	  basePower: 0,
+	  category: "Status",
+	  desc: "Raises the user's Special Defense by 1 stage. If the user uses an Electric-type attack on the next turn, its power will be doubled.",
+	  shortDesc: "+1 SpD, user's Electric move next turn 2x power.",
+	  id: "hyperscan",
+	  name: "Hyper Scan",
+	  pp: 20,
+	  priority: 0,
+	  flags: {},
+	  onBasePower(basePower, pokemon, target) {
+		 if (pokemon.level > 100) {
+			let currentBoost = Math.floor((pokemon.level - 100) / 10);
+			currentBoost = currentBoost / 20 + 1;
+			return this.chainModify(currentBoost);
+		 }
+	  },
+	  volatileStatus: 'hyperscan',
+	  onHit(pokemon) {
+		 this.add('-activate', pokemon, 'move: Hyper Scan');
+	  },
+	  effect: {
+		 duration: 3,
+		 onRestart(pokemon) {
+			this.effectData.duration = 3;
+		 },
+		 onModifyMovePriority: -2,
+		 onModifyMove(move, source, target) {
+			if (move.category !== "Status") {
+			   if (this.randomChance(7, 10)) {
+				  move.ignoreEvasion = true;
+			   }
+			   if (this.randomChance(7, 10)) {
+				  target.addVolatile('scan');
+			   }
+			   if (this.randomChance(7, 10)) {
+				  move.willCrit = true;
+			   }
+			   if (this.randomChance(7, 10)) {
+				  if (target.getStat('def', false, true) > target.getStat('spd', false, true)) move.defensiveCategory = 'Special';
+				  else move.defensiveCategory = 'Physical';
+			   }
+			   if (this.randomChance(7, 10)) {
+				  move.ignoreAbility = true;
+			   }
+			   if (this.randomChance(7, 10)) {
+				  move.priority++;
+			   }
+			}
+		 },
+	  },
+	  secondary: null,
+	  target: "self",
+	  type: "???",
+	  zMoveEffect: 'clearnegativeboost',
+	  contestType: "Clever",
+   },
 	"hyperspacefury": {
 		accuracy: true,
 		basePower: 100,
@@ -19089,7 +19148,69 @@ let BattleMovedex = {
 		type: "Ground",
 		zMovePower: 100,
 		contestType: "Clever",
-	},
+   },
+   "satellitedefense": {
+	  accuracy: true,
+	  basePower: 0,
+	  category: "Status",
+	  desc: "The user is protected from most attacks made by other Pokemon during this turn, and Pokemon making contact with the user lose 1/8 of their maximum HP, rounded down. This move has a 1/X chance of being successful, where X starts at 1 and triples each time this move is successfully used. X resets to 1 if this move fails, if the user's last move used is not Baneful Bunker, Detect, Endure, King's Shield, Protect, Quick Guard, Spiky Shield, or Wide Guard, or if it was one of those moves and the user's protection was broken. Fails if the user moves last this turn.",
+	  shortDesc: "Protects from moves. Contact: loses 1/8 max HP.",
+	  id: "satellitedefense",
+	  name: "Satellite Defense",
+	  pp: 10,
+	  priority: 4,
+	  flags: {},
+	  onBasePower(basePower, pokemon, target) {
+		 if (pokemon.level > 100) {
+			let currentBoost = Math.floor((pokemon.level - 100) / 10);
+			currentBoost = currentBoost / 20 + 1;
+			return this.chainModify(currentBoost);
+		 }
+	  },
+	  stallingMove: true,
+	  volatileStatus: 'satellitedefense',
+	  onTryHit(target, source, move) {
+		 return !!this.willAct() && this.runEvent('StallMove', target);
+	  },
+	  onHit(pokemon) {
+		 pokemon.addVolatile('stall');
+	  },
+	  effect: {
+		 duration: 1,
+		 onStart(target) {
+			this.add('-singleturn', target, 'move: Protect');
+		 },
+		 onTryHitPriority: 3,
+		 onTryHit(target, source, move) {
+			if (!move.flags['protect']) {
+			   if (move.isZ) target.getMoveHitData(move).zBrokeProtect = true;
+			   return;
+			}
+			this.add('-activate', target, 'move: Protect');
+			let lockedmove = source.getVolatile('lockedmove');
+			if (lockedmove) {
+			   // Outrage counter is reset
+			   if (source.volatiles['lockedmove'].duration === 2) {
+				  delete source.volatiles['lockedmove'];
+			   }
+			}
+			if (move.flags['contact']) {
+			   this.damage(source.maxhp / 7, source, target);
+			}
+			return this.NOT_FAIL;
+		 },
+		 onHit(target, source, move) {
+			if (move.isZPowered && move.flags['contact']) {
+			   this.damage(source.maxhp / 6, source, target);
+			}
+		 },
+	  },
+	  secondary: null,
+	  target: "self",
+	  type: "???",
+	  zMoveBoost: { def: 1 },
+	  contestType: "Tough",
+   },
 	"savagespinout": {
 		accuracy: true,
 		basePower: 1,
@@ -20951,7 +21072,51 @@ let BattleMovedex = {
 		type: "Normal",
 		zMoveEffect: 'clearnegativeboost',
 		contestType: "Cute",
-	},
+   },
+   "satellitestrike": {
+	  accuracy: 100,
+	  basePower: 300,
+	  category: "Special",
+	  desc: "This attack charges on the first turn and executes on the second. If the user is holding a Power Herb, the move completes in one turn. User must recharge after use",
+	  shortDesc: "Charges turn 1. Hits turn 2. Must recharge",
+	  id: "satellitestrike",
+	  name: "Satellite Strike",
+	  pp: 10,
+	  priority: 0,
+	  flags: { charge: 1, protect: 1, recharge: 1},
+	  onBasePower(basePower, pokemon, target) {
+		 let currentBoost = 1;
+		 if (pokemon.level > 100) {
+			currentBoost = Math.floor((pokemon.level - 100) / 10);
+			currentBoost = currentBoost / 20 + 1;
+		 }
+		 return this.chainModify(currentBoost);
+	  },
+	  onTryMove(attacker, defender, move) {
+		 if (attacker.removeVolatile(move.id)) {
+			return;
+		 }
+		 this.add('-prepare', attacker, move.name, defender);
+		 if (defender.volatiles['scan']) {
+			this.attrLastMove('[still]');
+			this.addMove('-anim', attacker, move.name, defender);
+			return;
+		 }
+		 if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+			return;
+		 }
+		 attacker.addVolatile('twoturnmove', defender);
+		 return null;
+	  },
+	  self: {
+		 volatileStatus: 'mustrecharge',
+	  },
+	  secondary: null,
+	  target: "normal",
+	  type: "???",
+	  zMovePower: 190,
+	  contestType: "Cool",
+   },
 	"solarbeam": {
 		accuracy: 100,
 		basePower: 120,
@@ -21348,7 +21513,7 @@ let BattleMovedex = {
 		type: "Ground",
 		zMoveBoost: {def: 1},
 		contestType: "Clever",
-	},
+   },
 	"spikyshield": {
 		accuracy: true,
 		basePower: 0,

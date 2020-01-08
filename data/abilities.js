@@ -1646,8 +1646,8 @@ let BattleAbilities = {
 		rating: 0,
 	},
 	"heatedcombat": {
-		desc: "This Pokemon's Fire-Type moves have a same-type attack bonus (STAB) of 1.7 instead of 1.5.",
-		shortDesc: "This Pokemon's Fire-type attack bonus (STAB) is 1.7 instead of 1.5.",
+		desc: "This Pokemon's Fire-Type moves have a same-type attack bonus (STAB) of 1.7 instead of 1.5. Grants contact moves an additional 15% chance to burn.",
+		shortDesc: "This Pokemon's Fire-type attack bonus (STAB) is 1.7 instead of 1.5. Contact moves have an extra 15% burn chance.",
 		onModifyMove(move) {
 			if(move.type === 'Fire') {
 				move.stab = 1.7;
