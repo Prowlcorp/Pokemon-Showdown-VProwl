@@ -4814,7 +4814,6 @@ let BattleMovedex = {
 					return;
 				}
 			   if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-			   if (source.volatiles['hyperscan'] && target === source.volatiles['scan'].source) return;
 				if (move.id === 'toxic' && source.hasType('Poison')) return;
 				return false;
 			},
@@ -11086,24 +11085,21 @@ let BattleMovedex = {
 		 onModifyMovePriority: -2,
 		 onModifyMove(move, source, target) {
 			if (move.category !== "Status") {
-			   if (this.randomChance(7, 10)) {
-				  move.ignoreEvasion = true;
+			   if (this.randomChance(9, 10)) {
+				  source.addVolatile('lockon');
 			   }
-			   if (this.randomChance(7, 10)) {
-				  target.addVolatile('scan');
-			   }
-			   if (this.randomChance(7, 10)) {
+			   if (this.randomChance(4, 10)) {
 				  move.willCrit = true;
 			   }
-			   if (this.randomChance(7, 10)) {
+			   if (this.randomChance(6, 10)) {
 				  if (target.getStat('def', false, true) > target.getStat('spd', false, true)) move.defensiveCategory = 'Special';
 				  else move.defensiveCategory = 'Physical';
 			   }
-			   if (this.randomChance(7, 10)) {
+			   if (this.randomChance(6, 10)) {
 				  move.ignoreAbility = true;
 			   }
-			   if (this.randomChance(7, 10)) {
-				  move.priority++;
+			   if (this.randomChance(9, 10)) {
+				  move.priority = move.priority +1;
 			   }
 			}
 		 },
@@ -19195,7 +19191,7 @@ let BattleMovedex = {
 			   }
 			}
 			if (move.flags['contact']) {
-			   this.damage(source.maxhp / 7, source, target);
+			   this.damage(source.maxhp / 6, source, target);
 			}
 			return this.NOT_FAIL;
 		 },
@@ -19210,6 +19206,50 @@ let BattleMovedex = {
 	  type: "???",
 	  zMoveBoost: { def: 1 },
 	  contestType: "Tough",
+   },
+   "satellitestrike": {
+	  accuracy: 100,
+	  basePower: 300,
+	  category: "Special",
+	  desc: "This attack charges on the first turn and executes on the second. If the user is holding a Power Herb, the move completes in one turn. User must recharge after use",
+	  shortDesc: "Charges turn 1. Hits turn 2. Must recharge",
+	  id: "satellitestrike",
+	  name: "Satellite Strike",
+	  pp: 10,
+	  priority: 0,
+	  flags: { charge: 1, protect: 1, recharge: 1 },
+	  onBasePower(basePower, pokemon, target) {
+		 let currentBoost = 1;
+		 if (pokemon.level > 100) {
+			currentBoost = Math.floor((pokemon.level - 100) / 10);
+			currentBoost = currentBoost / 20 + 1;
+		 }
+		 return this.chainModify(currentBoost);
+	  },
+	  onTryMove(attacker, defender, move) {
+		 if (attacker.removeVolatile(move.id)) {
+			return;
+		 }
+		 this.add('-prepare', attacker, move.name, defender);
+		 if (attacker.volatiles['hyperscan']) {
+			this.attrLastMove('[still]');
+			this.addMove('-anim', attacker, move.name, defender);
+			return;
+		 }
+		 if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+			return;
+		 }
+		 attacker.addVolatile('twoturnmove', defender);
+		 return null;
+	  },
+	  self: {
+		 volatileStatus: 'mustrecharge',
+	  },
+	  secondary: null,
+	  target: "normal",
+	  type: "???",
+	  zMovePower: 190,
+	  contestType: "Cool",
    },
 	"savagespinout": {
 		accuracy: true,
@@ -21072,50 +21112,6 @@ let BattleMovedex = {
 		type: "Normal",
 		zMoveEffect: 'clearnegativeboost',
 		contestType: "Cute",
-   },
-   "satellitestrike": {
-	  accuracy: 100,
-	  basePower: 300,
-	  category: "Special",
-	  desc: "This attack charges on the first turn and executes on the second. If the user is holding a Power Herb, the move completes in one turn. User must recharge after use",
-	  shortDesc: "Charges turn 1. Hits turn 2. Must recharge",
-	  id: "satellitestrike",
-	  name: "Satellite Strike",
-	  pp: 10,
-	  priority: 0,
-	  flags: { charge: 1, protect: 1, recharge: 1},
-	  onBasePower(basePower, pokemon, target) {
-		 let currentBoost = 1;
-		 if (pokemon.level > 100) {
-			currentBoost = Math.floor((pokemon.level - 100) / 10);
-			currentBoost = currentBoost / 20 + 1;
-		 }
-		 return this.chainModify(currentBoost);
-	  },
-	  onTryMove(attacker, defender, move) {
-		 if (attacker.removeVolatile(move.id)) {
-			return;
-		 }
-		 this.add('-prepare', attacker, move.name, defender);
-		 if (defender.volatiles['scan']) {
-			this.attrLastMove('[still]');
-			this.addMove('-anim', attacker, move.name, defender);
-			return;
-		 }
-		 if (!this.runEvent('ChargeMove', attacker, defender, move)) {
-			return;
-		 }
-		 attacker.addVolatile('twoturnmove', defender);
-		 return null;
-	  },
-	  self: {
-		 volatileStatus: 'mustrecharge',
-	  },
-	  secondary: null,
-	  target: "normal",
-	  type: "???",
-	  zMovePower: 190,
-	  contestType: "Cool",
    },
 	"solarbeam": {
 		accuracy: 100,
