@@ -19533,7 +19533,7 @@ let BattleLearnsets = {
 		wonderroom: ["7T"],
 		worryseed: ["7T"],
 		zenheadbutt: ["7T"],
-	}},	
+	}},
 	treecko: {learnset: {
 		absorb: ["7L5"],
 		acrobatics: ["7M"],
