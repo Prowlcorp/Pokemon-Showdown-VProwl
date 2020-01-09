@@ -1158,7 +1158,7 @@ let BattleAbilities = {
 		desc: "This Pokemon's Fire, Water, and Electric moves have their power multiplied by 1.5.",
 		shortDesc: "This Pokemon's Fire, Water, and Electric-type have 1.5x added power.",
 		onModifyMove(move, pokemon) {
-			if(move.type === 'Fire' || move.type === 'Water' || move.type === 'Electric')
+			if(move.type === 'Fire' || move.type === 'Ice' || move.type === 'Electric')
 				if(pokemon.hasType(move.type))
 					move.stab = 2;
 				else
@@ -1174,12 +1174,12 @@ let BattleAbilities = {
 		rating: 4,
    },
    "elementnegate": {
-	  desc: "This pokemon takes half damage from fire, electric, ice, and water attacks from opponents of equal level with a 1% increase or decrease per level gap.",
+	  desc: "This pokemon takes half damage from fire, electric, ice, and Water attacks from opponents of equal level with a 1% increase or decrease per level gap.",
 	  shortDesc: "This pokemon takes reduced damage based on the difference in levels.",
 	  onSourceModifyDamage(damage, source, target, move) {
 		 if (move.type === 'Electric' || move.type === 'Fire' || move.type === 'Water' || move.type === 'Ice') {
 			let damageAmount = 0.5;
-			let levelDiff = (source.level - target.level) / 100.0;
+			let levelDiff = (target.level - source.level) / 100.0;
 			damageAmount -= levelDiff;
 			if (damageAmount > 1.0) {
 			   damageAmount = 1.0;
