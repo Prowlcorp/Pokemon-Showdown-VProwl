@@ -2,12 +2,6 @@
 
 /**@type {{[k: string]: TemplateFormatsData}} */
 let BattleFormatsData = {
-	bulbasaur: {
-	},
-	ivysaur: {
-	},
-	venusaur: {
-	},
 	venusaurmega: {
 		requiredItem: "Venusaurite",
 	},
