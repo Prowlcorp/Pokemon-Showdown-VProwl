@@ -2,6 +2,20 @@
 
 /**@type {{[k: string]: TemplateFormatsData}} */
 let BattleFormatsData = {
+	bulbasaur: {
+		requiredItem: "Venusaurite",
+		tier: "UU",
+		doublesTier: "UU",
+	},
+	ivysaur: {
+		requiredItem: "Venusaurite",
+		tier: "UU",
+		doublesTier: "UU",
+	},
+	venusaur: {
+		tier: "UU",
+		doublesTier: "UU",
+	},
 	venusaurmega: {
 		requiredItem: "Venusaurite",
 		tier: "UU",

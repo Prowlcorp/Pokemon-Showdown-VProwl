@@ -12,6 +12,19 @@ let Formats = [
 		section: "US/UM Singles",
 	},
 	{
+		name: "[Gen 7] Custom Game",
+
+		mod: 'gen7',
+		debug: true,
+		trunc(n) { return Math.trunc(n); },
+		teamLength: {
+			validate: [1, 50],
+			battle: 50,
+		},
+		// no restrictions, for serious (other than team preview)
+		ruleset: ['Team Preview', 'Cancel Mod'],
+	},
+	{
 		name: "[Gen 7] OU",
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3646999/">OU Metagame Discussion</a>`,
@@ -217,19 +230,6 @@ let Formats = [
 			battle: 3,
 		},
 		ruleset: ['Pokemon', 'Standard GBU'],
-	},
-	{
-		name: "[Gen 7] Custom Game",
-
-		mod: 'gen7',
-		debug: true,
-		trunc(n) { return Math.trunc(n); },
-		teamLength: {
-			validate: [1, 50],
-			battle: 50,
-		},
-		// no restrictions, for serious (other than team preview)
-		ruleset: ['Team Preview', 'Cancel Mod'],
 	},
 
 	// US/UM Doubles/Triples
