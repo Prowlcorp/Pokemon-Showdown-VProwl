@@ -2964,6 +2964,50 @@ let BattleMovedex = {
 		zMoveBoost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1},
 		contestType: "Cute",
    },
+	"allycharge": {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		desc: "Raises an ally's Special Defense by 2 stage. If the ally uses an Electric-type attack on the next turn, its power will be doubled. Will move before some attacks",
+		shortDesc: "+2 SpD, ally's Electric move next turn 2x power. +1 priority",
+		id: "allycharge",
+		name: "Ally Charge",
+		pp: 20,
+		priority: 1,
+		flags: {snatch: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		volatileStatus: 'allycharge',
+		onHit(pokemon) {
+			this.add('-activate', pokemon, 'move: Ally Charge');
+		},
+		effect: {
+			duration: 2,
+			onRestart(pokemon) {
+				this.effectData.duration = 2;
+			},
+			onBasePowerPriority: 3,
+			onBasePower(basePower, attacker, defender, move) {
+				if (move.type === 'Electric') {
+					this.debug('ally charge boost');
+					return this.chainModify(2);
+				}
+			},
+		},
+		boosts: {
+			spd: 2,
+		},
+		secondary: null,
+		target: "adjacentAlly",
+		type: "Electric",
+		zMoveBoost: {spd: 2},
+		contestType: "Beautiful",
+	},
 	"charge": {
 		accuracy: true,
 		basePower: 0,
@@ -10815,31 +10859,6 @@ let BattleMovedex = {
 		target: "normal",
 		type: "Normal",
 		zMovePower: 120,
-		contestType: "Cool",
-	},
-	"horndrill": {
-		accuracy: 30,
-		basePower: 0,
-		category: "Physical",
-		desc: "Deals damage to the target equal to the target's maximum HP. Ignores accuracy and evasiveness modifiers. This attack's accuracy is equal to (user's level - target's level + 30)%, and fails if the target is at a higher level. Pokemon with the Sturdy Ability are immune.",
-		shortDesc: "OHKOs the target. Fails if user is a lower level.",
-		id: "horndrill",
-		name: "Horn Drill",
-		pp: 5,
-		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		},
-		ohko: true,
-		secondary: null,
-		target: "normal",
-		type: "Normal",
-		zMovePower: 180,
 		contestType: "Cool",
 	},
 	"hornleech": {

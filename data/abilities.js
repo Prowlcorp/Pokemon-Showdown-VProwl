@@ -2434,7 +2434,7 @@ let BattleAbilities = {
 		onCriticalHit: false,
 		onSourceModifyDamage(damage, source, target, move) {
 			if (target.getMoveHitData(move).typeMod > 0) {
-				this.debug('Filter neutralize');
+				this.debug('Living Castle neutralize');
 				return this.chainModify(0.75);
 			}
 		},

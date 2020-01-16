@@ -370,6 +370,15 @@ let BattleItems = {
 		},
 		desc: "Restores 20 HP when at 1/2 max HP or less. Single use.",
 	},
+	"berrysweet": {
+		id: "berrysweet",
+		name: "Berry Sweet",
+		spritenum: 706,
+		fling: {
+			basePower: 10,
+		},
+		desc: "Evolves Milcery into Alcremie when held and spun around.",
+	},
 	"berserkgene": {
 		id: "berserkgene",
 		name: "Berserk Gene",
@@ -868,6 +877,15 @@ let BattleItems = {
 			basePower: 100,
 		},
 		desc: "Can be revived into Anorith.",
+	},
+	"cloversweet": {
+		id: "cloversweet",
+		name: "Clover Sweet",
+		spritenum: 707,
+		fling: {
+			basePower: 10,
+		},
+		desc: "Evolves Milcery into Alcremie when held and spun around.",
 	},
 	"cobaberry": {
 		id: "cobaberry",
@@ -1753,6 +1771,15 @@ let BattleItems = {
 			return weight / 2;
 		},
 		desc: "Holder's weight is halved.",
+	},
+	"flowersweet": {
+		id: "flowersweet",
+		name: "Flower Sweet",
+		spritenum: 708,
+		fling: {
+			basePower: 0,
+		},
+		desc: "Evolves Milcery into Alcremie when held and spun around.",
 	},
 	"flygonite": {
 		id: "flygonite",
@@ -2898,6 +2925,15 @@ let BattleItems = {
 		spritenum: 258,
 		isPokeball: true,
 		desc: "Poke Ball for catching Pokemon that are the opposite gender of your Pokemon.",
+	},
+	"lovesweet": {
+		id: "lovesweet",
+		name: "Love Sweet",
+		spritenum: 705,
+		fling: {
+			basePower: 10,
+		},
+		desc: "Evolves Milcery into Alcremie when held and spun around.",
 	},
 	"lucarionite": {
 		id: "lucarionite",
@@ -4331,6 +4367,15 @@ let BattleItems = {
 		isPokeball: true,
 		desc: "A Poke Ball that works well on Pokemon species that were previously caught.",
 	},
+	"ribbonsweet": {
+		id: "ribbonsweet",
+		name: "Ribbon Sweet",
+		spritenum: 710,
+		fling: {
+			basePower: 10,
+		},
+		desc: "Evolves Milcery into Alcremie when held and spun around.",
+	},
 	"rindoberry": {
 		id: "rindoberry",
 		name: "Rindo Berry",
@@ -5069,6 +5114,15 @@ let BattleItems = {
 		},
 		desc: "Raises a random stat by 2 when at 1/4 max HP or less (not acc/eva). Single use.",
 	},
+	"starsweet": {
+		id: "starsweet",
+		name: "Star Sweet",
+		spritenum: 709,
+		fling: {
+			basePower: 10,
+		},
+		desc: "Evolves Milcery into Alcremie when held and spun around.",
+	},
 	"staticorb": {
 		id: "staticorb",
 		name: "Static Orb",
@@ -5179,6 +5233,15 @@ let BattleItems = {
 		},
 		forcedForme: "Arceus-Rock",
 		desc: "Holder's Rock-type attacks have 1.2x power. Judgment is Rock type.",
+	},
+	"strawberrysweet": {
+		id: "strawberrysweet",
+		name: "Strawberry Sweet",
+		spritenum: 704,
+		fling: {
+			basePower: 10,
+		},
+		desc: "Evolves Milcery into Alcremie when held and spun around.",
 	},
 	"sunstone": {
 		id: "sunstone",
