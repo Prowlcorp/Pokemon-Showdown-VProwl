@@ -2604,7 +2604,7 @@ let BattleAbilities = {
 				return;
 			}
 			for (const allyActive of pokemon.side.active) {
-				if (allyActive && allyActive.position !== pokemon.position && !allyActive.fainted && allyActive.hasAbility(['minus', 'plus'])) {
+				if (allyActive && allyActive.position !== pokemon.position && !allyActive.fainted && allyActive.hasAbility(['minus', 'plus', 'polaritysurge'])) {
 					return this.chainModify(2);
 				}
 			}
@@ -2622,7 +2622,7 @@ let BattleAbilities = {
 				return;
 			}
 			for (const allyActive of pokemon.side.active) {
-				if (allyActive && allyActive.position !== pokemon.position && !allyActive.fainted && allyActive.hasAbility(['minus', 'plus'])) {
+				if (allyActive && allyActive.position !== pokemon.position && !allyActive.fainted && allyActive.hasAbility(['minus', 'plus', 'polaritysurge'])) {
 					return this.chainModify(1.5);
 				}
 			}
@@ -3154,7 +3154,7 @@ let BattleAbilities = {
 				return;
 			}
 			for (const allyActive of pokemon.side.active) {
-				if (allyActive && allyActive.position !== pokemon.position && !allyActive.fainted && allyActive.hasAbility(['minus', 'plus'])) {
+				if (allyActive && allyActive.position !== pokemon.position && !allyActive.fainted && allyActive.hasAbility(['minus', 'plus', 'polaritysurge'])) {
 					return this.chainModify(1.5);
 				}
 			}
