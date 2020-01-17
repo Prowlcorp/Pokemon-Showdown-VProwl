@@ -57210,7 +57210,7 @@ let BattleLearnsets = {
 		rocktomb: ["7M"],
 		round: ["7M"],
 		sandattack: ["7L1"],
-		sandburial: ["7L75"].
+		sandburial: ["7L75"],
 		sandcoffin: ["7L47"],
 		sandstorm: ["7M"],
 		sandtomb: ["7L1", "7L50"],
