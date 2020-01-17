@@ -57232,7 +57232,7 @@ let BattleLearnsets = {
 	kuramasmall: {learnset: {
 		//3 Catch rate, 102 Exp Yield, Slow
 		acrobatics: ["7M"],
-		agility: ["7L10"]
+		agility: ["7L10"],
 		attract: ["7M"],
 		aurasphere: ["7T"],
 		bite: ["7L24"],
@@ -57314,7 +57314,7 @@ let BattleLearnsets = {
 	kuramamedium: {learnset: {
 		//3 Catch rate, 204 Exp Yield, Slow
 		acrobatics: ["7M"],
-		agility: ["7L10"]
+		agility: ["7L10"],
 		attract: ["7M"],
 		aurasphere: ["7T"],
 		bite: ["7L24"],
@@ -57396,7 +57396,7 @@ let BattleLearnsets = {
 	kurama: {learnset: {
 		//3 Catch rate, 306 Exp Yield, Slow
 		acrobatics: ["7M"],
-		agility: ["7L10"]
+		agility: ["7L10"],
 		attract: ["7M"],
 		aurasphere: ["7T"],
 		bijuubomb: ["7L0", "7L1"],
