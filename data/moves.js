@@ -5640,7 +5640,7 @@ let BattleMovedex = {
 		contestType: "Tough",
 	},
 	"drakonvoice": {
-		accuracy: 85,
+		accuracy: 90,
 		basePower: 105,
 		category: "Special",
 		desc: "No additional effect.",
