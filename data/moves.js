@@ -5644,7 +5644,7 @@ let BattleMovedex = {
 		basePower: 105,
 		category: "Special",
 		desc: "No additional effect.",
-		shortDesc: "No additional effect.",
+		shortDesc: "No additional effect. Hits adjacent foes.",
 		id: "drakonvoice",
 		name: "Drakon Voice",
 		pp: 10,
@@ -5658,7 +5658,7 @@ let BattleMovedex = {
 			}
 		},
 		secondary: null,
-		target: "normal",
+		target: "allAdjacentFoes",
 		type: "Dragon",
 		zMovePower: 180,
 		contestType: "Cool",
@@ -14863,7 +14863,7 @@ let BattleMovedex = {
 	},
 	"multiattack": {
 		accuracy: 100,
-		basePower: 90,
+		basePower: 120,
 		category: "Physical",
 		desc: "This move's type depends on the user's held Memory.",
 		shortDesc: "Type varies based on the held Memory.",
