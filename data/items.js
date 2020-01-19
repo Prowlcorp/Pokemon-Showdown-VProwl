@@ -1101,6 +1101,33 @@ let BattleItems = {
 			if (!source.volatiles.attract) source.addVolatile('attract', target);
 		},
 		desc: "If holder becomes infatuated, the other Pokemon also becomes infatuated.",
+	},	
+	"fateknot": {
+		id: "fateknot",
+		name: "Fate Knot",
+		spritenum: 95,
+		fling: {
+			basePower: 30,
+		},
+		onAttractPriority: -100,
+		onAttract(target, source) {
+			this.debug('attract intercepted: ' + target + ' from ' + source);
+			if (!source || source === target) return;
+			if (!source.volatiles.attract) source.addVolatile('attract', target);
+		},
+		onModifyDefPriority: 2,
+		onModifyDef(def, pokemon) {
+			if (pokemon.volatiles['attract']) {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpDPriority: 2,
+		onModifySpD(spd, pokemon) {
+			if (pokemon.volatiles['attract']) {
+				return this.chainModify(1.5);
+			}
+		},
+		desc: "If holder becomes infatuated, the other Pokemon also becomes infatuated. While infatuated, this pokemons Def and SpD are 1.5X",
 	},
 	"diancite": {
 		id: "diancite",
