@@ -5527,11 +5527,11 @@ let BattleItems = {
 			}
 		},
 		onTakeItem(item, pokemon) {
-			pokemon.boost({atk: 1});
-			pokemon.boost({def: 1});
-			pokemon.boost({spa: 1});
-			pokemon.boost({spd: 1});
-			pokemon.boost({spe: 1});
+			this.boost({atk: 1});
+			this.boost({def: 1});
+			this.boost({spa: 1});
+			this.boost({spd: 1});
+			this.boost({spe: 1});
 		},
 /*		onAfterDamage(damage, target, source, move) {
 			if (move.id === 'knockoff' && target.useItem()) {
