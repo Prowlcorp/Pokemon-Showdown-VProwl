@@ -1101,33 +1101,6 @@ let BattleItems = {
 			if (!source.volatiles.attract) source.addVolatile('attract', target);
 		},
 		desc: "If holder becomes infatuated, the other Pokemon also becomes infatuated.",
-	},	
-	"fateknot": {
-		id: "fateknot",
-		name: "Fate Knot",
-		spritenum: 95,
-		fling: {
-			basePower: 30,
-		},
-		onAttractPriority: -100,
-		onAttract(target, source) {
-			this.debug('attract intercepted: ' + target + ' from ' + source);
-			if (!source || source === target) return;
-			if (!source.volatiles.attract) source.addVolatile('attract', target);
-		},
-		onModifyDefPriority: 2,
-		onModifyDef(def, pokemon) {
-			if (pokemon.volatiles['attract']) {
-				return this.chainModify(1.5);
-			}
-		},
-		onModifySpDPriority: 2,
-		onModifySpD(spd, pokemon) {
-			if (pokemon.volatiles['attract']) {
-				return this.chainModify(1.5);
-			}
-		},
-		desc: "If holder becomes infatuated, the other Pokemon also becomes infatuated. While infatuated, this pokemons Def and SpD are 1.5X",
 	},
 	"diancite": {
 		id: "diancite",
@@ -1591,6 +1564,33 @@ let BattleItems = {
 		spritenum: 137,
 		isPokeball: true,
 		desc: "A Poke Ball that makes it easier to catch Pokemon which are quick to run away.",
+	},	
+	"fateknot": {
+		id: "fateknot",
+		name: "Fate Knot",
+		spritenum: 95,
+		fling: {
+			basePower: 30,
+		},
+		onAttractPriority: -100,
+		onAttract(target, source) {
+			this.debug('attract intercepted: ' + target + ' from ' + source);
+			if (!source || source === target) return;
+			if (!source.volatiles.attract) source.addVolatile('attract', target);
+		},
+		onModifyDefPriority: 2,
+		onModifyDef(def, pokemon) {
+			if (pokemon.volatiles['attract']) {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpDPriority: 2,
+		onModifySpD(spd, pokemon) {
+			if (pokemon.volatiles['attract']) {
+				return this.chainModify(1.5);
+			}
+		},
+		desc: "If holder becomes infatuated, the other Pokemon also becomes infatuated. While infatuated, this pokemons Def and SpD are 1.5X",
 	},
 	"feraligite": {
 		id: "feraligite",
@@ -5494,6 +5494,55 @@ let BattleItems = {
 		spritenum: 521,
 		isPokeball: true,
 		desc: "An ultra-performance Ball that provides a higher catch rate than a Great Ball.",
+	},
+	"ultraeviolite": {
+		id: "ultraeviolite",
+		name: "Ultra Eviolite",
+		spritenum: 130,
+		fling: {
+			basePower: 40,
+		},		
+		onModifyAtkPriority: 2,
+		onModifyAtk(atk, pokemon) {
+			if (pokemon.baseTemplate.nfe) {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpAPriority: 2,
+		onModifySpA(spa, pokemon) {
+			if (pokemon.baseTemplate.nfe) {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifyDefPriority: 2,
+		onModifyDef(def, pokemon) {
+			if (pokemon.baseTemplate.nfe) {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpDPriority: 2,
+		onModifySpD(spd, pokemon) {
+			if (pokemon.baseTemplate.nfe) {
+				return this.chainModify(1.5);
+			}
+		},
+		onTakeItem(item, pokemon) {
+			pokemon.boost({atk: 1});
+			pokemon.boost({def: 1});
+			pokemon.boost({spa: 1});
+			pokemon.boost({spd: 1});
+			pokemon.boost({spe: 1});
+		},
+/*		onAfterDamage(damage, target, source, move) {
+			if (move.id === 'knockoff' && target.useItem()) {
+				this.boost({atk: 1});
+				this.boost({def: 1});
+				this.boost({spa: 1});
+				this.boost({spd: 1});
+				this.boost({spe: 1});
+			}
+		},*/
+		desc: "If holder's species can evolve, its Defense and Sp. Def are 1.5x.",
 	},
 	"ultranecroziumz": {
 		id: "ultranecroziumz",
