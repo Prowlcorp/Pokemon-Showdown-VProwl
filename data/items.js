@@ -5488,6 +5488,39 @@ let BattleItems = {
 		},
 		desc: "If held by a Tyranitar, this item allows it to Mega Evolve in battle.",
 	},
+	"ultimateeviolite": {
+		id: "ultimateeviolite",
+		name: "Ultimate Eviolite",
+		spritenum: 130,
+		fling: {
+			basePower: 80,
+		},		
+		onModifyAtkPriority: 2,
+		onModifyAtk(atk, pokemon) {
+			if (pokemon.baseTemplate.nfe) {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpAPriority: 2,
+		onModifySpA(spa, pokemon) {
+			if (pokemon.baseTemplate.nfe) {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifyDefPriority: 2,
+		onModifyDef(def, pokemon) {
+			if (pokemon.baseTemplate.nfe) {
+				return this.chainModify(2);
+			}
+		},
+		onModifySpDPriority: 2,
+		onModifySpD(spd, pokemon) {
+			if (pokemon.baseTemplate.nfe) {
+				return this.chainModify(2);
+			}
+		},
+		desc: "If holder's species can evolve, its Attack and Sp. Atk are 1.5X, and its Def and Sp. Def are 2x.",
+	},
 	"ultraball": {
 		id: "ultraball",
 		name: "Ultra Ball",
@@ -5500,7 +5533,7 @@ let BattleItems = {
 		name: "Ultra Eviolite",
 		spritenum: 130,
 		fling: {
-			basePower: 40,
+			basePower: 60,
 		},		
 		onModifyAtkPriority: 2,
 		onModifyAtk(atk, pokemon) {
@@ -5526,23 +5559,7 @@ let BattleItems = {
 				return this.chainModify(1.5);
 			}
 		},
-		onTakeItem(item, pokemon) {
-			this.boost({atk: 1});
-			this.boost({def: 1});
-			this.boost({spa: 1});
-			this.boost({spd: 1});
-			this.boost({spe: 1});
-		},
-/*		onAfterDamage(damage, target, source, move) {
-			if (move.id === 'knockoff' && target.useItem()) {
-				this.boost({atk: 1});
-				this.boost({def: 1});
-				this.boost({spa: 1});
-				this.boost({spd: 1});
-				this.boost({spe: 1});
-			}
-		},*/
-		desc: "If holder's species can evolve, its Defense and Sp. Def are 1.5x.",
+		desc: "If holder's species can evolve, its Attack, Defense, Sp. Atk and Sp. Def are 1.5x.",
 	},
 	"ultranecroziumz": {
 		id: "ultranecroziumz",
