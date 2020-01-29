@@ -1739,13 +1739,6 @@ let BattleMovedex = {
 						category: "Physical",
 						priority: 1,
 						flags: {contact: 1, protect: 1},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		},
 						effectType: 'Move',
 						type: 'Normal',
 					};

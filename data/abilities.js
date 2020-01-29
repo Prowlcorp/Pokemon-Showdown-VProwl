@@ -999,8 +999,8 @@ let BattleAbilities = {
 		rating: 4,
 	},
 	"divashock": {
-		desc: "If this Pokemon is the target of an opposing Pokemon's move, that move loses one additional PP.",
-		shortDesc: "If this Pokemon is the target of a foe's move, that move loses one additional PP.",
+		desc: "If an opponent attacks this pokemon with a damaging move before it moves, the opponent takes 1/16th of their health as damage.",
+		shortDesc: "Opponent strikes before this pokemon it takes 1/16th max hp as damage.",
 		onAfterDamage(damage, target, source, move) {
 			if (source && source !== target && move && move.category !== 'Status') {
 				if(!target.moveThisTurn) {
@@ -1668,7 +1668,7 @@ let BattleAbilities = {
 	},
 	"heatedcombat": {
 		desc: "This Pokemon's Fire-Type moves have a same-type attack bonus (STAB) of 1.7 instead of 1.5. Grants contact moves an additional 15% chance to burn.",
-		shortDesc: "This Pokemon's Fire-type attack bonus (STAB) is 1.7 instead of 1.5. Contact moves have an extra 15% burn chance.",
+		shortDesc: "This Pokemon's Fire-type STAB is 1.7. Contact moves have an extra 15% brn chance.",
 		onModifyMove(move) {
 			if(move.type === 'Fire') {
 				move.stab = 1.7;

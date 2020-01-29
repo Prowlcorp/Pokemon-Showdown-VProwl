@@ -5519,7 +5519,7 @@ let BattleItems = {
 				return this.chainModify(2);
 			}
 		},
-		desc: "If holder's species can evolve, its Attack and Sp. Atk are 1.5X, and its Def and Sp. Def are 2x.",
+		desc: "If holder's species can evolve, its Atk and SpA are 1.5X, and its Def and SpD are 2x.",
 	},
 	"ultraball": {
 		id: "ultraball",
