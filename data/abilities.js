@@ -1903,7 +1903,7 @@ let BattleAbilities = {
 			if (move.id === 'attackorder') {
 				move.basePower *= 1.5;
 			} else if(move.id === 'healorder') {
-				move.heal = [7.5,10];
+				move.heal = [75,100];
 			} else if(move.id === 'defendorder') {
 				move.boosts = {def: 2, spd: 2,};
 			}
