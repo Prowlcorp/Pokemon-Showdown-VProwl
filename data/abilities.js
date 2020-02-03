@@ -2430,12 +2430,18 @@ let BattleAbilities = {
 		rating: 2.5,
 	},
 	"livingcastle": {
-		shortDesc: "This Pokemon cannot be struck by a critical hit and receives 3/4th damage from Super-Effective moves",
+		desc: "This Pokemon cannot be struck by a critical hit and receives 3/4th damage from Super-Effective moves. Rock type moves used by this pokemon get STAB",
+		shortDesc: "This Pokemon cannot be crit and receives 3/4th damage from SE moves. +Rock STAB",
 		onCriticalHit: false,
 		onSourceModifyDamage(damage, source, target, move) {
 			if (target.getMoveHitData(move).typeMod > 0) {
 				this.debug('Living Castle neutralize');
 				return this.chainModify(0.75);
+			}
+		},
+		onModifyMove(move) {
+			if(move.type === 'Rock') {
+				move.forceSTAB = true;
 			}
 		},
 		id: "livingcastle",
@@ -4015,7 +4021,8 @@ let BattleAbilities = {
 		rating: 4,
 	},
 	"silentkiller": {
-		shortDesc: "This pokemon has a much higher chance to crit and deals more damage with super effective strikes.",
+		desc: "This pokemon has a much higher chance to crit and deals 1.25X damage with super effective hits. If this pokemon uses a status move, until it next move opponents have 0.7X accuracy against it.",
+		shortDesc: "+2 Crit chance. SE: 1.25X damage. Status move: 0.7X accuracy against this pokemon.",
 		onModifyCritRatio(critRatio) {
 			return critRatio + 2;
 		},
@@ -4303,7 +4310,8 @@ let BattleAbilities = {
 		rating: 1,
 	},
 	"steelbreaker": {
-		shortDesc: "This deals double damage against steel types with slicing moves. Powers up and modifies moves.",
+		desc: "This deals double damage against steel types with slicing moves. Modifies Iron Tail and Slash. Powers up most slicing moves by 30%.",
+		shortDesc: "Slicing moves: +30% power, 2X damage vs steel. Modifies 2 moves.",
 		onStart(pokemon) {
 			if(pokemon.template.species === 'Haxorus-Mega') {
 				for (let moveSlot of pokemon.moveSlots) {
@@ -4319,7 +4327,7 @@ let BattleAbilities = {
 							used: false,
 						});
 					}
-					if(moveSlot.id === 'irontail') {
+					if(moveSlot.id === 'irontail' || moveSlot.id === 'dragontail') {
 						let move = this.getMove('axestrike');
 						pokemon.moveSlots.push({
 							move: move.name,
@@ -4349,7 +4357,7 @@ let BattleAbilities = {
 					return null;
 				}
 			}
-			if(move.id === 'irontail' && pokemon.template.species === 'Haxorus-Mega') {
+			if((move.id === 'irontail' || move.id === 'dragontail') && pokemon.template.species === 'Haxorus-Mega') {
 				move.accuracy = true;
 				move.secondary = null;
 				move.onTryHit = function(target,pokemon) {

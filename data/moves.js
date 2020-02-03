@@ -1273,6 +1273,9 @@ let BattleMovedex = {
 			this.hint("Only a Pokemon whose form is Haxorus-Mega can use this move.");
 			return null;
 		},
+		onEffectiveness(typeMod, target, type, move) {
+			return typeMod + this.getEffectiveness('Steel', type);
+		},
 		self: {
 			boosts: {
 				def: -1,
@@ -1292,7 +1295,7 @@ let BattleMovedex = {
 			},
 		],
 		target: "normal",
-		type: "Steel",
+		type: "Dragon",
 		zMovePower: 190,
 		contestType: "Cool",
 	},
