@@ -1252,7 +1252,7 @@ let BattleMovedex = {
 		basePower: 120,
 		category: "Physical",
 		desc: "Lowers own defense one stage. Has a 50% chance to cause bleeding. Two 30% chances to lower opponents defense. ",
-		shortDesc: "Lowers own defense. Half chance of causing bld. Twin chances of dropping opponent def.",
+		shortDesc: "Self -Defense. 0.5X bld chance. 2X chance: -foe def.",
 		id: "axestrike",
 		name: "Axe Strike",
 		pp: 15,
@@ -1292,6 +1292,9 @@ let BattleMovedex = {
 				boosts: {
 					def: -1,
 				},
+			}, {
+				chance: 50,
+				status: 'bld',
 			},
 		],
 		target: "normal",
