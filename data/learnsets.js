@@ -37664,6 +37664,7 @@ let BattleLearnsets = {
 		guillotine: ["7T"],
 		hiddenpower: ["7M"],
 		hyperbeam: ["7M"],
+		ironhead: ["7T"],
 		irontail: ["7T"],
 		knockoff: ["7T"],
 		leer: ["7L1"],

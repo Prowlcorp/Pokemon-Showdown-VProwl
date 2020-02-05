@@ -3556,13 +3556,14 @@ let BattleAbilities = {
 		onModifyCritRatio(critRatio, source) {
 			if (source.restrainedCrit) {
 				delete source.restrainedCrit;
+				this.add('-end', source, 'Restrained Rage', '[silent]');
 				return 5;
 			}
 		},
 		onBoost(boost, target, source, effect) {
 			if (source && target === source) return;
 			let showMsg = false;
-			if(boost.atk) {
+			if(boost.atk < 0) {
 				delete boost.atk;
 				let restrainChance = this.random(2);
 				switch(restrainChance)
@@ -5012,7 +5013,7 @@ let BattleAbilities = {
 	},
 	"unbendingblade": {
 		desc: "This Pokemon's sword-based attacks have their power multiplied by 1.5.",
-		shortDesc: "This Pokemon's sword-based attacks have 1.5x power. Sacred/Secret Sword is not boosted.",
+		shortDesc: "This Pokemon's sword-based attacks have 1.5x power.",
 		onBasePowerPriority: 8,
 		onBasePower(basePower, attacker, defender, move) {
 			if (move.flags['sword']) {

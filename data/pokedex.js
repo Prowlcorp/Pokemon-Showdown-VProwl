@@ -9352,7 +9352,7 @@ let BattlePokedex = {
 		baseStats: {hp: 95, atk: 144, def: 105, spa: 45, spd: 90, spe: 140},
 		abilities: {0: "Restrained Rage"},
 		heightm: 1.7,
-		weightkg: 15.3,
+		weightkg: 115.3,
 		color: "Red",
 		eggGroups: ["Field"],
 	},
