@@ -4559,6 +4559,7 @@ let BattleAbilities = {
 		onAnyModifyBoost(boosts, target) {
 			let source = this.effectData.target;
 			if (source === target) return;
+			if (boosts['evasion'] <= 0) return;
 			if (source === this.activePokemon && target === this.activeTarget) {
 				boosts['evasion'] = 0;
 			}
