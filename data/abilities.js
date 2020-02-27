@@ -266,12 +266,14 @@ let BattleAbilities = {
 	},
 	"ultimatesparring": {
 		shortDesc: "This Pokemon will always be critically hit. Grants 2X move BP",
-		onCriticalHit: true,
 		onBasePowerPriority: 8,
 		onBasePower(basePower, attacker, defender, move) {
 			if (move.category !== 'Status') {
 				return this.chainModify(2);
 			}
+		},
+		onFoeModifyCritRatio(critRatio) {
+			return 5;
 		},
 		id: "ultimatesparring",
 		name: "Ultimate Sparring",
