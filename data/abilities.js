@@ -264,6 +264,19 @@ let BattleAbilities = {
 		name: "Battery",
 		rating: 0,
 	},
+	"ultimatesparring": {
+		shortDesc: "This Pokemon will always be critically hit. Grants 2X move BP",
+		onCriticalHit: true,
+		onBasePowerPriority: 8,
+		onBasePower(basePower, attacker, defender, move) {
+			if (move.category !== 'Status') {
+				return this.chainModify(2);
+			}
+		},
+		id: "ultimatesparring",
+		name: "Ultimate Sparring",
+		rating: 1,
+	},
 	"battlearmor": {
 		shortDesc: "This Pokemon cannot be struck by a critical hit.",
 		onCriticalHit: false,
@@ -1554,10 +1567,13 @@ let BattleAbilities = {
 		rating: 4,
 	},
 	"gigatonforce": {
-		desc: "Contact destroys barriers and protect-like moves (doesn't include detect), has knock off effect on contact.",
+		desc: "Contact destroys barriers and protect-like moves, has knock off effect on contact.",
 		shortDesc: "Contact destroys protection and removes item",
 		onModifyMove(move) {
-			if(move.flags['contact']) delete move.flags['protect'];
+			if(move.flags['contact']) {
+				delete move.flags['protect'];
+				move.flags.authentic = 1;
+			}
 		},
 		onPrepareHit(source, target, move) {
 			if(move.flags['contact']) {
