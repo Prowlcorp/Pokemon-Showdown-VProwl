@@ -5513,7 +5513,7 @@ let BattlePokedex = {
 		eggGroups: ["Field"],
 		otherFormes: ["zangoosemega"],
 	//	otherFormes: ["zangoosemega", "yun", "yunmega"],
-	},	
+	},
 /*	yun: {
 		num: 325,
 		species: "Yun",
@@ -12941,7 +12941,7 @@ let BattlePokedex = {
 		formeLetter: "M",
 		types: ["Ghost", "Ground"],
 		baseStats: {hp: 85, atk: 95, def: 140, spa: 140, spd: 105, spe: 15},
-		abilities: {0: "Arena Trap"},
+		abilities: {0: "Eternal Beach"},
 		heightm: 2.6,
 		weightkg: 332.3,
 		color: "Brown",

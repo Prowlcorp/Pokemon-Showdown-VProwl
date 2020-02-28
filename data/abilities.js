@@ -113,6 +113,30 @@ let BattleAbilities = {
 		name: "Air Lock",
 		rating: 2.5,
 	},
+	"alluringgarden": {
+		shortDesc: "At the end of each turn, lowers other's defense, special defense, or speed by 1 stage.",
+		onResidualOrder: 5,
+		onResidualSubOrder: 1,
+		onResidual(pokemon) {
+			for (const target of pokemon.side.foe.active) {
+				if (!target) continue;
+				if (target.volatiles['substitute']) {
+					this.add('-immune', target);
+				} else {
+					if (this.randomChance(1,3)) {
+						this.boost({def:-1}, target, pokemon);
+					} else if (this.randomChance(1,2)) {
+						this.boost({spd:-1}, target, pokemon);
+					} else {
+						this.boost({spe:-1}, target, pokemon);
+					}
+				}
+			}
+		},
+		id: "alluringgarden",
+		name: "Alluring Garden",
+		rating: 5,
+	},
 	"analytic": {
 		desc: "The power of this Pokemon's move is multiplied by 1.3 if it is the last to move in a turn. Does not affect Doom Desire and Future Sight.",
 		shortDesc: "This Pokemon's attacks have 1.3x power if it is the last to move in a turn.",
@@ -263,21 +287,6 @@ let BattleAbilities = {
 		id: "battery",
 		name: "Battery",
 		rating: 0,
-	},
-	"ultimatesparring": {
-		shortDesc: "This Pokemon will always be critically hit. Grants 2X move BP",
-		onBasePowerPriority: 8,
-		onBasePower(basePower, attacker, defender, move) {
-			if (move.category !== 'Status') {
-				return this.chainModify(2);
-			}
-		},
-		onFoeModifyCritRatio(critRatio) {
-			return 5;
-		},
-		id: "ultimatesparring",
-		name: "Ultimate Sparring",
-		rating: 1,
 	},
 	"battlearmor": {
 		shortDesc: "This Pokemon cannot be struck by a critical hit.",
@@ -1236,6 +1245,32 @@ let BattleAbilities = {
 		name: "Emergency Exit",
 		rating: 1.5,
 	},
+	"eternalbeach": {
+		desc: "Prevents adjacent opposing Pokemon from choosing to switch out unless they are immune to trapping or are airborne.",
+		shortDesc: "Non-Airborne foes can't switch. +2 Def, SpD if damaged by a Water-type move.",
+		onFoeTrapPokemon(pokemon) {
+			if (!this.isAdjacent(pokemon, this.effectData.target)) return;
+			if (pokemon.isGrounded()) {
+				pokemon.tryTrap(true);
+			}
+		},
+		onFoeMaybeTrapPokemon(pokemon, source) {
+			if (!source) source = this.effectData.target;
+			if (!source || !this.isAdjacent(pokemon, source)) return;
+			if (pokemon.isGrounded(!pokemon.knownType)) { // Negate immunity if the type is unknown
+				pokemon.maybeTrapped = true;
+			}
+		},
+		onAfterDamage(damage, target, source, effect) {
+			if (effect && effect.type === 'Water') {
+				this.boost({def: 2});
+				this.boost({spd: 2});
+			}
+		},
+		id: "eternalbeach",
+		name: "Eternal Beach",
+		rating: 4.5,
+	},
 	"fairyaura": {
 		desc: "While this Pokemon is active, the power of Fairy-type moves used by active Pokemon is multiplied by 1.33.",
 		shortDesc: "While this Pokemon is active, a Fairy move used by any Pokemon has 1.33x power.",
@@ -1264,6 +1299,35 @@ let BattleAbilities = {
 		id: "filter",
 		name: "Filter",
 		rating: 3,
+	},
+	"firstforge": {
+		shortDesc: "This Pokemon cannot be burned or frozen. Gaining this Ability while burned or frozen cures it.",
+		onUpdate(pokemon) {
+			if (pokemon.status === 'brn' || pokemon.status === 'frz') {
+				this.add('-activate', pokemon, 'ability: First Forge');
+				pokemon.cureStatus();
+			}
+		},
+		onSetStatus(status, target, source, effect) {
+			if (status.id !== 'brn' && status.id !== 'frz') return;
+			if (!effect || !effect.status) return false;
+			this.add('-immune', target, '[from] ability: First Forge');
+			return false;
+		},
+		onModifyMove(move) {
+			if (!move || move.type !== 'Water' || move.target === 'self') return;
+			if (!move.secondaries) {
+				move.secondaries = [];
+			}
+			move.secondaries.push({
+				chance: 15,
+				status: 'brn',
+				ability: this.getAbility('firstforge'),
+			});
+		},
+		id: "firstforge",
+		name: "First Forge",
+		rating: 2,
 	},
 	"flamebody": {
 		shortDesc: "30% chance a Pokemon making contact with this Pokemon will be burned.",
@@ -2685,10 +2749,29 @@ let BattleAbilities = {
 		shortDesc: "Pokemon have a 50% chance to hit this pokemon that is not counted as evasion",
 		onDamagePriority: 1,
 		onDamage(damage, target, source, effect) {
-			if (this.randomChance(1, 2)) {
-				this.add('-activate', target, 'ability: Misdirection');
-				return null;
+			if (effect && effect.effectType === 'Move') {
+				if (this.randomChance(1, 2)) {
+					this.add('-activate', target, 'ability: Misdirection');
+					return null;
+				}
 			}
+		},
+		onAfterDamage(damage, target, source, effect) {
+			if (target.illusion && effect && effect.effectType === 'Move' && effect.id !== 'confused') {
+				this.singleEvent('End', this.getAbility('Illusion'), target.abilityData, target, source, effect);
+			}
+		},
+		onEnd(pokemon) {
+			if (pokemon.illusion) {
+				this.debug('illusion cleared');
+				pokemon.illusion = null;
+				let details = pokemon.template.species + (pokemon.level === 100 ? '' : ', L' + pokemon.level) + (pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny ? ', shiny' : '');
+				this.add('replace', pokemon, details);
+				this.add('-end', pokemon, 'Illusion');
+			}
+		},
+		onFaint(pokemon) {
+			pokemon.illusion = null;
 		},
 		id: "misdirection",
 		name: "Misdirection",
@@ -2986,8 +3069,8 @@ let BattleAbilities = {
 		rating: 1,
 	},
 	"otherworldlure": {
-		desc: "If this Pokemon is the target of an opposing Pokemon's move, that move loses one additional PP.",
-		shortDesc: "If this Pokemon is the target of a foe's move, that move loses one additional PP.",
+		desc: "If this Pokemon is the target of an opposing Pokemon's move, that move loses one additional PP. This pokemon's attacking moves restore 25% of the damage dealt to this pokemon.",
+		shortDesc: "If targeted by foe's move, that move loses +1 PP. 25% of damage dealt recovered.",
 		onStart(pokemon) {
 			this.add('-ability', pokemon, 'Otherworld Lure');
 		},
@@ -4867,30 +4950,6 @@ let BattleAbilities = {
 		name: "Trace",
 		rating: 3,
 	},
-	"alluringgarden": {
-		shortDesc: "At the end of each turn, lowers other's defense, special defense, or speed by 1 stage.",
-		onResidualOrder: 5,
-		onResidualSubOrder: 1,
-		onResidual(pokemon) {
-			for (const target of pokemon.side.foe.active) {
-				if (!target) continue;
-				if (target.volatiles['substitute']) {
-					this.add('-immune', target);
-				} else {
-					if (this.randomChance(1,3)) {
-						this.boost({def:-1}, target, pokemon);
-					} else if (this.randomChance(1,2)) {
-						this.boost({spd:-1}, target, pokemon);
-					} else {
-						this.boost({spe:-1}, target, pokemon);
-					}
-				}
-			}
-		},
-		id: "alluringgarden",
-		name: "Alluring Garden",
-		rating: 5,
-	},
 	"trancetouch": {
 		desc: "Physical and Special moves made by this pokemon gain an individual 30% chance of inflicting the sleep status.",
 		shortDesc: "30% chance of inflicting sleep when attacking.",
@@ -5007,6 +5066,21 @@ let BattleAbilities = {
 		},
 		id: "twinterror",
 		name: "Twin Terror",
+		rating: 1,
+	},
+	"ultimatesparring": {
+		shortDesc: "This Pokemon will always be critically hit. Grants 2X move BP",
+		onBasePowerPriority: 8,
+		onBasePower(basePower, attacker, defender, move) {
+			if (move.category !== 'Status') {
+				return this.chainModify(2);
+			}
+		},
+		onFoeModifyCritRatio(critRatio) {
+			return 5;
+		},
+		id: "ultimatesparring",
+		name: "Ultimate Sparring",
 		rating: 1,
 	},
 	"unaware": {
@@ -5243,35 +5317,6 @@ let BattleAbilities = {
 		},
 		id: "watercompaction",
 		name: "Water Compaction",
-		rating: 2,
-	},
-	"firstforge": {
-		shortDesc: "This Pokemon cannot be burned or frozen. Gaining this Ability while burned or frozen cures it.",
-		onUpdate(pokemon) {
-			if (pokemon.status === 'brn' || pokemon.status === 'frz') {
-				this.add('-activate', pokemon, 'ability: First Forge');
-				pokemon.cureStatus();
-			}
-		},
-		onSetStatus(status, target, source, effect) {
-			if (status.id !== 'brn' && status.id !== 'frz') return;
-			if (!effect || !effect.status) return false;
-			this.add('-immune', target, '[from] ability: First Forge');
-			return false;
-		},
-		onModifyMove(move) {
-			if (!move || move.type !== 'Water' || move.target === 'self') return;
-			if (!move.secondaries) {
-				move.secondaries = [];
-			}
-			move.secondaries.push({
-				chance: 15,
-				status: 'brn',
-				ability: this.getAbility('firstforge'),
-			});
-		},
-		id: "firstforge",
-		name: "First Forge",
 		rating: 2,
 	},
 	"waterveil": {
