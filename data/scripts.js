@@ -1131,7 +1131,7 @@ let BattleScripts = {
 		let altForme = pokemon.baseTemplate.otherFormes && this.getTemplate(pokemon.baseTemplate.otherFormes[0]);
 		let item = pokemon.getItem();
 		if (altForme && altForme.isMega && altForme.requiredMove && (pokemon.baseMoves.includes(toID(altForme.requiredMove)) || pokemon.level >=200)) return altForme.species;
-		if (pokemon.level >= 200 && altForme.requiredItem) {
+		if (altForme && pokemon.level >= 200 && altForme.requiredItem) {
 			return pokemon.speciesid+ "-Mega";
 		}
 		if (item.megaEvolves !== pokemon.baseTemplate.baseSpecies || item.megaStone === pokemon.species) {
