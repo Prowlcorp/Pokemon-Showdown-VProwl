@@ -55201,7 +55201,7 @@ let BattleLearnsets = {
 		thief: ["7L1"],
 		throatchop: ["7L1"],
 		thunderfang: ["7L1"],
-		titaniforce: ["7L1"],
+		titanicforce: ["7L1"],
 		torment: ["7L1"],
 		toxic: ["7L1"],
 		uproar: ["7L1"],

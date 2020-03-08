@@ -1130,9 +1130,15 @@ let BattleScripts = {
 	canMegaEvo(pokemon) {
 		let altForme = pokemon.baseTemplate.otherFormes && this.getTemplate(pokemon.baseTemplate.otherFormes[0]);
 		let item = pokemon.getItem();
-		if (altForme && altForme.isMega && altForme.requiredMove && pokemon.baseMoves.includes(toID(altForme.requiredMove))) return altForme.species;
+		if (altForme && altForme.isMega && altForme.requiredMove && (pokemon.baseMoves.includes(toID(altForme.requiredMove)) || pokemon.level >=200)) return altForme.species;
 		if (item.megaEvolves !== pokemon.baseTemplate.baseSpecies || item.megaStone === pokemon.species) {
 			return null;
+		}
+		if (pokemon.level >= 200 && pokemon.baseTemplate.otherFormes.includes(pokemon.baseTemplate.baseSpecies + "mega")) {
+			return pokemon.speciesid+ "-Mega";
+		}
+		if (pokemon.level >= 200 && pokemon.baseTemplate.otherFormes.includes(pokemon.baseTemplate.baseSpecies + "-Primal")) {
+			return pokemon.speciesid+ "-Primal";
 		}
 		return item.megaStone;
 	},

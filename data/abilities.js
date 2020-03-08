@@ -905,15 +905,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-/*		onResidualOrder: 26,
-		onResidualSubOrder: 1,
-		onResidual(pokemon) {
-			if(this.field.weatherData.source === pokemon) {
-				if(pokemon.hp <= pokemon.maxhp / 2) {
-					this.field.clearWeather();
-				}
-			}
-		},*/
 		onEnd(pokemon) {
 			if (this.field.weatherData.source !== pokemon) return;
 			for (const target of this.getAllActive()) {
@@ -2749,6 +2740,7 @@ let BattleAbilities = {
 		shortDesc: "Pokemon have a 50% chance to hit this pokemon that is not counted as evasion",
 		onDamagePriority: 1,
 		onDamage(damage, target, source, effect) {
+			if (target.volatiles['foresight']) return;
 			if (effect && effect.effectType === 'Move') {
 				if (this.randomChance(1, 2)) {
 					this.add('-activate', target, 'ability: Misdirection');
