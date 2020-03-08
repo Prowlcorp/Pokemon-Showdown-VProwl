@@ -1134,11 +1134,9 @@ let BattleScripts = {
 		if (item.megaEvolves !== pokemon.baseTemplate.baseSpecies || item.megaStone === pokemon.species) {
 			return null;
 		}
-		if (pokemon.level >= 200 && pokemon.baseTemplate.otherFormes.includes(pokemon.baseTemplate.baseSpecies + "mega")) {
+		//pokemon.baseTemplate.otherFormes.includes(pokemon.baseTemplate.baseSpecies + "mega")
+		if (pokemon.level >= 200 && altForme.requiredItem) {
 			return pokemon.speciesid+ "-Mega";
-		}
-		if (pokemon.level >= 200 && pokemon.baseTemplate.otherFormes.includes(pokemon.baseTemplate.baseSpecies + "-Primal")) {
-			return pokemon.speciesid+ "-Primal";
 		}
 		return item.megaStone;
 	},
