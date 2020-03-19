@@ -697,6 +697,7 @@ let BattleAbilities = {
 			}
 			if (targetSpecies !== null && attacker.template.species !== targetSpecies) {
 				attacker.formeChange(targetSpecies);
+				attacker.baseStoredStats.hp = hpbase;
 				attacker.template.baseStats.hp = hpbase;
 				attacker.sethp(attacker.maxhp*hpPercent);
 			}
