@@ -20808,7 +20808,7 @@ let BattleMovedex = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		volatileStatus: 'tornadobacklash',
+		volatileStatus: 'smackdown',
 		effect: {
 			noCopy: true,
 			onStart(pokemon) {
@@ -25861,7 +25861,7 @@ let BattleMovedex = {
 		onHit(target, source, move) {
 			return target.addVolatile('trapped', source, move, 'trapper');
 		},
-		volatileStatus: 'smackdown',
+		volatileStatus: 'tornadobacklash',
 		effect: {
 			onStart(pokemon) {
 				let applies = false;
