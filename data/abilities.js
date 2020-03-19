@@ -665,7 +665,7 @@ let BattleAbilities = {
 			if(move.type === 'Psychic') targetSpecies= 'Esp';
 			if(move.type === 'Grass') targetSpecies= 'Leaf';
 			if(move.type === 'Ice') targetSpecies= 'Glace';
-			if(move.type === 'Fairy') targetSpecies= 'Sylv';
+			if(move.type === 'Fairy') targetSpecies= 'Sylve';
 			if (targetSpecies !== null && attacker.template.species !== targetSpecies) attacker.formeChange(targetSpecies);
 		},
 		id: "crisisevolution",
