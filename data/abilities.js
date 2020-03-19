@@ -649,6 +649,29 @@ let BattleAbilities = {
 		name: "Corrosion",
 		rating: 2.5,
 	},
+	"crisisevolution": {
+		desc: "If this Pokemon is an Aegislash, it changes to Blade Forme before attempting to use an attacking move, and changes to Shield Forme before attempting to use King's Shield.",
+		shortDesc: "If Aegislash, changes Forme to Blade before attacks and Shield before King's Shield.",
+		onBeforeMovePriority: 0.5,
+		onBeforeMove(attacker, defender, move) {
+			if (attacker.template.baseSpecies !== 'Vee') return;
+			if (!['Normal', 'Water', 'Fire', 'Electric', 'Psychic', 'Dark', 'Grass', 'Ice', 'Fairy'].includes(move.type)) return;
+			let targetSpecies = null;
+			if(move.type === 'Normal') targetSpecies= 'Vee';
+			if(move.type === 'Fire') targetSpecies= 'Flare';
+			if(move.type === 'Water') targetSpecies= 'Vapor';
+			if(move.type === 'Electric') targetSpecies= 'Jolt';
+			if(move.type === 'Dark') targetSpecies= 'Umbra';
+			if(move.type === 'Psychic') targetSpecies= 'Esp';
+			if(move.type === 'Grass') targetSpecies= 'Leaf';
+			if(move.type === 'Ice') targetSpecies= 'Glace';
+			if(move.type === 'Fairy') targetSpecies= 'Sylv';
+			if (targetSpecies !== null && attacker.template.species !== targetSpecies) attacker.formeChange(targetSpecies);
+		},
+		id: "crisisevolution",
+		name: "Crisis Evolution",
+		rating: 5,
+	},
 	"cursedbody": {
 		desc: "If this Pokemon is hit by an attack, there is a 30% chance that move gets disabled unless one of the attacker's moves is already disabled.",
 		shortDesc: "If this Pokemon is hit by an attack, there is a 30% chance that move gets disabled.",
@@ -879,46 +902,6 @@ let BattleAbilities = {
 		id: "deltastream",
 		name: "Delta Stream",
 		rating: 5,
-	},
-	"sanddefense": {
-		desc: "While above half health and this pokemon is out, a sandstorm is stirred up and cannot be replaced normally. When this pokemon falls below half health, it's defense doubles and sandstorm ends the next turn.",
-		shortDesc: "Starts sandstorm, cannot be removed by normal means. Ends once health goes below half and boosts Def.",
-		onModifyDefPriority: 5,
-		onModifyDef(def, pokemon) {
-			if (pokemon.hp <= pokemon.maxhp / 2) {
-				return this.chainModify(1.5);
-			}
-		},
-		onStart(source) {
-			this.field.setWeather('ragingsandstorm');
-		},
-		onAnySetWeather(target, source, weather) {
-			if (this.field.getWeather().id === 'ragingsandstorm' && !['desolateland', 'primordialsea', 'deltastream'].includes(weather.id)) return false;
-		},
-		onAfterMoveSecondary(target, source, move) {
-			if (!source || source === target || !target.hp || !move.totalDamage) return;
-			const lastAttackedBy = target.getLastAttackedBy();
-			if (!lastAttackedBy) return;
-			if(this.field.weatherData.source === target) {
-				if(target.hp <= target.maxhp / 2) {
-					this.field.clearWeather();
-				}
-			}
-		},
-		onEnd(pokemon) {
-			if (this.field.weatherData.source !== pokemon) return;
-			for (const target of this.getAllActive()) {
-				if (target === pokemon) continue;
-				if (target.hasAbility('sanddefense')) {
-					this.field.weatherData.source = target;
-					return;
-				}
-			}
-			this.field.clearWeather();
-		},
-		id: "sanddefense",
-		name: "Sand Defense",
-		rating: -1,
 	},
 	"desolateland": {
 		desc: "On switch-in, the weather becomes extremely harsh sunlight that prevents damaging Water-type moves from executing and turns Ice type moves to water types, in addition to all the effects of Sunny Day. This weather remains in effect until this Ability is no longer active for any Pokemon, or the weather is changed by Delta Stream or Primordial Sea.",
@@ -2674,24 +2657,6 @@ let BattleAbilities = {
 		name: "Mine Deployment!",
 		rating: 3.5,
 	},
-	"polaritysurge": {
-		desc: "If an active ally has the Plus or Minus Ability, this Pokemon's Special Attack is multiplied by 2.",
-		shortDesc: "If an active ally has the Plus or Minus Ability, this Pokemon's Sp. Atk is 2x.",
-		onModifySpAPriority: 5,
-		onModifySpA(spa, pokemon) {
-			if (pokemon.side.active.length === 1) {
-				return;
-			}
-			for (const allyActive of pokemon.side.active) {
-				if (allyActive && allyActive.position !== pokemon.position && !allyActive.fainted && allyActive.hasAbility(['minus', 'plus', 'polaritysurge'])) {
-					return this.chainModify(2);
-				}
-			}
-		},
-		id: "polaritysurge",
-		name: "Polarity Surge",
-		rating: 0,
-	},
 	"minus": {
 		desc: "If an active ally has this Ability or the Plus Ability, this Pokemon's Special Attack is multiplied by 1.5.",
 		shortDesc: "If an active ally has this Ability or the Plus Ability, this Pokemon's Sp. Atk is 1.5x.",
@@ -3307,6 +3272,24 @@ let BattleAbilities = {
 		name: "Poison Touch",
 		rating: 2,
 	},
+	"polaritysurge": {
+		desc: "If an active ally has the Plus or Minus Ability, this Pokemon's Special Attack is multiplied by 2.",
+		shortDesc: "If an active ally has the Plus or Minus Ability, this Pokemon's Sp. Atk is 2x.",
+		onModifySpAPriority: 5,
+		onModifySpA(spa, pokemon) {
+			if (pokemon.side.active.length === 1) {
+				return;
+			}
+			for (const allyActive of pokemon.side.active) {
+				if (allyActive && allyActive.position !== pokemon.position && !allyActive.fainted && allyActive.hasAbility(['minus', 'plus', 'polaritysurge'])) {
+					return this.chainModify(2);
+				}
+			}
+		},
+		id: "polaritysurge",
+		name: "Polarity Surge",
+		rating: 0,
+	},
 	"powerchord": {
 		desc: "Normal-Type sound moves become Electric-Type, others gain the Electric-type.",
 		shortDesc: "Normal-Type sound moves become Electric-type, others gain the Electric-type.",
@@ -3758,6 +3741,46 @@ let BattleAbilities = {
 		id: "runaway",
 		name: "Run Away",
 		rating: 0,
+	},
+	"sanddefense": {
+		desc: "While above half health and this pokemon is out, a sandstorm is stirred up and cannot be replaced normally. When this pokemon falls below half health, it's defense doubles and sandstorm ends the next turn.",
+		shortDesc: "Starts sandstorm, cannot be removed by normal means. Ends once health goes below half and boosts Def.",
+		onModifyDefPriority: 5,
+		onModifyDef(def, pokemon) {
+			if (pokemon.hp <= pokemon.maxhp / 2) {
+				return this.chainModify(1.5);
+			}
+		},
+		onStart(source) {
+			this.field.setWeather('ragingsandstorm');
+		},
+		onAnySetWeather(target, source, weather) {
+			if (this.field.getWeather().id === 'ragingsandstorm' && !['desolateland', 'primordialsea', 'deltastream'].includes(weather.id)) return false;
+		},
+		onAfterMoveSecondary(target, source, move) {
+			if (!source || source === target || !target.hp || !move.totalDamage) return;
+			const lastAttackedBy = target.getLastAttackedBy();
+			if (!lastAttackedBy) return;
+			if(this.field.weatherData.source === target) {
+				if(target.hp <= target.maxhp / 2) {
+					this.field.clearWeather();
+				}
+			}
+		},
+		onEnd(pokemon) {
+			if (this.field.weatherData.source !== pokemon) return;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (target.hasAbility('sanddefense')) {
+					this.field.weatherData.source = target;
+					return;
+				}
+			}
+			this.field.clearWeather();
+		},
+		id: "sanddefense",
+		name: "Sand Defense",
+		rating: -1,
 	},
 	"sandforce": {
 		desc: "If Sandstorm is active, this Pokemon's Ground-, Rock-, and Steel-type attacks have their power multiplied by 1.3. This Pokemon takes no damage from Sandstorm.",

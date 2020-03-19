@@ -1137,7 +1137,6 @@ let BattleScripts = {
 		if (item.megaEvolves !== pokemon.baseTemplate.baseSpecies || item.megaStone === pokemon.species) {
 			return null;
 		}
-		//pokemon.baseTemplate.otherFormes.includes(pokemon.baseTemplate.baseSpecies + "mega")
 		return item.megaStone;
 	},
 

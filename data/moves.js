@@ -25837,6 +25837,66 @@ let BattleMovedex = {
 		type: "Electric",
 		contestType: "Cool",
 	},
+
+
+
+	"tornadobacklash": {
+		accuracy: 95,
+		basePower: 60,
+		category: "Special",
+		desc: "Prevents opponent from swapping out while this pokemon is on the field. Opponent is grounded.",
+		shortDesc: "Opponent cannot normally swap. Opponent is grounded.",
+		id: "tornadobacklash",
+		name: "Tornado Backlash",
+		pp: 20,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, sword: 1}, //Sword skill potential tag
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onHit(target, source, move) {
+			return target.addVolatile('trapped', source, move, 'trapper');
+		},
+		volatileStatus: 'smackdown',
+		effect: {
+			onStart(pokemon) {
+				let applies = false;
+				if (pokemon.hasType('Flying') || pokemon.hasAbility('levitate')) applies = true;
+				if (pokemon.hasItem('ironball') || pokemon.volatiles['ingrain'] || this.field.getPseudoWeather('gravity')) applies = false;
+				if (pokemon.removeVolatile('fly') || pokemon.removeVolatile('bounce')) {
+					applies = true;
+					this.cancelMove(pokemon);
+					pokemon.removeVolatile('twoturnmove');
+				}
+				if (pokemon.volatiles['magnetrise']) {
+					applies = true;
+					delete pokemon.volatiles['magnetrise'];
+				}
+				if (pokemon.volatiles['telekinesis']) {
+					applies = true;
+					delete pokemon.volatiles['telekinesis'];
+				}
+				if (!applies) return false;
+				this.add('-start', pokemon, 'Tornado Backlash');
+			},
+			onRestart(pokemon) {
+				if (pokemon.removeVolatile('fly') || pokemon.removeVolatile('bounce')) {
+					this.cancelMove(pokemon);
+					this.add('-start', pokemon, 'Tornado Backlash');
+				}
+			},
+			// groundedness implemented in battle.engine.js:BattlePokemon#isGrounded
+		},
+		secondary: null,
+		target: "normal",
+		type: "Flying",
+		zMovePower: 120,
+		contestType: "Cool",
+	},
 };
 
 exports.BattleMovedex = BattleMovedex;

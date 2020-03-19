@@ -4497,6 +4497,58 @@ let BattleFormatsData = {
 		tier: "UU",
 		doublesTier: "UU",
 	},
+	vee: {
+		tier: "UU",
+		doublesTier: "UU",
+	},
+	vapor: {
+		requiredAbility: 'Crisis Evolution',
+		battleOnly: true,
+		tier: "UU",
+		doublesTier: "UU",
+	},
+	jolt: {
+		requiredAbility: 'Crisis Evolution',
+		battleOnly: true,
+		tier: "UU",
+		doublesTier: "UU",
+	},
+	flare: {
+		requiredAbility: 'Crisis Evolution',
+		battleOnly: true,
+		tier: "UU",
+		doublesTier: "UU",
+	},
+	esp: {
+		requiredAbility: 'Crisis Evolution',
+		battleOnly: true,
+		tier: "UU",
+		doublesTier: "UU",
+	},
+	umbra: {
+		requiredAbility: 'Crisis Evolution',
+		battleOnly: true,
+		tier: "UU",
+		doublesTier: "UU",
+	},
+	leaf: {
+		requiredAbility: 'Crisis Evolution',
+		battleOnly: true,
+		tier: "UU",
+		doublesTier: "UU",
+	},
+	glace: {
+		requiredAbility: 'Crisis Evolution',
+		battleOnly: true,
+		tier: "UU",
+		doublesTier: "UU",
+	},
+	sylve: {
+		requiredAbility: 'Crisis Evolution',
+		battleOnly: true,
+		tier: "UU",
+		doublesTier: "UU",
+	},
 	missingno: {
 		tier: "UU",
 		doublesTier: "UU",
