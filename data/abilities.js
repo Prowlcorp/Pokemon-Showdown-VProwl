@@ -657,16 +657,49 @@ let BattleAbilities = {
 			if (attacker.template.baseSpecies !== 'Vee') return;
 			if (!['Normal', 'Water', 'Fire', 'Electric', 'Psychic', 'Dark', 'Grass', 'Ice', 'Fairy'].includes(move.type)) return;
 			let targetSpecies = null;
-			if(move.type === 'Normal') targetSpecies= 'Vee';
-			if(move.type === 'Fire') targetSpecies= 'Flare';
-			if(move.type === 'Water') targetSpecies= 'Vapor';
-			if(move.type === 'Electric') targetSpecies= 'Jolt';
-			if(move.type === 'Dark') targetSpecies= 'Umbra';
-			if(move.type === 'Psychic') targetSpecies= 'Esp';
-			if(move.type === 'Grass') targetSpecies= 'Leaf';
-			if(move.type === 'Ice') targetSpecies= 'Glace';
-			if(move.type === 'Fairy') targetSpecies= 'Sylve';
-			if (targetSpecies !== null && attacker.template.species !== targetSpecies) attacker.formeChange(targetSpecies);
+			let hpbase = 75;
+			let hpPercent = attacker.hp/attacker.maxhp;
+			if(move.type === 'Normal') {
+				targetSpecies= 'Vee';
+				hpbase = 75;
+			}
+			if(move.type === 'Fire') {
+				targetSpecies= 'Flare';
+				hpbase = 75;
+			}
+			if(move.type === 'Water') {
+				targetSpecies= 'Vapor';
+				hpbase = 140;
+			}
+			if(move.type === 'Electric') {
+				targetSpecies= 'Jolt';
+				hpbase = 75;
+			}
+			if(move.type === 'Dark') {
+				targetSpecies= 'Umbra';
+				hpbase = 105;
+			}
+			if(move.type === 'Psychic') {
+				targetSpecies= 'Esp';
+				hpbase = 75;
+			}
+			if(move.type === 'Grass') {
+				targetSpecies= 'Leaf';
+				hpbase = 75;
+			}
+			if(move.type === 'Ice') {
+				targetSpecies= 'Glace';
+				hpbase = 75;
+			}
+			if(move.type === 'Fairy') {
+				targetSpecies= 'Sylve';
+				hpbase = 105;
+			}
+			if (targetSpecies !== null && attacker.template.species !== targetSpecies) {
+				attacker.formeChange(targetSpecies);
+				attacker.template.baseStats.hp = hpbase;
+				attacker.sethp(attacker.maxhp*hpPercent);
+			}
 		},
 		id: "crisisevolution",
 		name: "Crisis Evolution",
