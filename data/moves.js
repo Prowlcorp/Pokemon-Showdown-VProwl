@@ -20808,7 +20808,7 @@ let BattleMovedex = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		volatileStatus: 'smackdown',
+		volatileStatus: 'tornadobacklash',
 		effect: {
 			noCopy: true,
 			onStart(pokemon) {
