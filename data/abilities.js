@@ -650,8 +650,8 @@ let BattleAbilities = {
 		rating: 2.5,
 	},
 	"crisisevolution": {
-		desc: "If this Pokemon is an Aegislash, it changes to Blade Forme before attempting to use an attacking move, and changes to Shield Forme before attempting to use King's Shield.",
-		shortDesc: "If Aegislash, changes Forme to Blade before attacks and Shield before King's Shield.",
+		desc: "If this Pokemon is Vee, it changes to a typed form based upon the move it uses, if applicable, before attacking.",
+		shortDesc: "If Vee, changes Forme to typed form when attacking.",
 		onBeforeMovePriority: 0.5,
 		onBeforeMove(attacker, defender, move) {
 			if (attacker.template.baseSpecies !== 'Vee') return;
