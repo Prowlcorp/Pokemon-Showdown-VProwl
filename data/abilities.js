@@ -650,8 +650,8 @@ let BattleAbilities = {
 		rating: 2.5,
 	},
 	"crisisevolution": {
-		desc: "If this Pokemon is Vee, it changes to a typed form based upon the move it uses, if applicable, before attacking.",
-		shortDesc: "If Vee, changes Forme to typed form when attacking.",
+		desc: "If this Pokemon is Vee, it changes to a typed form based upon the move it uses, if applicable, before attacking. STAB becomes 1.7X",
+		shortDesc: "If Vee, changes Forme to typed form when attacking. 1.7X STAB",
 		onBeforeMovePriority: 0.5,
 		onBeforeMove(attacker, defender, move) {
 			if (attacker.template.baseSpecies !== 'Vee') return;
@@ -673,6 +673,9 @@ let BattleAbilities = {
 				attacker.maxhp = newHP;
 				this.add('-heal', attacker, attacker.getHealth, '[silent]');
 			}
+		},
+		onModifyMove(move) {
+			move.stab = 1.7;
 		},
 		id: "crisisevolution",
 		name: "Crisis Evolution",

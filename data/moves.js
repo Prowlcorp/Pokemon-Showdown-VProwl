@@ -633,12 +633,12 @@ let BattleMovedex = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		desc: "Sharply raises Special Attack and Attack and raises speed. Gain weakness to all types. Can only be used once",
-		shortDesc: "Sharply raises SpA and Atk, raises speed. Weak to all types.",
+		desc: "Sharply raises Special Attack, Attack, and speed, and raises evasion. Gain weakness to all types. Can only be used once",
+		shortDesc: "Sharply raises SpA, Atk, Spe, raises evasion. Weak to all types.",
 		id: "angelwings",
 		name: "Angel Wings",
 		pp: 5,
-		priority: 0,
+		priority: -2,
 		flags: {snatch: 1},
 		onBasePower(basePower, pokemon, target) {
 			if (pokemon.level> 100) {
@@ -650,7 +650,8 @@ let BattleMovedex = {
 		boosts: {
 			atk: 2,
 			spa: 2,
-			spe: 1,
+			spe: 2,
+			evasion: 1,
 		},
 		volatileStatus: 'angelwings',
 		effect: {
@@ -1541,56 +1542,6 @@ let BattleMovedex = {
 		type: "Dark",
 		zMovePower: 100,
 		contestType: "Clever",
-	},
-	"kyuubiburn": {
-		accuracy: 90,
-		basePower: 130,
-		category: "Physical",
-		defensiveCategory: "Special",
-		desc: "Crushes the target in a hand then burns them with intense flames sure to leave a bad burn that remains until swapping which then leaves the burn status. Hard for this pokemon to evade after this.",
-		shortDesc: "Crushes target and badly burns them. Lowers own evasion",
-		id: "kyuubiburn",
-		name: "Kyuubi Burn",
-		pp: 10,
-		priority: 0,
-		flags: {protect: 1, contact: 1},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		},
-		volatileStatus: 'kyuubiburn',
-		effect: {
-			onStart(target) {
-				this.add('-start', target, 'move: Kyuubi Burn');
-			},
-			onResidualOrder: 8,
-			onResidual(pokemon) {
-				let target = this.effectData.source.side.active[pokemon.volatiles['kyuubiburn'].sourcePosition];
-				if (!target || target.fainted || target.hp <= 0) {
-					this.debug('Nothing to burn');
-					return;
-				}
-				this.damage(pokemon.maxhp / 8, pokemon, target);
-			},
-			onBeforeSwitchOut(pokemon) {
-				pokemon.trySetStatus('Brn');
-			},
-		},
-		secondary: {
-			chance: 100,
-			self: {
-				boosts: {
-					evasion: -1,
-				},
-			},
-		},
-		target: "normal",
-		type: "Fire",
-		zMovePower: 190,
-		contestType: "Tough",
 	},
 	"belch": {
 		accuracy: 90,
@@ -12189,6 +12140,56 @@ let BattleMovedex = {
 		type: "Dark",
 		zMovePower: 120,
 		contestType: "Clever",
+	},
+	"kyuubiburn": {
+		accuracy: 90,
+		basePower: 130,
+		category: "Physical",
+		defensiveCategory: "Special",
+		desc: "Crushes the target in a hand then burns them with intense flames sure to leave a bad burn that remains until swapping which then leaves the burn status. Hard for this pokemon to evade after this.",
+		shortDesc: "Crushes target and badly burns them. Lowers own evasion",
+		id: "kyuubiburn",
+		name: "Kyuubi Burn",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, contact: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		volatileStatus: 'kyuubiburn',
+		effect: {
+			onStart(target) {
+				this.add('-start', target, 'move: Kyuubi Burn');
+			},
+			onResidualOrder: 8,
+			onResidual(pokemon) {
+				let target = this.effectData.source.side.active[pokemon.volatiles['kyuubiburn'].sourcePosition];
+				if (!target || target.fainted || target.hp <= 0) {
+					this.debug('Nothing to burn');
+					return;
+				}
+				this.damage(pokemon.maxhp / 8, pokemon, target);
+			},
+			onBeforeSwitchOut(pokemon) {
+				pokemon.trySetStatus('Brn');
+			},
+		},
+		secondary: {
+			chance: 100,
+			self: {
+				boosts: {
+					evasion: -1,
+				},
+			},
+		},
+		target: "normal",
+		type: "Fire",
+		zMovePower: 190,
+		contestType: "Tough",
 	},
 	"landswrath": {
 		accuracy: 100,
