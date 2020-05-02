@@ -22678,6 +22678,43 @@ let BattleMovedex = {
 		zMovePower: 100,
 		contestType: "Tough",
 	},
+	"supernova": {
+		accuracy: 100,
+		basePower: 225,
+		category: "Special",
+		desc: "If this move is successful, the user must recharge on the following turn and cannot make a move. Has a 20% chance to burn. Has a 20% chance to cauterize wounds.",
+		shortDesc: "User cannot move next turn. May burn. May stop bleeding.",
+		id: "supernova",
+		name: "Supernova",
+		pp: 5,
+		priority: 0,
+		flags: {recharge: 1, protect: 1, defrost: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		self: {
+			volatileStatus: 'mustrecharge',
+		},
+		secondaries: [
+			{
+				chance: 40,
+				onHit(target) {
+					if (target.status === 'bld') target.cureStatus();
+				},
+			}, {
+				chance: 20,
+				status: 'brn',
+			},
+		],
+		target: "normal",
+		type: "Fire",
+		zMovePower: 200,
+		contestType: "Beautiful",
+	},
 	"superpower": {
 		accuracy: 100,
 		basePower: 120,
