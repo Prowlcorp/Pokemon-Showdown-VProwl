@@ -16,8 +16,8 @@ exports.BattleScripts = {
 			ability = this.battle.getAbility(ability);
 			let oldAbility = this.ability;
 			if (!isFromFormechange) {
-				if (['illusion', 'battlebond', 'comatose', 'disguise', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange'].includes(ability.id)) return false;
-				if (['battlebond', 'comatose', 'disguise', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange'].includes(oldAbility)) return false;
+				if (['illusion', 'battlebond', 'comatose', 'crisisevolution', 'disguise', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange'].includes(ability.id)) return false;
+				if (['battlebond', 'comatose', 'crisisevolution', 'disguise', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange'].includes(oldAbility)) return false;
 			}
 			this.battle.singleEvent('End', this.battle.getAbility(oldAbility), this.abilityData, this, source);
 			let ally = this.side.active.find(ally => ally && ally !== this && !ally.fainted);
