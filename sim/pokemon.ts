@@ -1390,7 +1390,7 @@ export class Pokemon {
 		const oldAbility = this.ability;
 		if (!isFromFormeChange) {
 			const abilities = [
-				'battlebond', 'comatose', 'crisis evolution', 'disguise', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange',
+				'battlebond', 'comatose', 'crisisevolution', 'disguise', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange',
 			];
 			if ('illusion' === ability.id || abilities.includes(ability.id) || abilities.includes(oldAbility)) return false;
 			if (this.battle.gen >= 7 && (ability.id === 'zenmode' || oldAbility === 'zenmode')) return false;
