@@ -6721,7 +6721,7 @@ let BattleMovedex = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "???",
-		zMoveEffect: 'clearnegativeboost',
+		zMovePower: 180,
 		contestType: "Clever",
 	},
 	"explosion": {
