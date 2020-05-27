@@ -1058,7 +1058,7 @@ let BattleMovedex = {
 		},
 		onModifyMove(move, source) {
 			move.priority = source.volatiles.auraiaido.multiplier;
-		}
+		},
 		category: "Physical",
 		defensiveCategory: "Special",
 		desc: "Power drops with each successful hit, up to a minimum of 30 power. Priority increases each hit, up to a maximum of 3. The power and priority is reset if this move misses or another move is used.",
@@ -4536,93 +4536,6 @@ let BattleMovedex = {
 		zMovePower: 160,
 		contestType: "Cool",
 	},
-	"evowavedestruction": {
-		accuracy: 90,
-		basePower: 100,
-		category: "Physical",
-		desc: "Causes the target to fall asleep. This move cannot be used successfully unless the user's current form, while considering Transform, is Darkrai.",
-		shortDesc: "Darkrai: Causes the foe(s) to fall asleep.",
-		id: "evowavedestruction",
-		name: "Evo-Wave Destruction",
-		pp: 5,
-		priority: 0,
-		flags: {protect: 1, reflectable: 1, mirror: 1},
-		basePowerCallback(pokemon, target, move) {
-			if (target.baseTemplate.prevo) return move.basePower * 2;
-			return move.basePower;
-		},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		},
-		onTryMove(pokemon, target, move) {
-			if (pokemon.template.species === 'Vee' && move.type !== "???") {
-				return;
-			}
-			this.add('-fail', pokemon, 'move: Evo-Wave Destruction');
-			this.hint("Only a Pokemon whose species is Vee and form is not base can use this move.");
-			return null;
-		},
-		onModifyMove(move, pokemon, target) {
-			if (pokemon.name !== 'Vee' && pokemon.template.baseSpecies === 'Vee') {
-				move.type = pokemon.types[0];
-			}
-			move.secondaries = [];
-			if (move.type === "Electric") {
-				move.secondaries.push({
-					chance: 40,
-					status: 'par',
-				});
-			}
-			if (move.type === "Fire") {
-				move.secondaries.push({
-					chance: 40,
-					status: 'brn',
-				});
-			}
-			if (move.type === "Ice") {
-				move.secondaries.push({
-					chance: 40,
-					status: 'frz',
-				});
-			}
-			if (move.type === "Psychic") {
-				move.secondaries.push({
-					chance: 40,
-					status: 'slp',
-				});
-			}
-			if (move.type === "Dark") {
-				move.secondaries.push({
-					chance: 40,
-					volatileStatus: 'flinch',
-				});
-			}
-			if (move.type === "Grass") {
-				move.drain = [1,2];
-			}
-			if (move.type === "Water") {
-				move.secondaries.push({
-					boosts: {
-						def: -1,
-						spd: -1,
-					},
-				});
-			}
-			if (move.type === "Fairy") {
-				move.stealsBoosts = true;
-				// Boost stealing implemented in scripts.js
-			}
-		},
-		secondary: null,
-		target: "allAdjacentFoes",
-		type: "???",
-		zMoveEffect: 'clearnegativeboost',
-		contestType: "Clever",
-	},
 	"darkvoid": {
 		accuracy: 50,
 		basePower: 0,
@@ -6703,6 +6616,93 @@ let BattleMovedex = {
 		type: "Fire",
 		zMovePower: 200,
 		contestType: "Beautiful",
+	},
+	"evowavedestruction": {
+		accuracy: 90,
+		basePower: 100,
+		category: "Physical",
+		desc: "Causes the target to fall asleep. This move cannot be used successfully unless the user's current form, while considering Transform, is Darkrai.",
+		shortDesc: "Darkrai: Causes the foe(s) to fall asleep.",
+		id: "evowavedestruction",
+		name: "Evo-Wave Destruction",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1},
+		basePowerCallback(pokemon, target, move) {
+			if (target.baseTemplate.prevo) return move.basePower * 2;
+			return move.basePower;
+		},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onTryMove(pokemon, target, move) {
+			if (pokemon.template.species === 'Vee' && move.type !== "???") {
+				return;
+			}
+			this.add('-fail', pokemon, 'move: Evo-Wave Destruction');
+			this.hint("Only a Pokemon whose species is Vee and form is not base can use this move.");
+			return null;
+		},
+		onModifyMove(move, pokemon, target) {
+			if (pokemon.name !== 'Vee' && pokemon.template.baseSpecies === 'Vee') {
+				move.type = pokemon.types[0];
+			}
+			move.secondaries = [];
+			if (move.type === "Electric") {
+				move.secondaries.push({
+					chance: 40,
+					status: 'par',
+				});
+			}
+			if (move.type === "Fire") {
+				move.secondaries.push({
+					chance: 40,
+					status: 'brn',
+				});
+			}
+			if (move.type === "Ice") {
+				move.secondaries.push({
+					chance: 40,
+					status: 'frz',
+				});
+			}
+			if (move.type === "Psychic") {
+				move.secondaries.push({
+					chance: 40,
+					status: 'slp',
+				});
+			}
+			if (move.type === "Dark") {
+				move.secondaries.push({
+					chance: 40,
+					volatileStatus: 'flinch',
+				});
+			}
+			if (move.type === "Grass") {
+				move.drain = [1,2];
+			}
+			if (move.type === "Water") {
+				move.secondaries.push({
+					boosts: {
+						def: -1,
+						spd: -1,
+					},
+				});
+			}
+			if (move.type === "Fairy") {
+				move.stealsBoosts = true;
+				// Boost stealing implemented in scripts.js
+			}
+		},
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "???",
+		zMoveEffect: 'clearnegativeboost',
+		contestType: "Clever",
 	},
 	"explosion": {
 		accuracy: 100,
