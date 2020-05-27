@@ -6657,7 +6657,7 @@ let BattleMovedex = {
 			return null;
 		},
 		onModifyMove(move, pokemon, target) {
-			if (pokemon.name !== 'Vee' && pokemon.template.baseSpecies === 'Vee') {
+			if (pokemon.template.species !== 'Vee' && pokemon.template.baseSpecies === 'Vee') {
 				move.type = pokemon.types[0];
 			}
 			if (pokemon.getStat('spa', false, true) > pokemon.getStat('atk', false, true)) move.category = 'Special';
