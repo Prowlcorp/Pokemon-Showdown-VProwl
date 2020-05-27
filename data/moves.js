@@ -1074,9 +1074,9 @@ let BattleMovedex = {
 		},
 		onModifyMove(move, source) {
 			if(source.volatiles.auraiaido) {
-				if(source.volatiles.auraiaido.multiplier === 1) move.priority = 1;
-				if(source.volatiles.auraiaido.multiplier === 2) move.priority = 2;
-				if(source.volatiles.auraiaido.multiplier === 3) move.priority = 3;
+				if(this.effectData.multiplier === 1) move.priority = 1;
+				if(this.effectData.multiplier === 2) move.priority = 2;
+				if(this.effectData.multiplier === 3) move.priority = 3;
 			}
 		},
 		effect: {
@@ -1120,9 +1120,12 @@ let BattleMovedex = {
 			volatileStatus: 'aurarage',
 		},
 		effect: {
-			duration: 2,
+			duration: 1,
 			onStart(pokemon) {
 				this.add('-singleturn', pokemon, 'move: Aura Rage');
+			},
+			onEffectiveness(typeMod, target, type, move) {
+				if (type === 'Steel') return 0;
 			},
 			onSourceModifyDamage(damage, source, target, move) {
 				if(move.flags.contact && move.category === "Special") {
