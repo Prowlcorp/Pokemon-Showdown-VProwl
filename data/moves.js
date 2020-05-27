@@ -1057,7 +1057,9 @@ let BattleMovedex = {
 			return this.clampIntRange(move.basePower / pokemon.volatiles.auraiaido.multiplier, 30, 120);
 		},
 		onModifyMove(move, source) {
-			move.priority = source.volatiles.auraiaido.multiplier;
+			if(source.volatiles.auraiaido.multiplier) {
+				move.priority = source.volatiles.auraiaido.multiplier;
+			}
 		},
 		category: "Physical",
 		defensiveCategory: "Special",
@@ -6651,6 +6653,7 @@ let BattleMovedex = {
 			if (pokemon.name !== 'Vee' && pokemon.template.baseSpecies === 'Vee') {
 				move.type = pokemon.types[0];
 			}
+			if (pokemon.getStat('spa', false, true) > pokemon.getStat('atk', false, true)) move.category = 'Special';
 			move.secondaries = [];
 			if (move.type === "Electric") {
 				move.secondaries.push({
