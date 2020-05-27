@@ -1057,7 +1057,7 @@ let BattleMovedex = {
 			return this.clampIntRange(move.basePower / pokemon.volatiles.auraiaido.multiplier, 30, 120);
 		},
 		onModifyMove(move, source) {
-			if(source.volatiles.auraiaido.multiplier) {
+			if(source.volatiles.auraiaido) {
 				move.priority = source.volatiles.auraiaido.multiplier;
 			}
 		},
