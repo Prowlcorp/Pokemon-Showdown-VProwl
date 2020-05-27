@@ -1054,15 +1054,12 @@ let BattleMovedex = {
 			if (!pokemon.volatiles.auraiaido || move.hit === 1) {
 				pokemon.addVolatile('auraiaido');
 			}
-			if(pokemon.volatiles.auraiaido) {
-				move.priority = pokemon.volatiles.auraiaido.multiplier;
-			}
 			return this.clampIntRange(move.basePower / pokemon.volatiles.auraiaido.multiplier, 40, 120);
 		},
 		category: "Physical",
 		defensiveCategory: "Special",
-		desc: "Power drops with each successful hit, up to a minimum of 30 power. Priority increases each hit, up to a maximum of 3. The power and priority is reset if this move misses or another move is used.",
-		shortDesc: "Power drops with each hit, down to 30. Priority adds with each hit.",
+		desc: "Power drops with each successful hit, down to a minimum of 40 power. Priority increases each hit, up to a maximum of 3. The power and priority is reset if this move misses or another move is used.",
+		shortDesc: "Power drops with each hit, down to 40. Priority adds with each hit.",
 		id: "auraiaido",
 		name: "Aura Iaido",
 		pp: 10,
@@ -1075,13 +1072,20 @@ let BattleMovedex = {
 				return this.chainModify(currentBoost);
 			}
 		},
+		onModifyMove(move, source) {
+			if(source.volatiles.auraiaido) {
+				if(source.volatiles.auraiaido.multiplier === 1) move.priority = 1;
+				if(source.volatiles.auraiaido.multiplier === 2) move.priority = 2;
+				if(source.volatiles.auraiaido.multiplier === 3) move.priority = 3;
+			}
+		},
 		effect: {
 			duration: 2,
 			onStart() {
 				this.effectData.multiplier = 1;
 			},
 			onRestart() {
-				if (this.effectData.multiplier < 4) {
+				if (this.effectData.multiplier < 3) {
 					this.effectData.multiplier <<= 1;
 				}
 				this.effectData.duration = 2;
