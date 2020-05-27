@@ -1047,6 +1047,98 @@ let BattleMovedex = {
 		zMoveEffect: 'clearnegativeboost',
 		contestType: "Cute",
 	},
+	"auraiaido": {
+		accuracy: 95,
+		basePower: 120,
+		basePowerCallback(pokemon, target, move) {
+			if (!pokemon.volatiles.auraiaido || move.hit === 1) {
+				pokemon.addVolatile('auraiaido');
+			}
+			return this.clampIntRange(move.basePower / pokemon.volatiles.auraiaido.multiplier, 30, 120);
+		},
+		onModifyMove(move, source) {
+			move.priority = source.volatiles.auraiaido.multiplier;
+		}
+		category: "Physical",
+		defensiveCategory: "Special",
+		desc: "Power drops with each successful hit, up to a minimum of 30 power. Priority increases each hit, up to a maximum of 3. The power and priority is reset if this move misses or another move is used.",
+		shortDesc: "Power drops with each hit, down to 30. Priority adds with each hit.",
+		id: "auraiaido",
+		name: "Aura Iaido",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, sword: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		effect: {
+			duration: 2,
+			onStart() {
+				this.effectData.multiplier = 1;
+			},
+			onRestart() {
+				if (this.effectData.multiplier < 4) {
+					this.effectData.multiplier <<= 1;
+				}
+				this.effectData.duration = 2;
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Fighting",
+		zMovePower: 180,
+		contestType: "Cool",
+	},
+	"aurarage": {
+		accuracy: 95,
+		basePower: 90,
+		category: "Special",
+		defensiveCategory: "Physical",
+		desc: "This pokemon uses Fighting-Type for incoming damage until next turn. Reduces damage received by 50% for contact and 25% for special.",
+		shortDesc: "Uses Fighting-Type when receiving damage. Reduces damage received.",
+		id: "aurarage",
+		name: "Aura Rage",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		volatileStatus: 'aurarage',
+		effect: {
+			duration: 2,
+			onStart(target) {
+				this.add('-singleturn', target, 'move: Aura Rage');
+			},
+			onSourceModifyDamage(damage, source, target, move) {
+				if(move.flags.contact && move.category === "Special") {
+					this.add('-activate', target, 'move: Aura Rage');
+					return this.chainModify(0.375);
+				}
+				if(move.flags.contact) {
+					this.add('-activate', target, 'move: Aura Rage');
+					return this.chainModify(0.5);
+				}
+				if(move.category === "Special") {
+					this.add('-activate', target, 'move: Aura Rage');
+					return this.chainModify(0.75);
+				}
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Fighting",
+		zMovePower: 175,
+		contestType: "Tough",
+	},
 	"aurasphere": {
 		accuracy: true,
 		basePower: 80,
@@ -1069,6 +1161,34 @@ let BattleMovedex = {
 		type: "Fighting",
 		zMovePower: 160,
 		contestType: "Beautiful",
+	},
+	"auricdoubleslash": {
+		accuracy: 100,
+		basePower: 50,
+		category: "Physical",
+		desc: "Hits twice. If the first hit breaks the target's substitute, it will take damage for the second hit. Has a 10% chance to cause bleeding",
+		shortDesc: "Hits 2 times in one turn. 10% chance to cause bleed.",
+		id: "auricdoubleslash",
+		name: "Auric Double Slash",
+		pp: 15,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, sword: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		multihit: 2,
+		secondary: {
+			chance: 10,
+			status: 'bld',
+		},
+		target: "normal",
+		type: "Fighting",
+		zMovePower: 100,
+		contestType: "Tough",
 	},
 	"aurorabeam": {
 		accuracy: 100,
@@ -4415,6 +4535,93 @@ let BattleMovedex = {
 		type: "Dark",
 		zMovePower: 160,
 		contestType: "Cool",
+	},
+	"evowavedestruction": {
+		accuracy: 90,
+		basePower: 100,
+		category: "Physical",
+		desc: "Causes the target to fall asleep. This move cannot be used successfully unless the user's current form, while considering Transform, is Darkrai.",
+		shortDesc: "Darkrai: Causes the foe(s) to fall asleep.",
+		id: "evowavedestruction",
+		name: "Evo-Wave Destruction",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1},
+		basePowerCallback(pokemon, target, move) {
+			if (target.baseTemplate.prevo) return move.basePower * 2;
+			return move.basePower;
+		},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onTryMove(pokemon, target, move) {
+			if (pokemon.template.species === 'Vee' && move.type !== "???") {
+				return;
+			}
+			this.add('-fail', pokemon, 'move: Evo-Wave Destruction');
+			this.hint("Only a Pokemon whose species is Vee and form is not base can use this move.");
+			return null;
+		},
+		onModifyMove(move, pokemon, target) {
+			if (pokemon.name !== 'Vee' && pokemon.template.baseSpecies === 'Vee') {
+				move.type = pokemon.types[0];
+			}
+			move.secondaries = [];
+			if (move.type === "Electric") {
+				move.secondaries.push({
+					chance: 40,
+					status: 'par',
+				});
+			}
+			if (move.type === "Fire") {
+				move.secondaries.push({
+					chance: 40,
+					status: 'brn',
+				});
+			}
+			if (move.type === "Ice") {
+				move.secondaries.push({
+					chance: 40,
+					status: 'frz',
+				});
+			}
+			if (move.type === "Psychic") {
+				move.secondaries.push({
+					chance: 40,
+					status: 'slp',
+				});
+			}
+			if (move.type === "Dark") {
+				move.secondaries.push({
+					chance: 40,
+					volatileStatus: 'flinch',
+				});
+			}
+			if (move.type === "Grass") {
+				move.drain = [1,2];
+			}
+			if (move.type === "Water") {
+				move.secondaries.push({
+					boosts: {
+						def: -1,
+						spd: -1,
+					},
+				});
+			}
+			if (move.type === "Fairy") {
+				move.stealsBoosts = true;
+				// Boost stealing implemented in scripts.js
+			}
+		},
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "???",
+		zMoveEffect: 'clearnegativeboost',
+		contestType: "Clever",
 	},
 	"darkvoid": {
 		accuracy: 50,
