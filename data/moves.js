@@ -1112,11 +1112,13 @@ let BattleMovedex = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		volatileStatus: 'aurarage',
+		self: {
+			volatileStatus: 'aurarage',
+		},
 		effect: {
 			duration: 2,
-			onStart(source) {
-				this.add('-singleturn', source, 'move: Aura Rage');
+			onStart(pokemon) {
+				this.add('-singleturn', pokemon, 'move: Aura Rage');
 			},
 			onSourceModifyDamage(damage, source, target, move) {
 				if(move.flags.contact && move.category === "Special") {
