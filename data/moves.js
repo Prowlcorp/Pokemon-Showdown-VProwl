@@ -1054,12 +1054,10 @@ let BattleMovedex = {
 			if (!pokemon.volatiles.auraiaido || move.hit === 1) {
 				pokemon.addVolatile('auraiaido');
 			}
-			return this.clampIntRange(move.basePower / pokemon.volatiles.auraiaido.multiplier, 30, 120);
-		},
-		onModifyMove(move, source) {
-			if(source.volatiles.auraiaido) {
-				move.priority = source.volatiles.auraiaido.multiplier;
+			if(pokemon.volatiles.auraiaido) {
+				move.priority = pokemon.volatiles.auraiaido.multiplier;
 			}
+			return this.clampIntRange(move.basePower / pokemon.volatiles.auraiaido.multiplier, 40, 120);
 		},
 		category: "Physical",
 		defensiveCategory: "Special",
@@ -1117,8 +1115,8 @@ let BattleMovedex = {
 		volatileStatus: 'aurarage',
 		effect: {
 			duration: 2,
-			onStart(target) {
-				this.add('-singleturn', target, 'move: Aura Rage');
+			onStart(source) {
+				this.add('-singleturn', source, 'move: Aura Rage');
 			},
 			onSourceModifyDamage(damage, source, target, move) {
 				if(move.flags.contact && move.category === "Special") {
