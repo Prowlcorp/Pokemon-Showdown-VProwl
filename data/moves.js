@@ -1047,7 +1047,7 @@ let BattleMovedex = {
 		zMoveEffect: 'clearnegativeboost',
 		contestType: "Cute",
 	},
-	"auraiaido": {
+/*	"auraiaido": {
 		accuracy: 95,
 		basePower: 120,
 		basePowerCallback(pokemon, target, move) {
@@ -1096,13 +1096,13 @@ let BattleMovedex = {
 		type: "Fighting",
 		zMovePower: 180,
 		contestType: "Cool",
-	},
+	},*/
 	"aurarage": {
 		accuracy: 95,
 		basePower: 90,
 		category: "Special",
 		defensiveCategory: "Physical",
-		desc: "This pokemon uses Fighting-Type for incoming damage until next turn. Reduces damage received by 50% for contact and 25% for special.",
+		desc: "This pokemon uses Fighting-Type for incoming damage until turn end. Reduces damage received by 50% for contact and 25% for special.",
 		shortDesc: "Uses Fighting-Type when receiving damage. Reduces damage received.",
 		id: "aurarage",
 		name: "Aura Rage",
@@ -6649,7 +6649,7 @@ let BattleMovedex = {
 			}
 		},
 		onTryMove(pokemon, target, move) {
-			if (pokemon.template.species === 'Vee' && move.type !== "???") {
+			if (pokemon.baseTemplate.baseSpecies === 'Vee' && move.type !== "???") {
 				return;
 			}
 			this.add('-fail', pokemon, 'move: Evo-Wave Destruction');
@@ -6706,6 +6706,16 @@ let BattleMovedex = {
 			if (move.type === "Fairy") {
 				move.stealsBoosts = true;
 				// Boost stealing implemented in scripts.js
+			}
+		},
+		onHit(target, pokemon, move) {
+			if (pokemon.baseTemplate.baseSpecies === 'Vee' && !pokemon.transformed) {
+				move.willChangeForme = true;
+			}
+		},
+		onAfterMoveSecondarySelf(pokemon, target, move) {
+			if (move.willChangeForme) {
+				pokemon.formeChange('Vee', this.effect, false, '[msg]');
 			}
 		},
 		secondary: null,
