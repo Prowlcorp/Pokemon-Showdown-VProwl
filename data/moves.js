@@ -2079,6 +2079,47 @@ let BattleMovedex = {
 		zMoveBoost: {def: 1},
 		contestType: "Cute",
 	},
+	//Test custom
+	"bloodscythe": {
+		accuracy: 100,
+		basePower: 0,
+		basePowerCallback(pokemon) {
+			return pokemon.hp-(pokemon.hp-1);
+		},
+		category: "Physical",
+		desc: "Power is equal to users current hp minus 1. This move combines Poison in its type effectiveness against the target. Poisons the target.",
+		shortDesc: "Power: Hp-1. Sets user to 1 hp. +Poison. +Poison-Type.",
+		id: "bloodscythe",
+		name: "Blood Scythe",
+		pp: 10,
+		flags: {protect: 1, mirror: 1, distance: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onEffectiveness(typeMod, target, type, move) {
+			if (target.hasType('Ghost')) {
+				if(!target.addedType || target.addedType && target.addedType !== "Ghost") {
+					this.add('-immune', target);
+					return null;
+				}
+			}
+			return typeMod + this.getEffectiveness('Poison', type);
+		},
+		onHit(target, pokemon) {
+			pokemon.sethp(1);
+			this.add('-sethp', pokemon, pokemon.getHealth, '[from] move: Blood Scythe');
+		},
+		status: 'psn',
+		priority: 0,
+		secondary: null,
+		target: "any",
+		type: "Psychic",
+		contestType: "Tough",
+	},
 	"bloomdoom": {
 		accuracy: true,
 		basePower: 1,
@@ -6630,8 +6671,8 @@ let BattleMovedex = {
 		accuracy: 90,
 		basePower: 100,
 		category: "Physical",
-		desc: "Causes the target to fall asleep. This move cannot be used successfully unless the user's current form, while considering Transform, is Darkrai.",
-		shortDesc: "Darkrai: Causes the foe(s) to fall asleep.",
+		desc: "Can only be used by a transformed Vee. Does 2X damage against pokemon that have evolved. Gains effect based on form. Regresses Vee into base form.",
+		shortDesc: "Vee: 2X against evo. Varied effect. Regresses form.",
 		id: "evowavedestruction",
 		name: "Evo-Wave Destruction",
 		pp: 5,
@@ -7346,6 +7387,35 @@ let BattleMovedex = {
 				return this.chainModify(currentBoost);
 			}
 		},
+/*
+		basePowerCallback(target, source, move) {  //This goes on close combat
+			if (['aurasphere'].includes(move.sourceEffect) && source.template.species === 'Zenkari') {
+				this.add('-combine');
+				return 150;
+			}
+			return 80;
+		},
+		onPrepareHit(target, source, move) { //this goes on aura sphere
+			for (const action of this.queue) {
+				// @ts-ignore
+				if (!action.move || !action.pokemon || !action.pokemon.isActive || action.pokemon.fainted) continue;
+				// @ts-ignore
+				if (action.pokemon.side === source.side && ['closecombat'].includes(action.move.id)) {
+					// @ts-ignore
+					//this.prioritizeAction(action);
+					this.add('-waiting', source, action.pokemon);
+					return null;
+				}
+			}
+		},
+		onModifyMove(move) {
+			if (move.sourceEffect === 'aurasphere') {
+				move.onTryHit = function(target,pokemon) {
+					this.useMove('hyperaurafisttag', pokemon, target);
+					return null;
+				}
+			}
+		},*/
 		onPrepareHit(target, source, move) {
 			for (const action of this.queue) {
 				// @ts-ignore
@@ -16310,44 +16380,6 @@ let BattleMovedex = {
 		},
 		status: 'psn',
 		volatileStatus: 'attract',
-		effect: {
-			noCopy: true, // doesn't get copied by Baton Pass
-			onStart(pokemon, source, effect) {
-				if (!(pokemon.gender === 'M' && source.gender === 'F') && !(pokemon.gender === 'F' && source.gender === 'M')) {
-					this.debug('incompatible gender');
-					return false;
-				}
-				if (!this.runEvent('Attract', pokemon, source)) {
-					this.debug('Attract event failed');
-					return false;
-				}
-
-				if (effect.id === 'cutecharm') {
-					this.add('-start', pokemon, 'Attract', '[from] ability: Cute Charm', '[of] ' + source);
-				} else if (effect.id === 'destinyknot') {
-					this.add('-start', pokemon, 'Attract', '[from] item: Destiny Knot', '[of] ' + source);
-				} else {
-					this.add('-start', pokemon, 'Attract');
-				}
-			},
-			onUpdate(pokemon) {
-				if (this.effectData.source && !this.effectData.source.isActive && pokemon.volatiles['attract']) {
-					this.debug('Removing Attract volatile on ' + pokemon);
-					pokemon.removeVolatile('attract');
-				}
-			},
-			onBeforeMovePriority: 2,
-			onBeforeMove(pokemon, target, move) {
-				this.add('-activate', pokemon, 'move: Attract', '[of] ' + this.effectData.source);
-				if (this.randomChance(1, 2)) {
-					this.add('cant', pokemon, 'Attract');
-					return false;
-				}
-			},
-			onEnd(pokemon) {
-				this.add('-end', pokemon, 'Attract', '[silent]');
-			},
-		},
 		secondary: null,
 		target: "normal",
 		type: "Poison",
