@@ -2084,7 +2084,7 @@ let BattleMovedex = {
 		accuracy: 100,
 		basePower: 0,
 		basePowerCallback(pokemon) {
-			return pokemon.hp-(pokemon.hp-1);
+			return pokemon.hp-1;
 		},
 		category: "Physical",
 		desc: "Power is equal to users current hp minus 1. This move combines Poison in its type effectiveness against the target. Poisons the target.",
