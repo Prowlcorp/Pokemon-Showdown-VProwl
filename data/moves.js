@@ -2100,12 +2100,18 @@ let BattleMovedex = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTryHit(target, pokemon) {
-			if (pokemon.hp === 1) return null; //fails
+		onTryMove(pokemon, target, move) {
+			if (pokemon.hp === 1) {
+				this.add('-fail', pokemon, 'move: Blood Scythe');
+				this.attrLastMove('[still]');
+				return null;
+			}
+		},
+		onTryHit(target) { //hits ghosts, works on no hp
 			if (target.hasType('Ghost')) {
-				if(!target.addedType || (target.addedType && target.addedType !== "Ghost")) {
+				if(!target.addedType || (target.addedType && target.addedType !== 'Ghost')) {
 					this.add('-immune', target);
-					return null;
+					return false;
 				}
 			}
 		},
