@@ -671,10 +671,10 @@ let BattleScripts = {
 				this.damage(Math.round(pokemon.maxhp / 2), pokemon, pokemon, this.getEffect('Mind Blown'), true);
 				move.mindBlownRecoil = false;
 			}
-			if (move.bloodScytheRecoil) {
+/*			if (move.bloodScytheRecoil) {
 				this.damage(pokemon.hp-1, pokemon, pokemon, this.getEffect('Blood Scythe'), true);
 				move.bloodScytheRecoil = false;
-			}
+			}*/
 			this.eachEvent('Update');
 			if (!pokemon.hp) {
 				hit++; // report the correct number of hits for multihit moves

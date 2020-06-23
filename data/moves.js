@@ -2100,33 +2100,32 @@ let BattleMovedex = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTryHit(pokemon, target) {
-			if (pokemon.hp === 1) return false; //fails
+		onTryHit(target, pokemon) {
+			if (pokemon.hp === 1) return null; //fails
 			if (target.hasType('Ghost')) {
-				/*				if(!target.addedType || (target.addedType && target.addedType !== "Ghost")) {
-									this.add('-immune', target);
-									return false;
-								}*/
-				this.add('-immune', target);
-				return false;
+				if(!target.addedType || (target.addedType && target.addedType !== "Ghost")) {
+					this.add('-immune', target);
+					return null;
+				}
 			}
 		},
 		onEffectiveness(typeMod, target, type, move) {
 			return typeMod + this.getEffectiveness('Poison', type);
 		},
-		bloodScytheRecoil: true,
+/*		bloodScytheRecoil: true,
 		onAfterMove(pokemon, target, move) {
 			if (move.bloodScytheRecoil && !move.multihit) {
 				this.damage(pokemon.hp-1, pokemon, pokemon, this.getEffect('Blood Scythe'), true);
 			}
-		},
-/*		onHit(target, pokemon) {
+		},*/
+		onHit(target, pokemon) {
 			pokemon.sethp(1);
 			this.add('-sethp', pokemon, pokemon.getHealth, '[from] move: Blood Scythe');
-		},*/
-		status: 'psn',
+		},
 		priority: 0,
-		secondary: null,
+		secondary: {
+			status: 'psn',
+		},
 		target: "any",
 		type: "Psychic",
 		contestType: "Tough",
