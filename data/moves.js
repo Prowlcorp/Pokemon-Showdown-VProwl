@@ -2087,11 +2087,11 @@ let BattleMovedex = {
 			return pokemon.hp-1;
 		},
 		category: "Physical",
-		desc: "Power is equal to users current hp minus 1. This move combines Poison in its type effectiveness against the target. Poisons the target.",
+		desc: "Power is equal to users current hp minus 1, fails if user is at 1 hp. Does not hit natural ghost types. This move combines Poison in its type effectiveness against the target. Poisons the target.",
 		shortDesc: "Power: Hp-1. Sets user to 1 hp. +Poison. +Poison-Type.",
 		id: "bloodscythe",
 		name: "Blood Scythe",
-		pp: 10,
+		pp: 5,
 		flags: {protect: 1, mirror: 1, distance: 1},
 		onBasePower(basePower, pokemon, target) {
 			if (pokemon.level> 100) {
@@ -2100,13 +2100,16 @@ let BattleMovedex = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		onEffectiveness(typeMod, target, type, move) {
+		onTryHit(pokemon, target) {
+			if (pokemon.hp === 1) return null;
 			if (target.hasType('Ghost')) {
-				if(!target.addedType || target.addedType && target.addedType !== "Ghost") {
+				if(!target.addedType || (target.addedType && target.addedType !== "Ghost")) {
 					this.add('-immune', target);
 					return null;
 				}
 			}
+		},
+		onEffectiveness(typeMod, target, type, move) {
 			return typeMod + this.getEffectiveness('Poison', type);
 		},
 		onHit(target, pokemon) {
