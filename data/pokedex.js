@@ -11964,7 +11964,7 @@ let BattlePokedex = {
 		formeLetter: "M",
 		types: ["Flying", "Dragon"],
 		baseStats: {hp: 85, atk: 80, def: 95, spa: 137, spd: 125, spe: 123},
-		abilities: {0: "Hyper SubWoofer"},
+		abilities: {0: "Hyper Subwoofer"},
 		heightm: 1.7,
 		weightkg: 91.7,
 		color: "Purple",

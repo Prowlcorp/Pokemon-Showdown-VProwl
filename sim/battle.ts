@@ -1911,6 +1911,7 @@ export class Battle extends Dex.ModdedDex {
 				category: 'Physical',
 				willCrit: false,
 			}) as ActiveMove;
+			if(pokemon.getStat('spa') > pokemon.getStat('atk')) move.category = 'Special';
 			move.hit = 0;
 		}
 

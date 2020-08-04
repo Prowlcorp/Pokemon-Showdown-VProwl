@@ -2079,7 +2079,6 @@ let BattleMovedex = {
 		zMoveBoost: {def: 1},
 		contestType: "Cute",
 	},
-	//Test custom
 	"bloodscythe": {
 		accuracy: 100,
 		basePower: 0,
@@ -2107,23 +2106,17 @@ let BattleMovedex = {
 				return null;
 			}
 		},
-		onTryHit(target) { //hits ghosts, works on no hp
+		onTryHit(target) {
 			if (target.hasType('Ghost')) {
 				if(!target.addedType || (target.addedType && target.addedType !== 'Ghost')) {
 					this.add('-immune', target);
-					return false;
+					return null;
 				}
 			}
 		},
 		onEffectiveness(typeMod, target, type, move) {
 			return typeMod + this.getEffectiveness('Poison', type);
 		},
-/*		bloodScytheRecoil: true,
-		onAfterMove(pokemon, target, move) {
-			if (move.bloodScytheRecoil && !move.multihit) {
-				this.damage(pokemon.hp-1, pokemon, pokemon, this.getEffect('Blood Scythe'), true);
-			}
-		},*/
 		onHit(target, pokemon) {
 			pokemon.sethp(1);
 			this.add('-sethp', pokemon, pokemon.getHealth, '[from] move: Blood Scythe');
@@ -5578,7 +5571,7 @@ let BattleMovedex = {
 		},
 		target: "normal",
 		type: "Dragon",
-		gmaxPower: 130,
+		zMovePower: 100,
 	},
 	"dragonhammer": {
 		accuracy: 100,
@@ -15324,6 +15317,8 @@ let BattleMovedex = {
 				move = 'psychic';
 			} else if (this.field.isTerrain('hellfire')) {
 				move = 'flamethrower';
+			} else if (this.field.isTerrain('soundstage')) {
+				move = 'hypervoice';
 			}
 			this.useMove(move, pokemon, target);
 			return null;
@@ -19787,6 +19782,11 @@ let BattleMovedex = {
 						spe: -1,
 					},
 				});
+			} else if (this.field.isTerrain('soundstage')) {
+				move.secondaries.push({
+					chance: 30,
+					volatileStatus: 'confusion',
+				});
 			}
 		},
 		secondary: {
@@ -21576,6 +21576,80 @@ let BattleMovedex = {
 		type: "Psychic",
 		zMovePower: 180,
 		contestType: "Tough",
+	},
+	"soundstage": {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		desc: "For 5 turns, the terrain becomes Sound Stage. During the effect, the power of Sound attacks made is multiplied by 2 and Pokemon cannot fall asleep; Pokemon already asleep wake up. Nature Power becomes Hyper Voice, and Secret Power has a 30% chance to cause confusion. Fails if the current terrain is Sound Stage.",
+		shortDesc: "5 turns. Grounded: +Electric power, can't sleep.",
+		id: "soundstage",
+		name: "Sound Stage",
+		pp: 10,
+		priority: 0,
+		flags: {},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onTryHit(target) {
+			for (const [i, allyActive] of target.side.active.entries()) {
+				if (allyActive && allyActive.status === 'slp') allyActive.cureStatus();
+				let foeActive = target.side.foe.active[i];
+				if (foeActive && foeActive.status === 'slp') foeActive.cureStatus();
+			}
+		},
+		terrain: 'soundstage',
+		effect: {
+			duration: 5,
+			durationCallback(source, effect) {
+				if (source && source.hasItem('terrainextender')) {
+					return 8;
+				}
+				return 5;
+			},
+			onSetStatus(status, target, source, effect) {
+				if (status.id === 'slp' && !target.isSemiInvulnerable()) {
+					if (effect.effectType === 'Move' && !effect.secondaries) {
+						this.add('-activate', target, 'move: Sound Stage');
+					}
+					return false;
+				}
+			},
+			onTryAddVolatile(status, target) {
+				if (target.isSemiInvulnerable()) return;
+				if (status.id === 'yawn') {
+					this.add('-activate', target, 'move: Sound Stage');
+					return null;
+				}
+			},
+			onBasePower(basePower, attacker, defender, move) {
+				if (move.flags.sound && !attacker.isSemiInvulnerable()) {
+					this.debug('sound stage boost');
+					return this.chainModify(2);
+				}
+			},
+			onStart(battle, source, effect) {
+				if (effect && effect.effectType === 'Ability') {
+					this.add('-fieldstart', 'move: Sound Stage', '[from] ability: ' + effect, '[of] ' + source);
+				} else {
+					this.add('-fieldstart', 'move: Sound Stage');
+				}
+			},
+			onResidualOrder: 21,
+			onResidualSubOrder: 2,
+			onEnd() {
+				this.add('-fieldend', 'move: Sound Stage');
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Normal",
+		zMoveBoost: {spa: 1},
+		contestType: "Cool",
 	},
 	"spacialrend": {
 		accuracy: 95,

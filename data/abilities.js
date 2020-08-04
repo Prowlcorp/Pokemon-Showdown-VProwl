@@ -4333,6 +4333,16 @@ let BattleAbilities = {
 		name: "Speed Boost",
 		rating: 4.5,
 	},
+	"speedformation": {
+		desc: "On switch-in, this Pokemon raises its Evasion by 2 stages. ",
+		shortDesc: "On switch-in, this Pokemon raises its Evasion by 2 stages.",
+		onStart(pokemon) {
+			this.boost({evasion: 1});
+		},
+		id: "speedformation",
+		name: "Speed Formation",
+		rating: 3.5,
+	},
 	"stakeout": {
 		shortDesc: "This Pokemon's attacking stat is doubled against a target that switched in this turn.",
 		onModifyAtkPriority: 5,

@@ -793,7 +793,6 @@ interface MoveData extends EffectData, MoveEventMethods {
 	baseMoveType?: string
 	basePowerModifier?: number
 	boosts?: SparseBoostsTable | false
-//	bloodScytheRecoil?: boolean
 	breaksProtect?: boolean
 	contestType?: string
 	critModifier?: number
