@@ -21595,10 +21595,10 @@ let BattleMovedex = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTryHit(target) {
-			for (const [i, allyActive] of target.side.active.entries()) {
+		onHit(pokemon) {
+			for (const [i, allyActive] of pokemon.side.active.entries()) {
 				if (allyActive && allyActive.status === 'slp') allyActive.cureStatus();
-				let foeActive = target.side.foe.active[i];
+				let foeActive = pokemon.side.foe.active[i];
 				if (foeActive && foeActive.status === 'slp') foeActive.cureStatus();
 			}
 		},
