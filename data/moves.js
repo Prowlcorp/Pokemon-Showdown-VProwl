@@ -1148,6 +1148,83 @@ let BattleMovedex = {
 		zMovePower: 175,
 		contestType: "Tough",
 	},
+	"aurasealingstrike": {
+		accuracy: 90,
+		basePower: 10,
+		basePowerCallback(pokemon, target, move) {
+			if((pokemon.lastMove && pokemon.lastMove.id === 'aurasealingstrike') && pokemon.sealing) return 100;
+			if(move.hit === 1) return 10;
+			return 20 * move.hit-1;
+		},
+		//10+20+40+60+80
+		//2, 2(4), 4(8), 8(16), 16(32)
+		category: "Special",
+		defensiveCategory: "Physical",
+		desc: "Hits five times. Power increases to 20 for the second hit, 40 for the third, 60 for the fourth, and 80 for the fifth. Boosts the users speed on the second hit. Drains the targets pp by 4 then 7 on the fourth and fifth hit. This move checks accuracy for each hit, and the attack ends if the target avoids a hit. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit three times. If used consecutively after full execution, launches a single 6th hit that robs the target of move types.",
+		shortDesc: "Hits 5 times. Each hit can miss, but power rises.",
+		id: "aurasealingstrike",
+		name: "Aura Sealing Strike",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onHit(target, source, move) {
+			if(move.hit === 1 && source.sealing) {
+				delete source.sealing;
+				target.addVolatile('aurasealingstrike');
+			}
+			if(move.hit === 2) this.boost({spe: 1});
+			if(move.hit === 4) {
+				if (target.lastMove && !target.lastMove.isZ) {
+					let ppDeducted = target.deductPP(target.lastMove.id, 4);
+					if (ppDeducted) {
+						this.add("-activate", target, 'move: Aura Sealing Strike', this.getMove(target.lastMove.id).name, ppDeducted);
+					}
+				}
+			}
+			if(move.hit === 5) {
+				if (target.lastMove && !target.lastMove.isZ) {
+					let ppDeducted = target.deductPP(target.lastMove.id, 7);
+					if (ppDeducted) {
+						this.add("-activate", target, 'move: Aura Sealing Strike', this.getMove(target.lastMove.id).name, ppDeducted);
+					}
+				}
+				source.sealing = true;
+			}
+
+		},
+		onModifyMove(move, pokemon, target) {
+			if (pokemon.getStat('atk', false, true) > pokemon.getStat('spa', false, true)) move.category = 'Physical';
+			if((pokemon.lastMove && pokemon.lastMove.id === 'aurasealingstrike') && pokemon.sealing) {
+				move.multihit = 1;
+			}
+		},
+		effect: {
+			onStart(target) {
+				this.add('-start', target, 'Aura Sealing Strike');
+			},
+			onModifyMovePriority: -2,
+			onModifyMove(move) {
+				if (move.id !== 'struggle') {
+					this.debug('Aura Sealing Strike making moves typeless');
+					move.type = '???';
+				}
+			},
+		},
+		multihit: 5,
+		multiaccuracy: true,
+		secondary: null,
+		target: "normal",
+		type: "Fighting",
+		zMovePower: 120,
+		contestType: "Cool",
+	},
 	"aurasphere": {
 		accuracy: true,
 		basePower: 80,
@@ -21581,8 +21658,8 @@ let BattleMovedex = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		desc: "For 5 turns, the terrain becomes Sound Stage. During the effect, the power of Sound attacks made is multiplied by 2 and Pokemon cannot fall asleep; Pokemon already asleep wake up. Nature Power becomes Hyper Voice, and Secret Power has a 30% chance to cause confusion. Fails if the current terrain is Sound Stage.",
-		shortDesc: "5 turns. Grounded: +Electric power, can't sleep.",
+		desc: "For 5 turns, the terrain becomes Sound Stage. During the effect, the power of Sound attacks made is multiplied by 2 and Pokemon cannot fall asleep; Pokemon already asleep do not wake up. Nature Power becomes Hyper Voice, and Secret Power has a 30% chance to cause confusion. Fails if the current terrain is Sound Stage.",
+		shortDesc: "5 turns. All: +Sound power, can't sleep.",
 		id: "soundstage",
 		name: "Sound Stage",
 		pp: 10,
@@ -21593,13 +21670,6 @@ let BattleMovedex = {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
-			}
-		},
-		onHit(pokemon) {
-			for (const [i, allyActive] of pokemon.side.active.entries()) {
-				if (allyActive && allyActive.status === 'slp') allyActive.cureStatus();
-				let foeActive = pokemon.side.foe.active[i];
-				if (foeActive && foeActive.status === 'slp') foeActive.cureStatus();
 			}
 		},
 		terrain: 'soundstage',
@@ -21619,6 +21689,7 @@ let BattleMovedex = {
 					return false;
 				}
 			},
+			on
 			onTryAddVolatile(status, target) {
 				if (target.isSemiInvulnerable()) return;
 				if (status.id === 'yawn') {

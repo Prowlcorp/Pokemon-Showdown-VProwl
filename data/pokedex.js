@@ -14687,7 +14687,7 @@ let BattlePokedex = {
 		color: "Red",
 		evos: ["kurama"],
 		evoType: "other",
-		evoCondition: "Gains a tail 33 levels since the last. Reach",
+		evoCondition: "Gains a tail 22 levels since the last. Reach 5 tails.",
 		eggGroups: ["Undiscovered"],
 		otherForms: ["kuramamediumfivetail","kuramamediumsixtail","kuramamediumseventail","kuramamediumeighttail"],
 	},
@@ -14702,7 +14702,7 @@ let BattlePokedex = {
 		weightkg: 729.1,
 		color: "Red",
 		evoType: "other",
-		evoCondition: "Gains a tail 33 levels since the last. Reach 9 tails",
+		evoCondition: "Gains a tail 22 levels since the last. Reach 9 tails.",
 		eggGroups: ["Undiscovered"],
 	},
 	giracario: {
