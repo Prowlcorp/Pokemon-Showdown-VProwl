@@ -1154,7 +1154,7 @@ let BattleMovedex = {
 		basePowerCallback(pokemon, target, move) {
 			if((pokemon.lastMove && pokemon.lastMove.id === 'aurasealingstrike') && pokemon.sealing) return 100;
 			if(move.hit === 1) return 10;
-			return 20 * move.hit-1;
+			return 20 * (move.hit-1);
 		},
 		//10+20+40+60+80
 		//2, 2(4), 4(8), 8(16), 16(32)
@@ -1176,10 +1176,9 @@ let BattleMovedex = {
 		},
 		onHit(target, source, move) {
 			if(move.hit === 1 && source.sealing) {
-				delete source.sealing;
-				target.addVolatile('aurasealingstrike');
+				source.sealing = false;
+				target.addVolatile('aurasealingstrike'); //FIX
 			}
-			if(move.hit === 2) this.boost({spe: 1});
 			if(move.hit === 4) {
 				if (target.lastMove && !target.lastMove.isZ) {
 					let ppDeducted = target.deductPP(target.lastMove.id, 4);
@@ -1197,7 +1196,14 @@ let BattleMovedex = {
 				}
 				source.sealing = true;
 			}
-
+		},
+		onTryHit(target, source, move) {
+			if (move.hit === 2) {
+				move.self = {boosts: {spe: 1}};
+			}
+			if(move.self && move.hit !== 2) {
+				move.self = null;
+			}
 		},
 		onModifyMove(move, pokemon, target) {
 			if (pokemon.getStat('atk', false, true) > pokemon.getStat('spa', false, true)) move.category = 'Physical';
