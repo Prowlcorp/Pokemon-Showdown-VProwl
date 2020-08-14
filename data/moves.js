@@ -1152,12 +1152,10 @@ let BattleMovedex = {
 		accuracy: 90,
 		basePower: 10,
 		basePowerCallback(pokemon, target, move) {
-			if((pokemon.lastMove && pokemon.lastMove.id === 'aurasealingstrike') && pokemon.sealing) return 100;
+			if(pokemon.sealing === (this.turn-1)) return 100;
 			if(move.hit === 1) return 10;
 			return 20 * (move.hit-1);
 		},
-		//10+20+40+60+80
-		//2, 2(4), 4(8), 8(16), 16(32)
 		category: "Special",
 		defensiveCategory: "Physical",
 		desc: "Hits five times. Power increases to 20 for the second hit, 40 for the third, 60 for the fourth, and 80 for the fifth. Boosts the users speed on the second hit. Drains the targets pp by 4 then 7 on the fourth and fifth hit. This move checks accuracy for each hit, and the attack ends if the target avoids a hit. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit three times. If used consecutively after full execution, launches a single 6th hit that robs the target of move types.",
@@ -1175,9 +1173,9 @@ let BattleMovedex = {
 			}
 		},
 		onHit(target, source, move) {
-			if(move.hit === 1 && source.sealing) {
+			if(move.hit === 1 && source.sealing === (this.turn-1)) {
 				source.sealing = false;
-				target.addVolatile('aurasealingstrike'); //FIX
+				target.addVolatile('aurasealingstrike');
 			}
 			if(move.hit === 4) {
 				if (target.lastMove && !target.lastMove.isZ) {
@@ -1194,7 +1192,7 @@ let BattleMovedex = {
 						this.add("-activate", target, 'move: Aura Sealing Strike', this.getMove(target.lastMove.id).name, ppDeducted);
 					}
 				}
-				source.sealing = true;
+				source.sealing = this.turn;
 			}
 		},
 		onTryHit(target, source, move) {
@@ -1207,7 +1205,7 @@ let BattleMovedex = {
 		},
 		onModifyMove(move, pokemon, target) {
 			if (pokemon.getStat('atk', false, true) > pokemon.getStat('spa', false, true)) move.category = 'Physical';
-			if((pokemon.lastMove && pokemon.lastMove.id === 'aurasealingstrike') && pokemon.sealing) {
+			if(pokemon.sealing === (this.turn-1)) {
 				move.multihit = 1;
 			}
 		},
