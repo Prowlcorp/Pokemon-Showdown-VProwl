@@ -21689,7 +21689,6 @@ let BattleMovedex = {
 					return false;
 				}
 			},
-			on
 			onTryAddVolatile(status, target) {
 				if (target.isSemiInvulnerable()) return;
 				if (status.id === 'yawn') {
