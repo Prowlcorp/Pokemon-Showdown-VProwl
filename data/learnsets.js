@@ -12530,7 +12530,7 @@ let BattleLearnsets = {
 		swagger: ["7M"],
 		swift: ["7T"],
 		swordsdance: ["7M", "7L29"],
-		synthesis: ["7L33"]
+		synthesis: ["7L33"],
 		toxic: ["7M"],
 		workup: ["7M"],
 		worryseed: ["7T"],
