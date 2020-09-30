@@ -4914,11 +4914,16 @@ let BattleAbilities = {
 		desc: "This Pokemon's highest offense stat or speed is raised by 1 stage after it is damaged by a move. Next attack after being hit is 1.3X stronger",
 		shortDesc: "Was hit: Random stat is boosted, next attack is stronger.",
 		onAfterDamage(damage, target, source, effect) {
+			if (effect && effect.type === 'Dark') {
+				this.boost({atk: 1});
+			}
+		},
+		onAfterDamage(damage, target, source, effect) {
 			if (effect && effect.effectType === 'Move' && effect.id !== 'confused') {
 				if (this.randomChance(1, 2)) {
 					let statName = 'atk';
-					if(source.storedStats.spa > source.storedStats.atk) statName = 'spa';
-					this.boost({[statName]: 1}, source);
+					if(target.storedStats.spa > target.storedStats.atk) statName = 'spa';
+					this.boost({[statName]: 1});
 				}
 				else {
 					this.boost({spe: 1});
