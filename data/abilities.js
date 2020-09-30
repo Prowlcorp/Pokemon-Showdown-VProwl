@@ -1068,7 +1068,7 @@ let BattleAbilities = {
 			}
 		},
 		id: "dreamsembrace",
-		name: "Dream's Embrase",
+		name: "Dream's Embrace",
 		rating: 4,
 	},
 	"drizzle": {
@@ -2014,8 +2014,8 @@ let BattleAbilities = {
 		onAnyTryMove(target, source, effect) {
 			if (['Poison'].includes(effect.type) && !source.hasAbility('holytoxin')) {
 				this.debug('Holy Toxin poison suppress');
+				this.add('cant', this.effectData.target, 'ability: Holy Toxin', effect, '[of] ' + target);
 				this.attrLastMove('[still]');
-				this.add('-fail', source, effect.id, '[from] holy Toxin');
 				return false;
 			}
 		},
