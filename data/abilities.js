@@ -1816,7 +1816,7 @@ let BattleAbilities = {
 		},
 		onSetStatus(status, target, source, effect) {
 			if (!effect || !effect.status) return false;
-			this.add('-immune', target, '[from] ability: Heaven's Guidance);
+			this.add('-immune', target, '[from] ability: Heaven\'s Guidance');
 			return false;
 		},
 		onModifyMove(move, pokemon) {
