@@ -1748,7 +1748,7 @@ let BattleAbilities = {
 			}
 			for (const allyActive of pokemon.side.active) {
 				if (allyActive && allyActive.hp && this.isAdjacent(pokemon, allyActive)) {
-					this.add('-activate', pokemon, 'ability: Holy Toxin');
+					this.add('-activate', pokemon, 'ability: Healer Heart');
 					allyActive.heal(allyActive.maxhp / 6);
 				}
 			}
@@ -2012,7 +2012,7 @@ let BattleAbilities = {
 		desc: "While this Pokemon is active, Poison-Type moves from opposing Pokemon are prevented from having an effect. Allies have status healed at the end of each turn",
 		shortDesc: "While this Pokemon is active, Poison-Type moves can't be used. Allies heal status at turn end.",
 		onAnyTryMove(target, source, effect) {
-			if (effect.type === 'Poison' && source.hasAbility('holytoxin')) {
+			if (['Poison'].includes(effect.type) && !source.hasAbility('holytoxin')) {
 				this.attrLastMove('[still]');
 				this.add('cant', this.effectData.target, 'ability: Holy Toxin', effect, '[of] ' + target);
 				return false;
@@ -4914,11 +4914,6 @@ let BattleAbilities = {
 		desc: "This Pokemon's highest offense stat or speed is raised by 1 stage after it is damaged by a move. Next attack after being hit is 1.3X stronger",
 		shortDesc: "Was hit: Random stat is boosted, next attack is stronger.",
 		onAfterDamage(damage, target, source, effect) {
-			if (effect && effect.type === 'Dark') {
-				this.boost({atk: 1});
-			}
-		},
-		onAfterDamage(damage, target, source, effect) {
 			if (effect && effect.effectType === 'Move' && effect.id !== 'confused') {
 				if (this.randomChance(1, 2)) {
 					let statName = 'atk';
@@ -4937,6 +4932,12 @@ let BattleAbilities = {
 		effect: {
 			noCopy: true, // doesn't get copied by Baton Pass
 			duration: 1,
+			durationCallback(source, effect) {
+				if (source && source.moveThisTurn) {
+					return 2;
+				}
+				return 1;
+			},
 			onStart(target) {
 				this.add('-start', target, 'ability: Temperamental');
 			},
