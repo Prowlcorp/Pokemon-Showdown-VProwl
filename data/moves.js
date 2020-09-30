@@ -499,6 +499,50 @@ let BattleMovedex = {
 		type: "Fighting",
 		contestType: "Cool",
 	},
+	"allycharge": {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		desc: "Raises an ally's Special Defense by 2 stage. If the ally uses an Electric-type attack on the next turn, its power will be doubled. Will move before some attacks",
+		shortDesc: "+2 SpD, ally's Electric move next turn 2x power. +1 priority",
+		id: "allycharge",
+		name: "Ally Charge",
+		pp: 20,
+		priority: 1,
+		flags: {snatch: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		volatileStatus: 'allycharge',
+		onHit(pokemon) {
+			this.add('-activate', pokemon, 'move: Ally Charge');
+		},
+		effect: {
+			duration: 2,
+			onRestart(pokemon) {
+				this.effectData.duration = 2;
+			},
+			onBasePowerPriority: 3,
+			onBasePower(basePower, attacker, defender, move) {
+				if (move.type === 'Electric') {
+					this.debug('ally charge boost');
+					return this.chainModify(2);
+				}
+			},
+		},
+		boosts: {
+			spd: 2,
+		},
+		secondary: null,
+		target: "adjacentAlly",
+		type: "Electric",
+		zMoveBoost: {spd: 2},
+		contestType: "Beautiful",
+	},
 	"allyswitch": {
 		accuracy: true,
 		basePower: 0,
@@ -3174,50 +3218,6 @@ let BattleMovedex = {
 		zMoveBoost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1},
 		contestType: "Cute",
    },
-	"allycharge": {
-		accuracy: true,
-		basePower: 0,
-		category: "Status",
-		desc: "Raises an ally's Special Defense by 2 stage. If the ally uses an Electric-type attack on the next turn, its power will be doubled. Will move before some attacks",
-		shortDesc: "+2 SpD, ally's Electric move next turn 2x power. +1 priority",
-		id: "allycharge",
-		name: "Ally Charge",
-		pp: 20,
-		priority: 1,
-		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		},
-		volatileStatus: 'allycharge',
-		onHit(pokemon) {
-			this.add('-activate', pokemon, 'move: Ally Charge');
-		},
-		effect: {
-			duration: 2,
-			onRestart(pokemon) {
-				this.effectData.duration = 2;
-			},
-			onBasePowerPriority: 3,
-			onBasePower(basePower, attacker, defender, move) {
-				if (move.type === 'Electric') {
-					this.debug('ally charge boost');
-					return this.chainModify(2);
-				}
-			},
-		},
-		boosts: {
-			spd: 2,
-		},
-		secondary: null,
-		target: "adjacentAlly",
-		type: "Electric",
-		zMoveBoost: {spd: 2},
-		contestType: "Beautiful",
-	},
 	"charge": {
 		accuracy: true,
 		basePower: 0,
@@ -4980,7 +4980,7 @@ let BattleMovedex = {
 		name: "Devour",
 		pp: 10,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
+		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
@@ -6852,7 +6852,7 @@ let BattleMovedex = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "???",
-		zMovePower: 180,
+		zMovePower: 200,
 		contestType: "Clever",
 	},
 	"explosion": {
@@ -10299,6 +10299,8 @@ let BattleMovedex = {
 			let success = false;
 			if (source.hasAbility('megalauncher')) {
 				success = !!this.heal(this.modify(target.maxhp, 0.75));
+			} else if (source.hasAbility('healerheart')) {
+				success = !!this.heal(Math.ceil(target.maxhp * 0.75));
 			} else {
 				success = !!this.heal(Math.ceil(target.maxhp * 0.5));
 			}
@@ -11411,7 +11413,7 @@ let BattleMovedex = {
 		zMovePower: 160,
 		contestType: "Cool",
    },
-   "hyperscan": {
+	"hyperscan": {
 	  accuracy: true,
 	  basePower: 0,
 	  category: "Status",
@@ -13058,7 +13060,11 @@ let BattleMovedex = {
 		},
 		onHit(target, source) {
 			for (const pokemon of source.side.active) {
-				this.heal(Math.ceil(pokemon.maxhp / 4), pokemon, source);
+				if (source.hasAbility('healerheart')) {
+					this.heal(Math.ceil(pokemon.maxhp * 0.37), pokemon, source);
+				} else {
+					this.heal(Math.ceil(pokemon.maxhp / 4), pokemon, source);
+				}
 			}
 		},
 		secondary: null,
@@ -19520,7 +19526,7 @@ let BattleMovedex = {
 		zMovePower: 100,
 		contestType: "Clever",
    },
-   "satellitedefense": {
+	"satellitedefense": {
 	  accuracy: true,
 	  basePower: 0,
 	  category: "Status",
@@ -19582,7 +19588,7 @@ let BattleMovedex = {
 	  zMoveBoost: { def: 1 },
 	  contestType: "Tough",
    },
-   "satellitestrike": {
+	"satellitestrike": {
 	  accuracy: 100,
 	  basePower: 300,
 	  category: "Special",

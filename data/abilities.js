@@ -1179,8 +1179,8 @@ let BattleAbilities = {
 		id: "elementalist",
 		name: "Elementalist",
 		rating: 4,
-   },
-   "elementnegate": {
+	},
+	"elementnegate": {
 	  desc: "This pokemon takes half damage from fire, electric, ice, and Water attacks from opponents of equal level with a 1% increase or decrease per level gap.",
 	  shortDesc: "This pokemon takes reduced damage based on the difference in levels.",
 	  onSourceModifyDamage(damage, source, target, move) {
@@ -1200,7 +1200,7 @@ let BattleAbilities = {
 	  id: "elementnegate",
 	  name: "Element Negate",
 	  rating: 4,
-   },
+	},
 	"emergencyexit": {
 		desc: "When this Pokemon has more than 1/2 its maximum HP and takes damage bringing it to 1/2 or less of its maximum HP, it immediately switches out to a chosen ally. This effect applies after all hits from a multi-hit move; Sheer Force prevents it from activating if the move has a secondary effect. This effect applies to both direct and indirect damage, except Curse and Substitute on use, Belly Drum, Pain Split, and confusion damage.",
 		shortDesc: "This Pokemon switches out when it reaches 1/2 or less of its maximum HP.",
@@ -1731,6 +1731,32 @@ let BattleAbilities = {
 		},
 		rating: 0,
 	},
+	"healerheart": {
+		desc: "Heals allies for 1/6th their maximum hp at the end of each turn. Healing moves used by this pokemon have increased power",
+		shortDesc: "Allies heal 1/6th hp at end of turn. Healing moves gain power.",
+		onBasePowerPriority: 8,
+		onBasePower(basePower, attacker, defender, move) {
+			if (move.flags['heal']) {
+				return this.chainModify(1.5);
+			}
+		},
+		onResidualOrder: 5,
+		onResidualSubOrder: 1,
+		onResidual(pokemon) {
+			if (pokemon.side.active.length === 1) {
+				return;
+			}
+			for (const allyActive of pokemon.side.active) {
+				if (allyActive && allyActive.hp && this.isAdjacent(pokemon, allyActive)) {
+					this.add('-activate', pokemon, 'ability: Holy Toxin');
+					allyActive.heal(allyActive.maxhp / 6);
+				}
+			}
+		},
+		id: "healerheart",
+		name: "Healer Heart",
+		rating: 3,
+	},
 	"heatedcombat": {
 		desc: "This Pokemon's Fire-Type moves have a same-type attack bonus (STAB) of 1.7 instead of 1.5. Grants contact moves an additional 15% chance to burn.",
 		shortDesc: "This Pokemon's Fire-type STAB is 1.7. Contact moves have an extra 15% brn chance.",
@@ -1771,7 +1797,7 @@ let BattleAbilities = {
 		rating: 2.5,
 	},
 	"heavensguidance": {
-		shortDesc: "Certain types of moves change in power and ability",
+		shortDesc: "Certain types of moves change in power and ability. Non-Volatiles statuses fail against this pokemon.",
 		onBasePower(basePower, attacker, defender, move) {
 			if (move.type === 'Grass' && move.category !== "Status" && attacker.template.species === 'Mew-Mega') {
 				return this.chainModify(1.2);
@@ -1787,6 +1813,11 @@ let BattleAbilities = {
 			if(move.type === 'Electric' && move.category === "Special" && attacker.template.species === 'Mew-Mega') {
 				return this.chainModify(1.4);
 			}
+		},
+		onSetStatus(status, target, source, effect) {
+			if (!effect || !effect.status) return false;
+			this.add('-immune', target, '[from] ability: Heaven's Guidance);
+			return false;
 		},
 		onModifyMove(move, pokemon) {
 			if(move.type === 'Normal' && move.category !== "Status" && pokemon.template.species === 'Mew-Mega') {
@@ -1909,7 +1940,7 @@ let BattleAbilities = {
 			if(move.type === 'Dark' && move.category === "Status" && move.target === "normal" && pokemon.template.species === 'Mew-Mega') {
 				move.name = "Dark Abyss";
 				move.accuracy = 80;
-			   move.status = 'slp';
+				move.status = 'slp';
 			}
 			if(move.type === 'Dark' && move.category === "Special" && pokemon.template.species === 'Mew-Mega' && move.id !== 'hyperspacehole') {
 				move.accuracy = true;
@@ -1976,6 +2007,33 @@ let BattleAbilities = {
 		id: "hivemind",
 		name: "Hive Mind",
 		rating: 4,
+	},
+	"holytoxin": {
+		desc: "While this Pokemon is active, Poison-Type moves from opposing Pokemon are prevented from having an effect. Allies have status healed at the end of each turn",
+		shortDesc: "While this Pokemon is active, Poison-Type moves can't be used. Allies heal status at turn end.",
+		onAnyTryMove(target, source, effect) {
+			if (effect.type === 'Poison' && source.hasAbility('holytoxin')) {
+				this.attrLastMove('[still]');
+				this.add('cant', this.effectData.target, 'ability: Holy Toxin', effect, '[of] ' + target);
+				return false;
+			}
+		},
+		onResidualOrder: 5,
+		onResidualSubOrder: 1,
+		onResidual(pokemon) {
+			if (pokemon.side.active.length === 1) {
+				return;
+			}
+			for (const allyActive of pokemon.side.active) {
+				if (allyActive && allyActive.hp && this.isAdjacent(pokemon, allyActive) && allyActive.status) {
+					this.add('-activate', pokemon, 'ability: Holy Toxin');
+					allyActive.cureStatus();
+				}
+			}
+		},
+		id: "holytoxin",
+		name: "Holy Toxin",
+		rating: 3,
 	},
 	"honeygather": {
 		shortDesc: "No competitive use.",
@@ -3629,7 +3687,7 @@ let BattleAbilities = {
 		rating: 4,
 	},
 	"restrainedrage": {
-		Desc: "Prevents other Pokemon from lowering this Pokemon's attack. Buffs attack or speed if attempt is made. The next attack made by this pokemon if hit with a critical will be a crit.",
+		desc: "Prevents other Pokemon from lowering this Pokemon's attack. Buffs attack or speed if attempt is made. The next attack made by this pokemon if hit with a critical will be a crit.",
 		shortDesc: "This pokemon powers up if it's attack is lowered. Next hit is critical if hit with a crit.",
 		onHit(target, source, move) {
 			if (!target.hp) return;
@@ -4851,6 +4909,49 @@ let BattleAbilities = {
 		id: "telepathy",
 		name: "Telepathy",
 		rating: 0,
+	},
+	"temperamental": {
+		desc: "This Pokemon's highest offense stat or speed is raised by 1 stage after it is damaged by a move. Next attack after being hit is 1.3X stronger",
+		shortDesc: "Was hit: Random stat is boosted, next attack is stronger.",
+		onAfterDamage(damage, target, source, effect) {
+			if (effect && effect.effectType === 'Move' && effect.id !== 'confused') {
+				if (this.randomChance(1, 2)) {
+					let statName = 'atk';
+					if(source.storedStats.spa > source.storedStats.atk) statName = 'spa';
+					this.boost({[statName]: 1}, source);
+				}
+				else {
+					this.boost({spe: 1});
+				}
+			}
+			target.addVolatile('temperamental'
+		},
+		onEnd(pokemon) {
+			pokemon.removeVolatile('temperamental');
+		},
+		effect: {
+			noCopy: true, // doesn't get copied by Baton Pass
+			duration: 1,
+			onStart(target) {
+				this.add('-start', target, 'ability: Temperamental');
+			},
+			onModifyAtkPriority: 5,
+			onModifyAtk(atk, attacker, defender, move) {
+				this.debug('Temperamental boost');
+				return this.chainModify(1.3);
+			},
+			onModifySpAPriority: 5,
+			onModifySpA(atk, attacker, defender, move) {
+				this.debug('Temperamental boost');
+				return this.chainModify(1.3);
+			},
+			onEnd(target) {
+				this.add('-end', target, 'ability: Temperamental', '[silent]');
+			},
+		},
+		id: "temperamental",
+		name: "Temperamental",
+		rating: 3,
 	},
 	"teravolt": {
 		shortDesc: "This Pokemon's moves and their effects ignore the Abilities of other Pokemon.",
