@@ -12505,7 +12505,7 @@ let BattleLearnsets = {
 		knockoff: ["7T"],
 		laserfocus: ["7T"],
 		lastresort: ["7L41"],
-		leafblade: ["7L45"],,
+		leafblade: ["7L45"],
 		leer: ["7L1"],
 		magicalleaf: ["7L20"],
 		mudslap: ["7T"],
