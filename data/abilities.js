@@ -4924,7 +4924,7 @@ let BattleAbilities = {
 					this.boost({spe: 1});
 				}
 			}
-			target.addVolatile('temperamental'
+			target.addVolatile('temperamental');
 		},
 		onEnd(pokemon) {
 			pokemon.removeVolatile('temperamental');
