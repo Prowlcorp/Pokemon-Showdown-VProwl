@@ -2011,12 +2011,14 @@ let BattleAbilities = {
 	"holytoxin": {
 		desc: "While this Pokemon is active, Poison-Type moves from opposing Pokemon are prevented from having an effect. Allies have status healed at the end of each turn",
 		shortDesc: "While this Pokemon is active, Poison-Type moves can't be used. Allies heal status at turn end.",
-		onTryMove(attacker, defender, move) {
-			if (move.type === 'Poison' && !attacker.hasAbility('holytoxin')) {
-				this.debug('Holy Toxin poison suppress');
-				this.add('-fail', attacker, move, '[from] Holy Toxin');
-				this.attrLastMove('[still]');
-				return null;
+		onAnyModifyMove(move, pokemon) {
+			if (move.type === 'Poison' && !pokemon.hasAbility('holytoxin')) {
+				move.onTryMove = function(pokemon, target, move) {
+//					if (pokemon.hasAbility('holytoxin')) return;
+					this.add('-fail', pokemon, 'ability: Holy Toxin');
+					this.attrLastMove('[still]');
+					return null;
+				},
 			}
 		},
 		onResidualOrder: 5,
