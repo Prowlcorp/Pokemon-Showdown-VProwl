@@ -2016,7 +2016,7 @@ let BattleAbilities = {
 				move.onTryMove = function(pokemon, target, move) {
 					this.add('-cant', pokemon, 'ability: Holy Toxin');
 					this.attrLastMove('[still]');
-					return null;
+					return false;
 				}
 			}
 		},
