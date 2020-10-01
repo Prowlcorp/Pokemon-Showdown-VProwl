@@ -2014,7 +2014,7 @@ let BattleAbilities = {
 		onAnyModifyMove(move, pokemon) {
 			if (move.type === 'Poison' && !pokemon.hasAbility('holytoxin')) {
 				move.onTryMove = function(pokemon, target, move) {
-					this.add('cant', pokemon, 'ability: Holy Toxin');
+					this.add('cant', 'ability: Holy Toxin');
 					this.attrLastMove('[still]');
 					return false;
 				}
