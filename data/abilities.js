@@ -2018,7 +2018,7 @@ let BattleAbilities = {
 					this.add('-fail', pokemon, 'ability: Holy Toxin');
 					this.attrLastMove('[still]');
 					return null;
-				},
+				}
 			}
 		},
 		onResidualOrder: 5,
