@@ -629,6 +629,33 @@ let BattleAbilities = {
 		name: "Compound Eyes",
 		rating: 3.5,
 	},
+	contradict: {
+		desc: "The physical and special categories of this pokemon's attacks are swapped.",
+		shortDesc: "The physical and special categories of this pokemon's attacks are swapped",
+		// This should be applied directly to the stat as opposed to chaining with the others
+		onStart(pokemon) {
+			this.add('-ability', pokemon, 'Contradict');
+		},
+		onModifyMovePriority: -1,
+		onModifyMove(move) {
+			if (move.category === 'Status') {
+				return;
+			} else if (move.category === 'Physical') {
+				move.category = 'Special';
+			} else if (move.category === 'Special') {
+				move.category = 'Physical';
+			}
+			if (move.self && move.self.boosts) {
+				if (move.self.boosts.atk || move.self.boosts.spa) {
+					const c = move.self.boosts.atk;
+					move.self.boosts.atk = move.self.boosts.spa;
+					move.self.boosts.spa = c;
+				}
+			}
+		},
+		name: "Contradict",
+		rating: 3.5,
+	},
 	"contrary": {
 		shortDesc: "If this Pokemon has a stat stage raised it is lowered instead, and vice versa.",
 		onBoost(boost, target, source, effect) {
@@ -2215,7 +2242,13 @@ let BattleAbilities = {
 		rating: 3.5,
 	},
 	"illuminate": {
-		shortDesc: "No competitive use.",
+		shortDesc: "Halves damage from Dark and Ghost type moves.",
+		onSourceModifyDamage(damage, source, target, move) {
+			if (move.type === 'Ghost' || move.type === 'Dark') {
+				this.debug('Illuminate weaken');
+				return this.chainModify(0.5);
+			}
+		},
 		id: "illuminate",
 		name: "Illuminate",
 		rating: 0,

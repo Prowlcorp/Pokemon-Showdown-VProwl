@@ -1564,7 +1564,7 @@ let BattleItems = {
 		spritenum: 137,
 		isPokeball: true,
 		desc: "A Poke Ball that makes it easier to catch Pokemon which are quick to run away.",
-	},	
+	},
 	"fateknot": {
 		id: "fateknot",
 		name: "Fate Knot",
@@ -5494,7 +5494,7 @@ let BattleItems = {
 		spritenum: 130,
 		fling: {
 			basePower: 80,
-		},		
+		},
 		onModifyAtkPriority: 2,
 		onModifyAtk(atk, pokemon) {
 			if (pokemon.baseTemplate.nfe) {
@@ -5534,7 +5534,7 @@ let BattleItems = {
 		spritenum: 130,
 		fling: {
 			basePower: 60,
-		},		
+		},
 		onModifyAtkPriority: 2,
 		onModifyAtk(atk, pokemon) {
 			if (pokemon.baseTemplate.nfe) {

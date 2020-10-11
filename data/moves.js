@@ -4756,6 +4756,7 @@ let BattleMovedex = {
 		},
 		target: "normal",
 		type: "Fairy",
+		zMoveEffect: 'redirect',
 	},
 	"defendorder": {
 		accuracy: true,
@@ -12891,7 +12892,7 @@ let BattleMovedex = {
 	},
 	"leer": {
 		accuracy: 100,
-		basePower: 0,
+		basePower: 50,
 		category: "Status",
 		desc: "Lowers the target's Defense by 1 stage.",
 		shortDesc: "Lowers the foe(s) Defense by 1.",

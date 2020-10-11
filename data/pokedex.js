@@ -1706,7 +1706,7 @@ let BattlePokedex = {
 		species: "Dodrio",
 		types: ["Normal", "Flying"],
 		baseStats: {hp: 65, atk: 110, def: 75, spa: 60, spd: 65, spe: 110},
-		abilities: {0: "Elementalist", 1: "Early Bird", H: "Triple Threat"},
+		abilities: {0: "Normalize", 1: "Early Bird", H: "Triple Threat"},
 		heightm: 1.8,
 		weightkg: 85.2,
 		color: "Brown",
@@ -3937,7 +3937,7 @@ let BattlePokedex = {
 		color: "Black",
 		eggGroups: ["Field"],
 	},
-	houndoomhell: {
+	houndoomhell: { //CAN NOT MEGA
 		num: 224,
 		species: "Houndoom-Hell",
 		forme: "Hell",
