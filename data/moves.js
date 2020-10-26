@@ -8683,7 +8683,7 @@ let BattleMovedex = {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);************
+				return this.chainModify(currentBoost);
 			}
 		},
 		secondary: null,
