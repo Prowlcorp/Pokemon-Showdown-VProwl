@@ -2574,6 +2574,7 @@ let BattleMovedex = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
+		zMovePower: 100,
 	},
 	"bravebird": {
 		accuracy: 100,
@@ -2626,6 +2627,7 @@ let BattleMovedex = {
 		},
 		target: "allAdjacentFoes",
 		type: "Dragon",
+		zMovePower: 120,
 	},
 	"breakneckblitz": {
 		accuracy: true,
@@ -4187,6 +4189,7 @@ let BattleMovedex = {
 		secondary: null,
 		target: "all",
 		type: "Normal",
+		zMoveBoost: {spe: 1},
 	},
 	"covet": {
 		accuracy: 100,
@@ -5977,6 +5980,7 @@ let BattleMovedex = {
 		},
 		target: "normal",
 		type: "Grass",
+		zMovePower: 160,
 	},
 	"dualchop": {
 		accuracy: 90,
@@ -7128,6 +7132,7 @@ let BattleMovedex = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
+		zMovePower: 160,
 	},
 	"falseswipe": {
 		accuracy: 100,
@@ -7669,6 +7674,7 @@ let BattleMovedex = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
+		zMovePower: 160,
 	},
 	"fissure": {
 		accuracy: 30,
@@ -8677,7 +8683,7 @@ let BattleMovedex = {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
+				return this.chainModify(currentBoost);************
 			}
 		},
 		secondary: null,
@@ -8687,7 +8693,7 @@ let BattleMovedex = {
 		contestType: "Cute",
 	},
 	"furyattack": {
-		accuracy: 85,
+		accuracy: 100,
 		basePower: 15,
 		category: "Physical",
 		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
@@ -8757,7 +8763,7 @@ let BattleMovedex = {
 		contestType: "Cool",
 	},
 	"furyswipes": {
-		accuracy: 80,
+		accuracy: 100,
 		basePower: 18,
 		category: "Physical",
 		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
@@ -10527,7 +10533,7 @@ let BattleMovedex = {
 			onBasePower(basePower, attacker, defender, move) {
 				if (move.type === 'Fire' && attacker.isGrounded() && !attacker.isSemiInvulnerable()) {
 					this.debug('Hell Fire boost');
-					return this.chainModify(2);
+					return this.chainModify(1.75);
 				}
 				if (move.type === 'Dark' && attacker.isGrounded() && !attacker.isSemiInvulnerable()) {
 					this.debug('Hell Fire boost');
@@ -10556,12 +10562,31 @@ let BattleMovedex = {
 					this.debug('Pokemon is grounded, damaging through Hell Fire.');
 					if(pokemon.hasType('Fire')) return;
 					let damageDenom = 16;
+					if(this.field.isWeather(['sunnyday', 'desolateland'])) {
+						if(pokemon.hasType('Rock')) damageDenom *=1.75;
+						if(pokemon.hasType('Steel')) damageDenom /=2.5;
+						if(pokemon.hasType('Grass')) damageDenom /=3;
+						if(pokemon.hasType('Ice')) damageDenom /=2.5;
+					}
+					else {
+						if(pokemon.hasType('Rock')) damageDenom *=2;
+						if(pokemon.hasType('Steel')) damageDenom /=2;
+						if(pokemon.hasType('Grass')) damageDenom /=2;
+						if(pokemon.hasType('Ice')) damageDenom /=2;
+					}
+					if(this.field.isWeather(['raindance', 'primordialsea'])) {
+						if(pokemon.hasType('Water')) damageDenom *=2.5;
+						if(pokemon.hasType('Steel')) damageDenom /=1.5;
+						if(pokemon.hasType('Grass')) damageDenom /=1.5;
+						if(pokemon.hasType('Ice')) damageDenom /=1.5;
+					}
+					else {
+						if(pokemon.hasType('Water')) damageDenom *=1.5;
+						if(pokemon.hasType('Steel')) damageDenom /=2;
+						if(pokemon.hasType('Grass')) damageDenom /=2;
+						if(pokemon.hasType('Ice')) damageDenom /=2;
+					}
 					if(pokemon.hasType('Dragon')) damageDenom *=4;
-					if(pokemon.hasType('Rock')) damageDenom *=2;
-					if(pokemon.hasType('Water')) damageDenom *=1.5;
-					if(pokemon.hasType('Steel')) damageDenom /=2;
-					if(pokemon.hasType('Grass')) damageDenom /=2;
-					if(pokemon.hasType('Ice')) damageDenom /=2;
 					if(pokemon.hasType('Bug')) damageDenom /=2;
 					this.damage(pokemon.maxhp / damageDenom, pokemon, pokemon);
 				}
@@ -11194,6 +11219,31 @@ let BattleMovedex = {
 		target: "normal",
 		type: "Normal",
 		zMovePower: 120,
+		contestType: "Cool",
+	},
+	"horndrill": {
+		accuracy: 30,
+		basePower: 0,
+		category: "Physical",
+		desc: "Deals damage to the target equal to the target's maximum HP. Ignores accuracy and evasiveness modifiers. This attack's accuracy is equal to (user's level - target's level + 30)%, and fails if the target is at a higher level. Pokemon with the Sturdy Ability are immune.",
+		shortDesc: "OHKOs the target. Fails if user is a lower level.",
+		id: "horndrill",
+		name: "Horn Drill",
+		pp: 5,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		ohko: true,
+		secondary: null,
+		target: "normal",
+		type: "Normal",
+		zMovePower: 180,
 		contestType: "Cool",
 	},
 	"hornleech": {
@@ -12313,6 +12363,7 @@ let BattleMovedex = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
+		zMovePower: 160,
 	},
 	"judgment": {
 		accuracy: 100,
@@ -12892,7 +12943,7 @@ let BattleMovedex = {
 	},
 	"leer": {
 		accuracy: 100,
-		basePower: 50,
+		basePower: 0,
 		category: "Status",
 		desc: "Lowers the target's Defense by 1 stage.",
 		shortDesc: "Lowers the foe(s) Defense by 1.",
@@ -13065,6 +13116,7 @@ let BattleMovedex = {
 		secondary: null,
 		target: "allyTeam",
 		type: "Water",
+		zMoveEffect: 'clearnegativeboost',
 	},
 	"lightofruin": {
 		accuracy: 90,
@@ -14383,6 +14435,7 @@ let BattleMovedex = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
+		zMovePower: 200,
 	},
 	"meteormash": {
 		accuracy: 90,
@@ -15708,6 +15761,7 @@ let BattleMovedex = {
 		secondary: null,
 		target: "self",
 		type: "Fighting",
+		zMoveBoost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1},
 	},
 	"nuzzle": {
 		accuracy: 100,
@@ -15820,6 +15874,7 @@ let BattleMovedex = {
 		secondary: null,
 		target: "self",
 		type: "Dark",
+		zMoveEffect: 'clearnegativeboost',
 	},
 	"oceanicoperetta": {
 		accuracy: true,
@@ -16012,6 +16067,7 @@ let BattleMovedex = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Electric",
+		zMovePower: 160,
 	},
 	"overheat": {
 		accuracy: 90,
@@ -17883,6 +17939,7 @@ let BattleMovedex = {
 		},
 		target: "normal",
 		type: "Fire",
+		zMovePower: 190,
 	},
 	"quash": {
 		accuracy: 100,
@@ -19576,7 +19633,7 @@ let BattleMovedex = {
 	  secondary: null,
 	  target: "self",
 	  type: "???",
-	  zMoveBoost: { def: 1 },
+	  zMoveBoost: {def: 1, spd: 1},
 	  contestType: "Tough",
    },
 	"satellitestrike": {
@@ -21400,6 +21457,7 @@ let BattleMovedex = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
+		zMovePower: 160,
 	},
 	"snore": {
 		accuracy: 100,
@@ -22042,6 +22100,7 @@ let BattleMovedex = {
 		},
 		target: "normal",
 		type: "Fairy",
+		zMovePower: 140,
 	},
 	"spiritshackle": {
 		accuracy: 100,
