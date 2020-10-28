@@ -629,7 +629,7 @@ let BattleAbilities = {
 		name: "Compound Eyes",
 		rating: 3.5,
 	},
-	contradict: {
+	"contradict": {
 		desc: "The physical and special categories of this pokemon's attacks are swapped.",
 		shortDesc: "The physical and special categories of this pokemon's attacks are swapped",
 		// This should be applied directly to the stat as opposed to chaining with the others
@@ -2464,23 +2464,6 @@ let BattleAbilities = {
 		id: "klutz",
 		name: "Klutz",
 		rating: -1,
-	},
-	"lazygrower": {
-		desc: "If this pokemon is not attacked and has been in a full turn, at the end of the turn it will produce a Sitrus Berry",
-		shortDesc: "If not hurt for full turn, produces Sitrus Berry",
-		id: "lazygrower",
-		name: "Lazy Grower",
-		onResidualOrder: 26,
-		onResidualSubOrder: 1,
-		onResidual(pokemon) {
-			if(!pokemon.item && !pokemon.hurtThisTurn && pokemon.moveThisTurn) {
-				pokemon.setItem('sitrusberry');
-				if(pokemon.hp <= pokemon.maxhp/2) {
-					pokemon.eatItem();
-				}
-			}
-		},
-		rating: 2.5,
 	},
 	"leafguard": {
 		desc: "If Sunny Day is active, this Pokemon cannot gain a major status condition and Rest will fail for it.",
