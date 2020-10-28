@@ -2473,7 +2473,7 @@ let BattleAbilities = {
 		onResidualOrder: 26,
 		onResidualSubOrder: 1,
 		onResidual(pokemon) {
-			if(!pokemon.getItem() && !pokemon.hurtThisTurn && pokemon.moveThisTurn) {
+			if(!pokemon.item && !pokemon.hurtThisTurn && pokemon.moveThisTurn) {
 				pokemon.setItem('sitrusberry');
 				if(pokemon.hp <= pokemon.maxhp/2) {
 					pokemon.eatItem();
