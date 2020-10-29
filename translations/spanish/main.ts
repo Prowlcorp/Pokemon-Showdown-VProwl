@@ -1,7 +1,14 @@
-{
-	"name": "Spanish",
+import type {Translations} from '../../server/chat';
 
-	"strings": {
+export const translations: Translations = {
+	name: "Spanish",
+	strings: {
+		"namelocked": "namelocked",
+		"locked": "locked",
+
+		"autoconfirmed": "autoconfirmado",
+		"trusted": "de confianza",
+
 		"Please follow the rules:": "Por favor sigue las reglas:",
 		"[TN: Link to the PS rules for your language (path after pokemonshowdown.com]/rules": "/pages/rules-es",
 		"Global Rules": "Reglas Globales",
@@ -12,8 +19,7 @@
 		"% <strong>Global Driver</strong> - The above, and they can also lock users and check for alts": "% <strong>Global Driver</strong> - Lo mismo que arriba y también pueden dar locks y revisar las alts",
 		"@ <strong>Global Moderator</strong> - The above, and they can globally ban users": "@ <strong>Global Moderator</strong> - Lo mismo que arriba y además pueden expulsar globalmente del servidor",
 		"* <strong>Global Bot</strong> - Like Moderator, but makes it clear that this user is a bot": "* <strong>Global Bot</strong> - Igual que un moderador, pero el símbolo identifica que es un Bot",
-		"&amp; <strong>Global Leader</strong> - The above, and they can promote to global moderator and force ties": "&amp; <strong>Global Leader</strong> - Lo mismo que arriba y también pueden promover a otros a moderador global y forzar empates",
-		"~ <strong>Global Administrator</strong> -  They can do anything, like change what this message says": "~ <strong>Global Administrator</strong> - Pueden hacer cualquier cosa, como cambiar lo que dice este mensaje",
+		"&amp; <strong>Global Administrator</strong> - They can do anything, like change what this message says and promote users globally": "&amp; <strong>Global Administrator</strong> - Pueden hacer cualquier cosa, como cambiar lo que dice este mensaje",
 
 		"<strong>Room ranks</strong>": "<strong>Rangos de Sala</strong>",
 		"+ <strong>Voice</strong> - They can use ! commands like !groups": "+ <strong>Voice</strong> - Pueden utilizar comandos con ! como !groups",
@@ -33,9 +39,9 @@
 		"DATA COMMANDS": "COMANDOS DE DATOS",
 		"DRIVER COMMANDS": "COMANDOS DE DRIVER",
 		"MODERATOR COMMANDS": "COMANDOS DE MODERATOR",
-		"LEADER COMMANDS": "COMANDOS DE LEADER",
+		"ADMIN COMMANDS": "COMANDOS DE ADMINISTRATOR",
 
-		"(replace / with ! to broadcast. Broadcasting requires: + % @ # & ~)": "(sustituye / con ! para hacer público un comando. Esto requiere: + % @ # & ~)",
+		"(replace / with ! to broadcast. Broadcasting requires: + % @ # &)": "(sustituye / con ! para hacer público un comando. Esto requiere: + % @ # &)",
 
 		"<strong>Room punishments</strong>:": "<strong>Sanciones de la sala</strong>:",
 		"<strong>warn</strong> - Displays a popup with the rules.": "<strong>warn</strong> - Muestra una ventana de di&aacute;logo con las reglas.",
@@ -95,6 +101,61 @@
 		"Your status contains a banned word.": "Tu estado contiene una palabra prohibida.",
 		"Your status has been set to: ${target}.": "Tu estado ha sido cambiado a: ${target}.",
 		"You are now marked as busy.": "Ahora estás marcado como busy (ocupado).",
-		"You are now marked as away. Send a message or use /back to indicate you are back.": "Ahora estás marcado como away (ausente). Envía un mensaje o usa /back para indicar que has vuelto."
-	}
-}
+		"You are now marked as away. Send a message or use /back to indicate you are back.": "Ahora estás marcado como away (ausente). Envía un mensaje o usa /back para indicar que has vuelto.",
+		"You are already marked as back.": "Ya estás marcado como de vuelta (back).",
+		"You are no longer marked as busy.": "Ya no estás marcado como busy (ocupado).",
+
+		"You must choose a name before you can talk.": "Tienes que escoger un nombre antes de poder hablar.",
+		"You are ${lockType} and can't talk in chat. ${lockExpiration}": "Has sido ${lockType} y no podrás hablar en el chat. ${lockExpiration}",
+		"Get help with [TN: your lock]this": "Consigue ayuda con aquí.",
+		"You are muted and cannot talk in this room.": "Has sido silenciado y no puedes hablar en esta sala.",
+		"Because moderated chat is set, your account must be at least one week old and you must have won at least one ladder game to speak in this room.": "Como el chat moderado está activado, tu cuenta debe estar registrada por una semana y tienes que haber ganado un mínimo de una partida",
+		"Because moderated chat is set, your account must be staff in a public room or have a global rank to speak in this room.": "Como el chat moderado está activado, tu cuenta debe ser staff en una sala pública o debe tener rango global para hablar en esta sala.",
+		"Because moderated chat is set, you must be of rank ${groupName} or higher to speak in this room.": "Como el chat moderado está activado, tienes que ser del rango ${groupName} o superior para hablar en esta sala.",
+		"Your message can't be blank.": "Tu mensaje no puede estar en blanco.",
+		"Your message is too long: ": "Tu mensaje es demasiado largo.",
+		"Your message contains banned characters.": "Tu mensaje contiene carácteres prohíbidos.",
+		"This room has slow-chat enabled. You can only talk once every ${time} seconds.": "Esta sala tiene el slow-chat activado. Solo puedes hablar cada ${time} segundos.",
+		"Your username contains a phrase banned by this room.": "Tu nombre de usuario contiene una frase prohíbida en esta sala.",
+		"Your status message contains a phrase banned by this room.": "Tu status contiene una frase prohíbida en esta sala.",
+
+		"You are ${lockType} and can only private message members of the global moderation team. ${lockExpiration}": "",
+		"Get help with this": "",
+		"The user \"${targetUser.name}\" is locked and cannot be PMed.": "",
+		"On this server, you must be of rank ${groupName} or higher to PM users.": "",
+		"This user is blocking private messages right now.": "",
+		"This ${Config.groups[targetUser.group].name} is too busy to answer private messages right now. Please contact a different staff member.": "",
+		"If you need help, try opening a <a href=\"view-help-request\" class=\"button\">help ticket</a>": "",
+		"You are blocking private messages right now.": "",
+
+		"Your message contained banned words in this room.": "Tu mensaje contiene palabras prohíbidas en esta sala.",
+		"You can't send the same message again so soon.": "No puedes mandar el mismo mensaje tan pronto.",
+		"Due to this room being a high traffic room, your message must contain at least two letters.": "Debido a que esta sala es de mucho tráfico de mensajes, tu mensaje tiene que contener al menos dos letras.",
+
+		"You are already blocking private messages! To unblock, use /unblockpms": "¡Ya estás bloqueando mensajes privados! Para desbloquearlos usa /unblockpms",
+		"You are now blocking private messages, except from staff and ${rank}.": "Ahora estás bloqueando mensajes privados, con excepción del staff y ${rank}.",
+		"You are now blocking private messages, except from staff and ${status} users.": "Ahora estás bloqueando mensajes privados, con excepción del staff y usuarios ${status}.",
+		"You are now blocking private messages, except from staff.": "Ahora estás bloqueando mensajes privados, con excepción del staff.",
+		"You are not blocking private messages! To block, use /blockpms": "¡No estás bloqueando mensajes privados! Para bloquearlos usa /blockpms",
+		"You are no longer blocking private messages.": "Ya no estás bloqueando mensajes privados.",
+		"You are now blocking all incoming challenge requests.": "Ahora estás bloqueando todas las solicitudes de batalla entrantes",
+		"You are already blocking challenges!": "¡Ya estás bloqueando solicitudes de batalla!",
+		"You are already available for challenges!": "¡Ya estás disponible para recibir solicitudes de batalla!",
+		"You are available for challenges from now on.": "Estás disponible para recibir solicitudes de batalla de ahora en adelante.",
+
+		"Staff FAQ": "FAQ del Staff",
+		"You cannot broadcast all FAQs at once.": "No puedes mostrar todos los FAQs a la vez.",
+		"A user is autoconfirmed when they have won at least one rated battle and have been registered for one week or longer. In order to prevent spamming and trolling, most chatrooms only allow autoconfirmed users to chat. If you are not autoconfirmed, you can politely PM a staff member (staff have %, @, or # in front of their username) in the room you would like to chat and ask them to disable modchat. However, staff are not obligated to disable modchat. However, staff are not obligated to disable modchat": "Un usuario es autoconfirmed cuando ha ganado al menos una batalla puntuada y ha estado registrado durante una semana o más. Con la finalidad de evitar spam o trolls, la mayoría de las salas de chat únicamente admiten usuarios autoconfirmed para conversar. Si tú no eres un usuario autoconfirmed, puedes solicitar amablemente por MP a un miembro del staff (los miembros del staff tienen %, @, o # al inicio de su nombre de usuario) de la sala en la que quieres conversar que deshabilite el modchat. Sin embargo, el staff no está obligado a deshabilitar el modchat.",
+		"How the ladder works": "Como funciona la ladder",
+		"Tiering FAQ": "FAQ de Tiers",
+		"Badge FAQ": "FAQ de Badges",
+		"Common misconceptions about our RNG": "Conceptos erróneos comunes sobre nuestra RNG",
+		"To join a room tournament, click the <strong>Join!</strong> button or type the command <code>/tour join</code> in the room's chat. You can check if your team is legal for the tournament by clicking the <strong>Validate</strong> button once you've joined and selected a team. To battle your opponent in the tournament, click the <strong>Ready!</strong> button when it appears. There are two different types of room tournaments: elimination (if a user loses more than a certain number of times, they are eliminated) and round robin (all users play against each other, and the user with the most wins is the winner).": "Para unirte a un torneo, haz click en el botón <strong>Join!</strong> o escribe el comando <code>/tour join</code> en el chat de la sala. Puedes revisar si tu equipo es legal para el torneo al hacer click en el botón <strong>Validate</strong> una vez te hayas unido y seleccionado un equipo. Para jugar contra tu oponente en el torneo, haz click en el botón <strong>Ready!</strong> cuando aparezca. Hay dos tipos diferentes de torneos de sala: elimination (si un usuario pierde más de cierto número de veces, es eliminado) y round robin (todos los usuarios juegan contra todos, y el usuario con más victorias es el ganador).",
+		"Frequently Asked Questions": "Preguntas Frecuentes",
+
+		"pages/faq": "pages/faq",
+		"pages/ladderhelp": "pages/ladderhelp",
+		"pages/rng": "pages/rng",
+		"pages/staff": "pages/staff",
+	},
+};

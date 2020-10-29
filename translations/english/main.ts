@@ -1,7 +1,14 @@
-{
-	"name": "English",
+import type {Translations} from '../../server/chat';
 
-	"strings": {
+export const translations: Translations = {
+	name: "English",
+	strings: {
+		"namelocked": "",
+		"locked": "",
+
+		"autoconfirmed": "",
+		"trusted": "",
+
 		"Please follow the rules:": "",
 		"[TN: Link to the PS rules for your language (path after pokemonshowdown.com]/rules": "",
 		"Global Rules": "",
@@ -12,8 +19,7 @@
 		"% <strong>Global Driver</strong> - The above, and they can also lock users and check for alts": "",
 		"@ <strong>Global Moderator</strong> - The above, and they can globally ban users": "",
 		"* <strong>Global Bot</strong> - Like Moderator, but makes it clear that this user is a bot": "",
-		"&amp; <strong>Global Leader</strong> - The above, and they can promote to global moderator and force ties": "",
-		"~ <strong>Global Administrator</strong> -  They can do anything, like change what this message says": "",
+		"&amp; <strong>Global Administrator</strong> -  They can do anything, like change what this message says and promote users globally": "",
 
 		"<strong>Room ranks</strong>": "",
 		"+ <strong>Voice</strong> - They can use ! commands like !groups": "",
@@ -33,9 +39,9 @@
 		"DATA COMMANDS": "",
 		"DRIVER COMMANDS": "",
 		"MODERATOR COMMANDS": "",
-		"LEADER COMMANDS": "",
+		"ADMIN COMMANDS": "",
 
-		"(replace / with ! to broadcast. Broadcasting requires: + % @ # & ~)": "",
+		"(replace / with ! to broadcast. Broadcasting requires: + % @ # &)": "",
 
 		"<strong>Room punishments</strong>:": "",
 		"<strong>warn</strong> - Displays a popup with the rules.": "",
@@ -95,6 +101,61 @@
 		"Your status contains a banned word.": "",
 		"Your status has been set to: ${target}.": "",
 		"You are now marked as busy.": "",
-		"You are now marked as away. Send a message or use /back to indicate you are back.": ""
-	}
-}
+		"You are now marked as away. Send a message or use /back to indicate you are back.": "",
+		"You are already marked as back.": "",
+		"You are no longer marked as busy.": "",
+
+		"You must choose a name before you can talk.": "",
+		"You are ${lockType} and can't talk in chat. ${lockExpiration}": "",
+		"Get help with [TN: your lock]this": "",
+		"You are muted and cannot talk in this room.": "",
+		"Because moderated chat is set, your account must be at least one week old and you must have won at least one ladder game to speak in this room.": "",
+		"Because moderated chat is set, your account must be staff in a public room or have a global rank to speak in this room.": "",
+		"Because moderated chat is set, you must be of rank ${groupName} or higher to speak in this room.": "",
+		"Your message can't be blank.": "",
+		"Your message is too long: ": "",
+		"Your message contains banned characters.": "",
+		"This room has slow-chat enabled. You can only talk once every ${time} seconds.": "",
+		"Your username contains a phrase banned by this room.": "",
+		"Your status message contains a phrase banned by this room.": "",
+
+		"You are ${lockType} and can only private message members of the global moderation team. ${lockExpiration}": "",
+		"Get help with this": "",
+		"The user \"${targetUser.name}\" is locked and cannot be PMed.": "",
+		"On this server, you must be of rank ${groupName} or higher to PM users.": "",
+		"This user is blocking private messages right now.": "",
+		"This ${Config.groups[targetUser.group].name} is too busy to answer private messages right now. Please contact a different staff member.": "",
+		"If you need help, try opening a <a href=\"view-help-request\" class=\"button\">help ticket</a>": "",
+		"You are blocking private messages right now.": "",
+
+		"Your message contained banned words in this room.": "",
+		"You can't send the same message again so soon.": "",
+		"Due to this room being a high traffic room, your message must contain at least two letters.": "",
+
+		"You are already blocking private messages! To unblock, use /unblockpms": "",
+		"You are now blocking private messages, except from staff and ${rank}.": "",
+		"You are now blocking private messages, except from staff and ${status} users.": "",
+		"You are now blocking private messages, except from staff.": "",
+		"You are not blocking private messages! To block, use /blockpms": "",
+		"You are no longer blocking private messages.": "",
+		"You are now blocking all incoming challenge requests.": "",
+		"You are already blocking challenges!": "",
+		"You are already available for challenges!": "",
+		"You are available for challenges from now on.": "",
+
+		"Staff FAQ": "",
+		"You cannot broadcast all FAQs at once.": "",
+		"A user is autoconfirmed when they have won at least one rated battle and have been registered for one week or longer. In order to prevent spamming and trolling, most chatrooms only allow autoconfirmed users to chat. If you are not autoconfirmed, you can politely PM a staff member (staff have %, @, or # in front of their username) in the room you would like to chat and ask them to disable modchat. However, staff are not obligated to disable modchat.": "",
+		"How the ladder works": "",
+		"Tiering FAQ": "",
+		"Badge FAQ": "",
+		"Common misconceptions about our RNG": "",
+		"To join a room tournament, click the <strong>Join!</strong> button or type the command <code>/tour join</code> in the room's chat. You can check if your team is legal for the tournament by clicking the <strong>Validate</strong> button once you've joined and selected a team. To battle your opponent in the tournament, click the <strong>Ready!</strong> button when it appears. There are two different types of room tournaments: elimination (if a user loses more than a certain number of times, they are eliminated) and round robin (all users play against each other, and the user with the most wins is the winner).": "",
+		"Frequently Asked Questions": "",
+
+		"pages/faq": "",
+		"pages/ladderhelp": "",
+		"pages/rng": "",
+		"pages/staff": "",
+	},
+};
