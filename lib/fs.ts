@@ -21,25 +21,23 @@
  * @license MIT
  */
 
-'use strict';
-
 import * as fs from 'fs';
 import * as pathModule from 'path';
-import { ReadStream, WriteStream } from './streams';
+import {ReadStream, WriteStream} from './streams';
 
 const ROOT_PATH = pathModule.resolve(__dirname, '..');
 
 interface PendingUpdate {
 	isWriting: boolean; // true: waiting on a call to FS.write, false: waiting on a throttle
 	pendingDataFetcher: (() => string | Buffer) | null;
-	pendingOptions: object | null;
+	pendingOptions: AnyObject | null;
 	throttleTime: number; // throttling until time (0 for no throttle)
 	throttleTimer: NodeJS.Timer | null;
 }
 
 const pendingUpdates = new Map<string, PendingUpdate>();
 
-class FSPath {
+export class FSPath {
 	path: string;
 
 	constructor(path: string) {
@@ -65,7 +63,7 @@ class FSPath {
 		if (typeof options !== 'string' && options.encoding === undefined) {
 			options.encoding = 'utf8';
 		}
-		return fs.readFileSync(this.path, options) as string;
+		return fs.readFileSync(this.path, options as {encoding: 'utf8'});
 	}
 
 	readBuffer(options: AnyObject | string = {}): Promise<Buffer> {
@@ -77,7 +75,19 @@ class FSPath {
 	}
 
 	readBufferSync(options: AnyObject | string = {}) {
-		return fs.readFileSync(this.path, options) as Buffer;
+		return fs.readFileSync(this.path, options as {encoding: null});
+	}
+
+	exists(): Promise<boolean> {
+		return new Promise(resolve => {
+			fs.exists(this.path, exists => {
+				resolve(exists);
+			});
+		});
+	}
+
+	existsSync() {
+		return fs.existsSync(this.path);
 	}
 
 	readIfExists(): Promise<string> {
@@ -98,7 +108,7 @@ class FSPath {
 		return '';
 	}
 
-	write(data: string | Buffer, options: object = {}) {
+	write(data: string | Buffer, options: AnyObject = {}) {
 		if (Config.nofswriting) return Promise.resolve();
 		return new Promise((resolve, reject) => {
 			fs.writeFile(this.path, data, options, err => {
@@ -107,7 +117,7 @@ class FSPath {
 		});
 	}
 
-	writeSync(data: string | Buffer, options: object = {}) {
+	writeSync(data: string | Buffer, options: AnyObject = {}) {
 		if (Config.nofswriting) return;
 		return fs.writeFileSync(this.path, data, options);
 	}
@@ -118,12 +128,12 @@ class FSPath {
 	 * Does not protect against simultaneous writing; use writeUpdate
 	 * for that.
 	 */
-	async safeWrite(data: string | Buffer, options: object = {}) {
+	async safeWrite(data: string | Buffer, options: AnyObject = {}) {
 		await FS(this.path + '.NEW').write(data, options);
 		await FS(this.path + '.NEW').rename(this.path);
 	}
 
-	safeWriteSync(data: string | Buffer, options: object = {}) {
+	safeWriteSync(data: string | Buffer, options: AnyObject = {}) {
 		FS(this.path + '.NEW').writeSync(data, options);
 		FS(this.path + '.NEW').renameSync(this.path);
 	}
@@ -146,7 +156,7 @@ class FSPath {
 	 * No synchronous version because there's no risk of race conditions
 	 * with synchronous code; just use `safeWriteSync`.
 	 */
-	writeUpdate(dataFetcher: () => string | Buffer, options: object = {}) {
+	writeUpdate(dataFetcher: () => string | Buffer, options: AnyObject = {}) {
 		if (Config.nofswriting) return;
 		const pendingUpdate: PendingUpdate | undefined = pendingUpdates.get(this.path);
 
@@ -164,11 +174,10 @@ class FSPath {
 			return;
 		}
 
-		// tslint:disable-next-line:no-floating-promises
 		this.writeUpdateNow(dataFetcher, options);
 	}
 
-	writeUpdateNow(dataFetcher: () => string | Buffer, options: object) {
+	writeUpdateNow(dataFetcher: () => string | Buffer, options: AnyObject) {
 		// @ts-ignore
 		const throttleTime = options.throttle ? Date.now() + options.throttle : 0;
 		const update = {
@@ -179,8 +188,7 @@ class FSPath {
 			throttleTimer: null,
 		};
 		pendingUpdates.set(this.path, update);
-		// tslint:disable-next-line:no-floating-promises
-		this.safeWrite(dataFetcher(), options).then(() => this.finishUpdate());
+		void this.safeWrite(dataFetcher(), options).then(() => this.finishUpdate());
 	}
 	checkNextUpdate() {
 		const pendingUpdate = pendingUpdates.get(this.path);
@@ -194,7 +202,6 @@ class FSPath {
 			return;
 		}
 
-		// tslint:disable-next-line:no-floating-promises
 		this.writeUpdateNow(dataFetcher, options);
 	}
 	finishUpdate() {
@@ -212,7 +219,7 @@ class FSPath {
 		pendingUpdate.throttleTimer = setTimeout(() => this.checkNextUpdate(), throttleTime - Date.now());
 	}
 
-	append(data: string | Buffer, options: object = {}) {
+	append(data: string | Buffer, options: AnyObject = {}) {
 		if (Config.nofswriting) return Promise.resolve();
 		return new Promise((resolve, reject) => {
 			fs.appendFile(this.path, data, options, err => {
@@ -221,7 +228,7 @@ class FSPath {
 		});
 	}
 
-	appendSync(data: string | Buffer, options: object = {}) {
+	appendSync(data: string | Buffer, options: AnyObject = {}) {
 		if (Config.nofswriting) return;
 		return fs.appendFileSync(this.path, data, options);
 	}
@@ -238,6 +245,15 @@ class FSPath {
 	symlinkToSync(target: string) {
 		if (Config.nofswriting) return;
 		return fs.symlinkSync(target, this.path);
+	}
+
+	copyFile(dest: string) {
+		if (Config.nofswriting) return Promise.resolve();
+		return new Promise((resolve, reject) => {
+			fs.copyFile(this.path, dest, err => {
+				err ? reject(err) : resolve();
+			});
+		});
 	}
 
 	rename(target: string) {
@@ -307,6 +323,20 @@ class FSPath {
 		} catch (err) {
 			if (err.code !== 'ENOENT') throw err;
 		}
+	}
+
+	async rmdir(recursive?: boolean) {
+		if (Config.nofswriting) return Promise.resolve();
+		return new Promise((resolve, reject) => {
+			fs.rmdir(this.path, {recursive}, err => {
+				err ? reject(err) : resolve();
+			});
+		});
+	}
+
+	rmdirSync(recursive?: boolean) {
+		if (Config.nofswriting) return;
+		return fs.rmdirSync(this.path, {recursive});
 	}
 
 	mkdir(mode: string | number = 0o755) {
@@ -381,6 +411,42 @@ class FSPath {
 	unwatch() {
 		fs.unwatchFile(this.path);
 	}
+
+	async isFile() {
+		return new Promise<boolean>((resolve, reject) => {
+			fs.stat(this.path, (err, stats) => {
+				err ? reject(err) : resolve(stats.isFile());
+			});
+		});
+	}
+
+	isFileSync() {
+		return fs.statSync(this.path).isFile();
+	}
+
+	async isDirectory() {
+		return new Promise<boolean>((resolve, reject) => {
+			fs.stat(this.path, (err, stats) => {
+				err ? reject(err) : resolve(stats.isDirectory());
+			});
+		});
+	}
+
+	isDirectorySync() {
+		return fs.statSync(this.path).isDirectory();
+	}
+
+	async realpath() {
+		return new Promise<string>((resolve, reject) => {
+			fs.realpath(this.path, (err, path) => {
+				err ? reject(err) : resolve(path);
+			});
+		});
+	}
+
+	realpathSync() {
+		return fs.realpathSync(this.path);
+	}
 }
 
 class FileReadStream extends ReadStream {
@@ -394,31 +460,30 @@ class FileReadStream extends ReadStream {
 		this.atEOF = false;
 	}
 
-	// @ts-ignore
-	_read(size: number = 16384) {
-		return new Promise((resolve, reject) => {
-			if (this.atEOF) return resolve(false);
+	_read(size = 16384): Promise<void> {
+		return new Promise<void>((resolve, reject) => {
+			if (this.atEOF) return resolve();
 			this.ensureCapacity(size);
-			return this.fd.then(fd => {
+			void this.fd.then(fd => {
 				fs.read(fd, this.buf, this.bufEnd, size, null, (err, bytesRead, buf) => {
 					if (err) return reject(err);
 					if (!bytesRead) {
 						this.atEOF = true;
 						this.resolvePush();
-						return resolve(false);
+						return resolve();
 					}
 					this.bufEnd += bytesRead;
 					// throw new Error([...this.buf].map(x => x.toString(16)).join(' '));
 					this.resolvePush();
-					resolve(true);
+					resolve();
 				});
 			});
 		});
 	}
 
 	_destroy() {
-		return new Promise(resolve => {
-			return this.fd.then(fd => {
+		return new Promise<void>(resolve => {
+			void this.fd.then(fd => {
 				fs.close(fd, () => resolve());
 			});
 		});
@@ -432,3 +497,4 @@ function getFs(path: string) {
 export const FS = Object.assign(getFs, {
 	FileReadStream,
 });
+
