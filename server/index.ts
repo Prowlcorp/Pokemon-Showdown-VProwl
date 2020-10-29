@@ -9,30 +9,26 @@
  * between users and your server, and also sets up globals. You can
  * see details in their corresponding files, but here's an overview:
  *
- * Users - from users.ts
+ * Users - from users.js
  *
- *   Most of the communication with users happens in users.ts, we just
- *   forward messages between the sockets.js and users.ts.
+ *   Most of the communication with users happens in users.js, we just
+ *   forward messages between the sockets.js and users.js.
  *
- *   It exports the global tables `Users.users` and `Users.connections`.
- *
- * Rooms - from rooms.ts
+ * Rooms - from rooms.js
  *
  *   Every chat room and battle is a room, and what they do is done in
- *   rooms.ts. There's also a global room which every user is in, and
+ *   rooms.js. There's also a global room which every user is in, and
  *   handles miscellaneous things like welcoming the user.
  *
- *   It exports the global table `Rooms.rooms`.
- *
- * Dex - from .sim-dist/dex.ts
+ * Dex - from .sim-dist/dex.js
  *
  *   Handles getting data about Pokemon, items, etc.
  *
- * Ladders - from ladders.ts and ladders-remote.ts
+ * Ladders - from ladders.js and ladders-remote.js
  *
  *   Handles Elo rating tracking for players.
  *
- * Chat - from chat.ts
+ * Chat - from chat.js
  *
  *   Handles chat and parses chat commands like /me and /ban
  *
@@ -44,6 +40,8 @@
  * @license MIT
  */
 
+'use strict';
+
 // NOTE: This file intentionally doesn't use too many modern JavaScript
 // features, so that it doesn't crash old versions of Node.js, so we
 // can successfully print the "We require Node.js 8+" message.
@@ -52,44 +50,32 @@
 try {
 	// I've gotten enough reports by people who don't use the launch
 	// script that this is worth repeating here
-	[].flatMap(x => x);
+	RegExp("\\p{Emoji}", "u");
 } catch (e) {
-	throw new Error("We require Node.js version 12 or later; you're using " + process.version);
+	throw new Error("We require Node.js version 10 or later; you're using " + process.version);
 }
-
 try {
 	require.resolve('../.sim-dist/index');
-	const sucraseVersion = require('sucrase').getVersion().split('.');
-	if (
-		parseInt(sucraseVersion[0]) < 3 ||
-		(parseInt(sucraseVersion[0]) === 3 && parseInt(sucraseVersion[1]) < 12)
-	) {
-		throw new Error("Sucrase version too old");
-	}
 } catch (e) {
 	throw new Error("Dependencies are unmet; run `node build` before launching Pokemon Showdown again.");
 }
 
-import {FS} from '../lib/fs';
+const FS = require('../.lib-dist/fs').FS;
 
 /*********************************************************
  * Load configuration
  *********************************************************/
 
-import * as ConfigLoader from './config-loader';
+const ConfigLoader = require('../.server-dist/config-loader');
 global.Config = ConfigLoader.Config;
 
-import {Monitor} from './monitor';
-global.Monitor = Monitor;
-global.__version = {head: ''};
-void Monitor.version().then((hash: any) => {
-	global.__version.tree = hash;
-});
+global.Monitor = require('./monitor');
 
 if (Config.watchconfig) {
 	FS(require.resolve('../config/config')).onModify(() => {
 		try {
 			global.Config = ConfigLoader.load(true);
+			if (global.Users) Users.cacheGroupData();
 			Monitor.notice('Reloaded ../config/config.js');
 		} catch (e) {
 			Monitor.adminlog("Error reloading ../config/config.js: " + e.stack);
@@ -101,49 +87,36 @@ if (Config.watchconfig) {
  * Set up most of our globals
  *********************************************************/
 
-import {Dex} from '../sim/dex';
-global.Dex = Dex;
-global.toID = Dex.toID;
+global.Dex = require('../.sim-dist/dex').Dex;
+global.toID = Dex.getId;
 
-import {LoginServer} from './loginserver';
-global.LoginServer = LoginServer;
+global.LoginServer = require('../.server-dist/loginserver').LoginServer;
 
-import {Ladders} from './ladders';
-global.Ladders = Ladders;
+global.Ladders = require('./ladders');
 
-import {Chat} from './chat';
-global.Chat = Chat;
+global.Chat = require('./chat');
 
-import {Users} from './users';
-global.Users = Users;
+global.Users = require('../.server-dist/users').Users;
 
-import {Punishments} from './punishments';
-global.Punishments = Punishments;
+global.Punishments = require('./punishments');
 
-import {Rooms} from './rooms';
-global.Rooms = Rooms;
-// We initialize the global room here because roomlogs.ts needs the Rooms global
-Rooms.global = new Rooms.GlobalRoomState();
+global.Rooms = require('./rooms');
 
-import * as Verifier from './verifier';
-global.Verifier = Verifier;
+global.Verifier = require('../.server-dist/verifier');
 Verifier.PM.spawn();
 
-import {Tournaments} from './tournaments';
-global.Tournaments = Tournaments;
+global.Tournaments = require('./tournaments');
 
-import {IPTools} from './ip-tools';
-global.IPTools = IPTools;
-void IPTools.loadHostsAndRanges();
+global.IPTools = require('../.server-dist/ip-tools').IPTools;
+IPTools.loadDatacenters();
 
 if (Config.crashguard) {
 	// graceful crash - allow current battles to finish before restarting
-	process.on('uncaughtException', (err: Error) => {
+	process.on('uncaughtException', err => {
 		Monitor.crashlog(err, 'The main process');
 	});
-
 	process.on('unhandledRejection', err => {
-		Monitor.crashlog(err as any, 'A main process Promise');
+		Monitor.crashlog(err, 'A main process Promise');
 	});
 }
 
@@ -151,12 +124,11 @@ if (Config.crashguard) {
  * Start networking processes to be connected to
  *********************************************************/
 
-import {Sockets} from './sockets';
-global.Sockets = Sockets;
+global.Sockets = require('./sockets');
 
-export function listen(port: number, bindAddress: string, workerCount: number) {
+exports.listen = function (port, bindAddress, workerCount) {
 	Sockets.listen(port, bindAddress, workerCount);
-}
+};
 
 if (require.main === module) {
 	// Launch the server directly when app.js is the main module. Otherwise,
@@ -171,39 +143,11 @@ if (require.main === module) {
  * Set up our last global
  *********************************************************/
 
-import * as TeamValidatorAsync from './team-validator-async';
-global.TeamValidatorAsync = TeamValidatorAsync;
+global.TeamValidatorAsync = require('./team-validator-async');
 TeamValidatorAsync.PM.spawn();
 
 /*********************************************************
  * Start up the REPL server
  *********************************************************/
 
-import {Repl} from '../lib/repl';
-// eslint-disable-next-line no-eval
-Repl.start('app', cmd => eval(cmd));
-
-/*********************************************************
- * Fully initialized, run startup hook
- *********************************************************/
-
-if (Config.startuphook) {
-	process.nextTick(Config.startuphook);
-}
-
-if (Config.ofemain) {
-	try {
-		require.resolve('node-oom-heapdump');
-	} catch (e) {
-		if (e.code !== 'MODULE_NOT_FOUND') throw e; // should never happen
-		throw new Error(
-			'node-oom-heapdump is not installed, but it is a required dependency if Config.ofe is set to true! ' +
-			'Run npm install node-oom-heapdump and restart the server.'
-		);
-	}
-
-	// Create a heapdump if the process runs out of memory.
-	global.nodeOomHeapdump = (require as any)('node-oom-heapdump')({
-		addTimestamp: true,
-	});
-}
+require('../.lib-dist/repl').Repl.start('app', cmd => eval(cmd));

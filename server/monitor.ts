@@ -4,12 +4,12 @@
  *
  * Various utility functions to make sure PS is running healthily.
  *
- * @license MIT
+ * @license MIT license
  */
+'use strict';
 
-import {exec, ExecException, ExecOptions} from 'child_process';
-import {crashlogger} from "../lib/crashlogger";
-import {FS} from "../lib/fs";
+/** @type {typeof import('../lib/fs').FS} */
+const FS = require(/** @type {any} */('../.lib-dist/fs')).FS;
 
 const MONITOR_CLEAN_TIMEOUT = 2 * 60 * 60 * 1000;
 
@@ -18,17 +18,21 @@ const MONITOR_CLEAN_TIMEOUT = 2 * 60 * 60 * 1000;
  * delta of time since the last time it was committed. Actions include
  * connecting to the server, starting a battle, validating a team, and
  * sending/receiving data over a connection's socket.
+ * @augments {Map<string, [number, number]>}
  */
-export class TimedCounter extends Map<string, [number, number]> {
+// @ts-ignore TypeScript bug
+class TimedCounter extends Map {
 	/**
 	 * Increments the number of times an action has been committed by one, and
 	 * updates the delta of time since it was last committed.
 	 *
-	 * @returns [action count, time delta]
+	 * @param {string} key
+	 * @param {number} timeLimit
+	 * @return {[number, number]} - [action count, time delta]
 	 */
-	increment(key: string, timeLimit: number): [number, number] {
-		const val = this.get(key);
-		const now = Date.now();
+	increment(key, timeLimit) {
+		let val = this.get(key);
+		let now = Date.now();
 		if (!val || now > val[1] + timeLimit) {
 			this.set(key, [1, Date.now()]);
 			return [1, 0];
@@ -51,90 +55,85 @@ if (('Config' in global) &&
 	Config.loglevel = 2;
 }
 
-export const Monitor = new class {
-	connections = new TimedCounter();
-	netRequests = new TimedCounter();
-	battles = new TimedCounter();
-	battlePreps = new TimedCounter();
-	groupChats = new TimedCounter();
-	tickets = new TimedCounter();
+/** @type {typeof import('../lib/crashlogger').crashlogger} */
+let crashlogger = require(/** @type {any} */('../.lib-dist/crashlogger')).crashlogger;
 
-	activeIp: string | null = null;
-	networkUse: {[k: string]: number} = {};
-	networkCount: {[k: string]: number} = {};
-	hotpatchLock: {[k: string]: {by: string, reason: string}} = {};
-	hotpatchVersions: {[k: string]: string | undefined} = {};
-
-	TimedCounter = TimedCounter;
-
-	updateServerLock = false;
-	cleanInterval: NodeJS.Timeout | null = null;
-	/**
-	 * Inappropriate userid : number of times the name has been forcerenamed
-	 */
-	readonly forceRenames = new Map<ID, number>();
-
+const Monitor = module.exports = {
 	/*********************************************************
 	 * Logging
 	 *********************************************************/
-	crashlog(error: Error, source = 'The main process', details: AnyObject | null = null) {
-		if (!error) error = {} as any;
+
+	/**
+	 * @param {Error} error
+	 * @param {string} source
+	 * @param {{}?} details
+	 */
+	crashlog(error, source = 'The main process', details = null) {
 		if ((error.stack || '').startsWith('@!!@')) {
 			try {
-				const stack = (error.stack || '');
-				const nlIndex = stack.indexOf('\n');
+				let stack = (error.stack || '');
+				let nlIndex = stack.indexOf('\n');
 				[error.name, error.message, source, details] = JSON.parse(stack.slice(4, nlIndex));
 				error.stack = stack.slice(nlIndex + 1);
 			} catch (e) {}
 		}
-		const crashType = crashlogger(error, source, details);
+		let crashType = crashlogger(error, source, details);
 		Rooms.global.reportCrash(error, source);
 		if (crashType === 'lockdown') {
-			Config.autolockdown = false;
 			Rooms.global.startLockdown(error);
 		}
-	}
+	},
 
-	log(text: string) {
+	/**
+	 * @param {string} text
+	 */
+	log(text) {
 		this.notice(text);
-		const staffRoom = Rooms.get('staff');
-		if (staffRoom) {
-			staffRoom.add(`|c|~|${text}`).update();
+		if (Rooms('staff')) {
+			Rooms('staff').add(`|c|~|${text}`).update();
 		}
-	}
+	},
 
-	adminlog(text: string) {
+	/**
+	 * @param {string} text
+	 */
+	adminlog(text) {
 		this.notice(text);
-		const upperstaffRoom = Rooms.get('upperstaff');
-		if (upperstaffRoom) {
-			upperstaffRoom.add(`|c|~|${text}`).update();
+		if (Rooms('upperstaff')) {
+			Rooms('upperstaff').add(`|c|~|${text}`).update();
 		}
-	}
+	},
 
-	logHTML(text: string) {
+	/**
+	 * @param {string} text
+	 */
+	logHTML(text) {
 		this.notice(text);
-		const staffRoom = Rooms.get('staff');
-		if (staffRoom) {
-			staffRoom.add(`|html|${text}`).update();
+		if (Rooms('staff')) {
+			Rooms('staff').add(`|html|${text}`).update();
 		}
-	}
+	},
 
-	error(text: string) {
-		(Rooms.get('development') || Rooms.get('staff') || Rooms.get('lobby'))?.add(`|error|${text}`).update();
-		if (Config.loglevel <= 3) console.error(text);
-	}
-
-	debug(text: string) {
+	/**
+	 * @param {string} text
+	 */
+	debug(text) {
 		if (Config.loglevel <= 1) console.log(text);
-	}
+	},
 
-	warn(text: string) {
+	/**
+	 * @param {string} text
+	 */
+	warn(text) {
 		if (Config.loglevel <= 3) console.log(text);
-	}
+	},
 
-	notice(text: string) {
+	/**
+	 * @param {string} text
+	 */
+	notice(text) {
 		if (Config.loglevel <= 2) console.log(text);
-	}
+	},
 
 	/*********************************************************
 	 * Resource Monitor
@@ -146,13 +145,32 @@ export const Monitor = new class {
 		this.battles.clear();
 		this.connections.clear();
 		IPTools.dnsblCache.clear();
-	}
+	},
+
+	connections: new TimedCounter(),
+	battles: new TimedCounter(),
+	battlePreps: new TimedCounter(),
+	groupChats: new TimedCounter(),
+	tickets: new TimedCounter(),
+
+	/** @type {string | null} */
+	activeIp: null,
+	/** @type {{[k: string]: number}} */
+	networkUse: {},
+	/** @type {{[k: string]: number}} */
+	networkCount: {},
+	/** @type {{[k: string]: string}} */
+	hotpatchLock: {},
 
 	/**
 	 * Counts a connection. Returns true if the connection should be terminated for abuse.
+	 *
+	 * @param {string} ip
+	 * @param {string} [name = '']
+	 * @return {boolean}
 	 */
-	countConnection(ip: string, name = '') {
-		const [count, duration] = this.connections.increment(ip, 30 * 60 * 1000);
+	countConnection(ip, name = '') {
+		let [count, duration] = this.connections.increment(ip, 30 * 60 * 1000);
 		if (count === 500) {
 			this.adminlog(`[ResourceMonitor] IP ${ip} banned for cflooding (${count} times in ${Chat.toDurationString(duration)}${name ? ': ' + name : ''})`);
 			return true;
@@ -160,7 +178,7 @@ export const Monitor = new class {
 
 		if (count > 500) {
 			if (count % 500 === 0) {
-				const c = count / 500;
+				let c = count / 500;
 				if (c === 2 || c === 4 || c === 10 || c === 20 || c % 40 === 0) {
 					this.adminlog(`[ResourceMonitor] IP ${ip} still cflooding (${count} times in ${Chat.toDurationString(duration)}${name ? ': ' + name : ''})`);
 				}
@@ -169,14 +187,18 @@ export const Monitor = new class {
 		}
 
 		return false;
-	}
+	},
 
 	/**
 	 * Counts battles created. Returns true if the connection should be
 	 * terminated for abuse.
+	 *
+	 * @param {string} ip
+	 * @param {string} [name = '']
+	 * @return {boolean}
 	 */
-	countBattle(ip: string, name = '') {
-		const [count, duration] = this.battles.increment(ip, 30 * 60 * 1000);
+	countBattle(ip, name = '') {
+		let [count, duration] = this.battles.increment(ip, 30 * 60 * 1000);
 		if (duration < 5 * 60 * 1000 && count % 30 === 0) {
 			this.adminlog(`[ResourceMonitor] IP ${ip} has battled ${count} times in the last ${Chat.toDurationString(duration)}${name ? ': ' + name : ''})`);
 			return true;
@@ -188,62 +210,68 @@ export const Monitor = new class {
 		}
 
 		return false;
-	}
+	},
 
 	/**
 	 * Counts team validations. Returns true if too many.
+	 *
+	 * @param {string} ip
+	 * @param {Connection} connection
+	 * @return {boolean}
 	 */
-	countPrepBattle(ip: string, connection: Connection) {
-		const count = this.battlePreps.increment(ip, 3 * 60 * 1000)[0];
+	countPrepBattle(ip, connection) {
+		let count = this.battlePreps.increment(ip, 3 * 60 * 1000)[0];
 		if (count <= 12) return false;
 		if (count < 120 && Punishments.sharedIps.has(ip)) return false;
 		connection.popup('Due to high load, you are limited to 12 battles and team validations every 3 minutes.');
 		return true;
-	}
+	},
 
 	/**
 	 * Counts concurrent battles. Returns true if too many.
+	 *
+	 * @param {number} count
+	 * @param {Connection} connection
+	 * @return {boolean}
 	 */
-	countConcurrentBattle(count: number, connection: Connection) {
+	countConcurrentBattle(count, connection) {
 		if (count <= 5) return false;
 		connection.popup(`Due to high load, you are limited to 5 games at the same time.`);
 		return true;
-	}
+	},
 	/**
 	 * Counts group chat creation. Returns true if too much.
+	 *
+	 * @param {string} ip
+	 * @return {boolean}
 	 */
-	countGroupChat(ip: string) {
-		const count = this.groupChats.increment(ip, 60 * 60 * 1000)[0];
+	countGroupChat(ip) {
+		let count = this.groupChats.increment(ip, 60 * 60 * 1000)[0];
 		return count > 4;
-	}
-
-	/**
-	 * Counts commands that use HTTPs requests. Returns true if too many.
-	 */
-	countNetRequests(ip: string) {
-		const [count] = this.netRequests.increment(ip, 1 * 60 * 1000);
-		if (count <= 10) return false;
-		if (count < 120 && Punishments.sharedIps.has(ip)) return false;
-		return true;
-	}
+	},
 
 	/**
 	 * Counts ticket creation. Returns true if too much.
+	 *
+	 * @param {string} ip
+	 * @return {boolean}
 	 */
-	countTickets(ip: string) {
-		const count = this.tickets.increment(ip, 60 * 60 * 1000)[0];
+	countTickets(ip) {
+		let count = this.tickets.increment(ip, 60 * 60 * 1000)[0];
 		if (Punishments.sharedIps.has(ip)) {
 			return count >= 20;
 		} else {
 			return count >= 5;
 		}
-	}
+	},
 
 	/**
 	 * Counts the data length received by the last connection to send a
 	 * message, as well as the data length in the server's response.
+	 *
+	 * @param {number} size
 	 */
-	countNetworkUse(size: number) {
+	countNetworkUse(size) {
 		if (!Config.emergency || typeof this.activeIp !== 'string') return;
 		if (this.activeIp in this.networkUse) {
 			this.networkUse[this.activeIp] += size;
@@ -252,33 +280,37 @@ export const Monitor = new class {
 			this.networkUse[this.activeIp] = size;
 			this.networkCount[this.activeIp] = 1;
 		}
-	}
+	},
 
 	writeNetworkUse() {
 		let buf = '';
-		for (const i in this.networkUse) {
+		for (let i in this.networkUse) {
 			buf += `${this.networkUse[i]}\t${this.networkCount[i]}\t${i}\n`;
 		}
-		void FS('logs/networkuse.tsv').write(buf);
-	}
+		FS('logs/networkuse.tsv').write(buf);
+	},
 
 	clearNetworkUse() {
 		if (Config.emergency) {
 			this.networkUse = {};
 			this.networkCount = {};
 		}
-	}
+	},
 
 	/**
 	 * Counts roughly the size of an object to have an idea of the server load.
+	 *
+	 * @param {any} object
+	 * @return {number}
 	 */
-	sizeOfObject(object: AnyObject) {
-		const objectCache: Set<[] | object> = new Set();
-		const stack: any[] = [object];
+	sizeOfObject(object) {
+		/** @type {Set<(Array | Object)>} */
+		let objectCache = new Set();
+		let stack = [object];
 		let bytes = 0;
 
 		while (stack.length) {
-			const value = stack.pop();
+			let value = stack.pop();
 			switch (typeof value) {
 			case 'boolean':
 				bytes += 4;
@@ -292,47 +324,19 @@ export const Monitor = new class {
 			case 'object':
 				if (!objectCache.has(value)) objectCache.add(value);
 				if (Array.isArray(value)) {
-					for (const el of value) stack.push(el);
+					for (let el of value) stack.push(el);
 				} else {
-					for (const i in value) stack.push(value[i]);
+					for (let i in value) stack.push(value[i]);
 				}
 				break;
 			}
 		}
 
 		return bytes;
-	}
+	},
 
-	sh(command: string, options: ExecOptions = {}): Promise<[number, string, string]> {
-		return new Promise((resolve, reject) => {
-			exec(command, options, (error: ExecException | null, stdout: string | Buffer, stderr: string | Buffer) => {
-				resolve([error?.code || 0, '' + stdout, '' + stderr]);
-			});
-		});
-	}
-
-	async version() {
-		let hash;
-		try {
-			await FS('.git/index').copyFile('logs/.gitindex');
-			const index = FS('logs/.gitindex');
-			const options = {
-				cwd: __dirname,
-				env: {GIT_INDEX_FILE: index.path},
-			};
-
-			let [code, stdout, stderr] = await this.sh(`git add -A`, options);
-			if (code || stderr) return;
-			[code, stdout, stderr] = await this.sh(`git write-tree`, options);
-
-			if (code || stderr) return;
-			hash = stdout.trim();
-
-			await this.sh(`git reset`, options);
-			await index.unlinkIfExists();
-		} catch (err) {}
-		return hash;
-	}
+	/** @type {{new(entries: [any, [number, number]]): TimedCounter}} */
+	TimedCounter,
 };
 
 Monitor.cleanInterval = setInterval(() => Monitor.clean(), MONITOR_CLEAN_TIMEOUT);

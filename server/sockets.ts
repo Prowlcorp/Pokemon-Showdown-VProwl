@@ -5,67 +5,118 @@
  * Abstraction layer for multi-process SockJS connections.
  *
  * This file handles all the communications between the users'
- * browsers, the networking processes, and users.ts in the
+ * browsers, the networking processes, and users.js in the
  * main process.
  *
  * @license MIT
  */
 
-import * as fs from 'fs';
-import * as http from 'http';
-import * as https from 'https';
-import * as path from 'path';
-import {crashlogger} from '../lib/crashlogger';
-import {RawProcessManager, StreamWorker} from '../lib/process-manager';
-import {IPTools} from './ip-tools';
-import {Repl} from '../lib/repl';
-import * as Streams from './../lib/streams';
+'use strict';
 
-type ChannelID = 0 | 1 | 2 | 3 | 4;
+const MINUTES = 60 * 1000;
 
-export const Sockets = new class {
-	async onSpawn(worker: StreamWorker) {
-		const id = worker.workerid;
-		for await (const data of worker.stream) {
+const cluster = require('cluster');
+const fs = require('fs');
+/** @type {typeof import('../lib/fs').FS} */
+const FS = require(/** @type {any} */('../.lib-dist/fs')).FS;
+
+/** @typedef {0 | 1 | 2 | 3 | 4} ChannelID */
+
+/** @type {typeof import('../lib/crashlogger').crashlogger} */
+let crashlogger = require(/** @type {any} */('../.lib-dist/crashlogger')).crashlogger;
+
+const Monitor = {
+	crashlog: crashlogger,
+};
+
+if (cluster.isMaster) {
+	cluster.setupMaster({
+		exec: require('path').resolve(__dirname, 'sockets'),
+	});
+
+	/** @type {Map<number, cluster.Worker>} */
+	const workers = exports.workers = new Map();
+
+	const spawnWorker = exports.spawnWorker = function () {
+		let worker = cluster.fork({PSPORT: Config.port, PSBINDADDR: Config.bindaddress || '0.0.0.0', PSNOSSL: Config.ssl ? 0 : 1});
+		let id = worker.id;
+		workers.set(id, worker);
+		worker.on('message', data => {
+			// console.log('master received: ' + data);
 			switch (data.charAt(0)) {
 			case '*': {
 				// *socketid, ip, protocol
 				// connect
-				worker.load++;
-				const [socketid, ip, protocol] = data.substr(1).split('\n');
-				Users.socketConnect(worker, id, socketid, ip, protocol);
+				let nlPos = data.indexOf('\n');
+				let nlPos2 = data.indexOf('\n', nlPos + 1);
+				Users.socketConnect(worker, id, data.slice(1, nlPos), data.slice(nlPos + 1, nlPos2), data.slice(nlPos2 + 1));
 				break;
 			}
 
 			case '!': {
 				// !socketid
 				// disconnect
-				worker.load--;
-				const socketid = data.substr(1);
-				Users.socketDisconnect(worker, id, socketid);
+				Users.socketDisconnect(worker, id, data.substr(1));
 				break;
 			}
 
 			case '<': {
 				// <socketid, message
 				// message
-				const idx = data.indexOf('\n');
-				const socketid = data.substr(1, idx - 1);
-				const message = data.substr(idx + 1);
-				Users.socketReceive(worker, id, socketid, message);
+				let nlPos = data.indexOf('\n');
+				Users.socketReceive(worker, id, data.substr(1, nlPos - 1), data.substr(nlPos + 1));
 				break;
 			}
 
 			default:
 			// unhandled
 			}
-		}
-	}
-	onUnspawn(worker: StreamWorker) {
-		Users.socketDisconnectAll(worker, worker.workerid);
-	}
+		});
 
-	listen(port?: number, bindAddress?: string, workerCount?: number) {
+		return worker;
+	};
+
+	cluster.on('exit', (worker, code, signal) => {
+		if (code === null && signal !== null) {
+			// Worker was killed by Sockets.killWorker or Sockets.killPid, probably.
+			console.log(`Worker ${worker.id} was forcibly killed with status ${signal}.`);
+			workers.delete(worker.id);
+		} else if (code === 0 && signal === null) {
+			// Happens when killing PS with ^C
+			console.log(`Worker ${worker.id} died, but returned a successful exit code.`);
+			workers.delete(worker.id);
+		} else if (code > 0) {
+			// Worker was killed abnormally, likely because of a crash.
+			Monitor.crashlog(new Error(`Worker ${worker.id} abruptly died with code ${code} and signal ${signal}`), "The main process");
+			// Don't delete the worker so it can be inspected if need be.
+		}
+
+		if (worker.isConnected()) worker.disconnect();
+		// FIXME: this is a bad hack to get around a race condition in
+		// Connection#onDisconnect sending room deinit messages after already
+		// having removed the sockets from their rooms.
+		// @ts-ignore
+		worker.send = () => {};
+
+		let count = 0;
+		for (const connection of Users.connections.values()) {
+			if (connection.worker === worker) {
+				Users.socketDisconnect(worker, worker.id, connection.socketid);
+				count++;
+			}
+		}
+		console.log(`${count} connections were lost.`);
+
+		// Attempt to recover.
+		spawnWorker();
+	});
+
+	/**
+	 * @param {number} [port]
+	 * @param {string} [bindAddress]
+	 * @param {number} [workerCount]
+	 */
+	exports.listen = function (port, bindAddress, workerCount) {
 		if (port !== undefined && !isNaN(port)) {
 			Config.port = port;
 			Config.ssl = null;
@@ -74,8 +125,10 @@ export const Sockets = new class {
 
 			// Autoconfigure when running in cloud environments.
 			try {
-				const cloudenv = (require as any)('cloud-env');
+				const cloudenv = require('cloud-env');
+				// @ts-ignore
 				bindAddress = cloudenv.get('IP', bindAddress);
+				// @ts-ignore
 				port = cloudenv.get('PORT', port);
 			} catch (e) {}
 		}
@@ -88,229 +141,321 @@ export const Sockets = new class {
 		if (workerCount === undefined) {
 			workerCount = (Config.workers !== undefined ? Config.workers : 1);
 		}
-
-		PM.env = {PSPORT: Config.port, PSBINDADDR: Config.bindaddress || '0.0.0.0', PSNOSSL: Config.ssl ? 0 : 1};
-		PM.subscribeSpawn(worker => void this.onSpawn(worker));
-		PM.subscribeUnspawn(this.onUnspawn);
-
-		PM.spawn(workerCount);
-	}
-
-	socketSend(worker: StreamWorker, socketid: string, message: string) {
-		void worker.stream.write(`>${socketid}\n${message}`);
-	}
-
-	socketDisconnect(worker: StreamWorker, socketid: string) {
-		void worker.stream.write(`!${socketid}`);
-	}
-
-	roomBroadcast(roomid: RoomID, message: string) {
-		for (const worker of PM.workers) {
-			void worker.stream.write(`#${roomid}\n${message}`);
+		// @ts-ignore - remove when Config is typed
+		for (let i = 0; i < workerCount; i++) {
+			spawnWorker();
 		}
-	}
+	};
 
-	roomAdd(worker: StreamWorker, roomid: RoomID, socketid: string) {
-		void worker.stream.write(`+${roomid}\n${socketid}`);
-	}
-
-	roomRemove(worker: StreamWorker, roomid: RoomID, socketid: string) {
-		void worker.stream.write(`-${roomid}\n${socketid}`);
-	}
-
-	channelBroadcast(roomid: RoomID, message: string) {
-		for (const worker of PM.workers) {
-			void worker.stream.write(`:${roomid}\n${message}`);
-		}
-	}
-
-	channelMove(worker: StreamWorker, roomid: RoomID, channelid: ChannelID, socketid: string) {
-		void worker.stream.write(`.${roomid}\n${channelid}\n${socketid}`);
-	}
-
-	eval(worker: StreamWorker, query: string) {
-		void worker.stream.write(`$${query}`);
-	}
-};
-
-export class ServerStream extends Streams.ObjectReadWriteStream<string> {
-	/** socketid:Connection */
-	sockets = new Map<string, import('sockjs').Connection>();
-	/** roomid:socketid:Connection */
-	rooms = new Map<RoomID, Map<string, import('sockjs').Connection>>();
-	/** roomid:socketid:channelid */
-	roomChannels = new Map<RoomID, Map<string, ChannelID>>();
-
-	server: http.Server;
-	serverSsl: https.Server | null;
-	socketCounter = 0;
-
-	isTrustedProxyIp: (ip: string) => boolean;
-
-	constructor(config: {
-		port: number,
-		bindaddress?: string,
-		ssl?: typeof Config.ssl,
-		wsdeflate?: typeof Config.wsdeflate,
-		proxyip?: typeof Config.proxyip,
-		customhttpresponse?: typeof Config.customhttpresponse,
-		disablenodestatic?: boolean,
-	}) {
-		super();
-		if (!config.bindaddress) config.bindaddress = '0.0.0.0';
-
-		this.isTrustedProxyIp = config.proxyip ? IPTools.checker(config.proxyip) : () => false;
-
-		// Static HTTP server
-
-		// This handles the custom CSS and custom avatar features, and also
-		// redirects yourserver:8001 to yourserver-8001.psim.us
-
-		// It's optional if you don't need these features.
-
-		this.server = http.createServer();
-		this.serverSsl = null;
-		if (config.ssl) {
-			let key;
-			try {
-				key = path.resolve(__dirname, config.ssl.options.key);
-				if (!fs.statSync(key).isFile()) throw new Error();
-				try {
-					key = fs.readFileSync(key);
-				} catch (e) {
-					crashlogger(
-						new Error(`Failed to read the configured SSL private key PEM file:\n${e.stack}`),
-						`Socket process ${process.pid}`
-					);
-				}
-			} catch (e) {
-				console.warn('SSL private key config values will not support HTTPS server option values in the future. Please set it to use the absolute path of its PEM file.');
-				key = config.ssl.options.key;
-			}
-
-			let cert;
-			try {
-				cert = path.resolve(__dirname, config.ssl.options.cert);
-				if (!fs.statSync(cert).isFile()) throw new Error();
-				try {
-					cert = fs.readFileSync(cert);
-				} catch (e) {
-					crashlogger(
-						new Error(`Failed to read the configured SSL certificate PEM file:\n${e.stack}`),
-						`Socket process ${process.pid}`
-					);
-				}
-			} catch (e) {
-				console.warn('SSL certificate config values will not support HTTPS server option values in the future. Please set it to use the absolute path of its PEM file.');
-				cert = config.ssl.options.cert;
-			}
-
-			if (key && cert) {
-				try {
-					// In case there are additional SSL config settings besides the key and cert...
-					this.serverSsl = https.createServer({...config.ssl.options, key, cert});
-				} catch (e) {
-					crashlogger(new Error(`The SSL settings are misconfigured:\n${e.stack}`), `Socket process ${process.pid}`);
-				}
+	/**
+	 * @param {cluster.Worker} worker
+	 */
+	exports.killWorker = function (worker) {
+		let count = 0;
+		for (const connection of Users.connections.values()) {
+			if (connection.worker === worker) {
+				Users.socketDisconnect(worker, worker.id, connection.socketid);
+				count++;
 			}
 		}
+		console.log(`${count} connections were lost.`);
 
-		// Static server
 		try {
-			if (config.disablenodestatic) throw new Error("disablenodestatic");
-			const StaticServer: typeof import('node-static').Server = require('node-static').Server;
-			const roomidRegex = /^\/(?:[A-Za-z0-9][A-Za-z0-9-]*)\/?$/;
-			const cssServer = new StaticServer('./config');
-			const avatarServer = new StaticServer('./config/avatars');
-			const staticServer = new StaticServer('./server/static');
-			const staticRequestHandler = (req: http.IncomingMessage, res: http.ServerResponse) => {
-				// console.log(`static rq: ${req.socket.remoteAddress}:${req.socket.remotePort} -> ${req.socket.localAddress}:${req.socket.localPort} - ${req.method} ${req.url} ${req.httpVersion} - ${req.rawHeaders.join('|')}`);
-				req.resume();
-				req.addListener('end', () => {
-					if (config.customhttpresponse &&
-							config.customhttpresponse(req, res)) {
-						return;
-					}
+			worker.kill('SIGTERM');
+		} catch (e) {}
 
-					let server = staticServer;
-					if (req.url) {
-						if (req.url === '/custom.css') {
-							server = cssServer;
-						} else if (req.url.startsWith('/avatars/')) {
-							req.url = req.url.substr(8);
-							server = avatarServer;
-						} else if (roomidRegex.test(req.url)) {
-							req.url = '/';
-						}
-					}
+		return count;
+	};
 
-					server.serve(req, res, e => {
-						if (e && (e as any).status === 404) {
-							staticServer.serveFile('404.html', 404, {}, req, res);
-						}
-					});
-				});
-			};
-
-			this.server.on('request', staticRequestHandler);
-			if (this.serverSsl) this.serverSsl.on('request', staticRequestHandler);
-		} catch (e) {
-			if (e.message === 'disablenodestatic') {
-				console.log('node-static is disabled');
-			} else {
-				console.log('Could not start node-static - try `npm install` if you want to use it');
+	/**
+	 * @param {number} pid
+	 */
+	exports.killPid = function (pid) {
+		for (const worker of workers.values()) {
+			if (pid === worker.process.pid) {
+				// @ts-ignore
+				return this.killWorker(worker);
 			}
 		}
+		return false;
+	};
 
-		// SockJS server
+	/**
+	 * @param {cluster.Worker} worker
+	 * @param {string} socketid
+	 * @param {string} message
+	 */
+	exports.socketSend = function (worker, socketid, message) {
+		worker.send(`>${socketid}\n${message}`);
+	};
 
-		// This is the main server that handles users connecting to our server
-		// and doing things on our server.
+	/**
+	 * @param {cluster.Worker} worker
+	 * @param {string} socketid
+	 */
+	exports.socketDisconnect = function (worker, socketid) {
+		worker.send(`!${socketid}`);
+	};
 
-		const sockjs: typeof import('sockjs') = (require as any)('sockjs');
-		const options: import('sockjs').ServerOptions & {faye_server_options?: {[key: string]: any}} = {
-			sockjs_url: `//play.pokemonshowdown.com/js/lib/sockjs-1.4.0-nwjsfix.min.js`,
-			prefix: '/showdown',
-			log(severity: string, message: string) {
-				if (severity === 'error') console.log(`ERROR: ${message}`);
-			},
+	/**
+	 * @param {string} roomid
+	 * @param {string} message
+	 */
+	exports.roomBroadcast = function (roomid, message) {
+		for (const worker of workers.values()) {
+			worker.send(`#${roomid}\n${message}`);
+		}
+	};
+
+	/**
+	 * @param {cluster.Worker} worker
+	 * @param {string} roomid
+	 * @param {string} socketid
+	 */
+	exports.roomAdd = function (worker, roomid, socketid) {
+		worker.send(`+${roomid}\n${socketid}`);
+	};
+
+	/**
+	 * @param {cluster.Worker} worker
+	 * @param {string} roomid
+	 * @param {string} socketid
+	 */
+	exports.roomRemove = function (worker, roomid, socketid) {
+		worker.send(`-${roomid}\n${socketid}`);
+	};
+
+	/**
+	 * @param {string} roomid
+	 * @param {string} message
+	 */
+	exports.channelBroadcast = function (roomid, message) {
+		for (const worker of workers.values()) {
+			worker.send(`:${roomid}\n${message}`);
+		}
+	};
+
+	/**
+	 * @param {cluster.Worker} worker
+	 * @param {string} roomid
+	 * @param {ChannelID} channelid
+	 * @param {string} socketid
+	 */
+	exports.channelMove = function (worker, roomid, channelid, socketid) {
+		worker.send(`.${roomid}\n${channelid}\n${socketid}`);
+	};
+
+	/**
+	 * @param {cluster.Worker} worker
+	 * @param {string} query
+	 */
+	exports.eval = function (worker, query) {
+		worker.send(`$${query}`);
+	};
+} else {
+	// is worker
+	global.Config = require(/** @type {any} */('../.server-dist/config-loader')).Config;
+
+	if (process.env.PSPORT) Config.port = +process.env.PSPORT;
+	if (process.env.PSBINDADDR) Config.bindaddress = process.env.PSBINDADDR;
+	if (process.env.PSNOSSL && parseInt(process.env.PSNOSSL)) Config.ssl = null;
+
+	if (Config.ofe) {
+		try {
+			require.resolve('node-oom-heapdump');
+		} catch (e) {
+			if (e.code !== 'MODULE_NOT_FOUND') throw e; // should never happen
+			throw new Error(
+				'node-oom-heapdump is not installed, but it is a required dependency if Config.ofe is set to true! ' +
+				'Run npm install node-oom-heapdump and restart the server.'
+			);
+		}
+
+		// Create a heapdump if the process runs out of memory.
+		// @ts-ignore
+		require('node-oom-heapdump')({
+			addTimestamp: true,
+		});
+	}
+
+	// Static HTTP server
+
+	// This handles the custom CSS and custom avatar features, and also
+	// redirects yourserver:8001 to yourserver-8001.psim.us
+
+	// It's optional if you don't need these features.
+
+	/** @type {typeof import('./ip-tools').IPTools} */
+	global.IPTools = require(/** @type {any} */('../.server-dist/ip-tools')).IPTools;
+
+	if (Config.crashguard) {
+		// graceful crash
+		process.on('uncaughtException', err => {
+			Monitor.crashlog(err, `Socket process ${cluster.worker.id} (${process.pid})`);
+		});
+	}
+
+	let app = require('http').createServer();
+	/** @type {?import('https').Server} */
+	let appssl = null;
+	if (Config.ssl) {
+		let key;
+		try {
+			key = require('path').resolve(__dirname, Config.ssl.options.key);
+			if (!fs.statSync(key).isFile()) throw new Error();
+			try {
+				key = fs.readFileSync(key);
+			} catch (e) {
+				Monitor.crashlog(new Error(`Failed to read the configured SSL private key PEM file:\n${e.stack}`), `Socket process ${cluster.worker.id} (${process.pid})`);
+			}
+		} catch (e) {
+			console.warn('SSL private key config values will not support HTTPS server option values in the future. Please set it to use the absolute path of its PEM file.');
+			key = Config.ssl.options.key;
+		}
+
+		let cert;
+		try {
+			cert = require('path').resolve(__dirname, Config.ssl.options.cert);
+			if (!fs.statSync(cert).isFile()) throw new Error();
+			try {
+				cert = fs.readFileSync(cert);
+			} catch (e) {
+				Monitor.crashlog(new Error(`Failed to read the configured SSL certificate PEM file:\n${e.stack}`), `Socket process ${cluster.worker.id} (${process.pid})`);
+			}
+		} catch (e) {
+			console.warn('SSL certificate config values will not support HTTPS server option values in the future. Please set it to use the absolute path of its PEM file.');
+			cert = Config.ssl.options.cert;
+		}
+
+		if (key && cert) {
+			try {
+				// In case there are additional SSL config settings besides the key and cert...
+				appssl = require('https').createServer(Object.assign({}, Config.ssl.options, {key, cert}));
+			} catch (e) {
+				Monitor.crashlog(new Error(`The SSL settings are misconfigured:\n${e.stack}`), `Socket process ${cluster.worker.id} (${process.pid})`);
+			}
+		}
+	}
+
+	// Static server
+	try {
+		if (Config.disablenodestatic) throw new Error("disablenodestatic");
+		const StaticServer = require('node-static').Server;
+		const roomidRegex = /^\/(?:[A-Za-z0-9][A-Za-z0-9-]*)\/?$/;
+		const cssServer = new StaticServer('./config');
+		const avatarServer = new StaticServer('./config/avatars');
+		const staticServer = new StaticServer('./server/static');
+		/**
+		 * @param {import('http').IncomingMessage} req
+		 * @param {import('http').ServerResponse} res
+		 */
+		const staticRequestHandler = (req, res) => {
+			// console.log(`static rq: ${req.socket.remoteAddress}:${req.socket.remotePort} -> ${req.socket.localAddress}:${req.socket.localPort} - ${req.method} ${req.url} ${req.httpVersion} - ${req.rawHeaders.join('|')}`);
+			req.resume();
+			req.addListener('end', () => {
+				if (Config.customhttpresponse &&
+						Config.customhttpresponse(req, res)) {
+					return;
+				}
+
+				let server = staticServer;
+				if (req.url) {
+					if (req.url === '/custom.css') {
+						server = cssServer;
+					} else if (req.url.startsWith('/avatars/')) {
+						req.url = req.url.substr(8);
+						server = avatarServer;
+					} else if (roomidRegex.test(req.url)) {
+						req.url = '/';
+					}
+				}
+
+				server.serve(req, res, e => {
+					// @ts-ignore
+					if (e && e.status === 404) {
+						staticServer.serveFile('404.html', 404, {}, req, res);
+					}
+				});
+			});
 		};
 
-		if (config.wsdeflate !== null) {
-			try {
-				const deflate = (require as any)('permessage-deflate').configure(config.wsdeflate);
-				options.faye_server_options = {extensions: [deflate]};
-			} catch (e) {
-				crashlogger(
-					new Error("Dependency permessage-deflate is not installed or is otherwise unaccessable. No message compression will take place until server restart."),
-					"Sockets"
-				);
-			}
+		app.on('request', staticRequestHandler);
+		if (appssl) appssl.on('request', staticRequestHandler);
+	} catch (e) {
+		if (e.message === 'disablenodestatic') {
+			console.log('node-static is disabled');
+		} else {
+			console.log('Could not start node-static - try `npm install` if you want to use it');
 		}
-
-		const server = sockjs.createServer(options);
-
-		process.once('disconnect', () => this.cleanup());
-		process.once('exit', () => this.cleanup());
-
-		// this is global so it can be hotpatched if necessary
-		server.on('connection', connection => this.onConnection(connection));
-		server.installHandlers(this.server, {});
-		this.server.listen(config.port, config.bindaddress);
-		console.log(`Worker ${PM.workerid} now listening on ${config.bindaddress}:${config.port}`);
-
-		if (this.serverSsl) {
-			server.installHandlers(this.serverSsl, {});
-			// @ts-ignore - if appssl exists, then `config.ssl` must also exist
-			this.serverSsl.listen(config.ssl.port, config.bindaddress);
-			// @ts-ignore - if appssl exists, then `config.ssl` must also exist
-			console.log(`Worker ${PM.workerid} now listening for SSL on port ${config.ssl.port}`);
-		}
-
-		console.log(`Test your server at http://${config.bindaddress === '0.0.0.0' ? 'localhost' : config.bindaddress}:${config.port}`);
 	}
 
-	extractChannel(message: string, channelid: -1 | ChannelID) {
+	// SockJS server
+
+	// This is the main server that handles users connecting to our server
+	// and doing things on our server.
+
+	const sockjs = require('sockjs');
+	const options = {
+		sockjs_url: `//${Config.routes.client}/js/lib/sockjs-1.1.1-nwjsfix.min.js`,
+		prefix: '/showdown',
+		/**
+		 * @param {string} severity
+		 * @param {string} message
+		 */
+		log(severity, message) {
+			if (severity === 'error') console.log(`ERROR: ${message}`);
+		},
+	};
+
+	if (Config.wsdeflate) {
+		try {
+			// @ts-ignore
+			const deflate = require('permessage-deflate').configure(Config.wsdeflate);
+			// @ts-ignore
+			options.faye_server_options = {extensions: [deflate]};
+		} catch (e) {
+			Monitor.crashlog(new Error("Dependency permessage-deflate is not installed or is otherwise unaccessable. No message compression will take place until server restart."), "Sockets");
+		}
+	}
+
+	const server = sockjs.createServer(options);
+	/**
+	 * socketid:Connection
+	 * @type {Map<string, import('sockjs').Connection>}
+	 */
+	const sockets = new Map();
+	/**
+	 * roomid:socketid:Connection
+	 * @type {Map<string, Map<string, import('sockjs').Connection>>}
+	 */
+	const rooms = new Map();
+	/**
+	 * roomid:socketid:channelid
+	 * @type {Map<string, Map<string, ChannelID>>}
+	 */
+	const roomChannels = new Map();
+
+	/** @type {WriteStream} */
+	const logger = FS(`logs/sockets-${process.pid}`).createAppendStream();
+
+	// Deal with phantom connections.
+	const sweepSocketInterval = setInterval(() => {
+		for (const socket of sockets.values()) {
+			// @ts-ignore
+			if (socket.protocol === 'xhr-streaming' && socket._session && socket._session.recv) {
+				// @ts-ignore
+				logger.write(`Found a ghost connection with protocol xhr-streaming and ready state ${socket._session.readyState}\n`);
+				// @ts-ignore
+				socket._session.recv.didClose();
+			}
+		}
+	}, 10 * MINUTES);
+
+	/**
+	 * @param {string} message
+	 * @param {-1 | ChannelID} channelid
+	 */
+	const extractChannel = (message, channelid) => {
 		if (channelid === -1) {
 			// Grab all privileged messages
 			return message.replace(/\n\|split\|p[1234]\n([^\n]*)\n(?:[^\n]*)/g, '\n$1');
@@ -327,31 +472,169 @@ export class ServerStream extends Streams.ObjectReadWriteStream<string> {
 		// Discard remaining privileged messages
 		// Note: the last \n? is for privileged messages that are empty when non-privileged
 		return message.replace(/\n\|split\|(?:[^\n]*)\n(?:[^\n]*)\n\n?/g, '\n');
-	}
+	};
 
-	/**
-	 * Clean up any remaining connections on disconnect. If this isn't done,
-	 * the process will not exit until any remaining connections have been destroyed.
-	 * Afterwards, the worker process will die on its own
-	 */
-	cleanup() {
-		for (const socket of this.sockets.values()) {
+	process.on('message', data => {
+		// console.log('worker received: ' + data);
+		/** @type {import('sockjs').Connection | undefined?} */
+		let socket = null;
+		let socketid = '';
+		/** @type {Map<string, import('sockjs').Connection> | undefined?} */
+		let room = null;
+		let roomid = '';
+		/** @type {Map<string, ChannelID> | undefined?} */
+		let roomChannel = null;
+		/** @type {ChannelID} */
+		let channelid = 0;
+		let nlLoc = -1;
+		let message = '';
+
+		switch (data.charAt(0)) {
+		case '$': // $code
+			eval(data.substr(1));
+			break;
+
+		case '!': // !socketid
+			// destroy
+			socketid = data.substr(1);
+			socket = sockets.get(socketid);
+			if (!socket) return;
+			socket.destroy();
+			sockets.delete(socketid);
+			for (const [roomid, room] of rooms) {
+				room.delete(socketid);
+				roomChannel = roomChannels.get(roomid);
+				if (roomChannel) roomChannel.delete(socketid);
+				if (!room.size) {
+					rooms.delete(roomid);
+					if (roomChannel) roomChannels.delete(roomid);
+				}
+			}
+			break;
+
+		case '>':
+			// >socketid, message
+			// message to single connection
+			nlLoc = data.indexOf('\n');
+			socketid = data.substr(1, nlLoc - 1);
+			socket = sockets.get(socketid);
+			if (!socket) return;
+			message = data.substr(nlLoc + 1);
+			socket.write(message);
+			break;
+
+		case '#':
+			// #roomid, message
+			// message to all connections in room
+			nlLoc = data.indexOf('\n');
+			roomid = data.substr(1, nlLoc - 1);
+			room = rooms.get(roomid);
+			if (!room) return;
+			message = data.substr(nlLoc + 1);
+			for (const socket of room.values()) socket.write(message);
+			break;
+
+		case '+':
+			// +roomid, socketid
+			// join room with connection
+			nlLoc = data.indexOf('\n');
+			socketid = data.substr(nlLoc + 1);
+			socket = sockets.get(socketid);
+			if (!socket) return;
+			roomid = data.substr(1, nlLoc - 1);
+			room = rooms.get(roomid);
+			if (!room) {
+				room = new Map();
+				rooms.set(roomid, room);
+			}
+			room.set(socketid, socket);
+			break;
+
+		case '-':
+			// -roomid, socketid
+			// leave room with connection
+			nlLoc = data.indexOf('\n');
+			roomid = data.slice(1, nlLoc);
+			room = rooms.get(roomid);
+			if (!room) return;
+			socketid = data.slice(nlLoc + 1);
+			room.delete(socketid);
+			roomChannel = roomChannels.get(roomid);
+			if (roomChannel) roomChannel.delete(socketid);
+			if (!room.size) {
+				rooms.delete(roomid);
+				if (roomChannel) roomChannels.delete(roomid);
+			}
+			break;
+
+		case '.':
+			// .roomid, channelid, socketid
+			// move connection to different channel in room
+			nlLoc = data.indexOf('\n');
+			roomid = data.slice(1, nlLoc);
+			let nlLoc2 = data.indexOf('\n', nlLoc + 1);
+			channelid = /** @type {ChannelID} */(Number(data.slice(nlLoc + 1, nlLoc2)));
+			socketid = data.slice(nlLoc2 + 1);
+
+			roomChannel = roomChannels.get(roomid);
+			if (!roomChannel) {
+				roomChannel = new Map();
+				roomChannels.set(roomid, roomChannel);
+			}
+			if (channelid === 0) {
+				roomChannel.delete(socketid);
+			} else {
+				roomChannel.set(socketid, channelid);
+			}
+			break;
+
+		case ':':
+			// :roomid, message
+			// message to a room, splitting `|split` by channel
+			nlLoc = data.indexOf('\n');
+			roomid = data.slice(1, nlLoc);
+			room = rooms.get(roomid);
+			if (!room) return;
+
+			/** @type {[string?, string?, string?, string?, string?]} */
+			const messages = [null, null, null, null, null];
+			message = data.substr(nlLoc + 1);
+			roomChannel = roomChannels.get(roomid);
+			for (const [socketid, socket] of room) {
+				channelid = (roomChannel && roomChannel.get(socketid)) || 0;
+				if (!messages[channelid]) messages[channelid] = extractChannel(message, channelid);
+				socket.write(/** @type {string} */(messages[channelid]));
+			}
+			break;
+		}
+	});
+
+	// Clean up any remaining connections on disconnect. If this isn't done,
+	// the process will not exit until any remaining connections have been destroyed.
+	// Afterwards, the worker process will die on its own.
+	process.once('disconnect', () => {
+		clearInterval(sweepSocketInterval);
+
+		for (const socket of sockets.values()) {
 			try {
 				socket.destroy();
 			} catch (e) {}
 		}
-		this.sockets.clear();
-		this.rooms.clear();
-		this.roomChannels.clear();
+		sockets.clear();
+		rooms.clear();
+		roomChannels.clear();
 
-		this.server.close();
-		if (this.serverSsl) this.serverSsl.close();
+		app.close();
+		if (appssl) appssl.close();
 
 		// Let the server(s) finish closing.
 		setImmediate(() => process.exit(0));
-	}
+	});
 
-	onConnection(socket: import('sockjs').Connection) {
+	// this is global so it can be hotpatched if necessary
+	let isTrustedProxyIp = IPTools.checker(Config.proxyip);
+	let socketCounter = 0;
+	server.on('connection', socket => {
 		// For reasons that are not entirely clear, SockJS sometimes triggers
 		// this event with a null `socket` argument.
 		if (!socket) return;
@@ -365,29 +648,48 @@ export class ServerStream extends Streams.ObjectReadWriteStream<string> {
 			return;
 		}
 
-		const socketid = '' + (++this.socketCounter);
-		this.sockets.set(socketid, socket);
+		let socketid = '' + (++socketCounter);
+		sockets.set(socketid, socket);
 
 		let socketip = socket.remoteAddress;
-		if (this.isTrustedProxyIp(socketip)) {
-			const ips = (socket.headers['x-forwarded-for'] || '').split(',').reverse();
-			for (const ip of ips) {
-				const proxy = ip.trim();
-				if (!this.isTrustedProxyIp(proxy)) {
+		if (isTrustedProxyIp(socketip)) {
+			let ips = (socket.headers['x-forwarded-for'] || '')
+				.split(',')
+				.reverse();
+			for (let ip of ips) {
+				let proxy = ip.trim();
+				if (!isTrustedProxyIp(proxy)) {
 					socketip = proxy;
 					break;
 				}
 			}
 		}
 
-		this.push(`*${socketid}\n${socketip}\n${socket.protocol}`);
+		// xhr-streamming connections sometimes end up becoming ghost
+		// connections. Since it already has keepalive set, we set a timeout
+		// instead and close the connection if it has been inactive for the
+		// configured SockJS heartbeat interval plus an extra second to account
+		// for any delay in receiving the SockJS heartbeat packet.
+		if (socket.protocol === 'xhr-streaming') {
+			// @ts-ignore
+			socket._session.recv.thingy.setTimeout(
+				// @ts-ignore
+				socket._session.recv.options.heartbeat_delay + 1000,
+				() => {
+					// @ts-ignore
+					if (socket._session.recv) socket._session.recv.didClose();
+				}
+			);
+		}
+
+		// @ts-ignore
+		process.send(`*${socketid}\n${socketip}\n${socket.protocol}`);
 
 		socket.on('data', message => {
 			// drop empty messages (DDoS?)
 			if (!message) return;
 			// drop messages over 100KB
 			if (message.length > (100 * 1024)) {
-				socket.write(`|popup|Your message must be below 100KB`);
 				console.log(`Dropping client message ${message.length / 1024} KB...`);
 				console.log(message.slice(0, 160));
 				return;
@@ -395,201 +697,34 @@ export class ServerStream extends Streams.ObjectReadWriteStream<string> {
 			// drop legacy JSON messages
 			if (typeof message !== 'string' || message.startsWith('{')) return;
 			// drop blank messages (DDoS?)
-			const pipeIndex = message.indexOf('|');
+			let pipeIndex = message.indexOf('|');
 			if (pipeIndex < 0 || pipeIndex === message.length - 1) return;
 
-			this.push(`<${socketid}\n${message}`);
+			// @ts-ignore
+			process.send(`<${socketid}\n${message}`);
 		});
 
 		socket.once('close', () => {
-			this.push(`!${socketid}`);
-			this.sockets.delete(socketid);
-			for (const room of this.rooms.values()) room.delete(socketid);
+			// @ts-ignore
+			process.send(`!${socketid}`);
+			sockets.delete(socketid);
+			for (const room of rooms.values()) room.delete(socketid);
 		});
+	});
+	server.installHandlers(app, {});
+	app.listen(Config.port, Config.bindaddress);
+	console.log(`Worker ${cluster.worker.id} now listening on ${Config.bindaddress}:${Config.port}`);
+
+	if (appssl) {
+		// @ts-ignore
+		server.installHandlers(appssl, {});
+		appssl.listen(Config.ssl.port, Config.bindaddress);
+		console.log(`Worker ${cluster.worker.id} now listening for SSL on port ${Config.ssl.port}`);
 	}
 
-	_write(data: string) {
-		// console.log('worker received: ' + data);
-		let socket: import('sockjs').Connection | undefined = undefined;
-		let socketid = '';
-		let room: Map<string, import('sockjs').Connection> | undefined = undefined;
-		let roomid = '' as RoomID;
-		let roomChannel: Map<string, ChannelID> | undefined = undefined;
-		let channelid: ChannelID = 0;
-		let nlLoc = -1;
-		let message = '';
+	console.log(`Test your server at http://${Config.bindaddress === '0.0.0.0' ? 'localhost' : Config.bindaddress}:${Config.port}`);
 
-		switch (data.charAt(0)) {
-		case '$': // $code
-			// eslint-disable-next-line no-eval
-			eval(data.substr(1));
-			break;
-
-		case '!': // !socketid
-			// destroy
-			socketid = data.substr(1);
-			socket = this.sockets.get(socketid);
-			if (!socket) return;
-			socket.destroy();
-			this.sockets.delete(socketid);
-			for (const [curRoomid, curRoom] of this.rooms) {
-				curRoom.delete(socketid);
-				roomChannel = this.roomChannels.get(curRoomid);
-				if (roomChannel) roomChannel.delete(socketid);
-				if (!curRoom.size) {
-					this.rooms.delete(curRoomid);
-					if (roomChannel) this.roomChannels.delete(curRoomid);
-				}
-			}
-			break;
-
-		case '>':
-			// >socketid, message
-			// message to single connection
-			nlLoc = data.indexOf('\n');
-			socketid = data.substr(1, nlLoc - 1);
-			socket = this.sockets.get(socketid);
-			if (!socket) return;
-			message = data.substr(nlLoc + 1);
-			socket.write(message);
-			break;
-
-		case '#':
-			// #roomid, message
-			// message to all connections in room
-			// #, message
-			// message to all connections
-			nlLoc = data.indexOf('\n');
-			roomid = data.substr(1, nlLoc - 1) as RoomID;
-			room = roomid ? this.rooms.get(roomid) : this.sockets;
-			if (!room) return;
-			message = data.substr(nlLoc + 1);
-			for (const curSocket of room.values()) curSocket.write(message);
-			break;
-
-		case '+':
-			// +roomid, socketid
-			// join room with connection
-			nlLoc = data.indexOf('\n');
-			socketid = data.substr(nlLoc + 1);
-			socket = this.sockets.get(socketid);
-			if (!socket) return;
-			roomid = data.substr(1, nlLoc - 1) as RoomID;
-			room = this.rooms.get(roomid);
-			if (!room) {
-				room = new Map();
-				this.rooms.set(roomid, room);
-			}
-			room.set(socketid, socket);
-			break;
-
-		case '-':
-			// -roomid, socketid
-			// leave room with connection
-			nlLoc = data.indexOf('\n');
-			roomid = data.slice(1, nlLoc) as RoomID;
-			room = this.rooms.get(roomid);
-			if (!room) return;
-			socketid = data.slice(nlLoc + 1);
-			room.delete(socketid);
-			roomChannel = this.roomChannels.get(roomid);
-			if (roomChannel) roomChannel.delete(socketid);
-			if (!room.size) {
-				this.rooms.delete(roomid);
-				if (roomChannel) this.roomChannels.delete(roomid);
-			}
-			break;
-
-		case '.':
-			// .roomid, channelid, socketid
-			// move connection to different channel in room
-			nlLoc = data.indexOf('\n');
-			roomid = data.slice(1, nlLoc) as RoomID;
-			const nlLoc2 = data.indexOf('\n', nlLoc + 1);
-			channelid = Number(data.slice(nlLoc + 1, nlLoc2)) as ChannelID;
-			socketid = data.slice(nlLoc2 + 1);
-
-			roomChannel = this.roomChannels.get(roomid);
-			if (!roomChannel) {
-				roomChannel = new Map();
-				this.roomChannels.set(roomid, roomChannel);
-			}
-			if (channelid === 0) {
-				roomChannel.delete(socketid);
-			} else {
-				roomChannel.set(socketid, channelid);
-			}
-			break;
-
-		case ':':
-			// :roomid, message
-			// message to a room, splitting `|split` by channel
-			nlLoc = data.indexOf('\n');
-			roomid = data.slice(1, nlLoc) as RoomID;
-			room = this.rooms.get(roomid);
-			if (!room) return;
-
-			const messages: [string | null, string | null, string | null, string | null, string | null] = [
-				null, null, null, null, null,
-			];
-			message = data.substr(nlLoc + 1);
-			roomChannel = this.roomChannels.get(roomid);
-			for (const [curSocketid, curSocket] of room) {
-				channelid = roomChannel?.get(curSocketid) || 0;
-				if (!messages[channelid]) messages[channelid] = this.extractChannel(message, channelid);
-				curSocket.write(messages[channelid]!);
-			}
-			break;
-		}
-	}
-}
-
-/*********************************************************
- * Process manager
- *********************************************************/
-
-export const PM = new RawProcessManager({
-	module,
-	setupChild: () => new ServerStream(Config),
-	isCluster: true,
-});
-
-if (!PM.isParentProcess) {
-	// This is a child process!
-	global.Config = (require as any)('./config-loader').Config;
-
-	if (Config.crashguard) {
-		// graceful crash - allow current battles to finish before restarting
-		process.on('uncaughtException', err => {
-			crashlogger(err, `Socket process ${PM.workerid} (${process.pid})`);
-		});
-		process.on('unhandledRejection', err => {
-			crashlogger(err as any || {}, `Socket process ${PM.workerid} (${process.pid}) Promise`);
-		});
-	}
-
-	if (Config.sockets) {
-		try {
-			require.resolve('node-oom-heapdump');
-		} catch (e) {
-			if (e.code !== 'MODULE_NOT_FOUND') throw e; // should never happen
-			throw new Error(
-				'node-oom-heapdump is not installed, but it is a required dependency if Config.ofesockets is set to true! ' +
-				'Run npm install node-oom-heapdump and restart the server.'
-			);
-		}
-
-		// Create a heapdump if the process runs out of memory.
-		(global as any).nodeOomHeapdump = (require as any)('node-oom-heapdump')({
-			addTimestamp: true,
-		});
-	}
-
-	// setup worker
-	if (process.env.PSPORT) Config.port = +process.env.PSPORT;
-	if (process.env.PSBINDADDR) Config.bindaddress = process.env.PSBINDADDR;
-	if (process.env.PSNOSSL && parseInt(process.env.PSNOSSL)) Config.ssl = null;
-
-	// eslint-disable-next-line no-eval
-	Repl.start(`sockets-${PM.workerid}-${process.pid}`, cmd => eval(cmd));
+	/** @type {typeof import('../lib/repl').Repl} */
+	const Repl = require(/** @type {any} */('../.lib-dist/repl')).Repl;
+	Repl.start(`sockets-${cluster.worker.id}-${process.pid}`, cmd => eval(cmd));
 }

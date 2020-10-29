@@ -7,63 +7,65 @@
  * @license MIT
  */
 
-import {crashlogger} from '../lib/crashlogger';
-import {TeamValidator} from '../sim/team-validator';
+'use strict';
 
-export class TeamValidatorAsync {
-	format: Format;
+/** @type {typeof import('../lib/crashlogger').crashlogger} */
+let crashlogger = require(/** @type {any} */('../.lib-dist/crashlogger')).crashlogger;
 
-	constructor(format: string) {
+class TeamValidatorAsync {
+	/**
+	 * @param {string} format
+	 */
+	constructor(format) {
 		this.format = Dex.getFormat(format);
 	}
 
-	validateTeam(team: string, options?: {removeNicknames?: boolean}) {
+	/**
+	 * @param {string} team
+	 * @param {boolean} [removeNicknames]
+	 */
+	validateTeam(team, removeNicknames = false) {
 		let formatid = this.format.id;
 		if (this.format.customRules) formatid += '@@@' + this.format.customRules.join(',');
-		return PM.query({formatid, options, team});
+		return PM.query({formatid, removeNicknames, team});
 	}
 
-	static get(format: string) {
+	/**
+	 * @param {string} format
+	 */
+	static get(format) {
 		return new TeamValidatorAsync(format);
 	}
 }
-
-export const get = TeamValidatorAsync.get;
 
 /*********************************************************
  * Process manager
  *********************************************************/
 
-import {QueryProcessManager} from '../lib/process-manager';
+/** @type {typeof import('../lib/process-manager').QueryProcessManager} */
+const QueryProcessManager = require(/** @type {any} */('../.lib-dist/process-manager')).QueryProcessManager;
 
-export const PM = new QueryProcessManager<{
-	formatid: string, options?: {removeNicknames?: boolean}, team: string,
-}>(module, message => {
-	const {formatid, options, team} = message;
-	const parsedTeam = Dex.fastUnpackTeam(team);
-
-	if (Config.debugvalidatorprocesses && process.send) {
-		process.send('DEBUG\n' + JSON.stringify(message));
-	}
+/** @type {QueryProcessManager} */
+// @ts-ignore
+const PM = new QueryProcessManager(module, async message => {
+	let {formatid, removeNicknames, team} = message;
+	let parsedTeam = Dex.fastUnpackTeam(team);
 
 	let problems;
 	try {
-		problems = TeamValidator.get(formatid).validateTeam(parsedTeam, options);
+		problems = TeamValidator.get(formatid).validateTeam(parsedTeam, removeNicknames);
 	} catch (err) {
 		crashlogger(err, 'A team validation', {
-			formatid,
-			team,
+			formatid: formatid,
+			team: team,
 		});
-		problems = [
-			`Your team crashed the validator. We'll fix this crash within a few minutes (we're automatically notified),` +
-			` but if you don't want to wait, just use a different team for now.`,
-		];
+		problems = [`Your team crashed the team validator. We've been automatically notified and will fix this crash, but you should use a different team for now.`];
 	}
 
-	if (problems?.length) {
+	if (problems && problems.length) {
 		return '0' + problems.join('\n');
 	}
-	const packedTeam = Dex.packTeam(parsedTeam);
+	let packedTeam = Dex.packTeam(parsedTeam);
 	// console.log('FROM: ' + message.substr(pipeIndex2 + 1));
 	// console.log('TO: ' + packedTeam);
 	return '1' + packedTeam;
@@ -71,28 +73,47 @@ export const PM = new QueryProcessManager<{
 
 if (!PM.isParentProcess) {
 	// This is a child process!
-	global.Config = require('./config-loader');
+	global.Config = require(/** @type {any} */('../.server-dist/config-loader')).Config;
 
+	global.TeamValidator = require(/** @type {any} */ ('../.sim-dist/team-validator')).TeamValidator;
+	// @ts-ignore ???
 	global.Monitor = {
-		crashlog(error: Error, source = 'A team validator process', details: AnyObject | null = null) {
+		/**
+		 * @param {Error} error
+		 * @param {string} source
+		 * @param {{}?} details
+		 */
+		crashlog(error, source = 'A team validator process', details = null) {
 			const repr = JSON.stringify([error.name, error.message, source, details]);
-			process.send!(`THROW\n@!!@${repr}\n${error.stack}`);
+			// @ts-ignore
+			process.send(`THROW\n@!!@${repr}\n${error.stack}`);
 		},
 	};
 
 	if (Config.crashguard) {
-		process.on('uncaughtException', (err: Error) => {
+		process.on('uncaughtException', err => {
 			Monitor.crashlog(err, `A team validator process`);
 		});
 		process.on('unhandledRejection', err => {
-			Monitor.crashlog(err as any || {}, 'A team validator process Promise');
+			if (err instanceof Error) {
+				Monitor.crashlog(err, 'A team validator process Promise');
+			}
 		});
 	}
 
-	global.Dex = require('../sim/dex').Dex.includeData();
+	global.Dex = require(/** @type {any} */ ('../.sim-dist/dex')).Dex.includeData();
+	global.toID = Dex.getId;
+	global.Chat = require('./chat');
 
-	// eslint-disable-next-line no-eval
-	require('../lib/repl').Repl.start(`team-validator-${process.pid}`, (cmd: string) => eval(cmd));
+	/** @type {typeof import('../lib/repl').Repl} */
+	const Repl = require(/** @type {any} */('../.lib-dist/repl')).Repl;
+	Repl.start(`team-validator-${process.pid}`, cmd => eval(cmd));
 } else {
 	PM.spawn(global.Config ? Config.validatorprocesses : 1);
 }
+
+/*********************************************************
+ * Exports
+ *********************************************************/
+
+module.exports = {get: TeamValidatorAsync.get, TeamValidatorAsync, PM};
