@@ -5,53 +5,59 @@
  * This keeps track of challenges to battle made between users, setting up
  * matches between users looking for a battle, and starting new battles.
  *
- * @License MIT License
+ * @license MIT
  */
 
-'use strict';
-
-/** @type {typeof LadderStoreT} */
-const LadderStore = require(typeof Config === 'object' && Config.remoteladder ? '../.server-dist/ladders-remote' : '../.server-dist/ladders-local').LadderStore;
+const LadderStore: typeof import('./ladders-remote').LadderStore = (
+	typeof Config === 'object' && Config.remoteladder ? require('./ladders-remote') : require('./ladders-local')
+).LadderStore;
 
 const SECONDS = 1000;
 const PERIODIC_MATCH_INTERVAL = 60 * SECONDS;
+
+import type {ChallengeType} from './room-battle';
 
 /**
  * This represents a user's search for a battle under a format.
  */
 class BattleReady {
-	/**
-	 * @param {string} userid
-	 * @param {string} formatid
-	 * @param {string} team
-	 * @param {number} [rating = 1000]
-	 */
-	constructor(userid, formatid, team, rating = 0) {
-		/** @type {string} */
+	readonly userid: ID;
+	readonly formatid: string;
+	readonly team: string;
+	readonly hidden: boolean;
+	readonly inviteOnly: boolean;
+	readonly rating: number;
+	readonly challengeType: ChallengeType;
+	readonly time: number;
+	constructor(
+		userid: ID,
+		formatid: string,
+		settings: User['battleSettings'],
+		rating: number,
+		challengeType: ChallengeType
+	) {
 		this.userid = userid;
-		/** @type {string} */
 		this.formatid = formatid;
-		/** @type {string} */
-		this.team = team;
-		/** @type {number} */
+		this.team = settings.team;
+		this.hidden = settings.hidden;
+		this.inviteOnly = settings.inviteOnly;
 		this.rating = rating;
-		/** @type {number} */
+		this.challengeType = challengeType;
 		this.time = Date.now();
 	}
 }
 
 /**
  * formatid:userid:BattleReady
- * @type {Map<string, Map<string, BattleReady>>}
  */
-const searches = new Map();
+const searches = new Map<string, Map<string, BattleReady>>();
 
 class Challenge {
-	/**
-	 * @param {BattleReady} ready
-	 * @param {string} to
-	 */
-	constructor(ready, to) {
+	readonly from: ID;
+	readonly to: string;
+	readonly formatid: string;
+	readonly ready: BattleReady;
+	constructor(ready: BattleReady, to: string) {
 		this.from = ready.userid;
 		this.to = to;
 		this.formatid = ready.formatid;
@@ -60,9 +66,8 @@ class Challenge {
 }
 /**
  * formatid:userid:BattleReady
- * @type {Map<string, Challenge[]>}
  */
-const challenges = new Map();
+const challenges = new Map<string, Challenge[]>();
 
 /**
  * This keeps track of searches for battles, creating a new battle for a newly
@@ -70,23 +75,15 @@ const challenges = new Map();
  * attempting to make a match with looser restrictions until one can be made.
  */
 class Ladder extends LadderStore {
-	/**
-	 * @param {string} formatid
-	 */
-	constructor(formatid) {
+	constructor(formatid: string) {
 		super(formatid);
 	}
 
-	/**
-	 * @param {Connection} connection
-	 * @param {string?} team
-	 * @return {Promise<BattleReady?>}
-	 */
-	async prepBattle(connection, team = null, isRated = false) {
+	async prepBattle(connection: Connection, challengeType: ChallengeType, team: string | null = null, isRated = false) {
 		// all validation for a battle goes through here
 		const user = connection.user;
-		const userid = user.userid;
-		if (team === null) team = user.team;
+		const userid = user.id;
+		if (team === null) team = user.battleSettings.team;
 
 		if (Rooms.global.lockdown && Rooms.global.lockdown !== 'pre') {
 			let message = `The server is restarting. Battles will be available again in a few minutes.`;
@@ -100,7 +97,7 @@ class Ladder extends LadderStore {
 			connection.popup(`You are barred from starting any new games until your battle ban expires.`);
 			return null;
 		}
-		let gameCount = user.games.size;
+		const gameCount = user.games.size;
 		if (Monitor.countConcurrentBattle(gameCount, connection)) {
 			return null;
 		}
@@ -109,17 +106,51 @@ class Ladder extends LadderStore {
 		}
 
 		try {
-			// @ts-ignore TypeScript bug: self-reference
 			this.formatid = Dex.validateFormat(this.formatid);
 		} catch (e) {
 			connection.popup(`Your selected format is invalid:\n\n- ${e.message}`);
 			return null;
 		}
 
-		const regex = /(?:^|])([^|]*)\|/g;
+		let rating = 0;
+		let valResult;
+		if (isRated && !Ladders.disabled) {
+			const uid = user.id;
+			[valResult, rating] = await Promise.all([
+				TeamValidatorAsync.get(this.formatid).validateTeam(team, {removeNicknames: !!(user.locked || user.namelocked)}),
+				this.getRating(uid),
+			]);
+			if (uid !== user.id) {
+				// User feedback for renames handled elsewhere.
+				return null;
+			}
+			if (!rating) rating = 1;
+		} else {
+			if (Ladders.disabled) {
+				connection.popup(`The ladder is temporarily disabled due to technical difficulties - you will not receive ladder rating for this game.`);
+				rating = 1;
+			}
+			const validator = TeamValidatorAsync.get(this.formatid);
+			valResult = await validator.validateTeam(team, {removeNicknames: !!(user.locked || user.namelocked)});
+		}
+
+		if (valResult.charAt(0) !== '1') {
+			connection.popup(
+				`Your team was rejected for the following reasons:\n\n` +
+				`- ` + valResult.slice(1).replace(/\n/g, `\n- `)
+			);
+			return null;
+		}
+
+		const regex = /(?:^|])([^|]*)\|([^|]*)\|/g;
 		let match = regex.exec(team);
+		let unownWord = '';
 		while (match) {
 			let nickname = match[1];
+			const speciesid = toID(match[2] || match[1]);
+			if (speciesid.length <= 6 && speciesid.startsWith('unown')) {
+				unownWord += speciesid.charAt(5) || 'a';
+			}
 			if (nickname) {
 				nickname = Chat.nicknamefilter(nickname, user);
 				if (!nickname || nickname !== match[1]) {
@@ -132,66 +163,51 @@ class Ladder extends LadderStore {
 			}
 			match = regex.exec(team);
 		}
-
-		let rating = 0, valResult;
-		if (isRated && !Ladders.disabled) {
-			let userid = user.userid;
-			[valResult, rating] = await Promise.all([
-				TeamValidatorAsync.get(this.formatid).validateTeam(team, !!(user.locked || user.namelocked)),
-				this.getRating(userid),
-			]);
-			if (userid !== user.userid) {
-				// User feedback for renames handled elsewhere.
+		if (unownWord) {
+			const filtered = Chat.nicknamefilter(unownWord, user);
+			if (!filtered || filtered !== unownWord) {
+				connection.popup(
+					`Your team was rejected for the following reason:\n\n` +
+					`- Your Unowns spell out a banned word: ${unownWord.toUpperCase()}`
+				);
 				return null;
 			}
-			if (!rating) rating = 1;
-		} else {
-			if (Ladders.disabled) {
-				connection.popup(`The ladder is temporarily disabled due to technical difficulties - you will not receive ladder rating for this game.`);
-				rating = 1;
-			}
-			valResult = await TeamValidatorAsync.get(this.formatid).validateTeam(team, !!(user.locked || user.namelocked));
 		}
 
-		if (valResult.charAt(0) !== '1') {
-			connection.popup(
-				`Your team was rejected for the following reasons:\n\n` +
-				`- ` + valResult.slice(1).replace(/\n/g, `\n- `)
-			);
-			return null;
-		}
-
-		return new BattleReady(userid, this.formatid, valResult.slice(1), rating);
+		const settings = {...user.battleSettings, team: valResult.slice(1) as string};
+		user.battleSettings.inviteOnly = false;
+		user.battleSettings.hidden = false;
+		return new BattleReady(userid, this.formatid, settings, rating, challengeType);
 	}
 
-	/**
-	 * @param {User} user
-	 */
-	static cancelChallenging(user) {
-		const chall = Ladder.getChallenging(user.userid);
+	static getChallenging(userid: ID) {
+		const userChalls = Ladders.challenges.get(userid);
+		if (userChalls) {
+			for (const chall of userChalls) {
+				if (chall.from === userid) return chall;
+			}
+		}
+		return null;
+	}
+
+	static cancelChallenging(user: User) {
+		const chall = Ladder.getChallenging(user.id);
 		if (chall) {
 			Ladder.removeChallenge(chall);
 			return true;
 		}
 		return false;
 	}
-	/**
-	 * @param {User} user
-	 * @param {User} targetUsername
-	 */
-	static rejectChallenge(user, targetUsername) {
+	static rejectChallenge(user: User, targetUsername: string) {
 		const targetUserid = toID(targetUsername);
 		const chall = Ladder.getChallenging(targetUserid);
-		if (chall && chall.to === user.userid) {
+		if (chall && chall.to === user.id) {
 			Ladder.removeChallenge(chall);
 			return true;
 		}
 		return false;
 	}
-	/**
-	 * @param {string} username
-	 */
-	static clearChallenges(username) {
+	static clearChallenges(username: string) {
 		const userid = toID(username);
 		const userChalls = Ladders.challenges.get(userid);
 		if (userChalls) {
@@ -203,30 +219,26 @@ class Ladder extends LadderStore {
 					otherUserid = chall.from;
 				}
 				Ladder.removeChallenge(chall, true);
-				const otherUser = Users(otherUserid);
+				const otherUser = Users.get(otherUserid);
 				if (otherUser) Ladder.updateChallenges(otherUser);
 			}
-			const user = Users(userid);
+			const user = Users.get(userid);
 			if (user) Ladder.updateChallenges(user);
 			return true;
 		}
 		return false;
 	}
-	/**
-	 * @param {Connection} connection
-	 * @param {User} targetUser
-	 */
-	async makeChallenge(connection, targetUser) {
+	async makeChallenge(connection: Connection, targetUser: User) {
 		const user = connection.user;
 		if (targetUser === user) {
 			connection.popup(`You can't battle yourself. The best you can do is open PS in Private Browsing (or another browser) and log into a different username, and battle that username.`);
 			return false;
 		}
-		if (Ladder.getChallenging(user.userid)) {
+		if (Ladder.getChallenging(user.id)) {
 			connection.popup(`You are already challenging someone. Cancel that challenge before challenging someone else.`);
 			return false;
 		}
-		if (targetUser.blockChallenges && !user.can('bypassblocks', targetUser)) {
+		if (targetUser.settings.blockChallenges && !user.can('bypassblocks', targetUser)) {
 			connection.popup(`The user '${targetUser.name}' is not accepting challenges right now.`);
 			Chat.maybeNotifyBlocked('challenge', targetUser, user);
 			return false;
@@ -236,24 +248,43 @@ class Ladder extends LadderStore {
 			connection.popup(`You challenged less than 10 seconds after your last challenge! It's cancelled in case it's a misclick.`);
 			return false;
 		}
-		const ready = await this.prepBattle(connection);
+		const currentChallenges = Ladders.challenges.get(targetUser.id);
+		if (currentChallenges && currentChallenges.length >= 3 && !user.autoconfirmed) {
+			connection.popup(
+				`This user already has 3 pending challenges.\n` +
+				`You must be autoconfirmed to challenge them.`
+			);
+			return false;
+		}
+		const ready = await this.prepBattle(connection, 'challenge');
 		if (!ready) return false;
-		Ladder.addChallenge(new Challenge(ready, targetUser.userid));
+		// If our target is already challenging us in the same format,
+		// simply accept the pending challenge instead of creating a new one.
+		const targetChalls = Ladders.challenges.get(targetUser.id);
+		if (targetChalls) {
+			for (const chall of targetChalls) {
+				if (chall.from === targetUser.id &&
+					chall.to === user.id &&
+					chall.formatid === this.formatid) {
+					if (Ladder.removeChallenge(chall)) {
+						Ladders.match(chall.ready, ready);
+						return true;
+					}
+				}
+			}
+		}
+		Ladder.addChallenge(new Challenge(ready, targetUser.id));
 		user.lastChallenge = Date.now();
 		return true;
 	}
-	/**
-	 * @param {Connection} connection
-	 * @param {User} targetUser
-	 */
-	static async acceptChallenge(connection, targetUser) {
-		const chall = Ladder.getChallenging(targetUser.userid);
-		if (!chall || chall.to !== connection.user.userid) {
-			connection.popup(`${targetUser.userid} is not challenging you. Maybe they cancelled before you accepted?`);
+	static async acceptChallenge(connection: Connection, targetUser: User) {
+		const chall = Ladder.getChallenging(targetUser.id);
+		if (!chall || chall.to !== connection.user.id) {
+			connection.popup(`${targetUser.id} is not challenging you. Maybe they cancelled before you accepted?`);
 			return false;
 		}
 		const ladder = Ladders(chall.formatid);
-		const ready = await ladder.prepBattle(connection);
+		const ready = await ladder.prepBattle(connection, 'challenge');
 		if (!ready) return false;
 		if (Ladder.removeChallenge(chall)) {
 			Ladders.match(chall.ready, ready);
@@ -261,22 +292,7 @@ class Ladder extends LadderStore {
 		return true;
 	}
 
-	/**
-	 * @param {string} userid
-	 */
-	static getChallenging(userid) {
-		const userChalls = Ladders.challenges.get(userid);
-		if (userChalls) {
-			for (const chall of userChalls) {
-				if (chall.from === userid) return chall;
-			}
-		}
-		return null;
-	}
-	/**
-	 * @param {Challenge} challenge
-	 */
-	static addChallenge(challenge, skipUpdate = false) {
+	static addChallenge(challenge: Challenge, skipUpdate = false) {
 		let challs1 = Ladders.challenges.get(challenge.from);
 		if (!challs1) Ladders.challenges.set(challenge.from, challs1 = []);
 		let challs2 = Ladders.challenges.get(challenge.to);
@@ -284,47 +300,39 @@ class Ladder extends LadderStore {
 		challs1.push(challenge);
 		challs2.push(challenge);
 		if (!skipUpdate) {
-			const fromUser = Users(challenge.from);
+			const fromUser = Users.get(challenge.from);
 			if (fromUser) Ladder.updateChallenges(fromUser);
-			const toUser = Users(challenge.to);
+			const toUser = Users.get(challenge.to);
 			if (toUser) Ladder.updateChallenges(toUser);
 		}
 	}
-	/**
-	 * @param {Challenge} challenge
-	 */
-	static removeChallenge(challenge, skipUpdate = false) {
-		const fromChalls = /** @type {Challenge[]} */ (Ladders.challenges.get(challenge.from));
+	static removeChallenge(challenge: Challenge, skipUpdate = false) {
+		const fromChalls = Ladders.challenges.get(challenge.from);
 		// the challenge may have been cancelled
 		if (!fromChalls) return false;
 		const fromIndex = fromChalls.indexOf(challenge);
 		if (fromIndex < 0) return false;
 		fromChalls.splice(fromIndex, 1);
 		if (!fromChalls.length) Ladders.challenges.delete(challenge.from);
-		const toChalls = /** @type {Challenge[]} */ (Ladders.challenges.get(challenge.to));
+		const toChalls = Ladders.challenges.get(challenge.to)!;
 		toChalls.splice(toChalls.indexOf(challenge), 1);
 		if (!toChalls.length) Ladders.challenges.delete(challenge.to);
 		if (!skipUpdate) {
-			const fromUser = Users(challenge.from);
+			const fromUser = Users.get(challenge.from);
 			if (fromUser) Ladder.updateChallenges(fromUser);
-			const toUser = Users(challenge.to);
+			const toUser = Users.get(challenge.to);
 			if (toUser) Ladder.updateChallenges(toUser);
 		}
 		return true;
 	}
-	/**
-	 * @param {User} user
-	 * @param {Connection?} connection
-	 */
-	static updateChallenges(user, connection = null) {
+	static updateChallenges(user: User, connection: Connection | null = null) {
 		if (!user.connected) return;
 		let challengeTo = null;
-		/**@type {{[k: string]: string}} */
-		let challengesFrom = {};
-		const userChalls = Ladders.challenges.get(user.userid);
+		const challengesFrom: {[k: string]: string} = {};
+		const userChalls = Ladders.challenges.get(user.id);
 		if (userChalls) {
 			for (const chall of userChalls) {
-				if (chall.from === user.userid) {
+				if (chall.from === user.id) {
 					challengeTo = {
 						to: chall.to,
 						format: chall.formatid,
@@ -335,38 +343,30 @@ class Ladder extends LadderStore {
 			}
 		}
 		(connection || user).send(`|updatechallenges|` + JSON.stringify({
-			challengesFrom: challengesFrom,
-			challengeTo: challengeTo,
+			challengesFrom,
+			challengeTo,
 		}));
 	}
 
-	/**
-	 * @param {User} user
-	 * @return {boolean}
-	 */
-	cancelSearch(user) {
+	cancelSearch(user: User) {
 		const formatid = toID(this.formatid);
 
 		const formatTable = Ladders.searches.get(formatid);
 		if (!formatTable) return false;
-		if (!formatTable.has(user.userid)) return false;
-		formatTable.delete(user.userid);
+		if (!formatTable.has(user.id)) return false;
+		formatTable.delete(user.id);
 
 		Ladder.updateSearch(user);
 		return true;
 	}
 
-	/**
-	 * @param {User} user
-	 * @return {number} cancel count
-	 */
-	static cancelSearches(user) {
+	static cancelSearches(user: User) {
 		let cancelCount = 0;
 
-		for (let formatTable of Ladders.searches.values()) {
-			const search = formatTable.get(user.userid);
+		for (const formatTable of Ladders.searches.values()) {
+			const search = formatTable.get(user.id);
 			if (!search) continue;
-			formatTable.delete(user.userid);
+			formatTable.delete(user.id);
 			cancelCount++;
 		}
 
@@ -374,16 +374,13 @@ class Ladder extends LadderStore {
 		return cancelCount;
 	}
 
-	/**
-	 * @param {BattleReady} search
-	 */
-	getSearcher(search) {
+	getSearcher(search: BattleReady) {
 		const formatid = toID(this.formatid);
 		const user = Users.get(search.userid);
-		if (!user || !user.connected || user.userid !== search.userid) {
+		if (!user || !user.connected || user.id !== search.userid) {
 			const formatTable = Ladders.searches.get(formatid);
 			if (formatTable) formatTable.delete(search.userid);
-			if (user && user.connected) {
+			if (user?.connected) {
 				user.popup(`You changed your name and are no longer looking for a battle in ${formatid}`);
 				Ladder.updateSearch(user);
 			}
@@ -392,33 +389,26 @@ class Ladder extends LadderStore {
 		return user;
 	}
 
-	/**
-	 * @param {User} user
-	 */
-	static getSearches(user) {
-		let userSearches = [];
+	static getSearches(user: User) {
+		const userSearches = [];
 		for (const [formatid, formatTable] of Ladders.searches) {
-			if (formatTable.has(user.userid)) userSearches.push(formatid);
+			if (formatTable.has(user.id)) userSearches.push(formatid);
 		}
 		return userSearches;
 	}
-	/**
-	 * @param {User} user
-	 * @param {Connection?} connection
-	 */
-	static updateSearch(user, connection = null) {
-		let games = /** @type {any} */ ({});
+	static updateSearch(user: User, connection: Connection | null = null) {
+		let games: {[k: string]: string} | null = {};
 		let atLeastOne = false;
 		for (const roomid of user.games) {
-			const room = Rooms(roomid);
+			const room = Rooms.get(roomid);
 			if (!room) {
-				Monitor.warn(`while searching, room ${roomid} expired for user ${user.userid} in rooms ${[...user.inRooms]} and games ${[...user.games]}`);
+				Monitor.warn(`while searching, room ${roomid} expired for user ${user.id} in rooms ${[...user.inRooms]} and games ${[...user.games]}`);
 				user.games.delete(roomid);
 				continue;
 			}
 			const game = room.game;
 			if (!game) {
-				Monitor.warn(`while searching, room ${roomid} has no game for user ${user.userid} in rooms ${[...user.inRooms]} and games ${[...user.games]}`);
+				Monitor.warn(`while searching, room ${roomid} has no game for user ${user.id} in rooms ${[...user.inRooms]} and games ${[...user.games]}`);
 				user.games.delete(roomid);
 				continue;
 			}
@@ -426,30 +416,24 @@ class Ladder extends LadderStore {
 			atLeastOne = true;
 		}
 		if (!atLeastOne) games = null;
-		let searching = Ladders.getSearches(user);
+		const searching = Ladders.getSearches(user);
 		(connection || user).send(`|updatesearch|` + JSON.stringify({
-			searching: searching,
-			games: games,
+			searching,
+			games,
 		}));
 	}
-	/**
-	 * @param {User} user
-	 */
-	hasSearch(user) {
+	hasSearch(user: User) {
 		const formatid = toID(this.formatid);
 		const formatTable = Ladders.searches.get(formatid);
 		if (!formatTable) return false;
-		return formatTable.has(user.userid);
+		return formatTable.has(user.id);
 	}
 
 	/**
 	 * Validates a user's team and fetches their rating for a given format
 	 * before creating a search for a battle.
-	 * @param {User} user
-	 * @param {Connection} connection
-	 * @return {Promise<void>}
 	 */
-	async searchBattle(user, connection) {
+	async searchBattle(user: User, connection: Connection) {
 		if (!user.connected) return;
 
 		const format = Dex.getFormat(this.formatid);
@@ -458,61 +442,19 @@ class Ladder extends LadderStore {
 			return;
 		}
 
-		const roomid = this.needsToMove(user);
-		if (roomid) {
-			connection.popup(`Error: You need to make a move in <<${roomid}>> before you can look for another battle.\n\n(This restriction doesn't apply in the first five turns of a battle.)`);
-			return;
-		}
+		const oldUserid = user.id;
+		const search = await this.prepBattle(connection, format.rated ? 'rated' : 'unrated', null, format.rated !== false);
 
-		if (roomid === null && Date.now() < user.lastDecision + 3 * SECONDS) {
-			connection.popup(`Error: You need to wait until after making a move before you can look for another battle.\n\n(This restriction doesn't apply in the first five turns of a battle.)`);
-			return;
-		}
-
-		let oldUserid = user.userid;
-		const search = await this.prepBattle(connection, null, format.rated !== false);
-
-		if (oldUserid !== user.userid) return;
+		if (oldUserid !== user.id) return;
 		if (!search) return;
 
 		this.addSearch(search, user);
 	}
 
 	/**
-	 * null = all battles ok
-	 * undefined = not in any battle
-	 * @param {User} user
-	 */
-	needsToMove(user) {
-		let out = undefined;
-		for (const roomid of user.games) {
-			const room = Rooms(roomid);
-			if (!room || !room.battle || !room.battle.playerTable[user.userid]) continue;
-			const battle = /** @type {RoomBattle} */ (room.battle);
-			if (battle.requestCount <= 16) {
-				// it's fine as long as it's before turn 5
-				// to be safe, we count off 8 requests for Team Preview, U-turn, and faints
-				continue;
-			}
-			if (Dex.getFormat(battle.format).allowMultisearch) {
-				continue;
-			}
-			const player = battle.playerTable[user.userid];
-			if (!player.request.isWait) return roomid;
-			out = null;
-		}
-		return out;
-	}
-
-	/**
 	 * Verifies whether or not a match made between two users is valid. Returns
-	 * @param {BattleReady} search1
-	 * @param {BattleReady} search2
-	 * @param {User=} user1
-	 * @param {User=} user2
-	 * @return {boolean}
 	 */
-	matchmakingOK(search1, search2, user1, user2) {
+	matchmakingOK(search1: BattleReady, search2: BattleReady, user1: User, user2: User) {
 		const formatid = toID(this.formatid);
 		if (!user1 || !user2) {
 			// This should never happen.
@@ -524,8 +466,8 @@ class Ladder extends LadderStore {
 		if (user1 === user2) return false;
 
 		if (Config.fakeladder) {
-			user1.lastMatch = user2.userid;
-			user2.lastMatch = user1.userid;
+			user1.lastMatch = user2.id;
+			user2.lastMatch = user1.id;
 			return true;
 		}
 
@@ -533,13 +475,13 @@ class Ladder extends LadderStore {
 		if (user1.latestIp === user2.latestIp) return false;
 
 		// users must not have been matched immediately previously
-		if (user1.lastMatch === user2.userid || user2.lastMatch === user1.userid) return false;
+		if (user1.lastMatch === user2.id || user2.lastMatch === user1.id) return false;
 
 		// search must be within range
 		let searchRange = 100;
-		let elapsed = Date.now() - Math.min(search1.time, search2.time);
-		if (formatid === 'gen7ou' || formatid === 'gen7oucurrent' ||
-				formatid === 'gen7oususpecttest' || formatid === 'gen7randombattle') {
+		const elapsed = Date.now() - Math.min(search1.time, search2.time);
+		if (formatid === 'gen8ou' || formatid === 'gen8oucurrent' ||
+				formatid === 'gen8oususpecttest' || formatid === 'gen8randombattle') {
 			searchRange = 50;
 		}
 
@@ -548,30 +490,28 @@ class Ladder extends LadderStore {
 		if (searchRange > 600) searchRange = 600;
 		if (Math.abs(search1.rating - search2.rating) > searchRange) return false;
 
-		user1.lastMatch = user2.userid;
-		user2.lastMatch = user1.userid;
+		user1.lastMatch = user2.id;
+		user2.lastMatch = user1.id;
 		return true;
 	}
 
 	/**
 	 * Starts a search for a battle for a user under the given format.
-	 * @param {BattleReady} newSearch
-	 * @param {User} user
 	 */
-	addSearch(newSearch, user) {
+	addSearch(newSearch: BattleReady, user: User) {
 		const formatid = newSearch.formatid;
 		let formatTable = Ladders.searches.get(formatid);
 		if (!formatTable) {
 			formatTable = new Map();
 			Ladders.searches.set(formatid, formatTable);
 		}
-		if (formatTable.has(user.userid)) {
+		if (formatTable.has(user.id)) {
 			user.popup(`Couldn't search: You are already searching for a ${formatid} battle.`);
 			return;
 		}
 
 		// In order from longest waiting to shortest waiting
-		for (let search of formatTable.values()) {
+		for (const search of formatTable.values()) {
 			const searcher = this.getSearcher(search);
 			if (!searcher) continue;
 			const matched = this.matchmakingOK(search, newSearch, searcher, user);
@@ -595,19 +535,19 @@ class Ladder extends LadderStore {
 		// In order from longest waiting to shortest waiting
 		for (const [formatid, formatTable] of Ladders.searches) {
 			const matchmaker = Ladders(formatid);
-			let longest = /** @type {[BattleReady, User]?} */ (null);
-			for (let search of formatTable.values()) {
+			let longest: [BattleReady, User] | null = null;
+			for (const search of formatTable.values()) {
 				if (!longest) {
 					const longestSearcher = matchmaker.getSearcher(search);
 					if (!longestSearcher) continue;
 					longest = [search, longestSearcher];
 					continue;
 				}
-				let searcher = matchmaker.getSearcher(search);
+				const searcher = matchmaker.getSearcher(search);
 				if (!searcher) continue;
 
-				let [longestSearch, longestSearcher] = longest;
-				let matched = matchmaker.matchmakingOK(search, longestSearch, searcher, longestSearcher);
+				const [longestSearch, longestSearcher] = longest;
+				const matched = matchmaker.matchmakingOK(search, longestSearch, searcher, longestSearcher);
 				if (matched) {
 					formatTable.delete(search.userid);
 					formatTable.delete(longestSearch.userid);
@@ -618,14 +558,10 @@ class Ladder extends LadderStore {
 		}
 	}
 
-	/**
-	 * @param {BattleReady} ready1
-	 * @param {BattleReady} ready2
-	 */
-	static match(ready1, ready2) {
+	static match(ready1: BattleReady, ready2: BattleReady) {
 		if (ready1.formatid !== ready2.formatid) throw new Error(`Format IDs don't match`);
-		const user1 = Users(ready1.userid);
-		const user2 = Users(ready2.userid);
+		const user1 = Users.get(ready1.userid);
+		const user2 = Users.get(ready2.userid);
 		if (!user1) {
 			if (!user2) return false;
 			user2.popup(`Sorry, your opponent ${ready1.userid} went offline before your battle could start.`);
@@ -639,28 +575,29 @@ class Ladder extends LadderStore {
 			p1: user1,
 			p1team: ready1.team,
 			p1rating: ready1.rating,
+			p1hidden: ready1.hidden,
+			p1inviteOnly: ready1.inviteOnly,
 			p2: user2,
 			p2team: ready2.team,
 			p2rating: ready2.rating,
+			p2hidden: ready2.hidden,
+			p2inviteOnly: ready2.inviteOnly,
 			rated: Math.min(ready1.rating, ready2.rating),
+			challengeType: ready1.challengeType,
 		});
 	}
 }
 
-/**
- * @param {string} formatid
- */
-function getLadder(formatid) {
+function getLadder(formatid: string) {
 	return new Ladder(formatid);
 }
 
-/** @type {?NodeJS.Timer} */
-let periodicMatchInterval = setInterval(
+const periodicMatchInterval = setInterval(
 	() => Ladder.periodicMatch(),
 	PERIODIC_MATCH_INTERVAL
 );
 
-const Ladders = Object.assign(getLadder, {
+export const Ladders = Object.assign(getLadder, {
 	BattleReady,
 	LadderStore,
 	Ladder,
@@ -682,8 +619,5 @@ const Ladders = Object.assign(getLadder, {
 
 	// tells the client to ask the server for format information
 	formatsListPrefix: LadderStore.formatsListPrefix,
-	/** @type {true | false | 'db'} */
-	disabled: false,
+	disabled: false as boolean | 'db',
 });
-
-module.exports = Ladders;
