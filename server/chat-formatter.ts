@@ -4,61 +4,76 @@
  *
  * Parses formate.
  *
- * @license MIT license
+ * @license MIT
  */
 
-'use strict';
+/*
+REGEXFREE SOURCE FOR LINKREGEX
 
-// Regex copied from the client
-const domainRegex = '[a-z0-9-]+(?:[.][a-z0-9-]+)*';
-const parenthesisRegex = '[(](?:[^\\s()<>&]|&amp;)*[)]';
-export const linkRegex = new RegExp(
-	'(?:' +
-		'(?:' +
-			// When using www. or http://, allow any-length TLD (like .museum)
-			'(?:https?://|\\bwww[.])' + domainRegex +
-			'|\\b' + domainRegex + '[.]' +
-				// Allow a common TLD, or any 2-3 letter TLD followed by : or /
-				'(?:com?|org|net|edu|info|us|jp|[a-z]{2,3}(?=[:/]))' +
-		')' +
-		'(?:[:][0-9]+)?' +
-		'\\b' +
-		'(?:' +
-			'/' +
-			'(?:' +
-				'(?:' +
-					'[^\\s()&<>]|&amp;|&quot;' +
-					'|' + parenthesisRegex +
-				')*' +
-				// URLs usually don't end with punctuation, so don't allow
-				// punctuation symbols that probably aren't related to URL.
-				'(?:' +
-					'[^\\s`()[\\]{}\'".,!?;:&<>*`^~\\\\]' +
-					'|' + parenthesisRegex +
-				')' +
-			')?' +
-		')?' +
-		// email address
-		'|[a-z0-9.]+\\b@' + domainRegex + '[.][a-z]{2,}' +
-	')' +
-	'(?![^ ]*&gt;)',
-	'ig'
-);
-// compiled from above
-// const linkRegex = /(?:(?:(?:https?:\/\/|\bwww[.])[a-z0-9-]+(?:[.][a-z0-9-]+)*|\b[a-z0-9-]+(?:[.][a-z0-9-]+)*[.](?:com?|org|net|edu|info|us|jp|[a-z]{2,3}(?=[:/])))(?:[:][0-9]+)?\b(?:\/(?:(?:[^\s()&<>]|&amp;|&quot;|[(](?:[^\s()<>&]|&amp;)*[)])*(?:[^\s`()[\]{}'".,!?;:&<>*`^~\\]|[(](?:[^\s()<>&]|&amp;)*[)]))?)?|[a-z0-9.]+\b@[a-z0-9-]+(?:[.][a-z0-9-]+)*[.][a-z]{2,})(?![^ ]*&gt;)/ig;
+	(
+		(
+			# When using http://, allow any domain
+			https?:\/\/ [a-z0-9-]+ ( \. [a-z0-9-]+ )*
+		|
+			# When using www., expect at least one more dot
+			www \. [a-z0-9-]+ ( \. [a-z0-9-]+ )+
+		|
+			# Otherwise, allow any domain, but only if
+			\b [a-z0-9-]+ ( \. [a-z0-9-]+ )* \.
+			(
+				# followed either a common TLD...
+				com? | org | net | edu | info | us | jp
+			|
+				# or any 2-3 letter TLD followed by : or /
+				[a-z]{2,3} (?=[:\/])
+			)
+		)
+		# possible custom port
+		( : [0-9]+ )?
+		(
+			\/
+			(
+				# characters allowed inside URL paths
+				(
+					[^\s()&<>] | &amp; | &quot;
+				|
+					# parentheses in URLs should be matched, so they're not confused
+					# for parentheses around URLs
+					\( ( [^\\s()<>&] | &amp; )* \)
+				)*
+				# URLs usually don't end with punctuation, so don't allow
+				# punctuation symbols that probably arent related to URL.
+				(
+					[^\s()[\]{}\".,!?;:&<>*`^~\\]
+				|
+					# annoyingly, Wikipedia URLs often end in )
+					\( ( [^\s()<>&] | &amp; )* \)
+				)
+			)?
+		)?
+	|
+		# email address
+		[a-z0-9.]+ @ [a-z0-9-]+ ( \. [a-z0-9-]+ )* \. [a-z]{2,}
+	)
+	(?! [^ ]*&gt; )
+
+*/
+export const linkRegex = /(?:(?:https?:\/\/[a-z0-9-]+(?:\.[a-z0-9-]+)*|www\.[a-z0-9-]+(?:\.[a-z0-9-]+)+|\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:com?|org|net|edu|info|us|jp|[a-z]{2,3}(?=[:/])))(?::[0-9]+)?(?:\/(?:(?:[^\s()&<>]|&amp;|&quot;|\((?:[^\\s()<>&]|&amp;)*\))*(?:[^\s()[\]{}".,!?;:&<>*`^~\\]|\((?:[^\s()<>&]|&amp;)*\)))?)?|[a-z0-9.]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-z]{2,})(?![^ ]*&gt;)/ig;
 
 type SpanType = '_' | '*' | '~' | '^' | '\\' | '<' | '[' | '`' | 'a' | 'spoiler' | '>' | '(';
 
 type FormatSpan = [SpanType, number];
 
 class TextFormatter {
-	str: string;
-	buffers: string[];
-	stack: FormatSpan[];
-	isTrusted: boolean;
+	readonly str: string;
+	readonly buffers: string[];
+	readonly stack: FormatSpan[];
+	readonly isTrusted: boolean;
+	readonly replaceLinebreaks: boolean;
+	/** offset of str that's been parsed so far */
 	offset: number;
 
-	constructor(str: string, isTrusted: boolean = false) {
+	constructor(str: string, isTrusted = false, replaceLinebreaks = false) {
 		// escapeHTML, without escaping /
 		str = `${str}`
 			.replace(/&/g, '&amp;')
@@ -75,7 +90,7 @@ class TextFormatter {
 			} else {
 				fulluri = uri.replace(/^([a-z]*[^a-z:])/g, 'http://$1');
 				if (uri.substr(0, 24) === 'https://docs.google.com/' || uri.substr(0, 16) === 'docs.google.com/') {
-					if (uri.slice(0, 5) === 'https') uri = uri.slice(8);
+					if (uri.startsWith('https')) uri = uri.slice(8);
 					if (uri.substr(-12) === '?usp=sharing' || uri.substr(-12) === '&usp=sharing') uri = uri.slice(0, -12);
 					if (uri.substr(-6) === '#gid=0') uri = uri.slice(0, -6);
 					let slashIndex = uri.lastIndexOf('/');
@@ -94,9 +109,10 @@ class TextFormatter {
 		this.buffers = [];
 		this.stack = [];
 		this.isTrusted = isTrusted;
-		/** offset of str that's been parsed so far */
+		this.replaceLinebreaks = this.isTrusted || replaceLinebreaks;
 		this.offset = 0;
 	}
+	// eslint-disable-next-line max-len
 	// debugAt(i=0, j=i+1) { console.log(this.slice(0, i) + '[' + this.slice(i, j) + ']' + this.slice(j, this.str.length)); }
 
 	slice(start: number, end: number) {
@@ -295,17 +311,20 @@ class TextFormatter {
 						break;
 					case 'pokemon':
 					case 'item':
+					case 'type':
+					case 'category':
 						term = term.slice(term.charAt(key.length + 1) === ' ' ? key.length + 2 : key.length + 1);
 
 						let display = '';
 						if (this.isTrusted) {
-							display = `<psicon ${key}="${term}"/>`;
+							display = `<psicon ${key}="${term}" />`;
 						} else {
 							display = `[${term}]`;
 						}
 
 						let dir = key;
 						if (key === 'item') dir += 's';
+						if (key === 'category') dir = 'categories' as 'category';
 
 						uri = `//dex.pokemonshowdown.com/${dir}/${toID(term)}`;
 						term = display;
@@ -424,7 +443,7 @@ class TextFormatter {
 			case '\r':
 			case '\n':
 				this.popAllSpans(i);
-				if (this.isTrusted) {
+				if (this.replaceLinebreaks) {
 					this.buffers.push(`<br />`);
 					this.offset++;
 				}
@@ -441,8 +460,8 @@ class TextFormatter {
 /**
  * Takes a string and converts it to HTML by replacing standard chat formatting with the appropriate HTML tags.
  */
-export function formatText(str: string, isTrusted = false) {
-	return new TextFormatter(str, isTrusted).get();
+export function formatText(str: string, isTrusted = false, replaceLinebreaks = false) {
+	return new TextFormatter(str, isTrusted, replaceLinebreaks).get();
 }
 
 /**
@@ -450,7 +469,7 @@ export function formatText(str: string, isTrusted = false) {
  */
 export function stripFormatting(str: string) {
 	// Doesn't match > meme arrows because the angle bracket appears in the chat still.
-	str = str.replace(/\*\*([^\s\*]+)\*\*|__([^\s_]+)__|~~([^\s~]+)~~|``([^\s`]+)``|\^\^([^\s\^]+)\^\^|\\([^\s\\]+)\\/g,
+	str = str.replace(/\*\*([^\s*]+)\*\*|__([^\s_]+)__|~~([^\s~]+)~~|``([^\s`]+)``|\^\^([^\s^]+)\^\^|\\([^\s\\]+)\\/g,
 		(match, $1, $2, $3, $4, $5, $6) => $1 || $2 || $3 || $4 || $5 || $6);
 	// Remove all of the link expect for the text in [[text<url>]]
 	return str.replace(/\[\[(?:([^<]*)\s*<[^>]+>|([^\]]+))\]\]/g, (match, $1, $2) => $1 || $2 || '');
