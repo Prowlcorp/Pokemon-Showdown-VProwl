@@ -16,7 +16,6 @@ import {RandomPlayerAI} from '../tools/random-player-ai';
 /*********************************************************************
  * Run AI
  *********************************************************************/
-// tslint:disable:no-floating-promises
 
 const streams = getPlayerStreams(new BattleStream());
 
@@ -38,17 +37,15 @@ const p2 = new RandomPlayerAI(streams.p2);
 console.log("p1 is " + p1.constructor.name);
 console.log("p2 is " + p2.constructor.name);
 
-p1.start();
-p2.start();
+void p1.start();
+void p2.start();
 
-(async () => {
-	let chunk;
-	// tslint:disable-next-line no-conditional-assignment
-	while ((chunk = await streams.omniscient.read())) {
+void (async () => {
+	for await (const chunk of streams.omniscient) {
 		console.log(chunk);
 	}
 })();
 
-streams.omniscient.write(`>start ${JSON.stringify(spec)}
+void streams.omniscient.write(`>start ${JSON.stringify(spec)}
 >player p1 ${JSON.stringify(p1spec)}
 >player p2 ${JSON.stringify(p2spec)}`);

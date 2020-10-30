@@ -3,13 +3,14 @@ Simulator
 
 Pokémon Showdown's simulator API is implemented as a `ReadWriteStream`. You write player choices to it, and you read protocol messages from it.
 
+`npm install pokemon-showdown`
+
 ```js
-const Sim = require('Pokemon-Showdown/sim');
+const Sim = require('pokemon-showdown');
 stream = new Sim.BattleStream();
 
 (async () => {
-    let output;
-    while ((output = await stream.read())) {
+    for await (const output of stream) {
         console.log(output);
     }
 })();
@@ -19,7 +20,9 @@ stream.write(`>player p1 {"name":"Alice"}`);
 stream.write(`>player p2 {"name":"Bob"}`);
 ```
 
-The stream can be accessed from other programming languages using standard IO:
+The stream can also be accessed from other programming languages using standard IO.
+
+In this case, you would clone the repository, and then run:
 
 ```bash
 echo '>start {"formatid":"gen7randombattle"}
@@ -103,7 +106,7 @@ Sets player information:
 
 Makes a choice for a player. [Possible choices are documented in `SIM-PROTOCOL.md`][possible-choices].
 
-  [possible-choices]: https://github.com/Zarel/Pokemon-Showdown/blob/master/sim/SIM-PROTOCOL.md#possible-choices
+  [possible-choices]: https://github.com/smogon/pokemon-showdown/blob/master/sim/SIM-PROTOCOL.md#possible-choices
 
 
 Reading from the simulator
@@ -111,7 +114,9 @@ Reading from the simulator
 
 The simulator will send back messages. In a data stream, they're delimited by `\n\n`. In an object stream, they will just be sent as separate strings.
 
-Messages start with a message type followed by `\n`. A message will never have two `\n` in a row, so that `\n\n` always delimits a  They look like:
+Messages start with a message type followed by `\n`. A message will never have two `\n` in a row, so that `\n\n` unambiguously separates messages.
+
+A message looks like:
 
     update
     MESSAGES
@@ -120,7 +125,7 @@ An update which should be sent to all players and spectators.
 
 [The messages the simulator sends back are documented in `SIM-PROTOCOL.md`][sim-protocol]. You can also look at a replay log for examples.
 
-  [sim-protocol]: https://github.com/Zarel/Pokemon-Showdown/blob/master/sim/SIM-PROTOCOL.md
+  [sim-protocol]: https://github.com/smogon/pokemon-showdown/blob/master/sim/SIM-PROTOCOL.md
 
 One message type that only appears here is `|split|PLAYERID`:
 
@@ -144,7 +149,7 @@ Note that choice requests (updates telling the player what choices they have for
 
 [Choice requests are documented in "Choice requests" in `SIM-PROTOCOL.md`][choice-requests].
 
-  [choice-requests]: https://github.com/Zarel/Pokemon-Showdown/blob/master/sim/SIM-PROTOCOL.md#choice-requests
+  [choice-requests]: https://github.com/smogon/pokemon-showdown/blob/master/sim/SIM-PROTOCOL.md#choice-requests
 
     end
     LOGDATA
