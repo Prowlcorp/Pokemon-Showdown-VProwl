@@ -40,8 +40,6 @@ export interface MoveAction {
 	mega: boolean | 'done';
 	/** if zmoving, the name of the zmove */
 	zmove?: string;
-	/** if dynamaxed, the name of the max move */
-	maxMove?: string;
 	/** effect that called the move (eg Instruct) if any */
 	sourceEffect?: Effect | null;
 }
@@ -92,7 +90,7 @@ export interface FieldAction {
 /** A generic action done by a single pokemon */
 export interface PokemonAction {
 	/** action type */
-	choice: 'megaEvo' | 'shift' | 'runPrimal' | 'runSwitch' | 'event' | 'runUnnerve' | 'runDynamax';
+	choice: 'megaEvo' | 'shift' | 'runPrimal' | 'runSwitch' | 'event' | 'runUnnerve';
 	/** priority of the action (lower first) */
 	priority: number;
 	/** speed of pokemon doing action (higher first if priority tie) */
@@ -178,7 +176,6 @@ export class BattleQueue {
 				runPrimal: 102,
 				switch: 103,
 				megaEvo: 104,
-				runDynamax: 105,
 
 				shift: 200,
 				// default is 200 (for moves)
@@ -196,7 +193,7 @@ export class BattleQueue {
 		}
 		if (!midTurn) {
 			if (action.choice === 'move') {
-				if (!action.maxMove && !action.zmove && action.move.beforeTurnCallback) {
+				if (!action.zmove && action.move.beforeTurnCallback) {
 					actions.unshift(...this.resolveAction({
 						choice: 'beforeTurnMove', pokemon: action.pokemon, move: action.move, targetLoc: action.targetLoc,
 					}));
@@ -206,12 +203,6 @@ export class BattleQueue {
 					// (This is currently being done in `runMegaEvo`).
 					actions.unshift(...this.resolveAction({
 						choice: 'megaEvo',
-						pokemon: action.pokemon,
-					}));
-				}
-				if (action.maxMove && !action.pokemon.volatiles['dynamax']) {
-					actions.unshift(...this.resolveAction({
-						choice: 'runDynamax',
 						pokemon: action.pokemon,
 					}));
 				}

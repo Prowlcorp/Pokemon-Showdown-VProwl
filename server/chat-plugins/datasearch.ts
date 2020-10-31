@@ -14,8 +14,6 @@ import {TeamValidator} from '../../sim/team-validator';
 
 interface DexOrGroup {
 	abilities: {[k: string]: boolean};
-	tiers: {[k: string]: boolean};
-	doublesTiers: {[k: string]: boolean};
 	colors: {[k: string]: boolean};
 	'egg groups': {[k: string]: boolean};
 	formes: {[k: string]: boolean};
@@ -126,17 +124,15 @@ export const commands: ChatCommands = {
 	dexsearchhelp() {
 		this.sendReplyBox(
 			`<code>/dexsearch [parameter], [parameter], [parameter], ...</code>: searches for Pok\u00e9mon that fulfill the selected criteria<br/>` +
-			`Search categories are: type, tier, color, moves, ability, gen, resists, recovery, zrecovery, priority, stat, weight, height, egg group.<br/>` +
+			`Search categories are: type, color, moves, ability, gen, resists, recovery, zrecovery, priority, stat, weight, height, egg group.<br/>` +
 			`Valid colors are: green, red, blue, white, brown, yellow, purple, pink, gray and black.<br/>` +
-			`Valid tiers are: Uber/OU/UUBL/UU/RUBL/RU/NUBL/NU/PUBL/PU/ZU/NFE/LC Uber/LC/CAP/CAP NFE/CAP LC.<br/>` +
-			`Valid doubles tiers are: DUber/DOU/DBL/DUU/DNU.<br/>` +
 			`Types can be searched for by either having the type precede <code>type</code> or just using the type itself as a parameter; e.g., both <code>fire type</code> and <code>fire</code> show all Fire types; however, using <code>psychic</code> as a parameter will show all Pok\u00e9mon that learn the move Psychic and not Psychic types.<br/>` +
 			`<code>resists</code> followed by a type will show Pok\u00e9mon that resist that typing (e.g. <code>resists normal</code>).<br/>` +
 			`<code>weak</code> followed by a type will show Pok\u00e9mon that are weak to that typing (e.g. <code>weak fire</code>).<br/>` +
 			`<code>asc</code> or <code>desc</code> following a stat will show the Pok\u00e9mon in ascending or descending order of that stat respectively (e.g. <code>speed asc</code>).<br/>` +
 			`Inequality ranges use the characters <code>>=</code> for <code>≥</code> and <code><=</code> for <code>≤</code>; e.g., <code>hp <= 95</code> searches all Pok\u00e9mon with HP less than or equal to 95.<br/>` +
 			`Parameters can be excluded through the use of <code>!</code>; e.g., <code>!water type</code> excludes all Water types.<br/>` +
-			`The parameter <code>mega</code> can be added to search for Mega Evolutions only, the parameter <code>gmax</code> can be added to search for Pokemon capable of Gigantamaxing only, and the parameter <code>Fully Evolved</code> (or <code>FE</code>) can be added to search for fully-evolved Pok\u00e9mon.<br/>` +
+			`The parameter <code>mega</code> can be added to search for Mega Evolutions only, and the parameter <code>Fully Evolved</code> (or <code>FE</code>) can be added to search for fully-evolved Pok\u00e9mon.<br/>` +
 			`<code>Alola</code>, <code>Galar</code>, <code>Therian</code>, <code>Totem</code>, or <code>Primal</code> can be used as parameters to search for those formes.<br/>` +
 			`Parameters separated with <code>|</code> will be searched as alternatives for each other; e.g., <code>trick | switcheroo</code> searches for all Pok\u00e9mon that learn either Trick or Switcheroo.<br/>` +
 			`You can search for info in a specific generation by appending the generation to ds or by using the <code>maxgen</code> keyword; e.g. <code>/ds1 normal</code> or <code>/ds normal, maxgen1</code> searches for all Pok\u00e9mon that were Normal type in Generation I.<br/>` +
@@ -284,10 +280,9 @@ export const commands: ChatCommands = {
 			`Inequality ranges use the characters <code>></code> and <code><</code>.<br/>` +
 			`Parameters can be excluded through the use of <code>!</code>; e.g., <code>!water type</code> excludes all Water-type moves.<br/>` +
 			`<code>asc</code> or <code>desc</code> following a move property will arrange the names in ascending or descending order of that property, respectively; e.g., <code>basepower asc</code> will arrange moves in ascending order of their base powers.<br/>` +
-			`Valid flags are: authentic (bypasses substitute), bite, bullet, charge, contact, dance, defrost, gravity, mirror (reflected by mirror move), ohko, powder, priority, protect, pulse, punch, recharge, recovery, reflectable, secondary, snatch, sound, and zmove.<br/>` +
+			`Valid flags are: authentic (bypasses substitute), bite, bullet, charge, contact, dance, defrost, gravity, mirror (reflected by mirror move), ohko, powder, priority, protect, pulse, punch, recharge, recovery, reflectable, secondary, snatch, sound, sword, and zmove.<br/>` +
 			`A search that includes <code>!protect</code> will show all moves that bypass protection.<br/>` +
 			`<code>protection</code> as a parameter will search protection moves like Protect, Detect, etc.<br/>` +
-			`<code>max</code> or <code>gmax</code> as parameters will search for Max Moves and G-Max moves respectively.<br/>` +
 			`Parameters separated with <code>|</code> will be searched as alternatives for each other; e.g., <code>fire | water</code> searches for all moves that are either Fire type or Water type.<br/>` +
 			`If a Pok\u00e9mon is included as a parameter, only moves from its movepool will be included in the search.<br/>` +
 			`You can search for info in a specific generation by appending the generation to ms; e.g. <code>ms1 normal</code> searches for all moves that were Normal type in Generation I.<br/>` +
@@ -421,24 +416,6 @@ export const commands: ChatCommands = {
 
 function runDexsearch(target: string, cmd: string, canAll: boolean, message: string) {
 	const searches: DexOrGroup[] = [];
-	const allTiers: {[k: string]: TierTypes.Singles | TierTypes.Other} = Object.assign(Object.create(null), {
-		anythinggoes: 'AG', ag: 'AG',
-		uber: 'Uber', ubers: 'Uber', ou: 'OU',
-		uubl: 'UUBL', uu: 'UU',
-		rubl: 'RUBL', ru: 'RU',
-		nubl: 'NUBL', nu: 'NU', untiered: '(NU)',
-		publ: 'PUBL', pu: 'PU', zu: '(PU)',
-		nfe: 'NFE',
-		lcuber: 'LC Uber', lcubers: 'LC Uber', lc: 'LC',
-		cap: 'CAP', caplc: 'CAP LC', capnfe: 'CAP NFE',
-	});
-	const allDoublesTiers: {[k: string]: TierTypes.Singles | TierTypes.Other} = Object.assign(Object.create(null), {
-		doublesubers: 'DUber', doublesuber: 'DUber', duber: 'DUber', dubers: 'DUber',
-		doublesou: 'DOU', dou: 'DOU',
-		doublesbl: 'DBL', dbl: 'DBL',
-		doublesuu: 'DUU', duu: 'DUU',
-		doublesnu: '(DUU)', dnu: '(DUU)',
-	});
 	const allTypes = Object.create(null);
 	for (const i in Dex.data.TypeChart) {
 		allTypes[toID(i)] = i;
@@ -470,9 +447,6 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 	let showAll = false;
 	let sort = null;
 	let megaSearch = null;
-	let gmaxSearch = null;
-	let tierSearch = null;
-	let capSearch = null;
 	let nationalSearch = null;
 	let fullyEvolvedSearch = null;
 	let singleTypeSearch = null;
@@ -502,7 +476,7 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 
 	for (const andGroup of target.split(',')) {
 		const orGroup: DexOrGroup = {
-			abilities: {}, tiers: {}, doublesTiers: {}, colors: {}, 'egg groups': {}, formes: {},
+			abilities: {}, colors: {}, 'egg groups': {}, formes: {},
 			gens: {}, moves: {}, types: {}, resists: {}, weak: {}, stats: {}, skip: false,
 		};
 		const parameters = andGroup.split("|");
@@ -520,28 +494,6 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 				const invalid = validParameter("abilities", targetAbility.id, isNotSearch, targetAbility.name);
 				if (invalid) return {error: invalid};
 				orGroup.abilities[targetAbility.name] = !isNotSearch;
-				continue;
-			}
-
-			if (toID(target) in allTiers) {
-				target = allTiers[toID(target)];
-				if (target.startsWith("CAP")) {
-					if (capSearch === isNotSearch) return {error: "A search cannot both include and exclude CAP tiers."};
-					capSearch = !isNotSearch;
-				}
-				const invalid = validParameter("tiers", target, isNotSearch, target);
-				if (invalid) return {error: invalid};
-				tierSearch = tierSearch || !isNotSearch;
-				orGroup.tiers[target] = !isNotSearch;
-				continue;
-			}
-
-			if (toID(target) in allDoublesTiers) {
-				target = allDoublesTiers[toID(target)];
-				const invalid = validParameter("doubles tiers", target, isNotSearch, target);
-				if (invalid) return {error: invalid};
-				tierSearch = tierSearch || !isNotSearch;
-				orGroup.doublesTiers[target] = !isNotSearch;
 				continue;
 			}
 
@@ -666,14 +618,6 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 				if (megaSearch === isNotSearch) return {error: "A search cannot include and exclude 'mega'."};
 				if (parameters.length > 1) return {error: "The parameter 'mega' cannot have alternative parameters"};
 				megaSearch = !isNotSearch;
-				orGroup.skip = true;
-				break;
-			}
-
-			if (target === 'gmax' || target === 'gigantamax') {
-				if (gmaxSearch === isNotSearch) return {error: "A search cannot include and exclude 'gigantamax'."};
-				if (parameters.length > 1) return {error: "The parameter 'gigantamax' cannot have alternative parameters"};
-				gmaxSearch = !isNotSearch;
 				orGroup.skip = true;
 				break;
 			}
@@ -819,7 +763,7 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 	}
 	if (
 		showAll && searches.length === 0 && !maxGen && singleTypeSearch === null &&
-		megaSearch === null && gmaxSearch === null && fullyEvolvedSearch === null && sort === null
+		megaSearch === null && fullyEvolvedSearch === null && sort === null
 	) {
 		return {
 			error: "No search parameters other than 'all' were found. Try '/help dexsearch' for more information on this command.",
@@ -835,10 +779,6 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 			megaSearch === null || (megaSearch === true && species.isMega) ||
 			(megaSearch === false && !species.isMega)
 		);
-		const gmaxSearchResult = (
-			gmaxSearch === null || (gmaxSearch === true && species.name.endsWith('-Gmax')) ||
-			(gmaxSearch === false && !species.name.endsWith('-Gmax'))
-		);
 		const fullyEvolvedSearchResult = (
 			fullyEvolvedSearch === null ||
 			(fullyEvolvedSearch === true && !species.nfe) ||
@@ -846,17 +786,7 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 		);
 		if (
 			species.gen <= maxGen &&
-			(
-				(
-					nationalSearch &&
-					species.isNonstandard &&
-					!["Custom", "Glitch", "Pokestar"].includes(species.isNonstandard)
-				) ||
-				(species.tier !== 'Unreleased' && species.tier !== 'Illegal')
-			) &&
-			(!species.tier.startsWith("CAP") || capSearch) &&
 			megaSearchResult &&
-			gmaxSearchResult &&
 			fullyEvolvedSearchResult
 		) {
 			dex[pokemon] = species;
@@ -889,43 +819,6 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 					matched = true;
 					break;
 				}
-			}
-
-			if (alts.tiers && Object.keys(alts.tiers).length) {
-				let tier = dex[mon].tier;
-				if (tier.startsWith('(') && tier !== '(PU)' && tier !== '(NU)') tier = tier.slice(1, -1) as TierTypes.Singles;
-				// if (tier === 'New') tier = 'OU';
-				if (alts.tiers[tier]) continue;
-				if (Object.values(alts.tiers).includes(false) && alts.tiers[tier] !== false) continue;
-				// LC handling, checks for LC Pokemon in higher tiers that need to be handled separately,
-				// as well as event-only Pokemon that are not eligible for LC despite being the first stage
-				let format = Dex.getFormat('gen' + maxGen + 'lc');
-				if (!format.exists) format = Dex.getFormat('gen8lc');
-				if (
-					alts.tiers.LC &&
-					!dex[mon].prevo &&
-					dex[mon].evos.some(evo => mod.getSpecies(evo).gen <= mod.gen) &&
-					!format.banlist.includes(dex[mon].name) &&
-					!format.banlist.includes(dex[mon].name + "-Base")
-				) {
-					const lsetData = Dex.getLearnsetData(dex[mon].id);
-					if (lsetData.exists && lsetData.eventData && lsetData.eventOnly) {
-						let validEvents = 0;
-						for (const event of lsetData.eventData) {
-							if (event.level && event.level <= 5) validEvents++;
-						}
-						if (validEvents > 0) continue;
-					} else {
-						continue;
-					}
-				}
-			}
-
-			if (alts.doublesTiers && Object.keys(alts.doublesTiers).length) {
-				let tier = dex[mon].doublesTier;
-				if (tier && tier.startsWith('(') && tier !== '(DUU)') tier = tier.slice(1, -1) as TierTypes.Doubles;
-				if (alts.doublesTiers[tier]) continue;
-				if (Object.values(alts.doublesTiers).includes(false) && alts.doublesTiers[tier] !== false) continue;
 			}
 
 			for (const type in alts.types) {
@@ -1028,9 +921,7 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 	for (const mon of Object.keys(dex).sort()) {
 		if (singleTypeSearch !== null && (dex[mon].types.length === 1) !== singleTypeSearch) continue;
 		const isRegionalForm = (dex[mon].forme === "Galar" || dex[mon].forme === "Alola") && dex[mon].name !== "Pikachu-Alola";
-		const allowGmax = (gmaxSearch || tierSearch);
 		if (!isRegionalForm && dex[mon].baseSpecies && results.includes(dex[mon].baseSpecies)) continue;
-		if (dex[mon].isNonstandard === 'Gigantamax' && !allowGmax) continue;
 		results.push(dex[mon].name);
 	}
 
@@ -1092,14 +983,13 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 function runMovesearch(target: string, cmd: string, canAll: boolean, message: string) {
 	const searches: MoveOrGroup[] = [];
 	const allCategories = ['physical', 'special', 'status'];
-	const allContestTypes = ['beautiful', 'clever', 'cool', 'cute', 'tough'];
 	const allProperties = ['basePower', 'accuracy', 'priority', 'pp'];
 	const allFlags = [
 		'authentic', 'bite', 'bullet', 'charge', 'contact', 'dance', 'defrost', 'gravity', 'highcrit', 'mirror',
 		'ohko', 'powder', 'protect', 'pulse', 'punch', 'recharge', 'reflectable', 'secondary',
-		'snatch', 'sound', 'zmove', 'maxmove', 'gmaxmove', 'protection',
+		'snatch', 'sound', 'sword', 'zmove', 'protection',
 	];
-	const allStatus = ['psn', 'tox', 'brn', 'par', 'frz', 'slp'];
+	const allStatus = ['psn', 'tox', 'brn', 'par', 'frz', 'slp', 'bld'];
 	const allVolatileStatus = ['flinch', 'confusion', 'partiallytrapped'];
 	const allBoosts = ['hp', 'atk', 'def', 'spa', 'spd', 'spe', 'accuracy', 'evasion'];
 	const allTargets: {[k: string]: string} = {
@@ -1204,8 +1094,6 @@ function runMovesearch(target: string, cmd: string, canAll: boolean, message: st
 
 			if (target === 'bypassessubstitute') target = 'authentic';
 			if (target === 'z') target = 'zmove';
-			if (target === 'max') target = 'maxmove';
-			if (target === 'gmax') target = 'gmaxmove';
 			if (target === 'crit' || toID(target) === 'highcrit') target = 'highcrit';
 			if (allFlags.includes(target)) {
 				if ((orGroup.flags[target] && isNotSearch) || (orGroup.flags[target] === false && !isNotSearch)) {
@@ -1443,6 +1331,7 @@ function runMovesearch(target: string, cmd: string, canAll: boolean, message: st
 			case 'paralyze': target = 'par'; break;
 			case 'freeze': target = 'frz'; break;
 			case 'sleep': target = 'slp'; break;
+			case 'bleed': target = 'bld'; break;
 			case 'confuse': target = 'confusion'; break;
 			case 'trap': target = 'partiallytrapped'; break;
 			case 'flinche': target = 'flinch'; break;
@@ -1531,14 +1420,7 @@ function runMovesearch(target: string, cmd: string, canAll: boolean, message: st
 	for (const moveid of validMoves) {
 		const move = mod.getMove(moveid);
 		if (move.gen <= maxGen) {
-			if (
-				(!nationalSearch && move.isNonstandard && move.isNonstandard !== "Gigantamax") ||
-				(nationalSearch && move.isNonstandard && !["Gigantamax", "Past"].includes(move.isNonstandard))
-			) {
-				continue;
-			} else {
-				dex[moveid] = move;
-			}
+			dex[moveid] = move;
 		}
 	}
 
@@ -1584,16 +1466,6 @@ function runMovesearch(target: string, cmd: string, canAll: boolean, message: st
 				} else if (flag === 'highcrit') {
 					const crit = move.willCrit || (move.critRatio && move.critRatio > 1);
 					if (!crit === !alts.flags[flag]) {
-						matched = true;
-						break;
-					}
-				} else if (flag === 'maxmove') {
-					if (!(typeof move.isMax === 'boolean' && move.isMax) === !alts.flags[flag]) {
-						matched = true;
-						break;
-					}
-				} else if (flag === 'gmaxmove') {
-					if (!(typeof move.isMax === 'string') === !alts.flags[flag]) {
 						matched = true;
 						break;
 					}

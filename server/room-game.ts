@@ -3,8 +3,8 @@
  * Pokemon Showdown - http://pokemonshowdown.com/
  *
  * Room games are an abstract representation of an activity that a room
- * can be focused on, such as a battle, tournament, or chat game like
- * Hangman. Rooms are limited to one roomgame at a time.
+ * can be focused on, such as a battle or tournament.
+ * Rooms are limited to one roomgame at a time.
  *
  * Room games can keep track of designated players. If a user is a player,
  * they will not be allowed to change name until their games are complete.

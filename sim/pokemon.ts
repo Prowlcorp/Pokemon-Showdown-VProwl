@@ -44,7 +44,6 @@ export class Pokemon {
 	readonly gender: GenderName;
 	readonly happiness: number;
 	readonly pokeball: string;
-	readonly gigantamax: boolean;
 
 	/** Transform keeps the original pre-transformed Hidden Power in Gen 2-4. */
 	readonly baseHpType: string;
@@ -109,7 +108,7 @@ export class Pokemon {
 	transformed: boolean;
 
 	maxhp: number;
-	/** This is the max HP before Dynamaxing; it's updated for Power Construct etc */
+	/** This is the max HP; it's updated for Power Construct etc */
 	baseMaxhp: number;
 	hp: number;
 	fainted: boolean;
@@ -224,8 +223,6 @@ export class Pokemon {
 
 	canMegaEvo: string | null | undefined;
 	canUltraBurst: string | null | undefined;
-	canDynamax: boolean;
-	readonly canGigantamax: string | null;
 
 	/** A Pokemon's currently 'staleness' with respect to the Endless Battle Clause. */
 	staleness?: 'internal' | 'external';
@@ -278,7 +275,6 @@ export class Pokemon {
 		if (this.gender === 'N') this.gender = '';
 		this.happiness = typeof set.happiness === 'number' ? this.battle.clampIntRange(set.happiness, 0, 255) : 255;
 		this.pokeball = this.set.pokeball || 'pokeball';
-		this.gigantamax = this.set.gigantamax || false;
 
 		this.baseMoveSlots = [];
 		this.moveSlots = [];
@@ -330,12 +326,6 @@ export class Pokemon {
 		}
 		for (stat in this.set.ivs) {
 			this.set.ivs[stat] = this.battle.clampIntRange(this.set.ivs[stat], 0, 31);
-		}
-		if (this.battle.gen && this.battle.gen <= 2) {
-			// We represent DVs using even IVs. Ensure they are in fact even.
-			for (stat in this.set.ivs) {
-				this.set.ivs[stat] &= 30;
-			}
 		}
 
 		const hpData = this.battle.dex.getHiddenPower(this.set.ivs);
@@ -405,13 +395,6 @@ export class Pokemon {
 
 		this.canMegaEvo = this.battle.canMegaEvo(this);
 		this.canUltraBurst = this.battle.canUltraBurst(this);
-		// Normally would want to use battle.canDynamax to set this, but it references this property.
-		this.canDynamax = (this.battle.gen >= 8);
-		this.canGigantamax = this.baseSpecies.canGigantamax || null;
-
-		// This is used in gen 1 only, here to avoid code repetition.
-		// Only declared if gen 1 to avoid declaring an object we aren't going to need.
-		if (this.battle.gen === 1) this.modifiedStats = {atk: 0, def: 0, spa: 0, spd: 0, spe: 0};
 
 		this.maxhp = 0;
 		this.baseMaxhp = 0;
@@ -544,21 +527,6 @@ export class Pokemon {
 		return this.battle.trunc(speed, 13);
 	}
 
-	/* Commented out for now until a use for Combat Power is found in Let's Go
-	getCombatPower() {
-		let statSum = 0;
-		let awakeningSum = 0;
-		for (const stat in this.stats) {
-			statSum += this.calculateStat(stat, this.boosts[stat as BoostName]);
-			awakeningSum += this.calculateStat(
-				stat, this.boosts[stat as BoostName]) + this.set.evs[stat];
-		}
-		const combatPower = Math.floor(Math.floor(statSum * this.level * 6 / 100) +
-			(Math.floor(awakeningSum) * Math.floor((this.level * 4) / 100 + 2)));
-		return this.battle.clampIntRange(combatPower, 0, 10000);
-	}
-	*/
-
 	getWeight() {
 		const weighthg = this.battle.runEvent('ModifyWeight', this, null, null, this.weighthg);
 		return Math.max(1, weighthg);
@@ -614,14 +582,6 @@ export class Pokemon {
 
 	nearbyFoes(): Pokemon[] {
 		return this.foes().filter(foe => this.battle.isAdjacent(this, foe));
-	}
-
-	getUndynamaxedHP(amount?: number) {
-		const hp = amount || this.hp;
-		if (this.volatiles['dynamax']) {
-			return Math.ceil(hp * this.baseMaxhp / this.maxhp);
-		}
-		return hp;
 	}
 
 	/** Get targets for Dragon Darts */
@@ -779,7 +739,7 @@ export class Pokemon {
 
 	/**
 	 * This refers to multi-turn moves like SolarBeam and Outrage and
-	 * Sky Drop, which remove all choice (no dynamax, switching, etc).
+	 * Sky Drop, which remove all choice (no switching, etc).
 	 * Don't use it for "soft locks" like Choice Band.
 	 */
 	getLockedMove(): string | null {
@@ -831,9 +791,7 @@ export class Pokemon {
 				}
 			}
 			let disabled = moveSlot.disabled;
-			if (this.volatiles['dynamax']) {
-				disabled = this.maxMoveDisabled(this.battle.dex.getMove(moveSlot.id));
-			} else if (
+			if (
 				(moveSlot.pp <= 0 && !this.volatiles['partialtrappinglock']) || disabled &&
 				this.side.active.length >= 2 && this.battle.targetTypeChoices(target!)
 			) {
@@ -858,42 +816,6 @@ export class Pokemon {
 		return hasValidMove ? moves : [];
 	}
 
-	maxMoveDisabled(move: Move) {
-		return !!(move.category === 'Status' && (this.hasItem('assaultvest') || this.volatiles['taunt']));
-	}
-
-	getDynamaxRequest(skipChecks?: boolean) {
-		// {gigantamax?: string, maxMoves: {[k: string]: string} | null}[]
-		if (!skipChecks) {
-			if (!this.canDynamax) return;
-			if (
-				this.species.isMega || this.species.isPrimal || this.species.forme === "Ultra" ||
-				this.getItem().zMove || this.canMegaEvo
-			) {
-				return;
-			}
-			// Some pokemon species are unable to dynamax
-			if (this.species.cannotDynamax || this.illusion?.species.cannotDynamax) return;
-		}
-		const result: DynamaxOptions = {maxMoves: []};
-		let atLeastOne = false;
-		for (const moveSlot of this.moveSlots) {
-			const move = this.battle.dex.getMove(moveSlot.id);
-			const maxMove = this.battle.getMaxMove(move, this);
-			if (maxMove) {
-				if (this.maxMoveDisabled(maxMove)) {
-					result.maxMoves.push({move: maxMove.id, target: maxMove.target, disabled: true});
-				} else {
-					result.maxMoves.push({move: maxMove.id, target: maxMove.target});
-					atLeastOne = true;
-				}
-			}
-		}
-		if (!atLeastOne) return;
-		if (this.canGigantamax) result.gigantamax = this.canGigantamax;
-		return result;
-	}
-
 	getMoveRequestData() {
 		let lockedMove = this.getLockedMove();
 
@@ -915,8 +837,6 @@ export class Pokemon {
 			canMegaEvo?: boolean,
 			canUltraBurst?: boolean,
 			canZMove?: AnyObject | null,
-			canDynamax?: boolean,
-			maxMoves?: DynamaxOptions,
 		} = {
 			moves,
 		};
@@ -942,9 +862,6 @@ export class Pokemon {
 			if (this.canUltraBurst) data.canUltraBurst = true;
 			const canZMove = this.battle.canZMove(this);
 			if (canZMove) data.canZMove = canZMove;
-
-			if (this.getDynamaxRequest()) data.canDynamax = true;
-			if (data.canDynamax || this.volatiles['dynamax']) data.maxMoves = this.getDynamaxRequest(true);
 		}
 
 		return data;
@@ -1057,8 +974,7 @@ export class Pokemon {
 	transformInto(pokemon: Pokemon, effect?: Effect) {
 		const species = pokemon.species;
 		if (pokemon.fainted || pokemon.illusion || (pokemon.volatiles['substitute'] && this.battle.gen >= 5) ||
-			(pokemon.transformed && this.battle.gen >= 2) || (this.transformed && this.battle.gen >= 5) ||
-			species.name === 'Eternatus-Eternamax') {
+			(pokemon.transformed && this.battle.gen >= 2) || (this.transformed && this.battle.gen >= 5)) {
 			return false;
 		}
 
@@ -1102,11 +1018,10 @@ export class Pokemon {
 			this.boosts[boostName] = pokemon.boosts[boostName]!;
 		}
 		if (this.battle.gen >= 6) {
-			const volatilesToCopy = ['focusenergy', 'gmaxchistrike', 'laserfocus'];
+			const volatilesToCopy = ['focusenergy', 'laserfocus'];
 			for (const volatile of volatilesToCopy) {
 				if (pokemon.volatiles[volatile]) {
 					this.addVolatile(volatile);
-					if (volatile === 'gmaxchistrike') this.volatiles[volatile].layers = pokemon.volatiles[volatile].layers;
 				} else {
 					this.removeVolatile(volatile);
 				}
@@ -1272,11 +1187,7 @@ export class Pokemon {
 				this.removeLinkedVolatiles(this.volatiles[i].linkedStatus, this.volatiles[i].linkedPokemon);
 			}
 		}
-		if (this.species.name === 'Eternatus-Eternamax' && this.volatiles['dynamax']) {
-			this.volatiles = {dynamax: this.volatiles['dynamax']};
-		} else {
-			this.volatiles = {};
-		}
+		this.volatiles = {};
 		if (includeSwitchFlags) {
 			this.switchFlag = false;
 			this.forceSwitchFlag = false;
@@ -1860,7 +1771,7 @@ export class Pokemon {
 	/** Specifically: is protected against a single-target damaging move */
 	isProtected() {
 		return !!(
-			this.volatiles['protect'] || this.volatiles['detect'] || this.volatiles['maxguard'] ||
+			this.volatiles['protect'] || this.volatiles['detect'] ||
 			this.volatiles['kingsshield'] || this.volatiles['spikyshield'] || this.volatiles['banefulbunker'] ||
 			this.volatiles['obstruct']
 		);

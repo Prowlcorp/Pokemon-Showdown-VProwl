@@ -28,7 +28,6 @@ type SparseStatsTable = Partial<StatsTable>;
 type BoostName = StatNameExceptHP | 'accuracy' | 'evasion';
 type BoostsTable = {[boost in BoostName]: number };
 type SparseBoostsTable = Partial<BoostsTable>;
-type Nonstandard = 'Past' | 'Future' | 'Unobtainable' | 'CAP' | 'LGPE' | 'Custom' | 'Gigantamax';
 /**
  * Describes the acceptable target(s) of a move.
  * adjacentAlly - Only relevant to Doubles or Triples, the move only targets an ally of the user.
@@ -66,7 +65,6 @@ interface PokemonSet {
 	happiness?: number;
 	pokeball?: string;
 	hpType?: string;
-	gigantamax?: boolean;
 }
 
 /**
@@ -82,7 +80,6 @@ interface PokemonSet {
  * - E = egg
  * - D = Dream World, only 5D is valid
  * - S = event, 3rd char+ is the index in .eventData
- * - V = Virtual Console or Let's Go transfer, only 7V/8V is valid
  * - C = NOT A REAL SOURCE, see note, only 3C/4C is valid
  *
  * C marks certain moves learned by a pokemon's prevo. It's used to
@@ -92,13 +89,6 @@ interface PokemonSet {
  * check prevos for compatibility).
  */
 type MoveSource = string;
-
-namespace TierTypes {
-	export type Singles = "AG" | "Uber" | "(Uber)" | "OU" | "(OU)" | "UUBL" | "UU" | "RUBL" | "RU" | "NUBL" | "NU" |
-	"(NU)" | "PUBL" | "PU" | "(PU)" | "NFE" | "LC Uber" | "LC";
-	export type Doubles = "DUber" | "(DUber)" | "DOU" | "(DOU)" | "DBL" | "DUU" | "(DUU)" | "NFE" | "LC Uber" | "LC";
-	export type Other = "Unreleased" | "Illegal" | "CAP" | "CAP NFE" | "CAP LC";
-}
 
 interface EventInfo {
 	generation: number;
@@ -788,7 +778,6 @@ interface EffectData {
 	durationCallback?: (this: Battle, target: Pokemon, source: Pokemon, effect: Effect | null) => number;
 	effectType?: string;
 	infiltrates?: boolean;
-	isNonstandard?: Nonstandard | null;
 	shortDesc?: string;
 }
 
@@ -932,7 +921,6 @@ interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	realMove?: string;
 
 	damage?: number | 'level' | false | null;
-	contestType?: string;
 	noPPBoosts?: boolean;
 
 	// Z-move data
@@ -946,17 +934,6 @@ interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 		basePower?: number,
 		effect?: string,
 		boost?: SparseBoostsTable,
-	};
-
-	// Max move data
-	// -------------
-	/**
-	 * `true` for Max moves like Max Airstream. If its a G-Max moves, this is
-	 * the species ID of the Gigantamax Pokemon that can use this G-Max move.
-	 */
-	isMax?: boolean | string;
-	maxMove?: {
-		basePower: number,
 	};
 
 	// Hit effects
@@ -1094,10 +1071,10 @@ interface ActiveMove extends BasicEffect, MoveData {
 	infiltrates?: boolean;
 
 	/**
-	 * Has this move been boosted by a Z-crystal or used by a Dynamax Pokemon? Usually the same as
-	 * `isZ` or `isMax`, but hacked moves will have this be `false` and `isZ` / `isMax` be truthy.
+	 * Has this move been boosted by a Z-crystal? Usually the same as
+	 * `isZ`, but hacked moves will have this be `false` and `isZ` be truthy.
 	 */
-	isZOrMaxPowered?: boolean;
+	isZPowered?: boolean;
 }
 
 interface SpeciesAbility {
@@ -1143,8 +1120,6 @@ interface SpeciesData {
 	requiredItems?: string[];
 	requiredMove?: string;
 	battleOnly?: string | string[];
-	canGigantamax?: string;
-	cannotDynamax?: boolean;
 	changesFrom?: string;
 	maleOnlyHidden?: boolean;
 	unreleasedHidden?: boolean | 'Past';
@@ -1154,17 +1129,13 @@ type ModdedSpeciesData = SpeciesData | Partial<Omit<SpeciesData, 'name'>> & {inh
 
 interface SpeciesFormatsData {
 	comboMoves?: readonly string[];
-	doublesTier?: TierTypes.Doubles | TierTypes.Other;
 	essentialMove?: string;
 	exclusiveMoves?: readonly string[];
-	gmaxUnreleased?: boolean;
-	isNonstandard?: Nonstandard | null;
 	randomBattleMoves?: readonly string[];
 	randomBattleLevel?: number;
 	randomDoubleBattleMoves?: readonly string[];
 	randomDoubleBattleLevel?: number;
 	randomSets?: readonly RandomTeamsTypes.Gen2RandomSet[];
-	tier?: TierTypes.Singles | TierTypes.Other;
 }
 
 type ModdedSpeciesFormatsData = SpeciesFormatsData & {inherit?: true};
@@ -1288,28 +1259,20 @@ interface Format extends Readonly<BasicEffect & FormatData> {
 type SpreadMoveTargets = (Pokemon | false | null)[];
 type SpreadMoveDamage = (number | boolean | undefined)[];
 type ZMoveOptions = ({move: string, target: MoveTarget} | null)[];
-interface DynamaxOptions {
-	maxMoves: ({move: string, target: MoveTarget, disabled?: boolean})[];
-	gigantamax?: string;
-}
 
 interface BattleScriptsData {
 	gen: number;
 	zMoveTable?: {[k: string]: string};
-	maxMoveTable?: {[k: string]: string};
 	afterMoveSecondaryEvent?: (this: Battle, targets: Pokemon[], pokemon: Pokemon, move: ActiveMove) => undefined;
 	calcRecoilDamage?: (this: Battle, damageDealt: number, move: Move) => number;
 	canMegaEvo?: (this: Battle, pokemon: Pokemon) => string | undefined | null;
 	canUltraBurst?: (this: Battle, pokemon: Pokemon) => string | null;
 	canZMove?: (this: Battle, pokemon: Pokemon) => ZMoveOptions | void;
-	canDynamax?: (this: Battle, pokemon: Pokemon, skipChecks?: boolean) => DynamaxOptions | void;
 	forceSwitch?: (
 		this: Battle, damage: SpreadMoveDamage, targets: SpreadMoveTargets, source: Pokemon,
 		move: ActiveMove, moveData: ActiveMove, isSecondary?: boolean, isSelf?: boolean
 	) => SpreadMoveDamage;
-	getActiveMaxMove?: (this: Battle, move: Move, pokemon: Pokemon) => ActiveMove;
 	getActiveZMove?: (this: Battle, move: Move, pokemon: Pokemon) => ActiveMove;
-	getMaxMove?: (this: Battle, move: Move, pokemon: Pokemon) => Move | undefined;
 	getSpreadDamage?: (
 		this: Battle, damage: SpreadMoveDamage, targets: SpreadMoveTargets, source: Pokemon,
 		move: ActiveMove, moveData: ActiveMove, isSecondary?: boolean, isSelf?: boolean
@@ -1332,7 +1295,7 @@ interface BattleScriptsData {
 	runMegaEvo?: (this: Battle, pokemon: Pokemon) => boolean;
 	runMove?: (
 		this: Battle, moveOrMoveName: Move | string, pokemon: Pokemon, targetLoc: number, sourceEffect?: Effect | null,
-		zMove?: string, externalMove?: boolean, maxMove?: string, originalTarget?: Pokemon
+		zMove?: string, externalMove?: boolean, originalTarget?: Pokemon
 	) => void;
 	runMoveEffects?: (
 		this: Battle, damage: SpreadMoveDamage, targets: SpreadMoveTargets, source: Pokemon,
@@ -1359,11 +1322,11 @@ interface BattleScriptsData {
 	trySpreadMoveHit?: (this: Battle, targets: Pokemon[], pokemon: Pokemon, move: ActiveMove) => boolean;
 	useMove?: (
 		this: Battle, move: Move, pokemon: Pokemon, target?: Pokemon | null,
-		sourceEffect?: Effect | null, zMove?: string, maxMove?: string
+		sourceEffect?: Effect | null, zMove?: string
 	) => boolean;
 	useMoveInner?: (
 		this: Battle, move: Move, pokemon: Pokemon, target?: Pokemon | null,
-		sourceEffect?: Effect | null, zMove?: string, maxMove?: string
+		sourceEffect?: Effect | null, zMove?: string
 	) => boolean;
 }
 
@@ -1440,7 +1403,7 @@ interface ModdedBattleScriptsData extends Partial<BattleScriptsData> {
 	natureModify?: (this: Battle, stats: StatsTable, set: PokemonSet) => StatsTable;
 	runMove?: (
 		this: Battle, moveOrMoveName: Move | string, pokemon: Pokemon, targetLoc: number, sourceEffect?: Effect | null,
-		zMove?: string, externalMove?: boolean, maxMove?: string, originalTarget?: Pokemon
+		zMove?: string, externalMove?: boolean, originalTarget?: Pokemon
 	) => void;
 	spreadModify?: (this: Battle, baseStats: StatsTable, set: PokemonSet) => StatsTable;
 	suppressingWeather?: (this: Battle) => boolean;
@@ -1458,7 +1421,6 @@ interface ModdedBattleScriptsData extends Partial<BattleScriptsData> {
 
 interface TypeData {
 	damageTaken: {[attackingTypeNameOrEffectid: string]: number};
-	HPdvs?: SparseStatsTable;
 	HPivs?: SparseStatsTable;
 }
 
@@ -1468,7 +1430,6 @@ interface TypeInfo extends Readonly<TypeData> {
 	readonly effectType: 'Type' | 'EffectType';
 	readonly exists: boolean;
 	readonly gen: number;
-	readonly HPdvs: SparseStatsTable;
 	readonly HPivs: SparseStatsTable;
 	readonly id: ID;
 	readonly name: string;
@@ -1526,7 +1487,6 @@ namespace RandomTeamsTypes {
 		shiny: boolean;
 		nature?: string;
 		happiness?: number;
-		gigantamax?: boolean;
 		moveset?: RandomTeamsTypes.RandomSet;
 		other?: {discard: boolean, restrictMoves: {[k: string]: number}};
 	}

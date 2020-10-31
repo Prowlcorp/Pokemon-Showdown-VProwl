@@ -211,19 +211,3 @@ export class PRNG {
 		] as PRNGSeed;
 	}
 }
-
-// The following commented-out function is designed to emulate the on-cartridge
-// PRNG for Gens 3 and 4, as described in
-// https://www.smogon.com/ingame/rng/pid_iv_creation#pokemon_random_number_generator
-// This RNG uses a 32-bit initial seed
-// m and n are converted to integers via Math.floor. If the result is NaN, they
-// are ignored.
-/*
-random(m: number, n: number) {
-	this.seed = (this.seed * 0x41C64E6D + 0x6073) >>> 0; // truncate the result to the last 32 bits
-	let result = this.seed >>> 16; // the first 16 bits of the seed are the random value
-	m = Math.floor(m)
-	n = Math.floor(n)
-	return (m ? (n ? (result % (n - m)) + m : result % m) : result / 0x10000)
-}
-*/

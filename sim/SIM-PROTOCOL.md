@@ -681,8 +681,6 @@ To be exact, `CHOICE` is one of:
 
 - `move MOVESPEC zmove`, to use a z-move version of a move
 
-- `move MOVESPEC max`, to Dynamax/Gigantamax and make a move
-
 - `switch SWITCHSPEC`, to make a switch
 
 `MOVESPEC` is:

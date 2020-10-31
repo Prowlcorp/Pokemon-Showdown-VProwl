@@ -436,46 +436,13 @@ export class ModdedDex {
 					if (!(key in species)) species[key] = baseSpeciesStatuses[key];
 				}
 			}
-			if (!species.tier && !species.doublesTier && species.baseSpecies !== species.name) {
-				if (species.baseSpecies === 'Mimikyu') {
-					species.tier = this.data.FormatsData[toID(species.baseSpecies)].tier || 'Illegal';
-					species.doublesTier = this.data.FormatsData[toID(species.baseSpecies)].doublesTier || 'Illegal';
-				} else if (species.id.endsWith('totem')) {
-					species.tier = this.data.FormatsData[species.id.slice(0, -5)].tier || 'Illegal';
-					species.doublesTier = this.data.FormatsData[species.id.slice(0, -5)].doublesTier || 'Illegal';
-				} else if (species.battleOnly) {
-					species.tier = this.data.FormatsData[toID(species.battleOnly)].tier || 'Illegal';
-					species.doublesTier = this.data.FormatsData[toID(species.battleOnly)].doublesTier || 'Illegal';
-				} else {
-					const baseFormatsData = this.data.FormatsData[toID(species.baseSpecies)];
-					if (!baseFormatsData) {
-						throw new Error(`${species.baseSpecies} has no formats-data entry`);
-					}
-					species.tier = baseFormatsData.tier || 'Illegal';
-					species.doublesTier = baseFormatsData.doublesTier || 'Illegal';
-				}
-			}
-			if (!species.tier) species.tier = 'Illegal';
-			if (!species.doublesTier) species.doublesTier = species.tier;
-			if (species.gen > this.gen) {
-				species.tier = 'Illegal';
-				species.doublesTier = 'Illegal';
-				species.isNonstandard = 'Future';
-			}
-			if (this.currentMod === 'letsgo' && !species.isNonstandard) {
-				const isLetsGo = (
-					(species.num <= 151 || ['Meltan', 'Melmetal'].includes(species.name)) &&
-					(!species.forme || ['Alola', 'Mega', 'Mega-X', 'Mega-Y', 'Starter'].includes(species.forme))
-				);
-				if (!isLetsGo) species.isNonstandard = 'Past';
-			}
 			species.nfe = species.evos.length && this.getSpecies(species.evos[0]).gen <= this.gen;
 			species.canHatch = species.canHatch ||
 				(!['Ditto', 'Undiscovered'].includes(species.eggGroups[0]) && !species.prevo && species.name !== 'Manaphy');
 			if (this.gen === 1) species.bst -= species.baseStats.spd;
 		} else {
 			species = new Data.Species({
-				id, name, exists: false, tier: 'Illegal', doublesTier: 'Illegal', isNonstandard: 'Custom',
+				id, name, exists: false,
 			});
 		}
 		if (species.exists) this.speciesCache.set(id, species);
@@ -809,34 +776,20 @@ export class ModdedDex {
 		];
 		const tr = this.trunc;
 		const stats = {hp: 31, atk: 31, def: 31, spe: 31, spa: 31, spd: 31};
-		if (this.gen <= 2) {
-			// Gen 2 specific Hidden Power check. IVs are still treated 0-31 so we get them 0-15
-			const atkDV = tr(ivs.atk / 2);
-			const defDV = tr(ivs.def / 2);
-			const speDV = tr(ivs.spe / 2);
-			const spcDV = tr(ivs.spa / 2);
-			return {
-				type: hpTypes[4 * (atkDV % 4) + (defDV % 4)],
-				power: tr(
-					(5 * ((spcDV >> 3) + (2 * (speDV >> 3)) + (4 * (defDV >> 3)) + (8 * (atkDV >> 3))) + (spcDV % 4)) / 2 + 31
-				),
-			};
-		} else {
-			// Hidden Power check for Gen 3 onwards
-			let hpTypeX = 0;
-			let hpPowerX = 0;
-			let i = 1;
-			for (const s in stats) {
-				hpTypeX += i * (ivs[s] % 2);
-				hpPowerX += i * (tr(ivs[s] / 2) % 2);
-				i *= 2;
-			}
-			return {
-				type: hpTypes[tr(hpTypeX * 15 / 63)],
-				// After Gen 6, Hidden Power is always 60 base power
-				power: (this.gen && this.gen < 6) ? tr(hpPowerX * 40 / 63) + 30 : 60,
-			};
+		// Hidden Power check for Gen 3 onwards
+		let hpTypeX = 0;
+		let hpPowerX = 0;
+		let i = 1;
+		for (const s in stats) {
+			hpTypeX += i * (ivs[s] % 2);
+			hpPowerX += i * (tr(ivs[s] / 2) % 2);
+			i *= 2;
 		}
+		return {
+			type: hpTypes[tr(hpTypeX * 15 / 63)],
+			// After Gen 6, Hidden Power is always 60 base power
+			power: (this.gen && this.gen < 6) ? tr(hpPowerX * 40 / 63) + 30 : 60,
+		};
 	}
 
 	getRuleTable(format: Format, depth = 1, repeals?: Map<string, number>): Data.RuleTable {
@@ -1040,14 +993,8 @@ export class ModdedDex {
 			case 'pokemontag':
 				// valid pokemontags
 				const validTags = [
-					// singles tiers
-					'uber', 'ou', 'uubl', 'uu', 'rubl', 'ru', 'nubl', 'nu', 'publ', 'pu', 'zu', 'nfe', 'lcuber', 'lc', 'cap', 'caplc', 'capnfe', 'ag',
-					// doubles tiers
-					'duber', 'dou', 'dbl', 'duu', 'dnu',
-					// custom tags -- nduubl is used for national dex teambuilder formatting
-					'mega', 'nduubl',
-					// illegal/nonstandard reasons
-					'past', 'future', 'unobtainable', 'lgpe', 'custom',
+					// custom tags
+					'mega',
 					// all
 					'allpokemon', 'allitems', 'allmoves', 'allabilities', 'allnatures',
 				];
@@ -1236,10 +1183,9 @@ export class ModdedDex {
 				buf += '|';
 			}
 
-			if (set.pokeball || set.hpType || set.gigantamax) {
+			if (set.pokeball || set.hpType) {
 				buf += ',' + (set.hpType || '');
 				buf += ',' + toID(set.pokeball || '');
-				buf += ',' + (set.gigantamax ? 'G' : '');
 			}
 		}
 
@@ -1364,7 +1310,6 @@ export class ModdedDex {
 				set.happiness = (misc[0] ? Number(misc[0]) : 255);
 				set.hpType = misc[1] || '';
 				set.pokeball = this.toID(misc[2] || '');
-				set.gigantamax = !!misc[3];
 			}
 			if (j < 0) break;
 			i = j + 1;
@@ -1385,7 +1330,6 @@ export class ModdedDex {
 			output += mon.item ? ` @ ${Dex.getItem(mon.item).name}<br />` : `<br />`;
 			output += `Ability: ${Dex.getAbility(mon.ability).name}<br />`;
 			if (typeof mon.happiness === 'number' && mon.happiness !== 255) output += `Happiness: ${mon.happiness}<br />`;
-			if (mon.gigantamax) output += `Gigantamax: Yes<br />`;
 			if (!hideStats) {
 				const evs = [];
 				for (const stat in mon.evs) {

@@ -256,7 +256,6 @@ export class TeamValidator {
 		}
 
 		const teamHas: {[k: string]: number} = {};
-		let lgpeStarterCount = 0;
 		for (const set of team) {
 			if (!set) return [`You sent invalid team data. If you're not using a custom client, please report this as a bug.`];
 
@@ -267,13 +266,6 @@ export class TeamValidator {
 				}
 			} else {
 				setProblems = (format.validateSet || this.validateSet).call(this, set, teamHas);
-			}
-
-			if (set.species === 'Pikachu-Starter' || set.species === 'Eevee-Starter') {
-				lgpeStarterCount++;
-				if (lgpeStarterCount === 2 && ruleTable.isBanned('nonexistent')) {
-					problems.push(`You can only have one of Pikachu-Starter or Eevee-Starter on a team.`);
-				}
 			}
 			if (setProblems) {
 				problems = problems.concat(setProblems);
@@ -333,13 +325,6 @@ export class TeamValidator {
 
 		let species = dex.getSpecies(set.species);
 		set.species = species.name;
-		// Backwards compatability with old Gmax format
-		if (set.species.toLowerCase().endsWith('-gmax') && this.format.id !== 'gen8megamax') {
-			set.species = set.species.slice(0, -5);
-			species = dex.getSpecies(set.species);
-			if (set.name && set.name.endsWith('-Gmax')) set.name = species.baseSpecies;
-			set.gigantamax = true;
-		}
 		if (set.name && set.name.length > 18) {
 			if (set.name === set.species) {
 				set.name = species.baseSpecies;
@@ -420,12 +405,6 @@ export class TeamValidator {
 			if (ruleTable.has('obtainableformes')) {
 				tierSpecies = outOfBattleSpecies;
 			}
-			if (ruleTable.has('obtainablemisc')) {
-				if (set.gender && set.gender !== 'M') {
-					problems.push(`Battle Bond Greninja must be male.`);
-				}
-				set.gender = 'M';
-			}
 		}
 		if (ability.id === 'owntempo' && species.id === 'rockruff') {
 			tierSpecies = outOfBattleSpecies = dex.getSpecies('rockruffdusk');
@@ -496,44 +475,27 @@ export class TeamValidator {
 
 		if (!set.ability) set.ability = 'No Ability';
 		if (ruleTable.has('obtainableabilities')) {
-			if (dex.gen <= 2 || dex.currentMod === 'letsgo') {
-				set.ability = 'No Ability';
-			} else {
-				if (!ability.name || ability.name === 'No Ability') {
-					problems.push(`${name} needs to have an ability.`);
-				} else if (!Object.values(species.abilities).includes(ability.name)) {
-					if (tierSpecies.abilities[0] === ability.name) {
-						set.ability = species.abilities[0];
-					} else {
-						problems.push(`${name} can't have ${set.ability}.`);
-					}
-				}
-				if (ability.name === species.abilities['H']) {
-					setSources.isHidden = true;
-
-					let unreleasedHidden = species.unreleasedHidden;
-					if (unreleasedHidden === 'Past' && this.minSourceGen < dex.gen) unreleasedHidden = false;
-
-					if (unreleasedHidden && ruleTable.has('-unreleased')) {
-						problems.push(`${name}'s Hidden Ability is unreleased.`);
-					} else if (dex.gen === 7 && ['entei', 'suicune', 'raikou'].includes(species.id) && this.minSourceGen > 1) {
-						problems.push(`${name}'s Hidden Ability is only available from Virtual Console, which is not allowed in this format.`);
-					} else if (dex.gen === 6 && ability.name === 'Symbiosis' &&
-						(set.species.endsWith('Orange') || set.species.endsWith('White'))) {
-						problems.push(`${name}'s Hidden Ability is unreleased for the Orange and White forms.`);
-					} else if (dex.gen === 5 && set.level < 10 && (species.maleOnlyHidden || species.gender === 'N')) {
-						problems.push(`${name} must be at least level 10 to have a Hidden Ability.`);
-					}
-					if (species.maleOnlyHidden) {
-						if (set.gender && set.gender !== 'M') {
-							problems.push(`${name} must be male to have a Hidden Ability.`);
-						}
-						set.gender = 'M';
-						setSources.sources = ['5D'];
-					}
+			if (!ability.name || ability.name === 'No Ability') {
+				problems.push(`${name} needs to have an ability.`);
+			} else if (!Object.values(species.abilities).includes(ability.name)) {
+				if (tierSpecies.abilities[0] === ability.name) {
+					set.ability = species.abilities[0];
 				} else {
-					setSources.isHidden = false;
+					problems.push(`${name} can't have ${set.ability}.`);
 				}
+			}
+			if (ability.name === species.abilities['H']) {
+				setSources.isHidden = true;
+
+				if (species.maleOnlyHidden) {
+					if (set.gender && set.gender !== 'M') {
+						problems.push(`${name} must be male to have a Hidden Ability.`);
+					}
+					set.gender = 'M';
+					setSources.sources = ['5D'];
+				}
+			} else {
+				setSources.isHidden = false;
 			}
 		}
 
@@ -822,59 +784,6 @@ export class TeamValidator {
 			}
 		}
 
-		if (dex.gen <= 2) {
-			// validate DVs
-			const ivs = set.ivs;
-			const atkDV = Math.floor(ivs.atk / 2);
-			const defDV = Math.floor(ivs.def / 2);
-			const speDV = Math.floor(ivs.spe / 2);
-			const spcDV = Math.floor(ivs.spa / 2);
-			const expectedHpDV = (atkDV % 2) * 8 + (defDV % 2) * 4 + (speDV % 2) * 2 + (spcDV % 2);
-			if (ivs.hp === -1) ivs.hp = expectedHpDV * 2;
-			const hpDV = Math.floor(ivs.hp / 2);
-			if (expectedHpDV !== hpDV) {
-				problems.push(`${name} has an HP DV of ${hpDV}, but its Atk, Def, Spe, and Spc DVs give it an HP DV of ${expectedHpDV}.`);
-			}
-			if (ivs.spa !== ivs.spd) {
-				if (dex.gen === 2) {
-					problems.push(`${name} has different SpA and SpD DVs, which is not possible in Gen 2.`);
-				} else {
-					ivs.spd = ivs.spa;
-				}
-			}
-			if (dex.gen > 1 && !species.gender) {
-				// Gen 2 gender is calculated from the Atk DV.
-				// High Atk DV <-> M. The meaning of "high" depends on the gender ratio.
-				const genderThreshold = species.genderRatio.F * 16;
-
-				const expectedGender = (atkDV >= genderThreshold ? 'M' : 'F');
-				if (set.gender && set.gender !== expectedGender) {
-					problems.push(`${name} is ${set.gender}, but it has an Atk DV of ${atkDV}, which makes its gender ${expectedGender}.`);
-				} else {
-					set.gender = expectedGender;
-				}
-			}
-			if (
-				set.species === 'Marowak' && toID(set.item) === 'thickclub' &&
-				set.moves.map(toID).includes('swordsdance' as ID) && set.level === 100
-			) {
-				// Marowak hack
-				set.ivs.atk = Math.floor(set.ivs.atk / 2) * 2;
-				while (set.evs.atk > 0 && 2 * 80 + set.ivs.atk + Math.floor(set.evs.atk / 4) + 5 > 255) {
-					set.evs.atk -= 4;
-				}
-			}
-			if (dex.gen > 1) {
-				const expectedShiny = !!(defDV === 10 && speDV === 10 && spcDV === 10 && atkDV % 4 >= 2);
-				if (expectedShiny && !set.shiny) {
-					problems.push(`${name} is not shiny, which does not match its DVs.`);
-				} else if (!expectedShiny && set.shiny) {
-					problems.push(`${name} is shiny, which does not match its DVs (its DVs must all be 10, except Atk which must be 2, 3, 6, 7, 10, 11, 14, or 15).`);
-				}
-			}
-			set.nature = 'Serious';
-		}
-
 		for (const stat in set.evs) {
 			if (set.evs[stat as 'hp'] < 0) {
 				problems.push(`${name} has less than 0 ${allowAVs ? 'Awakening Values' : 'EVs'} in ${statTable[stat as 'hp']}.`);
@@ -980,26 +889,6 @@ export class TeamValidator {
 			if (!eventData) {
 				throw new Error(`${eventSpecies.name} from ${species.name} doesn't have data for event ${source}`);
 			}
-		} else if (source === '7V') {
-			const isMew = species.id === 'mew';
-			const isCelebi = species.id === 'celebi';
-			eventData = {
-				generation: 2,
-				level: isMew ? 5 : isCelebi ? 30 : undefined,
-				perfectIVs: isMew || isCelebi ? 5 : 3,
-				isHidden: true,
-				shiny: isMew ? undefined : 1,
-				pokeball: 'pokeball',
-				from: 'Gen 1-2 Virtual Console transfer',
-			};
-		} else if (source === '8V') {
-			const isMew = species.id === 'mew';
-			eventData = {
-				generation: 8,
-				perfectIVs: isMew ? 3 : undefined,
-				shiny: isMew ? undefined : 1,
-				from: 'Gen 7 Let\'s Go! HOME transfer',
-			};
 		} else if (source.charAt(1) === 'D') {
 			eventData = {
 				generation: 5,
@@ -1062,8 +951,6 @@ export class TeamValidator {
 		for (const fatherid in dex.data.Pokedex) {
 			const father = dex.getSpecies(fatherid);
 			const fatherLsetData = dex.getLearnsetData(fatherid as ID);
-			// can't inherit from CAP pokemon
-			if (father.isNonstandard) continue;
 			// can't breed mons from future gens
 			if (father.gen > eggGen) continue;
 			// father must be male
@@ -1269,19 +1156,6 @@ export class TeamValidator {
 			}
 		}
 
-		const tier = tierSpecies.tier === '(PU)' ? 'ZU' : tierSpecies.tier === '(NU)' ? 'PU' : tierSpecies.tier;
-		const tierTag = 'pokemontag:' + toID(tier);
-		setHas[tierTag] = true;
-
-		const doublesTier = tierSpecies.doublesTier === '(DUU)' ? 'DNU' : tierSpecies.doublesTier;
-		const doublesTierTag = 'pokemontag:' + toID(doublesTier);
-		setHas[doublesTierTag] = true;
-
-		// Only pokemon that can gigantamax should have the Gmax flag
-		if (!tierSpecies.canGigantamax && set.gigantamax) {
-			return `${tierSpecies.name} cannot Gigantamax but is flagged as being able to.`;
-		}
-
 		let banReason = ruleTable.check('pokemon:' + species.id);
 		if (banReason) {
 			return `${species.name} is ${banReason}.`;
@@ -1316,56 +1190,9 @@ export class TeamValidator {
 			}
 		}
 
-		banReason = ruleTable.check(tierTag) || (tier === 'AG' ? ruleTable.check('pokemontag:uber') : null);
-		if (banReason) {
-			return `${tierSpecies.name} is in ${tier}, which is ${banReason}.`;
-		}
-		if (banReason === '') return null;
-
-		banReason = ruleTable.check(doublesTierTag);
-		if (banReason) {
-			return `${tierSpecies.name} is in ${doublesTier}, which is ${banReason}.`;
-		}
-		if (banReason === '') return null;
-
 		banReason = ruleTable.check('pokemontag:allpokemon');
 		if (banReason) {
 			return `${species.name} is not in the list of allowed pokemon.`;
-		}
-
-		// obtainability
-		if (tierSpecies.isNonstandard) {
-			banReason = ruleTable.check('pokemontag:' + toID(tierSpecies.isNonstandard));
-			if (banReason) {
-				if (tierSpecies.isNonstandard === 'Unobtainable') {
-					return `${tierSpecies.name} is not obtainable without hacking or glitches.`;
-				}
-				if (tierSpecies.isNonstandard === 'Gigantamax') {
-					return `${tierSpecies.name} is not obtainable without Gigantamaxing, even through hacking.`;
-				}
-				return `${tierSpecies.name} is tagged ${tierSpecies.isNonstandard}, which is ${banReason}.`;
-			}
-			if (banReason === '') return null;
-		}
-
-		// Special casing for Pokemon that can Gmax, but their Gmax factor cannot be legally obtained
-		if (tierSpecies.gmaxUnreleased && set.gigantamax) {
-			banReason = ruleTable.check('pokemontag:unobtainable');
-			if (banReason) {
-				return `${tierSpecies.name} is flagged as gigantamax, but it cannot gigantamax without hacking or glitches.`;
-			}
-			if (banReason === '') return null;
-		}
-
-		if (tierSpecies.isNonstandard && tierSpecies.isNonstandard !== 'Unobtainable') {
-			banReason = ruleTable.check('nonexistent', setHas);
-			if (banReason) {
-				if (['Past', 'Future'].includes(tierSpecies.isNonstandard)) {
-					return `${tierSpecies.name} does not exist in Gen ${dex.gen}.`;
-				}
-				return `${tierSpecies.name} does not exist in this game.`;
-			}
-			if (banReason === '') return null;
 		}
 
 		return null;
@@ -1388,29 +1215,6 @@ export class TeamValidator {
 			return `${set.name}'s item ${item.name} is not in the list of allowed items.`;
 		}
 
-		// obtainability
-		if (item.isNonstandard) {
-			banReason = ruleTable.check('pokemontag:' + toID(item.isNonstandard));
-			if (banReason) {
-				if (item.isNonstandard === 'Unobtainable') {
-					return `${item.name} is not obtainable without hacking or glitches.`;
-				}
-				return `${set.name}'s item ${item.name} is tagged ${item.isNonstandard}, which is ${banReason}.`;
-			}
-			if (banReason === '') return null;
-		}
-
-		if (item.isNonstandard && item.isNonstandard !== 'Unobtainable') {
-			banReason = ruleTable.check('nonexistent', setHas);
-			if (banReason) {
-				if (['Past', 'Future'].includes(item.isNonstandard)) {
-					return `${set.name}'s item ${item.name} does not exist in Gen ${dex.gen}.`;
-				}
-				return `${set.name}'s item ${item.name} does not exist in this game.`;
-			}
-			if (banReason === '') return null;
-		}
-
 		return null;
 	}
 
@@ -1429,32 +1233,6 @@ export class TeamValidator {
 		banReason = ruleTable.check('pokemontag:allmoves');
 		if (banReason) {
 			return `${set.name}'s move ${move.name} is not in the list of allowed moves.`;
-		}
-
-		// obtainability
-		if (move.isNonstandard) {
-			banReason = ruleTable.check('pokemontag:' + toID(move.isNonstandard));
-			if (banReason) {
-				if (move.isNonstandard === 'Unobtainable') {
-					return `${move.name} is not obtainable without hacking or glitches.`;
-				}
-				if (move.isNonstandard === 'Gigantamax') {
-					return `${move.name} is not usable without Gigantamaxing its user, ${move.isMax}.`;
-				}
-				return `${set.name}'s move ${move.name} is tagged ${move.isNonstandard}, which is ${banReason}.`;
-			}
-			if (banReason === '') return null;
-		}
-
-		if (move.isNonstandard && move.isNonstandard !== 'Unobtainable') {
-			banReason = ruleTable.check('nonexistent', setHas);
-			if (banReason) {
-				if (['Past', 'Future'].includes(move.isNonstandard)) {
-					return `${set.name}'s move ${move.name} does not exist in Gen ${dex.gen}.`;
-				}
-				return `${set.name}'s move ${move.name} does not exist in this game.`;
-			}
-			if (banReason === '') return null;
 		}
 
 		return null;
@@ -1477,24 +1255,6 @@ export class TeamValidator {
 			return `${set.name}'s ability ${ability.name} is not in the list of allowed abilities.`;
 		}
 
-		// obtainability
-		if (ability.isNonstandard) {
-			banReason = ruleTable.check('pokemontag:' + toID(ability.isNonstandard));
-			if (banReason) {
-				return `${set.name}'s ability ${ability.name} is tagged ${ability.isNonstandard}, which is ${banReason}.`;
-			}
-			if (banReason === '') return null;
-
-			banReason = ruleTable.check('nonexistent', setHas);
-			if (banReason) {
-				if (['Past', 'Future'].includes(ability.isNonstandard)) {
-					return `${set.name}'s ability ${ability.name} does not exist in Gen ${dex.gen}.`;
-				}
-				return `${set.name}'s ability ${ability.name} does not exist in this game.`;
-			}
-			if (banReason === '') return null;
-		}
-
 		return null;
 	}
 
@@ -1515,23 +1275,6 @@ export class TeamValidator {
 			return `${set.name}'s nature ${nature.name} is not in the list of allowed natures.`;
 		}
 
-		// obtainability
-		if (nature.isNonstandard) {
-			banReason = ruleTable.check('pokemontag:' + toID(nature.isNonstandard));
-			if (banReason) {
-				return `${set.name}'s nature ${nature.name} is tagged ${nature.isNonstandard}, which is ${banReason}.`;
-			}
-			if (banReason === '') return null;
-
-			banReason = ruleTable.check('nonexistent', setHas);
-			if (banReason) {
-				if (['Past', 'Future'].includes(nature.isNonstandard)) {
-					return `${set.name}'s nature ${nature.name} does not exist in Gen ${dex.gen}.`;
-				}
-				return `${set.name}'s nature ${nature.name} does not exist in this game.`;
-			}
-			if (banReason === '') return null;
-		}
 		return null;
 	}
 
@@ -1840,13 +1583,6 @@ export class TeamValidator {
 					// inherit from their base forme unless they're freely switchable
 					continue;
 				}
-				if (species.isNonstandard) {
-					// It's normal for a nonstandard species not to have learnset data
-
-					// Formats should replace the `Obtainable Moves` rule if they want to
-					// allow pokemon without learnsets.
-					return {type: 'invalid'};
-				}
 				// should never happen
 				throw new Error(`Species with no learnset data: ${species.id}`);
 			}
@@ -1863,7 +1599,7 @@ export class TeamValidator {
 				if (moveid === 'sketch' || !lset || species.id === 'smeargle') {
 					// The logic behind this comes from the idea that a Pokemon that learns Sketch
 					// should be able to Sketch any move before transferring into Generation 8.
-					if (move.noSketch || move.isZ || move.isMax || (move.gen > 7 && !this.format.id.includes('nationaldex'))) {
+					if (move.noSketch || move.isZ || (move.gen > 7 && !this.format.id.includes('nationaldex'))) {
 						return {type: 'invalid'};
 					}
 					lset = lsetData.learnset['sketch'];

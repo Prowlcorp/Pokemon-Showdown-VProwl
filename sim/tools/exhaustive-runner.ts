@@ -34,14 +34,7 @@ export class ExhaustiveRunner {
 
 	// TODO: Add triple battles once supported by the AI.
 	static readonly FORMATS = [
-		'gen8customgame', 'gen8doublescustomgame',
 		'gen7customgame', 'gen7doublescustomgame',
-		'gen6customgame', 'gen6doublescustomgame',
-		'gen5customgame', 'gen5doublescustomgame',
-		'gen4customgame', 'gen4doublescustomgame',
-		'gen3customgame', 'gen3doublescustomgame',
-		'gen2customgame',
-		'gen1customgame',
 	];
 
 	private readonly format: string;
@@ -451,13 +444,5 @@ class CoordinatedPlayerAI extends RandomPlayerAI {
 		if (id.startsWith('frustration')) return 'frustration';
 		if (id.startsWith('hiddenpower')) return 'hiddenpower';
 		return id;
-	}
-
-	// Gigantamax Pokemon need to be special cased for tracking because the current
-	// tracking only works if you can switch in a Pokemon.
-	private markUsedIfGmax(active: AnyObject | undefined) {
-		if (active && !active.canDynamax && active.maxMoves && active.maxMoves.gigantamax) {
-			this.pools.pokemon.markUsed(toID(active.maxMoves.gigantamax));
-		}
 	}
 }

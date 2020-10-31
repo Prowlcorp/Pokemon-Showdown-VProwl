@@ -83,12 +83,6 @@ export class BasicEffect implements EffectData {
 	shortDesc: string;
 	/** The full description for this effect. */
 	desc: string;
-	/**
-	 * Is this item/move/ability/pokemon nonstandard? Specified for effects
-	 * that have no use in standard formats: made-up pokemon (CAP),
-	 * glitches (MissingNo etc), Pokestar pokemon, etc.
-	 */
-	isNonstandard: Nonstandard | null;
 	/** The duration of the effect.  */
 	duration?: number;
 	/** Whether or not the effect is ignored by Baton Pass. */
@@ -114,7 +108,6 @@ export class BasicEffect implements EffectData {
 		this.gen = data.gen || 0;
 		this.shortDesc = data.shortDesc || '';
 		this.desc = data.desc || '';
-		this.isNonstandard = data.isNonstandard || null;
 		this.duration = data.duration;
 		this.noCopy = !!data.noCopy;
 		this.affectsFainted = !!data.affectsFainted;
@@ -168,12 +161,6 @@ export class RuleTable extends Map<string, string> {
 		if (this.has(`-pokemon:${species.id}`)) return true;
 		if (this.has(`+basepokemon:${toID(species.baseSpecies)}`)) return false;
 		if (this.has(`-basepokemon:${toID(species.baseSpecies)}`)) return true;
-		const tier = species.tier === '(PU)' ? 'ZU' : species.tier === '(NU)' ? 'PU' : species.tier;
-		if (this.has(`+pokemontag:${toID(tier)}`)) return false;
-		if (this.has(`-pokemontag:${toID(tier)}`)) return true;
-		const doublesTier = species.doublesTier === '(DUU)' ? 'DNU' : species.doublesTier;
-		if (this.has(`+pokemontag:${toID(doublesTier)}`)) return false;
-		if (this.has(`-pokemontag:${toID(doublesTier)}`)) return true;
 		return this.has(`-pokemontag:allpokemon`);
 	}
 
@@ -187,12 +174,6 @@ export class RuleTable extends Map<string, string> {
 		if (this.has(`*pokemon:${species.id}`)) return true;
 		if (this.has(`+basepokemon:${toID(species.baseSpecies)}`)) return false;
 		if (this.has(`*basepokemon:${toID(species.baseSpecies)}`)) return true;
-		const tier = species.tier === '(PU)' ? 'ZU' : species.tier === '(NU)' ? 'PU' : species.tier;
-		if (this.has(`+pokemontag:${toID(tier)}`)) return false;
-		if (this.has(`*pokemontag:${toID(tier)}`)) return true;
-		const doublesTier = species.doublesTier === '(DUU)' ? 'DNU' : species.doublesTier;
-		if (this.has(`+pokemontag:${toID(doublesTier)}`)) return false;
-		if (this.has(`*pokemontag:${toID(doublesTier)}`)) return true;
 		return this.has(`*pokemontag:allpokemon`);
 	}
 
@@ -586,10 +567,6 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	 * A species's alternate formeindex may change from generation to generation -
 	 * the forme with index N in Gen A is not guaranteed to be the same forme as the
 	 * forme with index in Gen B.
-	 *
-	 * Gigantamaxes are not considered formes by the game (see data/FORMES.md - PS
-	 * labels them as such for convenience) - Gigantamax "formes" are instead included at
-	 * the end of the formeOrder list so as not to interfere with the correct index numbers.
 	 */
 	readonly formeOrder?: string[];
 	/**
@@ -654,12 +631,6 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	readonly isMega?: boolean;
 	/** True if a pokemon is primal. */
 	readonly isPrimal?: boolean;
-	/** Name of its Gigantamax move, if a pokemon is capable of gigantamaxing. */
-	readonly canGigantamax?: string;
-	/** If this Pokemon can gigantamax, is its gigantamax released? */
-	readonly gmaxUnreleased?: boolean;
-	/** True if a Pokemon species is incapable of dynamaxing */
-	readonly cannotDynamax?: boolean;
 	/** What it transforms from, if a pokemon is a forme that is only accessible in battle. */
 	readonly battleOnly?: string | string[];
 	/** Required item. Do not use this directly; see requiredItems. */
@@ -686,16 +657,6 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	 */
 	readonly changesFrom?: string;
 
-	/**
-	 * Singles Tier. The Pokemon's location in the Smogon tier system.
-	 * Do not use for LC bans (usage tier will override LC Uber).
-	 */
-	readonly tier: TierTypes.Singles | TierTypes.Other;
-	/**
-	 * Doubles Tier. The Pokemon's location in the Smogon doubles tier system.
-	 * Do not use for LC bans (usage tier will override LC Uber).
-	 */
-	readonly doublesTier: TierTypes.Doubles | TierTypes.Other;
 	readonly randomBattleMoves?: readonly ID[];
 	readonly randomBattleLevel?: number;
 	readonly randomDoubleBattleMoves?: readonly ID[];
@@ -725,8 +686,6 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.types = data.types || ['???'];
 		this.addedType = data.addedType || undefined;
 		this.prevo = data.prevo || '';
-		this.tier = data.tier || '';
-		this.doublesTier = data.doublesTier || '';
 		this.evos = data.evos || [];
 		this.evoType = data.evoType || undefined;
 		this.evoMove = data.evoMove || undefined;
@@ -752,16 +711,13 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.maleOnlyHidden = !!data.maleOnlyHidden;
 		this.maxHP = data.maxHP || undefined;
 		this.isMega = !!(this.forme && ['Mega', 'Mega-X', 'Mega-Y'].includes(this.forme)) || undefined;
-		this.canGigantamax = data.canGigantamax || undefined;
-		this.gmaxUnreleased = !!data.gmaxUnreleased;
-		this.cannotDynamax = !!data.cannotDynamax;
 		this.battleOnly = data.battleOnly || (this.isMega ? this.baseSpecies : undefined);
 		this.changesFrom = data.changesFrom ||
 			(this.battleOnly !== this.baseSpecies ? this.battleOnly : this.baseSpecies);
 		if (Array.isArray(data.changesFrom)) this.changesFrom = data.changesFrom[0];
 
 		if (!this.gen && this.num >= 1) {
-			if (this.num >= 810 || ['Gmax', 'Galar', 'Galar-Zen'].includes(this.forme)) {
+			if (this.num >= 810 || ['Galar', 'Galar-Zen'].includes(this.forme)) {
 				this.gen = 8;
 			} else if (this.num >= 722 || this.forme.startsWith('Alola') || this.forme === 'Starter') {
 				this.gen = 7;
@@ -809,6 +765,7 @@ interface MoveFlags {
 	reflectable?: 1; // Bounced back to the original user by Magic Coat or the Ability Magic Bounce.
 	snatch?: 1; // Can be stolen from the original user and instead used by another Pokemon using Snatch.
 	sound?: 1; // Has no effect on Pokemon with the Ability Soundproof.
+	sword?: 1; // Power is multiplied by 1.5 when used by a Pokemon with the Ability Unbending Blade.
 }
 
 type MoveCategory = 'Physical' | 'Special' | 'Status';
@@ -888,12 +845,6 @@ export class Move extends BasicEffect implements Readonly<BasicEffect & MoveData
 		effect?: string,
 		boost?: SparseBoostsTable,
 	};
-	/** Is this move a Max move? */
-	readonly isMax: boolean | string;
-	/** Max/G-Max move fields */
-	readonly maxMove?: {
-		basePower: number,
-	};
 	readonly flags: MoveFlags;
 	/** Whether or not the user must switch after using this move. */
 	readonly selfSwitch?: ID | boolean;
@@ -952,7 +903,6 @@ export class Move extends BasicEffect implements Readonly<BasicEffect & MoveData
 		this.pp = Number(data.pp!);
 		this.noPPBoosts = !!data.noPPBoosts;
 		this.isZ = data.isZ || false;
-		this.isMax = data.isMax || false;
 		this.flags = data.flags || {};
 		this.selfSwitch = (typeof data.selfSwitch === 'string' ? (data.selfSwitch as ID) : data.selfSwitch) || undefined;
 		this.pressureTarget = data.pressureTarget || '';
@@ -965,47 +915,7 @@ export class Move extends BasicEffect implements Readonly<BasicEffect & MoveData
 		this.stab = data.stab || undefined;
 		this.volatileStatus = typeof data.volatileStatus === 'string' ? (data.volatileStatus as ID) : undefined;
 
-		if (this.category !== 'Status' && !this.maxMove && this.id !== 'struggle') {
-			this.maxMove = {basePower: 1};
-			if (this.isMax || this.isZ) {
-				// already initialized to 1
-			} else if (!this.basePower) {
-				this.maxMove.basePower = 100;
-			} else if (['Fighting', 'Poison'].includes(this.type)) {
-				if (this.basePower >= 150) {
-					this.maxMove.basePower = 100;
-				} else if (this.basePower >= 110) {
-					this.maxMove.basePower = 95;
-				} else if (this.basePower >= 75) {
-					this.maxMove.basePower = 90;
-				} else if (this.basePower >= 65) {
-					this.maxMove.basePower = 85;
-				} else if (this.basePower >= 55) {
-					this.maxMove.basePower = 80;
-				} else if (this.basePower >= 45) {
-					this.maxMove.basePower = 75;
-				} else {
-					this.maxMove.basePower = 70;
-				}
-			} else {
-				if (this.basePower >= 150) {
-					this.maxMove.basePower = 150;
-				} else if (this.basePower >= 110) {
-					this.maxMove.basePower = 140;
-				} else if (this.basePower >= 75) {
-					this.maxMove.basePower = 130;
-				} else if (this.basePower >= 65) {
-					this.maxMove.basePower = 120;
-				} else if (this.basePower >= 55) {
-					this.maxMove.basePower = 110;
-				} else if (this.basePower >= 45) {
-					this.maxMove.basePower = 100;
-				} else {
-					this.maxMove.basePower = 90;
-				}
-			}
-		}
-		if (this.category !== 'Status' && !this.zMove && !this.isZ && !this.isMax && this.id !== 'struggle') {
+		if (this.category !== 'Status' && !this.zMove && !this.isZ && this.id !== 'struggle') {
 			let basePower = this.basePower;
 			this.zMove = {};
 			if (Array.isArray(this.multihit)) basePower *= 3;
@@ -1103,8 +1013,6 @@ export class TypeInfo implements Readonly<TypeData> {
 	readonly damageTaken: {[attackingTypeNameOrEffectid: string]: number};
 	/** The IVs to get this Type Hidden Power (in gen 3 and later) */
 	readonly HPivs: SparseStatsTable;
-	/** The DVs to get this Type Hidden Power (in gen 2). */
-	readonly HPdvs: SparseStatsTable;
 
 	constructor(data: AnyObject, ...moreData: (AnyObject | null)[]) {
 		this.exists = true;
@@ -1117,7 +1025,6 @@ export class TypeInfo implements Readonly<TypeData> {
 		this.gen = data.gen || 0;
 		this.damageTaken = data.damageTaken || {};
 		this.HPivs = data.HPivs || {};
-		this.HPdvs = data.HPdvs || {};
 	}
 
 	toString() {

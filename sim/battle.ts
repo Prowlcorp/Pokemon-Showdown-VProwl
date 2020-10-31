@@ -2555,12 +2555,6 @@ export class Battle {
 		case 'megaEvo':
 			this.runMegaEvo(action.pokemon);
 			break;
-		case 'runDynamax':
-			action.pokemon.addVolatile('dynamax');
-			for (const pokemon of action.pokemon.side.pokemon) {
-				pokemon.canDynamax = false;
-			}
-			break;
 		case 'beforeTurnMove': {
 			if (!action.pokemon.isActive) return false;
 			if (action.pokemon.fainted) return false;

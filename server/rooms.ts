@@ -29,10 +29,6 @@ const RETRY_AFTER_LOGIN = null;
 import {FS} from '../lib/fs';
 import {Utils} from '../lib/utils';
 import {WriteStream} from '../lib/streams';
-import {GTSGiveaway, LotteryGiveaway, QuestionGiveaway} from './chat-plugins/wifi';
-import {QueuedHunt} from './chat-plugins/scavengers';
-import {ScavengerGameTemplate} from './chat-plugins/scavenger-games';
-import {RepeatedPhrase} from './chat-plugins/repeats';
 import {PM as RoomBattlePM, RoomBattle, RoomBattlePlayer, RoomBattleTimer} from "./room-battle";
 import {RoomGame, RoomGamePlayer} from './room-game';
 import {Roomlogs} from './roomlogs';
@@ -114,9 +110,6 @@ export interface RoomSettings {
 	permissions?: {[k: string]: GroupSymbol};
 	repeats?: RepeatedPhrase[];
 
-	scavSettings?: AnyObject;
-	scavQueue?: QueuedHunt[];
-
 	// should not ever be saved because they're inapplicable to persistent rooms
 	/** This includes groupchats, battles, and help-ticket rooms. */
 	isPersonal?: boolean;
@@ -178,10 +171,6 @@ export abstract class BasicRoom {
 	/** If true, this room's settings will be saved in config/chatrooms.json, allowing it to stay past restarts. */
 	persist: boolean;
 
-	scavgame: ScavengerGameTemplate | null;
-	scavLeaderboard: AnyObject;
-	giveaway?: QuestionGiveaway | LotteryGiveaway | null;
-	gtsga?: GTSGiveaway | null;
 	privacySetter?: Set<ID> | null;
 	hideReplay: boolean;
 
@@ -232,8 +221,6 @@ export abstract class BasicRoom {
 		this.persist = false;
 		this.hideReplay = false;
 		this.subRooms = null;
-		this.scavgame = null;
-		this.scavLeaderboard = {};
 		this.auth = new RoomAuth(this);
 
 		this.reportJoins = true;
