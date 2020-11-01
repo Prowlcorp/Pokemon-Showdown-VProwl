@@ -21,7 +21,9 @@ export const Conditions: {[k: string]: ConditionData} = {
 		name: 'par',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
-			if (sourceEffect && sourceEffect.effectType === 'Ability') {
+			if (sourceEffect && sourceEffect.id === 'staticorb') {
+				this.add('-status', target, 'par', '[from] item: Statuc Orb');
+			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'par', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {
 				this.add('-status', target, 'par');
@@ -143,6 +145,27 @@ export const Conditions: {[k: string]: ConditionData} = {
 			if (this.effectData.stage < 15) {
 				this.effectData.stage++;
 			}
+		},
+	},
+	bld: {
+		name: 'bld',
+		effectType: 'Status',
+		onStart(target, source, sourceEffect) {
+/*			if (sourceEffect && sourceEffect.id === 'flameorb') {
+				this.add('-status', target, 'brn', '[from] item: Flame Orb');
+			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
+				this.add('-status', target, 'brn', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
+			} else { */
+			this.add('-status', target, 'bld');
+		},
+		onAfterMoveSecondarySelf(source, target, move) {
+			if (source && source !== target && move && move.flags['contact']) {
+				this.damage(source.maxhp / 16);
+			}
+		},
+		onResidualOrder: 9,
+		onResidual(pokemon) {
+			this.damage(pokemon.maxhp / 16);
 			this.damage(this.clampIntRange(pokemon.baseMaxhp / 16, 1) * this.effectData.stage);
 		},
 	},
@@ -198,6 +221,16 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onStart(target) {
 			this.add('-activate', target, 'trapped');
 		},
+		onResidualOrder: 11,
+		onResidual(pokemon) {
+			if(this.effectData.sourceEffect.id === 'metalwhip') {
+				if (this.effectData.source.hasItem('bindingband')) {
+					this.damage(pokemon.maxhp / 12);
+				} else {
+					this.damage(pokemon.maxhp / 16);
+				}
+			}
+		},
 	},
 	trapper: {
 		name: 'trapper',
@@ -217,9 +250,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onResidualOrder: 11,
 		onResidual(pokemon) {
 			const source = this.effectData.source;
-			// G-Max Centiferno and G-Max Sandblast continue even after the user leaves the field
-			const gmaxEffect = ['gmaxcentiferno', 'gmaxsandblast'].includes(this.effectData.sourceEffect.id);
-			if (source && (!source.isActive || source.hp <= 0 || !source.activeTurns) && !gmaxEffect) {
+			if (source && (!source.isActive || source.hp <= 0 || !source.activeTurns)) {
 				delete pokemon.volatiles['partiallytrapped'];
 				this.add('-end', pokemon, this.effectData.sourceEffect, '[partiallytrapped]', '[silent]');
 				return;
@@ -230,8 +261,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.add('-end', pokemon, this.effectData.sourceEffect, '[partiallytrapped]');
 		},
 		onTrapPokemon(pokemon) {
-			const gmaxEffect = ['gmaxcentiferno', 'gmaxsandblast'].includes(this.effectData.sourceEffect.id);
-			if (this.effectData.source?.isActive || gmaxEffect) pokemon.tryTrap();
+			if (this.effectData.source?.isActive) pokemon.tryTrap();
 		},
 	},
 	lockedmove: {
@@ -259,7 +289,6 @@ export const Conditions: {[k: string]: ConditionData} = {
 			target.addVolatile('confusion');
 		},
 		onLockMove(pokemon) {
-			if (pokemon.volatiles['dynamax']) return;
 			return this.effectData.move;
 		},
 	},
@@ -296,8 +325,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 				return;
 			}
 			if (
-				!pokemon.ignoringItem() && !pokemon.volatiles['dynamax'] &&
-				move.id !== this.effectData.move && move.id !== 'struggle'
+				!pokemon.ignoringItem() && move.id !== this.effectData.move && move.id !== 'struggle'
 			) {
 				// Fails unless the Choice item is being ignored, and no PP is lost
 				this.addMove('move', pokemon, move.name);
@@ -312,7 +340,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 				pokemon.removeVolatile('choicelock');
 				return;
 			}
-			if (pokemon.ignoringItem() || pokemon.volatiles['dynamax']) {
+			if (pokemon.ignoringItem()) {
 				return;
 			}
 			for (const moveSlot of pokemon.moveSlots) {
@@ -379,7 +407,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onSwitchInPriority: 1,
 		onSwitchIn(target) {
 			if (!target.fainted) {
-				target.heal(target.maxhp);
+				target.heal(target.baseMaxhp);
 				this.add('-heal', target, target.getHealth, '[from] move: ' + this.effectData.sourceEffect, '[zeffect]');
 				target.side.removeSlotCondition(target, 'healreplacement');
 			}
@@ -477,7 +505,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			if (defender.hasItem('utilityumbrella')) return;
 			if (move.type === 'Water') {
 				this.debug('Rain water boost');
-				return this.chainModify(1.5);
+				return this.chainModify(2.0);
 			}
 		},
 		onStart(battle, source, effect) {
@@ -549,9 +577,14 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onWeatherModifyDamage(damage, attacker, defender, move) {
 			if (defender.hasItem('utilityumbrella')) return;
-			if (move.type === 'Fire') {
+			if (move.type === 'Ice') {
+				this.debug('Desolate Land melted the ice');
+				move.type = 'Water';
+				this.debug('Sunny Day water suppress');
+				return this.chainModify(0.5);
+			} else if (move.type === 'Fire') {
 				this.debug('Sunny Day fire boost');
-				return this.chainModify(1.5);
+				return this.chainModify(2.0);
 			}
 		},
 		onStart(battle, source, effect) {
@@ -565,6 +598,55 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onResidual() {
 			this.add('-weather', 'DesolateLand', '[upkeep]');
 			this.eachEvent('Weather');
+		},
+		onEnd() {
+			this.add('-weather', 'none');
+		},
+	},
+	ragingsandstorm: {
+		name: 'RagingSandstorm',
+		id: 'ragingsandstorm',
+		effectType: 'Weather',
+		duration: 0,
+		// This should be applied directly to the stat before any of the other modifiers are chained
+		// So we give it increased priority.
+		onModifySpDPriority: 10,
+		onModifySpD(spd, pokemon) {
+			if (pokemon.hasType('Rock')) {
+				return this.modify(spd, 1.5);
+			}
+		},
+		onModifyPriorityPriority: 10,
+		onModifyPriority(priority, pokemon) {
+			if (pokemon.hasType('Ground')) {
+				return priority+1;
+			} if (pokemon.hasType('Rock')) {
+				return priority+1;
+			}
+			return;
+		},
+		onModifyMovePriority: 10,
+		onModifyMove(move, pokemon) {
+			if (typeof move.accuracy !== 'number') return;
+			if (pokemon.hasType('Ground')) {
+				return;
+			} if (pokemon.hasType('Rock')) {
+				return;
+			}
+			this.debug('Raging Sandstorm - decreasing accuracy');
+			move.accuracy *= 0.8;
+			return move;
+		},
+		onStart(battle, source, effect) {
+			this.add('-weather', 'RagingSandstorm', '[from] ability: ' + effect, '[of] ' + source);
+		},
+		onResidualOrder: 1,
+		onResidual() {
+			this.add('-weather', 'RagingSandstorm', '[upkeep]');
+			this.eachEvent('Weather');
+		},
+		onWeather(target) {
+			this.damage(target.baseMaxhp / 16);
 		},
 		onEnd() {
 			this.add('-weather', 'none');
@@ -662,59 +744,6 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 	},
 
-	dynamax: {
-		name: 'Dynamax',
-		noCopy: true,
-		duration: 3,
-		onStart(pokemon) {
-			pokemon.removeVolatile('minimize');
-			pokemon.removeVolatile('substitute');
-			if (pokemon.volatiles['torment']) {
-				delete pokemon.volatiles['torment'];
-				this.add('-end', pokemon, 'Torment', '[silent]');
-			}
-			if (['cramorantgulping', 'cramorantgorging'].includes(pokemon.species.id) && !pokemon.transformed) {
-				pokemon.formeChange('cramorant');
-			}
-			this.add('-start', pokemon, 'Dynamax');
-			if (pokemon.gigantamax) this.add('-formechange', pokemon, pokemon.species.name + '-Gmax');
-			if (pokemon.baseSpecies.name === 'Shedinja') return;
-
-			// Changes based on dynamax level, 2 is max (at LVL 10)
-			const ratio = this.format.id.startsWith('gen8doublesou') ? 1.5 : 2;
-
-			pokemon.maxhp = Math.floor(pokemon.maxhp * ratio);
-			pokemon.hp = Math.floor(pokemon.hp * ratio);
-			this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
-		},
-		onTryAddVolatile(status, pokemon) {
-			if (status.id === 'flinch') return null;
-		},
-		onBeforeSwitchOutPriority: -1,
-		onBeforeSwitchOut(pokemon) {
-			pokemon.removeVolatile('dynamax');
-		},
-		onSourceModifyDamage(damage, source, target, move) {
-			if (move.id === 'behemothbash' || move.id === 'behemothblade' || move.id === 'dynamaxcannon') {
-				return this.chainModify(2);
-			}
-		},
-		onDragOutPriority: 2,
-		onDragOut(pokemon) {
-			this.add('-block', pokemon, 'Dynamax');
-			return null;
-		},
-		onResidualPriority: -100,
-		onEnd(pokemon) {
-			this.add('-end', pokemon, 'Dynamax');
-			if (pokemon.gigantamax) this.add('-formechange', pokemon, pokemon.species.name);
-			if (pokemon.baseSpecies.name === 'Shedinja') return;
-			pokemon.hp = pokemon.getUndynamaxedHP();
-			pokemon.maxhp = pokemon.baseMaxhp;
-			this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
-		},
-	},
-
 	// Arceus and Silvally's actual typing is implemented here.
 	// Their true typing for all their formes is Normal, and it's only
 	// Multitype and RKS System, respectively, that changes their type,
@@ -725,7 +754,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		name: 'Arceus',
 		onTypePriority: 1,
 		onType(types, pokemon) {
-			if (pokemon.transformed || pokemon.ability !== 'multitype' && this.gen >= 8) return types;
+			if (pokemon.transformed || pokemon.ability !== 'multitype') return types;
 			let type: string | undefined = 'Normal';
 			if (pokemon.ability === 'multitype') {
 				type = pokemon.getItem().onPlate;
@@ -740,10 +769,12 @@ export const Conditions: {[k: string]: ConditionData} = {
 		name: 'Silvally',
 		onTypePriority: 1,
 		onType(types, pokemon) {
-			if (pokemon.transformed || pokemon.ability !== 'rkssystem' && this.gen >= 8) return types;
+			if (pokemon.transformed || pokemon.ability !== 'rkssystem') return types;
 			let type: string | undefined = 'Normal';
 			if (pokemon.ability === 'rkssystem') {
 				type = pokemon.getItem().onMemory;
+				if (type === 'Full')
+					return;
 				if (!type) {
 					type = 'Normal';
 				}
