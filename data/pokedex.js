@@ -6818,7 +6818,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 14.5,
 		color: "Green",
 		prevo: "Roselia",
-		evoType: "stone",
+		evoType: "useItem",
 		evoItem: "Shiny Stone",
 		eggGroups: ["Fairy", "Grass"],
 	},
@@ -6886,9 +6886,10 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.2,
 		weightkg: 3.4,
 		color: "Green",
-		evos: ["Wormadam", "wormadamsandy", "wormadamtrash", "mothim"],
+		evos: ["Wormadam", "Wormadam-Sandy", "Wormadam-Trash", "Mothim"],
 		eggGroups: ["Bug"],
-		otherForms: ["burmysandy", "burmytrash"],
+		cosmeticFormes: ["Burmy-Sandy", "Burmy-Trash"],
+		formeOrder: ["Burmy", "Burmy-Sandy", "Burmy-Trash"],
 	},
 	wormadam: {
 		num: 400,
@@ -6904,7 +6905,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Burmy",
 		evoLevel: 20,
 		eggGroups: ["Bug"],
-		otherFormes: ["wormadamsandy", "wormadamtrash"],
+		otherFormes: ["Wormadam-Sandy", "Wormadam-Trash"],
+		formeOrder: ["Wormadam", "Wormadam-Sandy", "Wormadam-Trash"],
 	},
 	wormadamsandy: {
 		num: 400,
@@ -7056,7 +7058,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Cherubi",
 		evoLevel: 25,
 		eggGroups: ["Fairy", "Grass"],
-		otherFormes: ["cherrimsunshine"],
+		otherFormes: ["Cherrim-Sunshine"],
+		formeOrder: ["Cherrim", "Cherrim-Sunshine"],
 	},
 	cherrimsunshine: {
 		num: 408,
@@ -7069,9 +7072,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.5,
 		weightkg: 9.3,
 		color: "Pink",
-		prevo: "Cherubi",
-		evoLevel: 25,
 		eggGroups: ["Fairy", "Grass"],
+		requiredAbility: "Flower Gift",
+		battleOnly: "Cherrim",
 	},
 	shellos: {
 		num: 409,
@@ -7085,7 +7088,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Purple",
 		evos: ["Gastrodon"],
 		eggGroups: ["Water 1", "Amorphous"],
-		otherForms: ["shelloseast"],
+		cosmeticFormes: ["Shellos-East"],
+		formeOrder: ["Shellos", "Shellos-East"],
 	},
 	gastrodon: {
 		num: 410,
@@ -7100,7 +7104,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Shellos",
 		evoLevel: 30,
 		eggGroups: ["Water 1", "Amorphous"],
-		otherForms: ["gastrodoneast"],
+		cosmeticFormes: ["Gastrodon-East"],
+		formeOrder: ["Gastrodon", "Gastrodon-East"],
 	},
 	ambipom: {
 		num: 411,
@@ -7166,6 +7171,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "levelFriendship",
 		eggGroups: ["Field", "Human-Like"],
 		otherFormes: ["Lopunny-Mega"],
+		formeOrder: ["Lopunny", "Lopunny-Mega"],
 	},
 	lopunnymega: {
 		num: 415,
@@ -7179,6 +7185,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 28.3,
 		color: "Brown",
 		eggGroups: ["Field", "Human-Like"],
+		requiredItem: "Lopunnite",
 	},
 	mismagius: {
 		num: 416,
@@ -7191,6 +7198,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Purple",
 		prevo: "Misdreavus",
 		evoType: "stone",
+		evoType: "useItem",
 		evoItem: "Dusk Stone",
 		eggGroups: ["Amorphous"],
 	},
@@ -7204,7 +7212,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 27.3,
 		color: "Black",
 		prevo: "Murkrow",
-		evoType: "stone",
+		evoType: "useItem",
 		evoItem: "Dusk Stone",
 		eggGroups: ["Flying"],
 	},
@@ -7403,6 +7411,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoLevel: 48,
 		eggGroups: ["Monster", "Dragon"],
 		otherFormes: ["Garchomp-Mega"],
+		formeOrder: ["Garchomp", "Garchomp-Mega"],
 	},
 	garchompmega: {
 		num: 431,
@@ -7416,6 +7425,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 95,
 		color: "Blue",
 		eggGroups: ["Monster", "Dragon"],
+		requiredItem: "Garchompite",
 	},
 	munchlax: {
 		num: 432,
@@ -7460,6 +7470,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "during the day",
 		eggGroups: ["Field", "Human-Like"],
 		otherFormes: ["Lucario-Mega"],
+		formeOrder: ["Lucario", "Lucario-Mega"],
 	},
 	lucariomega: {
 		num: 434,
@@ -7474,6 +7485,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 57.5,
 		color: "Blue",
 		eggGroups: ["Field", "Human-Like"],
+		requiredItem: "Lucarionite",
 	},
 	hippopotas: {
 		num: 435,
@@ -7624,6 +7636,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoLevel: 40,
 		eggGroups: ["Monster", "Grass"],
 		otherFormes: ["Abomasnow-Mega"],
+		formeOrder: ["Abomasnow", "Abomasnow-Mega"],
 	},
 	abomasnowmega: {
 		num: 446,
@@ -7637,6 +7650,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 185,
 		color: "White",
 		eggGroups: ["Monster", "Grass"],
+		requiredItem: "Abomasite",
 	},
 	weavile: {
 		num: 447,
@@ -7677,8 +7691,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 180,
 		color: "Gray",
 		prevo: "Magneton",
-		evoType: "levelExtra",
-		evoCondition: "in a special magnetic field",
+		evoType: "useItem",
+		evoItem: "Thunder Stone",
 		eggGroups: ["Mineral"],
 	},
 	lickilicky: {
@@ -7706,6 +7720,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Gray",
 		prevo: "Rhydon",
 		evoType: "trade",
+		evoItem: "Protector",
 		eggGroups: ["Monster", "Field"],
 	},
 	tangrowth: {
@@ -7734,6 +7749,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Yellow",
 		prevo: "Electabuzz",
 		evoType: "trade",
+		evoItem: "Electirizer",
 		eggGroups: ["Human-Like"],
 	},
 	magmortar: {
@@ -7748,6 +7764,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Red",
 		prevo: "Magmar",
 		evoType: "trade",
+		evoItem: "Magmarizer",
 		eggGroups: ["Human-Like"],
 	},
 	togekiss: {
@@ -7761,7 +7778,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 38,
 		color: "White",
 		prevo: "Togetic",
-		evoType: "stone",
+		evoType: "useItem",
 		evoItem: "Shiny Stone",
 		eggGroups: ["Flying", "Fairy"],
 	},
@@ -7790,8 +7807,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 25.5,
 		color: "Green",
 		prevo: "Eevee",
-		evoType: "levelExtra",
-		evoCondition: "near a Moss Rock",
+		evoType: "useItem",
+		evoItem: "Leaf Stone",
 		eggGroups: ["Field"],
 	},
 	glaceon: {
@@ -7805,8 +7822,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 25.9,
 		color: "Blue",
 		prevo: "Eevee",
-		evoType: "levelExtra",
-		evoCondition: "near an Ice Rock",
+		evoType: "useItem",
+		evoItem: "Ice Stone",
 		eggGroups: ["Field"],
 	},
 	gliscor: {
@@ -7865,6 +7882,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.9,
 		weightkg: 34,
 		color: "Red",
+		evoItem: "Dubious Disc",
 		eggGroups: ["Mineral"],
 	},
 	gallade: {
@@ -7878,10 +7896,11 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 52,
 		color: "White",
 		prevo: "Kirlia",
-		evoType: "stone",
+		evoType: "useItem",
 		evoItem: "Dawn Stone",
-		eggGroups: ["Amorphous", "Human-Like"],
+		eggGroups: ["Human-Like", "Amorphous"],
 		otherFormes: ["Gallade-Mega"],
+		formeOrder: ["Gallade", "Gallade-Mega"],
 	},
 	gallademega: {
 		num: 461,
@@ -7896,6 +7915,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 56.4,
 		color: "White",
 		eggGroups: ["Amorphous"],
+		requiredItem: "Galladite",
 	},
 	probopass: {
 		num: 462,
@@ -7922,6 +7942,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Dusclops",
 		evoType: "trade",
+		evoItem: "Reaper Cloth",
 		eggGroups: ["Amorphous"],
 	},
 	froslass: {
@@ -7935,7 +7956,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 26.6,
 		color: "White",
 		prevo: "Snorunt",
-		evoType: "stone",
+		evoType: "useItem",
 		evoItem: "Dawn Stone",
 		eggGroups: ["Fairy", "Mineral"],
 	},
@@ -7950,7 +7971,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.3,
 		color: "Red",
 		eggGroups: ["Amorphous"],
-		otherFormes: ["rotomheat", "rotomwash", "rotomfrost", "rotomfan", "rotommow"],
+		otherFormes: ["Rotom-Heat", "Rotom-Wash", "Rotom-Frost", "Rotom-Fan", "Rotom-Mow"],
+		formeOrder: ["Rotom", "Rotom-Heat", "Rotom-Wash", "Rotom-Frost", "Rotom-Fan", "Rotom-Mow"],
 	},
 	rotomheat: {
 		num: 465,
@@ -7965,6 +7987,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.3,
 		color: "Red",
 		eggGroups: ["Amorphous"],
+		changesFrom: "Rotom",
 	},
 	rotomwash: {
 		num: 465,
@@ -7979,6 +8002,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.3,
 		color: "Red",
 		eggGroups: ["Amorphous"],
+		changesFrom: "Rotom",
 	},
 	rotomfrost: {
 		num: 465,
@@ -7993,6 +8017,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.3,
 		color: "Red",
 		eggGroups: ["Amorphous"],
+		changesFrom: "Rotom",
 	},
 	rotomfan: {
 		num: 465,
@@ -8007,6 +8032,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.3,
 		color: "Red",
 		eggGroups: ["Amorphous"],
+		changesFrom: "Rotom",
 	},
 	rotommow: {
 		num: 465,
@@ -8021,6 +8047,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.3,
 		color: "Red",
 		eggGroups: ["Amorphous"],
+		changesFrom: "Rotom",
 	},
 	uxie: {
 		num: 466,
@@ -8117,7 +8144,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 750,
 		color: "Black",
 		eggGroups: ["Undiscovered"],
-		otherFormes: ["giratinaorigin"],
+		otherFormes: ["Giratina-Origin"],
+		formeOrder: ["Giratina", "Giratina-Origin"],
 	},
 	giratinaorigin: {
 		num: 473,
@@ -8132,6 +8160,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 650,
 		color: "Black",
 		eggGroups: ["Undiscovered"],
+		requiredItem: "Griseous Orb",
+		changesFrom: "Giratina",
 	},
 	cresselia: {
 		num: 474,
@@ -8224,7 +8254,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 2.1,
 		color: "Green",
 		eggGroups: ["Grass"],
-		otherFormes: ["shayminsky"],
+		otherFormes: ["Shaymin-Sky"],
+		formeOrder: ["Shaymin", "Shaymin-Sky"],
 	},
 	shayminsky: {
 		num: 478,
@@ -8239,6 +8270,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 5.2,
 		color: "Green",
 		eggGroups: ["Grass"],
+		changesFrom: "Shaymin",
 	},
 	arceus: {
 		num: 479,
@@ -8252,7 +8284,11 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "White",
 		eggGroups: ["Undiscovered"],
-		otherFormes: ["arceusbug", "arceusdark", "arceusdragon", "arceuselectric", "arceusfairy", "arceusfighting", "arceusfire", "arceusflying", "arceusghost", "arceusgrass", "arceusground", "arceusice", "arceuspoison", "arceuspsychic", "arceusrock", "arceussteel", "arceuswater"],
+		otherFormes: ["Arceus-Bug", "Arceus-Dark", "Arceus-Dragon", "Arceus-Electric", "Arceus-Fairy", "Arceus-Fighting", "Arceus-Fire", "Arceus-Flying", "Arceus-Ghost", "Arceus-Grass", "Arceus-Ground", "Arceus-Ice", "Arceus-Poison", "Arceus-Psychic", "Arceus-Rock", "Arceus-Steel", "Arceus-Water"],
+		formeOrder: [
+			"Arceus", "Arceus-Fighting", "Arceus-Flying", "Arceus-Poison", "Arceus-Ground", "Arceus-Rock", "Arceus-Bug", "Arceus-Ghost", "Arceus-Steel",
+			"Arceus-Fire", "Arceus-Water", "Arceus-Grass", "Arceus-Electric", "Arceus-Psychic", "Arceus-Ice", "Arceus-Dragon", "Arceus-Dark", "Arceus-Fairy",
+		],
 	},
 	arceusbug: {
 		num: 479,
@@ -8267,6 +8303,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Insect Plate", "Buginium Z"],
+		changesFrom: "Arceus",
 	},
 	arceusdark: {
 		num: 479,
@@ -8281,6 +8319,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Dread Plate", "Darkinium Z"],
+		changesFrom: "Arceus",
 	},
 	arceusdragon: {
 		num: 479,
@@ -8295,6 +8335,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Draco Plate", "Dragonium Z"],
+		changesFrom: "Arceus",
 	},
 	arceuselectric: {
 		num: 479,
@@ -8309,6 +8351,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Zap Plate", "Electrium Z"],
+		changesFrom: "Arceus",
 	},
 	arceusfairy: {
 		num: 479,
@@ -8323,6 +8367,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Pixie Plate", "Fairium Z"],
+		changesFrom: "Arceus",
 	},
 	arceusfighting: {
 		num: 479,
@@ -8337,6 +8383,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Fist Plate", "Fightinium Z"],
+		changesFrom: "Arceus",
 	},
 	arceusfire: {
 		num: 479,
@@ -8351,6 +8399,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Flame Plate", "Firium Z"],
+		changesFrom: "Arceus",
 	},
 	arceusflying: {
 		num: 479,
@@ -8365,6 +8415,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Sky Plate", "Flyinium Z"],
+		changesFrom: "Arceus",
 	},
 	arceusghost: {
 		num: 479,
@@ -8379,6 +8431,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Spooky Plate", "Ghostium Z"],
+		changesFrom: "Arceus",
 	},
 	arceusgrass: {
 		num: 479,
@@ -8393,6 +8447,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Meadow Plate", "Grassium Z"],
+		changesFrom: "Arceus",
 	},
 	arceusground: {
 		num: 479,
@@ -8407,6 +8463,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Earth Plate", "Groundium Z"],
+		changesFrom: "Arceus",
 	},
 	arceusice: {
 		num: 479,
@@ -8421,6 +8479,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Icicle Plate", "Icium Z"],
+		changesFrom: "Arceus",
 	},
 	arceuspoison: {
 		num: 479,
@@ -8435,6 +8495,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Toxic Plate", "Poisonium Z"],
+		changesFrom: "Arceus",
 	},
 	arceuspsychic: {
 		num: 479,
@@ -8449,6 +8511,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Mind Plate", "Psychium Z"],
+		changesFrom: "Arceus",
 	},
 	arceusrock: {
 		num: 479,
@@ -8463,6 +8527,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Stone Plate", "Rockium Z"],
+		changesFrom: "Arceus",
 	},
 	arceussteel: {
 		num: 479,
@@ -8477,6 +8543,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Iron Plate", "Steelium Z"],
+		changesFrom: "Arceus",
 	},
 	arceuswater: {
 		num: 479,
@@ -8491,6 +8559,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 320,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		requiredItems: ["Splash Plate", "Waterium Z"],
+		changesFrom: "Arceus",
 	},
 	victini: {
 		num: 480,
