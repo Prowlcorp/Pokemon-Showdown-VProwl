@@ -1171,21 +1171,18 @@ export const Scripts: BattleScriptsData = {
 	},
 
 	canMegaEvo(pokemon) {
-		let altForme = pokemon.baseTemplate.otherFormes && this.getTemplate(pokemon.baseTemplate.otherFormes[0]);
-		let item = pokemon.getItem();
-		if (altForme && altForme.isMega && altForme.requiredMove && (pokemon.baseMoves.includes(toID(altForme.requiredMove)) || pokemon.level >=200)) return altForme.species;
-		if (altForme && altForme.isMega && altForme.requiredItem && pokemon.level >= 200) {
-			return altForme.species;
-		}
-		if (item.megaEvolves !== pokemon.baseTemplate.baseSpecies || item.megaStone === pokemon.species) {
-			return null;
 		const species = pokemon.baseSpecies;
 		const altForme = species.otherFormes && this.dex.getSpecies(species.otherFormes[0]);
 		const item = pokemon.getItem();
-		// Mega Rayquaza
-		if ((this.gen <= 7 || this.ruleTable.has('standardnatdex')) &&
-			altForme?.isMega && altForme?.requiredMove &&
-			pokemon.baseMoves.includes(this.toID(altForme.requiredMove)) && !item.zMove) {
+//		if (item.megaEvolves !== pokemon.baseTemplate.baseSpecies || item.megaStone === pokemon.species) {
+//			return null;
+//		}
+		if(altForme?.isMega && pokemon.level >= 200) {
+			return altForme.name;
+		}
+		// Mega Rayquaza and mew
+		if (altForme?.isMega && altForme?.requiredMove &&
+			pokemon.baseMoves.includes(this.toID(altForme.requiredMove))) {
 			return altForme.name;
 		}
 		// a hacked-in Megazard X can mega evolve into Megazard Y, but not into Megazard X
