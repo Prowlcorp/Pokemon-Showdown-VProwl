@@ -760,6 +760,7 @@ interface EventMethods {
 	onSourceInvulnerabilityPriority?: number;
 	onSourceModifyAccuracyPriority?: number;
 	onSourceModifyAtkPriority?: number;
+	onSourceModifyDamagePriority?: number;
 	onSourceModifySpAPriority?: number;
 	onSwitchInPriority?: number;
 	onTrapPokemonPriority?: number;
