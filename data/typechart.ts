@@ -7,7 +7,7 @@ let BattleTypeChart = {
 			Bug: 0,
 			Dark: 0,
 			Dragon: 0,
-			Electric: 0,
+			Electric: 1,
 			Fairy: 0,
 			Fighting: 2,
 			Fire: 1,
@@ -24,7 +24,6 @@ let BattleTypeChart = {
 			Water: 0,
 		},
 		HPivs: {atk: 30, def: 30, spd: 30},
-		HPdvs: {atk: 13, def: 13},
 	},
 	Dark: {
 		damageTaken: {
@@ -72,7 +71,6 @@ let BattleTypeChart = {
 			Water: 2,
 		},
 		HPivs: {atk: 30},
-		HPdvs: {def: 14},
 	},
 	Electric: {
 		damageTaken: {
@@ -97,12 +95,11 @@ let BattleTypeChart = {
 			Water: 0,
 		},
 		HPivs: {spa: 30},
-		HPdvs: {atk: 14},
 	},
 	Fairy: {
 		damageTaken: {
 			Bug: 2,
-			Dark: 2,
+			Dark: 1,
 			Dragon: 3,
 			Electric: 0,
 			Fairy: 0,
@@ -143,7 +140,6 @@ let BattleTypeChart = {
 			Water: 0,
 		},
 		HPivs: {def: 30, spa: 30, spd: 30, spe: 30},
-		HPdvs: {atk: 12, def: 12},
 	},
 	Fire: {
 		damageTaken: {
@@ -159,7 +155,7 @@ let BattleTypeChart = {
 			Ghost: 0,
 			Grass: 2,
 			Ground: 1,
-			Ice: 2,
+			Ice: 0,
 			Normal: 0,
 			Poison: 0,
 			Psychic: 0,
@@ -168,7 +164,6 @@ let BattleTypeChart = {
 			Water: 1,
 		},
 		HPivs: {atk: 30, spa: 30, spe: 30},
-		HPdvs: {atk: 14, def: 12},
 	},
 	Flying: {
 		damageTaken: {
@@ -192,11 +187,11 @@ let BattleTypeChart = {
 			Water: 0,
 		},
 		HPivs: {hp: 30, atk: 30, def: 30, spa: 30, spd: 30},
-		HPdvs: {atk: 12, def: 13},
 	},
 	Ghost: {
 		damageTaken: {
 			trapped: 3,
+			//bleed: 3,
 			Bug: 2,
 			Dark: 1,
 			Dragon: 0,
@@ -217,14 +212,13 @@ let BattleTypeChart = {
 			Water: 0,
 		},
 		HPivs: {def: 30, spd: 30},
-		HPdvs: {atk: 13, def: 14},
 	},
 	Grass: {
 		damageTaken: {
 			powder: 3,
 			Bug: 1,
 			Dark: 0,
-			Dragon: 0,
+			Dragon: 1,
 			Electric: 2,
 			Fairy: 0,
 			Fighting: 0,
@@ -238,15 +232,15 @@ let BattleTypeChart = {
 			Poison: 1,
 			Psychic: 0,
 			Rock: 0,
-			Steel: 0,
+			Steel: 1,
 			Water: 2,
 		},
 		HPivs: {atk: 30, spa: 30},
-		HPdvs: {atk: 14, def: 14},
 	},
 	Ground: {
 		damageTaken: {
 			sandstorm: 3,
+			ragingsandstorm: 3,
 			Bug: 0,
 			Dark: 0,
 			Dragon: 0,
@@ -267,7 +261,6 @@ let BattleTypeChart = {
 			Water: 1,
 		},
 		HPivs: {spa: 30, spd: 30},
-		HPdvs: {atk: 12},
 	},
 	Ice: {
 		damageTaken: {
@@ -293,7 +286,6 @@ let BattleTypeChart = {
 			Water: 0,
 		},
 		HPivs: {atk: 30, def: 30},
-		HPdvs: {def: 13},
 	},
 	Normal: {
 		damageTaken: {
@@ -341,7 +333,6 @@ let BattleTypeChart = {
 			Water: 0,
 		},
 		HPivs: {def: 30, spa: 30, spd: 30},
-		HPdvs: {atk: 12, def: 14},
 	},
 	Psychic: {
 		damageTaken: {
@@ -365,11 +356,11 @@ let BattleTypeChart = {
 			Water: 0,
 		},
 		HPivs: {atk: 30, spe: 30},
-		HPdvs: {def: 12},
 	},
 	Rock: {
 		damageTaken: {
 			sandstorm: 3,
+			ragingsandstorm: 3,
 			Bug: 0,
 			Dark: 0,
 			Dragon: 0,
@@ -390,13 +381,13 @@ let BattleTypeChart = {
 			Water: 1,
 		},
 		HPivs: {def: 30, spd: 30, spe: 30},
-		HPdvs: {atk: 13, def: 12},
 	},
 	Steel: {
 		damageTaken: {
 			psn: 3,
 			tox: 3,
 			sandstorm: 3,
+			ragingsandstorm: 3,
 			Bug: 2,
 			Dark: 0,
 			Dragon: 2,
@@ -417,7 +408,6 @@ let BattleTypeChart = {
 			Water: 0,
 		},
 		HPivs: {spd: 30},
-		HPdvs: {atk: 13},
 	},
 	Water: {
 		damageTaken: {
@@ -434,14 +424,13 @@ let BattleTypeChart = {
 			Ground: 0,
 			Ice: 2,
 			Normal: 0,
-			Poison: 0,
+			Poison: 1,
 			Psychic: 0,
 			Rock: 0,
 			Steel: 2,
 			Water: 2,
 		},
 		HPivs: {atk: 30, def: 30, spa: 30},
-		HPdvs: {atk: 14, def: 13},
 	},
 };
 
