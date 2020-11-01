@@ -1,4 +1,7 @@
-export const TypeChart: {[k: string]: TypeData} = {
+'use strict';
+
+/**@type {{[k: string]: TypeData}} */
+let BattleTypeChart = {
 	Bug: {
 		damageTaken: {
 			Bug: 0,
@@ -441,3 +444,5 @@ export const TypeChart: {[k: string]: TypeData} = {
 		HPdvs: {atk: 14, def: 13},
 	},
 };
+
+exports.BattleTypeChart = BattleTypeChart;
