@@ -1251,6 +1251,7 @@ export const commands: ChatCommands = {
 		if (!Users.Auth.hasPermission(user, 'promote', nextGroup)) {
 			this.errorReply(`/${cmd} - Access denied for promoting to ${groupName}`);
 			this.errorReply(`You can only promote to/from: ${Users.Auth.listJurisdiction(user, 'promote')}`);
+			return;
 		}
 
 		if (!Users.isUsernameKnown(userid)) {
@@ -1887,13 +1888,16 @@ export const commands: ChatCommands = {
 				` Do not attempt to recreate it, or you may be punished.${reason ? ` (reason: ${reason})` : ``}`
 			);
 
-			const modlogEntry = {
-				action: 'NOTE',
-				loggedBy: user.id,
-				note: `participants in ${roomid} (creator: ${targetUser.id}): ${participants.join(', ')}`,
-			};
-			Rooms.global.modlog(modlogEntry, targetRoom.roomid);
-			targetRoom.modlog(modlogEntry);
+			if (participants) {
+				const modlogEntry = {
+					action: 'NOTE',
+					loggedBy: user.id,
+					isGlobal: true,
+					note: `participants in ${roomid} (creator: ${targetUser.id}): ${participants.join(', ')}`,
+				};
+				targetRoom.modlog(modlogEntry);
+			}
+
 			targetRoom.destroy();
 		}
 	},
