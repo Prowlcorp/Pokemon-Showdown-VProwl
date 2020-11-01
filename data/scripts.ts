@@ -1,7 +1,7 @@
 const CHOOSABLE_TARGETS = new Set(['normal', 'any', 'adjacentAlly', 'adjacentAllyOrSelf', 'adjacentFoe']);
 
+	gen: 7,
 export const Scripts: BattleScriptsData = {
-	gen: 8,
 	/**
 	 * runMove is the "outside" move caller. It handles deducting PP,
 	 * flinching, full paralysis, etc. All the stuff up to and including
@@ -13,12 +13,12 @@ export const Scripts: BattleScriptsData = {
 	 * externalMove skips LockMove and PP deduction, mostly for use by
 	 * Dancer.
 	 */
-	runMove(moveOrMoveName, pokemon, targetLoc, sourceEffect, zMove, externalMove, maxMove, originalTarget) {
+	runMove(moveOrMoveName, pokemon, targetLoc, sourceEffect, zMove, externalMove, originalTarget) {
 		pokemon.activeMoveActions++;
-		let target = this.getTarget(pokemon, maxMove || zMove || moveOrMoveName, targetLoc, originalTarget);
+		let target = this.getTarget(pokemon, zMove || moveOrMoveName, targetLoc, originalTarget);
 		let baseMove = this.dex.getActiveMove(moveOrMoveName);
 		const pranksterBoosted = baseMove.pranksterBoosted;
-		if (baseMove.id !== 'struggle' && !zMove && !maxMove && !externalMove) {
+		if (baseMove.id !== 'struggle' && !zMove && !externalMove) {
 			const changedMove = this.runEvent('OverrideAction', pokemon, target, baseMove);
 			if (changedMove && changedMove !== true) {
 				baseMove = this.dex.getActiveMove(changedMove);
@@ -29,8 +29,6 @@ export const Scripts: BattleScriptsData = {
 		let move = baseMove;
 		if (zMove) {
 			move = this.getActiveZMove(baseMove, pokemon);
-		} else if (maxMove) {
-			move = this.getActiveMaxMove(baseMove, pokemon);
 		}
 
 		move.isExternal = externalMove;
@@ -95,7 +93,7 @@ export const Scripts: BattleScriptsData = {
 			this.add('-zpower', pokemon);
 			pokemon.side.zMoveUsed = true;
 		}
-		const moveDidSomething = this.useMove(baseMove, pokemon, target, sourceEffect, zMove, maxMove);
+		const moveDidSomething = this.useMove(baseMove, pokemon, target, sourceEffect, zMove);
 		this.lastSuccessfulMoveThisTurn = moveDidSomething ? this.activeMove && this.activeMove.id : null;
 		if (this.activeMove) move = this.activeMove;
 		this.singleEvent('AfterMove', move, null, pokemon, target, move);
@@ -137,14 +135,14 @@ export const Scripts: BattleScriptsData = {
 	 * The only ones that use runMove are Instruct, Pursuit, and
 	 * Dancer.
 	 */
-	useMove(move, pokemon, target, sourceEffect, zMove, maxMove) {
+	useMove(move, pokemon, target, sourceEffect, zMove) {
 		pokemon.moveThisTurnResult = undefined;
 		const oldMoveResult: boolean | null | undefined = pokemon.moveThisTurnResult;
-		const moveResult = this.useMoveInner(move, pokemon, target, sourceEffect, zMove, maxMove);
+		const moveResult = this.useMoveInner(move, pokemon, target, sourceEffect, zMove);
 		if (oldMoveResult === pokemon.moveThisTurnResult) pokemon.moveThisTurnResult = moveResult;
 		return moveResult;
 	},
-	useMoveInner(moveOrMoveName, pokemon, target, sourceEffect, zMove, maxMove) {
+	useMoveInner(moveOrMoveName, pokemon, target, sourceEffect, zMove) {
 		if (!sourceEffect && this.effect.id) sourceEffect = this.effect;
 		if (sourceEffect && ['instruct', 'custapberry'].includes(sourceEffect.id)) sourceEffect = null;
 
@@ -157,14 +155,6 @@ export const Scripts: BattleScriptsData = {
 		}
 		if (zMove || (move.category !== 'Status' && sourceEffect && (sourceEffect as ActiveMove).isZ)) {
 			move = this.getActiveZMove(move, pokemon);
-		}
-		if (maxMove && move.category !== 'Status') {
-			// Max move outcome is dependent on the move type after type modifications from ability and the move itself
-			this.singleEvent('ModifyType', move, null, pokemon, target, move, move);
-			this.runEvent('ModifyType', pokemon, target, move, move);
-		}
-		if (maxMove || (move.category !== 'Status' && sourceEffect && (sourceEffect as ActiveMove).isMax)) {
-			move = this.getActiveMaxMove(move, pokemon);
 		}
 
 		if (this.activeMove) {
@@ -448,7 +438,7 @@ export const Scripts: BattleScriptsData = {
 					if (move.ohko === 'Ice' && this.gen >= 7 && !pokemon.hasType('Ice')) {
 						accuracy = 20;
 					}
-					if (!target.volatiles['dynamax'] && pokemon.level >= target.level &&
+					if (pokemon.level >= target.level &&
 						(move.ohko === true || !target.hasType(move.ohko))) {
 						accuracy += (pokemon.level - target.level);
 					} else {
@@ -519,7 +509,7 @@ export const Scripts: BattleScriptsData = {
 					}
 				}
 				if (broke) {
-					if (['feint', 'gmaxoneblow', 'gmaxrapidflow'].includes(move.id)) {
+					if (['feint'].includes(move.id)) {
 						this.add('-activate', target, 'move: ' + move.name);
 					} else {
 						this.add('-activate', target, 'move: ' + move.name, '[broken]');
@@ -609,11 +599,11 @@ export const Scripts: BattleScriptsData = {
 		if (Array.isArray(targetHits)) {
 			// yes, it's hardcoded... meh
 			if (targetHits[0] === 2 && targetHits[1] === 5) {
-				if (this.gen >= 5) {
-					targetHits = this.sample([2, 2, 3, 3, 4, 5]);
-				} else {
-					targetHits = this.sample([2, 2, 2, 3, 3, 3, 4, 5]);
-				}
+				targetHits = this.sample([2, 2, 3, 3, 4, 5]);
+			} else if (targetHits[0] === 4 && targetHits[1] === 10) {
+				targetHits = this.sample([6,6,6,7,7,8,8,9,10]);
+			} else if (targetHits[0] === 6 && targetHits[1] === 15) {
+				targetHits = this.sample([6,6,6,7,7,7,8,8,8,9,9,9,10,10,11,11,12,12,13,14,15]);
 			} else {
 				targetHits = this.random(targetHits[0], targetHits[1] + 1);
 			}
@@ -1106,7 +1096,6 @@ export const Scripts: BattleScriptsData = {
 	getZMove(move, pokemon, skipChecks) {
 		const item = pokemon.getItem();
 		if (!skipChecks) {
-			if (pokemon.side.zMoveUsed) return;
 			if (!item.zMove) return;
 			if (item.itemUser && !item.itemUser.includes(pokemon.species.name)) return;
 			const moveData = pokemon.getMoveData(move);
@@ -1132,7 +1121,7 @@ export const Scripts: BattleScriptsData = {
 			const item = pokemon.getItem();
 			if (move.name === item.zMoveFrom) {
 				const zMove = this.dex.getActiveMove(item.zMove as string);
-				zMove.isZOrMaxPowered = true;
+				zMove.isZPowered = true;
 				return zMove;
 			}
 		}
@@ -1140,7 +1129,7 @@ export const Scripts: BattleScriptsData = {
 		if (move.category === 'Status') {
 			const zMove = this.dex.getActiveMove(move);
 			zMove.isZ = true;
-			zMove.isZOrMaxPowered = true;
+			zMove.isZPowered = true;
 			return zMove;
 		}
 		const zMove = this.dex.getActiveMove(this.zMoveTable[move.type]);
@@ -1148,15 +1137,11 @@ export const Scripts: BattleScriptsData = {
 		zMove.category = move.category;
 		// copy the priority for Quick Guard
 		zMove.priority = move.priority;
-		zMove.isZOrMaxPowered = true;
+		zMove.isZPowered = true;
 		return zMove;
 	},
 
 	canZMove(pokemon) {
-		if (pokemon.side.zMoveUsed ||
-			(pokemon.transformed &&
-				(pokemon.species.isMega || pokemon.species.isPrimal || pokemon.species.forme === "Ultra"))
-		) return;
 		const item = pokemon.getItem();
 		if (!item.zMove) return;
 		if (item.itemUser && !item.itemUser.includes(pokemon.species.name)) return;
@@ -1189,10 +1174,15 @@ export const Scripts: BattleScriptsData = {
 		const species = pokemon.baseSpecies;
 		const altForme = species.otherFormes && this.dex.getSpecies(species.otherFormes[0]);
 		const item = pokemon.getItem();
-		// Mega Rayquaza
-		if ((this.gen <= 7 || this.ruleTable.has('standardnatdex')) &&
-			altForme?.isMega && altForme?.requiredMove &&
-			pokemon.baseMoves.includes(this.toID(altForme.requiredMove)) && !item.zMove) {
+//		if (item.megaEvolves !== pokemon.baseTemplate.baseSpecies || item.megaStone === pokemon.species) {
+//			return null;
+//		}
+		if(altForme?.isMega && pokemon.level >= 200) {
+			return altForme.name;
+		}
+		// Mega Rayquaza and mew
+		if (altForme?.isMega && altForme?.requiredMove &&
+			pokemon.baseMoves.includes(this.toID(altForme.requiredMove))) {
 			return altForme.name;
 		}
 		// a hacked-in Megazard X can mega evolve into Megazard Y, but not into Megazard X
@@ -1210,61 +1200,6 @@ export const Scripts: BattleScriptsData = {
 		return null;
 	},
 
-	maxMoveTable: {
-		Flying: 'Max Airstream',
-		Dark: 'Max Darkness',
-		Fire: 'Max Flare',
-		Bug: 'Max Flutterby',
-		Water: 'Max Geyser',
-		Status: 'Max Guard',
-		Ice: 'Max Hailstorm',
-		Fighting: 'Max Knuckle',
-		Electric: 'Max Lightning',
-		Psychic: 'Max Mindstorm',
-		Poison: 'Max Ooze',
-		Grass: 'Max Overgrowth',
-		Ghost: 'Max Phantasm',
-		Ground: 'Max Quake',
-		Rock: 'Max Rockfall',
-		Fairy: 'Max Starfall',
-		Steel: 'Max Steelspike',
-		Normal: 'Max Strike',
-		Dragon: 'Max Wyrmwind',
-	},
-
-	getMaxMove(move, pokemon) {
-		if (typeof move === 'string') move = this.dex.getMove(move);
-		if (move.name === 'Struggle') return move;
-		if (pokemon.gigantamax && pokemon.canGigantamax && move.category !== 'Status') {
-			const gMaxMove = this.dex.getMove(pokemon.canGigantamax);
-			if (gMaxMove.exists && gMaxMove.type === move.type) return gMaxMove;
-		}
-		const maxMove = this.dex.getMove(this.maxMoveTable[move.category === 'Status' ? move.category : move.type]);
-		if (maxMove.exists) return maxMove;
-	},
-
-	getActiveMaxMove(move, pokemon) {
-		if (typeof move === 'string') move = this.dex.getActiveMove(move);
-		if (move.name === 'Struggle') return this.dex.getActiveMove(move);
-		let maxMove = this.dex.getActiveMove(this.maxMoveTable[move.category === 'Status' ? move.category : move.type]);
-		if (move.category !== 'Status') {
-			if (pokemon.gigantamax && pokemon.canGigantamax) {
-				const gMaxMove = this.dex.getActiveMove(pokemon.canGigantamax);
-				if (gMaxMove.exists && gMaxMove.type === move.type) maxMove = gMaxMove;
-			}
-			if (!move.maxMove?.basePower) throw new Error(`${move.name} doesn't have a maxMove basePower`);
-			if (!['gmaxdrumsolo', 'gmaxfireball', 'gmaxhydrosnipe'].includes(maxMove.id)) {
-				maxMove.basePower = move.maxMove.basePower;
-			}
-			maxMove.category = move.category;
-		}
-		maxMove.baseMove = move.id;
-		// copy the priority for Psychic Terrain, Quick Guard
-		maxMove.priority = move.priority;
-		maxMove.isZOrMaxPowered = true;
-		return maxMove;
-	},
-
 	runMegaEvo(pokemon) {
 		const speciesid = pokemon.canMegaEvo || pokemon.canUltraBurst;
 		if (!speciesid) return false;
@@ -1279,16 +1214,7 @@ export const Scripts: BattleScriptsData = {
 
 		pokemon.formeChange(speciesid, pokemon.getItem(), true);
 
-		// Limit one mega evolution
-		const wasMega = pokemon.canMegaEvo;
-		for (const ally of side.pokemon) {
-			if (wasMega) {
-				ally.canMegaEvo = null;
-			} else {
-				ally.canUltraBurst = null;
-			}
-		}
-
+		pokemon.canMegaEvo = null;
 		this.runEvent('AfterMega', pokemon);
 		return true;
 	},
