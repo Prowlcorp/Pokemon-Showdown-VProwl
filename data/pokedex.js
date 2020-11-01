@@ -58,7 +58,6 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster", "Grass"],
 		requiredItem: "Venusaurite",
 	},
-	},
 	charmander: {
 		num: 4,
 		name: "Charmander",
@@ -133,7 +132,6 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster", "Dragon"],
 		requiredItem: "Charizardite Y",
 	},
-	},
 	squirtle: {
 		num: 7,
 		name: "Squirtle",
@@ -192,7 +190,6 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Blue",
 		eggGroups: ["Monster", "Water 1"],
 		requiredItem: "Blastoisinite",
-	},
 	},
 	caterpie: {
 		num: 10,
