@@ -163,14 +163,11 @@ export const commands: ChatCommands = {
 		const args = target.split(',');
 		if (!args[0]) return this.parse(`/help randombattles`);
 		let dex = Dex;
-		let isLetsGo = false;
 		if (args[1] && toID(args[1]) in Dex.dexes) {
 			dex = Dex.dexes[toID(args[1])];
-			if (toID(args[1]) === 'letsgo') isLetsGo = true;
 		} else if (room?.battle) {
 			const format = Dex.getFormat(room.battle.format);
 			dex = Dex.mod(format.mod);
-			if (format.mod === 'letsgo') isLetsGo = true;
 		}
 		const species = dex.getSpecies(args[0]);
 		if (!species.exists) {

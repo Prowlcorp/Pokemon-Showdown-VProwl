@@ -61,7 +61,7 @@ describe('Flower Gift', function () {
 		], [
 			{species: 'Heatran', moves: ['blastburn']},
 		]]);
-		battle.makeChoices('auto', 'move blastburn dynamax');
+		battle.makeChoices('auto', 'move blastburn');
 		assert(battle.log.every(line => !line.startsWith('|-formechange')));
 	});
 });

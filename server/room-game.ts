@@ -9,7 +9,7 @@
  * Room games can keep track of designated players. If a user is a player,
  * they will not be allowed to change name until their games are complete.
  *
- * The player system is optional: Some games, like Hangman, don't designate
+ * The player system is optional: Some games, don't designate
  * players and just allow any user in the room to play.
  *
  * @license MIT

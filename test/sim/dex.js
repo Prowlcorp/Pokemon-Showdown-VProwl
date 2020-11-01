@@ -35,11 +35,6 @@ describe('Dex#getSpecies', function () {
 		assert.equal(Dex.getSpecies('Flabébé-yellow').name, 'Flabébé-Yellow');
 	});
 
-	it('should handle Minior-Meteor formes', function () {
-		assert(Dex.getSpecies('Minior-Meteor').isNonstandard);
-		assert(!Dex.forGen(7).getSpecies('Minior-Meteor').isNonstandard);
-	});
-
 	it.skip('should handle Rockruff-Dusk', function () {
 		assert.equal(Dex.getSpecies('rockruffdusk').name, 'Rockruff-Dusk');
 	});
@@ -53,17 +48,5 @@ describe('Dex#getSpecies', function () {
 			Dex.forGen(7).getSpecies('Pikachu').formeOrder.slice(0, 9),
 			["Pikachu", "Pikachu-Original", "Pikachu-Hoenn", "Pikachu-Sinnoh", "Pikachu-Unova", "Pikachu-Kalos", "Pikachu-Alola", "Pikachu-Partner", "Pikachu-Starter"]
 		);
-	});
-});
-
-describe('Dex#getItem', function () {
-	it('should not mark Gems as as Nonstandard in Gens 5-7', function () {
-		assert(!Dex.forGen(5).getItem('Rock Gem').isNonstandard);
-		assert(!Dex.forGen(5).getItem('Normal Gem').isNonstandard);
-
-		assert(Dex.forGen(6).getItem('Rock Gem').isNonstandard === 'Unobtainable');
-		assert(!Dex.forGen(6).getItem('Normal Gem').isNonstandard);
-
-		assert(Dex.forGen(8).getItem('Rock Gem').isNonstandard === 'Past');
 	});
 });

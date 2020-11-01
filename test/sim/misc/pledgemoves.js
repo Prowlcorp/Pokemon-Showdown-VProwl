@@ -49,7 +49,7 @@ describe('Pledge Moves', function () {
 			{species: 'Venusaur', moves: ['grasspledge']},
 			{species: 'Charizard', level: 1, moves: ['firepledge'], gigantamax: true},
 		]]);
-		battle.makeChoices('auto', 'move grasspledge +1, move firepledge +1 dynamax');
+		battle.makeChoices('auto', 'move grasspledge +1, move firepledge +1');
 		const weedle = battle.p1.active[0];
 		assert.statStage(weedle, 'atk', +1);
 	});

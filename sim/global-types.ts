@@ -1047,6 +1047,7 @@ interface ActiveMove extends BasicEffect, MoveData {
 	allies?: Pokemon[];
 	auraBooster?: Pokemon;
 	causedCrashDamage?: boolean;
+	colonizeBoosted?: boolean;
 	forceStatus?: ID;
 	galvanizeBoosted?: boolean;
 	hasAuraBreak?: boolean;

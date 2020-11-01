@@ -154,12 +154,11 @@ export class ExhaustiveRunner {
 
 	private static onlyValid<T>(
 		gen: number, obj: {[key: string]: T}, getter: (k: string) => AnyObject,
-		additional?: (k: string, v: AnyObject) => boolean, nonStandard?: boolean
+		additional?: (k: string, v: AnyObject) => boolean
 	) {
 		return Object.keys(obj).filter(k => {
 			const v = getter(k);
 			return v.gen <= gen &&
-				(!v.isNonstandard || !!nonStandard) &&
 				(!additional || additional(k, v));
 		});
 	}
@@ -403,7 +402,6 @@ class CoordinatedPlayerAI extends RandomPlayerAI {
 	}
 
 	protected chooseMove(active: AnyObject, moves: {choice: string, move: AnyObject}[]): string {
-		this.markUsedIfGmax(active);
 		// Prefer to use a move which hasn't been used yet.
 		for (const {choice, move} of moves) {
 			const id = this.fixMove(move);
@@ -416,7 +414,6 @@ class CoordinatedPlayerAI extends RandomPlayerAI {
 	}
 
 	protected chooseSwitch(active: AnyObject | undefined, switches: {slot: number, pokemon: AnyObject}[]): number {
-		this.markUsedIfGmax(active);
 		return this.choosePokemon(switches) || super.chooseSwitch(active, switches);
 	}
 

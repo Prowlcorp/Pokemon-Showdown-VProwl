@@ -31,7 +31,7 @@ describe('Ice Face', function () {
 			{species: 'Weavile', moves: ['icepunch']},
 		]]);
 		battle.makeChoices();
-		battle.makeChoices('auto', 'move icepunch dynamax');
+		battle.makeChoices('auto', 'move icepunch');
 		const activate = '|-activate';
 		const battleLog = battle.log.join('\n');
 		const firstIndex = battleLog.indexOf(activate);

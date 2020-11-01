@@ -41,12 +41,6 @@ interface FormatData {
 type GenerationNum = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
 // The tiers we support, ie. ones that we have data sources for.
-export const TIERS = new Set([
-	'ubers', 'ou', 'uu', 'ru', 'nu', 'pu', 'zu', 'lc', 'cap', 'nationaldex',
-	'doublesou', 'battlespotsingles', 'battlespotdoubles', 'battlestadiumsingles',
-	'vgc2016', 'vgc2017', 'vgc2018', 'vgc2019ultraseries', 'vgc2020', '1v1',
-	'anythinggoes', 'nationaldexag', 'balancedhackmons', 'letsgoou', 'monotype',
-]);
 const FORMATS = new Map<ID, {gen: GenerationNum, format: Format}>();
 const VALIDATORS = new Map<ID, TeamValidator>();
 for (let gen = 1; gen <= 8; gen++) {
@@ -135,17 +129,12 @@ function eligible(dex: ModdedDex, id: ID) {
 
 	if (species.battleOnly && !unique.some(f => id.startsWith(f))) return false;
 
-	// Most of these don't have analyses
-	const capNFE = species.isNonstandard === 'CAP' && species.nfe;
-
-	return !id.endsWith('totem') && !capNFE && !similar.some(f => id.startsWith(f) && id !== f);
+	return !id.endsWith('totem') && !similar.some(f => id.startsWith(f) && id !== f);
 }
 
-// TODO: Fix dex data such that CAP mons have a correct gen set
+
 function toGen(dex: ModdedDex, name: string): GenerationNum | undefined {
 	const pokemon = dex.getSpecies(name);
-	if (pokemon.isNonstandard === 'LGPE') return 7;
-	if (!pokemon.exists || (pokemon.isNonstandard && pokemon.isNonstandard !== 'CAP')) return undefined;
 
 	const n = pokemon.num;
 	if (n > 810) return 8;
@@ -335,14 +324,6 @@ function toPokemonSet(
 			if (!set.ivs || (dex.gen >= 7 && (!set.level || set.level === 100))) {
 				set.hpType = type;
 				fill = 31;
-			} else if (dex.gen === 2) {
-				const dvs = {...dex.getType(type).HPdvs};
-				let stat: StatName;
-				for (stat in dvs) {
-					dvs[stat]! *= 2;
-				}
-				set.ivs = {...dvs, ...set.ivs};
-				set.ivs.hp = expectedHP(set.ivs);
 			} else {
 				set.ivs = {...dex.getType(type).HPivs, ...set.ivs};
 			}
@@ -351,8 +332,6 @@ function toPokemonSet(
 
 	const copy = {species: pokemon, ...set} as PokemonSet;
 	copy.ivs = fillStats(set.ivs, fill);
-	// The validator expects us to have at least 1 EV set to prove it is intentional
-	if (!set.evs && dex.gen >= 3 && format.id !== 'gen7letsgoou') set.evs = {spe: 1};
 	copy.evs = fillStats(set.evs, dex.gen <= 2 ? 252 : 0);
 	// The validator wants an ability even when Gen < 3
 	copy.ability = copy.ability || 'None';
@@ -371,31 +350,9 @@ function toPokemonSet(
 	return copy;
 }
 
-
-function expectedHP(ivs: Partial<StatsTable>) {
-	ivs = fillStats(ivs, 31);
-	const atkDV = Math.floor(ivs.atk! / 2);
-	const defDV = Math.floor(ivs.def! / 2);
-	const speDV = Math.floor(ivs.spe! / 2);
-	const spcDV = Math.floor(ivs.spa! / 2);
-	return 2 * ((atkDV % 2) * 8 + (defDV % 2) * 4 + (speDV % 2) * 2 + (spcDV % 2));
-}
-
 function fillStats(stats?: Partial<StatsTable>, fill = 0) {
 	return TeamValidator.fillStats(stats || null, fill);
 }
-
-const SMOGON = {
-	uber: 'ubers',
-	doubles: 'doublesou',
-	lgpeou: 'letsgoou',
-	ag: 'anythinggoes',
-	bh: 'balancedhackmons',
-	vgc16: 'vgc2016',
-	vgc17: 'vgc2017',
-	vgc18: 'vgc2018',
-	vgc19: 'vgc2019ultraseries',
-} as unknown as {[id: string]: ID};
 
 const getAnalysis = retrying(async (u: string) => {
 	try {
@@ -464,7 +421,7 @@ function importUsageBasedSets(gen: GenerationNum, format: Format, statistics: sm
 				level: getLevel(format),
 				moves: (top(stats.Moves, 4) as string[]).map(m => dex.getMove(m).name).filter(m => m),
 			};
-			if (gen >= 2 && format.id !== 'gen7letsgoou') {
+			if (gen >= 2) {
 				const id = top(stats.Items) as string;
 				set.item = dex.getItem(id).name;
 				if (set.item === 'nothing') set.item = undefined;
@@ -474,10 +431,8 @@ function importUsageBasedSets(gen: GenerationNum, format: Format, statistics: sm
 				set.ability = fixedAbility(dex, pokemon, dex.getAbility(id).name);
 				const {nature, evs} = fromSpread(top(stats.Spreads) as string);
 				set.nature = nature;
-				if (format.id !== 'gen7letsgoou') {
-					if (!evs || !Object.keys(evs).length) continue;
-					set.evs = evs;
-				}
+				if (!evs || !Object.keys(evs).length) continue;
+				set.evs = evs;
 			}
 			const name = 'Showdown Usage';
 			if (validSet('stats', dex, format, pokemon, name, set)) {

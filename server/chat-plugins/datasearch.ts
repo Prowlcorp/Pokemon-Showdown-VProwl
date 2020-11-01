@@ -29,7 +29,6 @@ interface DexOrGroup {
 interface MoveOrGroup {
 	types: {[k: string]: boolean};
 	categories: {[k: string]: boolean};
-	contestTypes: {[k: string]: boolean};
 	flags: {[k: string]: boolean};
 	gens: {[k: string]: boolean};
 	recovery: {[k: string]: boolean};
@@ -133,10 +132,10 @@ export const commands: ChatCommands = {
 			`Inequality ranges use the characters <code>>=</code> for <code>≥</code> and <code><=</code> for <code>≤</code>; e.g., <code>hp <= 95</code> searches all Pok\u00e9mon with HP less than or equal to 95.<br/>` +
 			`Parameters can be excluded through the use of <code>!</code>; e.g., <code>!water type</code> excludes all Water types.<br/>` +
 			`The parameter <code>mega</code> can be added to search for Mega Evolutions only, and the parameter <code>Fully Evolved</code> (or <code>FE</code>) can be added to search for fully-evolved Pok\u00e9mon.<br/>` +
-			`<code>Alola</code>, <code>Galar</code>, <code>Therian</code>, <code>Totem</code>, or <code>Primal</code> can be used as parameters to search for those formes.<br/>` +
+			`<code>Alola</code>, <code>Konor</code>, <code>Therian</code>, <code>Totem</code>, or <code>Primal</code> can be used as parameters to search for those formes.<br/>` +
 			`Parameters separated with <code>|</code> will be searched as alternatives for each other; e.g., <code>trick | switcheroo</code> searches for all Pok\u00e9mon that learn either Trick or Switcheroo.<br/>` +
 			`You can search for info in a specific generation by appending the generation to ds or by using the <code>maxgen</code> keyword; e.g. <code>/ds1 normal</code> or <code>/ds normal, maxgen1</code> searches for all Pok\u00e9mon that were Normal type in Generation I.<br/>` +
-			`<code>/dexsearch</code> will search the Galar Pokedex; you can search the National Pokedex by using <code>/nds</code> or by adding <code>natdex</code> as a parameter.<br/>` +
+			`<code>/dexsearch</code> will search the Konor Pokedex; you can search the National Pokedex by using <code>/nds</code> or by adding <code>natdex</code> as a parameter.<br/>` +
 			`Searching for a Pok\u00e9mon with both egg group and type parameters can be differentiated by adding the suffix <code>group</code> onto the egg group parameter; e.g., seaching for <code>grass, grass group</code> will show all Grass types in the Grass egg group.<br/>` +
 			`The parameter <code>monotype</code> will only show Pok\u00e9mon that are single-typed.<br/>` +
 			`The order of the parameters does not matter.<br/>`
@@ -270,7 +269,7 @@ export const commands: ChatCommands = {
 	movesearchhelp() {
 		this.sendReplyBox(
 			`<code>/movesearch [parameter], [parameter], [parameter], ...</code>: searches for moves that fulfill the selected criteria.<br/>` +
-			`Search categories are: type, category, gen, contest condition, flag, status inflicted, type boosted, Pok\u00e9mon targeted, and numeric range for base power, pp, priority, and accuracy.<br/>` +
+			`Search categories are: type, category, gen, flag, status inflicted, type boosted, Pok\u00e9mon targeted, and numeric range for base power, pp, priority, and accuracy.<br/>` +
 			`Types can be followed by <code> type</code> for clarity; e.g., <code>dragon type</code>.<br/>` +
 			`Stat boosts must be preceded with <code>boosts </code>, and stat-lowering moves with <code>lowers </code>; e.g., <code>boosts attack</code> searches for moves that boost the Attack stat of either Pok\u00e9mon.<br/>` +
 			`Z-stat boosts must be preceded with <code>zboosts </code>; e.g., <code>zboosts accuracy</code> searches for all Status moves with Z-Effects that boost the user's accuracy.<br/>` +
@@ -286,7 +285,7 @@ export const commands: ChatCommands = {
 			`Parameters separated with <code>|</code> will be searched as alternatives for each other; e.g., <code>fire | water</code> searches for all moves that are either Fire type or Water type.<br/>` +
 			`If a Pok\u00e9mon is included as a parameter, only moves from its movepool will be included in the search.<br/>` +
 			`You can search for info in a specific generation by appending the generation to ms; e.g. <code>ms1 normal</code> searches for all moves that were Normal type in Generation I.<br/>` +
-			`<code>/ms</code> will search the Galar Moves; you can search the National Moves by using <code>/nms</code> or by adding <code>natdex</code> as a parameter.<br/>` +
+			`<code>/ms</code> will search the Konor Moves; you can search the National Moves by using <code>/nms</code> or by adding <code>natdex</code> as a parameter.<br/>` +
 			`The order of the parameters does not matter.`
 		);
 	},
@@ -438,7 +437,7 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 		water2: 'Water 2',
 		water3: 'Water 3',
 	});
-	const allFormes = ['alola', 'galar', 'primal', 'therian', 'totem'];
+	const allFormes = ['alola', 'konor', 'primal', 'therian', 'totem'];
 	const allStats = ['hp', 'atk', 'def', 'spa', 'spd', 'spe', 'bst', 'weight', 'height', 'gen'];
 	const allStatAliases: {[k: string]: string} = {
 		attack: 'atk', defense: 'def', specialattack: 'spa', spc: 'spa', special: 'spa', spatk: 'spa',
@@ -920,7 +919,7 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 	let results: string[] = [];
 	for (const mon of Object.keys(dex).sort()) {
 		if (singleTypeSearch !== null && (dex[mon].types.length === 1) !== singleTypeSearch) continue;
-		const isRegionalForm = (dex[mon].forme === "Galar" || dex[mon].forme === "Alola") && dex[mon].name !== "Pikachu-Alola";
+		const isRegionalForm = (dex[mon].forme === "Konor" || dex[mon].forme === "Alola") && dex[mon].name !== "Pikachu-Alola";
 		if (!isRegionalForm && dex[mon].baseSpecies && results.includes(dex[mon].baseSpecies)) continue;
 		results.push(dex[mon].name);
 	}
@@ -1021,7 +1020,7 @@ function runMovesearch(target: string, cmd: string, canAll: boolean, message: st
 	let maxGen = 0;
 	for (const arg of target.split(',')) {
 		const orGroup: MoveOrGroup = {
-			types: {}, categories: {}, contestTypes: {}, flags: {}, gens: {}, recovery: {}, mon: {}, property: {},
+			types: {}, categories: {}, flags: {}, gens: {}, recovery: {}, mon: {}, property: {},
 			boost: {}, lower: {}, zboost: {}, status: {}, volatileStatus: {}, targets: {}, recoil: false, skip: false,
 		};
 		const parameters = arg.split("|");
@@ -1057,18 +1056,6 @@ function runMovesearch(target: string, cmd: string, canAll: boolean, message: st
 					return {error: 'A search cannot both exclude and include a category.'};
 				}
 				orGroup.categories[target] = !isNotSearch;
-				continue;
-			}
-
-			if (allContestTypes.includes(target)) {
-				target = target.charAt(0).toUpperCase() + target.substr(1);
-				if (
-					(orGroup.contestTypes[target] && isNotSearch) ||
-					(orGroup.contestTypes[target] === false && !isNotSearch)
-				) {
-					return {error: 'A search cannot both exclude and include a contest condition.'};
-				}
-				orGroup.contestTypes[target] = !isNotSearch;
 				continue;
 			}
 
@@ -1437,14 +1424,6 @@ function runMovesearch(target: string, cmd: string, canAll: boolean, message: st
 			if (Object.keys(alts.categories).length) {
 				if (alts.categories[move.category]) continue;
 				if (Object.values(alts.categories).includes(false) && alts.categories[move.category] !== false) continue;
-			}
-
-			if (Object.keys(alts.contestTypes).length) {
-				if (alts.contestTypes[move.contestType || 'Cool']) continue;
-				if (
-					Object.values(alts.contestTypes).includes(false) &&
-					alts.contestTypes[move.contestType || 'Cool'] !== false
-				) continue;
 			}
 
 			if (Object.keys(alts.targets).length) {
@@ -2172,7 +2151,7 @@ function runLearn(target: string, cmd: string, canAll: boolean, message: string)
 	buffer += `${species.name}` + (problems.length ? ` <span class="message-learn-cannotlearn">can't</span> learn ` : ` <span class="message-learn-canlearn">can</span> learn `) + Chat.toListString(moveNames);
 	if (!problems.length) {
 		const sourceNames: {[k: string]: string} = {
-			'7V': "virtual console transfer from gen 1-2", '8V': "Pok&eacute;mon Home transfer from LGPE", E: "", S: "event", D: "dream world", X: "traded-back ", Y: "traded-back event",
+			E: "", S: "event", D: "dream world", X: "traded-back ", Y: "traded-back event",
 		};
 		const sourcesBefore = setSources.sourcesBefore;
 		if (sources.length || sourcesBefore < gen) buffer += " only when obtained";

@@ -66,8 +66,7 @@ export class BasicEffect implements EffectData {
 	 * Dex number? For a Pokemon, this is the National Dex number. For
 	 * other effects, this is often an internal ID (e.g. a move
 	 * number). Not all effects have numbers, this will be 0 if it
-	 * doesn't. Nonstandard effects (e.g. CAP effects) will have
-	 * negative numbers.
+	 * doesn't.
 	 */
 	num: number;
 	/**
@@ -717,7 +716,7 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		if (Array.isArray(data.changesFrom)) this.changesFrom = data.changesFrom[0];
 
 		if (!this.gen && this.num >= 1) {
-			if (this.num >= 810 || ['Galar', 'Galar-Zen'].includes(this.forme)) {
+			if (this.num >= 810 || ['Konor'].includes(this.forme)) {
 				this.gen = 8;
 			} else if (this.num >= 722 || this.forme.startsWith('Alola') || this.forme === 'Starter') {
 				this.gen = 7;
@@ -1086,15 +1085,7 @@ function combine(obj: AnyObject, ...data: (AnyObject | null)[]): AnyObject {
 // 	/**
 // 	 * The Pokemon's individual values, used in stat calculation.
 // 	 * These must be between 0 and 31, inclusive.
-// 	 * These are also used as DVs, or determinant values, in Gens
-// 	 * 1 and 2, which are represented as even numbers from 0 to 30.
-// 	 * From Gen 2 and on, IVs/DVs are used to determine Hidden Power's
-// 	 * type, although in Gen 7 a Pokemon may be legally altered such
-// 	 * that its stats are calculated as if these values were 31 via
-// 	 * Bottlecaps. Currently, PS handles this by considering any
-// 	 * IV of 31 in Gen 7 to count as either even or odd for the purpose
-// 	 * of validating a Hidden Power type, though restrictions on
-// 	 * possible IVs for event-only Pokemon are still considered.
+// 	 * IVs are used to determine Hidden Power's type.
 // 	 */
 // 	ivs: StatsTable;
 // 	/**

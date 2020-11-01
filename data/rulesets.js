@@ -145,12 +145,6 @@ let BattleFormats = {
 				problems.push((set.name || set.species) + ' is higher than level 100.');
 			}
 
-			if (item.isNonstandard) {
-				if (item.isNonstandard === 'Past' || item.isNonstandard === 'Future') {
-					problems.push(item.name + ' does not exist in this generation.');
-				}
-			}
-
 			if (set.evs) {
 				for (let k in set.evs) {
 					// @ts-ignore

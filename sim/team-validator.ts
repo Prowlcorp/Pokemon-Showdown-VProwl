@@ -370,10 +370,8 @@ export class TeamValidator {
 		}
 
 		const setHas: {[k: string]: true} = {};
-
-		const allowEVs = dex.currentMod !== 'letsgo';
 		const capEVs = dex.gen > 2 && (ruleTable.has('obtainablemisc') || dex.gen === 6);
-		if (!set.evs) set.evs = TeamValidator.fillStats(null, allowEVs && !capEVs ? 252 : 0);
+		if (!set.evs) set.evs = TeamValidator.fillStats(null, !capEVs ? 252 : 0);
 		if (!set.ivs) set.ivs = TeamValidator.fillStats(null, 31);
 
 		if (ruleTable.has('obtainableformes')) {
@@ -464,14 +462,6 @@ export class TeamValidator {
 
 		problem = this.checkItem(set, item, setHas);
 		if (problem) problems.push(problem);
-		if (ruleTable.has('obtainablemisc')) {
-			if (dex.gen <= 1 || ruleTable.has('allowavs')) {
-				if (item.id) {
-					// no items allowed
-					set.item = '';
-				}
-			}
-		}
 
 		if (!set.ability) set.ability = 'No Ability';
 		if (ruleTable.has('obtainableabilities')) {
@@ -707,12 +697,9 @@ export class TeamValidator {
 		const ruleTable = this.ruleTable;
 		const dex = this.dex;
 
-		const allowEVs = dex.currentMod !== 'letsgo';
-		const allowAVs = ruleTable.has('allowavs');
 		const capEVs = dex.gen > 2 && (ruleTable.has('obtainablemisc') || dex.gen === 6);
-		const canBottleCap = dex.gen >= 7 && (set.level === 100 || !ruleTable.has('obtainablemisc'));
 
-		if (!set.evs) set.evs = TeamValidator.fillStats(null, allowEVs && !capEVs ? 252 : 0);
+		if (!set.evs) set.evs = TeamValidator.fillStats(null, !capEVs ? 252 : 0);
 		if (!set.ivs) set.ivs = TeamValidator.fillStats(null, 31);
 
 		const problems = [];
@@ -732,20 +719,6 @@ export class TeamValidator {
 				}
 			}
 		}
-		if (set.hpType && maxedIVs && ruleTable.has('obtainablemisc')) {
-			if (dex.gen <= 2) {
-				const HPdvs = dex.getType(set.hpType).HPdvs;
-				set.ivs = {hp: 30, atk: 30, def: 30, spa: 30, spd: 30, spe: 30};
-				let statName: StatName;
-				for (statName in HPdvs) {
-					set.ivs[statName] = HPdvs[statName]! * 2;
-				}
-				set.ivs.hp = -1;
-			} else if (!canBottleCap) {
-				set.ivs = TeamValidator.fillStats(dex.getType(set.hpType).HPivs, 31);
-			}
-		}
-
 		const cantBreedNorEvolve = (species.eggGroups[0] === 'Undiscovered' && !species.prevo && !species.nfe);
 		const isLegendary = (cantBreedNorEvolve && ![
 			'Pikachu', 'Unown', 'Dracozolt', 'Arctozolt', 'Dracovish', 'Arctovish',
@@ -773,46 +746,22 @@ export class TeamValidator {
 			}
 		}
 
-		if (set.hpType && !canBottleCap) {
+		if (set.hpType) {
 			const ivHpType = dex.getHiddenPower(set.ivs).type;
 			if (set.hpType !== ivHpType) {
 				problems.push(`${name} has Hidden Power ${set.hpType}, but its IVs are for Hidden Power ${ivHpType}.`);
-			}
-		} else if (set.hpType) {
-			if (!this.possibleBottleCapHpType(set.hpType, set.ivs)) {
-				problems.push(`${name} has Hidden Power ${set.hpType}, but its IVs don't allow this even with (Bottle Cap) Hyper Training.`);
 			}
 		}
 
 		for (const stat in set.evs) {
 			if (set.evs[stat as 'hp'] < 0) {
-				problems.push(`${name} has less than 0 ${allowAVs ? 'Awakening Values' : 'EVs'} in ${statTable[stat as 'hp']}.`);
+				problems.push(`${name} has less than 0 EVs in ${statTable[stat as 'hp']}.`);
 			}
 		}
 
-		if (dex.currentMod === 'letsgo') { // AVs
-			for (const stat in set.evs) {
-				if (set.evs[stat as 'hp'] > 0 && !allowAVs) {
-					problems.push(`${name} has Awakening Values but this format doesn't allow them.`);
-					break;
-				} else if (set.evs[stat as 'hp'] > 200) {
-					problems.push(`${name} has more than 200 Awakening Values in ${statTable[stat as 'hp']}.`);
-				}
-			}
-		} else { // EVs
-			for (const stat in set.evs) {
-				if (set.evs[stat as StatName] > 255) {
-					problems.push(`${name} has more than 255 EVs in ${statTable[stat as 'hp']}.`);
-				}
-			}
-			if (dex.gen <= 2) {
-				if (set.evs.spa !== set.evs.spd) {
-					if (dex.gen === 2) {
-						problems.push(`${name} has different SpA and SpD EVs, which is not possible in Gen 2.`);
-					} else {
-						set.evs.spd = set.evs.spa;
-					}
-				}
+		for (const stat in set.evs) {
+			if (set.evs[stat as StatName] > 255) {
+				problems.push(`${name} has more than 255 EVs in ${statTable[stat as 'hp']}.`);
 			}
 		}
 
@@ -820,48 +769,21 @@ export class TeamValidator {
 		for (const stat in set.evs) totalEV += set.evs[stat as 'hp'];
 
 		if (!this.format.debug) {
-			if (set.level > 1 && (allowEVs || allowAVs) && totalEV === 0) {
-				problems.push(`${name} has exactly 0 EVs - did you forget to EV it? (If this was intentional, add exactly 1 to one of your EVs, which won't change its stats but will tell us that it wasn't a mistake).`);
-			} else if (allowEVs && !capEVs && [508, 510].includes(totalEV)) {
+			if (!capEVs && [508, 510].includes(totalEV)) {
 				problems.push(`${name} has exactly 510 EVs, but this format does not restrict you to 510 EVs: you can max out every EV (If this was intentional, add exactly 1 to one of your EVs, which won't change its stats but will tell us that it wasn't a mistake).`);
 			}
 			// Check for level import errors from user in VGC -> DOU, etc.
 			// Note that in VGC etc (maxForcedLevel: 50), `set.level` will be 100 here for validation purposes
-			if (set.level === 50 && this.format.maxLevel !== 50 && allowEVs && totalEV % 4 === 0) {
+			if (set.level === 50 && this.format.maxLevel !== 50 && totalEV % 4 === 0) {
 				problems.push(`${name} is level 50, but this format allows level 100 Pokémon. (If this was intentional, add exactly 1 to one of your EVs, which won't change its stats but will tell us that it wasn't a mistake).`);
 			}
 		}
 
-		if (allowEVs && capEVs && totalEV > 510) {
+		if (capEVs && totalEV > 510) {
 			problems.push(`${name} has more than 510 total EVs.`);
 		}
 
 		return problems;
-	}
-
-	/**
-	 * Not exhaustive, just checks Atk and Spe, which are the only competitively
-	 * relevant IVs outside of extremely obscure situations.
-	 */
-	possibleBottleCapHpType(type: string, ivs: StatsTable) {
-		if (!type) return true;
-		if (['Dark', 'Dragon', 'Grass', 'Ghost', 'Poison'].includes(type)) {
-			// Spe must be odd
-			if (ivs.spe % 2 === 0) return false;
-		}
-		if (['Psychic', 'Fire', 'Rock', 'Fighting'].includes(type)) {
-			// Spe must be even
-			if (ivs.spe !== 31 && ivs.spe % 2 === 1) return false;
-		}
-		if (type === 'Dark') {
-			// Atk must be odd
-			if (ivs.atk % 2 === 0) return false;
-		}
-		if (['Ice', 'Water'].includes(type)) {
-			// Spe or Atk must be odd
-			if (ivs.spe % 2 === 0 && ivs.atk % 2 === 0) return false;
-		}
-		return true;
 	}
 
 	validateSource(
@@ -1181,14 +1103,6 @@ export class TeamValidator {
 		if (banReason) {
 			return `${species.name} is ${banReason}.`;
 		}
-		if (banReason === '') {
-			// don't allow nonstandard speciess when whitelisting standard base species
-			// i.e. unbanning Pichu doesn't mean allowing Pichu-Spiky-Eared outside of Gen 4
-			const baseSpecies = dex.getSpecies(species.baseSpecies);
-			if (baseSpecies.isNonstandard === species.isNonstandard) {
-				return null;
-			}
-		}
 
 		banReason = ruleTable.check('pokemontag:allpokemon');
 		if (banReason) {
@@ -1337,31 +1251,15 @@ export class TeamValidator {
 		}
 		let requiredIVs = 0;
 		if (eventData.ivs) {
-			/** In Gen 7, IVs can be changed to 31 */
-			const canBottleCap = (dex.gen >= 7 && set.level === 100);
-
 			if (!set.ivs) set.ivs = {hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31};
 			const statTable = {
 				hp: 'HP', atk: 'Attack', def: 'Defense', spa: 'Special Attack', spd: 'Special Defense', spe: 'Speed',
 			};
 			let statName: StatName;
 			for (statName in eventData.ivs) {
-				if (canBottleCap && set.ivs[statName] === 31) continue;
 				if (set.ivs[statName] !== eventData.ivs[statName]) {
 					if (fastReturn) return true;
 					problems.push(`${name} must have ${eventData.ivs[statName]} ${statTable[statName]} IVs${etc}.`);
-				}
-			}
-
-			if (canBottleCap) {
-				// IVs can be overridden but Hidden Power type can't
-				if (Object.keys(eventData.ivs).length >= 6) {
-					const requiredHpType = dex.getHiddenPower(eventData.ivs).type;
-					if (set.hpType && set.hpType !== requiredHpType) {
-						if (fastReturn) return true;
-						problems.push(`${name} can only have Hidden Power ${requiredHpType}${etc}.`);
-					}
-					set.hpType = requiredHpType;
 				}
 			}
 		} else {
@@ -1638,15 +1536,6 @@ export class TeamValidator {
 						// check if the Pokemon's hidden ability was available
 						incompatibleAbility = true;
 						continue;
-					}
-					if (!species.isNonstandard) {
-						// HMs can't be transferred
-						if (dex.gen >= 4 && learnedGen <= 3 &&
-							['cut', 'fly', 'surf', 'strength', 'flash', 'rocksmash', 'waterfall', 'dive'].includes(moveid)) continue;
-						if (dex.gen >= 5 && learnedGen <= 4 &&
-							['cut', 'fly', 'surf', 'strength', 'rocksmash', 'waterfall', 'rockclimb'].includes(moveid)) continue;
-						// Defog and Whirlpool can't be transferred together
-						if (dex.gen >= 5 && ['defog', 'whirlpool'].includes(moveid) && learnedGen <= 4) blockedHM = true;
 					}
 
 					if (learned.charAt(1) === 'L') {

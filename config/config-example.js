@@ -460,7 +460,7 @@ exports.forcedpublicprefixes = [];
  *     - tournaments: creating tournaments (/tour new, settype etc.)
  *     - gamemoderation: /tour dq, autodq, end etc.
  *     - gamemanagement: enable/disable games, minigames, and tournaments.
- *     - minigame: make minigames (hangman, polls, etc.).
+ *     - minigame: make minigames (polls, etc.).
  *     - game: make games.
  */
 exports.grouplist = [
@@ -566,7 +566,6 @@ exports.grouplist = [
 		bypassblocks: 'u%@&~',
 		receiveauthmessages: true,
 		gamemoderation: true,
-		jeopardy: true,
 		joinbattle: true,
 		minigame: true,
 	},

@@ -585,12 +585,10 @@ export const commands: ChatCommands = {
 					}
 					details = {
 						"Dex#": String(pokemon.num),
-						Gen: String(pokemon.gen) || 'CAP',
+						Gen: String(pokemon.gen),
 						Height: `${pokemon.heightm} m`,
 					};
 					details["Weight"] = `${pokemon.weighthg / 10} kg <em>(${weighthit} BP)</em>`;
-					const gmaxMove = pokemon.canGigantamax || dex.getSpecies(pokemon.changesFrom).canGigantamax;
-					if (gmaxMove) details["G-Max Move"] = gmaxMove;
 					if (pokemon.color && dex.gen >= 5) details["Dex Colour"] = pokemon.color;
 					if (pokemon.eggGroups && dex.gen >= 2) details["Egg Group(s)"] = pokemon.eggGroups.join(", ");
 					const evos: string[] = [];
@@ -659,9 +657,6 @@ export const commands: ChatCommands = {
 						details["Natural Gift Type"] = item.naturalGift.type;
 						details["Natural Gift Base Power"] = String(item.naturalGift.basePower);
 					}
-					if (item.isNonstandard) {
-						details[`Unobtainable in Gen ${dex.gen}`] = "";
-					}
 				}
 				break;
 			case 'move':
@@ -670,10 +665,9 @@ export const commands: ChatCommands = {
 				if (showDetails) {
 					details = {
 						Priority: String(move.priority),
-						Gen: String(move.gen) || 'CAP',
+						Gen: String(move.gen),
 					};
 
-					if (move.isNonstandard === "Past" && dex.gen >= 8) details["&#10007; Past Gens Only"] = "";
 					if (move.secondary || move.secondaries) details["&#10003; Secondary effect"] = "";
 					if (move.flags['contact']) details["&#10003; Contact"] = "";
 					if (move.flags['sound']) details["&#10003; Sound"] = "";
@@ -729,15 +723,6 @@ export const commands: ChatCommands = {
 						}
 					}
 
-					if (dex.gen >= 8) {
-						if (move.isMax) {
-							details["&#10003; Max Move"] = "";
-							if (typeof move.isMax === "string") details["User"] = `${move.isMax}`;
-						} else if (move.maxMove?.basePower) {
-							details["Dynamax Power"] = String(move.maxMove.basePower);
-						}
-					}
-
 					const targetTypes: {[k: string]: string} = {
 						normal: "One Adjacent Pok\u00e9mon",
 						self: "User",
@@ -763,9 +748,6 @@ export const commands: ChatCommands = {
 					if (move.id === 'mirrormove') {
 						details[`<a href="https://${Config.routes.dex}/tags/nonmirror">Non-Mirrorable Moves</a>`] = '';
 					}
-					if (move.isNonstandard === 'Unobtainable') {
-						details[`Unobtainable in Gen ${dex.gen}`] = "";
-					}
 				}
 				break;
 			case 'ability':
@@ -773,7 +755,7 @@ export const commands: ChatCommands = {
 				buffer += `|raw|${Chat.getDataAbilityHTML(ability)}\n`;
 				if (showDetails) {
 					details = {
-						Gen: String(ability.gen) || 'CAP',
+						Gen: String(ability.gen),
 					};
 				}
 				break;
@@ -1736,22 +1718,6 @@ export const commands: ChatCommands = {
 		`!calc - Shows everyone a link to a damage calculator. Requires: + % @ # &`,
 	],
 
-	capintro: 'cap',
-	cap(target, room, user) {
-		if (!this.runBroadcast()) return;
-		this.sendReplyBox(
-			`An introduction to the Create-A-Pok&eacute;mon project:<br />` +
-			`- <a href="https://www.smogon.com/cap/">CAP project website and description</a><br />` +
-			`- <a href="https://www.smogon.com/forums/threads/48782/">What Pok&eacute;mon have been made?</a><br />` +
-			`- <a href="https://www.smogon.com/forums/forums/477">Talk about the metagame here</a><br />` +
-			`- <a href="https://www.smogon.com/forums/threads/3662655/">Sample SS CAP teams</a>`
-		);
-	},
-	caphelp: [
-		`/cap - Provides an introduction to the Create-A-Pok\u00e9mon project.`,
-		`!cap - Show everyone that information. Requires: + % @ # &`,
-	],
-
 	gennext(target, room, user) {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(
@@ -2235,9 +2201,6 @@ export const commands: ChatCommands = {
 		// Pokemon
 		if (pokemon.exists) {
 			atLeastOne = true;
-			if (pokemon.isNonstandard && pokemon.isNonstandard !== 'Past') {
-				return this.errorReply(`${pokemon.name} is not a real Pok\u00e9mon.`);
-			}
 
 			const baseSpecies = pokemon.baseSpecies || pokemon.name;
 			let forme = pokemon.forme;
@@ -2265,9 +2228,6 @@ export const commands: ChatCommands = {
 		// Item
 		if (item.exists) {
 			atLeastOne = true;
-			if (item.isNonstandard && item.isNonstandard !== 'Past') {
-				return this.errorReply(`${item.name} is not a real item.`);
-			}
 			const link = `${baseLink}items/${item.name.toLowerCase()}`;
 			this.sendReplyBox(`<a href="${link}">${item.name} item description</a> by Veekun`);
 		}
@@ -2275,9 +2235,6 @@ export const commands: ChatCommands = {
 		// Ability
 		if (ability.exists) {
 			atLeastOne = true;
-			if (ability.isNonstandard && ability.isNonstandard !== 'Past') {
-				return this.errorReply(`${ability.name} is not a real ability.`);
-			}
 			const link = `${baseLink}abilities/${ability.name.toLowerCase()}`;
 			this.sendReplyBox(`<a href="${link}">${ability.name} ability description</a> by Veekun`);
 		}
@@ -2285,9 +2242,6 @@ export const commands: ChatCommands = {
 		// Move
 		if (move.exists) {
 			atLeastOne = true;
-			if (move.isNonstandard && move.isNonstandard !== 'Past') {
-				return this.errorReply(`${move.name} is not a real move.`);
-			}
 			const link = `${baseLink}moves/${move.name.toLowerCase()}`;
 			this.sendReplyBox(`<a href="${link}">${move.name} move description</a> by Veekun`);
 		}

@@ -66,7 +66,7 @@ export class RandomPlayerAI extends BattlePlayer {
 			this.choose(choices.join(`, `));
 		} else if (request.active) {
 			// move request
-			let [canMegaEvo, canUltraBurst, canZMove, canDynamax] = [true, true, true, true];
+			let [canMegaEvo, canUltraBurst, canZMove] = [true, true, true];
 			const pokemon = request.side.pokemon;
 			const chosen: number[] = [];
 			const choices = request.active.map((active: AnyObject, i: number) => {
@@ -75,15 +75,11 @@ export class RandomPlayerAI extends BattlePlayer {
 				canMegaEvo = canMegaEvo && active.canMegaEvo;
 				canUltraBurst = canUltraBurst && active.canUltraBurst;
 				canZMove = canZMove && !!active.canZMove;
-				canDynamax = canDynamax && !!active.canDynamax;
 
 				// Determine whether we should change form if we do end up switching
-				const change = (canMegaEvo || canUltraBurst || canDynamax) && this.prng.next() < this.mega;
-				// If we've already dynamaxed or if we're planning on potentially dynamaxing
-				// we need to use the maxMoves instead of our regular moves
+				const change = (canMegaEvo || canUltraBurst) && this.prng.next() < this.mega;
 
-				const useMaxMoves = (!active.canDynamax && active.maxMoves) || (change && canDynamax);
-				const possibleMoves = useMaxMoves ? active.maxMoves.maxMoves : active.moves;
+				const possibleMoves = active.moves;
 
 				let canMove = range(1, possibleMoves.length).filter(j => (
 					// not disabled
@@ -160,10 +156,7 @@ export class RandomPlayerAI extends BattlePlayer {
 						canZMove = false;
 						return move;
 					} else if (change) {
-						if (canDynamax) {
-							canDynamax = false;
-							return `${move} dynamax`;
-						} else if (canMegaEvo) {
+						if (canMegaEvo) {
 							canMegaEvo = false;
 							return `${move} mega`;
 						} else {
@@ -175,8 +168,7 @@ export class RandomPlayerAI extends BattlePlayer {
 					}
 				} else {
 					throw new Error(`${this.constructor.name} unable to make choice ${i}. request='${request}',` +
-						` chosen='${chosen}', (mega=${canMegaEvo}, ultra=${canUltraBurst}, zmove=${canZMove},` +
-						` dynamax='${canDynamax}')`);
+						` chosen='${chosen}', (mega=${canMegaEvo}, ultra=${canUltraBurst}, zmove=${canZMove}')`);
 				}
 			});
 			this.choose(choices.join(`, `));

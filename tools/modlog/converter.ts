@@ -61,10 +61,6 @@ export function modernizeLog(line: string, nextLine?: string): string | undefine
 	if (line.startsWith('SCAV ')) {
 		line = line.replace(/: (\[room: .*?\]) by (.*)/, (match, roominfo, rest) => `: by ${rest} ${roominfo}`);
 	}
-	line = line.replace(
-		/(GIVEAWAY WIN|GTS FINISHED): ([A-Za-z0-9].*?)(won|has finished)/,
-		(match, action, user) => `${action}: [${toID(user)}]:`
-	);
 
 	if (line.includes(':')) {
 		const possibleModernAction = line.slice(0, line.indexOf(':')).trim();
@@ -89,9 +85,6 @@ export function modernizeLog(line: string, nextLine?: string): string | undefine
 		const actionTaker = toID(line.slice(line.indexOf(' by ') + ' by '.length));
 		const isEnding = line.includes('was ended by');
 		return `${prefix}POLL${isEnding ? ' END' : ''}: by ${actionTaker}`;
-	}
-	if (/User (.*?) won the game of (.*?) mode trivia/.test(line)) {
-		return `${prefix}TRIVIAGAME: by unknown: ${line}`;
 	}
 
 	const modernizerTransformations: {[k: string]: (log: string) => string} = {

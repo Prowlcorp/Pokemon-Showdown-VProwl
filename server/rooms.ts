@@ -89,11 +89,6 @@ export interface RoomSettings {
 	filterStretching?: boolean;
 	filterEmojis?: boolean;
 	filterCaps?: boolean;
-	jeopardyDisabled?: boolean;
-	mafiaDisabled?: boolean;
-	unoDisabled?: boolean;
-	blackjackDisabled?: boolean;
-	hangmanDisabled?: boolean;
 	tourAnnouncements?: boolean;
 	gameNumber?: number;
 	highTraffic?: boolean;

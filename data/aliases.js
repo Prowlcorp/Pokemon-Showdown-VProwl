@@ -117,7 +117,6 @@ let BattleAliases = {
 	"cherrimsunny": "Cherrim-Sunshine",
 	"darmanitanz": "Darmanitan-Zen",
 	"darmanitanzenmode": "Darmanitan-Zen",
-	"darmanitanzengalar": "Darmanitan-Galar-Zen",
 	"deoxysnormal": "Deoxys",
 	"deon": "Deoxys",
 	"deoxysa": "Deoxys-Attack",

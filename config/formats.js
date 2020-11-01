@@ -171,7 +171,7 @@ let Formats = [
 		allowMultisearch: true,
 		ruleset: ['Pokemon', 'Species Clause', 'Nickname Clause', 'Moody Clause', 'OHKO Clause', 'Evasion Moves Clause', 'Accuracy Moves Clause', 'Swagger Clause', 'Endless Battle Clause', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
 		banlist: [
-			'Illegal', 'Unreleased', 'Arceus', 'Darkrai', 'Deoxys-Base', 'Deoxys-Attack', 'Deoxys-Defense', 'Dialga', 'Giratina',
+			'Illegal', 'Arceus', 'Darkrai', 'Deoxys-Base', 'Deoxys-Attack', 'Deoxys-Defense', 'Dialga', 'Giratina',
 			'Groudon', 'Ho-Oh', 'Kangaskhan-Mega', 'Kyogre', 'Kyurem-Black', 'Kyurem-White', 'Lugia', 'Lunala', 'Marshadow', 'Mewtwo',
 			'Mimikyu', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane', 'Palkia', 'Rayquaza', 'Reshiram', 'Salamence-Mega', 'Shaymin-Sky',
 			'Snorlax', 'Solgaleo', 'Tapu Koko', 'Xerneas', 'Yveltal', 'Zekrom', 'Focus Sash', 'Perish Song', 'Detect + Fightinium Z',
@@ -618,9 +618,9 @@ let Formats = [
 			let onChangeSet = this.dex.getFormat('Pokemon').onChangeSet;
 			let problems = onChangeSet ? onChangeSet.call(this.dex, set, this.format) : null;
 			if (problems && problems.length) return problems;
-			if (!crossTemplate.exists || crossTemplate.isNonstandard) return this.validateSet(set, teamHas);
+			if (!crossTemplate.exists) return this.validateSet(set, teamHas);
 			let template = this.dex.getTemplate(set.species);
-			if (!template.exists || template.isNonstandard || template === crossTemplate) return this.validateSet(set, teamHas);
+			if (!template.exists || template === crossTemplate) return this.validateSet(set, teamHas);
 			if (!template.nfe) return ["" + template.species + " cannot cross evolve because it doesn't evolve."];
 			if (crossTemplate.battleOnly || crossTemplate.isUnreleased || !crossTemplate.prevo) return ["" + template.species + " cannot cross evolve into " + crossTemplate.species + " because it isn't an evolution."];
 			if (template.species === 'Sneasel' || crossTemplate.species === 'Shedinja' || crossTemplate.species === 'Solgaleo' || crossTemplate.species === 'Lunala') return ["" + template.species + " cannot cross evolve into " + crossTemplate.species + " because it is banned."];

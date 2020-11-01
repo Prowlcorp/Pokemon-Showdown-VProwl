@@ -399,7 +399,7 @@ export class ModdedDex {
 			let aliasTo = '';
 			const formeNames: {[k: string]: string[]} = {
 				alola: ['a', 'alola', 'alolan'],
-				galar: ['g', 'galar', 'galarian'],
+				konor: ['g', 'konor', 'konorian'],
 				mega: ['m', 'mega'],
 				primal: ['p', 'primal'],
 			};
@@ -510,9 +510,6 @@ export class ModdedDex {
 			const moveData = this.data.Moves[id];
 			const moveTextData = this.getDescs('Moves', id, moveData);
 			move = new Data.Move({name}, moveData, moveTextData);
-			if (move.gen > this.gen) {
-				(move as any).isNonstandard = 'Future';
-			}
 		} else {
 			move = new Data.Move({id, name, exists: false});
 		}
@@ -677,13 +674,6 @@ export class ModdedDex {
 			const itemData = this.data.Items[id];
 			const itemTextData = this.getDescs('Items', id, itemData);
 			item = new Data.Item({name}, itemData, itemTextData);
-			if (item.gen > this.gen) {
-				(item as any).isNonstandard = 'Future';
-			}
-			// hack for allowing mega evolution in LGPE
-			if (this.currentMod === 'letsgo' && !item.isNonstandard && !item.megaStone) {
-				(item as any).isNonstandard = 'Past';
-			}
 		} else {
 			item = new Data.Item({id, name, exists: false});
 		}
@@ -709,15 +699,6 @@ export class ModdedDex {
 			const abilityData = this.data.Abilities[id];
 			const abilityTextData = this.getDescs('Abilities', id, abilityData);
 			ability = new Data.Ability({name}, abilityData, abilityTextData);
-			if (ability.gen > this.gen) {
-				(ability as any).isNonstandard = 'Future';
-			}
-			if (this.currentMod === 'letsgo' && ability.id !== 'noability') {
-				(ability as any).isNonstandard = 'Past';
-			}
-			if ((this.currentMod === 'letsgo' || this.gen <= 2) && ability.id === 'noability') {
-				(ability as any).isNonstandard = null;
-			}
 		} else {
 			ability = new Data.Ability({id, name, exists: false});
 		}
@@ -760,7 +741,6 @@ export class ModdedDex {
 		if (id && this.data.Natures.hasOwnProperty(id)) {
 			const natureData = this.data.Natures[id];
 			nature = new Data.Nature(natureData);
-			if (nature.gen > this.gen) nature.isNonstandard = 'Future';
 		} else {
 			nature = new Data.Nature({id, name, exists: false});
 		}

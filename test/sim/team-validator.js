@@ -481,25 +481,6 @@ describe('Team Validator', function () {
 		assert(illegal);
 	});
 
-	it('should reject exclusive G-Max moves added directly to a Pokemon\'s moveset', function () {
-		const team = [
-			{species: 'charizard', ability: 'blaze', moves: ['gmaxwildfire'], evs: {hp: 1}, gigantamax: true},
-		];
-		let illegal = TeamValidator.get('gen8anythinggoes').validateTeam(team);
-		assert(illegal);
-		illegal = TeamValidator.get('gen8customgame@@@-nonexistent').validateTeam(team);
-		assert(illegal);
-	});
-
-	it('should reject Gmax Pokemon from formats with Dynamax Clause', function () {
-		const team = [
-			{species: 'gengar-gmax', ability: 'cursedbody', moves: ['shadowball'], evs: {hp: 1}},
-			{species: 'gengar', ability: 'cursedbody', moves: ['shadowball'], evs: {hp: 1}, gigantamax: true},
-		];
-		const illegal = TeamValidator.get('gen8customgame@@@dynamaxclause').validateTeam(team);
-		assert(illegal);
-	});
-
 	it('should reject Pokemon that cannot obtain moves in a particular forme', function () {
 		let team = [
 			{species: 'toxicrity', ability: 'punkrock', moves: ['venomdrench, magneticflux'], evs: {hp: 1}},
@@ -558,14 +539,6 @@ describe('Team Validator', function () {
 		const team = [
 			{species: 'urshifu', ability: 'unseenfist', shiny: true, moves: ['snore'], evs: {hp: 1}},
 			{species: 'cosmoem', ability: 'sturdy', shiny: true, moves: ['teleport'], evs: {hp: 1}},
-		];
-		const illegal = TeamValidator.get('gen8anythinggoes').validateTeam(team);
-		assert(illegal);
-	});
-
-	it('should not allow unreleased Gmax formes', function () {
-		const team = [
-			{species: 'melmetal-gmax', ability: 'ironfist', moves: ['doubleironbash'], evs: {hp: 1}},
 		];
 		const illegal = TeamValidator.get('gen8anythinggoes').validateTeam(team);
 		assert(illegal);

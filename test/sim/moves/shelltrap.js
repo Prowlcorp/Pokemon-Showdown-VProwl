@@ -41,13 +41,4 @@ describe('Shell Trap', function () {
 		battle.makeChoices('move shelltrap', 'move flail zmove');
 		assert(battle.log.some(line => line.includes('|Shell Trap|')));
 	});
-
-	it('should not Max if hit by a Max move', function () {
-		battle = common.createBattle({}, [
-			[{species: 'Turtonator', moves: ['shelltrap']}],
-			[{species: 'Magikarp', moves: ['flail']}],
-		]);
-		battle.makeChoices('move shelltrap', 'move flail dynamax');
-		assert(battle.log.some(line => line.includes('|Shell Trap|')));
-	});
 });

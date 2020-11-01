@@ -471,7 +471,7 @@ games in.
 
 `JSON.games` will be a `{roomid: title}` table of games you're currently in.
 Note that this includes ALL games, so `|updatesearch|` will be sent when you
-start/end challenge battles, and even non-Pokémon games like Mafia.
+start/end challenge battles, and even non-Pokémon games.
 
 To search for a battle against a random opponent, send:
 
@@ -532,12 +532,6 @@ NICKNAME|SPECIES|ITEM|ABILITY|MOVES|NATURE|EVS|GENDER|IVS|SHINY|LEVEL|HAPPINESS,
 
 - `EVS` represent AVs in Pokémon Let's Go.
 
-- `IVS` represent DVs in Gen 1-2. The IV will be divided by 2 and rounded down,
-  to become DVs (so the default of 31 IVs is converted to 15 DVs).
-
-- `IVS` is post-hyper-training: pre-hyper-training IVs are represented in
-  `HIDDENPOWERTYPE`
-
 - `SHINY` is `S` for shiny, and blank for non-shiny.
 
 - `LEVEL` is left blank for level 100.
@@ -546,8 +540,7 @@ NICKNAME|SPECIES|ITEM|ABILITY|MOVES|NATURE|EVS|GENDER|IVS|SHINY|LEVEL|HAPPINESS,
 
 - `POKEBALL` is left blank if it's a regular Poké Ball.
 
-- `HIDDENPOWERTYPE` is left blank if the Pokémon is not Hyper Trained, if
-  Hyper Training doesn't affect IVs, or if it's represented by a move in
+- `HIDDENPOWERTYPE` is left blank if it's represented by a move in
   the moves list.
 
 - If `POKEBALL` and `HIDDENPOWERTYPE` are both blank, the commas will be left

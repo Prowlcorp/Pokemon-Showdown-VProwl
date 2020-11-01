@@ -97,7 +97,7 @@ The commit summary should not end in a period.
 - BAD: `Refactor Users to use classes.`
 - GOOD: `Refactor Users to use classes`
 
-Your commit summary should make it clear what part of the code you're talking about. For instance, if you're editing the Trivia plugin, you might want to add "Trivia: " to the beginning of your commit summary so it's clear.
+Your commit summary should make it clear what part of the code you're talking about. For instance, if you're editing the moves file, you might want to add "Moves: " to the beginning of your commit summary so it's clear.
 
 - BAD: `Ban Genesect`
 - GOOD: `Monotype: Ban Genesect` (notice the uppercase "B")

@@ -17,15 +17,6 @@ describe('Wandering Spirit', function () {
 		assert(battle.p2.active[0].hasAbility('overgrow'));
 	});
 
-	it('should not activate while Dynamaxed', function () {
-		battle = common.createBattle();
-		battle.setPlayer('p1', {team: [{species: 'Decidueye', ability: 'overgrow', moves: ['shadowsneak']}]});
-		battle.setPlayer('p2', {team: [{species: 'Runerigus', ability: 'wanderingspirit', moves: ['bodypress']}]});
-		battle.makeChoices('move shadowsneak', 'move 1 dynamax');
-		assert(battle.p1.active[0].hasAbility('overgrow'));
-		assert(battle.p2.active[0].hasAbility('wanderingspirit'));
-	});
-
 	it('should not swap with Wonder Guard', function () {
 		battle = common.createBattle();
 		battle.setPlayer('p1', {team: [{species: 'Shedinja', ability: 'wonderguard', moves: ['shadowsneak']}]});
