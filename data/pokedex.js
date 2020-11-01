@@ -1135,8 +1135,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Yellow",
 		evos: ["Persian"],
 		eggGroups: ["Field"],
-		otherFormes: ["Meowth-Alola", "Meowth-Galar"],
-		formeOrder: ["Meowth", "Meowth-Alola", "Meowth-Galar"],
+		otherFormes: ["Meowth-Alola"],
+		formeOrder: ["Meowth", "Meowth-Alola"],
 	},
 	meowthalola: {
 		num: 50,
@@ -1150,7 +1150,6 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 4.2,
 		color: "Blue",
 		evos: ["Persian-Alola"],
-	},
 		eggGroups: ["Field"],
 	},
 	persian: {
@@ -2122,7 +2121,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.6,
 		weightkg: 1,
 		color: "Purple",
-		evos: ["Weezing", "Weezing-Galar"],
+		evos: ["Weezing"],
 		eggGroups: ["Amorphous"],
 	},
 	weezing: {
