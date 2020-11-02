@@ -2,7 +2,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 let BattleAbilities = {
 	noability: {
 		shortDesc: "Does nothing.",
-		id: "noability",
 		name: "No Ability",
 	},
 	acceleration: {
@@ -17,7 +16,6 @@ let BattleAbilities = {
 		onBasePower(basePower, pokemon, target, move) {
 			if (move.accelerationBoosted) return this.chainModify(1.5);
 		},
-		id: "acceleration",
 		name: "Acceleration",
 	},
 	adaptability: {
@@ -26,7 +24,6 @@ let BattleAbilities = {
 		onModifyMove(move) {
 			move.stab = 2;
 		},
-		id: "adaptability",
 		name: "Adaptability",
 	},
 	aerilate: {
@@ -43,13 +40,11 @@ let BattleAbilities = {
 		onBasePower(basePower, pokemon, target, move) {
 			if (move.aerilateBoosted) return this.chainModify([0x1333, 0x1000]);
 		},
-		id: "aerilate",
 		name: "Aerilate",
 	},
 	aftermath: {
 		desc: "If this Pokemon is knocked out with a contact move, that move's user loses 1/4 of its maximum HP, rounded down. If any active Pokemon has the Damp Ability, this effect is prevented.",
 		shortDesc: "If this Pokemon is KOed with a contact move, that move's user loses 1/4 its max HP.",
-		id: "aftermath",
 		name: "Aftermath",
 		onAfterDamageOrder: 1,
 		onAfterDamage(damage, target, source, move) {
@@ -64,7 +59,6 @@ let BattleAbilities = {
 			this.add('-ability', pokemon, 'Air Lock');
 		},
 		suppressWeather: true,
-		id: "airlock",
 		name: "Air Lock",
 	},
 	alluringgarden: {
@@ -87,7 +81,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "alluringgarden",
 		name: "Alluring Garden",
 	},
 	analytic: {
@@ -108,7 +101,6 @@ let BattleAbilities = {
 				return this.chainModify([0x14CD, 0x1000]);
 			}
 		},
-		id: "analytic",
 		name: "Analytic",
 	},
 	angerpoint: {
@@ -121,7 +113,6 @@ let BattleAbilities = {
 				this.add('-setboost', target, 'atk', 12, '[from] ability: Anger Point');
 			}
 		},
-		id: "angerpoint",
 		name: "Anger Point",
 	},
 	anticipation: {
@@ -140,7 +131,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "anticipation",
 		name: "Anticipation",
 	},
 	arenatrap: {
@@ -159,7 +149,6 @@ let BattleAbilities = {
 				pokemon.maybeTrapped = true;
 			}
 		},
-		id: "arenatrap",
 		name: "Arena Trap",
 	},
 	aromaveil: {
@@ -173,7 +162,6 @@ let BattleAbilities = {
 				return null;
 			}
 		},
-		id: "aromaveil",
 		name: "Aroma Veil",
 	},
 	assassinate: {
@@ -184,7 +172,6 @@ let BattleAbilities = {
 				return this.chainModify(2);
 			}
 		},
-		id: "assassinate",
 		name: "Assassinate",
 	},
 	aurabreak: {
@@ -197,7 +184,6 @@ let BattleAbilities = {
 			if (target === source || move.category === 'Status') return;
 			move.hasAuraBreak = true;
 		},
-		id: "aurabreak",
 		name: "Aura Break",
 	},
 	baddreams: {
@@ -217,7 +203,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "baddreams",
 		name: "Bad Dreams",
 	},
 	battery: {
@@ -229,13 +214,11 @@ let BattleAbilities = {
 				return this.chainModify([0x14CD, 0x1000]);
 			}
 		},
-		id: "battery",
 		name: "Battery",
 	},
 	battlearmor: {
 		shortDesc: "This Pokemon cannot be struck by a critical hit.",
 		onCriticalHit: false,
-		id: "battlearmor",
 		name: "Battle Armor",
 	},
 	battlebond: {
@@ -253,7 +236,6 @@ let BattleAbilities = {
 				move.multihit = 3;
 			}
 		},
-		id: "battlebond",
 		name: "Battle Bond",
 	},
 	beastboost: {
@@ -274,7 +256,6 @@ let BattleAbilities = {
 				this.boost({[statName]: 1}, source);
 			}
 		},
-		id: "beastboost",
 		name: "Beast Boost",
 	},
 	berserk: {
@@ -289,7 +270,6 @@ let BattleAbilities = {
 				this.boost({spa: 1});
 			}
 		},
-		id: "berserk",
 		name: "Berserk",
 	},
 	bigpecks: {
@@ -303,7 +283,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "bigpecks",
 		name: "Big Pecks",
 	},
 	bijuuboost: {
@@ -327,7 +306,6 @@ let BattleAbilities = {
 		onModifySpe(spe) {
 			return this.chainModify(2);
 		},
-		id: "bijuuboost",
 		name: "Bijuu Boost",
 	},
 	blaze: {
@@ -347,7 +325,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "blaze",
 		name: "Blaze",
 	},
 	bulletproof: {
@@ -359,7 +336,6 @@ let BattleAbilities = {
 				return null;
 			}
 		},
-		id: "bulletproof",
 		name: "Bulletproof",
 	},
 	cheekpouch: {
@@ -368,7 +344,6 @@ let BattleAbilities = {
 		onEatItem(item, pokemon) {
 			this.heal(pokemon.maxhp / 3);
 		},
-		id: "cheekpouch",
 		name: "Cheek Pouch",
 	},
 	chillingsonata: {
@@ -385,7 +360,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "chillingsonata",
 		name: "Chilling Sonata",
 	},
 	chlorophyll: {
@@ -395,7 +369,6 @@ let BattleAbilities = {
 				return this.chainModify(2);
 			}
 		},
-		id: "chlorophyll",
 		name: "Chlorophyll",
 	},
 	clearbody: {
@@ -415,7 +388,6 @@ let BattleAbilities = {
 				this.add("-fail", target, "unboost", "[from] ability: Clear Body", "[of] " + target);
 			}
 		},
-		id: "clearbody",
 		name: "Clear Body",
 	},
 	climatezero: {
@@ -456,7 +428,6 @@ let BattleAbilities = {
 				this.add('-end', target, 'ability: Climate Zero', '[silent]');
 			},
 		},
-		id: "climatezero",
 		name: "Climate Zero",
 	},
 	cloudnine: {
@@ -465,7 +436,6 @@ let BattleAbilities = {
 			this.add('-ability', pokemon, 'Cloud Nine');
 		},
 		suppressWeather: true,
-		id: "cloudnine",
 		name: "Cloud Nine",
 	},
 	colonize: {
@@ -482,7 +452,6 @@ let BattleAbilities = {
 		onBasePower(basePower, pokemon, target, move) {
 			if (move.colonizeBoosted) return this.chainModify([0x1333, 0x1000]);
 		},
-		id: "colonize",
 		name: "Colonize",
 	},
 	colorchange: {
@@ -504,7 +473,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "colorchange",
 		name: "Color Change",
 	},
 	comatose: {
@@ -520,7 +488,6 @@ let BattleAbilities = {
 		},
 		// Permanent sleep "status" implemented in the relevant sleep-checking effects
 		isUnbreakable: true,
-		id: "comatose",
 		name: "Comatose",
 	},
 	competitive: {
@@ -541,7 +508,6 @@ let BattleAbilities = {
 				this.boost({spa: 2}, target, target, null, true);
 			}
 		},
-		id: "competitive",
 		name: "Competitive",
 	},
 	compoundeyes: {
@@ -551,7 +517,6 @@ let BattleAbilities = {
 			this.debug('compoundeyes - enhancing accuracy');
 			return accuracy * 1.3;
 		},
-		id: "compoundeyes",
 		name: "Compound Eyes",
 	},
 	contradict: {
@@ -589,13 +554,11 @@ let BattleAbilities = {
 				boost[i] *= -1;
 			}
 		},
-		id: "contrary",
 		name: "Contrary",
 	},
 	corrosion: {
 		shortDesc: "This Pokemon can poison or badly poison other Pokemon regardless of their typing.",
 		// Implemented in sim/pokemon.js:Pokemon#setStatus
-		id: "corrosion",
 		name: "Corrosion",
 	},
 	crisisevolution: {
@@ -626,7 +589,6 @@ let BattleAbilities = {
 		onModifyMove(move) {
 			move.stab = 1.7;
 		},
-		id: "crisisevolution",
 		name: "Crisis Evolution",
 	},
 	cursedbody: {
@@ -640,7 +602,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "cursedbody",
 		name: "Cursed Body",
 	},
 	cutecharm: {
@@ -653,13 +614,11 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "cutecharm",
 		name: "Cute Charm",
 	},
 	damp: {
 		desc: "While this Pokemon is active, Explosion, Mind Blown, Self-Destruct, and the Aftermath Ability are prevented from having an effect.",
 		shortDesc: "Prevents Explosion/Mind Blown/Self-Destruct/Aftermath while this Pokemon is active.",
-		id: "damp",
 		onAnyTryMove(target, source, effect) {
 			if (['explosion', 'mindblown', 'selfdestruct'].includes(effect.id)) {
 				this.attrLastMove('[still]');
@@ -677,7 +636,6 @@ let BattleAbilities = {
 	dancer: {
 		desc: "After another Pokemon uses a dance move, this Pokemon uses the same move. Moves used by this Ability cannot be copied again.",
 		shortDesc: "After another Pokemon uses a dance move, this Pokemon uses the same move.",
-		id: "dancer",
 		name: "Dancer",
 		// implemented in runMove in scripts.js
 	},
@@ -694,7 +652,6 @@ let BattleAbilities = {
 			return this.chainModify([move.hasAuraBreak ? 0x0C00 : 0x1547, 0x1000]);
 		},
 		isUnbreakable: true,
-		id: "darkaura",
 		name: "Dark Aura",
 	},
 	dauntlessshield: {
@@ -702,7 +659,6 @@ let BattleAbilities = {
 		onStart(pokemon) {
 			this.boost({def: 1}, pokemon);
 		},
-		id: "dauntlessshield",
 		name: "Dauntless Shield",
 	},
 	dazzling: {
@@ -715,7 +671,6 @@ let BattleAbilities = {
 				return false;
 			}
 		},
-		id: "dazzling",
 		name: "Dazzling",
 	},
 	deathstare: { //Wonky?
@@ -741,7 +696,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "deathstare",
 		name: "Death Stare",
 	},
 	deepfreeze: {
@@ -753,7 +707,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "deepfreeze",
 		name: "Deep Freeze",
 	},
 	deepseamine: {
@@ -782,7 +735,6 @@ let BattleAbilities = {
 				this.damage(source.maxhp / deepseaDamage, source, target);
 			}
 		},
-		id: "deepseamine",
 		name: "Deepsea Mine",
 	},
 	defeatist: {
@@ -800,7 +752,6 @@ let BattleAbilities = {
 				return this.chainModify(0.5);
 			}
 		},
-		id: "defeatist",
 		name: "Defeatist",
 	},
 	defiant: {
@@ -821,7 +772,6 @@ let BattleAbilities = {
 				this.boost({atk: 2}, target, target, null, true);
 			}
 		},
-		id: "defiant",
 		name: "Defiant",
 	},
 	deltastream: {
@@ -844,7 +794,6 @@ let BattleAbilities = {
 			}
 			this.field.clearWeather();
 		},
-		id: "deltastream",
 		name: "Delta Stream",
 	},
 	desolateland: {
@@ -867,7 +816,6 @@ let BattleAbilities = {
 			}
 			this.field.clearWeather();
 		},
-		id: "desolateland",
 		name: "Desolate Land",
 	},
 	desperatestruggle: {
@@ -890,7 +838,6 @@ let BattleAbilities = {
 				return this.chainModify(2);
 			}
 		},
-		id: "desperatestruggle",
 		name: "Desperate Struggle",
 	},
 	direweb: {
@@ -907,7 +854,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "direweb",
 		name: "Dire Web",
 	},
 	disguise: {
@@ -933,7 +879,6 @@ let BattleAbilities = {
 				pokemon.formeChange(templateid, this.effect, true);
 			}
 		},
-		id: "disguise",
 		name: "Disguise",
 	},
 	divashock: {
@@ -946,7 +891,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "divashock",
 		name: "Diva Shock",
 	},
 	download: {
@@ -966,7 +910,6 @@ let BattleAbilities = {
 				this.boost({atk: 1});
 			}
 		},
-		id: "download",
 		name: "Download",
 	},
 	dragonforce: {
@@ -978,7 +921,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "dragonforce",
 		name: "Dragon Force",
 	},
 	dreamsembrace: {
@@ -995,7 +937,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "dreamsembrace",
 		name: "Dream's Embrace",
 	},
 	drizzle: {
@@ -1007,7 +948,6 @@ let BattleAbilities = {
 			}
 			this.field.setWeather('raindance');
 		},
-		id: "drizzle",
 		name: "Drizzle",
 	},
 	drought: {
@@ -1019,7 +959,6 @@ let BattleAbilities = {
 			}
 			this.field.setWeather('sunnyday');
 		},
-		id: "drought",
 		name: "Drought",
 	},
 	dryskin: {
@@ -1047,12 +986,10 @@ let BattleAbilities = {
 				this.damage(target.maxhp / 8, target, target);
 			}
 		},
-		id: "dryskin",
 		name: "Dry Skin",
 	},
 	earlybird: {
 		shortDesc: "This Pokemon's sleep counter drops by 2 instead of 1.",
-		id: "earlybird",
 		name: "Early Bird",
 		// Implemented in statuses.js
 	},
@@ -1071,7 +1008,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "effectspore",
 		name: "Effect Spore",
 	},
 	electricsurge: {
@@ -1079,7 +1015,6 @@ let BattleAbilities = {
 		onStart(source) {
 			this.field.setTerrain('electricterrain');
 		},
-		id: "electricsurge",
 		name: "Electric Surge",
 	},
 	elementalist: {
@@ -1097,7 +1032,6 @@ let BattleAbilities = {
 		onBasePower(basePower, pokemon, target, move) {
 			if (move.elementalistBoosted) return this.chainModify(1.5);
 		},
-		id: "elementalist",
 		name: "Elementalist",
 	},
 	elementnegate: {
@@ -1144,7 +1078,6 @@ let BattleAbilities = {
 				this.add('-activate', target, 'ability: Emergency Exit');
 			}
 		},
-		id: "emergencyexit",
 		name: "Emergency Exit",
 	},
 	eternalbeach: {
@@ -1169,7 +1102,6 @@ let BattleAbilities = {
 				this.boost({spd: 2});
 			}
 		},
-		id: "eternalbeach",
 		name: "Eternal Beach",
 	},
 	fairyaura: {
@@ -1185,7 +1117,6 @@ let BattleAbilities = {
 			return this.chainModify([move.hasAuraBreak ? 0x0C00 : 0x1547, 0x1000]);
 		},
 		isUnbreakable: true,
-		id: "fairyaura",
 		name: "Fairy Aura",
 	},
 	filter: {
@@ -1196,7 +1127,6 @@ let BattleAbilities = {
 				return this.chainModify(0.75);
 			}
 		},
-		id: "filter",
 		name: "Filter",
 	},
 	firstforge: {
@@ -1224,7 +1154,6 @@ let BattleAbilities = {
 				ability: this.getAbility('firstforge'),
 			});
 		},
-		id: "firstforge",
 		name: "First Forge",
 	},
 	flamebody: {
@@ -1236,7 +1165,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "flamebody",
 		name: "Flame Body",
 	},
 	flareboost: {
@@ -1248,7 +1176,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "flareboost",
 		name: "Flare Boost",
 	},
 	flashfire: {
@@ -1289,7 +1216,6 @@ let BattleAbilities = {
 				this.add('-end', target, 'ability: Flash Fire', '[silent]');
 			},
 		},
-		id: "flashfire",
 		name: "Flash Fire",
 	},
 	flowergift: {
@@ -1324,7 +1250,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "flowergift",
 		name: "Flower Gift",
 	},
 	flowerveil: {
@@ -1361,7 +1286,6 @@ let BattleAbilities = {
 				return null;
 			}
 		},
-		id: "flowerveil",
 		name: "Flower Veil",
 	},
 	fluffy: {
@@ -1373,7 +1297,6 @@ let BattleAbilities = {
 			if (move.flags['contact']) mod /= 2;
 			return this.chainModify(mod);
 		},
-		id: "fluffy",
 		name: "Fluffy",
 	},
 	forecast: {
@@ -1402,7 +1325,6 @@ let BattleAbilities = {
 				pokemon.formeChange(forme, this.effect, false, '[msg]');
 			}
 		},
-		id: "forecast",
 		name: "Forecast",
 	},
 	forewarn: {
@@ -1433,12 +1355,10 @@ let BattleAbilities = {
 			const [warnMoveName, warnTarget] = this.sample(warnMoves);
 			this.add('-activate', pokemon, 'ability: Forewarn', warnMoveName, '[of] ' + warnTarget);
 		},
-		id: "forewarn",
 		name: "Forewarn",
 	},
 	friendguard: {
 		shortDesc: "This Pokemon's allies receive 3/4 damage from other Pokemon's attacks.",
-		id: "friendguard",
 		name: "Friend Guard",
 		onAnyModifyDamage(damage, source, target, move) {
 			if (target !== this.effectData.target && target.side === this.effectData.target.side) {
@@ -1457,7 +1377,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "frisk",
 		name: "Frisk",
 	},
 	fullmetalbody: {
@@ -1479,7 +1398,6 @@ let BattleAbilities = {
 			}
 		},
 		isUnbreakable: true,
-		id: "fullmetalbody",
 		name: "Full Metal Body",
 	},
 	furcoat: {
@@ -1488,7 +1406,6 @@ let BattleAbilities = {
 		onModifyDef(def) {
 			return this.chainModify(2);
 		},
-		id: "furcoat",
 		name: "Fur Coat",
 	},
 	galewings: {
@@ -1496,7 +1413,6 @@ let BattleAbilities = {
 		onModifyPriority(priority, pokemon, target, move) {
 			if (move && move.type === 'Flying' && pokemon.hp === pokemon.maxhp) return priority + 1;
 		},
-		id: "galewings",
 		name: "Gale Wings",
 	},
 	galvanize: {
@@ -1513,7 +1429,6 @@ let BattleAbilities = {
 		onBasePower(basePower, pokemon, target, move) {
 			if (move.galvanizeBoosted) return this.chainModify([0x1333, 0x1000]);
 		},
-		id: "galvanize",
 		name: "Galvanize",
 	},
 	gigatonforce: {
@@ -1540,12 +1455,10 @@ let BattleAbilities = {
 				this.add('-enditem', target, item.name, '[from] ability: Gigaton Force', '[of] ' + source);
 			}
 		},
-		id: "gigatonforce",
 		name: "Gigaton Force",
 	},
 	gluttony: {
 		shortDesc: "When this Pokemon has 1/2 or less of its maximum HP, it uses certain Berries early.",
-		id: "gluttony",
 		name: "Gluttony",
 	},
 	gooey: {
@@ -1556,7 +1469,6 @@ let BattleAbilities = {
 				this.boost({spe: -1}, source, target, null, true);
 			}
 		},
-		id: "gooey",
 		name: "Gooey",
 	},
 	grasspelt: {
@@ -1565,7 +1477,6 @@ let BattleAbilities = {
 		onModifyDef(pokemon) {
 			if (this.field.isTerrain('grassyterrain')) return this.chainModify(1.5);
 		},
-		id: "grasspelt",
 		name: "Grass Pelt",
 	},
 	grassysurge: {
@@ -1573,7 +1484,6 @@ let BattleAbilities = {
 		onStart(source) {
 			this.field.setTerrain('grassyterrain');
 		},
-		id: "grassysurge",
 		name: "Grassy Surge",
 	},
 	guts: {
@@ -1585,13 +1495,11 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "guts",
 		name: "Guts",
 	},
 	harvest: {
 		desc: "If the last item this Pokemon used is a Berry, there is a 50% chance it gets restored at the end of each turn. If Sunny Day is active, this chance is 100%.",
 		shortDesc: "If last item used is a Berry, 50% chance to restore it each end of turn. 100% in Sun.",
-		id: "harvest",
 		name: "Harvest",
 		onResidualOrder: 26,
 		onResidualSubOrder: 1,
@@ -1608,7 +1516,6 @@ let BattleAbilities = {
 	healer: {
 		desc: "There is a 30% chance of curing an adjacent ally's major status condition at the end of each turn.",
 		shortDesc: "30% chance of curing an adjacent ally's status at the end of each turn.",
-		id: "healer",
 		name: "Healer",
 		onResidualOrder: 5,
 		onResidualSubOrder: 1,
@@ -1646,7 +1553,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "healerheart",
 		name: "Healer Heart",
 	},
 	heatedcombat: {
@@ -1666,7 +1572,6 @@ let BattleAbilities = {
 				ability: this.getAbility('heatedcombat'),
 			});
 		},
-		id: "heatedcombat",
 		name: "Heated Combat",
 	},
 	heatproof: {
@@ -1683,7 +1588,6 @@ let BattleAbilities = {
 				return damage / 2;
 			}
 		},
-		id: "heatproof",
 		name: "Heatproof",
 	},
 	heavensguidance: {
@@ -1860,7 +1764,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "heavensguidance",
 		name: "Heaven's Guidance",
 	},
 	heavymetal: {
@@ -1868,7 +1771,6 @@ let BattleAbilities = {
 		onModifyWeight(weight) {
 			return weight * 2;
 		},
-		id: "heavymetal",
 		name: "Heavy Metal",
 	},
 	hellfield: {
@@ -1876,7 +1778,6 @@ let BattleAbilities = {
 		onStart(source) {
 			this.field.setTerrain('hellfire');
 		},
-		id: "hellfield",
 		name: "Hell Field",
 	},
 	hivemind: {
@@ -1891,7 +1792,6 @@ let BattleAbilities = {
 				move.boosts = {def: 2, spd: 2,};
 			}
 		},
-		id: "hivemind",
 		name: "Hive Mind",
 	},
 	holytoxin: {
@@ -1918,12 +1818,10 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "holytoxin",
 		name: "Holy Toxin",
 	},
 	honeygather: {
 		shortDesc: "No competitive use.",
-		id: "honeygather",
 		name: "Honey Gather",
 	},
 	hugepower: {
@@ -1932,7 +1830,6 @@ let BattleAbilities = {
 		onModifyAtk(atk) {
 			return this.chainModify(2);
 		},
-		id: "hugepower",
 		name: "Huge Power",
 	},
 	hustle: {
@@ -1949,7 +1846,6 @@ let BattleAbilities = {
 				move.accuracy *= 0.8;
 			}
 		},
-		id: "hustle",
 		name: "Hustle",
 	},
 	hydration: {
@@ -1964,7 +1860,6 @@ let BattleAbilities = {
 				pokemon.cureStatus();
 			}
 		},
-		id: "hydration",
 		name: "Hydration",
 	},
 	hypercutter: {
@@ -1978,7 +1873,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "hypercutter",
 		name: "Hyper Cutter",
 	},
 	hypersubwoofer: {
@@ -2006,7 +1900,6 @@ let BattleAbilities = {
 				};
 			}
 		},
-		id: "hypersubwoofer",
 		name: "Hyper Subwoofer",
 	},
 	icebody: {
@@ -2020,7 +1913,6 @@ let BattleAbilities = {
 		onImmunity(type, pokemon) {
 			if (type === 'hail') return false;
 		},
-		id: "icebody",
 		name: "Ice Body",
 	},
 	iceface: {
@@ -2060,7 +1952,6 @@ let BattleAbilities = {
 				pokemon.formeChange('Eiscue', this.effect, true);
 			}
 		},
-		id: "iceface",
 		name: "Ice Face",
 	},
 	iceforce: {
@@ -2078,7 +1969,6 @@ let BattleAbilities = {
 		onImmunity(type, pokemon) {
 			if (type === 'hail') return false;
 		},
-		id: "iceforce",
 		name: "Ice Force",
 	},
 	icescales: {
@@ -2086,7 +1976,6 @@ let BattleAbilities = {
 		onModifySpD(spd) {
 			return this.chainModify(2);
 		},
-		id: "icescales",
 		name: "Ice Scales",
 	},
 	illuminate: {
@@ -2097,7 +1986,6 @@ let BattleAbilities = {
 				return this.chainModify(0.5);
 			}
 		},
-		id: "illuminate",
 		name: "Illuminate",
 	},
 	illusion: {
@@ -2132,7 +2020,6 @@ let BattleAbilities = {
 			pokemon.illusion = null;
 		},
 		isUnbreakable: true,
-		id: "illusion",
 		name: "Illusion",
 	},
 	immunity: {
@@ -2149,7 +2036,6 @@ let BattleAbilities = {
 			this.add('-immune', target, '[from] ability: Immunity');
 			return false;
 		},
-		id: "immunity",
 		name: "Immunity",
 	},
 	imposter: {
@@ -2162,7 +2048,6 @@ let BattleAbilities = {
 				pokemon.transformInto(target, this.getAbility('imposter'));
 			}
 		},
-		id: "imposter",
 		name: "Imposter",
 	},
 	infiltrator: {
@@ -2171,13 +2056,11 @@ let BattleAbilities = {
 		onModifyMove(move) {
 			move.infiltrates = true;
 		},
-		id: "infiltrator",
 		name: "Infiltrator",
 	},
 	innardsout: {
 		desc: "If this Pokemon is knocked out with a move, that move's user loses HP equal to the amount of damage inflicted on this Pokemon.",
 		shortDesc: "If this Pokemon is KOed with a move, that move's user loses an equal amount of HP.",
-		id: "innardsout",
 		name: "Innards Out",
 		onAfterDamageOrder: 1,
 		onAfterDamage(damage, target, source, move) {
@@ -2189,7 +2072,6 @@ let BattleAbilities = {
 	innerfocus: {
 		shortDesc: "This Pokemon cannot be made to flinch.",
 		onFlinch: false,
-		id: "innerfocus",
 		name: "Inner Focus",
 	},
 	insomnia: {
@@ -2206,7 +2088,6 @@ let BattleAbilities = {
 			this.add('-immune', target, '[from] ability: Insomnia');
 			return false;
 		},
-		id: "insomnia",
 		name: "Insomnia",
 	},
 	intimidate: {
@@ -2227,7 +2108,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "intimidate",
 		name: "Intimidate",
 	},
 	intrepidsword: {
@@ -2235,7 +2115,6 @@ let BattleAbilities = {
 		onStart(pokemon) {
 			this.boost({atk: 1}, pokemon);
 		},
-		id: "intrepidsword",
 		name: "Intrepid Sword",
 	},
 	ironbarbs: {
@@ -2247,7 +2126,6 @@ let BattleAbilities = {
 				this.damage(source.maxhp / 8, source, target);
 			}
 		},
-		id: "ironbarbs",
 		name: "Iron Barbs",
 	},
 	ironfist: {
@@ -2260,7 +2138,6 @@ let BattleAbilities = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		id: "ironfist",
 		name: "Iron Fist",
 	},
 	justified: {
@@ -2270,7 +2147,6 @@ let BattleAbilities = {
 				this.boost({atk: 1});
 			}
 		},
-		id: "justified",
 		name: "Justified",
 	},
 	keeneye: {
@@ -2288,14 +2164,12 @@ let BattleAbilities = {
 		onModifyMove(move) {
 			move.ignoreEvasion = true;
 		},
-		id: "keeneye",
 		name: "Keen Eye",
 	},
 	klutz: {
 		desc: "This Pokemon's held item has no effect. This Pokemon cannot use Fling successfully. Macho Brace, Power Anklet, Power Band, Power Belt, Power Bracer, Power Lens, and Power Weight still have their effects.",
 		shortDesc: "This Pokemon's held item has no effect, except Macho Brace. Fling cannot be used.",
 		// Item suppression implemented in Pokemon.ignoringItem() within sim/pokemon.js
-		id: "klutz",
 		name: "Klutz",
 	},
 	leafguard: {
@@ -2313,14 +2187,12 @@ let BattleAbilities = {
 				return null;
 			}
 		},
-		id: "leafguard",
 		name: "Leaf Guard",
 	},
 	levitate: {
 		desc: "This Pokemon is immune to Ground. Gravity, Ingrain, Smack Down, Thousand Arrows, and Iron Ball nullify the immunity.",
 		shortDesc: "This Pokemon is immune to Ground; Gravity/Ingrain/Smack Down/Iron Ball nullify it.",
 		// airborneness implemented in sim/pokemon.js:Pokemon#isGrounded
-		id: "levitate",
 		name: "Levitate",
 	},
 	libero: {
@@ -2334,7 +2206,6 @@ let BattleAbilities = {
 				this.add('-start', source, 'typechange', type, '[from] ability: Protean');
 			}
 		},
-		id: "libero",
 		name: "Libero",
 	},
 	lightmetal: {
@@ -2342,7 +2213,6 @@ let BattleAbilities = {
 		onModifyWeight(weight) {
 			return weight / 2;
 		},
-		id: "lightmetal",
 		name: "Light Metal",
 	},
 	lightningrod: {
@@ -2365,7 +2235,6 @@ let BattleAbilities = {
 				return this.effectData.target;
 			}
 		},
-		id: "lightningrod",
 		name: "Lightning Rod",
 	},
 	limber: {
@@ -2382,12 +2251,10 @@ let BattleAbilities = {
 			this.add('-immune', target, '[from] ability: Limber');
 			return false;
 		},
-		id: "limber",
 		name: "Limber",
 	},
 	liquidooze: {
 		shortDesc: "This Pokemon damages those draining HP from it for as much as they would heal.",
-		id: "liquidooze",
 		onSourceTryHeal(damage, target, source, effect) {
 			this.debug("Heal is occurring: " + target + " <- " + source + " :: " + effect.id);
 			/**@type {{[k: string]: number}} */
@@ -2408,7 +2275,6 @@ let BattleAbilities = {
 				move.type = 'Water';
 			}
 		},
-		id: "liquidvoice",
 		name: "Liquid Voice",
 	},
 	livingcastle: {
@@ -2426,7 +2292,6 @@ let BattleAbilities = {
 				move.forceSTAB = true;
 			}
 		},
-		id: "livingcastle",
 		name: "Living Castle",
 	},
 	longreach: {
@@ -2434,13 +2299,11 @@ let BattleAbilities = {
 		onModifyMove(move) {
 			delete move.flags['contact'];
 		},
-		id: "longreach",
 		name: "Long Reach",
 	},
 	magicbounce: {
 		desc: "This Pokemon blocks certain status moves and instead uses the move against the original user.",
 		shortDesc: "This Pokemon blocks certain status moves and bounces them back to the user.",
-		id: "magicbounce",
 		name: "Magic Bounce",
 		onTryHitPriority: 1,
 		onTryHit(target, source, move) {
@@ -2475,7 +2338,6 @@ let BattleAbilities = {
 				return false;
 			}
 		},
-		id: "magicguard",
 		name: "Magic Guard",
 	},
 	magician: {
@@ -2494,7 +2356,6 @@ let BattleAbilities = {
 				this.add('-item', source, yourItem, '[from] ability: Magician', '[of] ' + target);
 			}
 		},
-		id: "magician",
 		name: "Magician",
 	},
 	magmaarmor: {
@@ -2508,7 +2369,6 @@ let BattleAbilities = {
 		onImmunity(type, pokemon) {
 			if (type === 'frz') return false;
 		},
-		id: "magmaarmor",
 		name: "Magma Armor",
 	},
 	magnetpull: {
@@ -2526,7 +2386,6 @@ let BattleAbilities = {
 				pokemon.maybeTrapped = true;
 			}
 		},
-		id: "magnetpull",
 		name: "Magnet Pull",
 	},
 	marvelscale: {
@@ -2538,7 +2397,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "marvelscale",
 		name: "Marvel Scale",
 	},
 	megalauncher: {
@@ -2550,7 +2408,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "megalauncher",
 		name: "Mega Launcher",
 	},
 	merciless: {
@@ -2558,7 +2415,6 @@ let BattleAbilities = {
 		onModifyCritRatio(critRatio, source, target) {
 			if (target && ['psn', 'tox'].includes(target.status)) return 5;
 		},
-		id: "merciless",
 		name: "Merciless",
 	},
 	minedeployment: {
@@ -2569,7 +2425,6 @@ let BattleAbilities = {
 			this.add('-ability', pokemon, 'Mine Deployement');
 			this.useMove(move, pokemon, move.target);
 		},
-		id: "minedeployment",
 		name: "Mine Deployment!",
 	},
 	minus: {
@@ -2586,7 +2441,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "minus",
 		name: "Minus",
 	},
 	mirrorarmor: {
@@ -2610,7 +2464,6 @@ let BattleAbilities = {
 				this.boost(negativeBoosts, source, target, null, true);
 			}
 		},
-		id: "mirrorarmor",
 		name: "Mirror Armor",
 	},
 	misdirection: {
@@ -2643,7 +2496,6 @@ let BattleAbilities = {
 		onFaint(pokemon) {
 			pokemon.illusion = null;
 		},
-		id: "misdirection",
 		name: "Misdirection",
 	},
 	mistysurge: {
@@ -2651,7 +2503,6 @@ let BattleAbilities = {
 		onStart(source) {
 			this.field.setTerrain('mistyterrain');
 		},
-		id: "mistysurge",
 		name: "Misty Surge",
 	},
 	moldbreaker: {
@@ -2662,7 +2513,6 @@ let BattleAbilities = {
 		onModifyMove(move) {
 			move.ignoreAbility = true;
 		},
-		id: "moldbreaker",
 		name: "Mold Breaker",
 	},
 	moltenscale: {
@@ -2680,7 +2530,6 @@ let BattleAbilities = {
 		onImmunity(type, pokemon) {
 			if (type === 'frz') return false;
 		},
-		id: "moltenscale",
 		name: "Molten Scale",
 	},
 	moody: {
@@ -2714,7 +2563,6 @@ let BattleAbilities = {
 
 			this.boost(boost);
 		},
-		id: "moody",
 		name: "Moody",
 	},
 	motordrive: {
@@ -2728,7 +2576,6 @@ let BattleAbilities = {
 				return null;
 			}
 		},
-		id: "motordrive",
 		name: "Motor Drive",
 	},
 	moxie: {
@@ -2739,7 +2586,6 @@ let BattleAbilities = {
 				this.boost({atk: 1}, source);
 			}
 		},
-		id: "moxie",
 		name: "Moxie",
 	},
 	multiscale: {
@@ -2750,19 +2596,16 @@ let BattleAbilities = {
 				return this.chainModify(0.5);
 			}
 		},
-		id: "multiscale",
 		name: "Multiscale",
 	},
 	multitype: {
 		shortDesc: "If this Pokemon is an Arceus, its type changes to match its held Plate or Z-Crystal.",
 		// Multitype's type-changing itself is implemented in statuses.js
-		id: "multitype",
 		name: "Multitype",
 	},
 	mummy: {
 		desc: "Pokemon making contact with this Pokemon have their Ability changed to Mummy. Does not affect the Battle Bond, Crisis Evolution, Comatose, Disguise, Multitype, Power Construct, RKS System, Schooling, Shields Down, Stance Change, and Zen Mode Abilities.",
 		shortDesc: "Pokemon making contact with this Pokemon have their Ability changed to Mummy.",
-		id: "mummy",
 		name: "Mummy",
 		onAfterDamage(damage, target, source, move) {
 			if (source && source !== target && move && move.flags['contact'] && source.ability !== 'mummy') {
@@ -2855,7 +2698,6 @@ let BattleAbilities = {
 			// (once you know a Pokemon has Natural Cure, its cures are always known)
 			if (!pokemon.showCure) pokemon.showCure = undefined;
 		},
-		id: "naturalcure",
 		name: "Natural Cure",
 	},
 	neuroforce: {
@@ -2865,7 +2707,6 @@ let BattleAbilities = {
 				return this.chainModify([0x1400, 0x1000]);
 			}
 		},
-		id: "neuroforce",
 		name: "Neuroforce",
 	},
 	noguard: {
@@ -2876,7 +2717,6 @@ let BattleAbilities = {
 			}
 			return accuracy;
 		},
-		id: "noguard",
 		name: "No Guard",
 	},
 	normalize: {
@@ -2893,7 +2733,6 @@ let BattleAbilities = {
 		onBasePower(basePower, pokemon, target, move) {
 			if (move.normalizeBoosted) return this.chainModify([0x1333, 0x1000]);
 		},
-		id: "normalize",
 		name: "Normalize",
 	},
 	oblivious: {
@@ -2920,7 +2759,6 @@ let BattleAbilities = {
 				return null;
 			}
 		},
-		id: "oblivious",
 		name: "Oblivious",
 	},
 	otherworldlure: {
@@ -2938,7 +2776,6 @@ let BattleAbilities = {
 				move.drain = [1,4];
 			}
 		},
-		id: "otherworldlure",
 		name: "Otherworld Lure",
 	},
 	overcoat: {
@@ -2953,7 +2790,6 @@ let BattleAbilities = {
 				return null;
 			}
 		},
-		id: "overcoat",
 		name: "Overcoat",
 	},
 	overgrow: {
@@ -2973,7 +2809,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "overgrow",
 		name: "Overgrow",
 	},
 	owntempo: {
@@ -2992,7 +2827,6 @@ let BattleAbilities = {
 				this.add('-immune', target, 'confusion', '[from] ability: Own Tempo');
 			}
 		},
-		id: "owntempo",
 		name: "Own Tempo",
 	},
 	parentalbond: {
@@ -3015,7 +2849,6 @@ let BattleAbilities = {
 				return secondaries.filter(effect => effect.volatileStatus === 'flinch');
 			}
 		},
-		id: "parentalbond",
 		name: "Parental Bond",
 	},
 	pickup: {
@@ -3037,7 +2870,6 @@ let BattleAbilities = {
 			this.add('-item', pokemon, this.getItem(item), '[from] ability: Pickup');
 			pokemon.setItem(item);
 		},
-		id: "pickup",
 		name: "Pickup",
 	},
 	pickpocket: {
@@ -3060,7 +2892,6 @@ let BattleAbilities = {
 				this.add('-item', target, yourItem, '[from] ability: Pickpocket', '[of] ' + source);
 			}
 		},
-		id: "pickpocket",
 		name: "Pickpocket",
 	},
 	pixilate: {
@@ -3077,7 +2908,6 @@ let BattleAbilities = {
 		onBasePower(basePower, pokemon, target, move) {
 			if (move.pixilateBoosted) return this.chainModify([0x1333, 0x1000]);
 		},
-		id: "pixilate",
 		name: "Pixilate",
 	},
 	plasmaoverload: {
@@ -3095,7 +2925,6 @@ let BattleAbilities = {
 				this.damage((target.maxhp * 3)/ 16, target, target);
 			}
 		},
-		id: "plasmaoverload",
 		name: "Plasma Overload",
 	},
 	plus: {
@@ -3112,7 +2941,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "plus",
 		name: "Plus",
 	},
 	poisonheal: {
@@ -3125,7 +2953,6 @@ let BattleAbilities = {
 				return false;
 			}
 		},
-		id: "poisonheal",
 		name: "Poison Heal",
 	},
 	poisonpoint: {
@@ -3137,7 +2964,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "poisonpoint",
 		name: "Poison Point",
 	},
 	poisontouch: {
@@ -3154,7 +2980,6 @@ let BattleAbilities = {
 				ability: this.getAbility('poisontouch'),
 			});
 		},
-		id: "poisontouch",
 		name: "Poison Touch",
 	},
 	polaritysurge: {
@@ -3171,7 +2996,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "polaritysurge",
 		name: "Polarity Surge",
 	},
 	powerchord: {
@@ -3188,7 +3012,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "powerchord",
 		name: "Power Chord",
 	},
 	powerconstruct: {
@@ -3205,7 +3028,6 @@ let BattleAbilities = {
 			pokemon.maxhp = newHP;
 			this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
 		},
-		id: "powerconstruct",
 		name: "Power Construct",
 	},
 	powerofalchemy: {
@@ -3219,7 +3041,6 @@ let BattleAbilities = {
 			this.add('-ability', this.effectData.target, ability, '[from] ability: Power of Alchemy', '[of] ' + target);
 			this.effectData.target.setAbility(ability);
 		},
-		id: "powerofalchemy",
 		name: "Power of Alchemy",
 	},
 	powerspot: {
@@ -3231,7 +3052,6 @@ let BattleAbilities = {
 				return this.chainModify([0x14CD, 0x1000]);
 			}
 		},
-		id: "powerspot",
 		name: "Power Spot",
 	},
 	prankster: {
@@ -3242,7 +3062,6 @@ let BattleAbilities = {
 				return priority + 1;
 			}
 		},
-		id: "prankster",
 		name: "Prankster",
 	},
 	pressure: {
@@ -3255,7 +3074,6 @@ let BattleAbilities = {
 			if (target.side === source.side) return;
 			return 1;
 		},
-		id: "pressure",
 		name: "Pressure",
 	},
 	primordialsea: {
@@ -3278,7 +3096,6 @@ let BattleAbilities = {
 			}
 			this.field.clearWeather();
 		},
-		id: "primordialsea",
 		name: "Primordial Sea",
 	},
 	prismarmor: {
@@ -3291,7 +3108,6 @@ let BattleAbilities = {
 			}
 		},
 		isUnbreakable: true,
-		id: "prismarmor",
 		name: "Prism Armor",
 	},
 	protean: {
@@ -3305,7 +3121,6 @@ let BattleAbilities = {
 				this.add('-start', source, 'typechange', type, '[from] ability: Protean');
 			}
 		},
-		id: "protean",
 		name: "Protean",
 	},
 	psychicsurge: {
@@ -3313,7 +3128,6 @@ let BattleAbilities = {
 		onStart(source) {
 			this.field.setTerrain('psychicterrain');
 		},
-		id: "psychicsurge",
 		name: "Psychic Surge",
 	},
 	punkrock: {
@@ -3332,7 +3146,6 @@ let BattleAbilities = {
 				return this.chainModify(0.5);
 			}
 		},
-		id: "punkrock",
 		name: "Punk Rock",
 	},
 	purepower: {
@@ -3341,7 +3154,6 @@ let BattleAbilities = {
 		onModifyAtk(atk) {
 			return this.chainModify(2);
 		},
-		id: "purepower",
 		name: "Pure Power",
 	},
 	queenlymajesty: {
@@ -3354,7 +3166,6 @@ let BattleAbilities = {
 				return false;
 			}
 		},
-		id: "queenlymajesty",
 		name: "Queenly Majesty",
 	},
 	quickfeet: {
@@ -3365,7 +3176,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "quickfeet",
 		name: "Quick Feet",
 	},
 	raindish: {
@@ -3376,7 +3186,6 @@ let BattleAbilities = {
 				this.heal(target.maxhp / 16);
 			}
 		},
-		id: "raindish",
 		name: "Rain Dish",
 	},
 	rattled: {
@@ -3387,7 +3196,6 @@ let BattleAbilities = {
 				this.boost({spe: 1});
 			}
 		},
-		id: "rattled",
 		name: "Rattled",
 	},
 	receiver: {
@@ -3401,7 +3209,6 @@ let BattleAbilities = {
 			this.add('-ability', this.effectData.target, ability, '[from] ability: Receiver', '[of] ' + target);
 			this.effectData.target.setAbility(ability);
 		},
-		id: "receiver",
 		name: "Receiver",
 	},
 	reckless: {
@@ -3414,7 +3221,6 @@ let BattleAbilities = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		id: "reckless",
 		name: "Reckless",
 	},
 	refrigerate: {
@@ -3431,7 +3237,6 @@ let BattleAbilities = {
 		onBasePower(basePower, pokemon, target, move) {
 			if (move.refrigerateBoosted) return this.chainModify([0x1333, 0x1000]);
 		},
-		id: "refrigerate",
 		name: "Refrigerate",
 	},
 	regality: {
@@ -3450,7 +3255,6 @@ let BattleAbilities = {
 				this.add("-fail", target, "unboost", "[from] ability: Regality", "[of] " + target);
 			}
 		},
-		id: "regality",
 		name: "Regality",
 	},
 	regenerator: {
@@ -3458,7 +3262,6 @@ let BattleAbilities = {
 		onSwitchOut(pokemon) {
 			pokemon.heal(pokemon.maxhp / 3);
 		},
-		id: "regenerator",
 		name: "Regenerator",
 	},
 	relentlessattack: {
@@ -3478,7 +3281,6 @@ let BattleAbilities = {
 				this.boost({atk: 1}, target, target, null, true);
 			}
 		},
-		id: "relentlessattack",
 		name: "Relentless Attack",
 	},
 	restrainedrage: {
@@ -3519,7 +3321,6 @@ let BattleAbilities = {
 				this.add('-ability', target, 'Restrained Rage', 'boost');
 			}
 		},
-		id: "restrainedrage",
 		name: "Restrained Rage",
 	},
 	rivalry: {
@@ -3537,7 +3338,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "rivalry",
 		name: "Rivalry",
 	},
 	rkssystem: {
@@ -3566,7 +3366,6 @@ let BattleAbilities = {
 			}
 			if(move.id==='multiattack')move.type=source.apparentType;
 		},
-		id: "rkssystem",
 		name: "RKS System",
 	},
 	rockhead: {
@@ -3578,7 +3377,6 @@ let BattleAbilities = {
 				if (this.activeMove.id !== 'struggle') return null;
 			}
 		},
-		id: "rockhead",
 		name: "Rock Head",
 	},
 	roughskin: {
@@ -3590,12 +3388,10 @@ let BattleAbilities = {
 				this.damage(source.maxhp / 8, source, target);
 			}
 		},
-		id: "roughskin",
 		name: "Rough Skin",
 	},
 	runaway: {
 		shortDesc: "No competitive use.",
-		id: "runaway",
 		name: "Run Away",
 	},
 	sanddefense: {
@@ -3634,7 +3430,6 @@ let BattleAbilities = {
 			}
 			this.field.clearWeather();
 		},
-		id: "sanddefense",
 		name: "Sand Defense",
 	},
 	sandforce: {
@@ -3652,7 +3447,6 @@ let BattleAbilities = {
 		onImmunity(type, pokemon) {
 			if (type === 'sandstorm') return false;
 		},
-		id: "sandforce",
 		name: "Sand Force",
 	},
 	sandrush: {
@@ -3666,7 +3460,6 @@ let BattleAbilities = {
 		onImmunity(type, pokemon) {
 			if (type === 'sandstorm') return false;
 		},
-		id: "sandrush",
 		name: "Sand Rush",
 	},
 	sandstream: {
@@ -3674,7 +3467,6 @@ let BattleAbilities = {
 		onStart(source) {
 			this.field.setWeather('sandstorm');
 		},
-		id: "sandstream",
 		name: "Sand Stream",
 	},
 	sandveil: {
@@ -3690,7 +3482,6 @@ let BattleAbilities = {
 				return accuracy * 0.8;
 			}
 		},
-		id: "sandveil",
 		name: "Sand Veil",
 	},
 	sapsipper: {
@@ -3711,7 +3502,6 @@ let BattleAbilities = {
 				this.boost({atk: 1}, this.effectData.target);
 			}
 		},
-		id: "sapsipper",
 		name: "Sap Sipper",
 	},
 	savagestrike: {
@@ -3741,7 +3531,6 @@ let BattleAbilities = {
 				else return this.chainModify(1.5);
 			}
 		},
-		id: "savagestrike",
 		name: "Savage Strike",
 	},
 	schooling: {
@@ -3772,7 +3561,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "schooling",
 		name: "Schooling",
 	},
 	scrappy: {
@@ -3785,7 +3573,6 @@ let BattleAbilities = {
 				move.ignoreImmunity['Normal'] = true;
 			}
 		},
-		id: "scrappy",
 		name: "Scrappy",
 	},
 	serenegrace: {
@@ -3799,7 +3586,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "serenegrace",
 		name: "Serene Grace",
    },
 	shadowshield: {
@@ -3812,7 +3598,6 @@ let BattleAbilities = {
 			}
 		},
 		isUnbreakable: true,
-		id: "shadowshield",
 		name: "Shadow Shield",
 	},//FIX SPREAD HIT
 	shadowstrikesealed: {
@@ -3835,7 +3620,6 @@ let BattleAbilities = {
 				return secondaries.filter(effect => effect.volatileStatus === 'flinch');
 			}
 		},
-		id: "shadowstrikesealed",
 		name: "Shadow Strike (Sealed)",
 	},
 	shadowtag: {
@@ -3853,7 +3637,6 @@ let BattleAbilities = {
 				pokemon.maybeTrapped = true;
 			}
 		},
-		id: "shadowtag",
 		name: "Shadow Tag",
 	},
 	shatterstrike: {
@@ -3867,7 +3650,6 @@ let BattleAbilities = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		id: "shatterstrike",
 		name: "Shatter Strike",
 	},
 	shedskin: {
@@ -3882,7 +3664,6 @@ let BattleAbilities = {
 				pokemon.cureStatus();
 			}
 		},
-		id: "shedskin",
 		name: "Shed Skin",
 	},
 	sheerforce: {
@@ -3901,7 +3682,6 @@ let BattleAbilities = {
 		onBasePower(basePower, pokemon, target, move) {
 			if (move.hasSheerForce) return this.chainModify([0x14CD, 0x1000]);
 		},
-		id: "sheerforce",
 		name: "Sheer Force",
 	},
 	shielddust: {
@@ -3910,7 +3690,6 @@ let BattleAbilities = {
 			this.debug('Shield Dust prevent secondary');
 			return secondaries.filter(effect => !!(effect.self || effect.dustproof));
 		},
-		id: "shielddust",
 		name: "Shield Dust",
 	},
 	shieldsdown: {
@@ -3954,7 +3733,6 @@ let BattleAbilities = {
 			return null;
 		},
 		isUnbreakable: true,
-		id: "shieldsdown",
 		name: "Shields Down",
 	},
 	shiningaria: {
@@ -3971,7 +3749,6 @@ let BattleAbilities = {
 				});
 			}
 		},
-		id: "shiningaria",
 		name: "Shining Aria",
 	},
 	silentkiller: {
@@ -3992,7 +3769,6 @@ let BattleAbilities = {
 				return accuracy * 0.7;
 			}
 		},
-		id: "silentkiller",
 		name: "Silent Killer",
 	},
 	simple: {
@@ -4004,7 +3780,6 @@ let BattleAbilities = {
 				boost[i] *= 2;
 			}
 		},
-		id: "simple",
 		name: "Simple",
 	},
 	skilllink: {
@@ -4017,7 +3792,6 @@ let BattleAbilities = {
 				delete move.multiaccuracy;
 			}
 		},
-		id: "skilllink",
 		name: "Skill Link",
 	},
 	slowstart: {
@@ -4045,7 +3819,6 @@ let BattleAbilities = {
 				this.add('-end', target, 'Slow Start');
 			},
 		},
-		id: "slowstart",
 		name: "Slow Start",
 	},
 	slushrush: {
@@ -4055,7 +3828,6 @@ let BattleAbilities = {
 				return this.chainModify(2);
 			}
 		},
-		id: "slushrush",
 		name: "Slush Rush",
 	},
 	sniper: {
@@ -4066,7 +3838,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "sniper",
 		name: "Sniper",
 	},
 	snowcloak: {
@@ -4082,7 +3853,6 @@ let BattleAbilities = {
 				return accuracy * 0.8;
 			}
 		},
-		id: "snowcloak",
 		name: "Snow Cloak",
 	},
 	snowwarning: {
@@ -4090,7 +3860,6 @@ let BattleAbilities = {
 		onStart(source) {
 			this.field.setWeather('hail');
 		},
-		id: "snowwarning",
 		name: "Snow Warning",
 	},
 	solarpower: {
@@ -4107,7 +3876,6 @@ let BattleAbilities = {
 				this.damage(target.maxhp / 8, target, target);
 			}
 		},
-		id: "solarpower",
 		name: "Solar Power",
 	},
 	soulheart: {
@@ -4117,7 +3885,6 @@ let BattleAbilities = {
 		onAnyFaint() {
 			this.boost({spa: 1}, this.effectData.target);
 		},
-		id: "soulheart",
 		name: "Soul-Heart",
 	},
 	soundproof: {
@@ -4133,7 +3900,6 @@ let BattleAbilities = {
 				this.add('-immune', this.effectData.target, '[from] ability: Soundproof');
 			}
 		},
-		id: "soundproof",
 		name: "Soundproof",
 	},
 	speedboost: {
@@ -4146,7 +3912,6 @@ let BattleAbilities = {
 				this.boost({spe: 1});
 			}
 		},
-		id: "speedboost",
 		name: "Speed Boost",
 	},
 	speedformation: {
@@ -4155,7 +3920,6 @@ let BattleAbilities = {
 		onStart(pokemon) {
 			this.boost({evasion: 1});
 		},
-		id: "speedformation",
 		name: "Speed Formation",
 	},
 	stakeout: {
@@ -4174,7 +3938,6 @@ let BattleAbilities = {
 				return this.chainModify(2);
 			}
 		},
-		id: "stakeout",
 		name: "Stakeout",
 	},
 	stall: {
@@ -4182,7 +3945,6 @@ let BattleAbilities = {
 		onModifyPriority(priority) {
 			return Math.round(priority) - 0.1;
 		},
-		id: "stall",
 		name: "Stall",
 	},
 	stalwart: {
@@ -4196,7 +3958,6 @@ let BattleAbilities = {
 				return target;
 			}
 		},
-		id: "stalwart",
 		name: "Stalwart",
 	},
 	stamina: {
@@ -4206,7 +3967,6 @@ let BattleAbilities = {
 				this.boost({def: 1});
 			}
 		},
-		id: "stamina",
 		name: "Stamina",
 	},
 	stancechange: {
@@ -4219,7 +3979,6 @@ let BattleAbilities = {
 			let targetSpecies = (move.id === 'kingsshield' ? 'Aegislash' : 'Aegislash-Blade');
 			if (attacker.template.species !== targetSpecies) attacker.formeChange(targetSpecies);
 		},
-		id: "stancechange",
 		name: "Stance Change",
 	},
 	static: {
@@ -4231,7 +3990,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "static",
 		name: "Static",
 	},
 	steadfast: {
@@ -4239,7 +3997,6 @@ let BattleAbilities = {
 		onFlinch(pokemon) {
 			this.boost({spe: 1});
 		},
-		id: "steadfast",
 		name: "Steadfast",
 	},
 	steamengine: {
@@ -4249,7 +4006,6 @@ let BattleAbilities = {
 				this.boost({spe: 6});
 			}
 		},
-		id: "steamengine",
 		name: "Steam Engine",
 	},
 	steelbreaker: {
@@ -4262,8 +4018,7 @@ let BattleAbilities = {
 						let move = this.getMove('brutalslice');
 						pokemon.moveSlots.push({
 							move: move.name,
-							id: move.id,
-							pp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
+												pp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
 							maxpp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
 							target: move.target,
 							disabled: false,
@@ -4274,8 +4029,7 @@ let BattleAbilities = {
 						let move = this.getMove('axestrike');
 						pokemon.moveSlots.push({
 							move: move.name,
-							id: move.id,
-							pp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
+												pp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
 							maxpp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
 							target: move.target,
 							disabled: false,
@@ -4314,7 +4068,6 @@ let BattleAbilities = {
 				};
 			}
 		},
-		id: "steelbreaker",
 		name: "Steel Breaker",
 	},
 	steelworker: {
@@ -4333,7 +4086,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "steelworker",
 		name: "Steelworker",
 	},
 	stench: {
@@ -4352,7 +4104,6 @@ let BattleAbilities = {
 				});
 			}
 		},
-		id: "stench",
 		name: "Stench",
 	},
 	stickyhold: {
@@ -4365,7 +4116,6 @@ let BattleAbilities = {
 				return false;
 			}
 		},
-		id: "stickyhold",
 		name: "Sticky Hold",
 	},
 	stormdrain: {
@@ -4388,7 +4138,6 @@ let BattleAbilities = {
 				return this.effectData.target;
 			}
 		},
-		id: "stormdrain",
 		name: "Storm Drain",
 	},
 	strongjaw: {
@@ -4400,7 +4149,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "strongjaw",
 		name: "Strong Jaw",
 	},
 	sturdy: {
@@ -4419,7 +4167,6 @@ let BattleAbilities = {
 				return target.hp - 1;
 			}
 		},
-		id: "sturdy",
 		name: "Sturdy",
 	},
 	suctioncups: {
@@ -4429,7 +4176,6 @@ let BattleAbilities = {
 			this.add('-activate', pokemon, 'ability: Suction Cups');
 			return null;
 		},
-		id: "suctioncups",
 		name: "Suction Cups",
 	},
 //Does not show modded line
@@ -4439,7 +4185,6 @@ let BattleAbilities = {
 		onModifySpA(spa) {
 			return this.chainModify(2);
 		},
-		id: "superbrain",
 		name: "Super Brain",
 	},
 	superdownload: {
@@ -4471,7 +4216,6 @@ let BattleAbilities = {
 				this.boost({spd: 1});
 			}
 		},
-		id: "superdownload",
 		name: "Super Download",
 	},
 	superluck: {
@@ -4479,7 +4223,6 @@ let BattleAbilities = {
 		onModifyCritRatio(critRatio) {
 			return critRatio + 1;
 		},
-		id: "superluck",
 		name: "Super Luck",
 	},
 	suresword: {
@@ -4495,7 +4238,6 @@ let BattleAbilities = {
 				boosts['evasion'] = 0;
 			}
 		},
-		id: "suresword",
 		name: "Sure Sword",
 	},
 	surgesurfer: {
@@ -4505,7 +4247,6 @@ let BattleAbilities = {
 				return this.chainModify(2);
 			}
 		},
-		id: "surgesurfer",
 		name: "Surge Surfer",
 	},
 	swarm: {
@@ -4525,12 +4266,10 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "swarm",
 		name: "Swarm",
 	},
 	sweetveil: {
 		shortDesc: "This Pokemon and its allies cannot fall asleep.",
-		id: "sweetveil",
 		name: "Sweet Veil",
 		onAllySetStatus(status, target, source, effect) {
 			if (status.id === 'slp') {
@@ -4554,7 +4293,6 @@ let BattleAbilities = {
 				return this.chainModify(2);
 			}
 		},
-		id: "swiftswim",
 		name: "Swift Swim",
 	},
 	symbiosis: {
@@ -4571,7 +4309,6 @@ let BattleAbilities = {
 			}
 			this.add('-activate', source, 'ability: Symbiosis', myItem, '[of] ' + pokemon);
 		},
-		id: "symbiosis",
 		name: "Symbiosis",
 	},
 	synchronize: {
@@ -4587,7 +4324,6 @@ let BattleAbilities = {
 			// @ts-ignore
 			source.trySetStatus(status, target, {status: status.id, id: 'synchronize'});
 		},
-		id: "synchronize",
 		name: "Synchronize",
 	},
 	tangledfeet: {
@@ -4599,7 +4335,6 @@ let BattleAbilities = {
 				return accuracy * 0.5;
 			}
 		},
-		id: "tangledfeet",
 		name: "Tangled Feet",
 	},
 	tanglinghair: {
@@ -4610,7 +4345,6 @@ let BattleAbilities = {
 				this.boost({spe: -1}, source, target, null, false, true);
 			}
 		},
-		id: "tanglinghair",
 		name: "Tangling Hair",
 	},
 	technician: {
@@ -4623,7 +4357,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "technician",
 		name: "Technician",
 	},
 	telepathy: {
@@ -4634,7 +4367,6 @@ let BattleAbilities = {
 				return null;
 			}
 		},
-		id: "telepathy",
 		name: "Telepathy",
 	},
 	temperamental: {
@@ -4682,7 +4414,6 @@ let BattleAbilities = {
 				this.add('-end', target, 'ability: Temperamental', '[silent]');
 			},
 		},
-		id: "temperamental",
 		name: "Temperamental",
 	},
 	teravolt: {
@@ -4693,7 +4424,6 @@ let BattleAbilities = {
 		onModifyMove(move) {
 			move.ignoreAbility = true;
 		},
-		id: "teravolt",
 		name: "Teravolt",
 	},
 	thickfat: {
@@ -4713,7 +4443,6 @@ let BattleAbilities = {
 				return this.chainModify(0.5);
 			}
 		},
-		id: "thickfat",
 		name: "Thick Fat",
 	},
 	thirdeye: {
@@ -4723,7 +4452,6 @@ let BattleAbilities = {
 			move.flags.authentic = true;
 			move.ignoreImmunity = {'Ground': true, 'Psychic': true, 'Ghost': true, 'Normal': true, 'Fighting': true};
 		},
-		id: "thirdeye",
 		name: "Third Eye",
 	},
 	tintedlens: {
@@ -4734,7 +4462,6 @@ let BattleAbilities = {
 				return this.chainModify(2);
 			}
 		},
-		id: "tintedlens",
 		name: "Tinted Lens",
 	},
 	torrent: {
@@ -4754,7 +4481,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "torrent",
 		name: "Torrent",
 	},
 	toxicboost: {
@@ -4766,7 +4492,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "toxicboost",
 		name: "Toxic Boost",
 	},
 	toughclaws: {
@@ -4777,7 +4502,6 @@ let BattleAbilities = {
 				return this.chainModify([0x14CD, 0x1000]);
 			}
 		},
-		id: "toughclaws",
 		name: "Tough Claws",
 	},
 	trace: {
@@ -4806,7 +4530,6 @@ let BattleAbilities = {
 				return;
 			}
 		},
-		id: "trace",
 		name: "Trace",
 	},
 	trancetouch: {
@@ -4823,7 +4546,6 @@ let BattleAbilities = {
 				ability: this.getAbility('trancetouch'),
 			});
 		},
-		id: "trancetouch",
 		name: "Trance Touch",
 	},
 	triage: {
@@ -4831,7 +4553,6 @@ let BattleAbilities = {
 		onModifyPriority(priority, pokemon, target, move) {
 			if (move && move.flags['heal']) return priority + 3;
 		},
-		id: "triage",
 		name: "Triage",
 	},
 	triplethreat: {
@@ -4866,7 +4587,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "triplethreat",
 		name: "Triple Threat",
 	},
 	truant: {
@@ -4886,7 +4606,6 @@ let BattleAbilities = {
 			pokemon.addVolatile('truant');
 		},
 		effect: {},
-		id: "truant",
 		name: "Truant",
 	},
 	turboblaze: {
@@ -4897,7 +4616,6 @@ let BattleAbilities = {
 		onModifyMove(move) {
 			move.ignoreAbility = true;
 		},
-		id: "turboblaze",
 		name: "Turboblaze",
 	},
 	twinterror: {
@@ -4918,7 +4636,6 @@ let BattleAbilities = {
 				}
 			}
 		},
-		id: "twinterror",
 		name: "Twin Terror",
 	},
 	ultimatesparring: {
@@ -4932,13 +4649,11 @@ let BattleAbilities = {
 		onFoeModifyCritRatio(critRatio) {
 			return 5;
 		},
-		id: "ultimatesparring",
 		name: "Ultimate Sparring",
 	},
 	unaware: {
 		desc: "This Pokemon ignores other Pokemon's Attack, Special Attack, and accuracy stat stages when taking damage, and ignores other Pokemon's Defense, Special Defense, and evasiveness stat stages when dealing damage.",
 		shortDesc: "This Pokemon ignores other Pokemon's stat stages when taking or doing damage.",
-		id: "unaware",
 		name: "Unaware",
 		onAnyModifyBoost(boosts, target) {
 			let source = this.effectData.target;
@@ -4964,7 +4679,6 @@ let BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-		id: "unbendingblade",
 		name: "Unbending Blade",
 	},
 	unburden: {
@@ -4987,7 +4701,6 @@ let BattleAbilities = {
 				}
 			},
 		},
-		id: "unburden",
 		name: "Unburden",
 	},
 	unnerve: {
@@ -4997,7 +4710,6 @@ let BattleAbilities = {
 			this.add('-ability', pokemon, 'Unnerve', pokemon.side.foe);
 		},
 		onFoeTryEatItem: false,
-		id: "unnerve",
 		name: "Unnerve",
 	},
 	victorystar: {
@@ -5007,7 +4719,6 @@ let BattleAbilities = {
 				move.accuracy *= 1.1;
 			}
 		},
-		id: "victorystar",
 		name: "Victory Star",
 	},
 	vitalspirit: {
@@ -5024,7 +4735,6 @@ let BattleAbilities = {
 			this.add('-immune', target, '[from] ability: Vital Spirit');
 			return false;
 		},
-		id: "vitalspirit",
 		name: "Vital Spirit",
 	},
 	voltabsorb: {
@@ -5038,7 +4748,6 @@ let BattleAbilities = {
 				return null;
 			}
 		},
-		id: "voltabsorb",
 		name: "Volt Absorb",
 	},
 	voltconduit: {
@@ -5062,7 +4771,6 @@ let BattleAbilities = {
 				return this.effectData.target;
 			}
 		},
-		id: "voltconduit",
 		name: "Volt Conduit",
 	},
 	wanderingspirit: {
@@ -5091,7 +4799,6 @@ let BattleAbilities = {
 				this.singleEvent('Start', sourceAbility, target.abilityData, target);
 			}
 		},
-		id: "wanderingspirit",
 		name: "Wandering Spirit",
 		num: 254,
 	},
@@ -5106,7 +4813,6 @@ let BattleAbilities = {
 				return null;
 			}
 		},
-		id: "waterabsorb",
 		name: "Water Absorb",
 	},
 	waterbubble: {
@@ -5146,7 +4852,6 @@ let BattleAbilities = {
 			this.add('-immune', target, '[from] ability: Water Bubble');
 			return false;
 		},
-		id: "waterbubble",
 		name: "Water Bubble",
 	},
 	watercompaction: {
@@ -5156,7 +4861,6 @@ let BattleAbilities = {
 				this.boost({def: 2});
 			}
 		},
-		id: "watercompaction",
 		name: "Water Compaction",
 	},
 	waterveil: {
@@ -5173,7 +4877,6 @@ let BattleAbilities = {
 			this.add('-immune', target, '[from] ability: Water Veil');
 			return false;
 		},
-		id: "waterveil",
 		name: "Water Veil",
 	},
 	weakarmor: {
@@ -5184,7 +4887,6 @@ let BattleAbilities = {
 				this.boost({def: -1, spe: 2}, target, target);
 			}
 		},
-		id: "weakarmor",
 		name: "Weak Armor",
 	},
 	whitesmoke: {
@@ -5204,7 +4906,6 @@ let BattleAbilities = {
 				this.add("-fail", target, "unboost", "[from] ability: White Smoke", "[of] " + target);
 			}
 		},
-		id: "whitesmoke",
 		name: "White Smoke",
 	},
 	wonderguard: {
@@ -5217,7 +4918,6 @@ let BattleAbilities = {
 				return null;
 			}
 		},
-		id: "wonderguard",
 		name: "Wonder Guard",
 	},
 	wonderskin: {
@@ -5230,7 +4930,6 @@ let BattleAbilities = {
 				return 50;
 			}
 		},
-		id: "wonderskin",
 		name: "Wonder Skin",
 	},
 	zenmode: {
@@ -5262,7 +4961,6 @@ let BattleAbilities = {
 				pokemon.formeChange('Darmanitan');
 			},
 		},
-		id: "zenmode",
 		name: "Zen Mode",
 	},
 };
