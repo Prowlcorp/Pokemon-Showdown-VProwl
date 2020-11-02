@@ -365,7 +365,6 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Purple",
 		evos: ["Raticate"],
 		eggGroups: ["Field"],
-		otherFormes: ["rattataalola"],
 		otherFormes: ["Rattata-Alola"],
 		formeOrder: ["Rattata", "Rattata-Alola"],
 	},
@@ -464,7 +463,11 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "levelFriendship",
 		evos: ["Raichu", "Raichu-Alola"],
 		eggGroups: ["Field", "Fairy"],
-		otherFormes: ["pikachucosplay", "pikachurockstar", "pikachubelle", "pikachupopstar", "pikachuphd", "pikachulibre", "pikachuoriginal", "pikachuhoenn", "pikachusinnoh", "pikachuunova", "pikachukalos", "pikachualola", "pikachupartner", "pikachustarter"],
+		otherFormes: ["Pikachu-Cosplay", "Pikachu-Rock-Star", "Pikachu-Belle", "Pikachu-Pop-Star", "Pikachu-PhD", "Pikachu-Libre", "Pikachu-Partner", "Pikachu-World"],
+		formeOrder: [
+			"Pikachu", "Pikachu-Partner", "Pikachu-World",
+			"Pikachu-Rock-Star", "Pikachu-Belle", "Pikachu-Pop-Star", "Pikachu-PhD", "Pikachu-Libre", "Pikachu-Cosplay", // formes 1-6 from Gen 6
+		],
 	},
 	pikachucosplay: {
 		num: 23,
@@ -479,6 +482,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 6,
 		color: "Yellow",
 		eggGroups: ["Undiscovered"],
+		gen: 6,
 	},
 	pikachurockstar: {
 		num: 23,
@@ -493,6 +497,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 6,
 		color: "Yellow",
 		eggGroups: ["Undiscovered"],
+		changesFrom: "Pikachu-Cosplay",
 	},
 	pikachubelle: {
 		num: 23,
@@ -507,6 +512,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 6,
 		color: "Yellow",
 		eggGroups: ["Undiscovered"],
+		changesFrom: "Pikachu-Cosplay",
 	},
 	pikachupopstar: {
 		num: 23,
@@ -521,6 +527,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 6,
 		color: "Yellow",
 		eggGroups: ["Undiscovered"],
+		changesFrom: "Pikachu-Cosplay",
 	},
 	pikachuphd: {
 		num: 23,
@@ -535,6 +542,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 6,
 		color: "Yellow",
 		eggGroups: ["Undiscovered"],
+		changesFrom: "Pikachu-Cosplay",
 	},
 	pikachulibre: {
 		num: 23,
@@ -549,6 +557,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 6,
 		color: "Yellow",
 		eggGroups: ["Undiscovered"],
+		changesFrom: "Pikachu-Cosplay",
 	},
 	pikachupartner: {
 		num: 23,
@@ -1538,8 +1547,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Slowpoke",
 		evoLevel: 37,
 		eggGroups: ["Monster", "Water 1"],
-		otherFormes: ["Slowbro-Mega", "Slowbro-Galar"],
-		formeOrder: ["Slowbro", "Slowbro-Mega", "Slowbro-Galar"],
+		otherFormes: ["Slowbro-Mega"],
+		formeOrder: ["Slowbro", "Slowbro-Mega"],
 	},
 	slowbromega: {
 		num: 78,
@@ -2387,7 +2396,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.3,
 		weightkg: 6.5,
 		color: "Brown",
-		evos: ["Vaporeon", "jolteon", "flareon", "espeon", "umbreon", "leafeon", "glaceon", "sylveon"],
+		evos: ["Vaporeon", "Jolteon", "Flareon", "Espeon", "Umbreon", "Leafeon", "Glaceon", "Sylveon"],
 		eggGroups: ["Field"],
 	},
 	vaporeon: {
@@ -3312,6 +3321,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 8.5,
 		color: "Yellow",
 		prevo: "Sunkern",
+		evoType: "useItem",
 		evoItem: "Sun Stone",
 		eggGroups: ["Grass", "Field"],
 	},
@@ -7112,7 +7122,6 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 4.4,
 		color: "Purple",
 		prevo: "Misdreavus",
-		evoType: "stone",
 		evoType: "useItem",
 		evoItem: "Dusk Stone",
 		eggGroups: ["Amorphous"],
@@ -11116,6 +11125,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	vivillon: {
 		num: 650,
 		name: "Vivillon",
+		baseForme: "Meadow", // TODO: actual base forme is Icy Snow, not Meadow
 		types: ["Bug", "Flying"],
 		baseStats: {hp: 80, atk: 52, def: 50, spa: 90, spd: 50, spe: 89},
 		abilities: {0: "Shield Dust", 1: "Compound Eyes", H: "Friend Guard"},
@@ -11125,7 +11135,6 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Spewpa",
 		evoLevel: 12,
 		eggGroups: ["Bug"],
-		otherFormes: ["Vivillon-Fancy", "Vivillon-Pokeball"],
 		cosmeticFormes: ["Vivillon-Archipelago", "Vivillon-Continental", "Vivillon-Elegant", "Vivillon-Garden", "Vivillon-High Plains", "Vivillon-Icy Snow", "Vivillon-Jungle", "Vivillon-Marine", "Vivillon-Modern", "Vivillon-Monsoon", "Vivillon-Ocean", "Vivillon-Polar", "Vivillon-River", "Vivillon-Sandstorm", "Vivillon-Savanna", "Vivillon-Sun", "Vivillon-Tundra"],
 		formeOrder: [
 			"Vivillon-Icy Snow",
@@ -11147,7 +11156,6 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 			"Vivillon-Ocean",
 			"Vivillon-Jungle",
 		],
-	},
 	},
 	litleo: {
 		num: 651,
@@ -11933,7 +11941,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 1.1,
 		weightkg: 14,
 		color: "Brown",
-		prevo: "Pumpkaboolarge",
+		prevo: "Pumpkaboo-Large",
 		evoType: "trade",
 		eggGroups: ["Amorphous"],
 	},
@@ -12589,6 +12597,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Brown",
 		prevo: "Rockruff",
 		evoLevel: 25,
+		evoCondition: "during the day",
 		eggGroups: ["Field"],
 		otherFormes: ["Lycanroc-Midnight", "Lycanroc-Dusk"],
 		formeOrder: ["Lycanroc", "Lycanroc-Midnight", "Lycanroc-Dusk"],
@@ -13451,6 +13460,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	mimikyu: {
 		num: 762,
 		name: "Mimikyu",
+		baseForme: "Disguised",
 		types: ["Ghost", "Fairy"],
 		baseStats: {hp: 55, atk: 90, def: 80, spa: 50, spd: 105, spe: 96},
 		abilities: {0: "Disguise"},
@@ -14171,8 +14181,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.4,
 		weightkg: 11,
 		color: "Purple",
-		evos: ["Toxtricity", "toxtricitylowkey"],
+		evos: ["Toxtricity", "Toxtricity-Low-Key"],
 		eggGroups: ["Undiscovered"],
+		canHatch: true,
 	},
 	toxtricity: {
 		num: 809,
@@ -14187,7 +14198,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Toxel",
 		evoLevel: 30,
 		eggGroups: ["Human-Like"],
-		otherFormes: ["toxtricitylowkey"],
+		otherFormes: ["Toxtricity-Low-Key"],
+		formeOrder: ["Toxtricity", "Toxtricity-Low-Key"],
 	},
 	toxtricitylowkey: {
 		num: 809,
