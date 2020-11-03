@@ -544,7 +544,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if(move.type === 'Grass') targetSpecies= 'Leaf';
 			if(move.type === 'Ice') targetSpecies= 'Glace';
 			if(move.type === 'Fairy') targetSpecies= 'Sylve';
-			if (targetSpecies !== null && attacker.template.species !== targetSpecies) {
+			if (targetSpecies !== null && attacker.species.name !== targetSpecies) {
 				attacker.formeChange(targetSpecies);
 				let newHP = Math.floor(Math.floor(2 * attacker.template.baseStats['hp'] + attacker.set.ivs['hp'] + Math.floor(attacker.set.evs['hp'] / 4) + 100) * attacker.level / 100 + 10);
 				attacker.hp = newHP - (attacker.maxhp - attacker.hp);
@@ -1542,10 +1542,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	heavensguidance: {
 		onBasePower(basePower, attacker, defender, move) {
-			if (move.type === 'Grass' && move.category !== "Status" && attacker.template.species === 'Mew-Mega') {
+			if (move.type === 'Grass' && move.category !== "Status" && attacker.species.name === 'Mew-Mega') {
 				return this.chainModify(1.2);
 			}
-			if (move.type === 'Fighting' && move.category !== "Status" && attacker.template.species === 'Mew-Mega') {
+			if (move.type === 'Fighting' && move.category !== "Status" && attacker.species.name === 'Mew-Mega') {
 				if(move.id === 'dynamicpunch') {
 					return this.chainModify(1.3);
 				}
@@ -1553,7 +1553,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return this.chainModify(1.2);
 				}
 			}
-			if(move.type === 'Electric' && move.category === "Special" && attacker.template.species === 'Mew-Mega') {
+			if(move.type === 'Electric' && move.category === "Special" && attacker.species.name === 'Mew-Mega') {
 				return this.chainModify(1.4);
 			}
 		},
@@ -1563,11 +1563,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			return false;
 		},
 		onModifyMove(move, pokemon) {
-			if(move.type === 'Normal' && move.category !== "Status" && pokemon.template.species === 'Mew-Mega') {
+			if(move.type === 'Normal' && move.category !== "Status" && pokemon.species.name === 'Mew-Mega') {
 				move.name = "Ancestral Radiance";
 				move.basePower= 130;
 			}
-			if(move.type === 'Psychic' && move.category !== "Status" && pokemon.template.species === 'Mew-Mega') {
+			if(move.type === 'Psychic' && move.category !== "Status" && pokemon.species.name === 'Mew-Mega') {
 				move.basePower = 130;
 				if (pokemon.getStat('atk', false, true) > pokemon.getStat('spa', false, true)) move.category = 'Physical';
 				delete move.secondary;
@@ -1581,7 +1581,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					},
 				});
 			}
-			if(move.type === 'Fire' && move.category !== "Status" && pokemon.template.species === 'Mew-Mega' && move.id !== 'sacredfire') {
+			if(move.type === 'Fire' && move.category !== "Status" && pokemon.species.name === 'Mew-Mega' && move.id !== 'sacredfire') {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
@@ -1590,7 +1590,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return null;
 				}
 			}
-			if(move.type === 'Dragon' && move.category === "Special" && pokemon.template.species === 'Mew-Mega') {
+			if(move.type === 'Dragon' && move.category === "Special" && pokemon.species.name === 'Mew-Mega') {
 				move.basePower = 180;
 				move.accuracy = 90;
 				move.name = "Roar of Time Alpha";
@@ -1600,21 +1600,21 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.self.volatileStatus = 'mustrecharge';
 				move.flags.recharge = 1;
 			}
-			if(move.type === 'Dragon' && move.category === "Physical" && pokemon.template.species === 'Mew-Mega') {
+			if(move.type === 'Dragon' && move.category === "Physical" && pokemon.species.name === 'Mew-Mega') {
 				move.basePower = 120;
 				move.accuracy = 95;
 				move.name = "Spacial Rend Omega";
 				move.critRatio++;
 			}
-			if(move.type === 'Grass' && !move.drain && move.category !== "Status" && pokemon.template.species === 'Mew-Mega') {
+			if(move.type === 'Grass' && !move.drain && move.category !== "Status" && pokemon.species.name === 'Mew-Mega') {
 				move.drain = [1,3];
 			}
-			if(move.type === 'Fighting' && move.category !== "Status" && pokemon.template.species === 'Mew-Mega') {
+			if(move.type === 'Fighting' && move.category !== "Status" && pokemon.species.name === 'Mew-Mega') {
 				if(move.id !== 'dynamicpunch') {
 					move.accuracy=true;
 				}
 			}
-			if(move.type === 'Water' && move.category === "Special" && pokemon.template.species === 'Mew-Mega' && move.id !== 'steameruption') {
+			if(move.type === 'Water' && move.category === "Special" && pokemon.species.name === 'Mew-Mega' && move.id !== 'steameruption') {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
@@ -1623,7 +1623,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return null;
 				}
 			}
-			if(move.type === 'Flying' && move.category === "Physical" && pokemon.template.species === 'Mew-Mega') {
+			if(move.type === 'Flying' && move.category === "Physical" && pokemon.species.name === 'Mew-Mega') {
 				move.basePower= 80;
 				move.accuracy= 100;
 				move.name = "Oblivion Wing";
@@ -1632,7 +1632,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				}
 				move.drain = [3,4];
 			}
-			if(move.type === 'Flying' && move.category === "Special" && pokemon.template.species === 'Mew-Mega' && move.id !== 'aeroblast') {
+			if(move.type === 'Flying' && move.category === "Special" && pokemon.species.name === 'Mew-Mega' && move.id !== 'aeroblast') {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
@@ -1641,7 +1641,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return null;
 				}
 			}
-			if(move.type === 'Electric' && move.category === "Physical" && pokemon.template.species === 'Mew-Mega' && move.id !== 'boltstrike') {
+			if(move.type === 'Electric' && move.category === "Physical" && pokemon.species.name === 'Mew-Mega' && move.id !== 'boltstrike') {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
@@ -1650,10 +1650,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return null;
 				}
 			}
-			if(move.type === 'Electric' && move.category === "Special" && pokemon.template.species === 'Mew-Mega') {
+			if(move.type === 'Electric' && move.category === "Special" && pokemon.species.name === 'Mew-Mega') {
 				move.name = "Maximum " + move.name;
 			}
-			if(move.type === 'Ground' && move.category === "Physical" && pokemon.template.species === 'Mew-Mega' && move.id !== 'precipiceblades') {
+			if(move.type === 'Ground' && move.category === "Physical" && pokemon.species.name === 'Mew-Mega' && move.id !== 'precipiceblades') {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
@@ -1662,7 +1662,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return null;
 				}
 			}
-			if(move.type === 'Ice' && move.category === "Special"  && pokemon.template.species === 'Mew-Mega' && move.id !== 'glaciate') {
+			if(move.type === 'Ice' && move.category === "Special"  && pokemon.species.name === 'Mew-Mega' && move.id !== 'glaciate') {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
@@ -1671,7 +1671,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return null;
 				}
 			}
-			if(move.type === 'Ghost' && move.category === "Special" && pokemon.template.species === 'Mew-Mega' && move.id !== 'moongeistbeam') {
+			if(move.type === 'Ghost' && move.category === "Special" && pokemon.species.name === 'Mew-Mega' && move.id !== 'moongeistbeam') {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
@@ -1680,12 +1680,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return null;
 				}
 			}
-			if(move.type === 'Dark' && move.category === "Status" && move.target === "normal" && pokemon.template.species === 'Mew-Mega') {
+			if(move.type === 'Dark' && move.category === "Status" && move.target === "normal" && pokemon.species.name === 'Mew-Mega') {
 				move.name = "Dark Abyss";
 				move.accuracy = 80;
 				move.status = 'slp';
 			}
-			if(move.type === 'Dark' && move.category === "Special" && pokemon.template.species === 'Mew-Mega' && move.id !== 'hyperspacehole') {
+			if(move.type === 'Dark' && move.category === "Special" && pokemon.species.name === 'Mew-Mega' && move.id !== 'hyperspacehole') {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
@@ -1694,7 +1694,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return null;
 				}
 			}
-			if(move.type === 'Steel' && move.category === "Physical" && pokemon.template.species === 'Mew-Mega' && move.id !== 'sunsteelstrike') {
+			if(move.type === 'Steel' && move.category === "Physical" && pokemon.species.name === 'Mew-Mega' && move.id !== 'sunsteelstrike') {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
@@ -1703,7 +1703,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return null;
 				}
 			}
-			if(move.type === 'Fairy' && move.category === "Special" && pokemon.template.species === 'Mew-Mega' && move.id !== 'fleurcannon') {
+			if(move.type === 'Fairy' && move.category === "Special" && pokemon.species.name === 'Mew-Mega' && move.id !== 'fleurcannon') {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
@@ -2447,7 +2447,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (pokemon.illusion) {
 				this.debug('illusion cleared');
 				pokemon.illusion = null;
-				let details = pokemon.template.species + (pokemon.level === 100 ? '' : ', L' + pokemon.level) + (pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny ? ', shiny' : '');
+				let details = pokemon.species.name + (pokemon.level === 100 ? '' : ', L' + pokemon.level) + (pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny ? ', shiny' : '');
 				this.add('replace', pokemon, details);
 				this.add('-end', pokemon, 'Illusion');
 			}
@@ -3998,7 +3998,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	steelbreaker: {
 		onStart(pokemon) {
-			if(pokemon.template.species === 'Haxorus-Mega') {
+			if(pokemon.species.name === 'Haxorus-Mega') {
 				for (let moveSlot of pokemon.moveSlots) {
 					if(moveSlot.id === 'slash') {
 						let move = this.getMove('brutalslice');
@@ -4032,7 +4032,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 		},
 		onModifyMove(move, pokemon) {
-			if(move.id === 'slash' && pokemon.template.species === 'Haxorus-Mega') {
+			if(move.id === 'slash' && pokemon.species.name === 'Haxorus-Mega') {
 				move.accuracy = true;
 				move.secondary = null;
 				move.onTryHit = function(target,pokemon) {
@@ -4040,7 +4040,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return null;
 				}
 			}
-			if((move.id === 'irontail' || move.id === 'dragontail') && pokemon.template.species === 'Haxorus-Mega') {
+			if((move.id === 'irontail' || move.id === 'dragontail') && pokemon.species.name === 'Haxorus-Mega') {
 				move.accuracy = true;
 				move.secondary = null;
 				move.onTryHit = function(target,pokemon) {
