@@ -2954,7 +2954,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onHit(target, source, move) {
 			if (!target.hp) return;
-			if (move && move.effectType === 'Move' && move.type === 'Electric') {
+			if (move?.effectType === 'Move' && move.type === 'Electric') {
 				this.damage((target.maxhp * 3)/ 16, target, target);
 			}
 		},
@@ -3308,7 +3308,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	restrainedrage: {
 		onHit(target, source, move) {
 			if (!target.hp) return;
-			if (move && move.effectType === 'Move' && target.getMoveHitData(move).crit) {
+			if (move?.effectType === 'Move' && target.getMoveHitData(move).crit) {
 				target.restrainedCrit = true;
 				this.add('-ability', target, 'Restrained Rage', 'boost');
 			}

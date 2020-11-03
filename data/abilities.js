@@ -38,7 +38,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Aftermath",
 		onDamagingHitOrder: 1,
 		onDamagingHit(damage, target, source, move) {
-			if (source && source !== target && move && move.flags['contact'] && !target.hp) {
+			if (source && source !== target && move?.flags['contact'] && !target.hp) {
 				this.damage(source.maxhp / 4, source, target);
 			}
 		},
@@ -92,7 +92,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	angerpoint: {
 		onHit(target, source, move) {
 			if (!target.hp) return;
-			if (move && move.effectType === 'Move' && target.getMoveHitData(move).crit) {
+			if (move?.effectType === 'Move' && target.getMoveHitData(move).crit) {
 				target.setBoost({atk: 6});
 				this.add('-setboost', target, 'atk', 12, '[from] ability: Anger Point');
 			}
@@ -545,7 +545,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	cursedbody: {
 		onDamagingHit(damage, target, source, move) {
 			if (!source || source.volatiles['disable']) return;
-			if (source !== target && move && move.effectType === 'Move' && !move.isFutureMove) {
+			if (source !== target && move?.effectType === 'Move' && !move.isFutureMove) {
 				if (this.randomChance(3, 10)) {
 					source.addVolatile('disable', this.effectData.target);
 				}
@@ -555,7 +555,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	cutecharm: {
 		onDamagingHit(damage, target, source, move) {
-			if (move && move.flags['contact']) {
+			if (move?.flags['contact']) {
 				if (this.randomChance(3, 10)) {
 					source.addVolatile('attract', this.effectData.target);
 				}
@@ -636,7 +636,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	deepfreeze: {
 		onDamagingHit(damage, target, source, move) {
-			if (move && move.flags['contact']) {
+			if (move?.flags['contact']) {
 				if (this.randomChance(3, 10)) {
 					source.trySetStatus('frz', target);
 				}
@@ -647,7 +647,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	deepseamine: {
 		onDamagingHitOrder: 1,
 		onDamagingHit(damage, target, source, move) {
-			if (source && source !== target && move && move.flags['contact']) {
+			if (source && source !== target && move?.flags['contact']) {
 				let i = this.random(100);
 				let deepseaDamage = 16;
 				if (i < 5) {
@@ -919,7 +919,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	effectspore: {
 		onDamagingHit(damage, target, source, move) {
-			if (move && move.flags['contact'] && !source.status && source.runStatusImmunity('powder')) {
+			if (move?.flags['contact'] && !source.status && source.runStatusImmunity('powder')) {
 				let r = this.random(100);
 				if (r < 11) {
 					source.setStatus('slp', target);
@@ -1067,7 +1067,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	flamebody: {
 		onDamagingHit(damage, target, source, move) {
-			if (move && move.flags['contact']) {
+			if (move?.flags['contact']) {
 				if (this.randomChance(3, 10)) {
 					source.trySetStatus('brn', target);
 				}
@@ -1299,7 +1299,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	galewings: {
 		onModifyPriority(priority, pokemon, target, move) {
-			if (move && move.type === 'Flying' && pokemon.hp === pokemon.maxhp) return priority + 1;
+			if (move?.type === 'Flying' && pokemon.hp === pokemon.maxhp) return priority + 1;
 		},
 		name: "Gale Wings",
 	},
@@ -1924,7 +1924,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Innards Out",
 		onDamagingHitOrder: 1,
 		onDamagingHit(damage, target, source, move) {
-			if (source && source !== target && move && move.effectType === 'Move' && !target.hp) {
+			if (source && source !== target && move?.effectType === 'Move' && !target.hp) {
 				this.damage(damage, source, target);
 			}
 		},
@@ -1975,7 +1975,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	ironbarbs: {
 		onDamagingHitOrder: 1,
 		onDamagingHit(damage, target, source, move) {
-			if (source && source !== target && move && move.flags['contact']) {
+			if (source && source !== target && move?.flags['contact']) {
 				this.damage(source.maxhp / 8, source, target);
 			}
 		},
@@ -2325,7 +2325,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	moltenscale: {
 		onDamagingHitOrder: 1,
 		onDamagingHit(damage, target, source, move) {
-			if (source && source !== target && move && move.flags['contact']) {
+			if (source && source !== target && move?.flags['contact']) {
 				this.damage(source.maxhp / 8, source, target);
 				if (this.randomChance(7, 20)) {
 					source.trySetStatus('brn', target);
@@ -2403,7 +2403,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	mummy: {
 		name: "Mummy",
 		onDamagingHit(damage, target, source, move) {
-			if (source && source !== target && move && move.flags['contact'] && source.ability !== 'mummy') {
+			if (source && source !== target && move?.flags['contact'] && source.ability !== 'mummy') {
 				let oldAbility = source.setAbility('mummy', target);
 				if (oldAbility) {
 					this.add('-activate', target, 'ability: Mummy', this.getAbility(oldAbility).name, '[of] ' + source);
@@ -2638,7 +2638,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (status.id === 'confusion') return null;
 		},
 		onHit(target, source, move) {
-			if (move && move.volatileStatus === 'confusion') {
+			if (move?.volatileStatus === 'confusion') {
 				this.add('-immune', target, 'confusion', '[from] ability: Own Tempo');
 			}
 		},
@@ -2724,7 +2724,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	pickpocket: {
 		onAfterMoveSecondary(target, source, move) {
-			if (source && source !== target && move && move.flags['contact']) {
+			if (source && source !== target && move?.flags['contact']) {
 				if (target.item) {
 					return;
 				}
@@ -2765,7 +2765,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onHit(target, source, move) {
 			if (!target.hp) return;
-			if (move && move.effectType === 'Move' && move.type === 'Electric') {
+			if (move?.effectType === 'Move' && move.type === 'Electric') {
 				this.damage((target.maxhp * 3)/ 16, target, target);
 			}
 		},
@@ -2797,7 +2797,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	poisonpoint: {
 		onDamagingHit(damage, target, source, move) {
-			if (move && move.flags['contact']) {
+			if (move?.flags['contact']) {
 				if (this.randomChance(3, 10)) {
 					source.trySetStatus('psn', target);
 				}
@@ -2885,7 +2885,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	prankster: {
 		onModifyPriority(priority, pokemon, target, move) {
-			if (move && move.category === 'Status') {
+			if (move?.category === 'Status'') {
 				move.pranksterBoosted = true;
 				return priority + 1;
 			}
@@ -3093,7 +3093,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	restrainedrage: {
 		onHit(target, source, move) {
 			if (!target.hp) return;
-			if (move && move.effectType === 'Move' && target.getMoveHitData(move).crit) {
+			if (move?.effectType === 'Move' && target.getMoveHitData(move).crit) {
 				target.restrainedCrit = true;
 				this.add('-ability', target, 'Restrained Rage', 'boost');
 			}
@@ -3217,7 +3217,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	roughskin: {
 		onDamagingHitOrder: 1,
 		onDamagingHit(damage, target, source, move) {
-			if (source && source !== target && move && move.flags['contact']) {
+			if (source && source !== target && move?.flags['contact']) {
 				this.damage(source.maxhp / 8, source, target);
 			}
 		},
@@ -3764,7 +3764,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	static: {
 		onDamagingHit(damage, target, source, move) {
-			if (move && move.flags['contact']) {
+			if (move?.flags['contact']) {
 				if (this.randomChance(3, 10)) {
 					source.trySetStatus('par', target);
 				}
@@ -4298,7 +4298,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	triage: {
 		onModifyPriority(priority, pokemon, target, move) {
-			if (move && move.flags['heal']) return priority + 3;
+			if (move?.flags['heal']) return priority + 3;
 		},
 		name: "Triage",
 	},
@@ -4511,7 +4511,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onDamagingHit(damage, target, source, move) {
 			// Are these actually banned? Makes sense for them to be banned to me
 			let bannedAbilities = ['battlebond', 'comatose', 'crisisevolution', 'disguise', 'iceface', 'illusion', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange', 'wonderguard', 'zenmode'];
-			if (source && source !== target && move && move.flags['contact'] && !bannedAbilities.includes(source.ability)) {
+			if (source && source !== target && move?.flags['contact'] && !bannedAbilities.includes(source.ability)) {
 				let targetAbility = this.dex.getAbility(target.ability);
 				let sourceAbility = this.dex.getAbility(source.ability);
 				if (target.side === source.side) {
