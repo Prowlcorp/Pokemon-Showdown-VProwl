@@ -36,8 +36,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	aftermath: {
 		name: "Aftermath",
-		onAfterDamageOrder: 1,
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
 			if (source && source !== target && move && move.flags['contact'] && !target.hp) {
 				this.damage(source.baseMaxhp / 4, source, target);
 			}
@@ -501,7 +501,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Corrosion",
 	},
 	cottondown: {
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHit(damage, target, source, move) {
 			let activated = false;
 			for (const pokemon of this.getAllActive()) {
 				if (pokemon === target || pokemon.fainted) continue;
@@ -543,7 +543,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Crisis Evolution",
 	},
 	cursedbody: {
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHit(damage, target, source, move) {
 			if (!source || source.volatiles['disable']) return;
 			if (source !== target && move && move.effectType === 'Move' && !move.isFutureMove) {
 				if (this.randomChance(3, 10)) {
@@ -554,7 +554,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Cursed Body",
 	},
 	cutecharm: {
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHit(damage, target, source, move) {
 			if (move && move.flags['contact']) {
 				if (this.randomChance(3, 10)) {
 					source.addVolatile('attract', this.effectData.target);
@@ -635,7 +635,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Death Stare",
 	},
 	deepfreeze: {
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHit(damage, target, source, move) {
 			if (move && move.flags['contact']) {
 				if (this.randomChance(3, 10)) {
 					source.trySetStatus('frz', target);
@@ -645,8 +645,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Deep Freeze",
 	},
 	deepseamine: {
-		onAfterDamageOrder: 1,
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
 			if (source && source !== target && move && move.flags['contact']) {
 				let i = this.random(100);
 				let deepseaDamage = 16;
@@ -801,7 +801,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Disguise",
 	},
 	divashock: {
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHit(damage, target, source, move) {
 			if (source && source !== target && move && move.category !== 'Status') {
 				if(!target.moveThisTurn) {
 					this.damage(source.baseMaxhp / 16, source, target);
@@ -918,7 +918,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		// Implemented in statuses.js
 	},
 	effectspore: {
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHit(damage, target, source, move) {
 			if (move && move.flags['contact'] && !source.status && source.runStatusImmunity('powder')) {
 				let r = this.random(100);
 				if (r < 11) {
@@ -985,7 +985,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.add('-activate', target, 'ability: Emergency Exit');
 			}
 		},
-		onAfterDamage(damage, target, source, effect) {
+		onDamagingHit(damage, target, source, effect) {
 			if (!target.hp || effect.effectType === 'Move') return;
 			if (target.hp <= target.baseMaxhp / 2 && target.hp + damage > target.baseMaxhp / 2) {
 				if (!this.canSwitch(target.side) || target.forceSwitchFlag || target.switchFlag) return;
@@ -1009,7 +1009,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				pokemon.maybeTrapped = true;
 			}
 		},
-		onAfterDamage(damage, target, source, effect) {
+		onDamagingHit(damage, target, source, effect) {
 			if (effect && effect.type === 'Water') {
 				this.boost({def: 2});
 				this.boost({spd: 2});
@@ -1066,7 +1066,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "First Forge",
 	},
 	flamebody: {
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHit(damage, target, source, move) {
 			if (move && move.flags['contact']) {
 				if (this.randomChance(3, 10)) {
 					source.trySetStatus('brn', target);
@@ -1345,7 +1345,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Gluttony",
 	},
 	gooey: {
-		onAfterDamage(damage, target, source, effect) {
+		onDamagingHit(damage, target, source, effect) {
 			if (effect && effect.flags['contact']) {
 				this.add('-ability', target, 'Gooey');
 				this.boost({spe: -1}, source, target, null, true);
@@ -1367,7 +1367,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Grassy Surge",
 	},
 	gulpmissile: {
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHit(damage, target, source, move) {
 			if (target.transformed || target.isSemiInvulnerable()) return;
 			if (['cramorantgulping', 'cramorantgorging'].includes(target.species.id)) {
 				this.damage(source.baseMaxhp / 4, source, target);
@@ -1869,7 +1869,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (pokemon === pokemon.side.pokemon[i]) return;
 			pokemon.illusion = pokemon.side.pokemon[i];
 		},
-		onAfterDamage(damage, target, source, effect) {
+		onDamagingHit(damage, target, source, effect) {
 			if (target.illusion && effect && effect.effectType === 'Move' && effect.id !== 'confused') {
 				this.singleEvent('End', this.getAbility('Illusion'), target.abilityData, target, source, effect);
 			}
@@ -1922,8 +1922,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	innardsout: {
 		name: "Innards Out",
-		onAfterDamageOrder: 1,
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
 			if (source && source !== target && move && move.effectType === 'Move' && !target.hp) {
 				this.damage(damage, source, target);
 			}
@@ -1973,8 +1973,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Intrepid Sword",
 	},
 	ironbarbs: {
-		onAfterDamageOrder: 1,
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
 			if (source && source !== target && move && move.flags['contact']) {
 				this.damage(source.baseMaxhp / 8, source, target);
 			}
@@ -1992,7 +1992,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Iron Fist",
 	},
 	justified: {
-		onAfterDamage(damage, target, source, effect) {
+		onDamagingHit(damage, target, source, effect) {
 			if (effect && effect.type === 'Dark') {
 				this.boost({atk: 1});
 			}
@@ -2288,7 +2288,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				}
 			}
 		},
-		onAfterDamage(damage, target, source, effect) {
+		onDamagingHit(damage, target, source, effect) {
 			if (target.illusion && effect && effect.effectType === 'Move' && effect.id !== 'confused') {
 				this.singleEvent('End', this.getAbility('Illusion'), target.abilityData, target, source, effect);
 			}
@@ -2323,8 +2323,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Mold Breaker",
 	},
 	moltenscale: {
-		onAfterDamageOrder: 1,
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
 			if (source && source !== target && move && move.flags['contact']) {
 				this.damage(source.baseMaxhp / 8, source, target);
 				if (this.randomChance(7, 20)) {
@@ -2402,7 +2402,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	mummy: {
 		name: "Mummy",
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHit(damage, target, source, move) {
 			if (source && source !== target && move && move.flags['contact'] && source.ability !== 'mummy') {
 				let oldAbility = source.setAbility('mummy', target);
 				if (oldAbility) {
@@ -2796,7 +2796,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Poison Heal",
 	},
 	poisonpoint: {
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHit(damage, target, source, move) {
 			if (move && move.flags['contact']) {
 				if (this.randomChance(3, 10)) {
 					source.trySetStatus('psn', target);
@@ -3007,7 +3007,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Rain Dish",
 	},
 	rattled: {
-		onAfterDamage(damage, target, source, effect) {
+		onDamagingHit(damage, target, source, effect) {
 			if (effect && (effect.type === 'Dark' || effect.type === 'Bug' || effect.type === 'Ghost')) {
 				this.boost({spe: 1});
 			}
@@ -3215,8 +3215,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Rock Head",
 	},
 	roughskin: {
-		onAfterDamageOrder: 1,
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
 			if (source && source !== target && move && move.flags['contact']) {
 				this.damage(source.baseMaxhp / 8, source, target);
 			}
@@ -3289,7 +3289,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Sand Rush",
 	},
 	sandspit: {
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHit(damage, target, source, move) {
 			if (this.field.getWeather().id !== 'sandstorm') {
 				this.field.setWeather('sandstorm');
 			}
@@ -3745,7 +3745,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Stalwart",
 	},
 	stamina: {
-		onAfterDamage(damage, target, source, effect) {
+		onDamagingHit(damage, target, source, effect) {
 			if (effect && effect.effectType === 'Move' && effect.id !== 'confused') {
 				this.boost({def: 1});
 			}
@@ -3763,7 +3763,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Stance Change",
 	},
 	static: {
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHit(damage, target, source, move) {
 			if (move && move.flags['contact']) {
 				if (this.randomChance(3, 10)) {
 					source.trySetStatus('par', target);
@@ -3779,7 +3779,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Steadfast",
 	},
 	steamengine: {
-		onAfterDamage(damage, target, source, effect) {
+		onDamagingHit(damage, target, source, effect) {
 			if (effect && ['Water', 'Fire'].includes(effect.type)) {
 				this.boost({spe: 6});
 			}
@@ -4089,7 +4089,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Tangled Feet",
 	},
 	tanglinghair: {
-		onAfterDamage(damage, target, source, effect) {
+		onDamagingHit(damage, target, source, effect) {
 			if (effect && effect.flags['contact']) {
 				this.add('-ability', target, 'Tangling Hair');
 				this.boost({spe: -1}, source, target, null, false, true);
@@ -4117,7 +4117,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Telepathy",
 	},
 	temperamental: {
-		onAfterDamage(damage, target, source, effect) {
+		onDamagingHit(damage, target, source, effect) {
 			if (effect && effect.effectType === 'Move' && effect.id !== 'confused') {
 				if (this.randomChance(1, 2)) {
 					let statName = 'atk';
@@ -4508,7 +4508,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Volt Conduit",
 	},
 	wanderingspirit: {
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHit(damage, target, source, move) {
 			// Are these actually banned? Makes sense for them to be banned to me
 			let bannedAbilities = ['battlebond', 'comatose', 'crisisevolution', 'disguise', 'iceface', 'illusion', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange', 'wonderguard', 'zenmode'];
 			if (source && source !== target && move && move.flags['contact'] && !bannedAbilities.includes(source.ability)) {
@@ -4583,7 +4583,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Water Bubble",
 	},
 	watercompaction: {
-		onAfterDamage(damage, target, source, effect) {
+		onDamagingHit(damage, target, source, effect) {
 			if (effect && effect.type === 'Water') {
 				this.boost({def: 2});
 			}
@@ -4606,7 +4606,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Water Veil",
 	},
 	weakarmor: {
-		onAfterDamage(damage, target, source, move) {
+		onDamagingHit(damage, target, source, move) {
 			if (move.category === 'Physical') {
 				this.boost({def: -1, spe: 2}, target, target);
 			}
