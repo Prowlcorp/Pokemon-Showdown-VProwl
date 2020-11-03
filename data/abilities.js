@@ -358,7 +358,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onEnd(pokemon) {
 			pokemon.removeVolatile('climatezero');
 		},
-		effect: {
+		condition: {
 			noCopy: true, // doesn't get copied by Baton Pass
 			onStart(target) {
 				this.add('-start', target, 'ability: Climate Zero');
@@ -1097,7 +1097,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onEnd(pokemon) {
 			pokemon.removeVolatile('flashfire');
 		},
-		effect: {
+		condition: {
 			noCopy: true, // doesn't get copied by Baton Pass
 			onStart(target) {
 				this.add('-start', target, 'ability: Flash Fire');
@@ -2154,7 +2154,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.useMove(newMove, this.effectData.target, source);
 			return null;
 		},
-		effect: {
+		condition: {
 			duration: 1,
 		},
 	},
@@ -3604,7 +3604,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			delete pokemon.volatiles['slowstart'];
 			this.add('-end', pokemon, 'Slow Start', '[silent]');
 		},
-		effect: {
+		condition: {
 			duration: 5,
 			onStart(target) {
 				this.add('-start', target, 'ability: Slow Start');
@@ -4133,7 +4133,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onEnd(pokemon) {
 			pokemon.removeVolatile('temperamental');
 		},
-		effect: {
+		condition: {
 			noCopy: true, // doesn't get copied by Baton Pass
 			duration: 1,
 			durationCallback(source, effect) {
@@ -4350,7 +4350,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 			pokemon.addVolatile('truant');
 		},
-		effect: {},
+		condition: {},
 		name: "Truant",
 	},
 	turboblaze: {
@@ -4430,7 +4430,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onEnd(pokemon) {
 			pokemon.removeVolatile('unburden');
 		},
-		effect: {
+		condition: {
 			onModifySpe(spe, pokemon) {
 				if (!pokemon.item) {
 					return this.chainModify(2);
@@ -4671,7 +4671,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			delete pokemon.volatiles['zenmode'];
 			pokemon.formeChange('Darmanitan', this.effect, false, '[silent]');
 		},
-		effect: {
+		condition: {
 			onStart(pokemon) {
 				if (pokemon.species.nameid !== 'darmanitanzen') pokemon.formeChange('Darmanitan-Zen');
 			},
