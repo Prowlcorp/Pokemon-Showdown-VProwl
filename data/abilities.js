@@ -573,7 +573,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	cutecharm: {
 		onDamagingHit(damage, target, source, move) {
-			if (move?.flags['contact']) {
+			if (move.flags['contact']) {
 				if (this.randomChance(3, 10)) {
 					source.addVolatile('attract', this.effectData.target);
 				}
@@ -1996,6 +1996,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onDamagingHit(damage, target, source, move) {
 			if (source && source !== target && move?.effectType === 'Move' && !target.hp) {
 				this.damage(damage, source, target);
+			if (!target.hp) {
+				this.damage(target.getUndynamaxedHP(damage), source, target);
 			}
 		},
 	},
@@ -2674,7 +2676,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		name: "Oblivious",
 	},
-			if (move.flags['powder'] && target !== source && this.dex.getImmunity('powder', target)) {
 	otherworldlure: {
 		onStart(pokemon) {
 			this.add('-ability', pokemon, 'Otherworld Lure');
@@ -2696,7 +2697,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onTryHitPriority: 1,
 		onTryHit(target, source, move) {
-			if (move.flags['powder'] && target !== source && this.getImmunity('powder', target)) {
+			if (move.flags['powder'] && target !== source && this.dex.getImmunity('powder', target)) {
 				this.add('-immune', target, '[from] ability: Overcoat');
 				return null;
 			}
@@ -4828,12 +4829,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	zenmode: {
 		onResidualOrder: 27,
 		onResidual(pokemon) {
-			if (pokemon.baseTemplate.baseSpecies !== 'Darmanitan' || pokemon.transformed) {
+			if (pokemon.baseSpecies.baseSpecies !== 'Darmanitan' || pokemon.transformed) {
 				return;
 			}
-			if (pokemon.hp <= pokemon.maxhp / 2 && pokemon.species.nameid === 'darmanitan') {
+			if (pokemon.hp <= pokemon.maxhp / 2 && !['Zen', 'Galar-Zen'].includes(pokemon.species.forme)) {
 				pokemon.addVolatile('zenmode');
-			} else if (pokemon.hp > pokemon.maxhp / 2 && pokemon.species.nameid === 'darmanitanzen') {
+			} else if (pokemon.hp > pokemon.maxhp / 2 && ['Zen', 'Galar-Zen'].includes(pokemon.species.forme)) {
 				pokemon.addVolatile('zenmode'); // in case of base Darmanitan-Zen
 				pokemon.removeVolatile('zenmode');
 			}
@@ -4842,14 +4843,22 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (!pokemon.volatiles['zenmode'] || !pokemon.hp) return;
 			pokemon.transformed = false;
 			delete pokemon.volatiles['zenmode'];
-			pokemon.formeChange('Darmanitan', this.effect, false, '[silent]');
+			if (pokemon.species.baseSpecies === 'Darmanitan' && pokemon.species.battleOnly) {
+				pokemon.formeChange(pokemon.species.battleOnly as string, this.effect, false, '[silent]');
+			}
 		},
 		condition: {
 			onStart(pokemon) {
-				if (pokemon.species.nameid !== 'darmanitanzen') pokemon.formeChange('Darmanitan-Zen');
+				if (!pokemon.species.name.includes('Galar')) {
+					if (pokemon.species.id !== 'darmanitanzen') pokemon.formeChange('Darmanitan-Zen');
+				} else {
+					if (pokemon.species.id !== 'darmanitangalarzen') pokemon.formeChange('Darmanitan-Galar-Zen');
+				}
 			},
 			onEnd(pokemon) {
-				pokemon.formeChange('Darmanitan');
+				if (['Zen', 'Galar-Zen'].includes(pokemon.species.forme)) {
+					pokemon.formeChange(pokemon.species.battleOnly as string);
+				}
 			},
 		},
 		name: "Zen Mode",
