@@ -42,7 +42,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onDamagingHitOrder: 1,
 		onDamagingHit(damage, target, source, move) {
 			if (move.flags['contact'] && !target.hp) {
-				this.damage(source.baseMaxhp / 4, source, target);
+				this.damage(source.maxhp / 4, source, target);
 			}
 		},
 	},
@@ -176,7 +176,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			for (const target of pokemon.side.foe.active) {
 				if (!target || !target.hp) continue;
 				if (target.status === 'slp' || target.hasAbility('comatose')) {
-					this.damage(target.baseMaxhp / 8, target, pokemon);
+					this.damage(target.maxhp / 8, target, pokemon);
 				}
 			}
 		},
@@ -308,7 +308,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	cheekpouch: {
 		onEatItem(item, pokemon) {
-			this.heal(pokemon.baseMaxhp / 3);
+			this.heal(pokemon.maxhp / 3);
 		},
 		name: "Cheek Pouch",
 	},
@@ -854,7 +854,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (['mimikyu', 'mimikyutotem'].includes(pokemon.species.id) && this.effectData.busted) {
 				const speciesid = pokemon.species.id === 'mimikyutotem' ? 'Mimikyu-Busted-Totem' : 'Mimikyu-Busted';
 				pokemon.formeChange(speciesid, this.effect, true);
-				this.damage(pokemon.baseMaxhp / 8, pokemon, pokemon, this.dex.getSpecies(speciesid));
+				this.damage(pokemon.maxhp / 8, pokemon, pokemon, this.dex.getSpecies(speciesid));
 			}
 		},
 		name: "Disguise",
@@ -950,7 +950,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	dryskin: {
 		onTryHit(target, source, move) {
 			if (target !== source && move.type === 'Water') {
-				if (!this.heal(target.baseMaxhp / 4)) {
+				if (!this.heal(target.maxhp / 4)) {
 					this.add('-immune', target, '[from] ability: Dry Skin');
 				}
 				return null;
@@ -966,9 +966,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onWeather(target, source, effect) {
 			if (target.hasItem('utilityumbrella')) return;
 			if (effect.id === 'raindance' || effect.id === 'primordialsea') {
-				this.heal(target.baseMaxhp / 8);
+				this.heal(target.maxhp / 8);
 			} else if (effect.id === 'sunnyday' || effect.id === 'desolateland') {
-				this.damage(target.baseMaxhp / 8, target, target);
+				this.damage(target.maxhp / 8, target, target);
 			}
 		},
 		name: "Dry Skin",
@@ -1424,7 +1424,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onDamagingHit(damage, target, source, move) {
 			if (target.transformed || target.isSemiInvulnerable()) return;
 			if (['cramorantgulping', 'cramorantgorging'].includes(target.species.id)) {
-				this.damage(source.baseMaxhp / 4, source, target);
+				this.damage(source.maxhp / 4, source, target);
 				if (target.species.id === 'cramorantgulping') {
 					this.boost({def: -1}, source, target, null, true);
 				} else {
@@ -1848,7 +1848,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	icebody: {
 		onWeather(target, source, effect) {
 			if (effect.id === 'hail') {
-				this.heal(target.baseMaxhp / 16);
+				this.heal(target.maxhp / 16);
 			}
 		},
 		onImmunity(type, pokemon) {
@@ -2071,7 +2071,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onDamagingHitOrder: 1,
 		onDamagingHit(damage, target, source, move) {
 			if (move.flags['contact']) {
-				this.damage(source.baseMaxhp / 8, source, target);
+				this.damage(source.maxhp / 8, source, target);
 			}
 		},
 		name: "Iron Barbs",
@@ -2981,7 +2981,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onDamagePriority: 1,
 		onDamage(damage, target, source, effect) {
 			if (effect.id === 'psn' || effect.id === 'tox') {
-				this.heal(target.baseMaxhp / 8);
+				this.heal(target.maxhp / 8);
 				return false;
 			}
 		},
@@ -3047,10 +3047,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (pokemon.species.id === 'zygardecomplete' || pokemon.hp > pokemon.maxhp / 2) return;
 			this.add('-activate', pokemon, 'ability: Power Construct');
 			pokemon.formeChange('Zygarde-Complete', this.effect, true);
-			pokemon.baseMaxhp = Math.floor(Math.floor(
+			pokemon.maxhp = Math.floor(Math.floor(
 				2 * pokemon.species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100
 			) * pokemon.level / 100 + 10);
-			const newMaxHP = pokemon.volatiles['dynamax'] ? (2 * pokemon.baseMaxhp) : pokemon.baseMaxhp;
+			const newMaxHP = pokemon.volatiles['dynamax'] ? (2 * pokemon.maxhp) : pokemon.maxhp;
 			pokemon.hp = newMaxHP - (pokemon.maxhp - pokemon.hp);
 			pokemon.maxhp = newMaxHP;
 			this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
@@ -3206,7 +3206,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onWeather(target, source, effect) {
 			if (target.hasItem('utilityumbrella')) return;
 			if (effect.id === 'raindance' || effect.id === 'primordialsea') {
-				this.heal(target.baseMaxhp / 16);
+				this.heal(target.maxhp / 16);
 			}
 		},
 		name: "Rain Dish",
@@ -3283,7 +3283,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	regenerator: {
 		onSwitchOut(pokemon) {
-			pokemon.heal(pokemon.baseMaxhp / 3);
+			pokemon.heal(pokemon.maxhp / 3);
 		},
 		name: "Regenerator",
 	},
@@ -3410,7 +3410,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onDamagingHitOrder: 1,
 		onDamagingHit(damage, target, source, move) {
 			if (move.flags['contact']) {
-				this.damage(source.baseMaxhp / 8, source, target);
+				this.damage(source.maxhp / 8, source, target);
 			}
 		},
 		name: "Rough Skin",
@@ -3876,7 +3876,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onWeather(target, source, effect) {
 			if (target.hasItem('utilityumbrella')) return;
 			if (effect.id === 'sunnyday' || effect.id === 'desolateland') {
-				this.damage(target.baseMaxhp / 8, target, target);
+				this.damage(target.maxhp / 8, target, target);
 			}
 		},
 		name: "Solar Power",
@@ -4712,7 +4712,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	voltabsorb: {
 		onTryHit(target, source, move) {
 			if (target !== source && move.type === 'Electric') {
-				if (!this.heal(target.baseMaxhp / 4)) {
+				if (!this.heal(target.maxhp / 4)) {
 					this.add('-immune', target, '[from] ability: Volt Absorb');
 				}
 				return null;
@@ -4761,7 +4761,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	waterabsorb: {
 		onTryHit(target, source, move) {
 			if (target !== source && move.type === 'Water') {
-				if (!this.heal(target.baseMaxhp / 4)) {
+				if (!this.heal(target.maxhp / 4)) {
 					this.add('-immune', target, '[from] ability: Water Absorb');
 				}
 				return null;
