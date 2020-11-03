@@ -1,5 +1,4 @@
 export const Abilities: {[abilityid: string]: AbilityData} = {
-let BattleAbilities = {
 	noability: {
 		name: "No Ability",
 	},
@@ -4683,5 +4682,3 @@ let BattleAbilities = {
 		name: "Zen Mode",
 	},
 };
-
-exports.BattleAbilities = BattleAbilities;
