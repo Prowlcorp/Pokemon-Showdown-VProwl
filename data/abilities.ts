@@ -1419,6 +1419,31 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		name: "Gooey",
 	},
+	gracideamastery: {
+		name: "Gracidea Mastery",
+		onTryHit(target, source, move) {
+			if (
+				(target === source || move.category === 'Status') &&
+				target.species.id !== 'shayminsky' && target.transformed
+			) return;
+			target.formeChange('Shaymin', this.effect);
+		},
+		onDamagingHit(damage, target, source, move) {
+			if (target.species.id === 'shaymin') {
+				target.formeChange('Shaymin-Sky', this.effect);
+			}
+		},
+		onPrepareHit(source, target, move) {
+			if (!target || !move) return;
+			if (source.species.baseSpecies !== 'Shaymin' || source.transformed) return;
+			if (move.category !== 'Status') return;
+			source.formeChange('Shaymin', this.effect);
+		},
+		onAfterMove(pokemon) {
+			if (pokemon.species.id !== 'shaymin' || pokemon.transformed) return;
+			pokemon.formeChange('Shaymin-Sky', this.effect);
+		},
+	},
 	grasspelt: {
 		onModifyDefPriority: 6,
 		onModifyDef(pokemon) {

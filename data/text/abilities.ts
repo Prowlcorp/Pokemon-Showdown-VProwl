@@ -478,6 +478,11 @@ export const AbilitiesText = {
 		name: "Gooey",
 		shortDesc: "Pokemon making contact with this Pokemon have their Speed lowered by 1 stage.",
 	},
+	gracideamastery: {
+		name: "Gracidea Mastery",
+		desc: "If this Pokemon is Shaymin-Sky, it will transform into Shaymin before using a status move or upon being attacked. After using the move or taking attack damage, if this Pokemon was originally in its base forme, it will transform back into Shaymin-Sky.",
+		shortDesc: "Transforms into Shaymin when using status moves/being attacked.",
+	},
 	grasspelt: {
 		name: "Grass Pelt",
 		shortDesc: "If Grassy Terrain is active, this Pokemon's Defense is multiplied by 1.5.",
