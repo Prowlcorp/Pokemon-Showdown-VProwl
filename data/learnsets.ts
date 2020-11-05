@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-
+//Edit silvally and such
 export const Learnsets: {[speciesid: string]: LearnsetData} = {
 	bulbasaur: {
 		learnset: {
@@ -1202,6 +1202,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 	},
 	qwilfish: {
 		learnset: {
+			acupressure: ["7L60"],
 			scaleshot: ["8T"],
 			steelroller: ["8T"],
 		},
