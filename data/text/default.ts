@@ -27,7 +27,6 @@ export const DefaultText = {
 
 		mega: "  [POKEMON]'s [ITEM] is reacting to the Key Stone!",
 		megaNoItem: "  [POKEMON] is reacting to [TRAINER]'s Key Stone!",
-		megaGen6: "  [POKEMON]'s [ITEM] is reacting to [TRAINER]'s Mega Bracelet!",
 		transformMega: "[POKEMON] has Mega Evolved into Mega [SPECIES]!",
 		primal: "[POKEMON]'s Primal Reversion! It reverted to its primal state!",
 		zPower: "  [POKEMON] surrounded itself with its Z-Power!",
@@ -209,6 +208,14 @@ export const DefaultText = {
 		endFromItem: "  [POKEMON]'s [ITEM] woke it up!",
 		cant: "[POKEMON] is fast asleep.",
 	},
+	bld: {
+		start: "  [POKEMON] was wounded!",
+		startFromItem: "  [POKEMON] was wounded by the [ITEM]!",
+		alreadyStarted: "  [POKEMON] is already bleeding!",
+		end: "  [POKEMON]'s wound was healed!",
+		endFromItem: "  [POKEMON]'s [ITEM] healed its wound!",
+		damage: "  [POKEMON] was hurt by its wound!",
+	},
 
 	// misc effects
 	confusion: {
@@ -250,12 +257,6 @@ export const DefaultText = {
 	},
 	trapped: {
 		start: "  [POKEMON] can no longer escape!",
-	},
-	dynamax: {
-		start: "  ([POKEMON]'s Dynamax!)",
-		end: "  ([POKEMON] returned to normal!)",
-		block: "  The move was blocked by the power of Dynamax!",
-		fail: "  [POKEMON] shook its head. It seems like it can't use this move...",
 	},
 
 	// weather
@@ -306,6 +307,13 @@ export const DefaultText = {
 		activate: "  The mysterious strong winds weakened the attack!",
 		block: "  The mysterious strong winds blow on regardless!",
 	},
+	ragingsandstorm: {
+		weatherName: "Raging Sandstorm",
+		start: "  A harsh sandstorm kicked up!",
+		end: "  The harsh sandstorm subsided.",
+		upkeep: "  (The sandstorm is raging hard.)",
+		damage: "  [POKEMON] is buffeted by the raging sandstorm!",
+	},
 
 	// terrain
 	electricterrain: {
@@ -327,6 +335,11 @@ export const DefaultText = {
 		start: "  The battlefield got weird!",
 		end: "  The weirdness disappeared from the battlefield!",
 		block: "  [POKEMON] is protected by the Psychic Terrain!",
+	},
+	hellfire: {
+		start: "  The battlefield set on fire!",
+		end: "  The flames from the battlefield!",
+		damage: "  [POKEMON] is hurt by the Hell Fire!",
 	},
 
 	// field effects

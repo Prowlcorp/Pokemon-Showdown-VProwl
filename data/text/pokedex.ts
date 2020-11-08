@@ -11,9 +11,6 @@ export const PokedexText = {
 	venusaurmega: {
 		name: "Venusaur-Mega",
 	},
-	venusaurgmax: {
-		name: "Venusaur-Gmax",
-	},
 	charmander: {
 		name: "Charmander",
 	},
@@ -29,9 +26,6 @@ export const PokedexText = {
 	charizardmegay: {
 		name: "Charizard-Mega-Y",
 	},
-	charizardgmax: {
-		name: "Charizard-Gmax",
-	},
 	squirtle: {
 		name: "Squirtle",
 	},
@@ -44,9 +38,6 @@ export const PokedexText = {
 	blastoisemega: {
 		name: "Blastoise-Mega",
 	},
-	blastoisegmax: {
-		name: "Blastoise-Gmax",
-	},
 	caterpie: {
 		name: "Caterpie",
 	},
@@ -56,8 +47,8 @@ export const PokedexText = {
 	butterfree: {
 		name: "Butterfree",
 	},
-	butterfreegmax: {
-		name: "Butterfree-Gmax",
+	butterfreemega: {
+		name: "Butterfree-Mega",
 	},
 	weedle: {
 		name: "Weedle",
@@ -98,12 +89,6 @@ export const PokedexText = {
 	raticatealolatotem: {
 		name: "Raticate-Alola-Totem",
 	},
-	spearow: {
-		name: "Spearow",
-	},
-	fearow: {
-		name: "Fearow",
-	},
 	ekans: {
 		name: "Ekans",
 	},
@@ -130,33 +115,6 @@ export const PokedexText = {
 	},
 	pikachulibre: {
 		name: "Pikachu-Libre",
-	},
-	pikachuoriginal: {
-		name: "Pikachu-Original",
-	},
-	pikachuhoenn: {
-		name: "Pikachu-Hoenn",
-	},
-	pikachusinnoh: {
-		name: "Pikachu-Sinnoh",
-	},
-	pikachuunova: {
-		name: "Pikachu-Unova",
-	},
-	pikachukalos: {
-		name: "Pikachu-Kalos",
-	},
-	pikachualola: {
-		name: "Pikachu-Alola",
-	},
-	pikachupartner: {
-		name: "Pikachu-Partner",
-	},
-	pikachustarter: {
-		name: "Pikachu-Starter",
-	},
-	pikachugmax: {
-		name: "Pikachu-Gmax",
 	},
 	pikachuworld: {
 		name: "Pikachu-World",
@@ -266,12 +224,6 @@ export const PokedexText = {
 	meowthalola: {
 		name: "Meowth-Alola",
 	},
-	meowthgalar: {
-		name: "Meowth-Galar",
-	},
-	meowthgmax: {
-		name: "Meowth-Gmax",
-	},
 	persian: {
 		name: "Persian",
 	},
@@ -326,9 +278,6 @@ export const PokedexText = {
 	machamp: {
 		name: "Machamp",
 	},
-	machampgmax: {
-		name: "Machamp-Gmax",
-	},
 	bellsprout: {
 		name: "Bellsprout",
 	},
@@ -377,17 +326,11 @@ export const PokedexText = {
 	slowpoke: {
 		name: "Slowpoke",
 	},
-	slowpokegalar: {
-		name: "Slowpoke-Galar",
-	},
 	slowbro: {
 		name: "Slowbro",
 	},
 	slowbromega: {
 		name: "Slowbro-Mega",
-	},
-	slowbrogalar: {
-		name: "Slowbro-Galar",
 	},
 	magnemite: {
 		name: "Magnemite",
@@ -397,9 +340,6 @@ export const PokedexText = {
 	},
 	farfetchd: {
 		name: "Farfetch\u2019d",
-	},
-	farfetchdgalar: {
-		name: "Farfetch\u2019d-Galar",
 	},
 	doduo: {
 		name: "Doduo",
@@ -443,9 +383,6 @@ export const PokedexText = {
 	gengarmega: {
 		name: "Gengar-Mega",
 	},
-	gengargmax: {
-		name: "Gengar-Gmax",
-	},
 	onix: {
 		name: "Onix",
 	},
@@ -455,14 +392,14 @@ export const PokedexText = {
 	hypno: {
 		name: "Hypno",
 	},
+	hypnomega: {
+		name: "Hypno-Mega",
+	},
 	krabby: {
 		name: "Krabby",
 	},
 	kingler: {
 		name: "Kingler",
-	},
-	kinglergmax: {
-		name: "Kingler-Gmax",
 	},
 	voltorb: {
 		name: "Voltorb",
@@ -506,9 +443,6 @@ export const PokedexText = {
 	weezing: {
 		name: "Weezing",
 	},
-	weezinggalar: {
-		name: "Weezing-Galar",
-	},
 	rhyhorn: {
 		name: "Rhyhorn",
 	},
@@ -548,14 +482,8 @@ export const PokedexText = {
 	mrmime: {
 		name: "Mr. Mime",
 	},
-	mrmimegalar: {
-		name: "Mr. Mime-Galar",
-	},
 	scyther: {
 		name: "Scyther",
-	},
-	jynx: {
-		name: "Jynx",
 	},
 	electabuzz: {
 		name: "Electabuzz",
@@ -584,20 +512,11 @@ export const PokedexText = {
 	lapras: {
 		name: "Lapras",
 	},
-	laprasgmax: {
-		name: "Lapras-Gmax",
-	},
 	ditto: {
 		name: "Ditto",
 	},
 	eevee: {
 		name: "Eevee",
-	},
-	eeveestarter: {
-		name: "Eevee-Starter",
-	},
-	eeveegmax: {
-		name: "Eevee-Gmax",
 	},
 	vaporeon: {
 		name: "Vaporeon",
@@ -632,17 +551,23 @@ export const PokedexText = {
 	snorlax: {
 		name: "Snorlax",
 	},
-	snorlaxgmax: {
-		name: "Snorlax-Gmax",
-	},
 	articuno: {
 		name: "Articuno",
+	},
+	articunokonor: {
+		name: "Articuno-Konor",
 	},
 	zapdos: {
 		name: "Zapdos",
 	},
+	zapdoskonor: {
+		name: "Zapdos-Konor",
+	},
 	moltres: {
 		name: "Moltres",
+	},
+	moltreskonor: {
+		name: "Moltres-Konor",
 	},
 	dratini: {
 		name: "Dratini",
@@ -665,6 +590,9 @@ export const PokedexText = {
 	mew: {
 		name: "Mew",
 	},
+	mewmega: {
+		name: "Mew-Mega",
+	},
 	chikorita: {
 		name: "Chikorita",
 	},
@@ -673,6 +601,9 @@ export const PokedexText = {
 	},
 	meganium: {
 		name: "Meganium",
+	},
+	meganiummega: {
+		name: "Meganium-Mega",
 	},
 	cyndaquil: {
 		name: "Cyndaquil",
@@ -683,6 +614,9 @@ export const PokedexText = {
 	typhlosion: {
 		name: "Typhlosion",
 	},
+	typhlosionmega: {
+		name: "Typhlosion-Mega",
+	},
 	totodile: {
 		name: "Totodile",
 	},
@@ -692,11 +626,17 @@ export const PokedexText = {
 	feraligatr: {
 		name: "Feraligatr",
 	},
+	feraligatrmega: {
+		name: "Feraligatr-Mega",
+	},
 	sentret: {
 		name: "Sentret",
 	},
 	furret: {
 		name: "Furret",
+	},
+	furretmega: {
+		name: "Furret-Mega",
 	},
 	hoothoot: {
 		name: "Hoothoot",
@@ -727,9 +667,6 @@ export const PokedexText = {
 	},
 	pichu: {
 		name: "Pichu",
-	},
-	pichuspikyeared: {
-		name: "Pichu-Spiky-eared",
 	},
 	cleffa: {
 		name: "Cleffa",
@@ -773,9 +710,6 @@ export const PokedexText = {
 	sudowoodo: {
 		name: "Sudowoodo",
 	},
-	politoed: {
-		name: "Politoed",
-	},
 	hoppip: {
 		name: "Hoppip",
 	},
@@ -817,9 +751,6 @@ export const PokedexText = {
 	},
 	misdreavus: {
 		name: "Misdreavus",
-	},
-	unown: {
-		name: "Unown",
 	},
 	wobbuffet: {
 		name: "Wobbuffet",
@@ -893,9 +824,6 @@ export const PokedexText = {
 	corsola: {
 		name: "Corsola",
 	},
-	corsolagalar: {
-		name: "Corsola-Galar",
-	},
 	remoraid: {
 		name: "Remoraid",
 	},
@@ -914,8 +842,14 @@ export const PokedexText = {
 	houndour: {
 		name: "Houndour",
 	},
+	houndourhell: {
+		name: "Houndour-Hell",
+	},
 	houndoom: {
 		name: "Houndoom",
+	},
+	houndoomhell: {
+		name: "Houndoom-Hell",
 	},
 	houndoommega: {
 		name: "Houndoom-Mega",
@@ -943,9 +877,6 @@ export const PokedexText = {
 	},
 	hitmontop: {
 		name: "Hitmontop",
-	},
-	smoochum: {
-		name: "Smoochum",
 	},
 	elekid: {
 		name: "Elekid",
@@ -1031,6 +962,9 @@ export const PokedexText = {
 	mightyena: {
 		name: "Mightyena",
 	},
+	mightyenamega: {
+		name: "Mightyena-Mega",
+	},
 	zigzagoon: {
 		name: "Zigzagoon",
 	},
@@ -1082,6 +1016,9 @@ export const PokedexText = {
 	swellow: {
 		name: "Swellow",
 	},
+	swellowmega: {
+		name: "Swellow-Mega",
+	},
 	wingull: {
 		name: "Wingull",
 	},
@@ -1111,6 +1048,9 @@ export const PokedexText = {
 	},
 	breloom: {
 		name: "Breloom",
+	},
+	breloommega: {
+		name: "Breloom-Mega",
 	},
 	slakoth: {
 		name: "Slakoth",
@@ -1199,11 +1139,8 @@ export const PokedexText = {
 	manectricmega: {
 		name: "Manectric-Mega",
 	},
-	plusle: {
-		name: "Plusle",
-	},
-	minun: {
-		name: "Minun",
+	polaris: {
+		name: "Polaris",
 	},
 	volbeat: {
 		name: "Volbeat",
@@ -1247,15 +1184,6 @@ export const PokedexText = {
 	torkoal: {
 		name: "Torkoal",
 	},
-	spoink: {
-		name: "Spoink",
-	},
-	grumpig: {
-		name: "Grumpig",
-	},
-	spinda: {
-		name: "Spinda",
-	},
 	trapinch: {
 		name: "Trapinch",
 	},
@@ -1264,6 +1192,9 @@ export const PokedexText = {
 	},
 	flygon: {
 		name: "Flygon",
+	},
+	flygonmega: {
+		name: "Flygon-Mega",
 	},
 	cacnea: {
 		name: "Cacnea",
@@ -1283,8 +1214,14 @@ export const PokedexText = {
 	zangoose: {
 		name: "Zangoose",
 	},
+	zangoosemega: {
+		name: "Zangoose-Mega",
+	},
 	seviper: {
 		name: "Seviper",
+	},
+	sevipermega: {
+		name: "Seviper-Mega",
 	},
 	lunatone: {
 		name: "Lunatone",
@@ -1370,9 +1307,6 @@ export const PokedexText = {
 	absolmega: {
 		name: "Absol-Mega",
 	},
-	wynaut: {
-		name: "Wynaut",
-	},
 	snorunt: {
 		name: "Snorunt",
 	},
@@ -1402,9 +1336,6 @@ export const PokedexText = {
 	},
 	relicanth: {
 		name: "Relicanth",
-	},
-	luvdisc: {
-		name: "Luvdisc",
 	},
 	bagon: {
 		name: "Bagon",
@@ -1493,6 +1424,9 @@ export const PokedexText = {
 	torterra: {
 		name: "Torterra",
 	},
+	torterramega: {
+		name: "Torterra-Mega",
+	},
 	chimchar: {
 		name: "Chimchar",
 	},
@@ -1502,6 +1436,9 @@ export const PokedexText = {
 	infernape: {
 		name: "Infernape",
 	},
+	infernapemega: {
+		name: "Infernape-Mega",
+	},
 	piplup: {
 		name: "Piplup",
 	},
@@ -1510,6 +1447,9 @@ export const PokedexText = {
 	},
 	empoleon: {
 		name: "Empoleon",
+	},
+	empoleonmega: {
+		name: "Empoleon-Mega",
 	},
 	starly: {
 		name: "Starly",
@@ -1525,12 +1465,6 @@ export const PokedexText = {
 	},
 	bibarel: {
 		name: "Bibarel",
-	},
-	kricketot: {
-		name: "Kricketot",
-	},
-	kricketune: {
-		name: "Kricketune",
 	},
 	shinx: {
 		name: "Shinx",
@@ -1579,6 +1513,9 @@ export const PokedexText = {
 	},
 	vespiquen: {
 		name: "Vespiquen",
+	},
+	vespiquenmega: {
+		name: "Vespiquen-Mega",
 	},
 	pachirisu: {
 		name: "Pachirisu",
@@ -1652,9 +1589,6 @@ export const PokedexText = {
 	bonsly: {
 		name: "Bonsly",
 	},
-	mimejr: {
-		name: "Mime Jr.",
-	},
 	happiny: {
 		name: "Happiny",
 	},
@@ -1663,6 +1597,9 @@ export const PokedexText = {
 	},
 	spiritomb: {
 		name: "Spiritomb",
+	},
+	spiritombmega: {
+		name: "Spiritomb-Mega",
 	},
 	gible: {
 		name: "Gible",
@@ -1729,6 +1666,9 @@ export const PokedexText = {
 	},
 	weavile: {
 		name: "Weavile",
+	},
+	weavilemega: {
+		name: "Weavile-Mega",
 	},
 	magnezone: {
 		name: "Magnezone",
@@ -1832,6 +1772,9 @@ export const PokedexText = {
 	cresselia: {
 		name: "Cresselia",
 	},
+	cresseliamega: {
+		name: "Cresselia-Mega",
+	},
 	phione: {
 		name: "Phione",
 	},
@@ -1840,6 +1783,9 @@ export const PokedexText = {
 	},
 	darkrai: {
 		name: "Darkrai",
+	},
+	darkraimega: {
+		name: "Darkrai-Mega",
 	},
 	shaymin: {
 		name: "Shaymin",
@@ -1913,6 +1859,9 @@ export const PokedexText = {
 	serperior: {
 		name: "Serperior",
 	},
+	serperiormega: {
+		name: "Serperior-Mega",
+	},
 	tepig: {
 		name: "Tepig",
 	},
@@ -1922,6 +1871,9 @@ export const PokedexText = {
 	emboar: {
 		name: "Emboar",
 	},
+	emboarmega: {
+		name: "Emboar-Mega",
+	},
 	oshawott: {
 		name: "Oshawott",
 	},
@@ -1930,6 +1882,9 @@ export const PokedexText = {
 	},
 	samurott: {
 		name: "Samurott",
+	},
+	samurottmega: {
+		name: "Samurott-Mega",
 	},
 	patrat: {
 		name: "Patrat",
@@ -2087,23 +2042,17 @@ export const PokedexText = {
 	krookodile: {
 		name: "Krookodile",
 	},
+	krookodilemega: {
+		name: "Krookodile-Mega",
+	},
 	darumaka: {
 		name: "Darumaka",
-	},
-	darumakagalar: {
-		name: "Darumaka-Galar",
 	},
 	darmanitan: {
 		name: "Darmanitan",
 	},
 	darmanitanzen: {
 		name: "Darmanitan-Zen",
-	},
-	darmanitangalar: {
-		name: "Darmanitan-Galar",
-	},
-	darmanitangalarzen: {
-		name: "Darmanitan-Galar-Zen",
 	},
 	maractus: {
 		name: "Maractus",
@@ -2150,14 +2099,14 @@ export const PokedexText = {
 	garbodor: {
 		name: "Garbodor",
 	},
-	garbodorgmax: {
-		name: "Garbodor-Gmax",
-	},
 	zorua: {
 		name: "Zorua",
 	},
 	zoroark: {
 		name: "Zoroark",
+	},
+	zoroarkmega: {
+		name: "Zoroark-Mega",
 	},
 	minccino: {
 		name: "Minccino",
@@ -2225,9 +2174,6 @@ export const PokedexText = {
 	jellicent: {
 		name: "Jellicent",
 	},
-	alomomola: {
-		name: "Alomomola",
-	},
 	joltik: {
 		name: "Joltik",
 	},
@@ -2282,11 +2228,17 @@ export const PokedexText = {
 	haxorus: {
 		name: "Haxorus",
 	},
+	haxorusmega: {
+		name: "Haxorus-Mega",
+	},
 	cubchoo: {
 		name: "Cubchoo",
 	},
 	beartic: {
 		name: "Beartic",
+	},
+	bearticmega: {
+		name: "Beartic-Mega",
 	},
 	cryogonal: {
 		name: "Cryogonal",
@@ -2300,9 +2252,6 @@ export const PokedexText = {
 	stunfisk: {
 		name: "Stunfisk",
 	},
-	stunfiskgalar: {
-		name: "Stunfisk-Galar",
-	},
 	mienfoo: {
 		name: "Mienfoo",
 	},
@@ -2311,6 +2260,9 @@ export const PokedexText = {
 	},
 	druddigon: {
 		name: "Druddigon",
+	},
+	druddigonmega: {
+		name: "Druddigon-Mega",
 	},
 	golett: {
 		name: "Golett",
@@ -2417,6 +2369,9 @@ export const PokedexText = {
 	genesect: {
 		name: "Genesect",
 	},
+	genesectmega: {
+		name: "Genesect-Mega",
+	},
 	genesectdouse: {
 		name: "Genesect-Douse",
 	},
@@ -2474,6 +2429,9 @@ export const PokedexText = {
 	talonflame: {
 		name: "Talonflame",
 	},
+	talonflamemega: {
+		name: "Talonflame-Mega",
+	},
 	scatterbug: {
 		name: "Scatterbug",
 	},
@@ -2482,12 +2440,6 @@ export const PokedexText = {
 	},
 	vivillon: {
 		name: "Vivillon",
-	},
-	vivillonfancy: {
-		name: "Vivillon-Fancy",
-	},
-	vivillonpokeball: {
-		name: "Vivillon-Pokeball",
 	},
 	litleo: {
 		name: "Litleo",
@@ -2519,6 +2471,9 @@ export const PokedexText = {
 	pangoro: {
 		name: "Pangoro",
 	},
+	pangoromega: {
+		name: "Pangoro-Mega",
+	},
 	furfrou: {
 		name: "Furfrou",
 	},
@@ -2530,6 +2485,12 @@ export const PokedexText = {
 	},
 	meowsticf: {
 		name: "Meowstic-F",
+	},
+	meowsticmega: {
+		name: "Meowstic-Mega",
+	},
+	meowsticf-Mega: {
+		name: "Meowstic-F-Mega",
 	},
 	honedge: {
 		name: "Honedge",
@@ -2621,6 +2582,9 @@ export const PokedexText = {
 	klefki: {
 		name: "Klefki",
 	},
+	klefkimega: {
+		name: "Klefki-Mega",
+	},
 	phantump: {
 		name: "Phantump",
 	},
@@ -2662,6 +2626,9 @@ export const PokedexText = {
 	},
 	noivern: {
 		name: "Noivern",
+	},
+	noivernmega: {
+		name: "Noivern-Mega",
 	},
 	xerneas: {
 		name: "Xerneas",
@@ -2843,6 +2810,9 @@ export const PokedexText = {
 	salazzletotem: {
 		name: "Salazzle-Totem",
 	},
+	salazzleholy: {
+		name: "Salazzle-Holy",
+	},
 	stufful: {
 		name: "Stufful",
 	},
@@ -2879,6 +2849,9 @@ export const PokedexText = {
 	palossand: {
 		name: "Palossand",
 	},
+	palossandmega: {
+		name: "Palossand-Mega",
+	},
 	pyukumuku: {
 		name: "Pyukumuku",
 	},
@@ -2911,6 +2884,9 @@ export const PokedexText = {
 	},
 	silvallyflying: {
 		name: "Silvally-Flying",
+	},
+	silvallyfull: {
+		name: "Silvally-Full",
 	},
 	silvallyghost: {
 		name: "Silvally-Ghost",
@@ -2971,9 +2947,6 @@ export const PokedexText = {
 	},
 	bruxish: {
 		name: "Bruxish",
-	},
-	drampa: {
-		name: "Drampa",
 	},
 	dhelmise: {
 		name: "Dhelmise",
@@ -3071,15 +3044,6 @@ export const PokedexText = {
 	zeraora: {
 		name: "Zeraora",
 	},
-	meltan: {
-		name: "Meltan",
-	},
-	melmetal: {
-		name: "Melmetal",
-	},
-	melmetalgmax: {
-		name: "Melmetal-Gmax",
-	},
 	grookey: {
 		name: "Grookey",
 	},
@@ -3088,9 +3052,6 @@ export const PokedexText = {
 	},
 	rillaboom: {
 		name: "Rillaboom",
-	},
-	rillaboomgmax: {
-		name: "Rillaboom-Gmax",
 	},
 	scorbunny: {
 		name: "Scorbunny",
@@ -3101,9 +3062,6 @@ export const PokedexText = {
 	cinderace: {
 		name: "Cinderace",
 	},
-	cinderacegmax: {
-		name: "Cinderace-Gmax",
-	},
 	sobble: {
 		name: "Sobble",
 	},
@@ -3112,15 +3070,6 @@ export const PokedexText = {
 	},
 	inteleon: {
 		name: "Inteleon",
-	},
-	inteleongmax: {
-		name: "Inteleon-Gmax",
-	},
-	skwovet: {
-		name: "Skwovet",
-	},
-	greedent: {
-		name: "Greedent",
 	},
 	rookidee: {
 		name: "Rookidee",
@@ -3131,47 +3080,17 @@ export const PokedexText = {
 	corviknight: {
 		name: "Corviknight",
 	},
-	corviknightgmax: {
-		name: "Corviknight-Gmax",
-	},
-	blipbug: {
-		name: "Blipbug",
-	},
-	dottler: {
-		name: "Dottler",
-	},
-	orbeetle: {
-		name: "Orbeetle",
-	},
-	orbeetlegmax: {
-		name: "Orbeetle-Gmax",
-	},
 	nickit: {
 		name: "Nickit",
 	},
 	thievul: {
 		name: "Thievul",
 	},
-	gossifleur: {
-		name: "Gossifleur",
-	},
-	eldegoss: {
-		name: "Eldegoss",
-	},
-	wooloo: {
-		name: "Wooloo",
-	},
-	dubwool: {
-		name: "Dubwool",
-	},
 	chewtle: {
 		name: "Chewtle",
 	},
 	drednaw: {
 		name: "Drednaw",
-	},
-	drednawgmax: {
-		name: "Drednaw-Gmax",
 	},
 	yamper: {
 		name: "Yamper",
@@ -3188,32 +3107,20 @@ export const PokedexText = {
 	coalossal: {
 		name: "Coalossal",
 	},
-	coalossalgmax: {
-		name: "Coalossal-Gmax",
-	},
 	applin: {
 		name: "Applin",
 	},
 	flapple: {
 		name: "Flapple",
 	},
-	flapplegmax: {
-		name: "Flapple-Gmax",
-	},
 	appletun: {
 		name: "Appletun",
-	},
-	appletungmax: {
-		name: "Appletun-Gmax",
 	},
 	silicobra: {
 		name: "Silicobra",
 	},
 	sandaconda: {
 		name: "Sandaconda",
-	},
-	sandacondagmax: {
-		name: "Sandaconda-Gmax",
 	},
 	cramorant: {
 		name: "Cramorant",
@@ -3239,26 +3146,11 @@ export const PokedexText = {
 	toxtricitylowkey: {
 		name: "Toxtricity-Low-Key",
 	},
-	toxtricitygmax: {
-		name: "Toxtricity-Gmax",
-	},
-	toxtricitylowkeygmax: {
-		name: "Toxtricity-Low-Key-Gmax",
-	},
 	sizzlipede: {
 		name: "Sizzlipede",
 	},
 	centiskorch: {
 		name: "Centiskorch",
-	},
-	centiskorchgmax: {
-		name: "Centiskorch-Gmax",
-	},
-	clobbopus: {
-		name: "Clobbopus",
-	},
-	grapploct: {
-		name: "Grapploct",
 	},
 	sinistea: {
 		name: "Sinistea",
@@ -3281,9 +3173,6 @@ export const PokedexText = {
 	hatterene: {
 		name: "Hatterene",
 	},
-	hatterenegmax: {
-		name: "Hatterene-Gmax",
-	},
 	impidimp: {
 		name: "Impidimp",
 	},
@@ -3293,23 +3182,11 @@ export const PokedexText = {
 	grimmsnarl: {
 		name: "Grimmsnarl",
 	},
-	grimmsnarlgmax: {
-		name: "Grimmsnarl-Gmax",
+	grimmsnarlmega: {
+		name: "Grimmsnarl-Mega",
 	},
 	obstagoon: {
 		name: "Obstagoon",
-	},
-	perrserker: {
-		name: "Perrserker",
-	},
-	cursola: {
-		name: "Cursola",
-	},
-	sirfetchd: {
-		name: "Sirfetch\u2019d",
-	},
-	mrrime: {
-		name: "Mr. Rime",
 	},
 	runerigus: {
 		name: "Runerigus",
@@ -3320,14 +3197,8 @@ export const PokedexText = {
 	alcremie: {
 		name: "Alcremie",
 	},
-	alcremiegmax: {
-		name: "Alcremie-Gmax",
-	},
 	falinks: {
 		name: "Falinks",
-	},
-	pincurchin: {
-		name: "Pincurchin",
 	},
 	snom: {
 		name: "Snom",
@@ -3344,44 +3215,11 @@ export const PokedexText = {
 	eiscuenoice: {
 		name: "Eiscue-Noice",
 	},
-	indeedee: {
-		name: "Indeedee",
-	},
-	indeedeef: {
-		name: "Indeedee-F",
-	},
-	morpeko: {
-		name: "Morpeko",
-	},
-	morpekohangry: {
-		name: "Morpeko-Hangry",
-	},
-	cufant: {
-		name: "Cufant",
-	},
-	copperajah: {
-		name: "Copperajah",
-	},
-	copperajahgmax: {
-		name: "Copperajah-Gmax",
-	},
 	dracozolt: {
 		name: "Dracozolt",
 	},
-	arctozolt: {
-		name: "Arctozolt",
-	},
 	dracovish: {
 		name: "Dracovish",
-	},
-	arctovish: {
-		name: "Arctovish",
-	},
-	duraludon: {
-		name: "Duraludon",
-	},
-	duraludongmax: {
-		name: "Duraludon-Gmax",
 	},
 	dreepy: {
 		name: "Dreepy",
@@ -3404,12 +3242,6 @@ export const PokedexText = {
 	zamazentacrowned: {
 		name: "Zamazenta-Crowned",
 	},
-	eternatus: {
-		name: "Eternatus",
-	},
-	eternatuseternamax: {
-		name: "Eternatus-Eternamax",
-	},
 	kubfu: {
 		name: "Kubfu",
 	},
@@ -3419,238 +3251,94 @@ export const PokedexText = {
 	urshifurapidstrike: {
 		name: "Urshifu-Rapid-Strike",
 	},
-	urshifugmax: {
-		name: "Urshifu-Gmax",
+	parapod: {
+		name: "Parapod",
 	},
-	urshifurapidstrikegmax: {
-		name: "Urshifu-Rapid-Strike-Gmax",
+	pegasoltea: {
+		name: "Pegasoltea",
 	},
-	zarude: {
-		name: "Zarude",
+	pegasolteakonor: {
+		name: "Pegasoltea-Konor",
 	},
-	zarudedada: {
-		name: "Zarude-Dada",
+	mallarkee: {
+		name: "Mallar\u2019kee",
+	},
+	mallarkeef: {
+		name: "Mallar\u2019kee-F",
+	},
+	lediosso: {
+		name: "Lediosso",
+	},
+	dunseraph: {
+		name: "Dunseraph",
+	},
+	qwilomber: {
+		name: "Qwilomber",
+	},
+	ararisu: {
+		name: "Ararisu",
+	},
+	trebil: {
+		name: "Trebil",
+	},
+	basclef: {
+		name: "Basclef",
+	},
+	shukaku: {
+		name: "Shukaku",
+	},
+	kuramasmall: {
+		name: "Kurama-Small",
+	},
+	kuramamedium: {
+		name: "Kurama-Medium",
+	},
+	kurama: {
+		name: "Kurama",
+	},
+	kerberos: {
+		name: "Kerberos",
+	},
+	vee: {
+		name: "Vee",
+	},
+	vapor{
+		name: "Vapor",
+	},
+	jolt{
+		name: "Jolt",
+	},
+	flare{
+		name: "Flare",
+	},
+	esp{
+		name: "Esp",
+	},
+	umbra{
+		name: "Umbra",
+	},
+	glace{
+		name: "Glace",
+	},
+	leaf{
+		name: "Leaf",
+	},
+	sylve{
+		name: "Sylve",
+	},
+	giracario: {
+		name: "Giracario",
+	},
+	giracarioshadow: {
+		name: "Giracario-Shadow",
+	},
+	drake: {
+		name: "Drake",
+	},
+	loona: {
+		name: "Loona",
 	},
 	missingno: {
 		name: "MissingNo.",
-	},
-	syclar: {
-		name: "Syclar",
-	},
-	syclant: {
-		name: "Syclant",
-	},
-	revenankh: {
-		name: "Revenankh",
-	},
-	embirch: {
-		name: "Embirch",
-	},
-	flarelm: {
-		name: "Flarelm",
-	},
-	pyroak: {
-		name: "Pyroak",
-	},
-	breezi: {
-		name: "Breezi",
-	},
-	fidgit: {
-		name: "Fidgit",
-	},
-	rebble: {
-		name: "Rebble",
-	},
-	tactite: {
-		name: "Tactite",
-	},
-	stratagem: {
-		name: "Stratagem",
-	},
-	privatyke: {
-		name: "Privatyke",
-	},
-	arghonaut: {
-		name: "Arghonaut",
-	},
-	kitsunoh: {
-		name: "Kitsunoh",
-	},
-	cyclohm: {
-		name: "Cyclohm",
-	},
-	colossoil: {
-		name: "Colossoil",
-	},
-	krilowatt: {
-		name: "Krilowatt",
-	},
-	voodoll: {
-		name: "Voodoll",
-	},
-	voodoom: {
-		name: "Voodoom",
-	},
-	scratchet: {
-		name: "Scratchet",
-	},
-	tomohawk: {
-		name: "Tomohawk",
-	},
-	necturine: {
-		name: "Necturine",
-	},
-	necturna: {
-		name: "Necturna",
-	},
-	mollux: {
-		name: "Mollux",
-	},
-	cupra: {
-		name: "Cupra",
-	},
-	argalis: {
-		name: "Argalis",
-	},
-	aurumoth: {
-		name: "Aurumoth",
-	},
-	brattler: {
-		name: "Brattler",
-	},
-	malaconda: {
-		name: "Malaconda",
-	},
-	cawdet: {
-		name: "Cawdet",
-	},
-	cawmodore: {
-		name: "Cawmodore",
-	},
-	volkritter: {
-		name: "Volkritter",
-	},
-	volkraken: {
-		name: "Volkraken",
-	},
-	snugglow: {
-		name: "Snugglow",
-	},
-	plasmanta: {
-		name: "Plasmanta",
-	},
-	floatoy: {
-		name: "Floatoy",
-	},
-	caimanoe: {
-		name: "Caimanoe",
-	},
-	naviathan: {
-		name: "Naviathan",
-	},
-	crucibelle: {
-		name: "Crucibelle",
-	},
-	crucibellemega: {
-		name: "Crucibelle-Mega",
-	},
-	pluffle: {
-		name: "Pluffle",
-	},
-	kerfluffle: {
-		name: "Kerfluffle",
-	},
-	pajantom: {
-		name: "Pajantom",
-	},
-	mumbao: {
-		name: "Mumbao",
-	},
-	jumbao: {
-		name: "Jumbao",
-	},
-	fawnifer: {
-		name: "Fawnifer",
-	},
-	electrelk: {
-		name: "Electrelk",
-	},
-	caribolt: {
-		name: "Caribolt",
-	},
-	smogecko: {
-		name: "Smogecko",
-	},
-	smoguana: {
-		name: "Smoguana",
-	},
-	smokomodo: {
-		name: "Smokomodo",
-	},
-	swirlpool: {
-		name: "Swirlpool",
-	},
-	coribalis: {
-		name: "Coribalis",
-	},
-	snaelstrom: {
-		name: "Snaelstrom",
-	},
-	equilibra: {
-		name: "Equilibra",
-	},
-	astrolotl: {
-		name: "Astrolotl",
-	},
-	pokestarsmeargle: {
-		name: "Pokestar Smeargle",
-	},
-	pokestarufo: {
-		name: "Pokestar UFO",
-	},
-	pokestarufo2: {
-		name: "Pokestar UFO-2",
-	},
-	pokestarbrycenman: {
-		name: "Pokestar Brycen-Man",
-	},
-	pokestarmt: {
-		name: "Pokestar MT",
-	},
-	pokestarmt2: {
-		name: "Pokestar MT2",
-	},
-	pokestartransport: {
-		name: "Pokestar Transport",
-	},
-	pokestargiant: {
-		name: "Pokestar Giant",
-	},
-	pokestarhumanoid: {
-		name: "Pokestar Humanoid",
-	},
-	pokestarmonster: {
-		name: "Pokestar Monster",
-	},
-	pokestarf00: {
-		name: "Pokestar F-00",
-	},
-	pokestarf002: {
-		name: "Pokestar F-002",
-	},
-	pokestarspirit: {
-		name: "Pokestar Spirit",
-	},
-	pokestarblackdoor: {
-		name: "Pokestar Black Door",
-	},
-	pokestarwhitedoor: {
-		name: "Pokestar White Door",
-	},
-	pokestarblackbelt: {
-		name: "Pokestar Black Belt",
-	},
-	pokestarufopropu2: {
-		name: "Pokestar UFO-PropU2",
 	},
 };
