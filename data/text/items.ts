@@ -58,6 +58,10 @@ export const ItemsText = {
 		name: "Apicot Berry",
 		desc: "Raises holder's Sp. Def by 1 stage when at 1/4 max HP or less. Single use.",
 	},
+	ariadite: {
+		name: "Ariadite",
+		desc: "If held by a Ariados, this item allows it to Mega Evolve in battle.",
+	},
 	armorfossil: {
 		name: "Armor Fossil",
 		desc: "Can be revived into Shieldon.",
@@ -82,6 +86,10 @@ export const ItemsText = {
 		name: "Banettite",
 		desc: "If held by a Banette, this item allows it to Mega Evolve in battle.",
 	},
+	bearticite: {
+		name: "Bearticite",
+		desc: "If held by a Beartic, this item allows it to Mega Evolve in battle.",
+	},
 	beastball: {
 		name: "Beast Ball",
 		desc: "A special Poke Ball designed to catch Ultra Beasts.",
@@ -89,10 +97,6 @@ export const ItemsText = {
 	beedrillite: {
 		name: "Beedrillite",
 		desc: "If held by a Beedrill, this item allows it to Mega Evolve in battle.",
-	},
-	belueberry: {
-		name: "Belue Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
 	},
 	berryjuice: {
 		name: "Berry Juice",
@@ -136,17 +140,13 @@ export const ItemsText = {
 		name: "Blue Orb",
 		desc: "If held by a Kyogre, this item triggers its Primal Reversion in battle.",
 	},
-	blukberry: {
-		name: "Bluk Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
-	},
-	blunderpolicy: {
+	blunderpolicy: { //HERE
 		name: "Blunder Policy",
 		desc: "If the holder misses due to accuracy, its Speed is raised by 2 stages. Single use.",
 	},
-	bottlecap: {
-		name: "Bottle Cap",
-		desc: "Used for Hyper Training. One of a Pokemon's stats is calculated with an IV of 31.",
+	breloomite: {
+		name: "Breloomite",
+		desc: "If held by a Breloom, this item allows it to Mega Evolve in battle.",
 	},
 	brightpowder: {
 		name: "Bright Powder",
@@ -167,6 +167,10 @@ export const ItemsText = {
 	burndrive: {
 		name: "Burn Drive",
 		desc: "Holder's Techno Blast is Fire type.",
+	},
+	butterite: {
+		name: "Butterite",
+		desc: "If held by a Butterfree, this item allows it to Mega Evolve in battle.",
 	},
 	cameruptite: {
 		name: "Cameruptite",
@@ -248,10 +252,6 @@ export const ItemsText = {
 		name: "Colbur Berry",
 		desc: "Halves damage taken from a supereffective Dark-type attack. Single use.",
 	},
-	cornnberry: {
-		name: "Cornn Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
-	},
 	coverfossil: {
 		name: "Cover Fossil",
 		desc: "Can be revived into Tirtouga.",
@@ -259,6 +259,10 @@ export const ItemsText = {
 	crackedpot: {
 		name: "Cracked Pot",
 		desc: "Evolves Sinistea into Polteageist when used.",
+	},
+	cressite: {
+		name: "Cressite",
+		desc: "If held by a Cresselia, this item allows it to Mega Evolve in battle.",
 	},
 	custapberry: {
 		name: "Custap Berry",
@@ -281,6 +285,10 @@ export const ItemsText = {
 	darkiniumz: {
 		name: "Darkinium Z",
 		desc: "If holder has a Dark move, this item allows it to use a Dark Z-Move.",
+	},
+	darkrite: {
+		name: "Darkrite",
+		desc: "If held by a Darkrai, this item allows it to Mega Evolve in battle.",
 	},
 	dawnstone: {
 		name: "Dawn Stone",
@@ -308,6 +316,10 @@ export const ItemsText = {
 	diancite: {
 		name: "Diancite",
 		desc: "If held by a Diancie, this item allows it to Mega Evolve in battle.",
+	},
+	dinofossil: {
+		name: "Dino Fossil",
+		desc: "Can be revived into Dracozolt.",
 	},
 	diveball: {
 		name: "Dive Ball",
@@ -349,17 +361,13 @@ export const ItemsText = {
 		name: "Dread Plate",
 		desc: "Holder's Dark-type attacks have 1.2x power. Judgment is Dark type.",
 	},
-	dreamball: {
-		name: "Dream Ball",
-		desc: "A Poke Ball that makes it easier to catch wild Pokémon while they're asleep.",
+	druddite: {
+		name: "Druddite",
+		desc: "If held by a Druddigon, this item allows it to Mega Evolve in battle.",
 	},
 	dubiousdisc: {
 		name: "Dubious Disc",
 		desc: "Evolves Porygon2 into Porygon-Z when traded.",
-	},
-	durinberry: {
-		name: "Durin Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
 	},
 	duskball: {
 		name: "Dusk Ball",
@@ -408,6 +416,14 @@ export const ItemsText = {
 		name: "Electrium Z",
 		desc: "If holder has an Electric move, this item allows it to use an Electric Z-Move.",
 	},
+	emboarite: {
+		name: "Emboarite",
+		desc: "If held by a Emboar, this item allows it to Mega Evolve in battle.",
+	},
+	emporite: {
+		name: "Emporite",
+		desc: "If held by a Empoleon, this item allows it to Mega Evolve in battle.",
+	},
 	energypowder: {
 		name: "Energy Powder",
 		desc: "Restores 60 HP to one Pokemon.",
@@ -438,7 +454,15 @@ export const ItemsText = {
 	},
 	fastball: {
 		name: "Fast Ball",
-		desc: "A Poke Ball that makes it easier to catch Pokemon which are quick to run away.",
+		desc: "A Poke Ball that makes it easier to catch Pokemon which are quick.",
+	},
+	fateknot: {
+		name: "Fate Knot",
+		desc: "If holder becomes infatuated, the other Pokemon also becomes infatuated. While infatuated, this pokemons Def and SpD are 1.5X",
+	},
+	feraligite: {
+		name: "Feraligite",
+		desc: "If held by a Feraligatr, this item allows it to Mega Evolve in battle.",
 	},
 	fightinggem: {
 		name: "Fighting Gem",
@@ -473,6 +497,10 @@ export const ItemsText = {
 		name: "Firium Z",
 		desc: "If holder has a Fire move, this item allows it to use a Fire Z-Move.",
 	},
+	fishfossil: {
+		name: "Fish Fossil",
+		desc: "Can be revived into Dracovish.",
+	},
 	fistplate: {
 		name: "Fist Plate",
 		desc: "Holder's Fighting-type attacks have 1.2x power. Judgment is Fighting type.",
@@ -492,6 +520,10 @@ export const ItemsText = {
 	flowersweet: {
 		name: "Flower Sweet",
 		desc: "Evolves Milcery into Alcremie when held and spun around.",
+	},
+	flygonite: {
+		name: "Flygonite",
+		desc: "If held by a Flygon, this item allows it to Mega Evolve in battle.",
 	},
 	flyinggem: {
 		name: "Flying Gem",
@@ -517,37 +549,17 @@ export const ItemsText = {
 
 		end: "  [POKEMON] hung on using its Focus Sash!",
 	},
-	fossilizedbird: {
-		name: "Fossilized Bird",
-		desc: "Can revive into Dracozolt with Fossilized Drake or Arctozolt with Fossilized Dino.",
-	},
-	fossilizeddino: {
-		name: "Fossilized Dino",
-		desc: "Can revive into Arctovish with Fossilized Fish or Arctozolt with Fossilized Bird.",
-	},
-	fossilizeddrake: {
-		name: "Fossilized Drake",
-		desc: "Can revive into Dracozolt with Fossilized Bird or Dracovish with Fossilized Fish.",
-	},
-	fossilizedfish: {
-		name: "Fossilized Fish",
-		desc: "Can revive into Dracovish with Fossilized Drake or Arctovish with Fossilized Dino.",
-	},
-	friendball: {
-		name: "Friend Ball",
-		desc: "A Poke Ball that makes caught Pokemon more friendly.",
-	},
 	fullincense: {
 		name: "Full Incense",
 		desc: "Holder moves last in its priority bracket.",
 	},
-	galaricacuff: {
-		name: "Galarica Cuff",
-		desc: "Evolves Galarian Slowpoke into Galarian Slowbro when used.",
+	fullmemory: {
+		name: "Full Memory",
+		desc: "Holder's forme is now Full.",
 	},
-	galaricawreath: {
-		name: "Galarica Wreath",
-		desc: "Evolves Galarian Slowpoke into Galarian Slowking when used.",
+	furrite: {
+		name: "Furrite",
+		desc: "If held by a Furret, this item allows it to Mega Evolve in battle.",
 	},
 	galladite: {
 		name: "Galladite",
@@ -564,6 +576,10 @@ export const ItemsText = {
 	gardevoirite: {
 		name: "Gardevoirite",
 		desc: "If held by a Gardevoir, this item allows it to Mega Evolve in battle.",
+	},
+	genesectite: {
+		name: "Genesectite",
+		desc: "If held by a Genesect, this item allows it to Mega Evolve in battle.",
 	},
 	gengarite: {
 		name: "Gengarite",
@@ -585,10 +601,6 @@ export const ItemsText = {
 		name: "Glalitite",
 		desc: "If held by a Glalie, this item allows it to Mega Evolve in battle.",
 	},
-	goldbottlecap: {
-		name: "Gold Bottle Cap",
-		desc: "Used for Hyper Training. All of a Pokemon's stats are calculated with an IV of 31.",
-	},
 	grassgem: {
 		name: "Grass Gem",
 		desc: "Holder's first successful Grass-type attack will have 1.3x power. Single use.",
@@ -609,9 +621,9 @@ export const ItemsText = {
 		name: "Great Ball",
 		desc: "A high-performance Ball that provides a higher catch rate than a Poke Ball.",
 	},
-	grepaberry: {
-		name: "Grepa Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+	grimmite: {
+		name: "Grimmite",
+		desc: "If held by a Grimmsnarl, this item allows it to Mega Evolve in battle.",
 	},
 	gripclaw: {
 		name: "Grip Claw",
@@ -645,6 +657,10 @@ export const ItemsText = {
 		name: "Hard Stone",
 		desc: "Holder's Rock-type attacks have 1.2x power.",
 	},
+	haxorite: {
+		name: "Haxorite",
+		desc: "If held by a Haxorus, this item allows it to Mega Evolve in battle.",
+	},
 	healball: {
 		name: "Heal Ball",
 		desc: "A remedial Poke Ball that restores the caught Pokemon's HP and status problem.",
@@ -670,13 +686,13 @@ export const ItemsText = {
 		name: "Heracronite",
 		desc: "If held by a Heracross, this item allows it to Mega Evolve in battle.",
 	},
-	hondewberry: {
-		name: "Hondew Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
-	},
 	houndoominite: {
 		name: "Houndoominite",
 		desc: "If held by a Houndoom, this item allows it to Mega Evolve in battle.",
+	},
+	hypnotite: {
+		name: "Hypnotite",
+		desc: "If held by a Hypno, this item allows it to Mega Evolve in battle.",
 	},
 	iapapaberry: {
 		name: "Iapapa Berry",
@@ -707,9 +723,17 @@ export const ItemsText = {
 		name: "Icy Rock",
 		desc: "Holder's use of Hail lasts 8 turns instead of 5.",
 	},
+	illusorychain: {
+		name: "Illusory Chain",
+		desc: "If held by a Zoroark, this item allows it to Mega Evolve in battle.",
+	},
 	inciniumz: {
 		name: "Incinium Z",
 		desc: "If held by an Incineroar with Darkest Lariat, it can use Malicious Moonsault.",
+	},
+	infernite: {
+		name: "Infernite",
+		desc: "If held by a Infernape, this item allows it to Mega Evolve in battle.",
 	},
 	insectplate: {
 		name: "Insect Plate",
@@ -743,10 +767,6 @@ export const ItemsText = {
 		name: "Kee Berry",
 		desc: "Raises holder's Defense by 1 stage after it is hit by a physical attack. Single use.",
 	},
-	kelpsyberry: {
-		name: "Kelpsy Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
-	},
 	kangaskhanite: {
 		name: "Kangaskhanite",
 		desc: "If held by a Kangaskhan, this item allows it to Mega Evolve in battle.",
@@ -756,9 +776,17 @@ export const ItemsText = {
 		desc: "Holder's attacks without a chance to flinch gain a 10% chance to flinch. Evolves Poliwhirl into Politoed and Slowpoke into Slowking when traded.",
 		shortDesc: "Holder's attacks without a chance to flinch gain a 10% chance to flinch.",
 	},
+	klefkinite: {
+		name: "Klefkinite",
+		desc: "If held by a Klefki, this item allows it to Mega Evolve in battle.",
+	},
 	kommoniumz: {
 		name: "Kommonium Z",
 		desc: "If held by a Kommo-o with Clanging Scales, it can use Clangorous Soulblaze.",
+	},
+	krookonite: {
+		name: "Krookonite",
+		desc: "If held by a Krookodile, this item allows it to Mega Evolve in battle.",
 	},
 	laggingtail: {
 		name: "Lagging Tail",
@@ -787,7 +815,7 @@ export const ItemsText = {
 	},
 	leek: {
 		name: "Leek",
-		desc: "If held by a Farfetch\u2019d or Sirfetch\u2019d, its critical hit ratio is raised by 2 stages.",
+		desc: "If held by a Farfetch\u2019d or Mallar\u2019kee, its critical hit ratio is raised by 2 stages.",
 	},
 	leftovers: {
 		name: "Leftovers",
@@ -841,7 +869,7 @@ export const ItemsText = {
 	},
 	luckypunch: {
 		name: "Lucky Punch",
-		desc: "If held by a Chansey, its critical hit ratio is raised by 2 stages.",
+		desc: "If held by a Chansey or Blissey, its critical hit ratio is raised by 2 stages.",
 	},
 	lumberry: {
 		name: "Lum Berry",
@@ -871,6 +899,10 @@ export const ItemsText = {
 		name: "Lycanium Z",
 		desc: "If held by a Lycanroc forme with Stone Edge, it can use Splintered Stormshards.",
 	},
+	machampite: {
+		name: "Machampite",
+		desc: "If held by a Machamp, this item allows it to Mega Evolve in battle.",
+	},
 	machobrace: {
 		name: "Macho Brace",
 		desc: "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
@@ -886,14 +918,6 @@ export const ItemsText = {
 	magoberry: {
 		name: "Mago Berry",
 		desc: "Restores 33% max HP at 1/4 max HP or less; confuses if -Spe Nature. Single use.",
-	},
-	magostberry: {
-		name: "Magost Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
-	},
-	mail: {
-		name: "Mail",
-		desc: "Cannot be given to or taken from a Pokemon, except by Covet/Knock Off/Thief.",
 	},
 	manectite: {
 		name: "Manectite",
@@ -923,9 +947,21 @@ export const ItemsText = {
 		name: "Medichamite",
 		desc: "If held by a Medicham, this item allows it to Mega Evolve in battle.",
 	},
+	meganiumite: {
+		name: "Meganiumite",
+		desc: "If held by a Meganium, this item allows it to Mega Evolve in battle.",
+	},
 	mentalherb: {
 		name: "Mental Herb",
 		desc: "Cures holder of Attract, Disable, Encore, Heal Block, Taunt, Torment. Single use.",
+	},
+	meowsticite: {
+		name: "Meowsticite",
+		desc: "If held by a Meowstic, this item allows it to Mega Evolve in battle.",
+	},
+	meowsticitef: {
+		name: "MeowsticiteF",
+		desc: "If held by a Meowstic, this item allows it to Mega Evolve in battle.",
 	},
 	metagrossite: {
 		name: "Metagrossite",
@@ -960,6 +996,10 @@ export const ItemsText = {
 		name: "Micle Berry",
 		desc: "Holder's next move has 1.2x accuracy when at 1/4 max HP or less. Single use.",
 	},
+	mightyenite: {
+		name: "Mightyenite",
+		desc: "If held by a Mightyena, this item allows it to Mega Evolve in battle.",
+	},
 	mimikiumz: {
 		name: "Mimikium Z",
 		desc: "If held by a Mimikyu with Play Rough, it can use Let's Snuggle Forever.",
@@ -976,10 +1016,6 @@ export const ItemsText = {
 		name: "Misty Seed",
 		desc: "If the terrain is Misty Terrain, raises holder's Sp. Def by 1 stage. Single use.",
 	},
-	moonball: {
-		name: "Moon Ball",
-		desc: "A Poke Ball for catching Pokemon that evolve using the Moon Stone.",
-	},
 	moonstone: {
 		name: "Moon Stone",
 		desc: "Evolves Nidorina into Nidoqueen, Nidorino into Nidoking, Clefairy into Clefable, Jigglypuff into Wigglytuff, Skitty into Delcatty, and Munna into Musharna when used.",
@@ -993,10 +1029,6 @@ export const ItemsText = {
 		name: "Mystic Water",
 		desc: "Holder's Water-type attacks have 1.2x power.",
 	},
-	nanabberry: {
-		name: "Nanab Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
-	},
 	nestball: {
 		name: "Nest Ball",
 		desc: "A Poke Ball that works especially well on weaker Pokemon in the wild.",
@@ -1008,10 +1040,6 @@ export const ItemsText = {
 	nevermeltice: {
 		name: "Never-Melt Ice",
 		desc: "Holder's Ice-type attacks have 1.2x power.",
-	},
-	nomelberry: {
-		name: "Nomel Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
 	},
 	normalgem: {
 		name: "Normal Gem",
@@ -1040,10 +1068,6 @@ export const ItemsText = {
 	ovalstone: {
 		name: "Oval Stone",
 		desc: "Evolves Happiny into Chansey when held and leveled up during the day.",
-	},
-	pamtreberry: {
-		name: "Pamtre Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
 	},
 	parkball: {
 		name: "Park Ball",
@@ -1081,10 +1105,6 @@ export const ItemsText = {
 		name: "Pikashunium Z",
 		desc: "If held by cap Pikachu with Thunderbolt, it can use 10,000,000 Volt Thunderbolt.",
 	},
-	pinapberry: {
-		name: "Pinap Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
-	},
 	pinsirite: {
 		name: "Pinsirite",
 		desc: "If held by a Pinsir, this item allows it to Mega Evolve in battle.",
@@ -1116,10 +1136,6 @@ export const ItemsText = {
 	pokeball: {
 		name: "Poke Ball",
 		desc: "A device for catching wild Pokemon. It is designed as a capsule system.",
-	},
-	pomegberry: {
-		name: "Pomeg Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
 	},
 	poweranklet: {
 		name: "Power Anklet",
@@ -1189,10 +1205,6 @@ export const ItemsText = {
 		name: "Psychium Z",
 		desc: "If holder has a Psychic move, this item allows it to use a Psychic Z-Move.",
 	},
-	qualotberry: {
-		name: "Qualot Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
-	},
 	quickball: {
 		name: "Quick Ball",
 		desc: "A Poke Ball that provides a better catch rate at the start of a wild encounter.",
@@ -1206,10 +1218,6 @@ export const ItemsText = {
 	quickpowder: {
 		name: "Quick Powder",
 		desc: "If held by a Ditto that hasn't Transformed, its Speed is doubled.",
-	},
-	rabutaberry: {
-		name: "Rabuta Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
 	},
 	rarebone: {
 		name: "Rare Bone",
@@ -1228,10 +1236,6 @@ export const ItemsText = {
 		name: "Razor Fang",
 		desc: "Holder's attacks without a chance to flinch gain a 10% chance to flinch. Evolves Gligar into Gliscor when held and leveled up during the night.",
 		shortDesc: "Holder's attacks without a chance to flinch gain a 10% chance to flinch.",
-	},
-	razzberry: {
-		name: "Razz Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
 	},
 	reapercloth: {
 		name: "Reaper Cloth",
@@ -1442,10 +1446,6 @@ export const ItemsText = {
 		name: "Spell Tag",
 		desc: "Holder's Ghost-type attacks have 1.2x power.",
 	},
-	spelonberry: {
-		name: "Spelon Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
-	},
 	splashplate: {
 		name: "Splash Plate",
 		desc: "Holder's Water-type attacks have 1.2x power. Judgment is Water type.",
@@ -1511,10 +1511,6 @@ export const ItemsText = {
 		name: "Sweet Apple",
 		desc: "Evolves Applin into Appletun when used.",
 	},
-	tamatoberry: {
-		name: "Tamato Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
-	},
 	tangaberry: {
 		name: "Tanga Berry",
 		desc: "Halves damage taken from a supereffective Bug-type attack. Single use.",
@@ -1559,402 +1555,6 @@ export const ItemsText = {
 	tr00: {
 		name: "TR00",
 		desc: "Teaches certain Pokemon the move Swords Dance. One use.",
-	},
-	tr01: {
-		name: "TR01",
-		desc: "Teaches certain Pokemon the move Body Slam. One use.",
-	},
-	tr02: {
-		name: "TR02",
-		desc: "Teaches certain Pokemon the move Flamethrower. One use.",
-	},
-	tr03: {
-		name: "TR03",
-		desc: "Teaches certain Pokemon the move Hydro Pump. One use.",
-	},
-	tr04: {
-		name: "TR04",
-		desc: "Teaches certain Pokemon the move Surf. One use.",
-	},
-	tr05: {
-		name: "TR05",
-		desc: "Teaches certain Pokemon the move Ice Beam. One use.",
-	},
-	tr06: {
-		name: "TR06",
-		desc: "Teaches certain Pokemon the move Blizzard. One use.",
-	},
-	tr07: {
-		name: "TR07",
-		desc: "Teaches certain Pokemon the move Low Kick. One use.",
-	},
-	tr08: {
-		name: "TR08",
-		desc: "Teaches certain Pokemon the move Thunderbolt. One use.",
-	},
-	tr09: {
-		name: "TR09",
-		desc: "Teaches certain Pokemon the move Thunder. One use.",
-	},
-	tr10: {
-		name: "TR10",
-		desc: "Teaches certain Pokemon the move Earthquake. One use.",
-	},
-	tr11: {
-		name: "TR11",
-		desc: "Teaches certain Pokemon the move Psychic. One use.",
-	},
-	tr12: {
-		name: "TR12",
-		desc: "Teaches certain Pokemon the move Agility. One use.",
-	},
-	tr13: {
-		name: "TR13",
-		desc: "Teaches certain Pokemon the move Focus Energy. One use.",
-	},
-	tr14: {
-		name: "TR14",
-		desc: "Teaches certain Pokemon the move Metronome. One use.",
-	},
-	tr15: {
-		name: "TR15",
-		desc: "Teaches certain Pokemon the move Fire Blast. One use.",
-	},
-	tr16: {
-		name: "TR16",
-		desc: "Teaches certain Pokemon the move Waterfall. One use.",
-	},
-	tr17: {
-		name: "TR17",
-		desc: "Teaches certain Pokemon the move Amnesia. One use.",
-	},
-	tr18: {
-		name: "TR18",
-		desc: "Teaches certain Pokemon the move Leech Life. One use.",
-	},
-	tr19: {
-		name: "TR19",
-		desc: "Teaches certain Pokemon the move Tri Attack. One use.",
-	},
-	tr20: {
-		name: "TR20",
-		desc: "Teaches certain Pokemon the move Substitute. One use.",
-	},
-	tr21: {
-		name: "TR21",
-		desc: "Teaches certain Pokemon the move Reversal. One use.",
-	},
-	tr22: {
-		name: "TR22",
-		desc: "Teaches certain Pokemon the move Sludge Bomb. One use.",
-	},
-	tr23: {
-		name: "TR23",
-		desc: "Teaches certain Pokemon the move Spikes. One use.",
-	},
-	tr24: {
-		name: "TR24",
-		desc: "Teaches certain Pokemon the move Outrage. One use.",
-	},
-	tr25: {
-		name: "TR25",
-		desc: "Teaches certain Pokemon the move Psyshock. One use.",
-	},
-	tr26: {
-		name: "TR26",
-		desc: "Teaches certain Pokemon the move Endure. One use.",
-	},
-	tr27: {
-		name: "TR27",
-		desc: "Teaches certain Pokemon the move Sleep Talk. One use.",
-	},
-	tr28: {
-		name: "TR28",
-		desc: "Teaches certain Pokemon the move Megahorn. One use.",
-	},
-	tr29: {
-		name: "TR29",
-		desc: "Teaches certain Pokemon the move Baton Pass. One use.",
-	},
-	tr30: {
-		name: "TR30",
-		desc: "Teaches certain Pokemon the move Encore. One use.",
-	},
-	tr31: {
-		name: "TR31",
-		desc: "Teaches certain Pokemon the move Iron Tail. One use.",
-	},
-	tr32: {
-		name: "TR32",
-		desc: "Teaches certain Pokemon the move Crunch. One use.",
-	},
-	tr33: {
-		name: "TR33",
-		desc: "Teaches certain Pokemon the move Shadow Ball. One use.",
-	},
-	tr34: {
-		name: "TR34",
-		desc: "Teaches certain Pokemon the move Future Sight. One use.",
-	},
-	tr35: {
-		name: "TR35",
-		desc: "Teaches certain Pokemon the move Uproar. One use.",
-	},
-	tr36: {
-		name: "TR36",
-		desc: "Teaches certain Pokemon the move Heat Wave. One use.",
-	},
-	tr37: {
-		name: "TR37",
-		desc: "Teaches certain Pokemon the move Taunt. One use.",
-	},
-	tr38: {
-		name: "TR38",
-		desc: "Teaches certain Pokemon the move Trick. One use.",
-	},
-	tr39: {
-		name: "TR39",
-		desc: "Teaches certain Pokemon the move Superpower. One use.",
-	},
-	tr40: {
-		name: "TR40",
-		desc: "Teaches certain Pokemon the move Skill Swap. One use.",
-	},
-	tr41: {
-		name: "TR41",
-		desc: "Teaches certain Pokemon the move Blaze Kick. One use.",
-	},
-	tr42: {
-		name: "TR42",
-		desc: "Teaches certain Pokemon the move Hyper Voice. One use.",
-	},
-	tr43: {
-		name: "TR43",
-		desc: "Teaches certain Pokemon the move Overheat. One use.",
-	},
-	tr44: {
-		name: "TR44",
-		desc: "Teaches certain Pokemon the move Cosmic Power. One use.",
-	},
-	tr45: {
-		name: "TR45",
-		desc: "Teaches certain Pokemon the move Muddy Water. One use.",
-	},
-	tr46: {
-		name: "TR46",
-		desc: "Teaches certain Pokemon the move Iron Defense. One use.",
-	},
-	tr47: {
-		name: "TR47",
-		desc: "Teaches certain Pokemon the move Dragon Claw. One use.",
-	},
-	tr48: {
-		name: "TR48",
-		desc: "Teaches certain Pokemon the move Bulk Up. One use.",
-	},
-	tr49: {
-		name: "TR49",
-		desc: "Teaches certain Pokemon the move Calm Mind. One use.",
-	},
-	tr50: {
-		name: "TR50",
-		desc: "Teaches certain Pokemon the move Leaf Blade. One use.",
-	},
-	tr51: {
-		name: "TR51",
-		desc: "Teaches certain Pokemon the move Dragon Dance. One use.",
-	},
-	tr52: {
-		name: "TR52",
-		desc: "Teaches certain Pokemon the move Gyro Ball. One use.",
-	},
-	tr53: {
-		name: "TR53",
-		desc: "Teaches certain Pokemon the move Close Combat. One use.",
-	},
-	tr54: {
-		name: "TR54",
-		desc: "Teaches certain Pokemon the move Toxic Spikes. One use.",
-	},
-	tr55: {
-		name: "TR55",
-		desc: "Teaches certain Pokemon the move Flare Blitz. One use.",
-	},
-	tr56: {
-		name: "TR56",
-		desc: "Teaches certain Pokemon the move Aura Sphere. One use.",
-	},
-	tr57: {
-		name: "TR57",
-		desc: "Teaches certain Pokemon the move Poison Jab. One use.",
-	},
-	tr58: {
-		name: "TR58",
-		desc: "Teaches certain Pokemon the move Dark Pulse. One use.",
-	},
-	tr59: {
-		name: "TR59",
-		desc: "Teaches certain Pokemon the move Seed Bomb. One use.",
-	},
-	tr60: {
-		name: "TR60",
-		desc: "Teaches certain Pokemon the move X-Scissor. One use.",
-	},
-	tr61: {
-		name: "TR61",
-		desc: "Teaches certain Pokemon the move Bug Buzz. One use.",
-	},
-	tr62: {
-		name: "TR62",
-		desc: "Teaches certain Pokemon the move Dragon Pulse. One use.",
-	},
-	tr63: {
-		name: "TR63",
-		desc: "Teaches certain Pokemon the move Power Gem. One use.",
-	},
-	tr64: {
-		name: "TR64",
-		desc: "Teaches certain Pokemon the move Focus Blast. One use.",
-	},
-	tr65: {
-		name: "TR65",
-		desc: "Teaches certain Pokemon the move Energy Ball. One use.",
-	},
-	tr66: {
-		name: "TR66",
-		desc: "Teaches certain Pokemon the move Brave Bird. One use.",
-	},
-	tr67: {
-		name: "TR67",
-		desc: "Teaches certain Pokemon the move Earth Power. One use.",
-	},
-	tr68: {
-		name: "TR68",
-		desc: "Teaches certain Pokemon the move Nasty Plot. One use.",
-	},
-	tr69: {
-		name: "TR69",
-		desc: "Teaches certain Pokemon the move Zen Headbutt. One use.",
-	},
-	tr70: {
-		name: "TR70",
-		desc: "Teaches certain Pokemon the move Flash Cannon. One use.",
-	},
-	tr71: {
-		name: "TR71",
-		desc: "Teaches certain Pokemon the move Leaf Storm. One use.",
-	},
-	tr72: {
-		name: "TR72",
-		desc: "Teaches certain Pokemon the move Power Whip. One use.",
-	},
-	tr73: {
-		name: "TR73",
-		desc: "Teaches certain Pokemon the move Gunk Shot. One use.",
-	},
-	tr74: {
-		name: "TR74",
-		desc: "Teaches certain Pokemon the move Iron Head. One use.",
-	},
-	tr75: {
-		name: "TR75",
-		desc: "Teaches certain Pokemon the move Stone Edge. One use.",
-	},
-	tr76: {
-		name: "TR76",
-		desc: "Teaches certain Pokemon the move Stealth Rock. One use.",
-	},
-	tr77: {
-		name: "TR77",
-		desc: "Teaches certain Pokemon the move Grass Knot. One use.",
-	},
-	tr78: {
-		name: "TR78",
-		desc: "Teaches certain Pokemon the move Sludge Wave. One use.",
-	},
-	tr79: {
-		name: "TR79",
-		desc: "Teaches certain Pokemon the move Heavy Slam. One use.",
-	},
-	tr80: {
-		name: "TR80",
-		desc: "Teaches certain Pokemon the move Electro Ball. One use.",
-	},
-	tr81: {
-		name: "TR81",
-		desc: "Teaches certain Pokemon the move Foul Play. One use.",
-	},
-	tr82: {
-		name: "TR82",
-		desc: "Teaches certain Pokemon the move Stored Power. One use.",
-	},
-	tr83: {
-		name: "TR83",
-		desc: "Teaches certain Pokemon the move Ally Switch. One use.",
-	},
-	tr84: {
-		name: "TR84",
-		desc: "Teaches certain Pokemon the move Scald. One use.",
-	},
-	tr85: {
-		name: "TR85",
-		desc: "Teaches certain Pokemon the move Work Up. One use.",
-	},
-	tr86: {
-		name: "TR86",
-		desc: "Teaches certain Pokemon the move Wild Charge. One use.",
-	},
-	tr87: {
-		name: "TR87",
-		desc: "Teaches certain Pokemon the move Drill Run. One use.",
-	},
-	tr88: {
-		name: "TR88",
-		desc: "Teaches certain Pokemon the move Heat Crash. One use.",
-	},
-	tr89: {
-		name: "TR89",
-		desc: "Teaches certain Pokemon the move Hurricane. One use.",
-	},
-	tr90: {
-		name: "TR90",
-		desc: "Teaches certain Pokemon the move Play Rough. One use.",
-	},
-	tr91: {
-		name: "TR91",
-		desc: "Teaches certain Pokemon the move Venom Drench. One use.",
-	},
-	tr92: {
-		name: "TR92",
-		desc: "Teaches certain Pokemon the move Dazzling Gleam. One use.",
-	},
-	tr93: {
-		name: "TR93",
-		desc: "Teaches certain Pokemon the move Darkest Lariat. One use.",
-	},
-	tr94: {
-		name: "TR94",
-		desc: "Teaches certain Pokemon the move High Horsepower. One use.",
-	},
-	tr95: {
-		name: "TR95",
-		desc: "Teaches certain Pokemon the move Throat Chop. One use.",
-	},
-	tr96: {
-		name: "TR96",
-		desc: "Teaches certain Pokemon the move Pollen Puff. One use.",
-	},
-	tr97: {
-		name: "TR97",
-		desc: "Teaches certain Pokemon the move Psychic Fangs. One use.",
-	},
-	tr98: {
-		name: "TR98",
-		desc: "Teaches certain Pokemon the move Liquidation. One use.",
-	},
-	tr99: {
-		name: "TR99",
-		desc: "Teaches certain Pokemon the move Body Press. One use.",
 	},
 	twistedspoon: {
 		name: "Twisted Spoon",
@@ -2009,10 +1609,6 @@ export const ItemsText = {
 		name: "Waterium Z",
 		desc: "If holder has a Water move, this item allows it to use a Water Z-Move.",
 	},
-	watmelberry: {
-		name: "Watmel Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
-	},
 	waveincense: {
 		name: "Wave Incense",
 		desc: "Holder's Water-type attacks have 1.2x power.",
@@ -2020,10 +1616,6 @@ export const ItemsText = {
 	weaknesspolicy: {
 		name: "Weakness Policy",
 		desc: "If holder is hit super effectively, raises Attack, Sp. Atk by 2 stages. Single use.",
-	},
-	wepearberry: {
-		name: "Wepear Berry",
-		desc: "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
 	},
 	whippeddream: {
 		name: "Whipped Dream",

@@ -1,5 +1,5 @@
 export const Items: {[itemid: string]: ItemData} = {
-	"abomasite": {
+	abomasite: {
 		name: "Abomasite",
 		spritenum: 575,
 		megaStone: "Abomasnow-Mega",
@@ -9,7 +9,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"absolite": {
+	absolite: {
 		name: "Absolite",
 		spritenum: 576,
 		megaStone: "Absol-Mega",
@@ -19,7 +19,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"absorbbulb": {
+	absorbbulb: {
 		name: "Absorb Bulb",
 		spritenum: 2,
 		fling: {
@@ -31,7 +31,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"adamantorb": {
+	adamantorb: {
 		name: "Adamant Orb",
 		spritenum: 4,
 		fling: {
@@ -44,7 +44,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"adrenalineorb": {
+	adrenalineorb: {
 		name: "Adrenaline Orb",
 		spritenum: 660,
 		fling: {
@@ -56,7 +56,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"aerodactylite": {
+	aerodactylite: {
 		name: "Aerodactylite",
 		spritenum: 577,
 		megaStone: "Aerodactyl-Mega",
@@ -66,7 +66,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"aggronite": {
+	aggronite: {
 		name: "Aggronite",
 		spritenum: 578,
 		megaStone: "Aggron-Mega",
@@ -76,7 +76,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"aguavberry": {
+	aguavberry: {
 		name: "Aguav Berry",
 		spritenum: 5,
 		isBerry: true,
@@ -99,7 +99,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"airballoon": {
+	airballoon: {
 		name: "Air Balloon",
 		spritenum: 6,
 		fling: {
@@ -130,7 +130,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"alakazite": {
+	alakazite: {
 		name: "Alakazite",
 		spritenum: 579,
 		megaStone: "Alakazam-Mega",
@@ -140,7 +140,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"aloraichiumz": {
+	aloraichiumz: {
 		name: "Aloraichium Z",
 		spritenum: 655,
 		onTakeItem: false,
@@ -148,7 +148,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveFrom: "Thunderbolt",
 		zMoveUser: ["Raichu-Alola"],
 	},
-	"altarianite": {
+	altarianite: {
 		name: "Altarianite",
 		spritenum: 615,
 		megaStone: "Altaria-Mega",
@@ -158,7 +158,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"ampharosite": {
+	ampharosite: {
 		name: "Ampharosite",
 		spritenum: 580,
 		megaStone: "Ampharos-Mega",
@@ -168,7 +168,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"apicotberry": {
+	apicotberry: {
 		name: "Apicot Berry",
 		spritenum: 10,
 		isBerry: true,
@@ -185,7 +185,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			this.boost({spd: 1});
 		},
 	},
-	"ariadite": {
+	ariadite: {
 		name: "Ariadite",
 		spritenum: 594, //CHANGE
 		megaStone: "Ariados-Mega",
@@ -194,16 +194,15 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Ariados, this item allows it to Mega Evolve in battle.",
 	},
-	"armorfossil": {
+	armorfossil: {
 		name: "Armor Fossil",
 		spritenum: 12,
 		fling: {
 			basePower: 100,
 		},
 	},
-	"aspearberry": {
+	aspearberry: {
 		name: "Aspear Berry",
 		spritenum: 13,
 		isBerry: true,
@@ -222,7 +221,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"assaultvest": {
+	assaultvest: {
 		name: "Assault Vest",
 		spritenum: 581,
 		fling: {
@@ -240,7 +239,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"audinite": {
+	audinite: {
 		name: "Audinite",
 		spritenum: 617,
 		megaStone: "Audino-Mega",
@@ -250,7 +249,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"babiriberry": {
+	babiriberry: {
 		name: "Babiri Berry",
 		spritenum: 17,
 		isBerry: true,
@@ -269,7 +268,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onEat() { },
 	},
-	"banettite": {
+	banettite: {
 		name: "Banettite",
 		spritenum: 582,
 		megaStone: "Banette-Mega",
@@ -279,7 +278,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"bearticite": {
+	bearticite: {
 		name: "Bearticite",
 		spritenum: 594, //CHANGE
 		megaStone: "Beartic-Mega",
@@ -288,15 +287,13 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Beartic, this item allows it to Mega Evolve in battle.",
 	},
-	"beastball": {
+	beastball: {
 		name: "Beast Ball",
 		spritenum: 661,
 		isPokeball: true,
-		desc: "A special Poke Ball designed to catch Ultra Beasts.",
 	},
-	"beedrillite": {
+	beedrillite: {
 		name: "Beedrillite",
 		spritenum: 628,
 		megaStone: "Beedrill-Mega",
@@ -306,7 +303,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"berryjuice": {
+	berryjuice: {
 		name: "Berry Juice",
 		spritenum: 22,
 		fling: {
@@ -320,14 +317,14 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"berrysweet": {
+	berrysweet: {
 		name: "Berry Sweet",
 		spritenum: 706,
 		fling: {
 			basePower: 10,
 		},
 	},
-	"berserkgene": {
+	berserkgene: {
 		name: "Berserk Gene",
 		spritenum: 388,
 		onUpdate(pokemon) {
@@ -336,7 +333,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			pokemon.setItem('');
 		},
 	},
-	"bigroot": {
+	bigroot: {
 		name: "Big Root",
 		spritenum: 29,
 		fling: {
@@ -351,7 +348,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"bindingband": {
+	bindingband: {
 		name: "Binding Band",
 		spritenum: 31,
 		fling: {
@@ -359,7 +356,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		// implemented in statuses
 	},
-	"blackbelt": {
+	blackbelt: {
 		name: "Black Belt",
 		spritenum: 32,
 		fling: {
@@ -372,7 +369,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"blacksludge": {
+	blacksludge: {
 		name: "Black Sludge",
 		spritenum: 34,
 		fling: {
@@ -397,7 +394,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"blackglasses": {
+	blackglasses: {
 		name: "Black Glasses",
 		spritenum: 35,
 		fling: {
@@ -410,7 +407,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"blastoisinite": {
+	blastoisinite: {
 		name: "Blastoisinite",
 		spritenum: 583,
 		megaStone: "Blastoise-Mega",
@@ -420,7 +417,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"blazikenite": {
+	blazikenite: {
 		name: "Blazikenite",
 		spritenum: 584,
 		megaStone: "Blaziken-Mega",
@@ -430,7 +427,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"blueorb": {
+	blueorb: {
 		name: "Blue Orb",
 		spritenum: 41,
 		onSwitchIn(pokemon) {
@@ -446,7 +443,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"breloomite": {
+	breloomite: {
 		name: "Breloomite",
 		spritenum: 594, //CHANGE
 		megaStone: "Breloom-Mega",
@@ -455,9 +452,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Breloom, this item allows it to Mega Evolve in battle.",
 	},
-	"brightpowder": {
+	brightpowder: {
 		name: "Bright Powder",
 		spritenum: 51,
 		fling: {
@@ -469,7 +465,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return accuracy * 0.9;
 		},
 	},
-	"buggem": {
+	buggem: {
 		name: "Bug Gem",
 		isUnreleased: true,
 		spritenum: 53,
@@ -484,7 +480,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"bugmemory": {
+	bugmemory: {
 		name: "Bug Memory",
 		spritenum: 673,
 		onMemory: 'Bug',
@@ -496,7 +492,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Silvally-Bug",
 	},
-	"buginiumz": {
+	buginiumz: {
 		name: "Buginium Z",
 		spritenum: 642,
 		onPlate: 'Bug',
@@ -505,18 +501,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveType: "Bug",
 		forcedForme: "Arceus-Bug",
 	},
-	"butterite": {
-		name: "Butterite",
-		spritenum: 594, //CHANGE
-		megaStone: "Butterfree-Mega",
-		megaEvolves: "Butterfree",
-		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
-			return true;
-		},
-		desc: "If held by a Butterfree, this item allows it to Mega Evolve in battle.",
-	},
-	"burndrive": {
+	burndrive: {
 		name: "Burn Drive",
 		spritenum: 54,
 		onTakeItem(item, pokemon, source) {
@@ -528,7 +513,18 @@ export const Items: {[itemid: string]: ItemData} = {
 		onDrive: 'Fire',
 		forcedForme: "Genesect-Burn",
 	},
-	"cameruptite": {
+	butterite: {
+		name: "Butterite",
+		spritenum: 594, //CHANGE
+		megaStone: "Butterfree-Mega",
+		megaEvolves: "Butterfree",
+		onTakeItem(item, source) {
+			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
+			return true;
+		},
+		desc: "If held by a Butterfree, this item allows it to Mega Evolve in battle.",
+	},
+	cameruptite: {
 		name: "Cameruptite",
 		spritenum: 625,
 		megaStone: "Camerupt-Mega",
@@ -538,7 +534,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"cellbattery": {
+	cellbattery: {
 		name: "Cell Battery",
 		spritenum: 60,
 		fling: {
@@ -550,7 +546,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"charcoal": {
+	charcoal: {
 		name: "Charcoal",
 		spritenum: 61,
 		fling: {
@@ -563,7 +559,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"charizarditex": {
+	charizarditex: {
 		name: "Charizardite X",
 		spritenum: 585,
 		megaStone: "Charizard-Mega-X",
@@ -573,7 +569,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"charizarditey": {
+	charizarditey: {
 		name: "Charizardite Y",
 		spritenum: 586,
 		megaStone: "Charizard-Mega-Y",
@@ -583,7 +579,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"chartiberry": {
+	chartiberry: {
 		name: "Charti Berry",
 		spritenum: 62,
 		isBerry: true,
@@ -602,7 +598,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onEat() { },
 	},
-	"cheriberry": {
+	cheriberry: {
 		name: "Cheri Berry",
 		spritenum: 63,
 		isBerry: true,
@@ -621,12 +617,12 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"cherishball": {
+	cherishball: {
 		name: "Cherish Ball",
 		spritenum: 64,
 		isPokeball: true,
 	},
-	"chestoberry": {
+	chestoberry: {
 		name: "Chesto Berry",
 		spritenum: 65,
 		isBerry: true,
@@ -645,7 +641,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"chilanberry": {
+	chilanberry: {
 		name: "Chilan Berry",
 		spritenum: 66,
 		isBerry: true,
@@ -664,7 +660,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onEat() { },
 	},
-	"chilldrive": {
+	chilldrive: {
 		name: "Chill Drive",
 		spritenum: 67,
 		onTakeItem(item, pokemon, source) {
@@ -676,7 +672,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onDrive: 'Ice',
 		forcedForme: "Genesect-Chill",
 	},
-	"choiceband": {
+	choiceband: {
 		name: "Choice Band",
 		spritenum: 68,
 		fling: {
@@ -697,7 +693,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		isChoice: true,
 	},
-	"choicescarf": {
+	choicescarf: {
 		name: "Choice Scarf",
 		spritenum: 69,
 		fling: {
@@ -717,7 +713,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		isChoice: true,
 	},
-	"choicespecs": {
+	choicespecs: {
 		name: "Choice Specs",
 		spritenum: 70,
 		fling: {
@@ -738,7 +734,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		isChoice: true,
 	},
-	"chopleberry": {
+	chopleberry: {
 		name: "Chople Berry",
 		spritenum: 71,
 		isBerry: true,
@@ -757,21 +753,21 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onEat() { },
 	},
-	"clawfossil": {
+	clawfossil: {
 		name: "Claw Fossil",
 		spritenum: 72,
 		fling: {
 			basePower: 100,
 		},
 	},
-	"cloversweet": {
+	cloversweet: {
 		name: "Clover Sweet",
 		spritenum: 707,
 		fling: {
 			basePower: 10,
 		},
 	},
-	"cobaberry": {
+	cobaberry: {
 		name: "Coba Berry",
 		spritenum: 76,
 		isBerry: true,
@@ -790,7 +786,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onEat() { },
 	},
-	"colburberry": {
+	colburberry: {
 		name: "Colbur Berry",
 		spritenum: 78,
 		isBerry: true,
@@ -809,14 +805,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onEat() { },
 	},
-	"coverfossil": {
+	coverfossil: {
 		name: "Cover Fossil",
 		spritenum: 85,
 		fling: {
 			basePower: 100,
 		},
 	},
-	"cressite": {
+	cressite: {
 		name: "Cressite",
 		spritenum: 594, //CHANGE
 		megaStone: "Cresselia-Mega",
@@ -825,9 +821,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Cresselia, this item allows it to Mega Evolve in battle.",
 	},
-	"custapberry": {
+	custapberry: {
 		name: "Custap Berry",
 		spritenum: 86,
 		isBerry: true,
@@ -847,14 +842,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onEat() { },
 	},
-	"damprock": {
+	damprock: {
 		name: "Damp Rock",
 		spritenum: 88,
 		fling: {
 			basePower: 60,
 		},
 	},
-	"darkgem": {
+	darkgem: {
 		name: "Dark Gem",
 		isUnreleased: true,
 		spritenum: 89,
@@ -869,7 +864,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"darkmemory": {
+	darkmemory: {
 		name: "Dark Memory",
 		spritenum: 683,
 		onMemory: 'Dark',
@@ -881,7 +876,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Silvally-Dark",
 	},
-	"darkiniumz": {
+	darkiniumz: {
 		name: "Darkinium Z",
 		spritenum: 646,
 		onPlate: 'Dark',
@@ -890,7 +885,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveType: "Dark",
 		forcedForme: "Arceus-Dark",
 	},
-	"darkrite": {
+	darkrite: {
 		name: "Darkrite",
 		spritenum: 594, //CHANGE
 		megaStone: "Darkrai-Mega",
@@ -900,14 +895,14 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"dawnstone": {
+	dawnstone: {
 		name: "Dawn Stone",
 		spritenum: 92,
 		fling: {
 			basePower: 80,
 		},
 	},
-	"decidiumz": {
+	decidiumz: {
 		name: "Decidium Z",
 		spritenum: 650,
 		onTakeItem: false,
@@ -915,7 +910,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveFrom: "Spirit Shackle",
 		zMoveUser: ["Decidueye"],
 	},
-	"deepseascale": {
+	deepseascale: {
 		name: "Deep Sea Scale",
 		spritenum: 93,
 		fling: {
@@ -928,7 +923,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"deepseatooth": {
+	deepseatooth: {
 		name: "Deep Sea Tooth",
 		spritenum: 94,
 		fling: {
@@ -941,7 +936,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"destinyknot": {
+	destinyknot: {
 		name: "Destiny Knot",
 		spritenum: 95,
 		fling: {
@@ -953,9 +948,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (!source || source === target) return;
 			if (!source.volatiles.attract) source.addVolatile('attract', target);
 		},
-		desc: "If holder becomes infatuated, the other Pokemon also becomes infatuated.",
 	},
-	"diancite": {
+	diancite: {
 		name: "Diancite",
 		spritenum: 624,
 		megaStone: "Diancie-Mega",
@@ -965,27 +959,26 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"dinofossil": {
+	dinofossil: {
 		name: "Dino Fossil",
 		spritenum: 0,
 		fling: {
 			basePower: 100,
 		},
-		desc: "Can be revived into Dracozolt.",
 	},
-	"diveball": {
+	diveball: {
 		name: "Dive Ball",
 		spritenum: 101,
 		isPokeball: true,
 	},
-	"domefossil": {
+	domefossil: {
 		name: "Dome Fossil",
 		spritenum: 102,
 		fling: {
 			basePower: 100,
 		},
 	},
-	"dousedrive": {
+	dousedrive: {
 		name: "Douse Drive",
 		spritenum: 103,
 		onTakeItem(item, pokemon, source) {
@@ -997,7 +990,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onDrive: 'Water',
 		forcedForme: "Genesect-Douse",
 	},
-	"dracoplate": {
+	dracoplate: {
 		name: "Draco Plate",
 		spritenum: 105,
 		onPlate: 'Dragon',
@@ -1015,7 +1008,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Arceus-Dragon",
 	},
-	"dragonfang": {
+	dragonfang: {
 		name: "Dragon Fang",
 		spritenum: 106,
 		fling: {
@@ -1028,7 +1021,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"dragongem": {
+	dragongem: {
 		name: "Dragon Gem",
 		isUnreleased: true,
 		spritenum: 107,
@@ -1043,7 +1036,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"dragonmemory": {
+	dragonmemory: {
 		name: "Dragon Memory",
 		spritenum: 682,
 		onMemory: 'Dragon',
@@ -1055,14 +1048,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Silvally-Dragon",
 	},
-	"dragonscale": {
+	dragonscale: {
 		name: "Dragon Scale",
 		spritenum: 108,
 		fling: {
 			basePower: 30,
 		},
 	},
-	"dragoniumz": {
+	dragoniumz: {
 		name: "Dragonium Z",
 		spritenum: 645,
 		onPlate: 'Dragon',
@@ -1071,7 +1064,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveType: "Dragon",
 		forcedForme: "Arceus-Dragon",
 	},
-	"dreadplate": {
+	dreadplate: {
 		name: "Dread Plate",
 		spritenum: 110,
 		onPlate: 'Dark',
@@ -1089,7 +1082,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Arceus-Dark",
 	},
-	"druddite": {
+	druddite: {
 		name: "Druddite",
 		spritenum: 594, //CHANGE
 		megaStone: "Druddigon-Mega",
@@ -1098,28 +1091,27 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Druddigon, this item allows it to Mega Evolve in battle.",
 	},
-	"dubiousdisc": {
+	dubiousdisc: {
 		name: "Dubious Disc",
 		spritenum: 113,
 		fling: {
 			basePower: 50,
 		},
 	},
-	"duskball": {
+	duskball: {
 		name: "Dusk Ball",
 		spritenum: 115,
 		isPokeball: true,
 	},
-	"duskstone": {
+	duskstone: {
 		name: "Dusk Stone",
 		spritenum: 116,
 		fling: {
 			basePower: 80,
 		},
 	},
-	"earthplate": {
+	earthplate: {
 		name: "Earth Plate",
 		spritenum: 117,
 		onPlate: 'Ground',
@@ -1137,7 +1129,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Arceus-Ground",
 	},
-	"eeviumz": {
+	eeviumz: {
 		name: "Eevium Z",
 		spritenum: 657,
 		onTakeItem: false,
@@ -1145,7 +1137,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveFrom: "Last Resort",
 		zMoveUser: ["Eevee"],
 	},
-	"ejectbutton": {
+	ejectbutton: {
 		name: "Eject Button",
 		spritenum: 118,
 		fling: {
@@ -1165,14 +1157,14 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"electirizer": {
+	electirizer: {
 		name: "Electirizer",
 		spritenum: 119,
 		fling: {
 			basePower: 80,
 		},
 	},
-	"electricgem": {
+	electricgem: {
 		name: "Electric Gem",
 		isUnreleased: true,
 		spritenum: 120,
@@ -1187,7 +1179,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"electricmemory": {
+	electricmemory: {
 		name: "Electric Memory",
 		spritenum: 679,
 		onMemory: 'Electric',
@@ -1199,7 +1191,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Silvally-Electric",
 	},
-	"electricseed": {
+	electricseed: {
 		name: "Electric Seed",
 		spritenum: 664,
 		fling: {
@@ -1216,7 +1208,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"electriumz": {
+	electriumz: {
 		name: "Electrium Z",
 		spritenum: 634,
 		onPlate: 'Electric',
@@ -1225,7 +1217,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveType: "Electric",
 		forcedForme: "Arceus-Electric",
 	},
-	"emboarite": {
+	emboarite: {
 		name: "Emboarite",
 		spritenum: 594, //CHANGE
 		megaStone: "Emboar-Mega",
@@ -1234,9 +1226,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Emboar, this item allows it to Mega Evolve in battle.",
 	},
-	"emporite": {
+	emporite: {
 		name: "Emporite",
 		spritenum: 594, //CHANGE
 		megaStone: "Empoleon-Mega",
@@ -1245,16 +1236,15 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Empoleon, this item allows it to Mega Evolve in battle.",
 	},
-	"energypowder": {
+	energypowder: {
 		name: "Energy Powder",
 		spritenum: 123,
 		fling: {
 			basePower: 30,
 		},
 	},
-	"enigmaberry": {
+	enigmaberry: {
 		name: "Enigma Berry",
 		spritenum: 124,
 		isBerry: true,
@@ -1274,7 +1264,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onEat() { },
 	},
-	"eviolite": {
+	eviolite: {
 		name: "Eviolite",
 		spritenum: 130,
 		fling: {
@@ -1292,9 +1282,8 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify(1.5);
 			}
 		},
-		desc: "If holder's species can evolve, its Defense and Sp. Def are 1.5x.",
 	},
-	"expertbelt": {
+	expertbelt: {
 		name: "Expert Belt",
 		spritenum: 132,
 		fling: {
@@ -1306,7 +1295,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"fairiumz": {
+	fairiumz: {
 		name: "Fairium Z",
 		spritenum: 648,
 		onPlate: 'Fairy',
@@ -1315,7 +1304,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveType: "Fairy",
 		forcedForme: "Arceus-Fairy",
 	},
-	"fairygem": {
+	fairygem: {
 		name: "Fairy Gem",
 		isUnreleased: true,
 		spritenum: 611,
@@ -1330,7 +1319,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"fairymemory": {
+	fairymemory: {
 		name: "Fairy Memory",
 		spritenum: 684,
 		onMemory: 'Fairy',
@@ -1342,13 +1331,12 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Silvally-Fairy",
 	},
-	"fastball": {
+	fastball: {
 		name: "Fast Ball",
 		spritenum: 137,
 		isPokeball: true,
-		desc: "A Poke Ball that makes it easier to catch Pokemon which are quick to run away.",
 	},
-	"fateknot": {
+	fateknot: {
 		name: "Fate Knot",
 		spritenum: 95,
 		fling: {
@@ -1372,9 +1360,8 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify(1.5);
 			}
 		},
-		desc: "If holder becomes infatuated, the other Pokemon also becomes infatuated. While infatuated, this pokemons Def and SpD are 1.5X",
 	},
-	"feraligite": {
+	feraligite: {
 		name: "Feraligite",
 		spritenum: 594, //CHANGE
 		megaStone: "Feraligatr-Mega",
@@ -1383,9 +1370,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Feraligatr, this item allows it to Mega Evolve in battle.",
 	},
-	"fightinggem": {
+	fightinggem: {
 		name: "Fighting Gem",
 		isUnreleased: true,
 		spritenum: 139,
@@ -1400,7 +1386,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"fightingmemory": {
+	fightingmemory: {
 		name: "Fighting Memory",
 		spritenum: 668,
 		onMemory: 'Fighting',
@@ -1412,7 +1398,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Silvally-Fighting",
 	},
-	"fightiniumz": {
+	fightiniumz: {
 		name: "Fightinium Z",
 		spritenum: 637,
 		onPlate: 'Fighting',
@@ -1421,7 +1407,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveType: "Fighting",
 		forcedForme: "Arceus-Fighting",
 	},
-	"figyberry": {
+	figyberry: {
 		name: "Figy Berry",
 		spritenum: 140,
 		isBerry: true,
@@ -1444,7 +1430,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"firegem": {
+	firegem: {
 		name: "Fire Gem",
 		isUnreleased: true,
 		spritenum: 141,
@@ -1459,7 +1445,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"firememory": {
+	firememory: {
 		name: "Fire Memory",
 		spritenum: 676,
 		onMemory: 'Fire',
@@ -1471,14 +1457,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Silvally-Fire",
 	},
-	"firestone": {
+	firestone: {
 		name: "Fire Stone",
 		spritenum: 142,
 		fling: {
 			basePower: 30,
 		},
 	},
-	"firiumz": {
+	firiumz: {
 		name: "Firium Z",
 		spritenum: 632,
 		onPlate: 'Fire',
@@ -1487,15 +1473,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveType: "Fire",
 		forcedForme: "Arceus-Fire",
 	},
-	"fishfossil": {
+	fishfossil: {
 		name: "Fish Fossil",
 		spritenum: 0,
 		fling: {
 			basePower: 100,
 		},
-		desc: "Can be revived into Dracovish.",
 	},
-	"fistplate": {
+	fistplate: {
 		name: "Fist Plate",
 		spritenum: 143,
 		onPlate: 'Fighting',
@@ -1513,7 +1498,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Arceus-Fighting",
 	},
-	"flameorb": {
+	flameorb: {
 		name: "Flame Orb",
 		spritenum: 145,
 		fling: {
@@ -1527,7 +1512,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "At the end of every turn, this item attempts to burn the holder.",
 	},
-	"flameplate": {
+	flameplate: {
 		name: "Flame Plate",
 		spritenum: 146,
 		onPlate: 'Fire',
@@ -1545,7 +1530,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Arceus-Fire",
 	},
-	"floatstone": {
+	floatstone: {
 		name: "Float Stone",
 		spritenum: 147,
 		fling: {
@@ -1555,14 +1540,14 @@ export const Items: {[itemid: string]: ItemData} = {
 			return weight / 2;
 		},
 	},
-	"flowersweet": {
+	flowersweet: {
 		name: "Flower Sweet",
 		spritenum: 708,
 		fling: {
 			basePower: 0,
 		},
 	},
-	"flygonite": {
+	flygonite: {
 		name: "Flygonite",
 		spritenum: 594, //CHANGE
 		megaStone: "Flygon-Mega",
@@ -1571,9 +1556,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Flygon, this item allows it to Mega Evolve in battle.",
 	},
-	"flyinggem": {
+	flyinggem: {
 		name: "Flying Gem",
 		isUnreleased: true,
 		spritenum: 149,
@@ -1588,7 +1572,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"flyingmemory": {
+	flyingmemory: {
 		name: "Flying Memory",
 		spritenum: 669,
 		onMemory: 'Flying',
@@ -1600,7 +1584,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Silvally-Flying",
 	},
-	"flyiniumz": {
+	flyiniumz: {
 		name: "Flyinium Z",
 		spritenum: 640,
 		onPlate: 'Flying',
@@ -1609,7 +1593,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveType: "Flying",
 		forcedForme: "Arceus-Flying",
 	},
-	"focusband": {
+	focusband: {
 		name: "Focus Band",
 		spritenum: 150,
 		fling: {
@@ -1622,7 +1606,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"focussash": {
+	focussash: {
 		name: "Focus Sash",
 		spritenum: 151,
 		fling: {
@@ -1636,13 +1620,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"friendball": {
-		name: "Friend Ball",
-		spritenum: 153,
-		isPokeball: true,
-		desc: "A Poke Ball that makes caught Pokemon more friendly.",
-	},
-	"fullincense": {
+	fullincense: {
 		name: "Full Incense",
 		spritenum: 155,
 		fling: {
@@ -1652,7 +1630,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return Math.round(priority) - 0.1;
 		},
 	},
-	"fullmemory": {
+	fullmemory: {
 		name: "Full Memory",
 		spritenum: 676,
 		onMemory: 'Full',
@@ -1663,9 +1641,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Silvally-Full",
-		desc: "Holder's forme is now Full.",
 	},
-	"furrite": {
+	furrite: {
 		name: "Furrite",
 		spritenum: 594, //CHANGE
 		megaStone: "Furret-Mega",
@@ -1674,9 +1651,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Furret, this item allows it to Mega Evolve in battle.",
 	},
-	"galladite": {
+	galladite: {
 		name: "Galladite",
 		spritenum: 616,
 		megaStone: "Gallade-Mega",
@@ -1686,7 +1662,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"ganlonberry": {
+	ganlonberry: {
 		name: "Ganlon Berry",
 		spritenum: 158,
 		isBerry: true,
@@ -1703,7 +1679,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			this.boost({def: 1});
 		},
 	},
-	"garchompite": {
+	garchompite: {
 		name: "Garchompite",
 		spritenum: 589,
 		megaStone: "Garchomp-Mega",
@@ -1713,7 +1689,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"gardevoirite": {
+	gardevoirite: {
 		name: "Gardevoirite",
 		spritenum: 587,
 		megaStone: "Gardevoir-Mega",
@@ -1723,7 +1699,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"genesectite": {
+	genesectite: {
 		name: "Genesectite",
 		spritenum: 594, //CHANGE
 		megaStone: "Genesect-Mega",
@@ -1732,9 +1708,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Genesect, this item allows it to Mega Evolve in battle.",
 	},
-	"gengarite": {
+	gengarite: {
 		name: "Gengarite",
 		spritenum: 588,
 		megaStone: "Gengar-Mega",
@@ -1744,7 +1719,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"ghostgem": {
+	ghostgem: {
 		name: "Ghost Gem",
 		isUnreleased: true,
 		spritenum: 161,
@@ -1759,7 +1734,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"ghostmemory": {
+	ghostmemory: {
 		name: "Ghost Memory",
 		spritenum: 674,
 		onMemory: 'Ghost',
@@ -1771,7 +1746,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Silvally-Ghost",
 	},
-	"ghostiumz": {
+	ghostiumz: {
 		name: "Ghostium Z",
 		spritenum: 644,
 		onPlate: 'Ghost',
@@ -1780,7 +1755,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveType: "Ghost",
 		forcedForme: "Arceus-Ghost",
 	},
-	"giracariocrystal": {
+	giracariocrystal: {
 		name: "Giracario Crystal",
 		spritenum: 594,
 		megaStone: "Giracario-Alt",
@@ -1791,7 +1766,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Giracario, this item allows it to form change in battle.",
 	},
-	"glalitite": {
+	glalitite: {
 		name: "Glalitite",
 		spritenum: 623,
 		megaStone: "Glalie-Mega",
@@ -1801,7 +1776,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"grassgem": {
+	grassgem: {
 		name: "Grass Gem",
 		isUnreleased: true,
 		spritenum: 172,
@@ -1816,7 +1791,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"grassmemory": {
+	grassmemory: {
 		name: "Grass Memory",
 		spritenum: 678,
 		onMemory: 'Grass',
@@ -1828,7 +1803,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Silvally-Grass",
 	},
-	"grassiumz": {
+	grassiumz: {
 		name: "Grassium Z",
 		spritenum: 635,
 		onPlate: 'Grass',
@@ -1837,7 +1812,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveType: "Grass",
 		forcedForme: "Arceus-Grass",
 	},
-	"grassyseed": {
+	grassyseed: {
 		name: "Grassy Seed",
 		spritenum: 667,
 		fling: {
@@ -1854,12 +1829,12 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"greatball": {
+	greatball: {
 		name: "Great Ball",
 		spritenum: 174,
 		isPokeball: true,
 	},
-	"grimmite": {
+	grimmite: {
 		name: "Grimmite",
 		spritenum: 616,
 		megaStone: "Grimmsnarl-Mega",
@@ -1868,9 +1843,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Grimmsnarl, this item allows it to Mega Evolve in battle.",
 	},
-	"gripclaw": {
+	gripclaw: {
 		name: "Grip Claw",
 		spritenum: 179,
 		fling: {
@@ -1878,7 +1852,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		// implemented in statuses
 	},
-	"griseousorb": {
+	griseousorb: {
 		name: "Griseous Orb",
 		spritenum: 180,
 		fling: {
@@ -1898,7 +1872,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Giratina-Origin",
 	},
-	"groundgem": {
+	groundgem: {
 		name: "Ground Gem",
 		isUnreleased: true,
 		spritenum: 182,
@@ -1913,7 +1887,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"groundmemory": {
+	groundmemory: {
 		name: "Ground Memory",
 		spritenum: 671,
 		onMemory: 'Ground',
@@ -1925,7 +1899,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Silvally-Ground",
 	},
-	"groundiumz": {
+	groundiumz: {
 		name: "Groundium Z",
 		spritenum: 639,
 		onPlate: 'Ground',
@@ -1934,7 +1908,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveType: "Ground",
 		forcedForme: "Arceus-Ground",
 	},
-	"gyaradosite": {
+	gyaradosite: {
 		name: "Gyaradosite",
 		spritenum: 589,
 		megaStone: "Gyarados-Mega",
@@ -1944,7 +1918,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"habanberry": {
+	habanberry: {
 		name: "Haban Berry",
 		spritenum: 185,
 		isBerry: true,
@@ -1963,7 +1937,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onEat() { },
 	},
-	"hardstone": {
+	hardstone: {
 		name: "Hard Stone",
 		spritenum: 187,
 		fling: {
@@ -1976,7 +1950,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"haxorite": {
+	haxorite: {
 		name: "Haxorite",
 		spritenum: 594, //CHANGE
 		megaStone: "Haxorus-Mega",
@@ -1985,33 +1959,32 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Haxorus, this item allows it to Mega Evolve in battle.",
 	},
-	"healball": {
+	healball: {
 		name: "Heal Ball",
 		spritenum: 188,
 		isPokeball: true,
 	},
-	"heatrock": {
+	heatrock: {
 		name: "Heat Rock",
 		spritenum: 193,
 		fling: {
 			basePower: 60,
 		},
 	},
-	"heavyball": {
+	heavyball: {
 		name: "Heavy Ball",
 		spritenum: 194,
 		isPokeball: true,
 	},
-	"helixfossil": {
+	helixfossil: {
 		name: "Helix Fossil",
 		spritenum: 195,
 		fling: {
 			basePower: 100,
 		},
 	},
-	"heracronite": {
+	heracronite: {
 		name: "Heracronite",
 		spritenum: 590,
 		megaStone: "Heracross-Mega",
@@ -2021,7 +1994,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"houndoominite": {
+	houndoominite: {
 		name: "Houndoominite",
 		spritenum: 591,
 		megaStone: "Houndoom-Mega",
@@ -2031,7 +2004,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"hypnotite": {
+	hypnotite: {
 		name: "Hypnotite",
 		spritenum: 594, //CHANGE
 		megaStone: "Hypno-Mega",
@@ -2040,9 +2013,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Hypno, this item allows it to Mega Evolve in battle.",
 	},
-	"iapapaberry": {
+	iapapaberry: {
 		name: "Iapapa Berry",
 		spritenum: 217,
 		isBerry: true,
@@ -2065,7 +2037,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"icegem": {
+	icegem: {
 		name: "Ice Gem",
 		isUnreleased: true,
 		spritenum: 218,
@@ -2080,7 +2052,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"icememory": {
+	icememory: {
 		name: "Ice Memory",
 		spritenum: 681,
 		onMemory: 'Ice',
@@ -2092,14 +2064,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Silvally-Ice",
 	},
-	"icestone": {
+	icestone: {
 		name: "Ice Stone",
 		spritenum: 693,
 		fling: {
 			basePower: 30,
 		},
 	},
-	"icicleplate": {
+	icicleplate: {
 		name: "Icicle Plate",
 		spritenum: 220,
 		onPlate: 'Ice',
@@ -2117,7 +2089,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Arceus-Ice",
 	},
-	"iciumz": {
+	iciumz: {
 		name: "Icium Z",
 		spritenum: 636,
 		onPlate: 'Ice',
@@ -2126,14 +2098,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveType: "Ice",
 		forcedForme: "Arceus-Ice",
 	},
-	"icyrock": {
+	icyrock: {
 		name: "Icy Rock",
 		spritenum: 221,
 		fling: {
 			basePower: 40,
 		},
 	},
-	"illusorychain": {
+	illusorychain: {
 		name: "Illusory Chain",
 		spritenum: 594, //CHANGE
 		megaStone: "Zoroark-Mega",
@@ -2142,9 +2114,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Zoroark, this item allows it to Mega Evolve in battle.",
 	},
-	"inciniumz": {
+	inciniumz: {
 		name: "Incinium Z",
 		spritenum: 651,
 		onTakeItem: false,
@@ -2152,7 +2123,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveFrom: "Darkest Lariat",
 		zMoveUser: ["Incineroar"],
 	},
-	"infernite": {
+	infernite: {
 		name: "Infernite",
 		spritenum: 594, //CHANGE
 		megaStone: "Infernape-Mega",
@@ -2161,9 +2132,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Infernape, this item allows it to Mega Evolve in battle.",
 	},
-	"insectplate": {
+	insectplate: {
 		name: "Insect Plate",
 		spritenum: 223,
 		onPlate: 'Bug',
@@ -2181,7 +2151,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Arceus-Bug",
 	},
-	"ironball": {
+	ironball: {
 		name: "Iron Ball",
 		spritenum: 224,
 		fling: {
@@ -2197,7 +2167,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return this.chainModify(0.5);
 		},
 	},
-	"ironplate": {
+	ironplate: {
 		name: "Iron Plate",
 		spritenum: 225,
 		onPlate: 'Steel',
@@ -2215,7 +2185,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		forcedForme: "Arceus-Steel",
 	},
-	"jabocaberry": {
+	jabocaberry: {
 		name: "Jaboca Berry",
 		spritenum: 230,
 		isBerry: true,
@@ -2232,14 +2202,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onEat() { },
 	},
-	"jawfossil": {
+	jawfossil: {
 		name: "Jaw Fossil",
 		spritenum: 694,
 		fling: {
 			basePower: 100,
 		},
 	},
-	"kasibberry": {
+	kasibberry: {
 		name: "Kasib Berry",
 		spritenum: 233,
 		isBerry: true,
@@ -2258,7 +2228,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onEat() { },
 	},
-	"kebiaberry": {
+	kebiaberry: {
 		name: "Kebia Berry",
 		spritenum: 234,
 		isBerry: true,
@@ -2277,7 +2247,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onEat() { },
 	},
-	"keeberry": {
+	keeberry: {
 		name: "Kee Berry",
 		spritenum: 593,
 		isBerry: true,
@@ -2294,7 +2264,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			this.boost({def: 1});
 		},
 	},
-	"kangaskhanite": {
+	kangaskhanite: {
 		name: "Kangaskhanite",
 		spritenum: 592,
 		megaStone: "Kangaskhan-Mega",
@@ -2304,7 +2274,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"kingsrock": {
+	kingsrock: {
 		name: "King's Rock",
 		spritenum: 236,
 		fling: {
@@ -2325,7 +2295,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"klefkinite": {
+	klefkinite: {
 		name: "Klefkinite",
 		spritenum: 594, //CHANGE
 		megaStone: "Klefki-Mega",
@@ -2334,9 +2304,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Klefki, this item allows it to Mega Evolve in battle.",
 	},
-	"kommoniumz": {
+	kommoniumz: {
 		name: "Kommonium Z",
 		spritenum: 690,
 		onTakeItem: false,
@@ -2344,7 +2313,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveFrom: "Clanging Scales",
 		zMoveUser: ["Kommo-o", "Kommo-o-Totem"],
 	},
-	"krookonite": {
+	krookonite: {
 		name: "Krookonite",
 		spritenum: 594, //CHANGE
 		megaStone: "Krookodile-Mega",
@@ -2353,9 +2322,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Krookodile, this item allows it to Mega Evolve in battle.",
 	},
-	"laggingtail": {
+	laggingtail: {
 		name: "Lagging Tail",
 		spritenum: 237,
 		fling: {
@@ -2365,7 +2333,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return Math.round(priority) - 0.1;
 		},
 	},
-	"lansatberry": {
+	lansatberry: {
 		name: "Lansat Berry",
 		spritenum: 238,
 		isBerry: true,
@@ -2382,7 +2350,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			pokemon.addVolatile('focusenergy');
 		},
 	},
-	"latiasite": {
+	latiasite: {
 		name: "Latiasite",
 		spritenum: 629,
 		megaStone: "Latias-Mega",
@@ -2392,7 +2360,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"latiosite": {
+	latiosite: {
 		name: "Latiosite",
 		spritenum: 630,
 		megaStone: "Latios-Mega",
@@ -2402,7 +2370,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"laxincense": {
+	laxincense: {
 		name: "Lax Incense",
 		spritenum: 240,
 		fling: {
@@ -2414,14 +2382,14 @@ export const Items: {[itemid: string]: ItemData} = {
 			return accuracy * 0.9;
 		},
 	},
-	"leafstone": {
+	leafstone: {
 		name: "Leaf Stone",
 		spritenum: 241,
 		fling: {
 			basePower: 30,
 		},
 	},
-	"leek": {
+	leek: {
 		name: "Leek",
 		fling: {
 			basePower: 60,
@@ -2432,9 +2400,8 @@ export const Items: {[itemid: string]: ItemData} = {
 				return critRatio + 2;
 			}
 		},
-		desc: "If held by a Farfetch'd or Mallar'kee, its critical hit ratio is raised by 2 stages.",
 	},
-	"leftovers": {
+	leftovers: {
 		name: "Leftovers",
 		spritenum: 242,
 		fling: {
@@ -2451,7 +2418,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			this.heal(pokemon.maxhp / 16);
 		},
 	},
-	"leppaberry": {
+	leppaberry: {
 		name: "Leppa Berry",
 		spritenum: 244,
 		isBerry: true,
@@ -2474,13 +2441,13 @@ export const Items: {[itemid: string]: ItemData} = {
 			this.add('-activate', pokemon, 'item: Leppa Berry', moveSlot.move, '[consumed]');
 		},
 	},
-	"levelball": {
+	levelball: {
 		name: "Level Ball",
 		spritenum: 246,
 		isPokeball: true,
 		desc: "A Poke Ball for catching Pokemon that are a lower level than your own.",
 	},
-	"liechiberry": {
+	liechiberry: {
 		name: "Liechi Berry",
 		spritenum: 248,
 		isBerry: true,
@@ -2497,7 +2464,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			this.boost({atk: 1});
 		},
 	},
-	"lifeorb": {
+	lifeorb: {
 		name: "Life Orb",
 		spritenum: 249,
 		fling: {
@@ -2512,7 +2479,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"lightball": {
+	lightball: {
 		name: "Light Ball",
 		spritenum: 251,
 		fling: {
@@ -2532,7 +2499,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"lightclay": {
+	lightclay: {
 		name: "Light Clay",
 		spritenum: 252,
 		fling: {
@@ -2540,7 +2507,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		// implemented in the corresponding thing
 	},
-	"lopunnite": {
+	lopunnite: {
 		name: "Lopunnite",
 		spritenum: 626,
 		megaStone: "Lopunny-Mega",
@@ -2550,20 +2517,20 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"loveball": {
+	loveball: {
 		name: "Love Ball",
 		spritenum: 258,
 		isPokeball: true,
 		desc: "Poke Ball for catching Pokemon that are the opposite gender of your Pokemon.",
 	},
-	"lovesweet": {
+	lovesweet: {
 		name: "Love Sweet",
 		spritenum: 705,
 		fling: {
 			basePower: 10,
 		},
 	},
-	"lucarionite": {
+	lucarionite: {
 		name: "Lucarionite",
 		spritenum: 594,
 		megaStone: "Lucario-Mega",
@@ -2573,19 +2540,20 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	"luckypunch": {
+	luckypunch: {
 		name: "Lucky Punch",
 		spritenum: 261,
 		fling: {
 			basePower: 40,
 		},
 		onModifyCritRatio(critRatio, user) {
-			if (user.baseTemplate.species === 'Chansey') {
+			if (user.baseSpecies.name === 'Chansey') {
 				return critRatio + 2;
 			}
 		},
+		itemUser: ["Chansey", "Blissey"],
 	},
-	"lumberry": {
+	lumberry: {
 		name: "Lum Berry",
 		spritenum: 262,
 		isBerry: true,
@@ -2603,7 +2571,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			pokemon.removeVolatile('confusion');
 		},
 	},
-	"luminousmoss": {
+	luminousmoss: {
 		name: "Luminous Moss",
 		spritenum: 595,
 		fling: {
@@ -2615,7 +2583,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
-	"lunaliumz": {
+	lunaliumz: {
 		name: "Lunalium Z",
 		spritenum: 686,
 		onTakeItem: false,
@@ -2623,13 +2591,12 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveFrom: "Moongeist Beam",
 		zMoveUser: ["Lunala", "Necrozma-Dawn-Wings"],
 	},
-	"lureball": {
+	lureball: {
 		name: "Lure Ball",
 		spritenum: 264,
 		isPokeball: true,
-		desc: "A Poke Ball for catching Pokemon hooked by a Rod when fishing.",
 	},
-	"lustrousorb": {
+	lustrousorb: {
 		name: "Lustrous Orb",
 		spritenum: 265,
 		fling: {
@@ -2641,24 +2608,21 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "If held by a Palkia, its Water- and Dragon-type attacks have 1.2x power.",
 	},
-	"luxuryball": {
+	luxuryball: {
 		name: "Luxury Ball",
 		spritenum: 266,
 		isPokeball: true,
-		desc: "A comfortable Poke Ball that makes a caught wild Pokemon quickly grow friendly.",
 	},
-	"lycaniumz": {
+	lycaniumz: {
 		name: "Lycanium Z",
 		spritenum: 689,
 		onTakeItem: false,
 		zMove: "Splintered Stormshards",
 		zMoveFrom: "Stone Edge",
 		zMoveUser: ["Lycanroc", "Lycanroc-Midnight", "Lycanroc-Dusk"],
-		desc: "If held by a Lycanroc forme with Stone Edge, it can use Splintered Stormshards.",
 	},
-	"machampite": {
+	machampite: {
 		name: "Machampite",
 		spritenum: 594, //CHANGE
 		megaStone: "Machamp-Mega",
@@ -2667,9 +2631,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Machamp, this item allows it to Mega Evolve in battle.",
 	},
-	"machobrace": {
+	machobrace: {
 		name: "Macho Brace",
 		isUnreleased: true,
 		spritenum: 269,
@@ -2680,17 +2643,15 @@ export const Items: {[itemid: string]: ItemData} = {
 		onModifySpe(spe) {
 			return this.chainModify(0.5);
 		},
-		desc: "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
 	},
-	"magmarizer": {
+	magmarizer: {
 		name: "Magmarizer",
 		spritenum: 272,
 		fling: {
 			basePower: 80,
 		},
-		desc: "Evolves Magmar into Magmortar when traded.",
 	},
-	"magnet": {
+	magnet: {
 		name: "Magnet",
 		spritenum: 273,
 		fling: {
@@ -2702,9 +2663,8 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Electric-type attacks have 1.2x power.",
 	},
-	"magoberry": {
+	magoberry: {
 		name: "Mago Berry",
 		spritenum: 274,
 		isBerry: true,
@@ -2726,9 +2686,8 @@ export const Items: {[itemid: string]: ItemData} = {
 				pokemon.addVolatile('confusion');
 			}
 		},
-		desc: "Restores 1/2 max HP at 1/4 max HP or less; confuses if -Spe Nature. Single use.",
 	},
-	"manectite": {
+	manectite: {
 		name: "Manectite",
 		spritenum: 596,
 		megaStone: "Manectric-Mega",
@@ -2737,9 +2696,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Manectric, this item allows it to Mega Evolve in battle.",
 	},
-	"marangaberry": {
+	marangaberry: {
 		name: "Maranga Berry",
 		spritenum: 597,
 		isBerry: true,
@@ -2755,24 +2713,21 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat(pokemon) {
 			this.boost({spd: 1});
 		},
-		desc: "Raises holder's Sp. Def by 1 stage after it is hit by a special attack. Single use.",
 	},
-	"marshadiumz": {
+	marshadiumz: {
 		name: "Marshadium Z",
 		spritenum: 654,
 		onTakeItem: false,
 		zMove: "Soul-Stealing 7-Star Strike",
 		zMoveFrom: "Spectral Thief",
 		zMoveUser: ["Marshadow"],
-		desc: "If held by Marshadow with Spectral Thief, it can use Soul-Stealing 7-Star Strike.",
 	},
-	"masterball": {
+	masterball: {
 		name: "Master Ball",
 		spritenum: 276,
 		isPokeball: true,
-		desc: "The best Ball with the ultimate performance. It will catch any wild Pokemon.",
 	},
-	"mawilite": {
+	mawilite: {
 		name: "Mawilite",
 		spritenum: 598,
 		megaStone: "Mawile-Mega",
@@ -2781,9 +2736,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Mawile, this item allows it to Mega Evolve in battle.",
 	},
-	"meadowplate": {
+	meadowplate: {
 		name: "Meadow Plate",
 		spritenum: 282,
 		onPlate: 'Grass',
@@ -2800,9 +2754,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Arceus-Grass",
-		desc: "Holder's Grass-type attacks have 1.2x power. Judgment is Grass type.",
 	},
-	"medichamite": {
+	medichamite: {
 		name: "Medichamite",
 		spritenum: 599,
 		megaStone: "Medicham-Mega",
@@ -2811,9 +2764,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Medicham, this item allows it to Mega Evolve in battle.",
 	},
-	"meganiumite": {
+	meganiumite: {
 		name: "Meganiumite",
 		spritenum: 594, //CHANGE
 		megaStone: "Meganium-Mega",
@@ -2822,9 +2774,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Meganium, this item allows it to Mega Evolve in battle.",
 	},
-	"mentalherb": {
+	mentalherb: {
 		name: "Mental Herb",
 		spritenum: 285,
 		fling: {
@@ -2859,9 +2810,8 @@ export const Items: {[itemid: string]: ItemData} = {
 				}
 			}
 		},
-		desc: "Cures holder of Attract, Disable, Encore, Heal Block, Taunt, Torment. Single use.",
 	},
-	"meowsticite": {
+	meowsticite: {
 		name: "Meowsticite",
 		spritenum: 594, //CHANGE
 		megaStone: "Meowstic-Mega",
@@ -2870,9 +2820,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Meowstic, this item allows it to Mega Evolve in battle.",
 	},
-	"meowsticitef": {
+	meowsticitef: {
 		name: "MeowsticiteF",
 		spritenum: 594, //CHANGE
 		megaStone: "Meowstic-F-Mega",
@@ -2881,9 +2830,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Meowstic-F, this item allows it to Mega Evolve in battle.",
 	},
-	"metagrossite": {
+	metagrossite: {
 		name: "Metagrossite",
 		spritenum: 618,
 		megaStone: "Metagross-Mega",
@@ -2892,9 +2840,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Metagross, this item allows it to Mega Evolve in battle.",
 	},
-	"metalcoat": {
+	metalcoat: {
 		name: "Metal Coat",
 		spritenum: 286,
 		fling: {
@@ -2906,10 +2853,8 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Steel-type attacks have 1.2x power. Evolves Onix into Steelix and Scyther into Scizor when traded.",
-		shortDesc: "Holder's Steel-type attacks have 1.2x power.",
 	},
-	"metalpowder": {
+	metalpowder: {
 		name: "Metal Powder",
 		fling: {
 			basePower: 10,
@@ -2921,9 +2866,8 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify(2);
 			}
 		},
-		desc: "If held by a Ditto that hasn't Transformed, its Defense is doubled.",
 	},
-	"metronome": {
+	metronome: {
 		name: "Metronome",
 		spritenum: 289,
 		fling: {
@@ -2956,18 +2900,16 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([dmgMod[numConsecutive], 0x1000]);
 			},
 		},
-		desc: "Damage of moves used on consecutive turns is increased. Max 2x after 5 turns.",
 	},
-	"mewniumz": {
+	mewniumz: {
 		name: "Mewnium Z",
 		spritenum: 658,
 		onTakeItem: false,
 		zMove: "Genesis Supernova",
 		zMoveFrom: "Psychic",
 		zMoveUser: ["Mew"],
-		desc: "If held by a Mew with Psychic, it can use Genesis Supernova.",
 	},
-	"mewtwonitex": {
+	mewtwonitex: {
 		name: "Mewtwonite X",
 		spritenum: 600,
 		megaStone: "Mewtwo-Mega-X",
@@ -2976,9 +2918,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Mewtwo, this item allows it to Mega Evolve in battle.",
 	},
-	"mewtwonitey": {
+	mewtwonitey: {
 		name: "Mewtwonite Y",
 		spritenum: 601,
 		megaStone: "Mewtwo-Mega-Y",
@@ -2987,9 +2928,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Mewtwo, this item allows it to Mega Evolve in battle.",
 	},
-	"micleberry": {
+	micleberry: {
 		name: "Micle Berry",
 		spritenum: 290,
 		isBerry: true,
@@ -3015,9 +2955,8 @@ export const Items: {[itemid: string]: ItemData} = {
 				}
 			},
 		},
-		desc: "Holder's next move has 1.2x accuracy when at 1/4 max HP or less. Single use.",
 	},
-	"mightyenite": {
+	mightyenite: {
 		name: "Mightyenite",
 		spritenum: 594, //CHANGE
 		megaStone: "Mightyena-Mega",
@@ -3026,18 +2965,16 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Mightyena, this item allows it to Mega Evolve in battle.",
 	},
-	"mimikiumz": {
+	mimikiumz: {
 		name: "Mimikium Z",
 		spritenum: 688,
 		onTakeItem: false,
 		zMove: "Let's Snuggle Forever",
 		zMoveFrom: "Play Rough",
 		zMoveUser: ["Mimikyu", "Mimikyu-Busted", "Mimikyu-Totem", "Mimikyu-Busted-Totem"],
-		desc: "If held by a Mimikyu with Play Rough, it can use Let's Snuggle Forever.",
 	},
-	"mindplate": {
+	mindplate: {
 		name: "Mind Plate",
 		spritenum: 291,
 		onPlate: 'Psychic',
@@ -3054,9 +2991,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Arceus-Psychic",
-		desc: "Holder's Psychic-type attacks have 1.2x power. Judgment is Psychic type.",
 	},
-	"miracleseed": {
+	miracleseed: {
 		name: "Miracle Seed",
 		fling: {
 			basePower: 30,
@@ -3068,9 +3004,8 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Grass-type attacks have 1.2x power.",
 	},
-	"mistyseed": {
+	mistyseed: {
 		name: "Misty Seed",
 		spritenum: 666,
 		fling: {
@@ -3086,24 +3021,15 @@ export const Items: {[itemid: string]: ItemData} = {
 				this.boost({spd: 1}, this.effectData.target);
 			}
 		},
-		desc: "If the terrain is Misty Terrain, raises holder's Sp. Def by 1 stage. Single use.",
 	},
-	"moonball": {
-		name: "Moon Ball",
-		spritenum: 294,
-		isPokeball: true,
-		desc: "A Poke Ball for catching Pokemon that evolve using the Moon Stone.",
-	},
-	"moonstone": {
+	moonstone: {
 		name: "Moon Stone",
 		spritenum: 295,
 		fling: {
 			basePower: 30,
 		},
-		desc: "Evolves Nidorina into Nidoqueen, Nidorino into Nidoking, Clefairy into Clefable, Jigglypuff into Wigglytuff, Skitty into Delcatty, and Munna into Musharna when used.",
-		shortDesc: "Evolves certain species of Pokemon when used.",
 	},
-	"muscleband": {
+	muscleband: {
 		name: "Muscle Band",
 		spritenum: 297,
 		fling: {
@@ -3115,9 +3041,8 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1199, 0x1000]);
 			}
 		},
-		desc: "Holder's physical attacks have 1.1x power.",
 	},
-	"mysticwater": {
+	mysticwater: {
 		name: "Mystic Water",
 		spritenum: 300,
 		fling: {
@@ -3129,21 +3054,20 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Water-type attacks have 1.2x power.",
 	},
-	"nestball": {
+	nestball: {
 		name: "Nest Ball",
 		spritenum: 303,
 		isPokeball: true,
 		desc: "A Poke Ball that works especially well on weaker Pokemon in the wild.",
 	},
-	"netball": {
+	netball: {
 		name: "Net Ball",
 		spritenum: 304,
 		isPokeball: true,
 		desc: "A Poke Ball that works especially well on Water- and Bug-type Pokemon.",
 	},
-	"nevermeltice": {
+	nevermeltice: {
 		name: "Never-Melt Ice",
 		spritenum: 305,
 		fling: {
@@ -3157,7 +3081,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Ice-type attacks have 1.2x power.",
 	},
-	"noiverite": {
+	noiverite: {
 		name: "Noiverite",
 		spritenum: 594, //CHANGE
 		megaStone: "Noivern-Mega",
@@ -3168,7 +3092,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Noivern, this item allows it to Mega Evolve in battle.",
 	},
-	"normalgem": {
+	normalgem: {
 		name: "Normal Gem",
 		spritenum: 307,
 		isGem: true,
@@ -3183,7 +3107,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's first successful Normal-type attack will have 1.3x power. Single use.",
 	},
-	"normaliumz": {
+	normaliumz: {
 		name: "Normalium Z",
 		spritenum: 631,
 		onTakeItem: false,
@@ -3191,7 +3115,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveType: "Normal",
 		desc: "If holder has a Normal move, this item allows it to use a Normal Z-Move.",
 	},
-	"occaberry": {
+	occaberry: {
 		name: "Occa Berry",
 		spritenum: 311,
 		isBerry: true,
@@ -3211,7 +3135,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat() { },
 		desc: "Halves damage taken from a supereffective Fire-type attack. Single use.",
 	},
-	"oddincense": {
+	oddincense: {
 		name: "Odd Incense",
 		spritenum: 312,
 		fling: {
@@ -3225,7 +3149,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Psychic-type attacks have 1.2x power.",
 	},
-	"oldamber": {
+	oldamber: {
 		name: "Old Amber",
 		spritenum: 314,
 		fling: {
@@ -3233,7 +3157,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Can be revived into Aerodactyl.",
 	},
-	"oranberry": {
+	oranberry: {
 		name: "Oran Berry",
 		spritenum: 319,
 		isBerry: true,
@@ -3254,7 +3178,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Restores 10 HP when at 1/2 max HP or less. Single use.",
 	},
-	"ovalstone": {
+	ovalstone: {
 		name: "Oval Stone",
 		spritenum: 321,
 		fling: {
@@ -3262,7 +3186,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Evolves Happiny into Chansey when held and leveled up during the day.",
 	},
-	"palonite": {
+	palonite: {
 		name: "Palonite",
 		spritenum: 594, //CHANGE
 		megaStone: "Palossand-Mega",
@@ -3273,7 +3197,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Palossand, this item allows it to Mega Evolve in battle.",
 	},
-	"pangorite": {
+	pangorite: {
 		name: "Pangorite",
 		spritenum: 594, //CHANGE
 		megaStone: "Pangoro-Mega",
@@ -3284,13 +3208,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Pangoro, this item allows it to Mega Evolve in battle.",
 	},
-	"parkball": {
+	parkball: {
 		name: "Park Ball",
 		spritenum: 325,
 		isPokeball: true,
 		desc: "A special Poke Ball for the Pal Park.",
 	},
-	"passhoberry": {
+	passhoberry: {
 		name: "Passho Berry",
 		spritenum: 329,
 		isBerry: true,
@@ -3310,7 +3234,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat() { },
 		desc: "Halves damage taken from a supereffective Water-type attack. Single use.",
 	},
-	"payapaberry": {
+	payapaberry: {
 		name: "Payapa Berry",
 		spritenum: 330,
 		isBerry: true,
@@ -3330,7 +3254,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat() { },
 		desc: "Halves damage taken from a supereffective Psychic-type attack. Single use.",
 	},
-	"pechaberry": {
+	pechaberry: {
 		name: "Pecha Berry",
 		spritenum: 333,
 		isBerry: true,
@@ -3350,7 +3274,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder is cured if it is poisoned. Single use.",
 	},
-	"persimberry": {
+	persimberry: {
 		name: "Persim Berry",
 		spritenum: 334,
 		isBerry: true,
@@ -3368,7 +3292,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder is cured if it is confused. Single use.",
 	},
-	"petayaberry": {
+	petayaberry: {
 		name: "Petaya Berry",
 		spritenum: 335,
 		isBerry: true,
@@ -3386,7 +3310,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Raises holder's Sp. Atk by 1 stage when at 1/4 max HP or less. Single use.",
 	},
-	"pidgeotite": {
+	pidgeotite: {
 		name: "Pidgeotite",
 		spritenum: 622,
 		megaStone: "Pidgeot-Mega",
@@ -3397,7 +3321,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Pidgeot, this item allows it to Mega Evolve in battle.",
 	},
-	"pikaniumz": {
+	pikaniumz: {
 		name: "Pikanium Z",
 		spritenum: 649,
 		onTakeItem: false,
@@ -3406,7 +3330,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveUser: ["Pikachu"],
 		desc: "If held by a Pikachu with Volt Tackle, it can use Catastropika.",
 	},
-	"pikashuniumz": {
+	pikashuniumz: {
 		name: "Pikashunium Z",
 		spritenum: 659,
 		onTakeItem: false,
@@ -3415,7 +3339,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveUser: ["Pikachu-Original", "Pikachu-Hoenn", "Pikachu-Sinnoh", "Pikachu-Unova", "Pikachu-Kalos", "Pikachu-Alola", "Pikachu-Partner"],
 		desc: "If held by cap Pikachu with Thunderbolt, it can use 10,000,000 Volt Thunderbolt.",
 	},
-	"pinsirite": {
+	pinsirite: {
 		name: "Pinsirite",
 		spritenum: 602,
 		megaStone: "Pinsir-Mega",
@@ -3426,7 +3350,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Pinsir, this item allows it to Mega Evolve in battle.",
 	},
-	"pixieplate": {
+	pixieplate: {
 		name: "Pixie Plate",
 		spritenum: 610,
 		onPlate: 'Fairy',
@@ -3445,7 +3369,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Fairy",
 		desc: "Holder's Fairy-type attacks have 1.2x power. Judgment is Fairy type.",
 	},
-	"plumefossil": {
+	plumefossil: {
 		name: "Plume Fossil",
 		spritenum: 339,
 		fling: {
@@ -3453,7 +3377,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Can be revived into Archen.",
 	},
-	"poisonbarb": {
+	poisonbarb: {
 		name: "Poison Barb",
 		spritenum: 343,
 		fling: {
@@ -3468,7 +3392,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Poison-type attacks have 1.2x power.",
 	},
-	"poisongem": {
+	poisongem: {
 		name: "Poison Gem",
 		isUnreleased: true,
 		spritenum: 344,
@@ -3484,7 +3408,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's first successful Poison-type attack will have 1.3x power. Single use.",
 	},
-	"poisonmemory": {
+	poisonmemory: {
 		name: "Poison Memory",
 		spritenum: 670,
 		onMemory: 'Poison',
@@ -3497,7 +3421,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Silvally-Poison",
 		desc: "Holder's Multi-Attack is Poison type.",
 	},
-	"poisoniumz": {
+	poisoniumz: {
 		name: "Poisonium Z",
 		spritenum: 638,
 		onPlate: 'Poison',
@@ -3507,13 +3431,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Poison",
 		desc: "If holder has a Poison move, this item allows it to use a Poison Z-Move.",
 	},
-	"pokeball": {
+	pokeball: {
 		name: "Poke Ball",
 		spritenum: 345,
 		isPokeball: true,
 		desc: "A device for catching wild Pokemon. It is designed as a capsule system.",
 	},
-	"porygonite": {
+	porygonite: {
 		name: "Porygonite",
 		spritenum: 594, //CHANGE
 		megaStone: "Porygon-Z-Mega",
@@ -3524,7 +3448,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Porygon-Z, this item allows it to Mega Evolve in battle.",
 	},
-	"poweranklet": {
+	poweranklet: {
 		name: "Power Anklet",
 		spritenum: 354,
 		ignoreKlutz: true,
@@ -3536,7 +3460,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
 	},
-	"powerband": {
+	powerband: {
 		name: "Power Band",
 		spritenum: 355,
 		ignoreKlutz: true,
@@ -3548,7 +3472,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
 	},
-	"powerbelt": {
+	powerbelt: {
 		name: "Power Belt",
 		spritenum: 356,
 		ignoreKlutz: true,
@@ -3560,7 +3484,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
 	},
-	"powerbracer": {
+	powerbracer: {
 		name: "Power Bracer",
 		spritenum: 357,
 		ignoreKlutz: true,
@@ -3572,7 +3496,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
 	},
-	"powerherb": {
+	powerherb: {
 		onChargeMove(pokemon, target, move) {
 			if (pokemon.useItem()) {
 				this.debug('power herb - remove charge turn for ' + move.id);
@@ -3588,7 +3512,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's two-turn moves complete in one turn (except Sky Drop). Single use.",
 	},
-	"powerlens": {
+	powerlens: {
 		name: "Power Lens",
 		spritenum: 359,
 		ignoreKlutz: true,
@@ -3600,7 +3524,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
 	},
-	"powerweight": {
+	powerweight: {
 		name: "Power Weight",
 		spritenum: 360,
 		ignoreKlutz: true,
@@ -3612,13 +3536,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
 	},
-	"premierball": {
+	premierball: {
 		name: "Premier Ball",
 		spritenum: 363,
 		isPokeball: true,
 		desc: "A rare Poke Ball that has been crafted to commemorate an event.",
 	},
-	"primariumz": {
+	primariumz: {
 		name: "Primarium Z",
 		spritenum: 652,
 		onTakeItem: false,
@@ -3627,7 +3551,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveUser: ["Primarina"],
 		desc: "If held by a Primarina with Sparkling Aria, it can use Oceanic Operetta.",
 	},
-	"prismscale": {
+	prismscale: {
 		name: "Prism Scale",
 		spritenum: 365,
 		fling: {
@@ -3635,7 +3559,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Evolves Feebas into Milotic when traded.",
 	},
-	"protectivepads": {
+	protectivepads: {
 		name: "Protective Pads",
 		spritenum: 663,
 		fling: {
@@ -3679,7 +3603,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's moves are protected from adverse contact effects, except Pickpocket.",
 	},
-	"protector": {
+	protector: {
 		name: "Protector",
 		spritenum: 367,
 		fling: {
@@ -3687,7 +3611,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Evolves Rhydon into Rhyperior when traded.",
 	},
-	"psychicgem": {
+	psychicgem: {
 		name: "Psychic Gem",
 		isUnreleased: true,
 		spritenum: 369,
@@ -3703,7 +3627,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's first successful Psychic-type attack will have 1.3x power. Single use.",
 	},
-	"psychicmemory": {
+	psychicmemory: {
 		name: "Psychic Memory",
 		spritenum: 680,
 		onMemory: 'Psychic',
@@ -3716,7 +3640,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Silvally-Psychic",
 		desc: "Holder's Multi-Attack is Psychic type.",
 	},
-	"psychicseed": {
+	psychicseed: {
 		name: "Psychic Seed",
 		spritenum: 665,
 		fling: {
@@ -3734,7 +3658,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If the terrain is Psychic Terrain, raises holder's Sp. Def by 1 stage. Single use.",
 	},
-	"psychiumz": {
+	psychiumz: {
 		name: "Psychium Z",
 		spritenum: 641,
 		onPlate: 'Psychic',
@@ -3744,13 +3668,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Psychic",
 		desc: "If holder has a Psychic move, this item allows it to use a Psychic Z-Move.",
 	},
-	"quickball": {
+	quickball: {
 		name: "Quick Ball",
 		spritenum: 372,
 		isPokeball: true,
 		desc: "A Poke Ball that provides a better catch rate at the start of a wild encounter.",
 	},
-	"quickclaw": {
+	quickclaw: {
 		onModifyPriorityPriority: -1,
 		onModifyPriority(priority, pokemon) {
 			if (this.randomChance(1, 5)) {
@@ -3765,7 +3689,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Each turn, holder has a 20% chance to move first in its priority bracket.",
 	},
-	"quickpowder": {
+	quickpowder: {
 		name: "Quick Powder",
 		spritenum: 374,
 		fling: {
@@ -3778,7 +3702,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Ditto that hasn't Transformed, its Speed is doubled.",
 	},
-	"rarebone": {
+	rarebone: {
 		name: "Rare Bone",
 		spritenum: 379,
 		fling: {
@@ -3786,7 +3710,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "No competitive use other than when used with Fling.",
 	},
-	"rawstberry": {
+	rawstberry: {
 		name: "Rawst Berry",
 		spritenum: 381,
 		isBerry: true,
@@ -3806,7 +3730,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder is cured if it is burned. Single use.",
 	},
-	"razorclaw": {
+	razorclaw: {
 		name: "Razor Claw",
 		spritenum: 382,
 		fling: {
@@ -3818,7 +3742,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		desc: "Holder's critical hit ratio is raised by 1 stage. Evolves Sneasel into Weavile when held and leveled up during the night.",
 		shortDesc: "Holder's critical hit ratio is raised by 1 stage.",
 	},
-	"razorfang": {
+	razorfang: {
 		name: "Razor Fang",
 		spritenum: 383,
 		fling: {
@@ -3841,7 +3765,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		desc: "Holder's attacks without a chance to flinch gain a 10% chance to flinch. Evolves Gligar into Gliscor when held and leveled up during the night.",
 		shortDesc: "Holder's attacks without a chance to flinch gain a 10% chance to flinch.",
 	},
-	"reapercloth": {
+	reapercloth: {
 		name: "Reaper Cloth",
 		spritenum: 385,
 		fling: {
@@ -3849,7 +3773,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Evolves Dusclops into Dusknoir when traded.",
 	},
-	"redcard": {
+	redcard: {
 		name: "Red Card",
 		spritenum: 387,
 		fling: {
@@ -3867,7 +3791,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If holder survives a hit, attacker is forced to switch to a random ally. Single use.",
 	},
-	"redorb": {
+	redorb: {
 		name: "Red Orb",
 		spritenum: 390,
 		onSwitchIn(pokemon) {
@@ -3884,13 +3808,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Groudon, this item triggers its Primal Reversion in battle.",
 	},
-	"repeatball": {
+	repeatball: {
 		name: "Repeat Ball",
 		spritenum: 401,
 		isPokeball: true,
 		desc: "A Poke Ball that works well on Pokemon species that were previously caught.",
 	},
-	"ribbonsweet": {
+	ribbonsweet: {
 		name: "Ribbon Sweet",
 		spritenum: 710,
 		fling: {
@@ -3898,7 +3822,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Evolves Milcery into Alcremie when held and spun around.",
 	},
-	"rindoberry": {
+	rindoberry: {
 		name: "Rindo Berry",
 		spritenum: 409,
 		isBerry: true,
@@ -3918,7 +3842,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat() { },
 		desc: "Halves damage taken from a supereffective Grass-type attack. Single use.",
 	},
-	"ringtarget": {
+	ringtarget: {
 		name: "Ring Target",
 		spritenum: 410,
 		fling: {
@@ -3927,7 +3851,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onNegateImmunity: false,
 		desc: "The holder's type immunities granted solely by its typing are negated.",
 	},
-	"rockgem": {
+	rockgem: {
 		name: "Rock Gem",
 		isUnreleased: true,
 		spritenum: 415,
@@ -3943,7 +3867,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's first successful Rock-type attack will have 1.3x power. Single use.",
 	},
-	"rockincense": {
+	rockincense: {
 		name: "Rock Incense",
 		spritenum: 416,
 		fling: {
@@ -3957,7 +3881,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Rock-type attacks have 1.2x power.",
 	},
-	"rockmemory": {
+	rockmemory: {
 		name: "Rock Memory",
 		spritenum: 672,
 		onMemory: 'Rock',
@@ -3970,7 +3894,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Silvally-Rock",
 		desc: "Holder's Multi-Attack is Rock type.",
 	},
-	"rockiumz": {
+	rockiumz: {
 		name: "Rockium Z",
 		spritenum: 643,
 		onPlate: 'Rock',
@@ -3980,7 +3904,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Rock",
 		desc: "If holder has a Rock move, this item allows it to use a Rock Z-Move.",
 	},
-	"rockyhelmet": {
+	rockyhelmet: {
 		name: "Rocky Helmet",
 		spritenum: 417,
 		fling: {
@@ -3994,7 +3918,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If holder is hit by a contact move, the attacker loses 1/6 of its max HP.",
 	},
-	"rootfossil": {
+	rootfossil: {
 		name: "Root Fossil",
 		spritenum: 418,
 		fling: {
@@ -4002,7 +3926,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Can be revived into Lileep.",
 	},
-	"roseincense": {
+	roseincense: {
 		name: "Rose Incense",
 		spritenum: 419,
 		fling: {
@@ -4016,7 +3940,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Grass-type attacks have 1.2x power.",
 	},
-	"roseliberry": {
+	roseliberry: {
 		name: "Roseli Berry",
 		spritenum: 603,
 		isBerry: true,
@@ -4036,7 +3960,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat() { },
 		desc: "Halves damage taken from a supereffective Fairy-type attack. Single use.",
 	},
-	"rowapberry": {
+	rowapberry: {
 		name: "Rowap Berry",
 		spritenum: 420,
 		isBerry: true,
@@ -4054,7 +3978,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat() { },
 		desc: "If holder is hit by a special move, attacker loses 1/8 of its max HP. Single use.",
 	},
-	"rustedshield": {
+	rustedshield: {
 		name: "Rusted Shield",
 		spritenum: 0,
 		onTakeItem(item, pokemon, source) {
@@ -4066,7 +3990,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Zamazenta-Crowned",
 		desc: "If held by a Zamazenta, this item changes it to Crowned Forme.",
 	},
-	"rustedsword": {
+	rustedsword: {
 		name: "Rusted Sword",
 		spritenum: 0,
 		onTakeItem(item, pokemon, source) {
@@ -4078,7 +4002,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Zacian-Crowned",
 		desc: "If held by a Zacian, this item changes it to Crowned Forme.",
 	},
-	"sablenite": {
+	sablenite: {
 		name: "Sablenite",
 		spritenum: 614,
 		megaStone: "Sableye-Mega",
@@ -4089,7 +4013,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Sableye, this item allows it to Mega Evolve in battle.",
 	},
-	"sachet": {
+	sachet: {
 		name: "Sachet",
 		spritenum: 691,
 		fling: {
@@ -4097,13 +4021,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Evolves Spritzee into Aromatisse when traded.",
 	},
-	"safariball": {
+	safariball: {
 		name: "Safari Ball",
 		spritenum: 425,
 		isPokeball: true,
 		desc: "A special Poke Ball that is used only in the Safari Zone and Great Marsh.",
 	},
-	"safetygoggles": {
+	safetygoggles: {
 		name: "Safety Goggles",
 		spritenum: 604,
 		fling: {
@@ -4120,7 +4044,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder is immune to powder moves and damage from Sandstorm or Hail.",
 	},
-	"sailfossil": {
+	sailfossil: {
 		name: "Sail Fossil",
 		spritenum: 695,
 		fling: {
@@ -4128,7 +4052,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Can be revived into Amaura.",
 	},
-	"salacberry": {
+	salacberry: {
 		name: "Salac Berry",
 		spritenum: 426,
 		isBerry: true,
@@ -4146,7 +4070,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Raises holder's Speed by 1 stage when at 1/4 max HP or less. Single use.",
 	},
-	"salamencite": {
+	salamencite: {
 		name: "Salamencite",
 		spritenum: 627,
 		megaStone: "Salamence-Mega",
@@ -4157,7 +4081,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Salamence, this item allows it to Mega Evolve in battle.",
 	},
-	"samurite": {
+	samurite: {
 		name: "Samurite",
 		spritenum: 594, //CHANGE
 		megaStone: "Samurott-Mega",
@@ -4168,7 +4092,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Samurott, this item allows it to Mega Evolve in battle.",
 	},
-	"sceptilite": {
+	sceptilite: {
 		name: "Sceptilite",
 		spritenum: 613,
 		megaStone: "Sceptile-Mega",
@@ -4179,7 +4103,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Sceptile, this item allows it to Mega Evolve in battle.",
 	},
-	"scizorite": {
+	scizorite: {
 		name: "Scizorite",
 		spritenum: 605,
 		megaStone: "Scizor-Mega",
@@ -4190,7 +4114,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Scizor, this item allows it to Mega Evolve in battle.",
 	},
-	"scopelens": {
+	scopelens: {
 		name: "Scope Lens",
 		spritenum: 429,
 		fling: {
@@ -4201,7 +4125,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's critical hit ratio is raised by 1 stage.",
 	},
-	"seaincense": {
+	seaincense: {
 		name: "Sea Incense",
 		spritenum: 430,
 		fling: {
@@ -4215,7 +4139,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Water-type attacks have 1.2x power.",
 	},
-	"serpentite": {
+	serpentite: {
 		name: "Serpentite",
 		spritenum: 594, //CHANGE
 		megaStone: "Serperior-Mega",
@@ -4226,7 +4150,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Serperior, this item allows it to Mega Evolve in battle.",
 	},
-	"sevipetite": {
+	sevipetite: {
 		name: "Sevipetite",
 		spritenum: 594, //CHANGE
 		megaStone: "Seviper-Mega",
@@ -4237,7 +4161,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Seviper, this item allows it to Mega Evolve in battle.",
 	},
-	"sharpbeak": {
+	sharpbeak: {
 		name: "Sharp Beak",
 		spritenum: 436,
 		fling: {
@@ -4251,7 +4175,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Flying-type attacks have 1.2x power.",
 	},
-	"sharpedonite": {
+	sharpedonite: {
 		name: "Sharpedonite",
 		spritenum: 619,
 		megaStone: "Sharpedo-Mega",
@@ -4262,7 +4186,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Sharpedo, this item allows it to Mega Evolve in battle.",
 	},
-	"shedshell": {
+	shedshell: {
 		name: "Shed Shell",
 		spritenum: 437,
 		fling: {
@@ -4274,7 +4198,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder may switch out even when trapped by another Pokemon, or by Ingrain.",
 	},
-	"shellbell": {
+	shellbell: {
 		name: "Shell Bell",
 		spritenum: 438,
 		fling: {
@@ -4288,7 +4212,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "After an attack, holder gains 1/8 of the damage in HP dealt to other Pokemon.",
 	},
-	"shinystone": {
+	shinystone: {
 		name: "Shiny Stone",
 		spritenum: 439,
 		fling: {
@@ -4297,7 +4221,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		desc: "Evolves Togetic into Togekiss, Roselia into Roserade, Minccino into Cinccino, and Floette into Florges when used.",
 		shortDesc: "Evolves certain species of Pokemon when used.",
 	},
-	"shockdrive": {
+	shockdrive: {
 		name: "Shock Drive",
 		spritenum: 442,
 		onTakeItem(item, pokemon, source) {
@@ -4310,7 +4234,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Genesect-Shock",
 		desc: "Holder's Techno Blast is Electric type.",
 	},
-	"shucaberry": {
+	shucaberry: {
 		name: "Shuca Berry",
 		spritenum: 443,
 		isBerry: true,
@@ -4330,7 +4254,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat() { },
 		desc: "Halves damage taken from a supereffective Ground-type attack. Single use.",
 	},
-	"silkscarf": {
+	silkscarf: {
 		name: "Silk Scarf",
 		spritenum: 444,
 		fling: {
@@ -4344,7 +4268,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Normal-type attacks have 1.2x power.",
 	},
-	"silverpowder": {
+	silverpowder: {
 		name: "SilverPowder",
 		spritenum: 447,
 		fling: {
@@ -4358,7 +4282,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Bug-type attacks have 1.2x power.",
 	},
-	"sitrusberry": {
+	sitrusberry: {
 		name: "Sitrus Berry",
 		spritenum: 448,
 		isBerry: true,
@@ -4379,7 +4303,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Restores 1/4 max HP when at 1/2 max HP or less. Single use.",
 	},
-	"skullfossil": {
+	skullfossil: {
 		name: "Skull Fossil",
 		spritenum: 449,
 		fling: {
@@ -4387,7 +4311,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Can be revived into Cranidos.",
 	},
-	"skyplate": {
+	skyplate: {
 		name: "Sky Plate",
 		spritenum: 450,
 		onPlate: 'Flying',
@@ -4406,7 +4330,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Flying",
 		desc: "Holder's Flying-type attacks have 1.2x power. Judgment is Flying type.",
 	},
-	"slowbronite": {
+	slowbronite: {
 		name: "Slowbronite",
 		spritenum: 620,
 		megaStone: "Slowbro-Mega",
@@ -4417,7 +4341,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Slowbro, this item allows it to Mega Evolve in battle.",
 	},
-	"smoothrock": {
+	smoothrock: {
 		name: "Smooth Rock",
 		spritenum: 453,
 		fling: {
@@ -4425,7 +4349,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's use of Sandstorm lasts 8 turns instead of 5.",
 	},
-	"snorliumz": {
+	snorliumz: {
 		name: "Snorlium Z",
 		spritenum: 656,
 		onTakeItem: false,
@@ -4434,7 +4358,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveUser: ["Snorlax"],
 		desc: "If held by a Snorlax with Giga Impact, it can use Pulverizing Pancake.",
 	},
-	"snowball": {
+	snowball: {
 		name: "Snowball",
 		spritenum: 606,
 		fling: {
@@ -4447,7 +4371,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Raises holder's Attack by 1 if hit by an Ice-type attack. Single use.",
 	},
-	"softsand": {
+	softsand: {
 		name: "Soft Sand",
 		spritenum: 456,
 		fling: {
@@ -4461,7 +4385,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Ground-type attacks have 1.2x power.",
 	},
-	"solganiumz": {
+	solganiumz: {
 		name: "Solganium Z",
 		spritenum: 685,
 		onTakeItem: false,
@@ -4470,7 +4394,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveUser: ["Solgaleo", "Necrozma-Dusk-Mane"],
 		desc: "Solgaleo or Dusk Mane Necrozma with Sunsteel Strike can use a special Z-Move.",
 	},
-	"souldew": {
+	souldew: {
 		name: "Soul Dew",
 		spritenum: 459,
 		fling: {
@@ -4484,7 +4408,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Latias/Latios, its Dragon- and Psychic-type moves have 1.2x power.",
 	},
-	"spelltag": {
+	spelltag: {
 		name: "Spell Tag",
 		spritenum: 461,
 		fling: {
@@ -4498,7 +4422,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Ghost-type attacks have 1.2x power.",
 	},
-	"spiritnite": {
+	spiritnite: {
 		name: "Spiritnite",
 		spritenum: 594, //CHANGE
 		megaStone: "Spiritomb-Mega",
@@ -4509,7 +4433,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Spiritomb, this item allows it to Mega Evolve in battle.",
 	},
-	"splashplate": {
+	splashplate: {
 		name: "Splash Plate",
 		spritenum: 463,
 		onPlate: 'Water',
@@ -4528,7 +4452,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Water",
 		desc: "Holder's Water-type attacks have 1.2x power. Judgment is Water type.",
 	},
-	"spookyplate": {
+	spookyplate: {
 		name: "Spooky Plate",
 		spritenum: 464,
 		onPlate: 'Ghost',
@@ -4547,13 +4471,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Ghost",
 		desc: "Holder's Ghost-type attacks have 1.2x power. Judgment is Ghost type.",
 	},
-	"sportball": {
+	sportball: {
 		name: "Sport Ball",
 		spritenum: 465,
 		isPokeball: true,
 		desc: "A special Poke Ball for the Bug-Catching Contest.",
 	},
-	"starfberry": {
+	starfberry: {
 		name: "Starf Berry",
 		spritenum: 472,
 		isBerry: true,
@@ -4584,7 +4508,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Raises a random stat by 2 when at 1/4 max HP or less (not acc/eva). Single use.",
 	},
-	"starsweet": {
+	starsweet: {
 		name: "Star Sweet",
 		spritenum: 709,
 		fling: {
@@ -4592,7 +4516,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Evolves Milcery into Alcremie when held and spun around.",
 	},
-	"staticorb": {
+	staticorb: {
 		name: "Static Orb",
 		spritenum: 515,
 		fling: {
@@ -4606,7 +4530,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "At the end of every turn, this item attempts to paralyze the holder.",
 	},
-	"steelixite": {
+	steelixite: {
 		name: "Steelixite",
 		spritenum: 621,
 		megaStone: "Steelix-Mega",
@@ -4617,7 +4541,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Steelix, this item allows it to Mega Evolve in battle.",
 	},
-	"steelgem": {
+	steelgem: {
 		name: "Steel Gem",
 		isUnreleased: true,
 		spritenum: 473,
@@ -4633,7 +4557,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's first successful Steel-type attack will have 1.3x power. Single use.",
 	},
-	"steelmemory": {
+	steelmemory: {
 		name: "Steel Memory",
 		spritenum: 675,
 		onMemory: 'Steel',
@@ -4646,7 +4570,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Silvally-Steel",
 		desc: "Holder's Multi-Attack is Steel type.",
 	},
-	"steeliumz": {
+	steeliumz: {
 		name: "Steelium Z",
 		spritenum: 647,
 		onPlate: 'Steel',
@@ -4656,7 +4580,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Steel",
 		desc: "If holder has a Steel move, this item allows it to use a Steel Z-Move.",
 	},
-	"stickybarb": {
+	stickybarb: {
 		name: "Sticky Barb",
 		spritenum: 476,
 		fling: {
@@ -4677,7 +4601,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Each turn, holder loses 1/8 max HP. An attacker making contact can receive it.",
 	},
-	"stoneplate": {
+	stoneplate: {
 		name: "Stone Plate",
 		spritenum: 477,
 		onPlate: 'Rock',
@@ -4696,7 +4620,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Rock",
 		desc: "Holder's Rock-type attacks have 1.2x power. Judgment is Rock type.",
 	},
-	"strawberrysweet": {
+	strawberrysweet: {
 		name: "Strawberry Sweet",
 		spritenum: 704,
 		fling: {
@@ -4704,7 +4628,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Evolves Milcery into Alcremie when held and spun around.",
 	},
-	"sunstone": {
+	sunstone: {
 		name: "Sun Stone",
 		spritenum: 480,
 		fling: {
@@ -4713,7 +4637,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		desc: "Evolves Gloom into Bellossom, Sunkern into Sunflora, Cottonee into Whimsicott, Petilil into Lilligant, and Helioptile into Heliolisk when used.",
 		shortDesc: "Evolves certain species of Pokemon when used.",
 	},
-	"swampertite": {
+	swampertite: {
 		name: "Swampertite",
 		spritenum: 612,
 		megaStone: "Swampert-Mega",
@@ -4724,7 +4648,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Swampert, this item allows it to Mega Evolve in battle.",
 	},
-	"swellite": {
+	swellite: {
 		name: "swellite",
 		spritenum: 594, //CHANGE
 		megaStone: "Swellow-Mega",
@@ -4735,7 +4659,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Swellow, this item allows it to Mega Evolve in battle.",
 	},
-	"talonite": {
+	talonite: {
 		name: "Talonite",
 		spritenum: 594, //CHANGE
 		megaStone: "Talonflame-Mega",
@@ -4746,7 +4670,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Talonflame, this item allows it to Mega Evolve in battle.",
 	},
-	"tangaberry": {
+	tangaberry: {
 		name: "Tanga Berry",
 		spritenum: 487,
 		isBerry: true,
@@ -4766,7 +4690,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat() { },
 		desc: "Halves damage taken from a supereffective Bug-type attack. Single use.",
 	},
-	"tapuniumz": {
+	tapuniumz: {
 		name: "Tapunium Z",
 		spritenum: 653,
 		onTakeItem: false,
@@ -4775,7 +4699,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveUser: ["Tapu Koko", "Tapu Lele", "Tapu Bulu", "Tapu Fini"],
 		desc: "If held by a Tapu with Nature's Madness, it can use Guardian of Alola.",
 	},
-	"terrainextender": {
+	terrainextender: {
 		name: "Terrain Extender",
 		spritenum: 662,
 		fling: {
@@ -4783,7 +4707,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's use of Electric/Grassy/Misty/Psychic Terrain lasts 8 turns instead of 5.",
 	},
-	"thickclub": {
+	thickclub: {
 		name: "Thick Club",
 		spritenum: 491,
 		fling: {
@@ -4797,7 +4721,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Cubone or a Marowak, its Attack is doubled.",
 	},
-	"throatspray": {
+	throatspray: {
 		name: "Throat Spray",
 		spritenum: 0,
 		fling: {
@@ -4810,7 +4734,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Raises holder's Special Attack by 1 stage after using a sound move. Single use.",
 	},
-	"thunderstone": {
+	thunderstone: {
 		name: "Thunder Stone",
 		spritenum: 492,
 		fling: {
@@ -4819,13 +4743,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		desc: "Evolves Pikachu into Raichu or Alolan Raichu, Eevee into Jolteon, and Eelektrik into Eelektross when used.",
 		shortDesc: "Evolves certain species of Pokemon when used.",
 	},
-	"timerball": {
+	timerball: {
 		name: "Timer Ball",
 		spritenum: 494,
 		isPokeball: true,
 		desc: "A Poke Ball that becomes better the more turns there are in a battle.",
 	},
-	"torterrite": {
+	torterrite: {
 		name: "Torterrite",
 		spritenum: 594, //CHANGE
 		megaStone: "Torterra-Mega",
@@ -4836,7 +4760,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Torterra, this item allows it to Mega Evolve in battle.",
 	},
-	"toxicorb": {
+	toxicorb: {
 		name: "Toxic Orb",
 		spritenum: 515,
 		fling: {
@@ -4850,7 +4774,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "At the end of every turn, this item attempts to badly poison the holder.",
 	},
-	"toxicplate": {
+	toxicplate: {
 		name: "Toxic Plate",
 		spritenum: 516,
 		onPlate: 'Poison',
@@ -4869,7 +4793,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Poison",
 		desc: "Holder's Poison-type attacks have 1.2x power. Judgment is Poison type.",
 	},
-	"twistedspoon": {
+	twistedspoon: {
 		name: "Twisted Spoon",
 		spritenum: 520,
 		fling: {
@@ -4883,7 +4807,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Psychic-type attacks have 1.2x power.",
 	},
-	"typhlosionite": {
+	typhlosionite: {
 		name: "Typhlosionite",
 		spritenum: 594, //CHANGE
 		megaStone: "Typhlosion-Mega",
@@ -4894,7 +4818,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Typhlosion, this item allows it to Mega Evolve in battle.",
 	},
-	"tyranitarite": {
+	tyranitarite: {
 		name: "Tyranitarite",
 		spritenum: 607,
 		megaStone: "Tyranitar-Mega",
@@ -4905,7 +4829,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Tyranitar, this item allows it to Mega Evolve in battle.",
 	},
-	"ultimateeviolite": {
+	ultimateeviolite: {
 		name: "Ultimate Eviolite",
 		spritenum: 130,
 		fling: {
@@ -4937,13 +4861,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If holder's species can evolve, its Atk and SpA are 1.5X, and its Def and SpD are 2x.",
 	},
-	"ultraball": {
+	ultraball: {
 		name: "Ultra Ball",
 		spritenum: 521,
 		isPokeball: true,
 		desc: "An ultra-performance Ball that provides a higher catch rate than a Great Ball.",
 	},
-	"ultraeviolite": {
+	ultraeviolite: {
 		name: "Ultra Eviolite",
 		spritenum: 130,
 		fling: {
@@ -4975,7 +4899,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If holder's species can evolve, its Attack, Defense, Sp. Atk and Sp. Def are 1.5x.",
 	},
-	"ultranecroziumz": {
+	ultranecroziumz: {
 		name: "Ultranecrozium Z",
 		spritenum: 687,
 		onTakeItem: false,
@@ -4984,7 +4908,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveUser: ["Necrozma-Ultra"],
 		desc: "Dusk Mane/Dawn Wings Necrozma: Ultra Burst, then Z-Move w/ Photon Geyser.",
 	},
-	"upgrade": {
+	upgrade: {
 		name: "Up-Grade",
 		spritenum: 523,
 		fling: {
@@ -4992,7 +4916,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Evolves Porygon into Porygon2 when traded.",
 	},
-	"venusaurite": {
+	venusaurite: {
 		name: "Venusaurite",
 		spritenum: 608,
 		megaStone: "Venusaur-Mega",
@@ -5003,7 +4927,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Venusaur, this item allows it to Mega Evolve in battle.",
 	},
-	"vespite": {
+	vespite: {
 		name: "Vespite",
 		spritenum: 594, //CHANGE
 		megaStone: "Vespiquen-Mega",
@@ -5014,7 +4938,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Vespiquen, this item allows it to Mega Evolve in battle.",
 	},
-	"wacanberry": {
+	wacanberry: {
 		name: "Wacan Berry",
 		spritenum: 526,
 		isBerry: true,
@@ -5034,7 +4958,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat() { },
 		desc: "Halves damage taken from a supereffective Electric-type attack. Single use.",
 	},
-	"watergem": {
+	watergem: {
 		name: "Water Gem",
 		isUnreleased: true,
 		spritenum: 528,
@@ -5050,7 +4974,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's first successful Water-type attack will have 1.3x power. Single use.",
 	},
-	"watermemory": {
+	watermemory: {
 		name: "Water Memory",
 		spritenum: 677,
 		onMemory: 'Water',
@@ -5063,7 +4987,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Silvally-Water",
 		desc: "Holder's Multi-Attack is Water type.",
 	},
-	"waterstone": {
+	waterstone: {
 		name: "Water Stone",
 		spritenum: 529,
 		fling: {
@@ -5072,7 +4996,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		desc: "Evolves Poliwhirl into Poliwrath, Shellder into Cloyster, Staryu into Starmie, Eevee into Vaporeon, Lombre into Ludicolo, and Panpour into Simipour when used.",
 		shortDesc: "Evolves certain species of Pokemon when used.",
 	},
-	"wateriumz": {
+	wateriumz: {
 		name: "Waterium Z",
 		spritenum: 633,
 		onPlate: 'Water',
@@ -5082,7 +5006,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Water",
 		desc: "If holder has a Water move, this item allows it to use a Water Z-Move.",
 	},
-	"waveincense": {
+	waveincense: {
 		name: "Wave Incense",
 		spritenum: 531,
 		fling: {
@@ -5096,7 +5020,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's Water-type attacks have 1.2x power.",
 	},
-	"weaknesspolicy": {
+	weaknesspolicy: {
 		name: "Weakness Policy",
 		spritenum: 609,
 		fling: {
@@ -5110,7 +5034,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If holder is hit super effectively, raises Attack, Sp. Atk by 2 stages. Single use.",
 	},
-	"weavilite": {
+	weavilite: {
 		name: "Weavilite",
 		spritenum: 594, //CHANGE
 		megaStone: "Weavile-Mega",
@@ -5121,7 +5045,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Weavile, this item allows it to Mega Evolve in battle.",
 	},
-	"whippeddream": {
+	whippeddream: {
 		name: "Whipped Dream",
 		spritenum: 692,
 		fling: {
@@ -5129,7 +5053,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Evolves Swirlix into Slurpuff when traded.",
 	},
-	"whiteherb": {
+	whiteherb: {
 		name: "White Herb",
 		spritenum: 535,
 		fling: {
@@ -5169,7 +5093,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Restores all lowered stat stages to 0 when one is less than 0. Single use.",
 	},
-	"widelens": {
+	widelens: {
 		name: "Wide Lens",
 		spritenum: 537,
 		fling: {
@@ -5182,7 +5106,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "The accuracy of attacks by the holder is 1.1x.",
 	},
-	"wikiberry": {
+	wikiberry: {
 		name: "Wiki Berry",
 		spritenum: 538,
 		isBerry: true,
@@ -5206,7 +5130,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Restores 1/2 max HP at 1/4 max HP or less; confuses if -SpA Nature. Single use.",
 	},
-	"wiseglasses": {
+	wiseglasses: {
 		name: "Wise Glasses",
 		spritenum: 539,
 		fling: {
@@ -5220,7 +5144,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "Holder's special attacks have 1.1x power.",
 	},
-	"yacheberry": {
+	yacheberry: {
 		name: "Yache Berry",
 		spritenum: 567,
 		isBerry: true,
@@ -5240,7 +5164,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat() { },
 		desc: "Halves damage taken from a supereffective Ice-type attack. Single use.",
 	},
-	"zangite": {
+	zangite: {
 		name: "Zangite",
 		spritenum: 594, //CHANGE
 		megaStone: "Zangoose-Mega",
@@ -5251,7 +5175,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		desc: "If held by a Zangoose, this item allows it to Mega Evolve in battle.",
 	},
-	"zapplate": {
+	zapplate: {
 		name: "Zap Plate",
 		spritenum: 572,
 		onPlate: 'Electric',
@@ -5270,7 +5194,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Electric",
 		desc: "Holder's Electric-type attacks have 1.2x power. Judgment is Electric type.",
 	},
-	"zoomlens": {
+	zoomlens: {
 		name: "Zoom Lens",
 		spritenum: 574,
 		fling: {
