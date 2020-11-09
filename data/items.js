@@ -1755,17 +1755,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveType: "Ghost",
 		forcedForme: "Arceus-Ghost",
 	},
-	giracariocrystal: {
-		name: "Giracario Crystal",
-		spritenum: 594,
-		megaStone: "Giracario-Alt",
-		megaEvolves: "Giracario",
-		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
-			return true;
-		},
-		desc: "If held by a Giracario, this item allows it to form change in battle.",
-	},
 	glalitite: {
 		name: "Glalitite",
 		spritenum: 623,
@@ -3059,13 +3048,11 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Nest Ball",
 		spritenum: 303,
 		isPokeball: true,
-		desc: "A Poke Ball that works especially well on weaker Pokemon in the wild.",
 	},
 	netball: {
 		name: "Net Ball",
 		spritenum: 304,
 		isPokeball: true,
-		desc: "A Poke Ball that works especially well on Water- and Bug-type Pokemon.",
 	},
 	nevermeltice: {
 		name: "Never-Melt Ice",
@@ -3079,7 +3066,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Ice-type attacks have 1.2x power.",
 	},
 	noiverite: {
 		name: "Noiverite",
@@ -3090,7 +3076,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Noivern, this item allows it to Mega Evolve in battle.",
 	},
 	normalgem: {
 		name: "Normal Gem",
@@ -3105,7 +3090,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				}
 			}
 		},
-		desc: "Holder's first successful Normal-type attack will have 1.3x power. Single use.",
 	},
 	normaliumz: {
 		name: "Normalium Z",
@@ -3133,7 +3117,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onEat() { },
-		desc: "Halves damage taken from a supereffective Fire-type attack. Single use.",
 	},
 	oddincense: {
 		name: "Odd Incense",
@@ -3147,7 +3130,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Psychic-type attacks have 1.2x power.",
 	},
 	oldamber: {
 		name: "Old Amber",
@@ -3155,7 +3137,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 100,
 		},
-		desc: "Can be revived into Aerodactyl.",
 	},
 	oranberry: {
 		name: "Oran Berry",
@@ -3176,7 +3157,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat(pokemon) {
 			this.heal(10);
 		},
-		desc: "Restores 10 HP when at 1/2 max HP or less. Single use.",
 	},
 	ovalstone: {
 		name: "Oval Stone",
@@ -3184,7 +3164,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 80,
 		},
-		desc: "Evolves Happiny into Chansey when held and leveled up during the day.",
 	},
 	palonite: {
 		name: "Palonite",
@@ -3195,7 +3174,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Palossand, this item allows it to Mega Evolve in battle.",
 	},
 	pangorite: {
 		name: "Pangorite",
@@ -3206,13 +3184,11 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Pangoro, this item allows it to Mega Evolve in battle.",
 	},
 	parkball: {
 		name: "Park Ball",
 		spritenum: 325,
 		isPokeball: true,
-		desc: "A special Poke Ball for the Pal Park.",
 	},
 	passhoberry: {
 		name: "Passho Berry",
@@ -3232,7 +3208,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onEat() { },
-		desc: "Halves damage taken from a supereffective Water-type attack. Single use.",
 	},
 	payapaberry: {
 		name: "Payapa Berry",
@@ -3252,7 +3227,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onEat() { },
-		desc: "Halves damage taken from a supereffective Psychic-type attack. Single use.",
 	},
 	pechaberry: {
 		name: "Pecha Berry",
@@ -3272,7 +3246,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				pokemon.cureStatus();
 			}
 		},
-		desc: "Holder is cured if it is poisoned. Single use.",
 	},
 	persimberry: {
 		name: "Persim Berry",
@@ -3290,7 +3263,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat(pokemon) {
 			pokemon.removeVolatile('confusion');
 		},
-		desc: "Holder is cured if it is confused. Single use.",
 	},
 	petayaberry: {
 		name: "Petaya Berry",
@@ -3308,7 +3280,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat(pokemon) {
 			this.boost({spa: 1});
 		},
-		desc: "Raises holder's Sp. Atk by 1 stage when at 1/4 max HP or less. Single use.",
 	},
 	pidgeotite: {
 		name: "Pidgeotite",
@@ -3319,7 +3290,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Pidgeot, this item allows it to Mega Evolve in battle.",
 	},
 	pikaniumz: {
 		name: "Pikanium Z",
@@ -3328,7 +3298,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMove: "Catastropika",
 		zMoveFrom: "Volt Tackle",
 		zMoveUser: ["Pikachu"],
-		desc: "If held by a Pikachu with Volt Tackle, it can use Catastropika.",
 	},
 	pikashuniumz: {
 		name: "Pikashunium Z",
@@ -3336,8 +3305,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "10,000,000 Volt Thunderbolt",
 		zMoveFrom: "Thunderbolt",
-		zMoveUser: ["Pikachu-Original", "Pikachu-Hoenn", "Pikachu-Sinnoh", "Pikachu-Unova", "Pikachu-Kalos", "Pikachu-Alola", "Pikachu-Partner"],
-		desc: "If held by cap Pikachu with Thunderbolt, it can use 10,000,000 Volt Thunderbolt.",
+		zMoveUser: ["Pikachu-World"],
 	},
 	pinsirite: {
 		name: "Pinsirite",
@@ -3348,7 +3316,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Pinsir, this item allows it to Mega Evolve in battle.",
 	},
 	pixieplate: {
 		name: "Pixie Plate",
@@ -3367,7 +3334,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Arceus-Fairy",
-		desc: "Holder's Fairy-type attacks have 1.2x power. Judgment is Fairy type.",
 	},
 	plumefossil: {
 		name: "Plume Fossil",
@@ -3375,7 +3341,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 100,
 		},
-		desc: "Can be revived into Archen.",
 	},
 	poisonbarb: {
 		name: "Poison Barb",
@@ -3390,7 +3355,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Poison-type attacks have 1.2x power.",
 	},
 	poisongem: {
 		name: "Poison Gem",
@@ -3406,7 +3370,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				}
 			}
 		},
-		desc: "Holder's first successful Poison-type attack will have 1.3x power. Single use.",
 	},
 	poisonmemory: {
 		name: "Poison Memory",
@@ -3419,7 +3382,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Silvally-Poison",
-		desc: "Holder's Multi-Attack is Poison type.",
 	},
 	poisoniumz: {
 		name: "Poisonium Z",
@@ -3429,13 +3391,11 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMove: true,
 		zMoveType: "Poison",
 		forcedForme: "Arceus-Poison",
-		desc: "If holder has a Poison move, this item allows it to use a Poison Z-Move.",
 	},
 	pokeball: {
 		name: "Poke Ball",
 		spritenum: 345,
 		isPokeball: true,
-		desc: "A device for catching wild Pokemon. It is designed as a capsule system.",
 	},
 	porygonite: {
 		name: "Porygonite",
@@ -3446,7 +3406,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Porygon-Z, this item allows it to Mega Evolve in battle.",
 	},
 	poweranklet: {
 		name: "Power Anklet",
@@ -3458,7 +3417,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onModifySpe(spe) {
 			return this.chainModify(0.5);
 		},
-		desc: "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
 	},
 	powerband: {
 		name: "Power Band",
@@ -3470,7 +3428,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onModifySpe(spe) {
 			return this.chainModify(0.5);
 		},
-		desc: "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
 	},
 	powerbelt: {
 		name: "Power Belt",
@@ -3482,7 +3439,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onModifySpe(spe) {
 			return this.chainModify(0.5);
 		},
-		desc: "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
 	},
 	powerbracer: {
 		name: "Power Bracer",
@@ -3494,7 +3450,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onModifySpe(spe) {
 			return this.chainModify(0.5);
 		},
-		desc: "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
 	},
 	powerherb: {
 		onChargeMove(pokemon, target, move) {
@@ -3510,7 +3465,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		desc: "Holder's two-turn moves complete in one turn (except Sky Drop). Single use.",
 	},
 	powerlens: {
 		name: "Power Lens",
@@ -3522,7 +3476,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onModifySpe(spe) {
 			return this.chainModify(0.5);
 		},
-		desc: "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
 	},
 	powerweight: {
 		name: "Power Weight",
@@ -3534,13 +3487,11 @@ export const Items: {[itemid: string]: ItemData} = {
 		onModifySpe(spe) {
 			return this.chainModify(0.5);
 		},
-		desc: "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
 	},
 	premierball: {
 		name: "Premier Ball",
 		spritenum: 363,
 		isPokeball: true,
-		desc: "A rare Poke Ball that has been crafted to commemorate an event.",
 	},
 	primariumz: {
 		name: "Primarium Z",
@@ -3549,7 +3500,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMove: "Oceanic Operetta",
 		zMoveFrom: "Sparkling Aria",
 		zMoveUser: ["Primarina"],
-		desc: "If held by a Primarina with Sparkling Aria, it can use Oceanic Operetta.",
 	},
 	prismscale: {
 		name: "Prism Scale",
@@ -3557,7 +3507,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		desc: "Evolves Feebas into Milotic when traded.",
 	},
 	protectivepads: {
 		name: "Protective Pads",
@@ -3601,7 +3550,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onSetStatus(status, target, source, effect) {
 			if (target !== source && target === this.activePokemon && this.activeMove && this.activeMove.flags['contact']) return false;
 		},
-		desc: "Holder's moves are protected from adverse contact effects, except Pickpocket.",
 	},
 	protector: {
 		name: "Protector",
@@ -3609,7 +3557,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 80,
 		},
-		desc: "Evolves Rhydon into Rhyperior when traded.",
 	},
 	psychicgem: {
 		name: "Psychic Gem",
@@ -3625,7 +3572,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				}
 			}
 		},
-		desc: "Holder's first successful Psychic-type attack will have 1.3x power. Single use.",
 	},
 	psychicmemory: {
 		name: "Psychic Memory",
@@ -3638,7 +3584,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Silvally-Psychic",
-		desc: "Holder's Multi-Attack is Psychic type.",
 	},
 	psychicseed: {
 		name: "Psychic Seed",
@@ -3656,7 +3601,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				this.boost({spd: 1}, this.effectData.target);
 			}
 		},
-		desc: "If the terrain is Psychic Terrain, raises holder's Sp. Def by 1 stage. Single use.",
 	},
 	psychiumz: {
 		name: "Psychium Z",
@@ -3666,13 +3610,11 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMove: true,
 		zMoveType: "Psychic",
 		forcedForme: "Arceus-Psychic",
-		desc: "If holder has a Psychic move, this item allows it to use a Psychic Z-Move.",
 	},
 	quickball: {
 		name: "Quick Ball",
 		spritenum: 372,
 		isPokeball: true,
-		desc: "A Poke Ball that provides a better catch rate at the start of a wild encounter.",
 	},
 	quickclaw: {
 		onModifyPriorityPriority: -1,
@@ -3687,7 +3629,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 80,
 		},
-		desc: "Each turn, holder has a 20% chance to move first in its priority bracket.",
 	},
 	quickpowder: {
 		name: "Quick Powder",
@@ -3700,7 +3641,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify(2);
 			}
 		},
-		desc: "If held by a Ditto that hasn't Transformed, its Speed is doubled.",
 	},
 	rarebone: {
 		name: "Rare Bone",
@@ -3708,7 +3648,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 100,
 		},
-		desc: "No competitive use other than when used with Fling.",
 	},
 	rawstberry: {
 		name: "Rawst Berry",
@@ -3728,7 +3667,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				pokemon.cureStatus();
 			}
 		},
-		desc: "Holder is cured if it is burned. Single use.",
 	},
 	razorclaw: {
 		name: "Razor Claw",
@@ -3739,8 +3677,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onModifyCritRatio(critRatio) {
 			return critRatio + 1;
 		},
-		desc: "Holder's critical hit ratio is raised by 1 stage. Evolves Sneasel into Weavile when held and leveled up during the night.",
-		shortDesc: "Holder's critical hit ratio is raised by 1 stage.",
 	},
 	razorfang: {
 		name: "Razor Fang",
@@ -3762,8 +3698,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				});
 			}
 		},
-		desc: "Holder's attacks without a chance to flinch gain a 10% chance to flinch. Evolves Gligar into Gliscor when held and leveled up during the night.",
-		shortDesc: "Holder's attacks without a chance to flinch gain a 10% chance to flinch.",
 	},
 	reapercloth: {
 		name: "Reaper Cloth",
@@ -3771,7 +3705,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		desc: "Evolves Dusclops into Dusknoir when traded.",
 	},
 	redcard: {
 		name: "Red Card",
@@ -3789,7 +3722,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				}
 			}
 		},
-		desc: "If holder survives a hit, attacker is forced to switch to a random ally. Single use.",
 	},
 	redorb: {
 		name: "Red Orb",
@@ -3806,13 +3738,21 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (source.baseTemplate.baseSpecies === 'Groudon') return false;
 			return true;
 		},
-		desc: "If held by a Groudon, this item triggers its Primal Reversion in battle.",
 	},
 	repeatball: {
 		name: "Repeat Ball",
 		spritenum: 401,
 		isPokeball: true,
-		desc: "A Poke Ball that works well on Pokemon species that were previously caught.",
+	},
+	reversegem: {
+		name: "Reverse Gem",
+		spritenum: 594,
+		megaStone: "Giracario-Shadow",
+		megaEvolves: "Giracario",
+		onTakeItem(item, source) {
+			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
+			return true;
+		},
 	},
 	ribbonsweet: {
 		name: "Ribbon Sweet",
@@ -3820,7 +3760,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		desc: "Evolves Milcery into Alcremie when held and spun around.",
 	},
 	rindoberry: {
 		name: "Rindo Berry",
@@ -3840,7 +3779,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onEat() { },
-		desc: "Halves damage taken from a supereffective Grass-type attack. Single use.",
 	},
 	ringtarget: {
 		name: "Ring Target",
@@ -3849,7 +3787,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 10,
 		},
 		onNegateImmunity: false,
-		desc: "The holder's type immunities granted solely by its typing are negated.",
 	},
 	rockgem: {
 		name: "Rock Gem",
@@ -3865,7 +3802,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				}
 			}
 		},
-		desc: "Holder's first successful Rock-type attack will have 1.3x power. Single use.",
 	},
 	rockincense: {
 		name: "Rock Incense",
@@ -3879,7 +3815,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Rock-type attacks have 1.2x power.",
 	},
 	rockmemory: {
 		name: "Rock Memory",
@@ -3892,7 +3827,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Silvally-Rock",
-		desc: "Holder's Multi-Attack is Rock type.",
 	},
 	rockiumz: {
 		name: "Rockium Z",
@@ -3902,7 +3836,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMove: true,
 		zMoveType: "Rock",
 		forcedForme: "Arceus-Rock",
-		desc: "If holder has a Rock move, this item allows it to use a Rock Z-Move.",
 	},
 	rockyhelmet: {
 		name: "Rocky Helmet",
@@ -3916,7 +3849,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				this.damage(source.maxhp / 6, source, target);
 			}
 		},
-		desc: "If holder is hit by a contact move, the attacker loses 1/6 of its max HP.",
 	},
 	rootfossil: {
 		name: "Root Fossil",
@@ -3924,7 +3856,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 100,
 		},
-		desc: "Can be revived into Lileep.",
 	},
 	roseincense: {
 		name: "Rose Incense",
@@ -3938,7 +3869,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Grass-type attacks have 1.2x power.",
 	},
 	roseliberry: {
 		name: "Roseli Berry",
@@ -3958,7 +3888,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onEat() { },
-		desc: "Halves damage taken from a supereffective Fairy-type attack. Single use.",
 	},
 	rowapberry: {
 		name: "Rowap Berry",
@@ -3976,7 +3905,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onEat() { },
-		desc: "If holder is hit by a special move, attacker loses 1/8 of its max HP. Single use.",
 	},
 	rustedshield: {
 		name: "Rusted Shield",
@@ -3988,7 +3916,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Zamazenta-Crowned",
-		desc: "If held by a Zamazenta, this item changes it to Crowned Forme.",
 	},
 	rustedsword: {
 		name: "Rusted Sword",
@@ -4000,7 +3927,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Zacian-Crowned",
-		desc: "If held by a Zacian, this item changes it to Crowned Forme.",
 	},
 	sablenite: {
 		name: "Sablenite",
@@ -4011,7 +3937,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Sableye, this item allows it to Mega Evolve in battle.",
 	},
 	sachet: {
 		name: "Sachet",
@@ -4019,13 +3944,11 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 80,
 		},
-		desc: "Evolves Spritzee into Aromatisse when traded.",
 	},
 	safariball: {
 		name: "Safari Ball",
 		spritenum: 425,
 		isPokeball: true,
-		desc: "A special Poke Ball that is used only in the Safari Zone and Great Marsh.",
 	},
 	safetygoggles: {
 		name: "Safety Goggles",
@@ -4042,7 +3965,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return null;
 			}
 		},
-		desc: "Holder is immune to powder moves and damage from Sandstorm or Hail.",
 	},
 	sailfossil: {
 		name: "Sail Fossil",
@@ -4050,7 +3972,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 100,
 		},
-		desc: "Can be revived into Amaura.",
 	},
 	salacberry: {
 		name: "Salac Berry",
@@ -4068,7 +3989,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat(pokemon) {
 			this.boost({spe: 1});
 		},
-		desc: "Raises holder's Speed by 1 stage when at 1/4 max HP or less. Single use.",
 	},
 	salamencite: {
 		name: "Salamencite",
@@ -4079,7 +3999,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Salamence, this item allows it to Mega Evolve in battle.",
 	},
 	samurite: {
 		name: "Samurite",
@@ -4090,7 +4009,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Samurott, this item allows it to Mega Evolve in battle.",
 	},
 	sceptilite: {
 		name: "Sceptilite",
@@ -4101,7 +4019,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Sceptile, this item allows it to Mega Evolve in battle.",
 	},
 	scizorite: {
 		name: "Scizorite",
@@ -4112,7 +4029,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Scizor, this item allows it to Mega Evolve in battle.",
 	},
 	scopelens: {
 		name: "Scope Lens",
@@ -4123,7 +4039,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onModifyCritRatio(critRatio) {
 			return critRatio + 1;
 		},
-		desc: "Holder's critical hit ratio is raised by 1 stage.",
 	},
 	seaincense: {
 		name: "Sea Incense",
@@ -4137,7 +4052,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Water-type attacks have 1.2x power.",
 	},
 	serpentite: {
 		name: "Serpentite",
@@ -4148,7 +4062,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Serperior, this item allows it to Mega Evolve in battle.",
 	},
 	sevipetite: {
 		name: "Sevipetite",
@@ -4159,7 +4072,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Seviper, this item allows it to Mega Evolve in battle.",
 	},
 	sharpbeak: {
 		name: "Sharp Beak",
@@ -4173,7 +4085,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Flying-type attacks have 1.2x power.",
 	},
 	sharpedonite: {
 		name: "Sharpedonite",
@@ -4184,7 +4095,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Sharpedo, this item allows it to Mega Evolve in battle.",
 	},
 	shedshell: {
 		name: "Shed Shell",
@@ -4196,7 +4106,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTrapPokemon(pokemon) {
 			pokemon.trapped = pokemon.maybeTrapped = false;
 		},
-		desc: "Holder may switch out even when trapped by another Pokemon, or by Ingrain.",
 	},
 	shellbell: {
 		name: "Shell Bell",
@@ -4210,7 +4119,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				this.heal(pokemon.lastDamage / 8, pokemon);
 			}
 		},
-		desc: "After an attack, holder gains 1/8 of the damage in HP dealt to other Pokemon.",
 	},
 	shinystone: {
 		name: "Shiny Stone",
@@ -4218,8 +4126,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 80,
 		},
-		desc: "Evolves Togetic into Togekiss, Roselia into Roserade, Minccino into Cinccino, and Floette into Florges when used.",
-		shortDesc: "Evolves certain species of Pokemon when used.",
 	},
 	shockdrive: {
 		name: "Shock Drive",
@@ -4232,7 +4138,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onDrive: 'Electric',
 		forcedForme: "Genesect-Shock",
-		desc: "Holder's Techno Blast is Electric type.",
 	},
 	shucaberry: {
 		name: "Shuca Berry",
@@ -4252,7 +4157,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onEat() { },
-		desc: "Halves damage taken from a supereffective Ground-type attack. Single use.",
 	},
 	silkscarf: {
 		name: "Silk Scarf",
@@ -4266,7 +4170,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Normal-type attacks have 1.2x power.",
 	},
 	silverpowder: {
 		name: "SilverPowder",
@@ -4280,7 +4183,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Bug-type attacks have 1.2x power.",
 	},
 	sitrusberry: {
 		name: "Sitrus Berry",
@@ -4301,7 +4203,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat(pokemon) {
 			this.heal(pokemon.maxhp / 4);
 		},
-		desc: "Restores 1/4 max HP when at 1/2 max HP or less. Single use.",
 	},
 	skullfossil: {
 		name: "Skull Fossil",
@@ -4309,7 +4210,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 100,
 		},
-		desc: "Can be revived into Cranidos.",
 	},
 	skyplate: {
 		name: "Sky Plate",
@@ -4328,7 +4228,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Arceus-Flying",
-		desc: "Holder's Flying-type attacks have 1.2x power. Judgment is Flying type.",
 	},
 	slowbronite: {
 		name: "Slowbronite",
@@ -4339,7 +4238,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Slowbro, this item allows it to Mega Evolve in battle.",
 	},
 	smoothrock: {
 		name: "Smooth Rock",
@@ -4347,7 +4245,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		desc: "Holder's use of Sandstorm lasts 8 turns instead of 5.",
 	},
 	snorliumz: {
 		name: "Snorlium Z",
@@ -4356,7 +4253,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMove: "Pulverizing Pancake",
 		zMoveFrom: "Giga Impact",
 		zMoveUser: ["Snorlax"],
-		desc: "If held by a Snorlax with Giga Impact, it can use Pulverizing Pancake.",
 	},
 	snowball: {
 		name: "Snowball",
@@ -4369,7 +4265,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				this.boost({atk: 1});
 			}
 		},
-		desc: "Raises holder's Attack by 1 if hit by an Ice-type attack. Single use.",
 	},
 	softsand: {
 		name: "Soft Sand",
@@ -4383,7 +4278,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Ground-type attacks have 1.2x power.",
 	},
 	solganiumz: {
 		name: "Solganium Z",
@@ -4392,7 +4286,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMove: "Searing Sunraze Smash",
 		zMoveFrom: "Sunsteel Strike",
 		zMoveUser: ["Solgaleo", "Necrozma-Dusk-Mane"],
-		desc: "Solgaleo or Dusk Mane Necrozma with Sunsteel Strike can use a special Z-Move.",
 	},
 	souldew: {
 		name: "Soul Dew",
@@ -4406,7 +4299,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "If held by a Latias/Latios, its Dragon- and Psychic-type moves have 1.2x power.",
 	},
 	spelltag: {
 		name: "Spell Tag",
@@ -4420,7 +4312,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Ghost-type attacks have 1.2x power.",
 	},
 	spiritnite: {
 		name: "Spiritnite",
@@ -4431,7 +4322,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Spiritomb, this item allows it to Mega Evolve in battle.",
 	},
 	splashplate: {
 		name: "Splash Plate",
@@ -4450,7 +4340,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Arceus-Water",
-		desc: "Holder's Water-type attacks have 1.2x power. Judgment is Water type.",
 	},
 	spookyplate: {
 		name: "Spooky Plate",
@@ -4469,13 +4358,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Arceus-Ghost",
-		desc: "Holder's Ghost-type attacks have 1.2x power. Judgment is Ghost type.",
-	},
-	sportball: {
-		name: "Sport Ball",
-		spritenum: 465,
-		isPokeball: true,
-		desc: "A special Poke Ball for the Bug-Catching Contest.",
 	},
 	starfberry: {
 		name: "Starf Berry",
@@ -4506,7 +4388,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				this.boost(boost);
 			}
 		},
-		desc: "Raises a random stat by 2 when at 1/4 max HP or less (not acc/eva). Single use.",
 	},
 	starsweet: {
 		name: "Star Sweet",
@@ -4514,7 +4395,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		desc: "Evolves Milcery into Alcremie when held and spun around.",
 	},
 	staticorb: {
 		name: "Static Orb",
@@ -4528,7 +4408,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onResidual(pokemon) {
 			pokemon.trySetStatus('par', pokemon);
 		},
-		desc: "At the end of every turn, this item attempts to paralyze the holder.",
 	},
 	steelixite: {
 		name: "Steelixite",
@@ -4539,7 +4418,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Steelix, this item allows it to Mega Evolve in battle.",
 	},
 	steelgem: {
 		name: "Steel Gem",
@@ -4555,7 +4433,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				}
 			}
 		},
-		desc: "Holder's first successful Steel-type attack will have 1.3x power. Single use.",
 	},
 	steelmemory: {
 		name: "Steel Memory",
@@ -4568,7 +4445,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Silvally-Steel",
-		desc: "Holder's Multi-Attack is Steel type.",
 	},
 	steeliumz: {
 		name: "Steelium Z",
@@ -4578,7 +4454,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMove: true,
 		zMoveType: "Steel",
 		forcedForme: "Arceus-Steel",
-		desc: "If holder has a Steel move, this item allows it to use a Steel Z-Move.",
 	},
 	stickybarb: {
 		name: "Sticky Barb",
@@ -4599,7 +4474,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				// no message for Sticky Barb changing hands
 			}
 		},
-		desc: "Each turn, holder loses 1/8 max HP. An attacker making contact can receive it.",
 	},
 	stoneplate: {
 		name: "Stone Plate",
@@ -4618,7 +4492,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Arceus-Rock",
-		desc: "Holder's Rock-type attacks have 1.2x power. Judgment is Rock type.",
 	},
 	strawberrysweet: {
 		name: "Strawberry Sweet",
@@ -4626,7 +4499,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		desc: "Evolves Milcery into Alcremie when held and spun around.",
 	},
 	sunstone: {
 		name: "Sun Stone",
@@ -4634,8 +4506,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		desc: "Evolves Gloom into Bellossom, Sunkern into Sunflora, Cottonee into Whimsicott, Petilil into Lilligant, and Helioptile into Heliolisk when used.",
-		shortDesc: "Evolves certain species of Pokemon when used.",
 	},
 	swampertite: {
 		name: "Swampertite",
@@ -4646,10 +4516,9 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Swampert, this item allows it to Mega Evolve in battle.",
 	},
 	swellite: {
-		name: "swellite",
+		name: "Swellite",
 		spritenum: 594, //CHANGE
 		megaStone: "Swellow-Mega",
 		megaEvolves: "Swellow",
@@ -4657,7 +4526,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Swellow, this item allows it to Mega Evolve in battle.",
 	},
 	talonite: {
 		name: "Talonite",
@@ -4668,7 +4536,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Talonflame, this item allows it to Mega Evolve in battle.",
 	},
 	tangaberry: {
 		name: "Tanga Berry",
@@ -4688,7 +4555,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onEat() { },
-		desc: "Halves damage taken from a supereffective Bug-type attack. Single use.",
 	},
 	tapuniumz: {
 		name: "Tapunium Z",
@@ -4697,7 +4563,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMove: "Guardian of Alola",
 		zMoveFrom: "Nature's Madness",
 		zMoveUser: ["Tapu Koko", "Tapu Lele", "Tapu Bulu", "Tapu Fini"],
-		desc: "If held by a Tapu with Nature's Madness, it can use Guardian of Alola.",
 	},
 	terrainextender: {
 		name: "Terrain Extender",
@@ -4705,7 +4570,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 60,
 		},
-		desc: "Holder's use of Electric/Grassy/Misty/Psychic Terrain lasts 8 turns instead of 5.",
 	},
 	thickclub: {
 		name: "Thick Club",
@@ -4719,7 +4583,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify(2);
 			}
 		},
-		desc: "If held by a Cubone or a Marowak, its Attack is doubled.",
 	},
 	throatspray: {
 		name: "Throat Spray",
@@ -4732,7 +4595,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				this.boost({spa: 1}); // TODO: Find exact value, and whether this activates before or after use
 			}
 		},
-		desc: "Raises holder's Special Attack by 1 stage after using a sound move. Single use.",
 	},
 	thunderstone: {
 		name: "Thunder Stone",
@@ -4740,14 +4602,11 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		desc: "Evolves Pikachu into Raichu or Alolan Raichu, Eevee into Jolteon, and Eelektrik into Eelektross when used.",
-		shortDesc: "Evolves certain species of Pokemon when used.",
 	},
 	timerball: {
 		name: "Timer Ball",
 		spritenum: 494,
 		isPokeball: true,
-		desc: "A Poke Ball that becomes better the more turns there are in a battle.",
 	},
 	torterrite: {
 		name: "Torterrite",
@@ -4758,7 +4617,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Torterra, this item allows it to Mega Evolve in battle.",
 	},
 	toxicorb: {
 		name: "Toxic Orb",
@@ -4772,7 +4630,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onResidual(pokemon) {
 			pokemon.trySetStatus('tox', pokemon);
 		},
-		desc: "At the end of every turn, this item attempts to badly poison the holder.",
 	},
 	toxicplate: {
 		name: "Toxic Plate",
@@ -4791,7 +4648,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Arceus-Poison",
-		desc: "Holder's Poison-type attacks have 1.2x power. Judgment is Poison type.",
 	},
 	twistedspoon: {
 		name: "Twisted Spoon",
@@ -4805,7 +4661,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Psychic-type attacks have 1.2x power.",
 	},
 	typhlosionite: {
 		name: "Typhlosionite",
@@ -4816,7 +4671,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Typhlosion, this item allows it to Mega Evolve in battle.",
 	},
 	tyranitarite: {
 		name: "Tyranitarite",
@@ -4827,7 +4681,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Tyranitar, this item allows it to Mega Evolve in battle.",
 	},
 	ultimateeviolite: {
 		name: "Ultimate Eviolite",
@@ -4859,13 +4712,11 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify(2);
 			}
 		},
-		desc: "If holder's species can evolve, its Atk and SpA are 1.5X, and its Def and SpD are 2x.",
 	},
 	ultraball: {
 		name: "Ultra Ball",
 		spritenum: 521,
 		isPokeball: true,
-		desc: "An ultra-performance Ball that provides a higher catch rate than a Great Ball.",
 	},
 	ultraeviolite: {
 		name: "Ultra Eviolite",
@@ -4897,7 +4748,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify(1.5);
 			}
 		},
-		desc: "If holder's species can evolve, its Attack, Defense, Sp. Atk and Sp. Def are 1.5x.",
 	},
 	ultranecroziumz: {
 		name: "Ultranecrozium Z",
@@ -4906,7 +4756,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMove: "Light That Burns the Sky",
 		zMoveFrom: "Photon Geyser",
 		zMoveUser: ["Necrozma-Ultra"],
-		desc: "Dusk Mane/Dawn Wings Necrozma: Ultra Burst, then Z-Move w/ Photon Geyser.",
 	},
 	upgrade: {
 		name: "Up-Grade",
@@ -4914,7 +4763,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		desc: "Evolves Porygon into Porygon2 when traded.",
 	},
 	venusaurite: {
 		name: "Venusaurite",
@@ -4925,7 +4773,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Venusaur, this item allows it to Mega Evolve in battle.",
 	},
 	vespite: {
 		name: "Vespite",
@@ -4936,7 +4783,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Vespiquen, this item allows it to Mega Evolve in battle.",
 	},
 	wacanberry: {
 		name: "Wacan Berry",
@@ -4956,7 +4802,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onEat() { },
-		desc: "Halves damage taken from a supereffective Electric-type attack. Single use.",
 	},
 	watergem: {
 		name: "Water Gem",
@@ -4972,7 +4817,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				}
 			}
 		},
-		desc: "Holder's first successful Water-type attack will have 1.3x power. Single use.",
 	},
 	watermemory: {
 		name: "Water Memory",
@@ -4985,7 +4829,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Silvally-Water",
-		desc: "Holder's Multi-Attack is Water type.",
 	},
 	waterstone: {
 		name: "Water Stone",
@@ -4993,8 +4836,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		desc: "Evolves Poliwhirl into Poliwrath, Shellder into Cloyster, Staryu into Starmie, Eevee into Vaporeon, Lombre into Ludicolo, and Panpour into Simipour when used.",
-		shortDesc: "Evolves certain species of Pokemon when used.",
 	},
 	wateriumz: {
 		name: "Waterium Z",
@@ -5004,7 +4845,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMove: true,
 		zMoveType: "Water",
 		forcedForme: "Arceus-Water",
-		desc: "If holder has a Water move, this item allows it to use a Water Z-Move.",
 	},
 	waveincense: {
 		name: "Wave Incense",
@@ -5018,7 +4858,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		desc: "Holder's Water-type attacks have 1.2x power.",
 	},
 	weaknesspolicy: {
 		name: "Weakness Policy",
@@ -5032,7 +4871,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				this.boost({atk: 2, spa: 2});
 			}
 		},
-		desc: "If holder is hit super effectively, raises Attack, Sp. Atk by 2 stages. Single use.",
 	},
 	weavilite: {
 		name: "Weavilite",
@@ -5043,7 +4881,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Weavile, this item allows it to Mega Evolve in battle.",
 	},
 	whippeddream: {
 		name: "Whipped Dream",
@@ -5051,7 +4888,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 80,
 		},
-		desc: "Evolves Swirlix into Slurpuff when traded.",
 	},
 	whiteherb: {
 		name: "White Herb",
@@ -5091,7 +4927,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				this.add('-clearnegativeboost', pokemon, '[silent]');
 			}
 		},
-		desc: "Restores all lowered stat stages to 0 when one is less than 0. Single use.",
 	},
 	widelens: {
 		name: "Wide Lens",
@@ -5104,7 +4939,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return accuracy * 1.1;
 			}
 		},
-		desc: "The accuracy of attacks by the holder is 1.1x.",
 	},
 	wikiberry: {
 		name: "Wiki Berry",
@@ -5128,7 +4962,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				pokemon.addVolatile('confusion');
 			}
 		},
-		desc: "Restores 1/2 max HP at 1/4 max HP or less; confuses if -SpA Nature. Single use.",
 	},
 	wiseglasses: {
 		name: "Wise Glasses",
@@ -5142,7 +4975,6 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1199, 0x1000]);
 			}
 		},
-		desc: "Holder's special attacks have 1.1x power.",
 	},
 	yacheberry: {
 		name: "Yache Berry",
@@ -5162,7 +4994,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onEat() { },
-		desc: "Halves damage taken from a supereffective Ice-type attack. Single use.",
 	},
 	zangite: {
 		name: "Zangite",
@@ -5173,7 +5004,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Zangoose, this item allows it to Mega Evolve in battle.",
 	},
 	zapplate: {
 		name: "Zap Plate",
@@ -5192,7 +5022,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 		forcedForme: "Arceus-Electric",
-		desc: "Holder's Electric-type attacks have 1.2x power. Judgment is Electric type.",
 	},
 	zoomlens: {
 		name: "Zoom Lens",
@@ -5206,6 +5035,5 @@ export const Items: {[itemid: string]: ItemData} = {
 				return accuracy * 1.2;
 			}
 		},
-		desc: "The accuracy of attacks by the holder is 1.2x if it moves after its target.",
 	},
 };

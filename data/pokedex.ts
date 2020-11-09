@@ -4717,7 +4717,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 21.1,
 		color: "Blue",
 		eggGroups: ["Flying"],
-		requiredItem: "Swellite", //FIX NAME
+		requiredItem: "Swellite",
 	},
 	wingull: {
 		num: 272,
@@ -9772,7 +9772,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 86.5,
 		color: "Gray",
 		eggGroups: ["Field"],
-		requiredItem: "", //FIX
+		requiredItem: "Illusory Chain",
 	},
 	minccino: {
 		num: 557,
@@ -15335,7 +15335,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 73.1,
 		color: "Blue",
 		eggGroups: ["Field", "Human-Like", "Dragon"],
-		requiredItem: "", //FIX
+		requiredItem: "Reverse Gem",
 		changesFrom: "Giracario",
 	},
 	drake: {

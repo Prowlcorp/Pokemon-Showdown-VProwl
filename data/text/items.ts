@@ -106,6 +106,10 @@ export const ItemsText = {
 		name: "Berry Sweet",
 		desc: "Evolves Milcery into Alcremie when held and spun around.",
 	},
+	berserkgene: {
+		name: "Berserk Gene",
+		desc: "(Gen 2) On switch-in, raises holder's Attack by 2 and confuses it. Single use.",
+	},
 	bigroot: {
 		name: "Big Root",
 		desc: "Holder gains 1.3x HP from draining/Aqua Ring/Ingrain/Leech Seed/Strength Sap.",
@@ -1041,6 +1045,10 @@ export const ItemsText = {
 		name: "Never-Melt Ice",
 		desc: "Holder's Ice-type attacks have 1.2x power.",
 	},
+	noiverite: {
+		name: "Noiverite",
+		desc: "If held by a Noivern, this item allows it to Mega Evolve in battle.",
+	},
 	normalgem: {
 		name: "Normal Gem",
 		desc: "Holder's first successful Normal-type attack will have 1.3x power. Single use.",
@@ -1068,6 +1076,14 @@ export const ItemsText = {
 	ovalstone: {
 		name: "Oval Stone",
 		desc: "Evolves Happiny into Chansey when held and leveled up during the day.",
+	},
+	palonite: {
+		name: "Palonite",
+		desc: "If held by a Palossand, this item allows it to Mega Evolve in battle.",
+	},
+	pangorite: {
+		name: "Pangorite",
+		desc: "If held by a Pangoro, this item allows it to Mega Evolve in battle.",
 	},
 	parkball: {
 		name: "Park Ball",
@@ -1136,6 +1152,10 @@ export const ItemsText = {
 	pokeball: {
 		name: "Poke Ball",
 		desc: "A device for catching wild Pokemon. It is designed as a capsule system.",
+	},
+	porygonite: {
+		name: "Porygonite",
+		desc: "If held by a Porygon-Z, this item allows it to Mega Evolve in battle.",
 	},
 	poweranklet: {
 		name: "Power Anklet",
@@ -1255,6 +1275,10 @@ export const ItemsText = {
 		name: "Repeat Ball",
 		desc: "A Poke Ball that works well on Pokemon species that were previously caught.",
 	},
+	reversegem: {
+		name: "Reverse Gem",
+		desc: "If held by a Giracario, this item allows it to form change in battle.",
+	},
 	ribbonsweet: {
 		name: "Ribbon Sweet",
 		desc: "Evolves Milcery into Alcremie when held and spun around.",
@@ -1347,6 +1371,10 @@ export const ItemsText = {
 		name: "Salamencite",
 		desc: "If held by a Salamence, this item allows it to Mega Evolve in battle.",
 	},
+	samurite: {
+		name: "Samurite",
+		desc: "If held by a Samurott, this item allows it to Mega Evolve in battle.",
+	},
 	sceptilite: {
 		name: "Sceptilite",
 		desc: "If held by a Sceptile, this item allows it to Mega Evolve in battle.",
@@ -1362,6 +1390,14 @@ export const ItemsText = {
 	seaincense: {
 		name: "Sea Incense",
 		desc: "Holder's Water-type attacks have 1.2x power.",
+	},
+	serpentite: {
+		name: "Serpentite",
+		desc: "If held by a Serperior, this item allows it to Mega Evolve in battle.",
+	},
+	sevipetite: {
+		name: "Sevipetite",
+		desc: "If held by a Seviper, this item allows it to Mega Evolve in battle.",
 	},
 	sharpbeak: {
 		name: "Sharp Beak",
@@ -1446,6 +1482,10 @@ export const ItemsText = {
 		name: "Spell Tag",
 		desc: "Holder's Ghost-type attacks have 1.2x power.",
 	},
+	spiritnite: {
+		name: "Spiritnite",
+		desc: "If held by a Spiritomb, this item allows it to Mega Evolve in battle.",
+	},
 	splashplate: {
 		name: "Splash Plate",
 		desc: "Holder's Water-type attacks have 1.2x power. Judgment is Water type.",
@@ -1454,10 +1494,6 @@ export const ItemsText = {
 		name: "Spooky Plate",
 		desc: "Holder's Ghost-type attacks have 1.2x power. Judgment is Ghost type.",
 	},
-	sportball: {
-		name: "Sport Ball",
-		desc: "A special Poke Ball for the Bug-Catching Contest.",
-	},
 	starfberry: {
 		name: "Starf Berry",
 		desc: "Raises a random stat by 2 when at 1/4 max HP or less (not acc/eva). Single use.",
@@ -1465,6 +1501,10 @@ export const ItemsText = {
 	starsweet: {
 		name: "Star Sweet",
 		desc: "Evolves Milcery into Alcremie when held and spun around.",
+	},
+	staticorb: {
+		name: "Static Orb",
+		desc: "At the end of every turn, this item attempts to paralyze the holder.",
 	},
 	steelixite: {
 		name: "Steelixite",
@@ -1507,6 +1547,14 @@ export const ItemsText = {
 		name: "Swampertite",
 		desc: "If held by a Swampert, this item allows it to Mega Evolve in battle.",
 	},
+	swellite: {
+		name: "Swellite",
+		desc: "If held by a Swellow, this item allows it to Mega Evolve in battle.",
+	},
+	talonite: {
+		name: "Talonite",
+		desc: "If held by a Talonflame, this item allows it to Mega Evolve in battle.",
+	},
 	sweetapple: {
 		name: "Sweet Apple",
 		desc: "Evolves Applin into Appletun when used.",
@@ -1544,6 +1592,10 @@ export const ItemsText = {
 		name: "Timer Ball",
 		desc: "A Poke Ball that becomes better the more turns there are in a battle.",
 	},
+	torterrite: {
+		name: "Torterrite",
+		desc: "If held by a Torterra, this item allows it to Mega Evolve in battle.",
+	},
 	toxicorb: {
 		name: "Toxic Orb",
 		desc: "At the end of every turn, this item attempts to badly poison the holder.",
@@ -1560,13 +1612,25 @@ export const ItemsText = {
 		name: "Twisted Spoon",
 		desc: "Holder's Psychic-type attacks have 1.2x power.",
 	},
+	typhlosionite: {
+		name: "Typhlosionite",
+		desc: "If held by a Typhlosion, this item allows it to Mega Evolve in battle.",
+	},
 	tyranitarite: {
 		name: "Tyranitarite",
 		desc: "If held by a Tyranitar, this item allows it to Mega Evolve in battle.",
 	},
+	ultimateeviolite: {
+		name: "Ultimate Eviolite",
+		desc: "If holder's species can evolve, its Atk and SpA are 1.5X, and its Def and SpD are 2x.",
+	},
 	ultraball: {
 		name: "Ultra Ball",
 		desc: "An ultra-performance Ball that provides a higher catch rate than a Great Ball.",
+	},
+	ultraeviolite: {
+		name: "Ultra Eviolite",
+		desc: "If holder's species can evolve, its Attack, Defense, Sp. Atk and Sp. Def are 1.5x.",
 	},
 	ultranecroziumz: {
 		name: "Ultranecrozium Z",
@@ -1587,6 +1651,10 @@ export const ItemsText = {
 	venusaurite: {
 		name: "Venusaurite",
 		desc: "If held by a Venusaur, this item allows it to Mega Evolve in battle.",
+	},
+	vespite: {
+		name: "Vespite",
+		desc: "If held by a Vespiquen, this item allows it to Mega Evolve in battle.",
 	},
 	wacanberry: {
 		name: "Wacan Berry",
@@ -1617,6 +1685,10 @@ export const ItemsText = {
 		name: "Weakness Policy",
 		desc: "If holder is hit super effectively, raises Attack, Sp. Atk by 2 stages. Single use.",
 	},
+	weavilite: {
+		name: "Weavilite",
+		desc: "If held by a Weavile, this item allows it to Mega Evolve in battle.",
+	},
 	whippeddream: {
 		name: "Whipped Dream",
 		desc: "Evolves Swirlix into Slurpuff when traded.",
@@ -1643,6 +1715,10 @@ export const ItemsText = {
 		name: "Yache Berry",
 		desc: "Halves damage taken from a supereffective Ice-type attack. Single use.",
 	},
+	zangite: {
+		name: "Zangite",
+		desc: "If held by a Zangoose, this item allows it to Mega Evolve in battle.",
+	},
 	zapplate: {
 		name: "Zap Plate",
 		desc: "Holder's Electric-type attacks have 1.2x power. Judgment is Electric type.",
@@ -1650,20 +1726,5 @@ export const ItemsText = {
 	zoomlens: {
 		name: "Zoom Lens",
 		desc: "The accuracy of attacks by the holder is 1.2x if it moves after its target.",
-	},
-
-	// Gen 2 items
-
-	berserkgene: {
-		name: "Berserk Gene",
-		desc: "(Gen 2) On switch-in, raises holder's Attack by 2 and confuses it. Single use.",
-	},
-	pinkbow: {
-		name: "Pink Bow",
-		desc: "(Gen 2) Holder's Normal-type attacks have 1.1x power.",
-	},
-	polkadotbow: {
-		name: "Polkadot Bow",
-		desc: "(Gen 2) Holder's Normal-type attacks have 1.1x power.",
 	},
 };
