@@ -656,6 +656,9 @@ export const PokedexText = {
 	ariados: {
 		name: "Ariados",
 	},
+	ariadosmega: {
+		name: "Ariados-Mega",
+	},
 	crobat: {
 		name: "Crobat",
 	},
