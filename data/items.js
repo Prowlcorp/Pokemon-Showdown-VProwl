@@ -2510,6 +2510,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				return critRatio + 2;
 			}
 		},
+		itemUser: ["Farfetch\u2019d", "Sirfetch\u2019d"],
 	},
 	leftovers: {
 		name: "Leftovers",
