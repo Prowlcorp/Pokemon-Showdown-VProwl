@@ -27,10 +27,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onAfterDamage(damage, target, source, move) {
-			if (move.type === 'Water' && target.useItem()) {
-				this.boost({spa: 1});
+		onDamagingHit(damage, target, source, move) {
+			if (move.type === 'Water') {
+				target.useItem();
 			}
+		},
+		boosts: {
+			spa: 1,
 		},
 	},
 	adamantorb: {
@@ -39,12 +42,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 60,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
-			if (move && user.baseTemplate.species === 'Dialga' && (move.type === 'Steel' || move.type === 'Dragon')) {
+			if (move && user.baseSpecies.name === 'Dialga' && (move.type === 'Steel' || move.type === 'Dragon')) {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
+		itemUser: ["Dialga"],
 	},
 	adrenalineorb: {
 		name: "Adrenaline Orb",
@@ -53,9 +57,12 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 30,
 		},
 		onAfterBoost(boost, target, source, effect) {
-			if (effect.id === 'intimidate' && target.useItem()) {
-				this.boost({spe: 1});
+			if (effect.id === 'intimidate') {
+				target.useItem();
 			}
+		},
+		boosts: {
+			spe: 1,
 		},
 	},
 	aerodactylite: {
@@ -97,7 +104,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat(pokemon) {
-			this.heal(pokemon.maxhp / 2);
+			this.heal(pokemon.maxhp * 0.33);
 			if (pokemon.getNature().minus === 'spd') {
 				pokemon.addVolatile('confusion');
 			}
@@ -115,22 +122,19 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		// airborneness implemented in sim/pokemon.js:Pokemon#isGrounded
-		onAfterDamage(damage, target, source, effect) {
-			this.debug('effect: ' + effect.id);
-			if (effect.effectType === 'Move' && effect.id !== 'confused') {
-				this.add('-enditem', target, 'Air Balloon');
-				target.item = '';
-				target.itemData = {id: '', target};
-				this.runEvent('AfterUseItem', target, null, null, this.getItem('airballoon'));
-			}
+		onDamagingHit(damage, target, source, move) {
+			this.add('-enditem', target, 'Air Balloon');
+			target.item = '';
+			target.itemData = {id: '', target};
+			this.runEvent('AfterUseItem', target, null, null, this.dex.getItem('airballoon'));
 		},
 		onAfterSubDamage(damage, target, source, effect) {
 			this.debug('effect: ' + effect.id);
-			if (effect.effectType === 'Move' && effect.id !== 'confused') {
+			if (effect.effectType === 'Move') {
 				this.add('-enditem', target, 'Air Balloon');
 				target.item = '';
 				target.itemData = {id: '', target};
-				this.runEvent('AfterUseItem', target, null, null, this.getItem('airballoon'));
+				this.runEvent('AfterUseItem', target, null, null, this.dex.getItem('airballoon'));
 			}
 		},
 	},
@@ -151,7 +155,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Stoked Sparksurfer",
 		zMoveFrom: "Thunderbolt",
-		zMoveUser: ["Raichu-Alola"],
+		itemUser: ["Raichu-Alola"],
 	},
 	altarianite: {
 		name: "Altarianite",
@@ -241,7 +245,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onDisableMove(pokemon) {
 			for (const moveSlot of pokemon.moveSlots) {
-				if (this.getMove(moveSlot.move).category === 'Status') {
+				if (this.dex.getMove(moveSlot.move).category === 'Status') {
 					pokemon.disableMove(moveSlot.id);
 				}
 			}
@@ -267,7 +271,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Steel",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Steel' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Steel' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -353,9 +360,8 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onTryHealPriority: 1,
 		onTryHeal(damage, target, source, effect) {
-			/**@type {{[k: string]: number}} */
-			let heals = {drain: 1, leechseed: 1, ingrain: 1, aquaring: 1, strengthsap: 1};
-			if (heals[effect.id]) {
+			const heals = ['drain', 'leechseed', 'ingrain', 'aquaring', 'strengthsap'];
+			if (heals.includes(effect.id)) {
 				return this.chainModify([0x14CC, 0x1000]);
 			}
 		},
@@ -374,7 +380,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Fighting') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -388,7 +394,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 30,
 		},
 		onResidualOrder: 5,
-		onResidualSubOrder: 2,
+		onResidualSubOrder: 5,
 		onResidual(pokemon) {
 			if (this.field.isTerrain('grassyterrain')) return;
 			if (pokemon.hasType('Poison')) {
@@ -412,7 +418,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Dark') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -445,17 +451,18 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Blue Orb",
 		spritenum: 41,
 		onSwitchIn(pokemon) {
-			if (pokemon.isActive && pokemon.baseTemplate.species === 'Kyogre') {
-				this.insertQueue({pokemon: pokemon, choice: 'runPrimal'});
+			if (pokemon.isActive && pokemon.baseSpecies.name === 'Kyogre') {
+				this.queue.insertChoice({choice: 'runPrimal', pokemon: pokemon});
 			}
 		},
 		onPrimal(pokemon) {
 			pokemon.formeChange('Kyogre-Primal', this.effect, true);
 		},
 		onTakeItem(item, source) {
-			if (source.baseTemplate.baseSpecies === 'Kyogre') return false;
+			if (source.baseSpecies.baseSpecies === 'Kyogre') return false;
 			return true;
 		},
+		itemUser: ["Kyogre"],
 	},
 	breloomite: {
 		name: "Breloomite",
@@ -474,6 +481,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
+		onModifyAccuracyPriority: 5,
 		onModifyAccuracy(accuracy) {
 			if (typeof accuracy !== 'number') return;
 			this.debug('brightpowder - decreasing accuracy');
@@ -482,16 +490,12 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	buggem: {
 		name: "Bug Gem",
-		isUnreleased: true,
 		spritenum: 53,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
-			if (move.type === 'Bug') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Bug Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			if (move.type === 'Bug' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -500,12 +504,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 673,
 		onMemory: 'Bug',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Bug",
+		itemUser: ["Silvally-Bug"],
 	},
 	buginiumz: {
 		name: "Buginium Z",
@@ -520,7 +525,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Burn Drive",
 		spritenum: 54,
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 649) || pokemon.baseTemplate.num === 649) {
+			if ((source && source.baseSpecies.num === 649) || pokemon.baseSpecies.num === 649) {
 				return false;
 			}
 			return true;
@@ -557,10 +562,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onAfterDamage(damage, target, source, move) {
-			if (move.type === 'Electric' && target.useItem()) {
-				this.boost({atk: 1});
+		onDamagingHit(damage, target, source, move) {
+			if (move.type === 'Electric') {
+				target.useItem();
 			}
+		},
+		boosts: {
+			atk: 1,
 		},
 	},
 	charcoal: {
@@ -569,7 +577,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Fire') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -607,7 +615,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Rock",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Rock' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Rock' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -669,7 +680,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Normal",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Normal' && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (
+				move.type === 'Normal' &&
+				(!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))
+			) {
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -683,13 +697,21 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Chill Drive",
 		spritenum: 67,
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 649) || pokemon.baseTemplate.num === 649) {
+			if ((source && source.baseSpecies.num === 649) || pokemon.baseSpecies.num === 649) {
 				return false;
 			}
 			return true;
 		},
 		onDrive: 'Ice',
 		forcedForme: "Genesect-Chill",
+		itemUser: ["Genesect-Chill"],
+	},
+	chippedpot: {
+		name: "Chipped Pot",
+		spritenum: 720,
+		fling: {
+			basePower: 80,
+		},
 	},
 	choiceband: {
 		name: "Choice Band",
@@ -699,7 +721,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onStart(pokemon) {
 			if (pokemon.volatiles['choicelock']) {
-				this.debug('removing choicelock: ' + pokemon.volatiles.choicelock);
+				this.debug('removing choicelock: ' + pokemon.volatiles['choicelock']);
 			}
 			pokemon.removeVolatile('choicelock');
 		},
@@ -707,7 +729,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			pokemon.addVolatile('choicelock');
 		},
 		onModifyAtkPriority: 1,
-		onModifyAtk(atk) {
+		onModifyAtk(atk, pokemon) {
+			if (pokemon.volatiles['dynamax']) return;
 			return this.chainModify(1.5);
 		},
 		isChoice: true,
@@ -720,14 +743,15 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onStart(pokemon) {
 			if (pokemon.volatiles['choicelock']) {
-				this.debug('removing choicelock: ' + pokemon.volatiles.choicelock);
+				this.debug('removing choicelock: ' + pokemon.volatiles['choicelock']);
 			}
 			pokemon.removeVolatile('choicelock');
 		},
 		onModifyMove(move, pokemon) {
 			pokemon.addVolatile('choicelock');
 		},
-		onModifySpe(spe) {
+		onModifySpe(spe, pokemon) {
+			if (pokemon.volatiles['dynamax']) return;
 			return this.chainModify(1.5);
 		},
 		isChoice: true,
@@ -740,7 +764,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onStart(pokemon) {
 			if (pokemon.volatiles['choicelock']) {
-				this.debug('removing choicelock: ' + pokemon.volatiles.choicelock);
+				this.debug('removing choicelock: ' + pokemon.volatiles['choicelock']);
 			}
 			pokemon.removeVolatile('choicelock');
 		},
@@ -748,7 +772,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			pokemon.addVolatile('choicelock');
 		},
 		onModifySpAPriority: 1,
-		onModifySpA(spa) {
+		onModifySpA(spa, pokemon) {
+			if (pokemon.volatiles['dynamax']) return;
 			return this.chainModify(1.5);
 		},
 		isChoice: true,
@@ -762,7 +787,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Fighting",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Fighting' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Fighting' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -795,7 +823,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Flying",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Flying' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Flying' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -814,7 +845,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Dark",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Dark' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Dark' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -840,6 +874,11 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem(item, source) {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
+	crackedpot: {
+		name: "Cracked Pot",
+		spritenum: 719,
+		fling: {
+			basePower: 80,
 		},
 	},
 	custapberry: {
@@ -850,13 +889,15 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 100,
 			type: "Ghost",
 		},
-		onModifyPriorityPriority: -1,
-		onModifyPriority(priority, pokemon) {
-			if (pokemon.hp <= pokemon.maxhp / 4 || (pokemon.hp <= pokemon.maxhp / 2 && pokemon.hasAbility('gluttony'))) {
+		onFractionalPriorityPriority: -2,
+		onFractionalPriority(priority, pokemon) {
+			if (
+				(priority <= 0 && pokemon.hp <= pokemon.maxhp / 4) ||
+				(pokemon.hp <= pokemon.maxhp / 2 && pokemon.hasAbility('gluttony'))
+			) {
 				if (pokemon.eatItem()) {
 					this.add('-activate', pokemon, 'item: Custap Berry', '[consumed]');
-					pokemon.removeVolatile('custapberry');
-					return Math.round(priority) + 0.1;
+					return 0.1;
 				}
 			}
 		},
@@ -871,16 +912,12 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	darkgem: {
 		name: "Dark Gem",
-		isUnreleased: true,
 		spritenum: 89,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
-			if (move.type === 'Dark') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Dark Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			if (move.type === 'Dark' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -889,12 +926,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 683,
 		onMemory: 'Dark',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Dark",
+		itemUser: ["Silvally-Dark"],
 	},
 	darkiniumz: {
 		name: "Darkinium Z",
@@ -929,7 +967,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Sinister Arrow Raid",
 		zMoveFrom: "Spirit Shackle",
-		zMoveUser: ["Decidueye"],
+		itemUser: ["Decidueye"],
 	},
 	deepseascale: {
 		name: "Deep Sea Scale",
@@ -939,10 +977,11 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifySpDPriority: 2,
 		onModifySpD(spd, pokemon) {
-			if (pokemon.baseTemplate.species === 'Clamperl') {
+			if (pokemon.baseSpecies.name === 'Clamperl') {
 				return this.chainModify(2);
 			}
 		},
+		itemUser: ["Clamperl"],
 	},
 	deepseatooth: {
 		name: "Deep Sea Tooth",
@@ -952,10 +991,11 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifySpAPriority: 1,
 		onModifySpA(spa, pokemon) {
-			if (pokemon.baseTemplate.species === 'Clamperl') {
+			if (pokemon.baseSpecies.name === 'Clamperl') {
 				return this.chainModify(2);
 			}
 		},
+		itemUser: ["Clamperl"],
 	},
 	destinyknot: {
 		name: "Destiny Knot",
@@ -967,7 +1007,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onAttract(target, source) {
 			this.debug('attract intercepted: ' + target + ' from ' + source);
 			if (!source || source === target) return;
-			if (!source.volatiles.attract) source.addVolatile('attract', target);
+			if (!source.volatiles['attract']) source.addVolatile('attract', target);
 		},
 	},
 	diancite: {
@@ -1004,26 +1044,27 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Douse Drive",
 		spritenum: 103,
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 649) || pokemon.baseTemplate.num === 649) {
+			if ((source && source.baseSpecies.num === 649) || pokemon.baseSpecies.num === 649) {
 				return false;
 			}
 			return true;
 		},
 		onDrive: 'Water',
 		forcedForme: "Genesect-Douse",
+		itemUser: ["Genesect-Douse"],
 	},
 	dracoplate: {
 		name: "Draco Plate",
 		spritenum: 105,
 		onPlate: 'Dragon',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Dragon') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -1036,7 +1077,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 70,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Dragon') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -1045,16 +1086,12 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	dragongem: {
 		name: "Dragon Gem",
-		isUnreleased: true,
 		spritenum: 107,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
-			if (move.type === 'Dragon') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Dragon Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			if (move.type === 'Dragon' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -1063,12 +1100,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 682,
 		onMemory: 'Dragon',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Dragon",
+		itemUser: ["Silvally-Dragon"],
 	},
 	dragonscale: {
 		name: "Dragon Scale",
@@ -1090,14 +1128,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Dread Plate",
 		spritenum: 110,
 		onPlate: 'Dark',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Dark') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -1138,14 +1176,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Earth Plate",
 		spritenum: 117,
 		onPlate: 'Ground',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Ground') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -1158,7 +1196,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Extreme Evoboost",
 		zMoveFrom: "Last Resort",
-		zMoveUser: ["Eevee"],
+		itemUser: ["Eevee"],
 	},
 	ejectbutton: {
 		name: "Eject Button",
@@ -1180,6 +1218,32 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
+	ejectpack: {
+		name: "Eject Pack",
+		spritenum: 714,
+		fling: {
+			basePower: 50,
+		},
+		onAfterBoost(boost, target, source, effect) {
+			if (this.activeMove?.id === 'partingshot') return;
+			let eject = false;
+			let i: BoostName;
+			for (i in boost) {
+				if (boost[i]! < 0) {
+					eject = true;
+				}
+			}
+			if (eject) {
+				if (target.hp) {
+					if (!this.canSwitch(target.side)) return;
+					for (const pokemon of this.getAllActive()) {
+						if (pokemon.switchFlag === true) return;
+					}
+					if (target.useItem()) target.switchFlag = true;
+				}
+			}
+		},
+	},
 	electirizer: {
 		name: "Electirizer",
 		spritenum: 119,
@@ -1189,16 +1253,13 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	electricgem: {
 		name: "Electric Gem",
-		isUnreleased: true,
 		spritenum: 120,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
-			if (target === source || move.category === 'Status' || ['firepledge', 'grasspledge', 'waterpledge'].includes(move.id)) return;
-			if (move.type === 'Electric') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Electric Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			const pledges = ['firepledge', 'grasspledge', 'waterpledge'];
+			if (target === source || move.category === 'Status' || pledges.includes(move.id)) return;
+			if (move.type === 'Electric' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -1207,12 +1268,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 679,
 		onMemory: 'Electric',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Electric",
+		itemUser: ["Silvally-Electric"],
 	},
 	electricseed: {
 		name: "Electric Seed",
@@ -1221,14 +1283,18 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 10,
 		},
 		onStart(pokemon) {
-			if (!pokemon.ignoringItem() && this.field.isTerrain('electricterrain') && pokemon.useItem()) {
-				this.boost({def: 1});
+			if (!pokemon.ignoringItem() && this.field.isTerrain('electricterrain')) {
+				pokemon.useItem();
 			}
 		},
 		onAnyTerrainStart() {
-			if (this.field.isTerrain('electricterrain') && this.effectData.target.useItem()) {
-				this.boost({def: 1}, this.effectData.target);
+			const pokemon = this.effectData.target;
+			if (this.field.isTerrain('electricterrain')) {
+				pokemon.useItem();
 			}
+		},
+		boosts: {
+			def: 1,
 		},
 	},
 	electriumz: {
@@ -1297,13 +1363,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifyDefPriority: 2,
 		onModifyDef(def, pokemon) {
-			if (pokemon.baseTemplate.nfe) {
+			if (pokemon.baseSpecies.nfe) {
 				return this.chainModify(1.5);
 			}
 		},
 		onModifySpDPriority: 2,
 		onModifySpD(spd, pokemon) {
-			if (pokemon.baseTemplate.nfe) {
+			if (pokemon.baseSpecies.nfe) {
 				return this.chainModify(1.5);
 			}
 		},
@@ -1331,16 +1397,12 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	fairygem: {
 		name: "Fairy Gem",
-		isUnreleased: true,
 		spritenum: 611,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
-			if (move.type === 'Fairy') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Fairy Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			if (move.type === 'Fairy' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -1349,12 +1411,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 684,
 		onMemory: 'Fairy',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Fairy",
+		itemUser: ["Silvally-Fairy"],
 	},
 	fastball: {
 		name: "Fast Ball",
@@ -1399,16 +1462,12 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	fightinggem: {
 		name: "Fighting Gem",
-		isUnreleased: true,
 		spritenum: 139,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
-			if (move.type === 'Fighting') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Fighting Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			if (move.type === 'Fighting' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -1417,12 +1476,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 668,
 		onMemory: 'Fighting',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Fighting",
+		itemUser: ["Silvally-Fighting"],
 	},
 	fightiniumz: {
 		name: "Fightinium Z",
@@ -1450,7 +1510,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat(pokemon) {
-			this.heal(pokemon.maxhp / 2);
+			this.heal(pokemon.maxhp * 0.33);
 			if (pokemon.getNature().minus === 'atk') {
 				pokemon.addVolatile('confusion');
 			}
@@ -1458,16 +1518,13 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	firegem: {
 		name: "Fire Gem",
-		isUnreleased: true,
 		spritenum: 141,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
-			if (target === source || move.category === 'Status' || ['firepledge', 'grasspledge', 'waterpledge'].includes(move.id)) return;
-			if (move.type === 'Fire') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Fire Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			const pledges = ['firepledge', 'grasspledge', 'waterpledge'];
+			if (target === source || move.category === 'Status' || pledges.includes(move.id)) return;
+			if (move.type === 'Fire' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -1476,12 +1533,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 676,
 		onMemory: 'Fire',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Fire",
+		itemUser: ["Silvally-Fire"],
 	},
 	firestone: {
 		name: "Fire Stone",
@@ -1510,14 +1568,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Fist Plate",
 		spritenum: 143,
 		onPlate: 'Fighting',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Fighting') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -1536,20 +1594,19 @@ export const Items: {[itemid: string]: ItemData} = {
 		onResidual(pokemon) {
 			pokemon.trySetStatus('brn', pokemon);
 		},
-		desc: "At the end of every turn, this item attempts to burn the holder.",
 	},
 	flameplate: {
 		name: "Flame Plate",
 		spritenum: 146,
 		onPlate: 'Fire',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Fire') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -1562,8 +1619,8 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onModifyWeight(weight) {
-			return weight / 2;
+		onModifyWeight(weighthg) {
+			return this.trunc(weighthg / 2);
 		},
 	},
 	flowersweet: {
@@ -1586,16 +1643,12 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	flyinggem: {
 		name: "Flying Gem",
-		isUnreleased: true,
 		spritenum: 149,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
-			if (move.type === 'Flying') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Flying Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			if (move.type === 'Flying' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -1604,12 +1657,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 669,
 		onMemory: 'Flying',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Flying",
+		itemUser: ["Silvally-Flying"],
 	},
 	flyiniumz: {
 		name: "Flyinium Z",
@@ -1754,16 +1808,12 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	ghostgem: {
 		name: "Ghost Gem",
-		isUnreleased: true,
 		spritenum: 161,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
-			if (move.type === 'Ghost') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Ghost Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			if (move.type === 'Ghost' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -1772,12 +1822,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 674,
 		onMemory: 'Ghost',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Ghost",
+		itemUser: ["Silvally-Ghost"],
 	},
 	ghostiumz: {
 		name: "Ghostium Z",
@@ -1801,16 +1852,13 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	grassgem: {
 		name: "Grass Gem",
-		isUnreleased: true,
 		spritenum: 172,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
-			if (target === source || move.category === 'Status' || ['firepledge', 'grasspledge', 'waterpledge'].includes(move.id)) return;
-			if (move.type === 'Grass') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Grass Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			const pledges = ['firepledge', 'grasspledge', 'waterpledge'];
+			if (target === source || move.category === 'Status' || pledges.includes(move.id)) return;
+			if (move.type === 'Grass' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -1819,12 +1867,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 678,
 		onMemory: 'Grass',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Grass",
+		itemUser: ["Silvally-Grass"],
 	},
 	grassiumz: {
 		name: "Grassium Z",
@@ -1842,14 +1891,18 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 10,
 		},
 		onStart(pokemon) {
-			if (!pokemon.ignoringItem() && this.field.isTerrain('grassyterrain') && pokemon.useItem()) {
-				this.boost({def: 1});
+			if (!pokemon.ignoringItem() && this.field.isTerrain('grassyterrain')) {
+				pokemon.useItem();
 			}
 		},
 		onAnyTerrainStart() {
-			if (this.field.isTerrain('grassyterrain') && this.effectData.target.useItem()) {
-				this.boost({def: 1}, this.effectData.target);
+			const pokemon = this.effectData.target;
+			if (this.field.isTerrain('grassyterrain')) {
+				pokemon.useItem();
 			}
+		},
+		boosts: {
+			def: 1,
 		},
 	},
 	greatball: {
@@ -1882,32 +1935,29 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 60,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
-			if (user.baseTemplate.num === 487 && (move.type === 'Ghost' || move.type === 'Dragon')) {
+			if (user.baseSpecies.num === 487 && (move.type === 'Ghost' || move.type === 'Dragon')) {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 487) || pokemon.baseTemplate.num === 487) {
+			if ((source && source.baseSpecies.num === 487) || pokemon.baseSpecies.num === 487) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Giratina-Origin",
+		itemUser: ["Giratina-Origin"],
 	},
 	groundgem: {
 		name: "Ground Gem",
-		isUnreleased: true,
 		spritenum: 182,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
-			if (move.type === 'Ground') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Ground Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			if (move.type === 'Ground' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -1916,12 +1966,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 671,
 		onMemory: 'Ground',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Ground",
+		itemUser: ["Silvally-Ground"],
 	},
 	groundiumz: {
 		name: "Groundium Z",
@@ -1952,7 +2003,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Dragon",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Dragon' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Dragon' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -1968,7 +2022,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 100,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Rock') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -2002,6 +2056,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Heavy Ball",
 		spritenum: 194,
 		isPokeball: true,
+	},
+	heavydutyboots: {
+		name: "Heavy-Duty Boots",
+		spritenum: 715,
+		fling: {
+			basePower: 80,
+		},
+		// Hazard Immunity implemented in moves.js
 	},
 	helixfossil: {
 		name: "Helix Fossil",
@@ -2060,7 +2122,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat(pokemon) {
-			this.heal(pokemon.maxhp / 2);
+			this.heal(pokemon.maxhp * 0.33);
 			if (pokemon.getNature().minus === 'def') {
 				pokemon.addVolatile('confusion');
 			}
@@ -2068,16 +2130,12 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	icegem: {
 		name: "Ice Gem",
-		isUnreleased: true,
 		spritenum: 218,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
-			if (move.type === 'Ice') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Ice Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			if (move.type === 'Ice' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -2086,12 +2144,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 681,
 		onMemory: 'Ice',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Ice",
+		itemUser: ["Silvally-Ice"],
 	},
 	icestone: {
 		name: "Ice Stone",
@@ -2104,14 +2163,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Icicle Plate",
 		spritenum: 220,
 		onPlate: 'Ice',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Ice') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -2151,7 +2210,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Malicious Moonsault",
 		zMoveFrom: "Darkest Lariat",
-		zMoveUser: ["Incineroar"],
 	},
 	infernite: {
 		name: "Infernite",
@@ -2163,19 +2221,20 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
+		itemUser: ["Incineroar"],
 	},
 	insectplate: {
 		name: "Insect Plate",
 		spritenum: 223,
 		onPlate: 'Bug',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Bug') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -2202,14 +2261,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Iron Plate",
 		spritenum: 225,
 		onPlate: 'Steel',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Steel') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -2224,8 +2283,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 100,
 			type: "Dragon",
 		},
-		onAfterDamage(damage, target, source, move) {
-			if (source && source.hp && source !== target && move && move.category === 'Physical') {
+		onDamagingHit(damage, target, source, move) {
+			if (move.category === 'Physical') {
 				if (target.eatItem()) {
 					this.damage(source.maxhp / 8, source, target);
 				}
@@ -2249,7 +2308,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Ghost",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Ghost' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Ghost' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -2268,7 +2330,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Poison",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Poison' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Poison' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -2288,6 +2353,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onAfterMoveSecondary(target, source, move) {
 			if (move.category === 'Physical') {
+				if (move.id === 'present' && move.heal) return;
 				target.eatItem();
 			}
 		},
@@ -2344,7 +2410,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Clangorous Soulblaze",
 		zMoveFrom: "Clanging Scales",
-		zMoveUser: ["Kommo-o", "Kommo-o-Totem"],
 	},
 	krookonite: {
 		name: "Krookonite",
@@ -2356,6 +2421,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
+		itemUser: ["Kommo-o", "Kommo-o-Totem"],
 	},
 	laggingtail: {
 		name: "Lagging Tail",
@@ -2363,9 +2429,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		onModifyPriority(priority, pokemon) {
-			return Math.round(priority) - 0.1;
-		},
+		onFractionalPriority: -0.1,
 	},
 	lansatberry: {
 		name: "Lansat Berry",
@@ -2412,6 +2476,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
+		onModifyAccuracyPriority: 5,
 		onModifyAccuracy(accuracy) {
 			if (typeof accuracy !== 'number') return;
 			this.debug('lax incense - decreasing accuracy');
@@ -2433,6 +2498,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 475,
 		onModifyCritRatio(critRatio, user) {
 			if (user.baseTemplate.species === 'Farfetch\'d' || user.baseTemplate.species === 'Mallar\'kee') {
+			if (["farfetchd", "sirfetchd"].includes(this.toID(user.baseSpecies.baseSpecies))) {
 				return critRatio + 2;
 			}
 		},
@@ -2444,7 +2510,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 10,
 		},
 		onResidualOrder: 5,
-		onResidualSubOrder: 2,
+		onResidualSubOrder: 5,
 		onResidual(pokemon) {
 			if (this.field.isTerrain('grassyterrain')) return;
 			this.heal(pokemon.maxhp / 16);
@@ -2469,7 +2535,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onEat(pokemon) {
-			let moveSlot = pokemon.moveSlots.find(move => move.pp === 0) ||
+			const moveSlot = pokemon.moveSlots.find(move => move.pp === 0) ||
 				pokemon.moveSlots.find(move => move.pp < move.maxpp);
 			if (!moveSlot) return;
 			moveSlot.pp += 10;
@@ -2481,7 +2547,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Level Ball",
 		spritenum: 246,
 		isPokeball: true,
-		desc: "A Poke Ball for catching Pokemon that are a lower level than your own.",
 	},
 	liechiberry: {
 		name: "Liechi Berry",
@@ -2511,7 +2576,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onAfterMoveSecondarySelf(source, target, move) {
 			if (source && source !== target && move && move.category !== 'Status') {
-				this.damage(source.maxhp / 10, source, source, this.getItem('lifeorb'));
+				this.damage(source.maxhp / 10, source, source, this.dex.getItem('lifeorb'));
 			}
 		},
 	},
@@ -2524,16 +2589,17 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifyAtkPriority: 1,
 		onModifyAtk(atk, pokemon) {
-			if (pokemon.baseTemplate.baseSpecies === 'Pikachu') {
+			if (pokemon.baseSpecies.baseSpecies === 'Pikachu') {
 				return this.chainModify(2);
 			}
 		},
 		onModifySpAPriority: 1,
 		onModifySpA(spa, pokemon) {
-			if (pokemon.baseTemplate.baseSpecies === 'Pikachu') {
+			if (pokemon.baseSpecies.baseSpecies === 'Pikachu') {
 				return this.chainModify(2);
 			}
 		},
+		itemUser: ["Pikachu"],
 	},
 	lightclay: {
 		name: "Light Clay",
@@ -2558,7 +2624,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Love Ball",
 		spritenum: 258,
 		isPokeball: true,
-		desc: "Poke Ball for catching Pokemon that are the opposite gender of your Pokemon.",
 	},
 	lovesweet: {
 		name: "Love Sweet",
@@ -2599,6 +2664,9 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 80,
 			type: "Flying",
 		},
+		onAfterSetStatus(status, pokemon) {
+			pokemon.eatItem();
+		},
 		onUpdate(pokemon) {
 			if (pokemon.status || pokemon.volatiles['confusion']) {
 				pokemon.eatItem();
@@ -2615,10 +2683,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onAfterDamage(damage, target, source, move) {
-			if (move.type === 'Water' && target.useItem()) {
-				this.boost({spd: 1});
+		onDamagingHit(damage, target, source, move) {
+			if (move.type === 'Water') {
+				target.useItem();
 			}
+		},
+		boosts: {
+			spd: 1,
 		},
 	},
 	lunaliumz: {
@@ -2627,7 +2698,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Menacing Moonraze Maelstrom",
 		zMoveFrom: "Moongeist Beam",
-		zMoveUser: ["Lunala", "Necrozma-Dawn-Wings"],
+		itemUser: ["Lunala", "Necrozma-Dawn-Wings"],
 	},
 	lureball: {
 		name: "Lure Ball",
@@ -2640,12 +2711,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 60,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
-			if (move && user.baseTemplate.species === 'Palkia' && (move.type === 'Water' || move.type === 'Dragon')) {
+			if (move && user.baseSpecies.name === 'Palkia' && (move.type === 'Water' || move.type === 'Dragon')) {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
+		itemUser: ["Palkia"],
 	},
 	luxuryball: {
 		name: "Luxury Ball",
@@ -2670,10 +2742,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
+		itemUser: ["Lycanroc", "Lycanroc-Midnight", "Lycanroc-Dusk"],
 	},
 	machobrace: {
 		name: "Macho Brace",
-		isUnreleased: true,
 		spritenum: 269,
 		ignoreKlutz: true,
 		fling: {
@@ -2696,7 +2768,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Electric') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -2720,7 +2792,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat(pokemon) {
-			this.heal(pokemon.maxhp / 2);
+			this.heal(pokemon.maxhp * 0.33);
 			if (pokemon.getNature().minus === 'spe') {
 				pokemon.addVolatile('confusion');
 			}
@@ -2760,7 +2832,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Soul-Stealing 7-Star Strike",
 		zMoveFrom: "Spectral Thief",
-		zMoveUser: ["Marshadow"],
+		itemUser: ["Marshadow"],
 	},
 	masterball: {
 		name: "Master Ball",
@@ -2782,14 +2854,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Meadow Plate",
 		spritenum: 282,
 		onPlate: 'Grass',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Grass') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -2824,7 +2896,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 			effect(pokemon) {
-				let conditions = ['attract', 'taunt', 'encore', 'torment', 'disable', 'healblock'];
+				const conditions = ['attract', 'taunt', 'encore', 'torment', 'disable', 'healblock'];
 				for (const firstCondition of conditions) {
 					if (pokemon.volatiles[firstCondition]) {
 						for (const secondCondition of conditions) {
@@ -2839,7 +2911,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			},
 		},
 		onUpdate(pokemon) {
-			let conditions = ['attract', 'taunt', 'encore', 'torment', 'disable', 'healblock'];
+			const conditions = ['attract', 'taunt', 'encore', 'torment', 'disable', 'healblock'];
 			for (const firstCondition of conditions) {
 				if (pokemon.volatiles[firstCondition]) {
 					if (!pokemon.useItem()) return;
@@ -2893,7 +2965,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Steel') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -2908,10 +2980,11 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 287,
 		onModifyDefPriority: 2,
 		onModifyDef(def, pokemon) {
-			if (pokemon.template.species === 'Ditto' && !pokemon.transformed) {
+			if (pokemon.species.name === 'Ditto' && !pokemon.transformed) {
 				return this.chainModify(2);
 			}
 		},
+		itemUser: ["Ditto"],
 	},
 	metronome: {
 		name: "Metronome",
@@ -2922,7 +2995,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onStart(pokemon) {
 			pokemon.addVolatile('metronome');
 		},
-		effect: {
+		condition: {
 			onStart(pokemon) {
 				this.effectData.numConsecutive = 0;
 				this.effectData.lastMove = '';
@@ -2933,7 +3006,7 @@ export const Items: {[itemid: string]: ItemData} = {
 					pokemon.removeVolatile('metronome');
 					return;
 				}
-				if (this.effectData.lastMove === move.id) {
+				if (this.effectData.lastMove === move.id && pokemon.moveLastTurnResult) {
 					this.effectData.numConsecutive++;
 				} else {
 					this.effectData.numConsecutive = 0;
@@ -2941,8 +3014,8 @@ export const Items: {[itemid: string]: ItemData} = {
 				this.effectData.lastMove = move.id;
 			},
 			onModifyDamage(damage, source, target, move) {
-				let numConsecutive = this.effectData.numConsecutive > 5 ? 5 : this.effectData.numConsecutive;
-				let dmgMod = [0x1000, 0x1333, 0x1666, 0x1999, 0x1CCC, 0x2000];
+				const dmgMod = [0x1000, 0x1333, 0x1666, 0x1999, 0x1CCC, 0x2000];
+				const numConsecutive = this.effectData.numConsecutive > 5 ? 5 : this.effectData.numConsecutive;
 				return this.chainModify([dmgMod[numConsecutive], 0x1000]);
 			},
 		},
@@ -2953,7 +3026,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Genesis Supernova",
 		zMoveFrom: "Psychic",
-		zMoveUser: ["Mew"],
+		itemUser: ["Mew"],
 	},
 	mewtwonitex: {
 		name: "Mewtwonite X",
@@ -2993,8 +3066,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		onEat(pokemon) {
 			pokemon.addVolatile('micleberry');
 		},
-		effect: {
+		condition: {
 			duration: 2,
+			onSourceModifyAccuracyPriority: 3,
 			onSourceModifyAccuracy(accuracy, target, source) {
 				this.add('-enditem', source, 'Micle Berry');
 				source.removeVolatile('micleberry');
@@ -3021,20 +3095,20 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Let's Snuggle Forever",
 		zMoveFrom: "Play Rough",
-		zMoveUser: ["Mimikyu", "Mimikyu-Busted", "Mimikyu-Totem", "Mimikyu-Busted-Totem"],
+		itemUser: ["Mimikyu", "Mimikyu-Busted", "Mimikyu-Totem", "Mimikyu-Busted-Totem"],
 	},
 	mindplate: {
 		name: "Mind Plate",
 		spritenum: 291,
 		onPlate: 'Psychic',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Psychic') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -3047,7 +3121,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 30,
 		},
 		spritenum: 292,
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Grass') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -3061,15 +3135,20 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 10,
 		},
 		onStart(pokemon) {
-			if (!pokemon.ignoringItem() && this.field.isTerrain('mistyterrain') && pokemon.useItem()) {
-				this.boost({spd: 1});
+			if (!pokemon.ignoringItem() && this.field.isTerrain('mistyterrain')) {
+				pokemon.useItem();
 			}
 		},
 		onAnyTerrainStart() {
-			if (this.field.isTerrain('mistyterrain') && this.effectData.target.useItem()) {
-				this.boost({spd: 1}, this.effectData.target);
+			const pokemon = this.effectData.target;
+			if (this.field.isTerrain('mistyterrain')) {
+				pokemon.useItem();
 			}
 		},
+		boosts: {
+			spd: 1,
+		},
+	},
 	},
 	moonstone: {
 		name: "Moon Stone",
@@ -3084,7 +3163,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 16,
 		onBasePower(basePower, user, target, move) {
 			if (move.category === 'Physical') {
 				return this.chainModify([0x1199, 0x1000]);
@@ -3097,7 +3176,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Water') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -3120,7 +3199,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Ice') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -3143,12 +3222,10 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 307,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
-			if (target === source || move.category === 'Status' || ['firepledge', 'grasspledge', 'waterpledge'].includes(move.id)) return;
-			if (move.type === 'Normal') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Normal Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			const pledges = ['firepledge', 'grasspledge', 'waterpledge'];
+			if (target === source || move.category === 'Status' || pledges.includes(move.id)) return;
+			if (move.type === 'Normal' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -3158,7 +3235,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: true,
 		zMoveType: "Normal",
-		desc: "If holder has a Normal move, this item allows it to use a Normal Z-Move.",
 	},
 	occaberry: {
 		name: "Occa Berry",
@@ -3169,7 +3245,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Fire",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Fire' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Fire' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -3185,7 +3264,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Psychic') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -3262,7 +3341,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Water",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Water' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Water' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -3281,7 +3363,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Psychic",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Psychic' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Psychic' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -3361,7 +3446,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Catastropika",
 		zMoveFrom: "Volt Tackle",
-		zMoveUser: ["Pikachu"],
+		itemUser: ["Pikachu"],
 	},
 	pikashuniumz: {
 		name: "Pikashunium Z",
@@ -3369,7 +3454,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "10,000,000 Volt Thunderbolt",
 		zMoveFrom: "Thunderbolt",
-		zMoveUser: ["Pikachu-World"],
+		itemUser: ["Pikachu-Original", "Pikachu-Hoenn", "Pikachu-Sinnoh", "Pikachu-Unova", "Pikachu-Kalos", "Pikachu-Alola", "Pikachu-Partner"],
 	},
 	pinsirite: {
 		name: "Pinsirite",
@@ -3386,14 +3471,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Pixie Plate",
 		spritenum: 610,
 		onPlate: 'Fairy',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Fairy') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -3414,7 +3499,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 70,
 			status: 'psn',
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Poison') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -3423,16 +3508,12 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	poisongem: {
 		name: "Poison Gem",
-		isUnreleased: true,
 		spritenum: 344,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
-			if (move.type === 'Poison') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Poison Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			if (move.type === 'Poison' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -3441,12 +3522,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 670,
 		onMemory: 'Poison',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Poison",
+		itemUser: ["Silvally-Poison"],
 	},
 	poisoniumz: {
 		name: "Poisonium Z",
@@ -3565,7 +3647,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Oceanic Operetta",
 		zMoveFrom: "Sparkling Aria",
-		zMoveUser: ["Primarina"],
+		itemUser: ["Primarina"],
 	},
 	prismscale: {
 		name: "Prism Scale",
@@ -3582,7 +3664,10 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onAttractPriority: -1,
 		onAttract(target, source) {
-			if (target !== source && target === this.activePokemon && this.activeMove && this.activeMove.flags['contact']) return false;
+			if (
+				target !== source && target === this.activePokemon &&
+				this.activeMove && this.activeMove.flags['contact']
+			) return false;
 		},
 		onBoostPriority: -1,
 		onBoost(boost, target, source, effect) {
@@ -3606,7 +3691,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onSetAbility(ability, target, source, effect) {
 			if (target !== source && target === this.activePokemon && this.activeMove && this.activeMove.flags['contact']) {
-				if (effect && effect.effectType === 'Ability') {
+				if (effect && effect.effectType === 'Ability' && effect.id !== 'wanderingspirit') {
 					this.add('-activate', source, effect.fullname);
 					this.add('-activate', target, 'item: Protective Pads');
 				}
@@ -3614,7 +3699,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onSetStatus(status, target, source, effect) {
-			if (target !== source && target === this.activePokemon && this.activeMove && this.activeMove.flags['contact']) return false;
+			if (
+				target !== source && target === this.activePokemon &&
+				this.activeMove && this.activeMove.flags['contact']
+			) return false;
 		},
 	},
 	protector: {
@@ -3626,16 +3714,12 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	psychicgem: {
 		name: "Psychic Gem",
-		isUnreleased: true,
 		spritenum: 369,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
-			if (move.type === 'Psychic') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Psychic Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			if (move.type === 'Psychic' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -3644,12 +3728,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 680,
 		onMemory: 'Psychic',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Psychic",
+		itemUser: ["Silvally-Psychic"],
 	},
 	psychicseed: {
 		name: "Psychic Seed",
@@ -3658,14 +3743,18 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 10,
 		},
 		onStart(pokemon) {
-			if (!pokemon.ignoringItem() && this.field.isTerrain('psychicterrain') && pokemon.useItem()) {
-				this.boost({spd: 1});
+			if (!pokemon.ignoringItem() && this.field.isTerrain('psychicterrain')) {
+				pokemon.useItem();
 			}
 		},
 		onAnyTerrainStart() {
-			if (this.field.isTerrain('psychicterrain') && this.effectData.target.useItem()) {
-				this.boost({spd: 1}, this.effectData.target);
+			const pokemon = this.effectData.target;
+			if (this.field.isTerrain('psychicterrain')) {
+				pokemon.useItem();
 			}
+		},
+		boosts: {
+			spd: 1,
 		},
 	},
 	psychiumz: {
@@ -3683,11 +3772,11 @@ export const Items: {[itemid: string]: ItemData} = {
 		isPokeball: true,
 	},
 	quickclaw: {
-		onModifyPriorityPriority: -1,
-		onModifyPriority(priority, pokemon) {
-			if (this.randomChance(1, 5)) {
+		onFractionalPriorityPriority: -2,
+		onFractionalPriority(priority, pokemon) {
+			if (priority <= 0 && this.randomChance(1, 5)) {
 				this.add('-activate', pokemon, 'item: Quick Claw');
-				return Math.round(priority) + 0.1;
+				return 0.1;
 			}
 		},
 		name: "Quick Claw",
@@ -3703,10 +3792,11 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 10,
 		},
 		onModifySpe(spe, pokemon) {
-			if (pokemon.template.species === 'Ditto' && !pokemon.transformed) {
+			if (pokemon.species.name === 'Ditto' && !pokemon.transformed) {
 				return this.chainModify(2);
 			}
 		},
+		itemUser: ["Ditto"],
 	},
 	rarebone: {
 		name: "Rare Bone",
@@ -3780,8 +3870,11 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onAfterMoveSecondary(target, source, move) {
 			if (source && source !== target && source.hp && target.hp && move && move.category !== 'Status') {
-				if (!source.isActive || !this.canSwitch(source.side) || source.forceSwitchFlag || target.forceSwitchFlag) return;
-				if (target.useItem(source)) { // This order is correct - the item is used up even against a pokemon with Ingrain or that otherwise can't be forced out
+				if (!source.isActive || !this.canSwitch(source.side) || source.forceSwitchFlag || target.forceSwitchFlag) {
+					return;
+				}
+				// The item is used up even against a pokemon with Ingrain or that otherwise can't be forced out
+				if (target.useItem(source)) {
 					if (this.runEvent('DragOut', source, target, move)) {
 						source.forceSwitchFlag = true;
 					}
@@ -3793,17 +3886,18 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Red Orb",
 		spritenum: 390,
 		onSwitchIn(pokemon) {
-			if (pokemon.isActive && pokemon.baseTemplate.species === 'Groudon') {
-				this.insertQueue({pokemon: pokemon, choice: 'runPrimal'});
+			if (pokemon.isActive && pokemon.baseSpecies.name === 'Groudon') {
+				this.queue.insertChoice({choice: 'runPrimal', pokemon: pokemon});
 			}
 		},
 		onPrimal(pokemon) {
 			pokemon.formeChange('Groudon-Primal', this.effect, true);
 		},
 		onTakeItem(item, source) {
-			if (source.baseTemplate.baseSpecies === 'Groudon') return false;
+			if (source.baseSpecies.baseSpecies === 'Groudon') return false;
 			return true;
 		},
+		itemUser: ["Groudon"],
 	},
 	repeatball: {
 		name: "Repeat Ball",
@@ -3837,7 +3931,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Grass",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Grass' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Grass' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -3857,16 +3954,12 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	rockgem: {
 		name: "Rock Gem",
-		isUnreleased: true,
 		spritenum: 415,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
-			if (move.type === 'Rock') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Rock Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			if (move.type === 'Rock' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -3876,7 +3969,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Rock') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -3888,12 +3981,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 672,
 		onMemory: 'Rock',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Rock",
+		itemUser: ["Silvally-Rock"],
 	},
 	rockiumz: {
 		name: "Rockium Z",
@@ -3910,11 +4004,26 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 60,
 		},
-		onAfterDamageOrder: 2,
-		onAfterDamage(damage, target, source, move) {
-			if (source && source !== target && move && move.flags['contact']) {
+		onDamagingHitOrder: 2,
+		onDamagingHit(damage, target, source, move) {
+			if (move.flags['contact']) {
 				this.damage(source.maxhp / 6, source, target);
 			}
+		},
+	},
+	roomservice: {
+		name: "Room Service",
+		spritenum: 717,
+		fling: {
+			basePower: 100,
+		},
+		onUpdate(pokemon) {
+			if (this.field.getPseudoWeather('trickroom')) {
+				pokemon.useItem();
+			}
+		},
+		boosts: {
+			spe: -1,
 		},
 	},
 	rootfossil: {
@@ -3930,7 +4039,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Grass') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -3946,7 +4055,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Fairy",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Fairy' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Fairy' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -3964,8 +4076,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 100,
 			type: "Dark",
 		},
-		onAfterDamage(damage, target, source, move) {
-			if (source && source.hp && source !== target && move && move.category === 'Special') {
+		onDamagingHit(damage, target, source, move) {
+			if (move.category === 'Special') {
 				if (target.eatItem()) {
 					this.damage(source.maxhp / 8, source, target);
 				}
@@ -3975,25 +4087,27 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	rustedshield: {
 		name: "Rusted Shield",
-		spritenum: 0,
+		spritenum: 699,
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 889) || pokemon.baseTemplate.num === 889) {
+			if ((source && source.baseSpecies.num === 889) || pokemon.baseSpecies.num === 889) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Zamazenta-Crowned",
+		itemUser: ["Zamazenta-Crowned"],
 	},
 	rustedsword: {
 		name: "Rusted Sword",
-		spritenum: 0,
+		spritenum: 698,
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 888) || pokemon.baseTemplate.num === 888) {
+			if ((source && source.baseSpecies.num === 888) || pokemon.baseSpecies.num === 888) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Zacian-Crowned",
+		itemUser: ["Zacian-Crowned"],
 	},
 	sablenite: {
 		name: "Sablenite",
@@ -4028,7 +4142,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (type === 'sandstorm' || type === 'hail' || type === 'powder') return false;
 		},
 		onTryHit(pokemon, source, move) {
-			if (move.flags['powder'] && pokemon !== source && this.getImmunity('powder', pokemon)) {
+			if (move.flags['powder'] && pokemon !== source && this.dex.getImmunity('powder', pokemon)) {
 				this.add('-activate', pokemon, 'item: Safety Goggles', move.name);
 				return null;
 			}
@@ -4118,7 +4232,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Water') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -4153,7 +4267,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 50,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Flying') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -4206,13 +4320,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Shock Drive",
 		spritenum: 442,
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 649) || pokemon.baseTemplate.num === 649) {
+			if ((source && source.baseSpecies.num === 649) || pokemon.baseSpecies.num === 649) {
 				return false;
 			}
 			return true;
 		},
 		onDrive: 'Electric',
 		forcedForme: "Genesect-Shock",
+		itemUser: ["Genesect-Shock"],
 	},
 	shucaberry: {
 		name: "Shuca Berry",
@@ -4223,7 +4338,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Ground",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Ground' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Ground' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -4239,7 +4357,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Normal') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -4247,12 +4365,12 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 	},
 	silverpowder: {
-		name: "SilverPowder",
+		name: "Silver Powder",
 		spritenum: 447,
 		fling: {
 			basePower: 10,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Bug') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -4290,14 +4408,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Sky Plate",
 		spritenum: 450,
 		onPlate: 'Flying',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Flying') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -4328,7 +4446,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Pulverizing Pancake",
 		zMoveFrom: "Giga Impact",
-		zMoveUser: ["Snorlax"],
+		itemUser: ["Snorlax"],
 	},
 	snowball: {
 		name: "Snowball",
@@ -4336,10 +4454,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onAfterDamage(damage, target, source, move) {
-			if (move.type === 'Ice' && target.useItem()) {
-				this.boost({atk: 1});
+		onDamagingHit(damage, target, source, move) {
+			if (move.type === 'Ice') {
+				target.useItem();
 			}
+		},
+		boosts: {
+			atk: 1,
 		},
 	},
 	softsand: {
@@ -4348,7 +4469,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Ground') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -4361,7 +4482,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Searing Sunraze Smash",
 		zMoveFrom: "Sunsteel Strike",
-		zMoveUser: ["Solgaleo", "Necrozma-Dusk-Mane"],
+		itemUser: ["Solgaleo", "Necrozma-Dusk-Mane"],
 	},
 	souldew: {
 		name: "Soul Dew",
@@ -4369,12 +4490,16 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
-			if (move && (user.baseTemplate.num === 380 || user.baseTemplate.num === 381) && (move.type === 'Psychic' || move.type === 'Dragon')) {
+			if (
+				move && (user.baseSpecies.num === 380 || user.baseSpecies.num === 381) &&
+				(move.type === 'Psychic' || move.type === 'Dragon')
+			) {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
+		itemUser: ["Latios", "Latias"],
 	},
 	spelltag: {
 		name: "Spell Tag",
@@ -4382,7 +4507,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Ghost') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -4404,14 +4529,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Splash Plate",
 		spritenum: 463,
 		onPlate: 'Water',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Water') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -4422,14 +4547,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Spooky Plate",
 		spritenum: 464,
 		onPlate: 'Ghost',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Ghost') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -4450,17 +4575,16 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onEat(pokemon) {
-			let stats = [];
-			for (let stat in pokemon.boosts) {
-				// @ts-ignore
+			const stats: BoostName[] = [];
+			let stat: BoostName;
+			for (stat in pokemon.boosts) {
 				if (stat !== 'accuracy' && stat !== 'evasion' && pokemon.boosts[stat] < 6) {
 					stats.push(stat);
 				}
 			}
 			if (stats.length) {
-				let randomStat = this.sample(stats);
-				/**@type {{[k: string]: number}} */
-				let boost = {};
+				const randomStat = this.sample(stats);
+				const boost: SparseBoostsTable = {};
 				boost[randomStat] = 2;
 				this.boost(boost);
 			}
@@ -4499,16 +4623,12 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	steelgem: {
 		name: "Steel Gem",
-		isUnreleased: true,
 		spritenum: 473,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
-			if (move.type === 'Steel') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Steel Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			if (move.type === 'Steel' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -4517,12 +4637,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 675,
 		onMemory: 'Steel',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Steel",
+		itemUser: ["Silvally-Steel"],
 	},
 	steeliumz: {
 		name: "Steelium Z",
@@ -4546,7 +4667,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onHit(target, source, move) {
 			if (source && source !== target && !source.item && move && move.flags['contact']) {
-				let barb = target.takeItem();
+				const barb = target.takeItem();
 				if (!barb) return; // Gen 4 Multitype
 				source.setItem(barb);
 				// no message for Sticky Barb changing hands
@@ -4557,14 +4678,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Stone Plate",
 		spritenum: 477,
 		onPlate: 'Rock',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Rock') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -4616,6 +4737,11 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem(item, source) {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
+	sweetapple: {
+		name: "Sweet Apple",
+		spritenum: 711,
+		fling: {
+			basePower: 30,
 		},
 	},
 	tangaberry: {
@@ -4627,7 +4753,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Bug",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Bug' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Bug' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -4643,7 +4772,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Guardian of Alola",
 		zMoveFrom: "Nature's Madness",
-		zMoveUser: ["Tapu Koko", "Tapu Lele", "Tapu Bulu", "Tapu Fini"],
+		itemUser: ["Tapu Koko", "Tapu Lele", "Tapu Bulu", "Tapu Fini"],
+	},
+	tartapple: {
+		name: "Tart Apple",
+		spritenum: 712,
+		fling: {
+			basePower: 30,
+		},
 	},
 	terrainextender: {
 		name: "Terrain Extender",
@@ -4660,21 +4796,25 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifyAtkPriority: 1,
 		onModifyAtk(atk, pokemon) {
-			if (pokemon.baseTemplate.baseSpecies === 'Cubone' || pokemon.baseTemplate.baseSpecies === 'Marowak') {
+			if (pokemon.baseSpecies.baseSpecies === 'Cubone' || pokemon.baseSpecies.baseSpecies === 'Marowak') {
 				return this.chainModify(2);
 			}
 		},
+		itemUser: ["Marowak", "Cubone"],
 	},
 	throatspray: {
 		name: "Throat Spray",
-		spritenum: 0,
+		spritenum: 713,
 		fling: {
 			basePower: 30,
 		},
 		onAfterMoveSecondarySelf(target, source, move) {
-			if (move.flags['sound'] && target.useItem()) {
-				this.boost({spa: 1}); // TODO: Find exact value, and whether this activates before or after use
+			if (move.flags['sound']) {
+				target.useItem();
 			}
+		},
+		boosts: {
+			spa: 1,
 		},
 	},
 	thunderstone: {
@@ -4717,19 +4857,26 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Toxic Plate",
 		spritenum: 516,
 		onPlate: 'Poison',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Poison') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Arceus-Poison",
+	},
+	tr00: {
+		name: "TR00",
+		fling: {
+			basePower: 10,
+		},
+		spritenum: 721,
 	},
 	twistedspoon: {
 		name: "Twisted Spoon",
@@ -4737,7 +4884,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Psychic') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -4839,7 +4986,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: "Light That Burns the Sky",
 		zMoveFrom: "Photon Geyser",
-		zMoveUser: ["Necrozma-Ultra"],
+		itemUser: ["Necrozma-Ultra"],
 	},
 	upgrade: {
 		name: "Up-Grade",
@@ -4847,6 +4994,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
+	},
+	utilityumbrella: {
+		name: "Utility Umbrella",
+		spritenum: 718,
+		fling: {
+			basePower: 60,
+		},
+		// Implemented in statuses.js, moves.js, and abilities.js
 	},
 	venusaurite: {
 		name: "Venusaurite",
@@ -4879,7 +5034,9 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Electric",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Electric' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Electric' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -4891,16 +5048,13 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	watergem: {
 		name: "Water Gem",
-		isUnreleased: true,
 		spritenum: 528,
 		isGem: true,
 		onSourceTryPrimaryHit(target, source, move) {
-			if (target === source || move.category === 'Status' || ['firepledge', 'grasspledge', 'waterpledge'].includes(move.id)) return;
-			if (move.type === 'Water') {
-				if (source.useItem()) {
-					this.add('-enditem', source, 'Water Gem', '[from] gem', '[move] ' + move.name);
-					source.addVolatile('gem');
-				}
+			const pledges = ['firepledge', 'grasspledge', 'waterpledge'];
+			if (target === source || move.category === 'Status' || pledges.includes(move.id)) return;
+			if (move.type === 'Water' && source.useItem()) {
+				source.addVolatile('gem');
 			}
 		},
 	},
@@ -4909,12 +5063,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 677,
 		onMemory: 'Water',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 773) || pokemon.baseTemplate.num === 773) {
+			if ((source && source.baseSpecies.num === 773) || pokemon.baseSpecies.num === 773) {
 				return false;
 			}
 			return true;
 		},
 		forcedForme: "Silvally-Water",
+		itemUser: ["Silvally-Water"],
 	},
 	waterstone: {
 		name: "Water Stone",
@@ -4938,7 +5093,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Water') {
 				return this.chainModify([0x1333, 0x1000]);
@@ -4951,22 +5106,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 80,
 		},
-		onHitPriority: 1,
-		onHit(target, source, move) {
-			if (target.hp && move.category !== 'Status' && !move.damage && !move.damageCallback && target.getMoveHitData(move).typeMod > 0 && target.useItem()) {
-				this.boost({atk: 2, spa: 2});
+		onDamagingHit(damage, target, source, move) {
+			if (!move.damage && !move.damageCallback && target.getMoveHitData(move).typeMod > 0) {
+				target.useItem();
 			}
 		},
-	},
-	weavilite: {
-		name: "Weavilite",
-		spritenum: 594, //CHANGE
-		megaStone: "Weavile-Mega",
-		megaEvolves: "Weavile",
-		itemUser: ["Weavile"],
-		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+		boosts: {
+			atk: 2,
+			spa: 2,
 		},
 	},
 	whippeddream: {
@@ -4983,10 +5130,9 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 10,
 			effect(pokemon) {
 				let activate = false;
-				/**@type {{[k: string]: number}} */
-				let boosts = {};
-				for (let i in pokemon.boosts) {
-					// @ts-ignore
+				const boosts: SparseBoostsTable = {};
+				let i: BoostName;
+				for (i in pokemon.boosts) {
 					if (pokemon.boosts[i] < 0) {
 						activate = true;
 						boosts[i] = 0;
@@ -5000,10 +5146,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onUpdate(pokemon) {
 			let activate = false;
-			/**@type {{[k: string]: number}} */
-			let boosts = {};
-			for (let i in pokemon.boosts) {
-				// @ts-ignore
+			const boosts: SparseBoostsTable = {};
+			let i: BoostName;
+			for (i in pokemon.boosts) {
 				if (pokemon.boosts[i] < 0) {
 					activate = true;
 					boosts[i] = 0;
@@ -5021,6 +5166,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
+		onSourceModifyAccuracyPriority: 4,
 		onSourceModifyAccuracy(accuracy) {
 			if (typeof accuracy === 'number') {
 				return accuracy * 1.1;
@@ -5044,7 +5190,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
 		onEat(pokemon) {
-			this.heal(pokemon.maxhp / 2);
+			this.heal(pokemon.maxhp * 0.33);
 			if (pokemon.getNature().minus === 'spa') {
 				pokemon.addVolatile('confusion');
 			}
@@ -5056,7 +5202,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 16,
 		onBasePower(basePower, user, target, move) {
 			if (move.category === 'Special') {
 				return this.chainModify([0x1199, 0x1000]);
@@ -5072,7 +5218,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			type: "Ice",
 		},
 		onSourceModifyDamage(damage, source, target, move) {
-			if (move.type === 'Ice' && target.getMoveHitData(move).typeMod > 0 && (!target.volatiles['substitute'] || move.flags['authentic'] || (move.infiltrates && this.gen >= 6))) {
+			if (move.type === 'Ice' && target.getMoveHitData(move).typeMod > 0) {
+				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+				if (hitSub) return;
+
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -5097,14 +5246,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Zap Plate",
 		spritenum: 572,
 		onPlate: 'Electric',
-		onBasePowerPriority: 6,
+		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move.type === 'Electric') {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 493) || pokemon.baseTemplate.num === 493) {
+			if ((source && source.baseSpecies.num === 493) || pokemon.baseSpecies.num === 493) {
 				return false;
 			}
 			return true;
@@ -5117,8 +5266,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
+		onSourceModifyAccuracyPriority: 4,
 		onSourceModifyAccuracy(accuracy, target) {
-			if (typeof accuracy === 'number' && !this.willMove(target)) {
+			if (typeof accuracy === 'number' && !this.queue.willMove(target)) {
 				this.debug('Zoom Lens boosting accuracy');
 				return accuracy * 1.2;
 			}
