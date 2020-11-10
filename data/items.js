@@ -5116,6 +5116,17 @@ export const Items: {[itemid: string]: ItemData} = {
 			spa: 2,
 		},
 	},
+	weavilite: {
+		name: "Weavilite",
+		spritenum: 594, //CHANGE
+		megaStone: "Weavile-Mega",
+		megaEvolves: "Weavile",
+		itemUser: ["Weavile"],
+		onTakeItem(item, source) {
+			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
+			return true;
+		},
+	},
 	whippeddream: {
 		name: "Whipped Dream",
 		spritenum: 692,
