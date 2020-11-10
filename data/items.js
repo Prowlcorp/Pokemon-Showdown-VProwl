@@ -464,6 +464,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		itemUser: ["Kyogre"],
 	},
+	blunderpolicy: {
+		name: "Blunder Policy",
+		spritenum: 716,
+		fling: {
+			basePower: 80,
+		},
+		// Item activation located in scripts.js
+	},
 	breloomite: {
 		name: "Breloomite",
 		spritenum: 594, //CHANGE
