@@ -862,10 +862,6 @@ export const ItemsText = {
 		name: "Lopunnite",
 		desc: "If held by a Lopunny, this item allows it to Mega Evolve in battle.",
 	},
-	loveball: {
-		name: "Love Ball",
-		desc: "Poke Ball for catching Pokemon that are the opposite gender of your Pokemon.",
-	},
 	lovesweet: {
 		name: "Love Sweet",
 		desc: "Evolves Milcery into Alcremie when held and spun around.",

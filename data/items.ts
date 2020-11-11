@@ -2666,11 +2666,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
-	loveball: {
-		name: "Love Ball",
-		spritenum: 258,
-		isPokeball: true,
-	},
 	lovesweet: {
 		name: "Love Sweet",
 		spritenum: 705,
@@ -4810,6 +4805,13 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
+	sweetapple: {
+		name: "Sweet Apple",
+		spritenum: 711,
+		fling: {
+			basePower: 30,
+		},
+	},
 	swellite: {
 		name: "Swellite",
 		spritenum: 594, //CHANGE
@@ -4830,13 +4832,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem(item, source) {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
-		},
-	},
-	sweetapple: {
-		name: "Sweet Apple",
-		spritenum: 711,
-		fling: {
-			basePower: 30,
 		},
 	},
 	tangaberry: {
@@ -4869,18 +4864,18 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMoveFrom: "Nature's Madness",
 		itemUser: ["Tapu Koko", "Tapu Lele", "Tapu Bulu", "Tapu Fini"],
 	},
-	tartapple: {
-		name: "Tart Apple",
-		spritenum: 712,
-		fling: {
-			basePower: 30,
-		},
-	},
 	terrainextender: {
 		name: "Terrain Extender",
 		spritenum: 662,
 		fling: {
 			basePower: 60,
+		},
+	},
+	tartapple: {
+		name: "Tart Apple",
+		spritenum: 712,
+		fling: {
+			basePower: 30,
 		},
 	},
 	thickclub: {
