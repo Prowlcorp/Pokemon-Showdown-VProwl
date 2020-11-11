@@ -322,6 +322,28 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
+	belueberry: {
+		name: "Belue Berry",
+		spritenum: 381,
+		isBerry: true,
+		naturalGift: {
+			basePower: 100,
+			type: "Electric",
+		},
+		onStart(Pokemon) {
+			if (!pokemon.status) {
+				pokemon.eatItem();
+			}
+		},
+		onResidual(Pokemon) {
+			if (!pokemon.status) {
+				pokemon.eatItem();
+			}
+		},
+		onEat(pokemon) {
+			pokemon.trySetStatus('par', pokemon);
+		},
+	},
 	berryjuice: {
 		name: "Berry Juice",
 		spritenum: 22,
@@ -1169,6 +1191,28 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 113,
 		fling: {
 			basePower: 50,
+		},
+	},
+	durinberry: {
+		name: "Durin Berry",
+		spritenum: 381,
+		isBerry: true,
+		naturalGift: {
+			basePower: 100,
+			type: "Poison",
+		},
+		onStart(Pokemon) {
+			if (!pokemon.status) {
+				pokemon.eatItem();
+			}
+		},
+		onResidual(Pokemon) {
+			if (!pokemon.status) {
+				pokemon.eatItem();
+			}
+		},
+		onEat(pokemon) {
+			pokemon.trySetStatus('psn', pokemon);
 		},
 	},
 	duskball: {
@@ -3316,6 +3360,35 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
+	pamtreberry: {
+		name: "Pamtre Berry",
+		spritenum: 381,
+		isBerry: true,
+		naturalGift: {
+			basePower: 100,
+			type: "Ice",
+		},
+		onStart(Pokemon) {
+			if (!pokemon.status || pokemon.status === 'brn') {
+				pokemon.eatItem();
+			}
+		},
+		onResidual(Pokemon) {
+			if (!pokemon.status || pokemon.status === 'brn') {
+				pokemon.eatItem();
+			}
+		},
+		onEat(pokemon) {
+			if (pokemon.status === 'brn') {
+				pokemon.cureStatus();
+			}
+			else {
+				this.boost({def: 2});
+				this.boost({spd: 2});
+			}
+			pokemon.trySetStatus('frz', pokemon);
+		},
+	},
 	pangorite: {
 		name: "Pangorite",
 		spritenum: 594, //CHANGE
@@ -4509,6 +4582,31 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 	},
+	spelonberry: {
+		name: "Spelon Berry",
+		spritenum: 381,
+		isBerry: true,
+		naturalGift: {
+			basePower: 100,
+			type: "Fire",
+		},
+		onStart(Pokemon) {
+			if (!pokemon.status || pokemon.status === 'frz') {
+				pokemon.eatItem();
+			}
+		},
+		onResidual(Pokemon) {
+			if (!pokemon.status || pokemon.status === 'frz') {
+				pokemon.eatItem();
+			}
+		},
+		onEat(pokemon) {
+			if (pokemon.status === 'frz') {
+				pokemon.cureStatus();
+			}
+			pokemon.trySetStatus('brn', pokemon);
+		},
+	},
 	spiritnite: {
 		name: "Spiritnite",
 		spritenum: 594, //CHANGE
@@ -5076,6 +5174,28 @@ export const Items: {[itemid: string]: ItemData} = {
 		zMove: true,
 		zMoveType: "Water",
 		forcedForme: "Arceus-Water",
+	},
+	watmelberry: {
+		name: "Watmel Berry",
+		spritenum: 381,
+		isBerry: true,
+		naturalGift: {
+			basePower: 60,
+			type: "Fairy",
+		},
+		onModifyMove(move, pokemon) {
+			if(move.category !== 'Status') {
+				move.selfSwitch = true;
+			}
+		},
+		onFractionalPriorityPriority: -2,
+		onFractionalPriority(priority, pokemon) {
+			if (pokemon.eatItem()) {
+				this.add('-activate', pokemon, 'item: Custap Berry', '[consumed]');
+				return 0.1;
+			}
+		},
+		onEat(pokemon) { },
 	},
 	waveincense: {
 		name: "Wave Incense",

@@ -98,6 +98,10 @@ export const ItemsText = {
 		name: "Beedrillite",
 		desc: "If held by a Beedrill, this item allows it to Mega Evolve in battle.",
 	},
+	belueberry: {
+		name: "Belue Berry",
+		desc: "Holder is paralyzed. Single use.",
+	},
 	berryjuice: {
 		name: "Berry Juice",
 		desc: "Restores 20 HP when at 1/2 max HP or less. Single use.",
@@ -372,6 +376,10 @@ export const ItemsText = {
 	dubiousdisc: {
 		name: "Dubious Disc",
 		desc: "Evolves Porygon2 into Porygon-Z when traded.",
+	},
+	durinberry: {
+		name: "Durin Berry",
+		desc: "Holder is poisoned. Single use.",
 	},
 	duskball: {
 		name: "Dusk Ball",
@@ -1076,6 +1084,10 @@ export const ItemsText = {
 		name: "Palonite",
 		desc: "If held by a Palossand, this item allows it to Mega Evolve in battle.",
 	},
+	pamtreberry: {
+		name: "Pamtre Berry",
+		desc: "Holder is frozen even if burned. If holder wasn't burned on use, sharply raises Def and SpD. Single use.",
+	},
 	pangorite: {
 		name: "Pangorite",
 		desc: "If held by a Pangoro, this item allows it to Mega Evolve in battle.",
@@ -1473,6 +1485,10 @@ export const ItemsText = {
 		name: "Spell Tag",
 		desc: "Holder's Ghost-type attacks have 1.2x power.",
 	},
+	spelonberry: {
+		name: "Spelon Berry",
+		desc: "Holder is burned even if frozen. Single use.",
+	},
 	spiritnite: {
 		name: "Spiritnite",
 		desc: "If held by a Spiritomb, this item allows it to Mega Evolve in battle.",
@@ -1663,6 +1679,10 @@ export const ItemsText = {
 	wateriumz: {
 		name: "Waterium Z",
 		desc: "If holder has a Water move, this item allows it to use a Water Z-Move.",
+	},
+	watmelberry: {
+		name: "Watmel Berry",
+		desc: "Holder moves first in it's priority bracket and swaps if it launches a damaging attack. Single use.",
 	},
 	waveincense: {
 		name: "Wave Incense",
