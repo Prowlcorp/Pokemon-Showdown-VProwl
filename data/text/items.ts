@@ -677,11 +677,6 @@ export const ItemsText = {
 		name: "Heavy Ball",
 		desc: "A Poke Ball for catching very heavy Pokemon.",
 	},
-	heavydutyboots: {
-		name: "Heavy-Duty Boots",
-		desc: "When switching in, the holder is unaffected by hazards on its side of the field.",
-		// Hazard Immunity implemented in moves.js
-	},
 	helixfossil: {
 		name: "Helix Fossil",
 		desc: "Can be revived into Omanyte.",
@@ -1084,10 +1079,6 @@ export const ItemsText = {
 	pangorite: {
 		name: "Pangorite",
 		desc: "If held by a Pangoro, this item allows it to Mega Evolve in battle.",
-	},
-	parkball: {
-		name: "Park Ball",
-		desc: "A special Poke Ball for the Pal Park.",
 	},
 	passhoberry: {
 		name: "Passho Berry",
@@ -1603,10 +1594,6 @@ export const ItemsText = {
 	toxicplate: {
 		name: "Toxic Plate",
 		desc: "Holder's Poison-type attacks have 1.2x power. Judgment is Poison type.",
-	},
-	tr00: {
-		name: "TR00",
-		desc: "Teaches certain Pokemon the move Swords Dance. One use.",
 	},
 	twistedspoon: {
 		name: "Twisted Spoon",
