@@ -336,7 +336,7 @@ export class ModdedDex {
 			let aliasTo = '';
 			const formeNames: {[k: string]: string[]} = {
 				alola: ['a', 'alola', 'alolan'],
-				konor: ['g', 'konor', 'konorian'],
+				konor: ['k', 'konor', 'konorian'],
 				mega: ['m', 'mega'],
 				primal: ['p', 'primal'],
 			};

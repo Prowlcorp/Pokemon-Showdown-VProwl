@@ -239,9 +239,9 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		if (Array.isArray(data.changesFrom)) this.changesFrom = data.changesFrom[0];
 
 		if (!this.gen && this.num >= 1) {
-			if (this.num >= 810 || ['Gmax', 'Galar', 'Galar-Zen'].includes(this.forme)) {
+			if (this.num >= 810 || ['Konor'].includes(this.forme)) {
 				this.gen = 8;
-			} else if (this.num >= 722 || this.forme.startsWith('Alola') || this.forme === 'Starter') {
+			} else if (this.num >= 722 || this.forme.startsWith('Alola')) {
 				this.gen = 7;
 			} else if (this.forme === 'Primal') {
 				this.gen = 6;

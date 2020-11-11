@@ -46,6 +46,7 @@ interface MoveFlags {
 	reflectable?: 1; // Bounced back to the original user by Magic Coat or the Ability Magic Bounce.
 	snatch?: 1; // Can be stolen from the original user and instead used by another Pokemon using Snatch.
 	sound?: 1; // Has no effect on Pokemon with the Ability Soundproof.
+	sword?: 1; // Power is multiplied by 1.5 when used by a Pokemon with the Ability Unbending Blade.
 }
 
 export interface HitEffect {
@@ -150,17 +151,6 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 		basePower?: number,
 		effect?: string,
 		boost?: SparseBoostsTable,
-	};
-
-	// Max move data
-	// -------------
-	/**
-	 * `true` for Max moves like Max Airstream. If its a G-Max moves, this is
-	 * the species ID of the Gigantamax Pokemon that can use this G-Max move.
-	 */
-	isMax?: boolean | string;
-	maxMove?: {
-		basePower: number,
 	};
 
 	// Hit effects
@@ -275,6 +265,7 @@ export interface ActiveMove extends MutableMove {
 	allies?: Pokemon[];
 	auraBooster?: Pokemon;
 	causedCrashDamage?: boolean;
+	colonizeBoosted?: boolean;
 	forceStatus?: ID;
 	galvanizeBoosted?: boolean;
 	hasAuraBreak?: boolean;
@@ -302,7 +293,7 @@ export interface ActiveMove extends MutableMove {
 	 * Has this move been boosted by a Z-crystal or used by a Dynamax Pokemon? Usually the same as
 	 * `isZ` or `isMax`, but hacked moves will have this be `false` and `isZ` / `isMax` be truthy.
 	 */
-	isZOrMaxPowered?: boolean;
+	isZPowered?: boolean;
 }
 
 type MoveCategory = 'Physical' | 'Special' | 'Status';
@@ -382,12 +373,6 @@ export class DataMove extends BasicEffect implements Readonly<BasicEffect & Move
 		effect?: string,
 		boost?: SparseBoostsTable,
 	};
-	/** Is this move a Max move? */
-	readonly isMax: boolean | string;
-	/** Max/G-Max move fields */
-	readonly maxMove?: {
-		basePower: number,
-	};
 	readonly flags: MoveFlags;
 	/** Whether or not the user must switch after using this move. */
 	readonly selfSwitch?: ID | boolean;
@@ -446,7 +431,6 @@ export class DataMove extends BasicEffect implements Readonly<BasicEffect & Move
 		this.pp = Number(data.pp!);
 		this.noPPBoosts = !!data.noPPBoosts;
 		this.isZ = data.isZ || false;
-		this.isMax = data.isMax || false;
 		this.flags = data.flags || {};
 		this.selfSwitch = (typeof data.selfSwitch === 'string' ? (data.selfSwitch as ID) : data.selfSwitch) || undefined;
 		this.pressureTarget = data.pressureTarget || '';
@@ -459,47 +443,8 @@ export class DataMove extends BasicEffect implements Readonly<BasicEffect & Move
 		this.stab = data.stab || undefined;
 		this.volatileStatus = typeof data.volatileStatus === 'string' ? (data.volatileStatus as ID) : undefined;
 
-		if (this.category !== 'Status' && !this.maxMove && this.id !== 'struggle') {
-			this.maxMove = {basePower: 1};
-			if (this.isMax || this.isZ) {
-				// already initialized to 1
-			} else if (!this.basePower) {
-				this.maxMove.basePower = 100;
-			} else if (['Fighting', 'Poison'].includes(this.type)) {
-				if (this.basePower >= 150) {
-					this.maxMove.basePower = 100;
-				} else if (this.basePower >= 110) {
-					this.maxMove.basePower = 95;
-				} else if (this.basePower >= 75) {
-					this.maxMove.basePower = 90;
-				} else if (this.basePower >= 65) {
-					this.maxMove.basePower = 85;
-				} else if (this.basePower >= 55) {
-					this.maxMove.basePower = 80;
-				} else if (this.basePower >= 45) {
-					this.maxMove.basePower = 75;
-				} else {
-					this.maxMove.basePower = 70;
-				}
-			} else {
-				if (this.basePower >= 150) {
-					this.maxMove.basePower = 150;
-				} else if (this.basePower >= 110) {
-					this.maxMove.basePower = 140;
-				} else if (this.basePower >= 75) {
-					this.maxMove.basePower = 130;
-				} else if (this.basePower >= 65) {
-					this.maxMove.basePower = 120;
-				} else if (this.basePower >= 55) {
-					this.maxMove.basePower = 110;
-				} else if (this.basePower >= 45) {
-					this.maxMove.basePower = 100;
-				} else {
-					this.maxMove.basePower = 90;
-				}
-			}
-		}
-		if (this.category !== 'Status' && !this.zMove && !this.isZ && !this.isMax && this.id !== 'struggle') {
+
+		if (this.category !== 'Status' && !this.zMove && !this.isZ && this.id !== 'struggle') {
 			let basePower = this.basePower;
 			this.zMove = {};
 			if (Array.isArray(this.multihit)) basePower *= 3;
@@ -527,25 +472,4 @@ export class DataMove extends BasicEffect implements Readonly<BasicEffect & Move
 				this.zMove.basePower = 100;
 			}
 		}
-
-		if (!this.gen) {
-			if (this.num >= 743) {
-				this.gen = 8;
-			} else if (this.num >= 622) {
-				this.gen = 7;
-			} else if (this.num >= 560) {
-				this.gen = 6;
-			} else if (this.num >= 468) {
-				this.gen = 5;
-			} else if (this.num >= 355) {
-				this.gen = 4;
-			} else if (this.num >= 252) {
-				this.gen = 3;
-			} else if (this.num >= 166) {
-				this.gen = 2;
-			} else if (this.num >= 1) {
-				this.gen = 1;
-			}
-		}
-	}
 }
