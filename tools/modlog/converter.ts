@@ -5,14 +5,26 @@
  * @author jetou
  */
 
-// @ts-ignore Needed for FS
-if (!global.Config) global.Config = {nofswriting: false, modlogftsextension: true, usesqlitemodlog: true};
+if (!global.Config) {
+	let hasSQLite = true;
+	try {
+		require.resolve('better-sqlite3');
+	} catch (e) {
+		hasSQLite = false;
+	}
+	global.Config = {
+		nofswriting: false,
+		usesqlitemodlog: hasSQLite,
+		usesqlite: hasSQLite,
+	};
+}
 
-import * as Database from 'better-sqlite3';
-
+import type * as DatabaseType from 'better-sqlite3';
 import {FS} from '../../lib/fs';
 import {Modlog, ModlogEntry} from '../../server/modlog';
 import {IPTools} from '../../server/ip-tools';
+
+const Database = Config.usesqlite ? require('better-sqlite3') : null;
 
 type ModlogFormat = 'txt' | 'sqlite';
 
@@ -91,6 +103,9 @@ export function modernizeLog(line: string, nextLine?: string): string | undefine
 		const actionTaker = toID(line.slice(line.indexOf(' by ') + ' by '.length));
 		const isEnding = line.includes('was ended by');
 		return `${prefix}POLL${isEnding ? ' END' : ''}: by ${actionTaker}`;
+	}
+	if (/User (.*?) won the game of (.*?) mode trivia/.test(line)) {
+		return `${prefix}TRIVIAGAME: by unknown: ${line}`;
 	}
 
 	const modernizerTransformations: {[k: string]: (log: string) => string} = {
@@ -341,14 +356,25 @@ export function parseModlog(raw: string, nextLine?: string, isGlobal = false): M
 	let line = modernizeLog(raw);
 	if (!line) return;
 
-	const log: ModlogEntry = {action: 'NULL', isGlobal};
 	const timestamp = parseBrackets(line, '[');
-	log.time = Math.floor(new Date(timestamp).getTime()) || Date.now();
 	line = line.slice(timestamp.length + 3);
+	const [roomID, ...bonus] = parseBrackets(line, '(').split(' ');
 
-	const [roomid, ...bonus] = parseBrackets(line, '(').split(' ');
-	log.roomID = roomid;
-	if (bonus.length) log.visualRoomID = `${roomid} ${bonus.join(' ')}`;
+	const log: ModlogEntry = {
+		action: 'NULL',
+		roomID,
+		visualRoomID: '',
+		userid: null,
+		autoconfirmedID: null,
+		alts: [],
+		ip: null,
+		isGlobal,
+		loggedBy: null,
+		note: '',
+		time: Math.floor(new Date(timestamp).getTime()) || Date.now(),
+	};
+
+	if (bonus.length) log.visualRoomID = `${log.roomID} ${bonus.join(' ')}`;
 	line = line.slice((log.visualRoomID || log.roomID).length + 3);
 	const actionColonIndex = line.indexOf(':');
 	const action = line.slice(0, actionColonIndex);
@@ -419,7 +445,7 @@ export function parseModlog(raw: string, nextLine?: string, isGlobal = false): M
 		const colonIndex = line.indexOf(': ');
 		const actionTaker = line.slice(actionTakerIndex + 3, colonIndex > actionTakerIndex ? colonIndex : undefined);
 		if (toID(actionTaker).length < 19) {
-			log.loggedBy = toID(actionTaker) || undefined;
+			log.loggedBy = toID(actionTaker) || null;
 			if (colonIndex > actionTakerIndex) line = line.slice(colonIndex);
 			line = line.replace(regex, '');
 		}
@@ -432,7 +458,7 @@ export function rawifyLog(log: ModlogEntry) {
 	let result = `[${new Date(log.time || Date.now()).toJSON()}] (${(log.visualRoomID || log.roomID || 'global').replace(/^global-/, '')}) ${log.action}`;
 	if (log.userid) result += `: [${log.userid}]`;
 	if (log.autoconfirmedID) result += ` ac: [${log.autoconfirmedID}]`;
-	if (log.alts) result += ` alts: [${log.alts.join('], [')}]`;
+	if (log.alts.length) result += ` alts: [${log.alts.join('], [')}]`;
 	if (log.ip) {
 		if (!log.userid) result += `:`;
 		result += ` [${log.ip}]`;
@@ -445,9 +471,9 @@ export function rawifyLog(log: ModlogEntry) {
 export class ModlogConverterSQLite {
 	readonly databaseFile: string;
 	readonly textLogDir: string;
-	readonly isTesting: {files: Map<string, string>, db: Database.Database} | null = null;
+	readonly isTesting: {files: Map<string, string>, db: DatabaseType.Database} | null = null;
 
-	constructor(databaseFile: string, textLogDir: string, isTesting?: Database.Database) {
+	constructor(databaseFile: string, textLogDir: string, isTesting?: DatabaseType.Database) {
 		this.databaseFile = databaseFile;
 		this.textLogDir = textLogDir;
 		if (isTesting || Config.nofswriting) {

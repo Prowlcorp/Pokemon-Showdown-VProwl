@@ -7,7 +7,6 @@ import * as smogon from 'smogon';
 
 import * as Streams from '../../lib/streams';
 import {Dex, toID} from '../../sim/dex';
-import {Species} from '../../sim/dex-data';
 import {TeamValidator} from '../../sim/team-validator';
 Dex.includeModData();
 
@@ -129,9 +128,9 @@ function eligible(dex: ModdedDex, id: ID) {
 
 	if (species.battleOnly && !unique.some(f => id.startsWith(f))) return false;
 
-	return !id.endsWith('totem') && !similar.some(f => id.startsWith(f) && id !== f);
-}
 
+	return !id.endsWith('totem') && !capNFE && !similar.some(f => id.startsWith(f) && id !== f);
+}
 
 function toGen(dex: ModdedDex, name: string): GenerationNum | undefined {
 	const pokemon = dex.getSpecies(name);
