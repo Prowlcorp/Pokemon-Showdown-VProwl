@@ -240,7 +240,12 @@ export class Pokemon {
 	/**
 	 * An object for storing untyped data, for mods to use.
 	 */
-	m: PokemonModData;
+	m: {
+		gluttonyFlag?: boolean, // Gen-NEXT
+		innate?: string, // Partners in Crime
+		originalSpecies?: string, // Mix and Mega
+		[key: string]: any,
+	};
 
 	constructor(set: string | AnyObject, side: Side) {
 		this.side = side;
@@ -527,6 +532,21 @@ export class Pokemon {
 		return this.battle.trunc(speed, 13);
 	}
 
+	/* Commented out for now until a use for Combat Power is found in Let's Go
+	getCombatPower() {
+		let statSum = 0;
+		let awakeningSum = 0;
+		for (const stat in this.stats) {
+			statSum += this.calculateStat(stat, this.boosts[stat as BoostName]);
+			awakeningSum += this.calculateStat(
+				stat, this.boosts[stat as BoostName]) + this.set.evs[stat];
+		}
+		const combatPower = Math.floor(Math.floor(statSum * this.level * 6 / 100) +
+			(Math.floor(awakeningSum) * Math.floor((this.level * 4) / 100 + 2)));
+		return this.battle.clampIntRange(combatPower, 0, 10000);
+	}
+	*/
+
 	getWeight() {
 		const weighthg = this.battle.runEvent('ModifyWeight', this, null, null, this.weighthg);
 		return Math.max(1, weighthg);
@@ -671,9 +691,6 @@ export class Pokemon {
 	}
 
 	ignoringAbility() {
-		const abilities = [
-			'asoneglastrier', 'asonespectrier', 'battlebond', 'comatose', 'disguise', 'gulpmissile', 'iceface', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange',
-		];
 		// Check if any active pokemon have the ability Neutralizing Gas
 		let neutralizinggas = false;
 		for (const pokemon of this.battle.getAllActive()) {
@@ -688,7 +705,8 @@ export class Pokemon {
 		return !!(
 			(this.battle.gen >= 5 && !this.isActive) ||
 			((this.volatiles['gastroacid'] || (neutralizinggas && this.ability !== ('neutralizinggas' as ID))) &&
-			!abilities.includes(this.ability))
+			!this.getAbility().isPermanent
+			)
 		);
 	}
 
@@ -1539,11 +1557,7 @@ export class Pokemon {
 		if (typeof ability === 'string') ability = this.battle.dex.getAbility(ability);
 		const oldAbility = this.ability;
 		if (!isFromFormeChange) {
-			const abilities = [
-				'asoneglastrier', 'asonespectrier', 'battlebond', 'comatose', 'disguise', 'gulpmissile', 'hungerswitch', 'iceface', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange',
-			];
-			if (ability.id === 'illusion' || abilities.includes(ability.id) || abilities.includes(oldAbility)) return false;
-			if (this.battle.gen >= 7 && (ability.id === 'zenmode' || oldAbility === 'zenmode')) return false;
+			if (ability.isPermanent || this.getAbility().isPermanent) return false;
 		}
 		if (!this.battle.runEvent('SetAbility', this, source, this.battle.effect, ability)) return false;
 		this.battle.singleEvent('End', this.battle.dex.getAbility(oldAbility), this.abilityData, this, source);
