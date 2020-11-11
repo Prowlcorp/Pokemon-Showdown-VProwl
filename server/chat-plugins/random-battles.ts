@@ -28,11 +28,6 @@ function formatItem(item: Item | string) {
 	}
 }
 
-	}
-}
-
-}
-
 function battleFactorySets(species: string | Species, tier: string | null, gen = 'gen7', isBSS = false) {
 	species = Dex.getSpecies(species);
 	if (typeof species.battleOnly === 'string') {
