@@ -1,4 +1,9 @@
-// Other Metas plugin by Spandan
+/**
+ * Other Metagames chat plugin
+ * Lets users see elements of Pokemon in various Other Metagames.
+ * Originally by Spandan.
+ * @author Kris
+*/
 
 import {Utils} from '../../lib/utils';
 
@@ -29,7 +34,7 @@ function getMegaStone(stone: string, mod = 'gen8'): Item | null {
 				num: -1,
 				effectType: 'Item',
 				sourceEffect: '',
-			};
+			} as Item;
 		} else {
 			return null;
 		}
@@ -41,12 +46,12 @@ function getMegaStone(stone: string, mod = 'gen8'): Item | null {
 export const commands: ChatCommands = {
 	om: 'othermetas',
 	othermetas(target, room, user) {
-		if (!this.runBroadcast()) return;
+		this.runBroadcast();
 		target = toID(target);
 		let buffer = ``;
 
 		if (target === 'all' && this.broadcasting) {
-			return this.sendReplyBox(`You cannot broadcast information about all Other Metagames at once.`);
+			throw new Chat.ErrorMessage(`You cannot broadcast information about all Other Metagames at once.`);
 		}
 
 		if (!target || target === 'all') {
@@ -75,24 +80,132 @@ export const commands: ChatCommands = {
 		`!om - Show everyone that information. Requires: + % @ # &`,
 	],
 
+	mnm: 'mixandmega',
+	mixandmega(target, room, user) {
+		if (!toID(target) || !target.includes('@')) return this.parse('/help mixandmega');
+		this.runBroadcast();
+		let dex = Dex;
+		const sep = target.split('@');
+		const stoneName = sep.slice(1).join('@').trim().split(',');
+		const mod = stoneName[1];
+		if (mod) {
+			if (toID(mod) in Dex.dexes) {
+				dex = Dex.mod(toID(mod));
+			} else {
+				throw new Chat.ErrorMessage(`A mod by the name of '${mod.trim()}' does not exist.`);
+			}
+			if (dex === Dex.dexes['ssb']) {
+				throw new Chat.ErrorMessage(`The SSB mod supports custom elements for Mega Stones that have the capability of crashing the server.`);
+			}
+		}
+		const stone = getMegaStone(stoneName[0], mod);
+		const species = dex.getSpecies(sep[0]);
+		if (!stone || (dex.gen >= 8 && ['redorb', 'blueorb'].includes(stone.id))) {
+			throw new Chat.ErrorMessage(`Error: Mega Stone not found.`);
+		}
+		if (!species.exists) throw new Chat.ErrorMessage(`Error: Pok\u00e9mon not found.`);
+		let baseSpecies = dex.getSpecies(stone.megaEvolves);
+		let megaSpecies = dex.getSpecies(stone.megaStone);
+		if (stone.id === 'redorb') { // Orbs do not have 'Item.megaStone' or 'Item.megaEvolves' properties.
+			megaSpecies = dex.getSpecies("Groudon-Primal");
+			baseSpecies = dex.getSpecies("Groudon");
+		} else if (stone.id === 'blueorb') {
+			megaSpecies = dex.getSpecies("Kyogre-Primal");
+			baseSpecies = dex.getSpecies("Kyogre");
+		}
+		const deltas: StoneDeltas = {
+			baseStats: Object.create(null),
+			weighthg: megaSpecies.weighthg - baseSpecies.weighthg,
+			bst: megaSpecies.bst - baseSpecies.bst,
+		};
+		let statId: StatName;
+		for (statId in megaSpecies.baseStats) {
+			deltas.baseStats[statId] = megaSpecies.baseStats[statId] - baseSpecies.baseStats[statId];
+		}
+		if (megaSpecies.types.length > baseSpecies.types.length) {
+			deltas.type = megaSpecies.types[1];
+		} else if (megaSpecies.types.length < baseSpecies.types.length) {
+			deltas.type = dex.gen >= 8 ? 'mono' : megaSpecies.types[0];
+		} else if (megaSpecies.types[1] !== baseSpecies.types[1]) {
+			deltas.type = megaSpecies.types[1];
+		}
+		const mixedSpecies = Utils.deepClone(species);
+		mixedSpecies.abilities = Utils.deepClone(megaSpecies.abilities);
+		if (mixedSpecies.types[0] === deltas.type) { // Add any type gains
+			mixedSpecies.types = [deltas.type];
+		} else if (deltas.type === 'mono') {
+			mixedSpecies.types = [mixedSpecies.types[0]];
+		} else if (deltas.type) {
+			mixedSpecies.types = [mixedSpecies.types[0], deltas.type];
+		}
+		let statName: StatName;
+		mixedSpecies.bst = 0;
+		for (statName in species.baseStats) { // Add the changed stats and weight
+			mixedSpecies.baseStats[statName] = Utils.clampIntRange(
+				mixedSpecies.baseStats[statName] + deltas.baseStats[statName], 1, 255
+			);
+			mixedSpecies.bst += mixedSpecies.baseStats[statName];
+		}
+		mixedSpecies.weighthg = Math.max(1, species.weighthg + deltas.weighthg);
+		mixedSpecies.tier = "MnM";
+		let weighthit = 20;
+		if (mixedSpecies.weighthg >= 2000) {
+			weighthit = 120;
+		} else if (mixedSpecies.weighthg >= 1000) {
+			weighthit = 100;
+		} else if (mixedSpecies.weighthg >= 500) {
+			weighthit = 80;
+		} else if (mixedSpecies.weighthg >= 250) {
+			weighthit = 60;
+		} else if (mixedSpecies.weighthg >= 100) {
+			weighthit = 40;
+		}
+		const details: {[k: string]: string} = {
+			"Dex#": '' + mixedSpecies.num,
+			Gen: '' + mixedSpecies.gen,
+			Height: mixedSpecies.heightm + " m",
+			Weight: mixedSpecies.weighthg / 10 + " kg <em>(" + weighthit + " BP)</em>",
+			"Dex Colour": mixedSpecies.color,
+		};
+		if (mixedSpecies.eggGroups) details["Egg Group(s)"] = mixedSpecies.eggGroups.join(", ");
+		details['<font color="#686868">Does Not Evolve</font>'] = "";
+		this.sendReply(`|raw|${Chat.getDataPokemonHTML(mixedSpecies)}`);
+		this.sendReply('|raw|<font size="1">' + Object.keys(details).map(detail => {
+			if (details[detail] === '') return detail;
+			return '<font color="#686868">' + detail + ':</font> ' + details[detail];
+		}).join("&nbsp;|&ThickSpace;") + '</font>');
+	},
+	mixandmegahelp: [
+		`/mnm <pokemon> @ <mega stone>[, generation] - Shows the Mix and Mega evolved Pok\u00e9mon's type and stats.`,
+	],
+
 	orb: 'stone',
 	megastone: 'stone',
 	stone(target) {
-		if (!this.runBroadcast()) return;
 		const sep = target.split(',');
 		let dex = Dex;
-		if (sep[1] && toID(sep[1]) in Dex.dexes) dex = Dex.mod(toID(sep[1]));
+		if (sep[1]) {
+			if (toID(sep[1]) in Dex.dexes) {
+				dex = Dex.mod(toID(sep[1]));
+			} else {
+				throw new Chat.ErrorMessage(`A mod by the name of '${sep[1].trim()}' does not exist.`);
+			}
+			if (dex === Dex.dexes['ssb']) {
+				throw new Chat.ErrorMessage(`The SSB mod supports custom elements for Mega Stones that have the capability of crashing the server.`);
+			}
+		}
 		const targetid = toID(sep[0]);
 		if (!targetid) return this.parse('/help stone');
+		this.runBroadcast();
 		const stone = getMegaStone(targetid, sep[1]);
 		if (stone && dex.gen >= 8 && ['redorb', 'blueorb'].includes(stone.id)) {
-			return this.errorReply("The Orbs do not exist in Gen 8 and later.");
+			throw new Chat.ErrorMessage("The Orbs do not exist in Gen 8 and later.");
 		}
 		const stones = [];
 		if (!stone) {
 			const species = dex.getSpecies(targetid.replace(/(?:mega[xy]?|primal)$/, ''));
-			if (!species.exists) return this.errorReply(`Error: Mega Stone not found.`);
-			if (!species.otherFormes) return this.errorReply(`Error: Mega Evolution not found.`);
+			if (!species.exists) throw new Chat.ErrorMessage(`Error: Mega Stone not found.`);
+			if (!species.otherFormes) throw new Chat.ErrorMessage(`Error: Mega Evolution not found.`);
 			for (const poke of species.otherFormes) {
 				if (!/(?:-Primal|-Mega(?:-[XY])?)$/.test(poke)) continue;
 				const megaPoke = dex.getSpecies(poke);
@@ -101,22 +214,15 @@ export const commands: ChatCommands = {
 				if (!flag) continue;
 				stones.push(getMegaStone(flag, sep[1]));
 			}
-			if (!stones.length) return this.errorReply(`Error: Mega Evolution not found.`);
+			if (!stones.length) throw new Chat.ErrorMessage(`Error: Mega Evolution not found.`);
 		}
 		const toDisplay = (stones.length ? stones : [stone]);
-		const ruleTable = Dex.getRuleTable(Dex.getFormat('gen8mixandmega'));
 		for (const aStone of toDisplay) {
 			if (!aStone) return;
-			if (ruleTable.isBanned(`${aStone.name === 'Dragon Ascent' ? 'move' : 'item'}:${aStone.name}`)) {
-				this.errorReply(`Warning: ${aStone.name} is banned from Mix and Mega.`);
-			}
-			if (aStone.name === 'Dragon Ascent') {
-				this.errorReply(`Warning: Only Pokemon with access to Dragon Ascent can mega evolve with Mega Rayquaza's traits.`);
-			}
 			let baseSpecies = dex.getSpecies(aStone.megaEvolves);
 			let megaSpecies = dex.getSpecies(aStone.megaStone);
 			if (dex.gen >= 8 && ['redorb', 'blueorb'].includes(aStone.id)) {
-				return this.errorReply("The Orbs do not exist in Gen 8 and later.");
+				throw new Chat.ErrorMessage("The Orbs do not exist in Gen 8 and later.");
 			}
 			if (aStone.id === 'redorb') { // Orbs do not have 'Item.megaStone' or 'Item.megaEvolves' properties.
 				megaSpecies = dex.getSpecies("Groudon-Primal");
@@ -188,7 +294,7 @@ export const commands: ChatCommands = {
 			this.sendReply(`|raw|<font size="1"><font color="#686868">Gen:</font> ${details["Gen"]}&nbsp;|&ThickSpace;<font color="#686868">Weight:</font> ${details["Weight"]}</font>`);
 		}
 	},
-	stonehelp: [`/stone <mega stone>[, generation] - Shows the changes that a mega stone/orb applies to a Pokemon.`],
+	stonehelp: [`/stone <mega stone>[, generation] - Shows the changes that a mega stone/orb applies to a Pok\u00e9mon.`],
 
 	ce: 'crossevolve',
 	crossevo: 'crossevolve',
@@ -200,11 +306,11 @@ export const commands: ChatCommands = {
 		const species = Dex.getSpecies(pokes[0]);
 		const crossSpecies = Dex.getSpecies(pokes[1]);
 
-		if (!species.exists) return this.errorReply(`Error: Pokemon '${pokes[0]}' not found.`);
-		if (!crossSpecies.exists) return this.errorReply(`Error: Pokemon '${pokes[1]}' not found.`);
+		if (!species.exists) throw new Chat.ErrorMessage(`Error: Pok\u00e9mon '${pokes[0]}' not found.`);
+		if (!crossSpecies.exists) throw new Chat.ErrorMessage(`Error: Pok\u00e9mon '${pokes[1]}' not found.`);
 
-		if (!species.evos.length) return this.errorReply(`Error: ${species.name} does not evolve.`);
-		if (!crossSpecies.prevo) return this.errorReply(`Error: ${crossSpecies.name} does not have a prevolution.`);
+		if (!species.evos.length) throw new Chat.ErrorMessage(`Error: ${species.name} does not evolve.`);
+		if (!crossSpecies.prevo) throw new Chat.ErrorMessage(`Error: ${crossSpecies.name} does not have a prevolution.`);
 
 		let setStage = 1;
 		let crossStage = 1;
@@ -222,7 +328,7 @@ export const commands: ChatCommands = {
 			}
 		}
 		if (setStage + 1 !== crossStage) {
-			return this.errorReply(`Error: Cross evolution must follow evolutionary stages. (${species.name} is Stage ${setStage} and can only cross evolve to Stage ${setStage + 1})`);
+			throw new Chat.ErrorMessage(`Error: Cross evolution must follow evolutionary stages. (${species.name} is Stage ${setStage} and can only cross evolve to Stage ${setStage + 1})`);
 		}
 		const mixedSpecies = Utils.deepClone(species);
 		mixedSpecies.abilities = Utils.deepClone(crossSpecies.abilities);
@@ -274,7 +380,7 @@ export const commands: ChatCommands = {
 		}).join("&nbsp;|&ThickSpace;") + '</font>');
 	},
 	crossevolvehelp: [
-		"/crossevo <base pokemon>, <evolved pokemon> - Shows the type and stats for the Cross Evolved Pokemon.",
+		"/crossevo <base pokemon>, <evolved pokemon> - Shows the type and stats for the Cross Evolved Pok\u00e9mon.",
 	],
 
 	showevo(target, user, room) {
@@ -283,10 +389,10 @@ export const commands: ChatCommands = {
 		if (!targetid) return this.parse('/help showevo');
 		const evo = Dex.getSpecies(target);
 		if (!evo.exists) {
-			return this.errorReply(`Error: Pok\u00e9mon ${target} not found.`);
+			throw new Chat.ErrorMessage(`Error: Pok\u00e9mon ${target} not found.`);
 		}
 		if (!evo.prevo) {
-			return this.errorReply(`Error: ${evo.name} is not an evolution.`);
+			throw new Chat.ErrorMessage(`Error: ${evo.name} is not an evolution.`);
 		}
 		const prevoSpecies = Dex.getSpecies(evo.prevo);
 		const deltas = Utils.deepClone(evo);

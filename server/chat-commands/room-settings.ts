@@ -609,7 +609,7 @@ export const commands: ChatCommands = {
 			if (room.settings.requestShowEnabled) return this.errorReply(`Approvals are already enabled.`);
 			room.settings.requestShowEnabled = true;
 			this.privateModAction(`${user.name} enabled the use of media approvals in this room.`);
-			if (!room.settings.showEnabled || room.settings.showEnabled === '@') {
+			if (!room.settings.permissions || room.settings.permissions['/show'] === '@') {
 				this.privateModAction(
 					`Note: Due to this room's settings, Drivers aren't allowed to use /show directly, ` +
 					`but will be able to request and approve each other's /requestshow`
@@ -623,36 +623,8 @@ export const commands: ChatCommands = {
 	},
 
 	showmedia(target, room, user) {
-		room = this.requireRoom();
-		this.checkCan('declare', null, room);
-		target = target.trim();
-		if (this.meansNo(target)) {
-			if (!room.settings.showEnabled) return this.errorReply(`/show is already disabled.`);
-			room.settings.showEnabled = undefined;
-			target = 'ROs only';
-		} else if (this.meansYes(target)) {
-			if (room.settings.showEnabled === true) {
-				return this.errorReply(`/show is already allowed for whitelisted users.`);
-			}
-			room.settings.showEnabled = true;
-			target = 'whitelist';
-		} else if (!Config.groups[target]) {
-			return this.errorReply(`/show must be set to on (whitelisted and up), off (ROs only), or a group symbol.`);
-		} else {
-			if (room.settings.showEnabled === target) {
-				return this.errorReply(`/show is already allowed for ${target} and above.`);
-			}
-			room.settings.showEnabled = target as GroupSymbol;
-		}
-		room.saveSettings();
-		this.modlog(`SHOWMEDIA`, null, `to ${target}`);
-		this.privateModAction(`${user.name} set /show permissions to ${target}.`);
-		if (room.settings.requestShowEnabled && (!room.settings.showEnabled || room.settings.showEnabled === '@')) {
-			this.privateModAction(
-				`Note: Due to this room's settings, Drivers aren't allowed to use /show directly,` +
-				` but will be able to request and approve each other's /requestshow`
-			);
-		}
+		this.errorReply(`/showmedia has been deprecated. Use /permissions instead.`);
+		this.parse(`/help permissions`);
 	},
 
 	hightraffic(target, room, user) {
@@ -931,7 +903,7 @@ export const commands: ChatCommands = {
 		this.errorReply("Did you mean /renameroom?");
 	},
 	renamegroupchat: 'renameroom',
-	async renameroom(target, room, user, connection, cmd) {
+	renameroom(target, room, user, connection, cmd) {
 		room = this.requireRoom();
 		if (room.game || room.minorActivity || room.tour) {
 			return this.errorReply("Cannot rename room while a tour/poll/game is running.");
@@ -965,9 +937,7 @@ export const commands: ChatCommands = {
 		}
 		const creatorID = room.roomid.split('-')[1];
 		const id = isGroupchat ? `groupchat-${creatorID}-${toID(target)}` as RoomID : undefined;
-		if (!(await room.rename(target, id))) {
-			return this.errorReply(`An error occured while renaming the room.`);
-		}
+		room.rename(target, id);
 		this.modlog(`RENAME${isGroupchat ? 'GROUPCHAT' : 'ROOM'}`, null, `from ${oldTitle}`);
 		const privacy = room.settings.isPrivate === true ? "Private" :
 			!room.settings.isPrivate ? "Public" :
@@ -1068,11 +1038,14 @@ export const commands: ChatCommands = {
 				}
 				return this.errorReply(`This room is already ${settingName}.`);
 			}
-			room.settings.isPrivate = setting;
 			this.addModAction(`${user.name} made this room ${settingName}.`);
 			this.modlog(`${settingName.toUpperCase()}ROOM`);
-			room.settings.isPrivate = setting;
-			room.saveSettings();
+			if (room.battle) {
+				room.makePrivate(setting);
+			} else {
+				room.settings.isPrivate = setting;
+				room.saveSettings();
+			}
 			room.privacySetter = new Set([user.id]);
 		}
 	},
@@ -1574,17 +1547,6 @@ export const roomSettings: SettingsHandler[] = [
 		options: [
 			[`off`, !room.settings.requestShowEnabled || `showapprovals off`],
 			[`on`, room.settings.requestShowEnabled || `showapprovals on`],
-		],
-	}),
-	room => ({
-		label: "/show",
-		permission: 'declare',
-		options: [
-			[`off`, !room.settings.showEnabled || `showmedia off`],
-			[`whitelist`, room.settings.showEnabled === true || `showmedia on`],
-			[`+`, room.settings.showEnabled === '+' || `showmedia +`],
-			[`%`, room.settings.showEnabled === '%' || `showmedia %`],
-			[`@`, room.settings.showEnabled === '@' || `showmedia @`],
 		],
 	}),
 ];

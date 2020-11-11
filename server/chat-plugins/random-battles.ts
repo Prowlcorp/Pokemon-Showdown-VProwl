@@ -28,26 +28,9 @@ function formatItem(item: Item | string) {
 	}
 }
 
-function trimmedItemsArray(items: string[]) {
-	const data: string[] = [];
-	for (const item of items) {
-		if (data.includes(toID(item) === "" ? "No Item" : item)) continue;
-		if (toID(item) === "") {
-			data.push("No Item");
-		} else {
-			data.push(item);
-		}
 	}
-	return data.sort();
 }
 
-function trimmedMovesArray(moves: string[]) {
-	const data: string[] = [];
-	for (const move of moves) {
-		if (data.includes(move)) continue;
-		data.push(move);
-	}
-	return data.sort();
 }
 
 function battleFactorySets(species: string | Species, tier: string | null, gen = 'gen7', isBSS = false) {

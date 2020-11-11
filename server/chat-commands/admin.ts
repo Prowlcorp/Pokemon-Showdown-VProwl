@@ -17,6 +17,21 @@ import {Utils} from '../../lib/utils';
 
 import * as ProcessManager from '../../lib/process-manager';
 
+function getDisabledCommands(table: ChatCommands = Chat.commands): string[] {
+	const disabled = [];
+	for (const k in table) {
+		const handler = table[k];
+		if (Array.isArray(handler) || typeof handler === 'string') continue;
+		if (typeof handler === 'object') {
+			disabled.push(...getDisabledCommands(handler));
+		}
+		if (typeof handler === 'function' && (handler as Chat.AnnotatedChatHandler).disabled) {
+			disabled.push(k);
+		}
+	}
+	return disabled;
+}
+
 export const commands: ChatCommands = {
 
 	/*********************************************************
@@ -131,10 +146,13 @@ export const commands: ChatCommands = {
 		`/changerankuhtml [rank], [name], [message] - Changes the message previously shown with /addrankuhtml [rank], [name]. Requires: * # &`,
 	],
 
-	addline(target, room, user) {
-		this.checkCan('rawpacket');
-		// secret sysop command
-		this.add(target);
+	pline(target, room, user) {
+		// Secret console admin command
+		this.canUseConsole();
+		const message = target.length > 30 ? target.slice(0, 30) + '...' : target;
+		this.checkBroadcast(true, `!pline ${message}`);
+		this.runBroadcast(true);
+		this.sendReply(target);
 	},
 
 	pminfobox(target, room, user, connection) {
@@ -330,6 +348,13 @@ export const commands: ChatCommands = {
 				}
 				if (requiresForce(patch)) return this.errorReply(requiresForceMessage);
 
+				const disabledCommands = getDisabledCommands();
+				if (cmd !== 'forcehotpatch' && disabledCommands.length) {
+					this.errorReply(`${Chat.count(disabledCommands.length, "commands")} are disabled right now.`);
+					this.errorReply(`Hotpatching will enable them. Use /forcehotpatch chat if you're sure.`);
+					return this.errorReply(`Currently disabled: ${disabledCommands.map(item => `/${item}`).join(', ')}`);
+				}
+
 				const oldPlugins = Chat.plugins;
 				Chat.destroy();
 
@@ -448,14 +473,14 @@ export const commands: ChatCommands = {
 			}
 		} catch (e) {
 			Rooms.global.notifyRooms(
-				['development', 'staff', 'upperstaff'] as RoomID[],
+				['development', 'staff'] as RoomID[],
 				`|c|${user.getIdentity()}|/log ${user.name} used /hotpatch ${patch} - but something failed while trying to hot-patch.`
 			);
 			return this.errorReply(`Something failed while trying to hot-patch ${patch}: \n${e.stack}`);
 		}
 		Monitor.hotpatchVersions[patch] = version;
 		Rooms.global.notifyRooms(
-			['development', 'staff', 'upperstaff'] as RoomID[],
+			['development', 'staff'] as RoomID[],
 			`|c|${user.getIdentity()}|/log ${user.name} used /hotpatch ${patch}`
 		);
 	},
@@ -554,6 +579,29 @@ export const commands: ChatCommands = {
 		this.sendReply("learnsets.js saved.");
 	},
 
+	disablecommand(target, room, user) {
+		this.checkCan('makeroom');
+		if (!toID(target)) {
+			return this.parse(`/help disablecommand`);
+		}
+		if (['!', '/'].some(c => target.startsWith(c))) target = target.slice(1);
+		const parsed = this.parseCommand(`/${target}`);
+		if (!parsed) {
+			return this.errorReply(`Command "/${target}" is in an invalid format.`);
+		}
+		const {handler, cmd} = parsed;
+		if (!handler) {
+			return this.errorReply(`Command "/${target}" not found.`);
+		}
+		if (handler.disabled) {
+			return this.errorReply(`Command "/${target}" is already disabled`);
+		}
+		handler.disabled = true;
+		this.addGlobalModAction(`${user.name} disabled the command /${cmd}.`);
+		this.globalModlog(`DISABLECOMMAND`, null, target);
+	},
+	disablecommandhelp: [`/disablecommand [command] - Disables the given [command]. Requires: &`],
+
 	widendatacenters: 'adddatacenters',
 	adddatacenters() {
 		this.errorReply("This command has been replaced by /datacenter add");
@@ -611,6 +659,12 @@ export const commands: ChatCommands = {
 	lockdown(target, room, user) {
 		this.checkCan('lockdown');
 
+		const disabledCommands = getDisabledCommands();
+		if (disabledCommands.length) {
+			this.sendReply(`${Chat.count(disabledCommands.length, "commands")} are disabled right now.`);
+			this.sendReply(`Be aware that restarting will re-enable them.`);
+			this.sendReply(`Currently disabled: ${disabledCommands.map(c => `/${c}`).join(', ')}`);
+		}
 		Rooms.global.startLockdown();
 
 		this.stafflog(`${user.name} used /lockdown`);
@@ -966,14 +1020,7 @@ export const commands: ChatCommands = {
 		}
 		const battle = room.battle;
 		let cmd;
-		const spaceIndex = target.indexOf(' ');
-		if (spaceIndex > 0) {
-			cmd = target.substr(0, spaceIndex).toLowerCase();
-			target = target.substr(spaceIndex + 1);
-		} else {
-			cmd = target.toLowerCase();
-			target = '';
-		}
+		[cmd, target] = Utils.splitFirst(target, ' ');
 		if (cmd.endsWith(',')) cmd = cmd.slice(0, -1);
 		const targets = target.split(',');
 		function getPlayer(input: string) {

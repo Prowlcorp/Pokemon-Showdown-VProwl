@@ -12,7 +12,6 @@ const AUTO_START_MINIMUM_TIMEOUT = 30 * 1000;
 const MAX_REASON_LENGTH = 300;
 const MAX_CUSTOM_NAME_LENGTH = 100;
 const TOURBAN_DURATION = 14 * 24 * 60 * 60 * 1000;
-const ALLOW_ALTS = false;
 
 Punishments.roomPunishmentTypes.set('TOURBAN', 'banned from tournaments');
 
@@ -254,7 +253,11 @@ export class Tournament extends Rooms.RoomGame {
 				const match = player.inProgressMatch;
 				if (match) {
 					match.room.tour = null;
-					match.room.parent = null;
+					if (match.room.parent) {
+						match.room.parent.subRooms?.delete(match.room.roomid);
+						if (!match.room.parent.subRooms?.size) match.room.parent.subRooms = null;
+						match.room.parent = null;
+					}
 					match.room.addRaw(`<div class="broadcast-red"><b>The tournament was forcefully ended.</b><br />You can finish playing, but this battle is no longer considered a tournament battle.</div>`);
 				}
 			}
@@ -386,7 +389,7 @@ export class Tournament extends Rooms.RoomGame {
 			return;
 		}
 
-		if (!ALLOW_ALTS) {
+		if (!Config.noipchecks) {
 			for (const otherPlayer of this.players) {
 				if (!otherPlayer) continue;
 				const otherUser = Users.get(otherPlayer.id);
@@ -466,7 +469,7 @@ export class Tournament extends Rooms.RoomGame {
 			output.errorReply(`${replacementUser.name} is banned from joining tournaments.`);
 			return;
 		}
-		if (!ALLOW_ALTS) {
+		if (!Config.noipchecks) {
 			for (const otherPlayer of this.players) {
 				if (!otherPlayer) continue;
 				const otherUser = Users.get(otherPlayer.id);
@@ -501,7 +504,13 @@ export class Tournament extends Rooms.RoomGame {
 				Utils.html`<div class="broadcast-red"><b>${user.name} is no longer in the tournament.<br />` +
 				`You can finish playing, but this battle is no longer considered a tournament battle.</div>`
 			).update();
-			matchPlayer.inProgressMatch.room.parent = null;
+			if (matchPlayer.inProgressMatch.room.parent) {
+				matchPlayer.inProgressMatch.room.parent.subRooms?.delete(matchPlayer.inProgressMatch.room.roomid);
+				if (!matchPlayer.inProgressMatch.room.parent.subRooms?.size) {
+					matchPlayer.inProgressMatch.room.parent.subRooms = null;
+				}
+				matchPlayer.inProgressMatch.room.parent = null;
+			}
 			this.completedMatches.add(matchPlayer.inProgressMatch.room.roomid);
 			matchPlayer.inProgressMatch = null;
 		}
@@ -721,7 +730,13 @@ export class Tournament extends Rooms.RoomGame {
 		if (matchFrom) {
 			matchFrom.to.isBusy = false;
 			player.inProgressMatch = null;
-			matchFrom.room.parent = null;
+			if (matchFrom.room.parent) {
+				matchFrom.room.parent.subRooms?.delete(matchFrom.room.roomid);
+				if (!matchFrom.room.parent.subRooms?.size) {
+					matchFrom.room.parent.subRooms = null;
+				}
+				matchFrom.room.parent = null;
+			}
 			this.completedMatches.add(matchFrom.room.roomid);
 			if (matchFrom.room.battle) matchFrom.room.battle.forfeit(player.name);
 		}
@@ -969,6 +984,7 @@ export class Tournament extends Rooms.RoomGame {
 			rated: !Ladders.disabled && this.isRated,
 			challengeType: ready.challengeType,
 			tour: this,
+			parentid: this.roomid,
 		});
 		if (!room || !room.battle) throw new Error(`Failed to create battle in ${room}`);
 
@@ -1026,7 +1042,11 @@ export class Tournament extends Rooms.RoomGame {
 	onBattleWin(room: GameRoom, winnerid: ID) {
 		if (this.completedMatches.has(room.roomid)) return;
 		this.completedMatches.add(room.roomid);
-		room.parent = null;
+		if (room.parent) {
+			room.parent.subRooms?.delete(room.roomid);
+			if (!room.parent.subRooms?.size) room.parent.subRooms = null;
+			room.parent = null;
+		}
 		if (!room.battle) throw new Error("onBattleWin called without a battle");
 		if (!room.p1 || !room.p2) throw new Error("onBattleWin called with missing players");
 		const p1 = this.playerTable[room.p1.id];
@@ -1804,6 +1824,15 @@ const commands: ChatCommands = {
 			const option = target ? target.toLowerCase() : 'on';
 			if (this.meansYes(option)) {
 				tournament.forceTimer = true;
+				for (const player of tournament.players) {
+					const curMatch = player.inProgressMatch;
+					if (curMatch) {
+						const battle = curMatch.room.battle;
+						if (battle) {
+							battle.timer.start();
+						}
+					}
+				}
 				room.add('Forcetimer is now on for the tournament.');
 				this.privateModAction(`The timer was turned on for the tournament by ${user.name}`);
 				this.modlog('TOUR FORCETIMER', null, 'ON');

@@ -27,6 +27,38 @@ export function getCommonBattles(userID1: ID, user1: User | null, userID2: ID, u
 	return battles;
 }
 
+export function findFormats(targetId: string, isOMSearch = false) {
+	let formatList: string[] = [];
+	const format = Dex.getFormat(targetId);
+	if (['Format', 'ValidatorRule', 'Rule'].includes(format.effectType)) formatList = [targetId];
+	if (!formatList.length) {
+		formatList = Object.keys(Dex.formats);
+	}
+
+	// Filter formats and group by section
+	let exactMatch = '';
+	const sections: {[k: string]: {name: string, formats: string[]}} = {};
+	let totalMatches = 0;
+	for (const mode of formatList) {
+		const subformat = Dex.getFormat(mode);
+		const sectionId = toID(subformat.section);
+		let formatId = subformat.id;
+		if (!/^gen\d+/.test(targetId)) {
+			// Skip generation prefix if it wasn't provided
+			formatId = formatId.replace(/^gen\d+/, '') as ID;
+		}
+		if (targetId && !(subformat as any)[targetId + 'Show'] && sectionId !== targetId &&
+		subformat.id === mode && !formatId.startsWith(targetId)) continue;
+		totalMatches++;
+		if (!sections[sectionId]) sections[sectionId] = {name: subformat.section!, formats: []};
+		sections[sectionId].formats.push(subformat.id);
+		if (subformat.id !== targetId) continue;
+		exactMatch = sectionId;
+		break;
+	}
+	return {totalMatches, sections, exactMatch};
+}
+
 export const commands: ChatCommands = {
 	ip: 'whois',
 	rooms: 'whois',
@@ -1758,43 +1790,7 @@ export const commands: ChatCommands = {
 		let targetId = toID(target);
 		if (targetId === 'ladder') targetId = 'search' as ID;
 		if (targetId === 'all') targetId = '';
-
-		let formatList: string[] = [];
-		const format = Dex.getFormat(targetId);
-		if (['Format', 'ValidatorRule', 'Rule'].includes(format.effectType)) formatList = [targetId];
-		if (!formatList.length) {
-			formatList = Object.keys(Dex.formats);
-		}
-
-		// Filter formats and group by section
-		let exactMatch = '';
-		const sections: {[k: string]: {name: string, formats: string[]}} = {};
-		let totalMatches = 0;
-		for (const mode of formatList) {
-			const subformat = Dex.getFormat(mode);
-			const sectionId = toID(subformat.section);
-			let formatId = subformat.id;
-			if (!/^gen\d+/.test(targetId)) {
-				// Skip generation prefix if it wasn't provided
-				formatId = formatId.replace(/^gen\d+/, '') as ID;
-			 }
-			if (targetId && !(subformat as any)[targetId + 'Show'] && sectionId !== targetId &&
-			subformat.id === mode && !formatId.startsWith(targetId)) continue;
-			if (isOMSearch) {
-				const officialFormats = [
-					'ou', 'uu', 'ru', 'nu', 'pu', 'ubers', 'lc', 'monotype', 'customgame', 'doublescustomgame', 'gbusingles', 'gbudoubles',
-				];
-				if (subformat.id.startsWith('gen') && officialFormats.includes(subformat.id.slice(4))) {
-					continue;
-				}
-			}
-			totalMatches++;
-			if (!sections[sectionId]) sections[sectionId] = {name: subformat.section!, formats: []};
-			sections[sectionId].formats.push(subformat.id);
-			if (subformat.id !== targetId) continue;
-			exactMatch = sectionId;
-			break;
-		}
+		const {totalMatches, sections, exactMatch} = findFormats(targetId, isOMSearch);
 
 		if (!totalMatches) return this.errorReply("No matched formats found.");
 		if (!this.runBroadcast()) return;
@@ -1931,7 +1927,8 @@ export const commands: ChatCommands = {
 	},
 
 	rule: 'rules',
-	rules(target, room, user) {
+	roomrules: "rules",
+	rules(target, room, user, connection, cmd) {
 		if (!target) {
 			if (!this.runBroadcast()) return;
 			this.sendReplyBox(
@@ -1943,6 +1940,26 @@ export const commands: ChatCommands = {
 		}
 		if (!room) {
 			return this.errorReply(`This is not a room you can set the rules of.`);
+		}
+		const possibleRoom = Rooms.search(toID(target));
+		const {totalMatches: formatMatches} = findFormats(toID(target));
+		if (formatMatches && possibleRoom && cmd !== 'roomrules') {
+			this.errorReply(`'${target}' is both a room and a tier. `);
+			this.errorReply(`If you were looking for rules of that room, use /roomrules [room].`);
+			this.errorReply(`Otherwise, use /tier [tiername].`);
+			return;
+		}
+
+		if (possibleRoom) {
+			const rulesLink = possibleRoom.settings.rulesLink;
+			return this.sendReplyBox(
+				`${possibleRoom.title}'s rules:<br />` +
+				`${rulesLink ? Utils.html`- <a href="${rulesLink}">${this.tr `${possibleRoom.title} room rules`}</a><br />` : `None set.`}`
+			);
+		}
+
+		if (formatMatches > 0 && cmd !== 'roomrules') {
+			return this.parse(`/tier ${target}`);
 		}
 		this.checkCan('editroom', null, room);
 		if (target.length > 150) {
@@ -2074,8 +2091,8 @@ export const commands: ChatCommands = {
 
 			let formatName = extraFormat.name;
 			let formatId: string = extraFormat.id;
-			if (formatName.startsWith('[Gen ')) {
-				formatName = formatName.replace('[Gen ' + formatName[formatName.indexOf('[') + 5] + '] ', '');
+			if (formatName.startsWith('[Gen ') && formatName.slice(6, 8) === '] ') {
+				formatName = formatName.slice(8);
 				formatId = toID(formatName);
 			}
 			if (formatId === 'battlespotdoubles') {
@@ -2537,14 +2554,10 @@ export const commands: ChatCommands = {
 
 		this.checkBroadcast();
 		if (this.broadcastMessage) {
-			const minGroup = room ? (room.settings.showEnabled || '#') : '+';
-			const auth = room?.auth || Users.globalAuth;
-			if (minGroup !== true && !auth.atLeast(user, minGroup)) {
-				this.errorReply(`You must be at least group ${minGroup} to use /show`);
-				if (auth.atLeast(user, '%')) {
-					this.errorReply(`The limit can be changed in /roomsettings`);
-				}
-				return;
+			if (room) {
+				this.checkCan('show', null, room);
+			} else {
+				this.checkCan('altsself');
 			}
 		}
 		this.runBroadcast();
