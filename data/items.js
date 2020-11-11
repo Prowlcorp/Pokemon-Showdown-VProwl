@@ -1718,9 +1718,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		onModifyPriority(priority, pokemon) {
-			return Math.round(priority) - 0.1;
-		},
+		onFractionalPriority: -0.1,
 	},
 	fullmemory: {
 		name: "Full Memory",
