@@ -331,7 +331,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onHit(target) {
 			if (target.side.active.length < 2) return false; // fails in singles
-			let action = this.willMove(target);
+			let action = this.queue.willMove(target);
 			if (action) {
 				this.cancelMove(target);
 				this.queue.unshift(action);
@@ -1425,7 +1425,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		stallingMove: true,
 		volatileStatus: 'banefulbunker',
 		onTryHit(target, source, move) {
-			return !!this.willAct() && this.runEvent('StallMove', target);
+			return !!this.queue.willAct() && this.runEvent('StallMove', target);
 		},
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
@@ -2078,7 +2078,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 100,
 		basePower: 85,
 		basePowerCallback(pokemon, target, move) {
-			if (target.newlySwitched || this.willMove(target)) {
+			if (target.newlySwitched || this.queue.willMove(target)) {
 				this.debug('Bolt Beak damage boost');
 				return move.basePower * 2;
 			}
@@ -3456,13 +3456,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onHit(target) {
-			if (['battlebond', 'comatose', 'crisisevolution', 'disguise', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange', 'zenmode'].includes(target.ability)) return;
-			if (target.newlySwitched || this.willMove(target)) return;
+			if (target.getAbility().isPermanent) return;
+			if (target.newlySwitched || this.queue.willMove(target)) return;
 			target.addVolatile('gastroacid');
 		},
 		onAfterSubDamage(damage, target) {
-			if (['battlebond', 'comatose', 'crisisevolution', 'disguise', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange', 'zenmode'].includes(target.ability)) return;
-			if (target.newlySwitched || this.willMove(target)) return;
+			if (target.getAbility().isPermanent) return;
+			if (target.newlySwitched || this.queue.willMove(target)) return;
 			target.addVolatile('gastroacid');
 		},
 		secondary: null,
@@ -3766,7 +3766,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		sideCondition: 'craftyshield',
 		onTryHitSide(side, source) {
-			return !!this.willAct();
+			return !!this.queue.willAct();
 		},
 		effect: {
 			duration: 1,
@@ -4348,7 +4348,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		stallingMove: true,
 		volatileStatus: 'protect',
 		onPrepareHit(pokemon) {
-			return !!this.willAct() && this.runEvent('StallMove', pokemon);
+			return !!this.queue.willAct() && this.runEvent('StallMove', pokemon);
 		},
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
@@ -4505,7 +4505,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			noCopy: true, // doesn't get copied by Baton Pass
 			onStart(pokemon, source, effect) {
 				// The target hasn't taken its turn, or Cursed Body activated and the move was not used through Dancer or Instruct
-				if (this.willMove(pokemon) || (pokemon === this.activePokemon && this.activeMove && !this.activeMove.isExternal)) {
+				if (this.queue.willMove(pokemon) || (pokemon === this.activePokemon && this.activeMove && !this.activeMove.isExternal)) {
 					this.effectData.duration--;
 				}
 				if (!pokemon.lastMove) {
@@ -5568,7 +5568,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		volatileStatus: 'electrify',
 		onTryHit(target) {
-			if (!this.willMove(target) && target.activeTurns) return false;
+			if (!this.queue.willMove(target) && target.activeTurns) return false;
 		},
 		effect: {
 			duration: 1,
@@ -5741,7 +5741,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				this.effectData.move = target.lastMove.id;
 				this.add('-start', target, 'Encore');
-				if (!this.willMove(target)) {
+				if (!this.queue.willMove(target)) {
 					this.effectData.duration++;
 				}
 			},
@@ -5822,7 +5822,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		stallingMove: true,
 		volatileStatus: 'endure',
 		onTryHit(pokemon) {
-			return this.willAct() && this.runEvent('StallMove', pokemon);
+			return this.queue.willAct() && this.runEvent('StallMove', pokemon);
 		},
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
@@ -5887,16 +5887,23 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onTryHit(target, source) {
 			if (target === source) return false;
-			let bannedTargetAbilities = ['battlebond', 'comatose', 'crisisevolution', 'disguise', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange', 'truant'];
-			let bannedSourceAbilities = ['battlebond', 'comatose', 'crisisevolution', 'disguise', 'flowergift', 'forecast', 'illusion', 'imposter', 'multitype', 'powerconstruct', 'powerofalchemy', 'receiver', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange', 'trace', 'zenmode'];
-			if (bannedTargetAbilities.includes(target.ability) || bannedSourceAbilities.includes(source.ability) || target.ability === source.ability) {
+
+			const additionalBannedSourceAbilities = [
+				'noability', 'bijuuboost', 'crisisevolution', 'flowergift', 'forecast', 'illusion', 'imposter', 'misdirection', 'neutralizinggas', 'powerofalchemy', 'receiver', 'shadowstrikesealed', 'trace', 'wonderguard'
+			];
+			if (
+				target.ability === source.ability ||
+				target.getAbility().isPermanent || target.ability === 'truant' ||
+				source.getAbility().isPermanent || additionalBannedSourceAbilities.includes(source.ability)
+			) {
 				return false;
 			}
 		},
 		onHit(target, source) {
-			let oldAbility = target.setAbility(source.ability);
+			const oldAbility = target.setAbility(source.ability);
 			if (oldAbility) {
-				this.add('-ability', target, this.getAbility(target.ability).name, '[from] move: Entrainment');
+				this.add('-ability', target, target.getAbility().name, '[from] move: Entrainment');
+				if (target.side !== source.side) target.volatileStaleness = 'external';
 				return;
 			}
 			return false;
@@ -6742,7 +6749,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 100,
 		basePower: 85,
 		basePowerCallback(pokemon, target, move) {
-			if (target.newlySwitched || this.willMove(target)) {
+			if (target.newlySwitched || this.queue.willMove(target)) {
 				this.debug('Fishious Rend damage boost');
 				return move.basePower * 2;
 			}
@@ -7869,17 +7876,19 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'gastroacid',
-		onTryHit(pokemon) {
-			let bannedAbilities = ['battlebond', 'comatose', 'crisisevolution', 'disguise', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange', 'zenmode'];
-			if (bannedAbilities.includes(pokemon.ability)) {
+		onTryHit(target) {
+			if (target.getAbility().isPermanent) {
 				return false;
 			}
 		},
-		effect: {
+		condition: {
 			// Ability suppression implemented in Pokemon.ignoringAbility() within sim/pokemon.js
 			onStart(pokemon) {
 				this.add('-endability', pokemon);
-				this.singleEvent('End', this.getAbility(pokemon.ability), pokemon.abilityData, pokemon, pokemon, 'gastroacid');
+				this.singleEvent('End', pokemon.getAbility(), pokemon.abilityData, pokemon, pokemon, 'gastroacid');
+			},
+			onCopy(pokemon) {
+				if (pokemon.getAbility().isPermanent) pokemon.removeVolatile('gastroacid');
 			},
 		},
 		secondary: null,
@@ -9383,7 +9392,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		volatileStatus: 'helpinghand',
 		onTryHit(target) {
-			if (!target.newlySwitched && !this.willMove(target)) return false;
+			if (!target.newlySwitched && !this.queue.willMove(target)) return false;
 		},
 		effect: {
 			duration: 1,
@@ -11001,7 +11010,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		stallingMove: true,
 		volatileStatus: 'kingsshield',
 		onTryHit(pokemon) {
-			return !!this.willAct() && this.runEvent('StallMove', pokemon);
+			return !!this.queue.willAct() && this.runEvent('StallMove', pokemon);
 		},
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
@@ -11438,7 +11447,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		stallingMove: true,
 		volatileStatus: 'legacyshield',
 		onTryHit(pokemon) {
-			return !!this.willAct() && this.runEvent('StallMove', pokemon);
+			return !!this.queue.willAct() && this.runEvent('StallMove', pokemon);
 		},
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
@@ -12422,7 +12431,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onTryHit(target, pokemon) {
-			let action = this.willMove(target);
+			let action = this.queue.willMove(target);
 			if (action) {
 				let noMeFirst = [
 					'beakblast', 'chatter', 'counter', 'covet', 'focuspunch', 'mefirst', 'metalburst', 'mirrorcoat', 'shelltrap', 'struggle', 'thief',
@@ -13959,7 +13968,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		stallingMove: true,
 		volatileStatus: 'obstruct',
 		onTryHit(pokemon) {
-			return !!this.willAct() && this.runEvent('StallMove', pokemon);
+			return !!this.queue.willAct() && this.runEvent('StallMove', pokemon);
 		},
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
@@ -13972,7 +13981,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onTryHitPriority: 3,
 			onTryHit(target, source, move) {
 				if (!move.flags['protect']) {
-					if (move.isZ || move.isMax) target.getMoveHitData(move).zBrokeProtect = true;
+					if (move.isZ) target.getMoveHitData(move).zBrokeProtect = true;
 					return;
 				}
 				this.add('-activate', target, 'move: Protect');
@@ -14293,7 +14302,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 100,
 		basePower: 50,
 		basePowerCallback(pokemon, target, move) {
-			if (target.newlySwitched || this.willMove(target)) {
+			if (target.newlySwitched || this.queue.willMove(target)) {
 				this.debug('Payback NOT boosted');
 				return move.basePower;
 			}
@@ -15301,7 +15310,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		stallingMove: true,
 		volatileStatus: 'protect',
 		onPrepareHit(pokemon) {
-			return !!this.willAct() && this.runEvent('StallMove', pokemon);
+			return !!this.queue.willAct() && this.runEvent('StallMove', pokemon);
 		},
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
@@ -15824,7 +15833,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onHit(target) {
 			if (target.side.active.length < 2) return false; // fails in singles
-			let action = this.willMove(target);
+			let action = this.queue.willMove(target);
 			if (action) {
 				action.priority = -7.1;
 				this.cancelMove(target);
@@ -15881,7 +15890,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		sideCondition: 'quickguard',
 		onTryHitSide(side, source) {
-			return !!this.willAct();
+			return !!this.queue.willAct();
 		},
 		onHitSide(side, source) {
 			source.addVolatile('stall');
@@ -16789,16 +16798,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onTryHit(target, source) {
-			let bannedTargetAbilities = ['battlebond', 'comatose', 'crisisevolution', 'disguise', 'flowergift', 'forecast', 'illusion', 'imposter', 'multitype', 'powerconstruct', 'powerofalchemy', 'receiver', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange', 'trace', 'wonderguard', 'zenmode'];
-			let bannedSourceAbilities = ['battlebond', 'comatose', 'crisisevolution', 'disguise', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange'];
-			if (bannedTargetAbilities.includes(target.ability) || bannedSourceAbilities.includes(source.ability) || target.ability === source.ability) {
+			if (target.ability === source.ability) return false;
+
+			const additionalBannedTargetAbilities = [
+				'bijuuboost', 'crisisevolution', 'flowergift', 'forecast', 'illusion', 'imposter', 'misdirection', 'neutralizinggas', 'powerofalchemy', 'receiver', 'shadowstrikesealed', 'trace', 'wonderguard'
+			];
+
+			if (target.getAbility().isPermanent || additionalBannedTargetAbilities.includes(target.ability) ||
+				source.getAbility().isPermanent) {
 				return false;
 			}
 		},
 		onHit(target, source) {
-			let oldAbility = source.setAbility(target.ability);
+			const oldAbility = source.setAbility(target.ability);
 			if (oldAbility) {
-				this.add('-ability', source, this.getAbility(source.ability).name, '[from] move: Role Play', '[of] ' + target);
+				this.add('-ability', source, source.getAbility().name, '[from] move: Role Play', '[of] ' + target);
 				return;
 			}
 			return false;
@@ -17267,7 +17281,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		stallingMove: true,
 		volatileStatus: 'satellitedefense',
 		onTryHit(target, source, move) {
-		 return !!this.willAct() && this.runEvent('StallMove', target);
+		 return !!this.queue.willAct() && this.runEvent('StallMove', target);
 		},
 		onHit(pokemon) {
 		 pokemon.addVolatile('stall');
@@ -18139,14 +18153,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTryHit(pokemon) {
-			let bannedAbilities = ['battlebond', 'comatose', 'crisisevolution', 'disguise', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'simple', 'stancechange', 'truant', 'zenmode'];
-			if (bannedAbilities.includes(pokemon.ability)) {
+		onTryHit(target) {
+			if (target.getAbility().isPermanent || target.ability === 'simple' || target.ability === 'truant') {
 				return false;
 			}
 		},
 		onHit(pokemon) {
-			let oldAbility = pokemon.setAbility('simple');
+			const oldAbility = pokemon.setAbility('simple');
 			if (oldAbility) {
 				this.add('-ability', pokemon, 'Simple', '[from] move: Simple Beam');
 				return;
@@ -18254,14 +18267,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onTryHit(target, source) {
-			let bannedAbilities = ['battlebond', 'comatose', 'crisisevolution', 'disguise', 'illusion', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange', 'wonderguard', 'zenmode'];
-			if (bannedAbilities.includes(target.ability) || bannedAbilities.includes(source.ability)) {
+			const additionalBannedAbilities = ['bijuuboost', 'crisisevolution', 'flowergift', 'forecast', 'illusion', 'imposter', 'misdirection', 'neutralizinggas', 'powerofalchemy', 'receiver', 'shadowstrikesealed', 'trace', 'wonderguard'];
+			if (
+				target.getAbility().isPermanent || source.getAbility().isPermanent ||
+				additionalBannedAbilities.includes(target.ability) || additionalBannedAbilities.includes(source.ability)
+			) {
 				return false;
 			}
 		},
 		onHit(target, source, move) {
-			let targetAbility = this.getAbility(target.ability);
-			let sourceAbility = this.getAbility(source.ability);
+			const targetAbility = target.getAbility();
+			const sourceAbility = source.getAbility();
 			if (target.side === source.side) {
 				this.add('-activate', source, 'move: Skill Swap', '', '', '[of] ' + target);
 			} else {
@@ -18272,8 +18288,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (targetAbility.id !== sourceAbility.id) {
 				source.ability = targetAbility.id;
 				target.ability = sourceAbility.id;
-				source.abilityData = {id: toID(source.ability), target: source};
-				target.abilityData = {id: toID(target.ability), target: target};
+				source.abilityData = {id: this.toID(source.ability), target: source};
+				target.abilityData = {id: this.toID(target.ability), target: target};
+				if (target.side !== source.side) target.volatileStaleness = 'external';
 			}
 			this.singleEvent('Start', targetAbility, source.abilityData, source);
 			this.singleEvent('Start', sourceAbility, target.abilityData, target);
@@ -19395,7 +19412,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		stallingMove: true,
 		volatileStatus: 'spikyshield',
 		onTryHit(target, source, move) {
-			return !!this.willAct() && this.runEvent('StallMove', target);
+			return !!this.queue.willAct() && this.runEvent('StallMove', target);
 		},
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
@@ -20285,7 +20302,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onTry(source, target) {
-			let action = this.willMove(target);
+			let action = this.queue.willMove(target);
 			if (!action || action.choice !== 'move' || (action.move.category === 'Status' && action.move.id !== 'mefirst') || target.volatiles.mustrecharge) {
 				this.add('-fail', source);
 				this.attrLastMove('[still]');
@@ -20921,7 +20938,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		effect: {
 			duration: 3,
 			onStart(target) {
-				if (target.activeTurns && !this.willMove(target)) {
+				if (target.activeTurns && !this.queue.willMove(target)) {
 					this.effectData.duration++;
 				}
 				this.add('-start', target, 'move: Taunt');
@@ -21801,7 +21818,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 
 			if (target.side.active.length === 2 && target.position === 1) {
 				// Curse Glitch
-				const action = this.willMove(target);
+				const action = this.queue.willMove(target);
 				if (action && action.move.id === 'curse') {
 					action.targetLoc = -1;
 				}
@@ -22671,7 +22688,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		sideCondition: 'wideguard',
 		onTryHitSide(side, source) {
-			return !!this.willAct();
+			return !!this.queue.willAct();
 		},
 		onHitSide(side, source) {
 			source.addVolatile('stall');
@@ -22948,14 +22965,20 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTryHit(pokemon) {
-			let bannedAbilities = ['battlebond', 'comatose', 'crisisevolution', 'disguise', 'insomnia', 'multitype', 'powerconstruct', 'rkssystem', 'schooling', 'shieldsdown', 'stancechange', 'truant', 'zenmode'];
-			if (bannedAbilities.includes(pokemon.ability)) {
+		onTryImmunity(target) {
+			// Truant and Insomnia have special treatment; they fail before
+			// checking accuracy and will double Stomping Tantrum's BP
+			if (target.ability === 'truant' || target.ability === 'insomnia') {
+				return false;
+			}
+		},
+		onTryHit(target) {
+			if (target.getAbility().isPermanent) {
 				return false;
 			}
 		},
 		onHit(pokemon) {
-			let oldAbility = pokemon.setAbility('insomnia');
+			const oldAbility = pokemon.setAbility('insomnia');
 			if (oldAbility) {
 				this.add('-ability', pokemon, 'Insomnia', '[from] move: Worry Seed');
 				if (pokemon.status === 'slp') {
