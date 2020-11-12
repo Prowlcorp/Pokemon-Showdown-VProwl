@@ -13,7 +13,9 @@ import {YoutubeInterface} from '../chat-plugins/youtube';
 import {Utils} from '../../lib/utils';
 import {Net} from '../../lib/net';
 
-export function getCommonBattles(userID1: ID, user1: User | null, userID2: ID, user2: User | null) {
+export function getCommonBattles(
+	userID1: ID, user1: User | null, userID2: ID, user2: User | null, connection: Connection
+) {
 	const battles = [];
 	for (const curRoom of Rooms.rooms.values()) {
 		if (!curRoom.battle) continue;
@@ -369,7 +371,7 @@ export const commands: ChatCommands = {
 		const userID1 = toID(targetUsername1);
 		const userID2 = toID(targetUsername2);
 
-		const battles = getCommonBattles(userID1, user1, userID2, user2);
+		const battles = getCommonBattles(userID1, user1, userID2, user2, this.connection);
 
 		if (!battles.length) return this.sendReply(`${targetUsername1} and ${targetUsername2} have no common battles.`);
 
