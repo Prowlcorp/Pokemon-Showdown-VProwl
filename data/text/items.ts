@@ -1,4 +1,4 @@
-export const ItemsText = {
+export const ItemsText: {[k: string]: ItemText} = {
 	abomasite: {
 		name: "Abomasite",
 		desc: "If held by an Abomasnow, this item allows it to Mega Evolve in battle.",

@@ -1424,7 +1424,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Gooey",
 	},
 	gracideamastery: {
-		name: "Gracidea Mastery",
 		onTryHit(target, source, move) {
 			if (
 				(target === source || move.category === 'Status') &&
@@ -1447,6 +1446,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (pokemon.species.id !== 'shaymin' || pokemon.transformed) return;
 			pokemon.formeChange('Shaymin-Sky', this.effect);
 		},
+		isPermanent: true;
+		name: "Gracidea Mastery",
 	},
 	grasspelt: {
 		onModifyDefPriority: 6,
@@ -2439,7 +2440,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onFaint(pokemon) {
 			pokemon.illusion = null;
 		},
-//UNSURE		isUnbreakable: true,
+		isUnbreakable: true,
 		name: "Misdirection",
 	},
 	mistysurge: {
@@ -3035,17 +3036,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isPermanent: true,
 		name: "Power Construct",
 	},
-	powerofalchemy: {//FIX
+	powerofalchemy: {
 		onAllyFaint(target) {
 			if (!this.effectData.target.hp) return;
 			const ability = target.getAbility();
-			const bannedAbilities = [
-				'battlebond', 'bijuuboost', 'comatose', 'crisisevolution', 'disguise', 'flowergift', 'forecast', 'gulpmissile', 'iceface', 'illusion', 'imposter', 'misdirection', 'multitype', 'powerconstruct', 'powerofalchemy', 'receiver', 'rkssystem', 'schooling', 'shadowstrikesealed', 'shieldsdown', 'stancechange', 'trace', 'wonderguard', 'zenmode',
-			];
 			const additionalBannedAbilities = [
-				'noability', 'flowergift', 'forecast', 'hungerswitch', 'illusion', 'imposter', 'neutralizinggas', 'powerofalchemy', 'receiver', 'trace', 'wonderguard',
+				'noability', 'bijuuboost', 'crisisevolution', 'flowergift', 'forecast', 'illusion', 'imposter', 'misdirection', 'neutralizinggas', 'powerofalchemy', 'receiver', 'shadowstrikesealed', 'trace', 'wonderguard',
 			];
-			if (bannedAbilities.includes(target.ability)) return;
 			if (target.getAbility().isPermanent || additionalBannedAbilities.includes(target.ability)) return;
 			if (bannedAbilities.includes(target.ability)) return;
 			this.add('-ability', this.effectData.target, ability, '[from] ability: Power of Alchemy', '[of] ' + target);
@@ -3207,17 +3204,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		name: "Rattled",
 	},
-	receiver: {//FIX
+	receiver: {
 		onAllyFaint(target) {
 			if (!this.effectData.target.hp) return;
 			const ability = target.getAbility();
-			const bannedAbilities = [
-				'battlebond', 'bijuuboost', 'comatose', 'crisisevolution', 'disguise', 'flowergift', 'forecast', 'gulpmissile', 'iceface', 'illusion', 'imposter', 'misdirection', 'multitype', 'neutralizinggas', 'powerconstruct', 'powerofalchemy', 'receiver', 'rkssystem', 'schooling', 'shadowstrikesealed', 'shieldsdown', 'stancechange', 'trace', 'wonderguard', 'zenmode',
-			];
 			const additionalBannedAbilities = [
-				'noability', 'flowergift', 'forecast', 'hungerswitch', 'illusion', 'imposter', 'neutralizinggas', 'powerofalchemy', 'receiver', 'trace', 'wonderguard',
+				'noability', 'bijuuboost', 'crisisevolution', 'flowergift', 'forecast', 'illusion', 'imposter', 'misdirection', 'neutralizinggas', 'powerofalchemy', 'receiver', 'shadowstrikesealed', 'trace', 'wonderguard',
 			];
-			if (bannedAbilities.includes(target.ability)) return;
 			if (target.getAbility().isPermanent || additionalBannedAbilities.includes(target.ability)) return;
 			if (bannedAbilities.includes(target.ability)) return;
 			this.add('-ability', this.effectData.target, ability, '[from] ability: Receiver', '[of] ' + target);
@@ -3625,6 +3618,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					if (secondary.chance) secondary.chance *= 2;
 				}
 			}
+			if (move.self?.chance) move.self.chance *= 2;
 		},
 		name: "Serene Grace",
 	},
@@ -3700,6 +3694,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (move.secondaries) {
 				delete move.secondaries;
 				// Technically not a secondary effect, but it is negated
+				delete move.self;
 				if (move.id === 'clangoroussoulblaze') delete move.selfBoost;
 				// Actual negation of `AfterMoveSecondary` effects implemented in scripts.js
 				move.hasSheerForce = true;
@@ -4478,7 +4473,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.effectData.gaveUp = true;
 			}
 		},
-		onUpdate(pokemon) {//FIX
+		onUpdate(pokemon) {
 			if (!pokemon.isStarted || this.effectData.gaveUp) return;
 			const possibleTargets = pokemon.side.foe.active.filter(foeActive => foeActive && this.isAdjacent(pokemon, foeActive));
 			while (possibleTargets.length) {
@@ -4486,11 +4481,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (possibleTargets.length > 1) rand = this.random(possibleTargets.length);
 				const target = possibleTargets[rand];
 				const ability = target.getAbility();
-				const bannedAbilities = [
-					'noability', 'battlebond', 'bijuuboost', 'comatose', 'crisisevolution', 'disguise', 'flowergift', 'forecast', 'gulpmissile', 'iceface', 'illusion', 'imposter', 'misdirection', 'multitype', 'neutralizinggas', 'powerconstruct', 'powerofalchemy', 'receiver', 'rkssystem', 'schooling', 'shadowstrikesealed', 'shieldsdown', 'stancechange', 'trace', 'zenmode',
-								const additionalBannedAbilities = [
-					// Zen Mode included here for compatability with Gen 5-6
-					'noability', 'flowergift', 'forecast', 'hungerswitch', 'illusion', 'imposter', 'neutralizinggas', 'powerofalchemy', 'receiver', 'trace', 'zenmode',
+				const additionalBannedAbilities = [
+					'noability', 'bijuuboost', 'crisisevolution', 'flowergift', 'forecast', 'illusion', 'imposter', 'misdirection', 'neutralizinggas', 'powerofalchemy', 'receiver', 'shadowstrikesealed', 'trace', 'wonderguard',
 				];
 				if (target.getAbility().isPermanent || additionalBannedAbilities.includes(target.ability)) {
 					possibleTargets.splice(rand, 1);
@@ -4748,9 +4740,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		name: "Volt Conduit",
 	},
-	wanderingspirit: {//FIX
+	wanderingspirit: {
 		onDamagingHit(damage, target, source, move) {
-			if (['illusion', 'misdirection', 'neutralizinggas', 'wanderingspirit', 'wonderguard'].includes(source.ability)) return;
+			const additionalBannedAbilities = ['misdirection', 'illusion', 'misdirection', 'neutralizinggas', 'shadowstrikesealed', 'wonderguard'];
+			if (source.getAbility().isPermanent || additionalBannedAbilities.includes(source.ability)) {
+				return;
+			}
+			
 			if (move.flags['contact']) {
 				const sourceAbility = source.setAbility('wanderingspirit', target);
 				if (!sourceAbility) return;
@@ -4762,14 +4758,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				target.setAbility(sourceAbility);
 			}
 		},
-		const additionalBannedAbilities = ['hungerswitch', 'illusion', 'neutralizinggas', 'wonderguard'];
-			if (source.getAbility().isPermanent || additionalBannedAbilities.includes(source.ability) ||
-				target.volatiles['dynamax']
-			) {
-				return;
-			}
-
-		isPermanent: true,
 		name: "Wandering Spirit",
 	},
 	waterabsorb: {
@@ -4927,6 +4915,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				}
 			},
 		},
+		isPermanent: true,
 		name: "Zen Mode",
 	},
 };

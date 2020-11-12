@@ -1,4 +1,4 @@
-export const PokedexText = {
+export const PokedexText: {[k: string]: PokedexText} = {
 	bulbasaur: {
 		name: "Bulbasaur",
 	},
@@ -3232,6 +3232,12 @@ export const PokedexText = {
 	},
 	dragapult: {
 		name: "Dragapult",
+	},
+	regieleki: {
+		name: "Regieleki",
+	},
+	regidrago: {
+		name: "Regidrago",
 	},
 	zacian: {
 		name: "Zacian",
