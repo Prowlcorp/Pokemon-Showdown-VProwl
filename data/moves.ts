@@ -857,47 +857,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "any",
 		type: "Fighting",
 	},
-	aurawheel: {
-		accuracy: 100,
-		basePower: 110,
-		category: "Physical",
-		name: "Aura Wheel",
-		pp: 10,
-		priority: 0,
-		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		},
-		secondary: {
-			chance: 100,
-			self: {
-				boosts: {
-					spe: 1,
-				},
-			},
-		},
-		onTry(pokemon) {
-			if (pokemon.species.baseSpecies === 'Morpeko') {
-				return;
-			}
-			this.hint("Only a Pokemon whose form is Morpeko or Morpeko-Hangry can use this move.");
-			this.add('-fail', pokemon, 'move: Aura Wheel');
-			return null;
-		},
-		onModifyType(move, pokemon) {
-			if (pokemon.species.name === 'Morpeko-Hangry') {
-				move.type = 'Dark';
-			} else {
-				move.type = 'Electric';
-			}
-		},
-		target: "normal",
-		type: "Electric",
-	},
 	aurorabeam: {
 		accuracy: 100,
 		basePower: 65,
