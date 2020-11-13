@@ -421,7 +421,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},
-	allycharge: { //FIX
+	allycharge: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -1152,7 +1152,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "any",
 		type: "Fighting",
 	},
-	auricdoubleslash: { //FIX
+	auricdoubleslash: {
 		accuracy: 100,
 		basePower: 50,
 		category: "Physical",
@@ -1341,7 +1341,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			return null;
 		},
 		onEffectiveness(typeMod, target, type, move) {
-			return typeMod + this.getEffectiveness('Steel', type);
+			return typeMod + this.dex.getEffectiveness('Steel', type);
 		},
 		self: {
 			boosts: {
@@ -1773,7 +1773,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "self",
 		type: "Normal",
 	},
-	bijuubomb: {//FIX
+	bijuubomb: {
 		accuracy: 85,
 		basePower: 200,
 		category: "Physical",
@@ -1792,8 +1792,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		onModifyMove(move, pokemon) {
-			if (pokemon.getStat('spa', false, true) > pokemon.getStat('atk', false, true)) move.category = 'Special';
+		onModifyType(move, pokemon) {
 			if (pokemon.species.name === 'Shukaku') {
 				move.type='Ground';
 			}
@@ -1801,8 +1800,11 @@ export const Moves: {[moveid: string]: MoveData} = {
 				move.type='Fire';
 			}
 		},
+		onModifyMove(move, pokemon) {
+			if (pokemon.getStat('spa', false, true) > pokemon.getStat('atk', false, true)) move.category = 'Special';
+		},
 		onEffectiveness(typeMod, target, type, move) {
-			return typeMod + this.getEffectiveness('Dark', type);
+			return typeMod + this.dex.getEffectiveness('Dark', type);
 		},
 		secondary: null,
 		target: "normal",
@@ -2001,7 +2003,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onEffectiveness(typeMod, target, type, move) {
-			return typeMod + this.getEffectiveness('Poison', type);
+			return typeMod + this.dex.getEffectiveness('Poison', type);
 		},
 		onHit(target, pokemon) {
 			pokemon.sethp(1);
@@ -2366,7 +2368,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
-	breakstep: {//FIX
+	breakstep: {
 		accuracy: 90,
 		basePower: 50,
 		category: "Physical",
@@ -3365,14 +3367,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Rock",
 	},
-	continuouscombat: {//FIX
+	continuouscombat: {
 		accuracy: 95,
 		basePower: 40,
 		basePowerCallback(pokemon, target, move) {
-			if (!pokemon.volatiles.continuouscombat || move.hit === 1) {
+			if (!pokemon.volatiles['continuouscombat'] || move.hit === 1) {
 				pokemon.addVolatile('continuouscombat');
 			}
-			return this.clampIntRange(move.basePower * pokemon.volatiles.continuouscombat.multiplier, 1, 160);
+			return this.clampIntRange(move.basePower * pokemon.volatiles['continuouscomba'].multiplier, 1, 160);
 		},
 		category: "Physical",
 		name: "Continuous Combat",
@@ -3402,7 +3404,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},
-	controlspore: {//FIX
+	controlspore: {
 		accuracy: 85,
 		basePower: 0,
 		category: "Status",
@@ -4008,7 +4010,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {basePower: 190},
 	},
-	cryokick: {//FIX
+	cryokick: {
 		accuracy: 90,
 		basePower: 85,
 		category: "Physical",
@@ -4031,7 +4033,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Ice",
 	},
-	cryoslash: {//FIX
+	cryoslash: {
 		accuracy: 100,
 		basePower: 70,
 		category: "Physical",
@@ -4171,7 +4173,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Dark",
 	},
-	darkmatter: {//FIX
+	darkmatter: {
 		accuracy: 90,
 		basePower: 150,
 		category: "Special",
@@ -4476,7 +4478,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Dragon",
 	},
-	devour: {//FIX
+	devour: {
 		accuracy: 120,
 		basePower: 80,
 		category: "Special",
@@ -4911,7 +4913,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {effect: 'clearnegativeboost'},
 	},
-	dracojet: {//FIX
+	dracojet: {
 		accuracy: 100,
 		basePower: 40,
 		category: "Physical",
@@ -5225,7 +5227,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},
-	drakonvoice: {//FIX
+	drakonvoice: {
 		accuracy: 90,
 		basePower: 105,
 		category: "Special",
@@ -5370,7 +5372,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Flying",
 	},
-	dynamicentry: {//FIX
+	dynamicentry: {
 		accuracy: 100,
 		basePower: 90,
 		category: "Physical",
@@ -5386,7 +5388,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onTry(pokemon, target) {
-			if (pokemon.activeTurns > 1) {
+			if (pokemon.activeMoveActions > 1) {
 				this.add('-fail', pokemon);
 				this.attrLastMove('[still]');
 				this.hint("Dynamic Entry only works on your first turn out.");
@@ -5504,14 +5506,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
-	echolocation: {//FIX
+	echolocation: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
 		name: "Echolocation",
 		pp: 15,
 		priority: 0,
-		flags: {snatch: 1},
+		flags: {snatch: 1, sound: 1},
 		onBasePower(basePower, pokemon, target) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
@@ -5983,7 +5985,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {spd: 1}},
 	},
-	epicenter: {//FIX
+	epicenter: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -6537,7 +6539,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "allAdjacentFoes",
 		type: "Dark",
 	},
-	finalfeather: {//FIX
+	finalfeather: {
 		accuracy: 100,
 		basePower: 130,
 		category: "Physical",
@@ -7004,7 +7006,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fire",
 	},
-	flameimpact: {//FIX
+	flameimpact: {
 		accuracy: 100,
 		basePower: 55,
 		category: "Physical",
@@ -9186,7 +9188,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			} else if (source.hasAbility('healerheart')) {
 				success = !!this.heal(this.modify(target.maxhp * 0.75));
 			} else {
-				success = !!this.heal(this.modify(target.maxhp * 0.5));
+				success = !!this.heal(Math.cell(target.maxhp * 0.5));
 			}
 			if (success && target.side !== source.side) {
 				target.staleness = 'external';
@@ -10674,7 +10676,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "allAdjacentFoes",
 		type: "Fire",
 	},
-	infernalblade: {//FIX
+	infernalblade: {
 		accuracy: 100,
 		basePower: 90,
 		category: "Physical",
@@ -10690,8 +10692,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onEffectiveness(typeMod, target, type, move) {
+			if(type !== 'Fairy' && target.hasType('Fairy')) return 0;
 			if(type === 'Fairy') return 1;
-			if(target.hasType('Fairy')) return 0;
 		},
 		secondary: {
 			chance: 20,
@@ -11517,7 +11519,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {atk: 1}},
 	},
-	legacyshield: {//FIX
+	legacyshield: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -11551,8 +11553,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 					if (move.isZ) target.getMoveHitData(move).zBrokeProtect = true;
 					return;
 				}
-				this.add('-activate', target, 'move: Protect');
-				let lockedmove = source.getVolatile('lockedmove');
+				if (move.smartTarget) {
+					move.smartTarget = false;
+				} else {
+					this.add('-activate', target, 'move: Protect');
+				}
+				const lockedmove = source.getVolatile('lockedmove');
 				if (lockedmove) {
 					// Outrage counter is reset
 					if (source.volatiles['lockedmove'].duration === 2) {
@@ -11560,10 +11566,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 				if (move.category === 'Physical') {
-					this.boost({def: 1}, target, target, this.getActiveMove("Legacy Shield"));
+					this.boost({def: 1}, target, target, this.dex.getActiveMove("Legacy Shield"));
 				}
 				if (move.category === 'Special') {
-					this.boost({spd: 1}, target, target, this.getActiveMove("Legacy Shield"));
+					this.boost({spd: 1}, target, target, this.dex.getActiveMove("Legacy Shield"));
 				}
 				return this.NOT_FAIL;
 			},
@@ -11623,7 +11629,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Ghost",
 	},
-	lifedew: {//FIX
+	lifedew: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -11638,16 +11644,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		heal: [1, 4],
-		onHit(target, source) {
-			for (const pokemon of source.side.active) {
-				if (source.hasAbility('healerheart')) {
-					this.heal(Math.ceil(pokemon.maxhp * 0.37), pokemon, source);
-				} else {
-					this.heal(Math.ceil(pokemon.maxhp / 4), pokemon, source);
-				}
+		onModifyMove(move, pokemon) {
+			if (source.hasAbility('healerheart')) {
+				move.heal = [37, 100];
 			}
 		},
+		heal: [1, 4],
 		secondary: null,
 		target: "allies",
 		type: "Water",
@@ -12213,7 +12215,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Psychic",
 		zMove: {boost: {spd: 1}},
 	},
-	magmadrift: {//FIX
+	magmadrift: {
 		accuracy: 100,
 		basePower: 90,
 		category: "Special",
@@ -13641,7 +13643,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Ground",
 		zMove: {boost: {spd: 1}},
 	},
-	muddywater: {//FIX
+	muddywater: {
 		accuracy: 85,
 		basePower: 90,
 		category: "Special",
@@ -13657,7 +13659,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onEffectiveness(typeMod, target, type, move) {
-			return typeMod + this.getEffectiveness('Ground', type);
+			return typeMod + this.dex.getEffectiveness('Ground', type);
 		},
 		secondary: {
 			chance: 30,
@@ -14694,7 +14696,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Poison",
 		zMove: {effect: 'clearnegativeboost'},
 	},
-	photonblade: {//FIX
+	photonblade: {
 		accuracy: 100,
 		basePower: 90,
 		category: "Physical",
@@ -14744,7 +14746,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Psychic",
 	},
-	photonkick: {//FIX
+	photonkick: {
 		accuracy: 90,
 		basePower: 85,
 		category: "Physical",
@@ -16275,7 +16277,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Water",
 	},
-	razorwhip: {//FIX
+	razorwhip: {
 		accuracy: 90,
 		basePower: 70,
 		category: "Physical",
@@ -17414,7 +17416,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Ground",
 	},
-	satellitedefense: {//FIX
+	satellitedefense: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -17444,27 +17446,31 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onTryHitPriority: 3,
 			onTryHit(target, source, move) {
-			if (!move.flags['protect']) {
-				if (move.isZ) target.getMoveHitData(move).zBrokeProtect = true;
-				return;
-			}
-			this.add('-activate', target, 'move: Protect');
-			let lockedmove = source.getVolatile('lockedmove');
-			if (lockedmove) {
-				// Outrage counter is reset
-				if (source.volatiles['lockedmove'].duration === 2) {
-					delete source.volatiles['lockedmove'];
+				if (!move.flags['protect']) {
+					if (move.isZ) target.getMoveHitData(move).zBrokeProtect = true;
+					return;
 				}
-			}
-			if (move.flags['contact']) {
-				this.damage(source.maxhp / 6, source, target);
-			}
-			return this.NOT_FAIL;
+				if (move.smartTarget) {
+					move.smartTarget = false;
+				} else {
+					this.add('-activate', target, 'move: Protect');
+				}
+				const lockedmove = source.getVolatile('lockedmove');
+				if (lockedmove) {
+					// Outrage counter is reset
+					if (source.volatiles['lockedmove'].duration === 2) {
+						delete source.volatiles['lockedmove'];
+					}
+				}
+				if (move.flags['contact']) {
+					this.damage(source.maxhp / 6, source, target);
+				}
+				return this.NOT_FAIL;
 			},
 			onHit(target, source, move) {
-			if (move.isZPowered && move.flags['contact']) {
-				this.damage(source.maxhp / 6, source, target);
-			}
+				if (move.isZPowered && move.flags['contact']) {
+					this.damage(source.maxhp / 6, source, target);
+				}
 			},
 		},
 		secondary: null,
@@ -18186,7 +18192,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Steel",
 		zMove: {effect: 'clearnegativeboost'},
 	},
-	shiveringconduct: {//FIX
+	shiveringconduct: {
 		accuracy: 95,
 		basePower: 80,
 		category: "Special",
@@ -19292,7 +19298,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Ghost",
 	},
-	soulwrecker: {//FIX
+	soulwrecker: {
 		accuracy: 30,
 		basePower: 0,
 		category: "Special",
@@ -19846,7 +19852,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {spd: 1}},
 	},
-	squawk: {//FIX
+	squawk: {
 		accuracy: 100,
 		basePower: 70,
 		category: "Special",
@@ -20535,7 +20541,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Dark",
 	},
-	suddenstrike: {//FIX
+	suddenstrike: {
 		accuracy: 100,
 		basePower: 40,
 		category: "Physical",
@@ -20617,7 +20623,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
-	supernova: {//FIX
+	supernova: {
 		accuracy: 100,
 		basePower: 225,
 		category: "Special",
@@ -20948,7 +20954,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {effect: 'clearnegativeboost'},
 	},
-	symphonicdiscord: {//FIX
+	symphonicdiscord: {
 		accuracy: 95,
 		basePower: 80,
 		category: "Physical",
@@ -21133,7 +21139,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
-	talonswipe: {//FIX
+	talonswipe: {
 		accuracy: 100,
 		basePower: 70,
 		category: "Physical",
@@ -21885,7 +21891,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {def: 1}},
 	},
-	titanicforce: {//FIX
+	titanicforce: {
 		accuracy: 30,
 		basePower: 0,
 		category: "Physical",
@@ -21970,7 +21976,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Dark",
 		zMove: {boost: {def: 1}},
 	},
-	tornadoclaw: {//FIX
+	tornadoclaw: {
 		accuracy: 90,
 		basePower: 70,
 		category: "Physical",
@@ -22537,7 +22543,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},
-	vampiricbite: {//FIX
+	vampiricbite: {
 		accuracy: 100,
 		basePower: 75,
 		category: "Physical",
@@ -23361,7 +23367,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {atk: 1}},
 	},
-	wormhole: {//FIX
+	wormhole: {
 		accuracy: 100,
 		basePower: 40,
 		category: "Special",
