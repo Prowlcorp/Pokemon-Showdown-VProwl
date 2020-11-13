@@ -1074,7 +1074,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.NOT_FAIL;
 			},
 			onHit(target, source, move) {
-				if (move.isZOrMaxPowered && move.flags['contact']) {
+				if (move.isZPowered && move.flags['contact']) {
 					source.trySetStatus('psn', target);
 				}
 			},
@@ -9897,7 +9897,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.NOT_FAIL;
 			},
 			onHit(target, source, move) {
-				if (move.isZOrMaxPowered && move.flags['contact']) {
+				if (move.isZPowered && move.flags['contact']) {
 					this.boost({atk: -1}, source, target, this.dex.getActiveMove("King's Shield"));
 				}
 			},
@@ -12675,7 +12675,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.NOT_FAIL;
 			},
 			onHit(target, source, move) {
-				if (move.isZOrMaxPowered && move.flags['contact']) {
+				if (move.isZPowered && move.flags['contact']) {
 					this.boost({def: -2}, source, target, this.dex.getActiveMove("Obstruct"));
 				}
 			},
@@ -17718,7 +17718,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.NOT_FAIL;
 			},
 			onHit(target, source, move) {
-				if (move.isZOrMaxPowered && move.flags['contact']) {
+				if (move.isZPowered && move.flags['contact']) {
 					this.damage(source.maxhp / 8, source, target);
 				}
 			},
