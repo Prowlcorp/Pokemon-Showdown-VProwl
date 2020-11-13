@@ -5038,7 +5038,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 100,
 		basePower: 0,
 		damageCallback(pokemon, target) {
-			return target.getUndynamaxedHP() - pokemon.hp;
+			return target.hp - pokemon.hp;
 		},
 		category: "Physical",
 		name: "Endeavor",
@@ -7640,7 +7640,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 0,
 		damageCallback(pokemon, target) {
-			const hp75 = Math.floor(target.getUndynamaxedHP() * 3 / 4);
+			const hp75 = Math.floor(target.hp * 3 / 4);
 			if (
 				target.volatiles['protect'] || target.volatiles['banefulbunker'] || target.volatiles['kingsshield'] ||
 				target.volatiles['spikyshield'] || target.side.getSideCondition('matblock')
@@ -11486,7 +11486,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			for (const id in Moves) {
 				const move = Moves[id];
 				if (move.realMove) continue;
-				if (move.isZ || move.isNonstandard) continue;
+				if (move.isZ) continue;
 				if (effect.noMetronome!.includes(move.name)) continue;
 				if (this.dex.getMove(id).gen > this.gen) continue;
 				moves.push(move);
@@ -12358,7 +12358,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 90,
 		basePower: 0,
 		damageCallback(pokemon, target) {
-			return this.clampIntRange(Math.floor(target.getUndynamaxedHP() / 2), 1);
+			return this.clampIntRange(Math.floor(target.hp / 2), 1);
 		},
 		category: "Special",
 		name: "Nature's Madness",
@@ -12886,7 +12886,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onHit(target, pokemon) {
-			const targetHP = target.getUndynamaxedHP();
+			const targetHP = target.hp;
 			const averagehp = Math.floor((targetHP + pokemon.hp) / 2) || 1;
 			const targetChange = targetHP - averagehp;
 			target.sethp(target.hp - targetChange);
@@ -18663,7 +18663,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 90,
 		basePower: 0,
 		damageCallback(pokemon, target) {
-			return this.clampIntRange(target.getUndynamaxedHP() / 2, 1);
+			return this.clampIntRange(target.hp / 2, 1);
 		},
 		category: "Physical",
 		name: "Super Fang",

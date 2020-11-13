@@ -812,17 +812,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onHit(target) {
-			let moves = [];
+			const noAssist = [
+				'assist', 'banefulbunker', 'beakblast', 'belch', 'bestow', 'bounce', 'celebrate', 'chatter', 'circlethrow', 'copycat', 'counter', 'covet', 'destinybond', 'detect', 'dig', 'dive', 'dragontail', 'endure', 'feint', 'fly', 'focuspunch', 'followme', 'helpinghand', 'holdhands', 'kingsshield', 'legacy shield', 'matblock', 'mefirst', 'metronome', 'mimic', 'mirrorcoat', 'mirrormove', 'naturepower', 'phantomforce', 'protect', 'ragepowder', 'roar', 'satellitedefense', 'shadowforce', 'shelltrap', 'sketch', 'skydrop', 'sleeptalk', 'snatch', 'spikyshield', 'spotlight', 'struggle', 'switcheroo', 'thief', 'transform', 'trick', 'whirlwind',
+			];
+
+			const moves = [];
 			for (const pokemon of target.side.pokemon) {
 				if (pokemon === target) continue;
 				for (const moveSlot of pokemon.moveSlots) {
-					let move = moveSlot.id;
-					let noAssist = [
-						'assist', 'banefulbunker', 'beakblast', 'belch', 'bestow', 'bounce', 'celebrate', 'chatter', 'circlethrow', 'copycat', 'counter', 'covet', 'destinybond', 'detect', 'dig', 'dive', 'dragontail', 'endure', 'feint', 'fly', 'focuspunch', 'followme', 'helpinghand', 'holdhands', 'kingsshield', 'matblock', 'mefirst', 'metronome', 'mimic', 'mirrorcoat', 'mirrormove', 'naturepower', 'phantomforce', 'protect', 'ragepowder', 'roar', 'shadowforce', 'shelltrap', 'sketch', 'skydrop', 'sleeptalk', 'snatch', 'spikyshield', 'spotlight', 'struggle', 'switcheroo', 'thief', 'transform', 'trick', 'whirlwind',
-					];
-					if (!noAssist.includes(move) && !this.getMove(move).isZ) {
-						moves.push(move);
+					const moveid = moveSlot.id;
+					if (noAssist.includes(moveid)) continue;
+					const move = this.dex.getMove(moveid);
+					if (move.isZ) {
+						continue;
 					}
+					moves.push(moveid);
 				}
 			}
 			let randomMove = '';
@@ -3526,11 +3530,16 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onHit(pokemon) {
-			let noCopycat = ['assist', 'banefulbunker', 'bestow', 'celebrate', 'chatter', 'circlethrow', 'copycat', 'counter', 'covet', 'destinybond', 'detect', 'dragontail', 'endure', 'feint', 'focuspunch', 'followme', 'helpinghand', 'mefirst', 'metronome', 'mimic', 'mirrorcoat', 'mirrormove', 'naturepower', 'protect', 'ragepowder', 'roar', 'sketch', 'sleeptalk', 'snatch', 'struggle', 'switcheroo', 'thief', 'transform', 'trick', 'whirlwind'];
-			if (!this.lastMove || noCopycat.includes(this.lastMove.id) || this.lastMove.isZ) {
+			const noCopycat = [
+				'assist', 'banefulbunker', 'beakblast', 'behemothbash', 'behemothblade', 'belch', 'bestow', 'celebrate', 'chatter', 'circlethrow', 'copycat', 'counter', 'covet', 'craftyshield', 'destinybond', 'detect', 'dragontail', 'endure', 'feint', 'focuspunch', 'followme', 'helpinghand', 'holdhands', 'kingsshield', 'legacyshield', 'matblock', 'mefirst', 'metronome', 'mimic', 'mirrorcoat', 'mirrormove', 'naturepower', 'obstruct', 'protect', 'ragepowder', 'roar', 'satellitedefense', 'shelltrap', 'sketch', 'sleeptalk', 'snatch', 'spikyshield', 'spotlight', 'struggle', 'switcheroo', 'thief', 'transform', 'trick', 'whirlwind',
+			];
+			let move: Move | ActiveMove | null = this.lastMove;
+			if (!move) return;
+
+			if (noCopycat.includes(move.id) || move.isZ) {
 				return false;
 			}
-			this.useMove(this.lastMove.id, pokemon);
+			this.useMove(move.id, pokemon);
 		},
 		secondary: null,
 		target: "self",
@@ -5843,14 +5852,18 @@ export const Moves: {[moveid: string]: MoveData} = {
 			duration: 3,
 			noCopy: true, // doesn't get copied by Z-Baton Pass
 			onStart(target) {
-				let noEncore = ['assist', 'copycat', 'encore', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'sketch', 'sleeptalk', 'struggle', 'transform'];
-				let moveIndex = target.lastMove ? target.moves.indexOf(target.lastMove.id) : -1;
-				if (!target.lastMove || target.lastMove.isZ || noEncore.includes(target.lastMove.id) || !target.moveSlots[moveIndex] || target.moveSlots[moveIndex].pp <= 0) {
+				const noEncore = [
+					'assist', 'copycat', 'encore', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'sketch', 'sleeptalk', 'struggle', 'transform',
+				];
+				let move: Move | ActiveMove | null = target.lastMove;
+				if (!move) return false;
+
+				const moveIndex = target.moves.indexOf(move.id);
+				if (move.isZ || noEncore.includes(move.id) || !target.moveSlots[moveIndex] || target.moveSlots[moveIndex].pp <= 0) {
 					// it failed
-					delete target.volatiles['encore'];
 					return false;
 				}
-				this.effectData.move = target.lastMove.id;
+				this.effectData.move = move.id;
 				this.add('-start', target, 'Encore');
 				if (!this.queue.willMove(target)) {
 					this.effectData.duration++;
@@ -5861,10 +5874,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onResidualOrder: 13,
 			onResidual(target) {
-				if (target.moves.includes(this.effectData.move) && target.moveSlots[target.moves.indexOf(this.effectData.move)].pp <= 0) {
+				if (target.moves.includes(this.effectData.move) &&
+					target.moveSlots[target.moves.indexOf(this.effectData.move)].pp <= 0) {
 					// early termination if you run out of PP
-					delete target.volatiles.encore;
-					this.add('-end', target, 'Encore');
+					target.removeVolatile('encore');
 				}
 			},
 			onEnd(target) {
@@ -10919,18 +10932,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onHit(target, source) {
 			if (!target.lastMove) return false;
-			let lastMove = target.lastMove;
-			let moveIndex = target.moves.indexOf(lastMove.id);
-			let noInstruct = [
+			const lastMove = target.lastMove;
+			const moveIndex = target.moves.indexOf(lastMove.id);
+			const noInstruct = [
 				'assist', 'beakblast', 'bide', 'celebrate', 'copycat', 'focuspunch', 'iceball', 'instruct', 'kingsshield', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'outrage', 'petaldance', 'rollout', 'shelltrap', 'sketch', 'sleeptalk', 'thrash', 'transform',
 			];
-			if (noInstruct.includes(lastMove.id) || lastMove.isZ || lastMove.flags['charge'] || lastMove.flags['recharge'] || target.volatiles['beakblast'] || target.volatiles['focuspunch'] || target.volatiles['shelltrap'] || (target.moveSlots[moveIndex] && target.moveSlots[moveIndex].pp <= 0)) {
+			if (
+				noInstruct.includes(lastMove.id) || lastMove.isZ ||
+				lastMove.flags['charge'] || lastMove.flags['recharge'] ||
+				target.volatiles['beakblast'] || target.volatiles['focuspunch'] || target.volatiles['shelltrap'] ||
+				(target.moveSlots[moveIndex] && target.moveSlots[moveIndex].pp <= 0)
+			) {
 				return false;
 			}
-			// Instructed Fake Out etc. should fail
-			target.activeTurns++;
 			this.add('-singleturn', target, 'move: Instruct', '[of] ' + source);
-			this.runMove(target.lastMove.id, target, /** @type {number} */(target.lastMoveTargetLoc));
+			this.runMove(target.lastMove.id, target, target.lastMoveTargetLoc!);
 		},
 		secondary: null,
 		target: "normal",
@@ -12998,22 +13014,23 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		noMetronome: ['afteryou', 'assist', 'banefulbunker', 'beakblast', 'belch', 'bestow', 'celebrate', 'chatter', 'copycat', 'counter', 'covet', 'craftyshield', 'destinybond', 'detect', 'diamondstorm', 'dragonascent', 'endure', 'feint', 'fleurcannon', 'focuspunch', 'followme', 'freezeshock', 'helpinghand', 'holdhands', 'hyperspacefury', 'hyperspacehole', 'iceburn', 'instruct', 'kingsshield', 'lightofruin', 'matblock', 'mefirst', 'metronome', 'mimic', 'mindblown', 'mirrorcoat', 'mirrormove', 'naturepower', 'originpulse', 'photongeyser', 'plasmafists', 'precipiceblades', 'protect', 'quash', 'quickguard', 'ragepowder', 'relicsong', 'secretsword', 'shelltrap', 'sketch', 'sleeptalk', 'snarl', 'snatch', 'snore', 'spectralthief', 'spikyshield', 'spotlight', 'steameruption', 'struggle', 'switcheroo', 'technoblast', 'thief', 'thousandarrows', 'thousandwaves', 'transform', 'trick', 'vcreate', 'wideguard'],
+		noMetronome: [
+			"After You", "Apple Acid", "Assist", "Baneful Bunker", "Beak Blast", "Behemoth Bash", "Behemoth Blade", "Belch", "Bestow", "Body Press", "Branch Poke", "Breaking Swipe", "Celebrate", "Chatter", "Clangorous Soul", "Copycat", "Counter", "Covet", "Crafty Shield", "Decorate", "Destiny Bond", "Detect", "Diamond Storm", "Dragon Ascent", "Dragon Energy", "Drum Beating", "Endure", "False Surrender", "Feint", "Fiery Wrath", "Fleur Cannon", "Focus Punch", "Follow Me", "Freeze Shock", "Freezing Glare", "Grav Apple", "Helping Hand", "Hold Hands", "Hyperspace Fury", "Hyperspace Hole", "Ice Burn", "Instruct", "King's Shield", "Life Dew", "Light of Ruin", "Mat Block", "Me First", "Meteor Assault", "Metronome", "Mimic", "Mind Blown", "Mirror Coat", "Mirror Move", "Moongeist Beam", "Nature Power", "Nature's Madness", "Obstruct", "Origin Pulse", "Overdrive", "Photon Geyser", "Plasma Fists", "Precipice Blades", "Protect", "Pyro Ball", "Quash", "Quick Guard", "Rage Powder", "Relic Song", "Secret Sword", "Shell Trap", "Sketch", "Sleep Talk", "Snarl", "Snatch", "Snore", "Spectral Thief", "Spiky Shield", "Spirit Break", "Spotlight", "Steam Eruption", "Steel Beam", "Struggle", "Sunsteel Strike", "Surging Strikes", "Switcheroo", "Techno Blast", "Thief", "Thousand Arrows", "Thousand Waves", "Thunder Cage", "Thunderous Kick", "Transform", "Trick", "V-create", "Wicked Blow", "Wide Guard",
+		],
 		onHit(target, source, effect) {
-			let moves = [];
-			for (let i in exports.BattleMovedex) {
-				let move = exports.BattleMovedex[i];
-				if (i !== move.id) continue;
+			const moves: MoveData[] = [];
+			for (const id in Moves) {
+				const move = Moves[id];
+				if (move.realMove) continue;
 				if (move.isZ) continue;
-				// @ts-ignore
-				if (effect.noMetronome.includes(move.id)) continue;
-				if (this.getMove(i).gen > this.gen) continue;
+				if (effect.noMetronome!.includes(move.name)) continue;
+				if (this.dex.getMove(id).gen > this.gen) continue;
 				moves.push(move);
 			}
 			let randomMove = '';
 			if (moves.length) {
-				moves.sort((a, b) => a.num - b.num);
-				randomMove = this.sample(moves).id;
+				moves.sort((a, b) => a.num! - b.num!);
+				randomMove = this.sample(moves).name;
 			}
 			if (!randomMove) {
 				return false;
@@ -18850,15 +18867,18 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (pokemon.status !== 'slp' && !pokemon.hasAbility('comatose')) return false;
 		},
 		onHit(pokemon) {
-			let moves = [];
+			const noSleepTalk = [
+				'assist', 'beakblast', 'belch', 'bide', 'celebrate', 'chatter', 'copycat', 'focuspunch', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'shelltrap', 'sketch', 'sleeptalk', 'uproar',
+			];
+			const moves = [];
 			for (const moveSlot of pokemon.moveSlots) {
-				const move = moveSlot.id;
-				const noSleepTalk = [
-					'assist', 'beakblast', 'belch', 'bide', 'celebrate', 'chatter', 'copycat', 'focuspunch', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'shelltrap', 'sketch', 'sleeptalk', 'uproar',
-				];
-				if (move && !(noSleepTalk.includes(move) || this.getMove(move).flags['charge'] || (this.getMove(move).isZ && this.getMove(move).basePower !== 1))) {
-					moves.push(move);
+				const moveid = moveSlot.id;
+				if (!moveid) continue;
+				const move = this.dex.getMove(moveid);
+				if (noSleepTalk.includes(moveid) || move.flags['charge'] || (move.isZ && move.basePower !== 1)) {
+					continue;
 				}
+				moves.push(moveid);
 			}
 			let randomMove = '';
 			if (moves.length) randomMove = this.sample(moves);
