@@ -111,6 +111,8 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Angel Wings",
 		desc: "Sharply raises Special Attack, Attack, and speed, and raises evasion. Gain weakness to all types. Can only be used once",
 		shortDesc: "Sharply raises SpA, Atk, Spe, raises evasion. Weak to all types.",
+
+		start: "  [POKEMON] is blessed by Angel Wings!",
 	},
 	appleacid: {
 		name: "Apple Acid",
@@ -2708,11 +2710,6 @@ export const MovesText: {[k: string]: MoveText} = {
 		shortDesc: "Shares HP of user and target equally.",
 
 		activate: "  The battlers shared their pain!",
-	},
-	paleowave: {
-		name: "Paleo Wave",
-		desc: "Has a 20% chance to lower the target's Attack by 1 stage.",
-		shortDesc: "20% chance to lower the target's Attack by 1.",
 	},
 	paraboliccharge: {
 		name: "Parabolic Charge",

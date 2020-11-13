@@ -421,7 +421,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},
-	allycharge: {
+	allycharge: { //FIX
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -573,7 +573,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Rock",
 	},
-	angelwings: {
+	angelwings: { //FIX
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -966,7 +966,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {effect: 'clearnegativeboost'},
 	},
-/*	"auraiaido": {
+/*	"auraiaido": { Fix
 		accuracy: 95,
 		basePower: 120,
 		basePowerCallback(pokemon, target, move) {
@@ -1011,7 +1011,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},*/
-	aurarage: { 
+	aurarage: { //FIX
 		accuracy: 95,
 		basePower: 90,
 		category: "Special",
@@ -1057,7 +1057,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},
-	aurasealingstrike: { 
+	aurasealingstrike: { //FIX
 		accuracy: 90,
 		basePower: 10,
 		basePowerCallback(pokemon, target, move) {
@@ -1152,7 +1152,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "any",
 		type: "Fighting",
 	},
-	auricdoubleslash: {
+	auricdoubleslash: { //FIX
 		accuracy: 100,
 		basePower: 50,
 		category: "Physical",
@@ -1317,7 +1317,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Ice",
 	},
-	axestrike: {
+	axestrike: { //FIX
 		accuracy: 90,
 		basePower: 120,
 		category: "Physical",
@@ -1581,7 +1581,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 	},
 	behemothbash: {
 		accuracy: 100,
-		basePower: 100,
+		basePower: 130,
 		category: "Physical",
 		name: "Behemoth Bash",
 		pp: 5,
@@ -1600,12 +1600,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 	},
 	behemothblade: {
 		accuracy: 100,
-		basePower: 100,
+		basePower: 130,
 		category: "Physical",
 		name: "Behemoth Blade",
 		pp: 5,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
+		flags: {contact: 1, protect: 1, mirror: 1, sword: 1},
 		onBasePower(basePower, pokemon, target) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
@@ -1773,7 +1773,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "self",
 		type: "Normal",
 	},
-	bijuubomb: {
+	bijuubomb: {//FIX
 		accuracy: 85,
 		basePower: 200,
 		category: "Physical",
@@ -1968,7 +1968,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {def: 1}},
 	},
-	bloodscythe: {
+	bloodscythe: {//FIX
 		accuracy: 100,
 		basePower: 0,
 		basePowerCallback(pokemon) {
@@ -2265,8 +2265,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 2,
 			onInvulnerability(target, source, move) {
-				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows'].includes(move.id)) {
-				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows', 'helpinghand', 'tornadobacklash'].includes(move.id)) {
+				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows', 'tornadobacklash'].includes(move.id)) {
 					return;
 				}
 				return false;
@@ -2367,7 +2366,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
-	breakstep: {
+	breakstep: {//FIX
 		accuracy: 90,
 		basePower: 50,
 		category: "Physical",
@@ -2447,7 +2446,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Water",
 	},
-	brutalslice: {
+	brutalslice: {//FIX
 		accuracy: 100,
 		basePower: 100,
 		category: "Physical",
@@ -3366,7 +3365,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Rock",
 	},
-	continuouscombat: {
+	continuouscombat: {//FIX
 		accuracy: 95,
 		basePower: 40,
 		basePowerCallback(pokemon, target, move) {
@@ -3403,7 +3402,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},
-	controlspore: {
+	controlspore: {//FIX
 		accuracy: 85,
 		basePower: 0,
 		category: "Status",
@@ -3574,7 +3573,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Steel",
 	},
-	corrode: {
+	corrode: {//FIX
 		accuracy: 100,
 		basePower: 70,
 		category: "Special",
@@ -4009,7 +4008,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {basePower: 190},
 	},
-	cryokick: {
+	cryokick: {//FIX
 		accuracy: 90,
 		basePower: 85,
 		category: "Physical",
@@ -4032,7 +4031,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Ice",
 	},
-	cryoslash: {
+	cryoslash: {//FIX
 		accuracy: 100,
 		basePower: 70,
 		category: "Physical",
@@ -4172,7 +4171,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Dark",
 	},
-	darkmatter: {
+	darkmatter: {//FIX
 		accuracy: 90,
 		basePower: 150,
 		category: "Special",
@@ -4477,7 +4476,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Dragon",
 	},
-	devour: {
+	devour: {//FIX
 		accuracy: 120,
 		basePower: 80,
 		category: "Special",
@@ -4796,13 +4795,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 					category: "Special",
 					priority: 0,
 					flags: {},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		},
 					effectType: 'Move',
 					isFutureMove: true,
 					type: 'Steel',
@@ -4919,7 +4911,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {effect: 'clearnegativeboost'},
 	},
-	dracojet: {
+	dracojet: {//FIX
 		accuracy: 100,
 		basePower: 40,
 		category: "Physical",
@@ -5233,7 +5225,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},
-	drakonvoice: {
+	drakonvoice: {//FIX
 		accuracy: 90,
 		basePower: 105,
 		category: "Special",
@@ -5378,7 +5370,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Flying",
 	},
-	dynamicentry: {
+	dynamicentry: {//FIX
 		accuracy: 100,
 		basePower: 90,
 		category: "Physical",
@@ -5512,7 +5504,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
-	echolocation: {
+	echolocation: {//FIX
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -5991,7 +5983,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {spd: 1}},
 	},
-	epicenter: {
+	epicenter: {//FIX
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -6036,7 +6028,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "allAdjacentFoes",
 		type: "Fire",
 	},
-	evowavedestruction: {
+	evowavedestruction: {//FIX
 		accuracy: 90,
 		basePower: 100,
 		category: "Physical",
@@ -6545,7 +6537,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "allAdjacentFoes",
 		type: "Dark",
 	},
-	finalfeather: {
+	finalfeather: {//FIX
 		accuracy: 100,
 		basePower: 130,
 		category: "Physical",
@@ -7012,7 +7004,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fire",
 	},
-	flameimpact: {
+	flameimpact: {//FIX
 		accuracy: 100,
 		basePower: 55,
 		category: "Physical",
@@ -7372,8 +7364,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 2,
 			onInvulnerability(target, source, move) {
-				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows'].includes(move.id)) {
-				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows', 'helpinghand', 'tornadobacklash'].includes(move.id)) {
+				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows', 'tornadobacklash'].includes(move.id)) {
 					return;
 				}
 				return false;
@@ -7967,13 +7958,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 					category: "Special",
 					priority: 0,
 					flags: {},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		},
 					ignoreImmunity: false,
 					effectType: 'Move',
 					isFutureMove: true,
@@ -8069,14 +8053,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (!targets.length) return false;
 			let didSomething = false;
 			for (const target of targets) {
-				didSomething = this.boost({atk: 1, spa: 1},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		}, target, source, move, false, true) || didSomething;
+				didSomething = this.boost({atk: 1, spa: 1}, target, source, move, false, true) || didSomething;
 			}
 			return didSomething;
 		},
@@ -9207,9 +9184,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (source.hasAbility('megalauncher')) {
 				success = !!this.heal(this.modify(target.maxhp, 0.75));
 			} else if (source.hasAbility('healerheart')) {
-				success = !!this.heal(Math.ceil(target.maxhp * 0.75));
+				success = !!this.heal(this.modify(target.maxhp * 0.75));
 			} else {
-				success = !!this.heal(Math.ceil(target.maxhp * 0.5));
+				success = !!this.heal(this.modify(target.maxhp * 0.5));
 			}
 			if (success && target.side !== source.side) {
 				target.staleness = 'external';
@@ -9381,7 +9358,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Steel",
 		zMove: {basePower: 160},
 	},
-	hellfire: {
+	hellfire: {//FIX
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -10213,7 +10190,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
-	hyperscan: {
+	hyperscan: {//FIX
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -10697,7 +10674,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "allAdjacentFoes",
 		type: "Fire",
 	},
-	infernalblade: {
+	infernalblade: {//FIX
 		accuracy: 100,
 		basePower: 90,
 		category: "Physical",
@@ -11182,7 +11159,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Dark",
 	},
-	kyuubiburn: {
+	kyuubiburn: {//FIX
 		accuracy: 90,
 		basePower: 130,
 		category: "Physical",
@@ -11540,7 +11517,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {atk: 1}},
 	},
-	legacyshield: {
+	legacyshield: {//FIX
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -11646,7 +11623,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Ghost",
 	},
-	lifedew: {
+	lifedew: {//FIX
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -11791,7 +11768,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Water",
 	},
-	livewire: {
+	livewire: {//FIX
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -12236,7 +12213,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Psychic",
 		zMove: {boost: {spd: 1}},
 	},
-	magmadrift: {
+	magmadrift: {//FIX
 		accuracy: 100,
 		basePower: 90,
 		category: "Special",
@@ -12804,7 +12781,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Steel",
 		zMove: {boost: {spa: 1}},
 	},
-	metalwhip: {
+	metalwhip: {//FIX
 		accuracy: 90,
 		basePower: 50,
 		category: "Physical",
@@ -12868,14 +12845,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return;
 			}
 			this.add('-prepare', attacker, move.name);
-			this.boost({spa: 1},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		}, attacker, attacker, move);
+			this.boost({spa: 1}, attacker, attacker, move);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -12928,8 +12898,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		noMetronome: [
-			"After You", "Apple Acid", "Assist", "Astral Barrage", "Aura Wheel", "Baneful Bunker", "Beak Blast", "Behemoth Bash", "Behemoth Blade", "Belch", "Bestow", "Body Press", "Branch Poke", "Breaking Swipe", "Celebrate", "Chatter", "Clangorous Soul", "Copycat", "Counter", "Covet", "Crafty Shield", "Decorate", "Destiny Bond", "Detect", "Diamond Storm", "Double Iron Bash", "Dragon Ascent", "Dragon Energy", "Drum Beating", "Endure", "False Surrender", "Feint", "Fiery Wrath", "Fleur Cannon", "Focus Punch", "Follow Me", "Freeze Shock", "Freezing Glare", "Glacial Lance", "Grav Apple", "Helping Hand", "Hold Hands", "Hyperspace Fury", "Hyperspace Hole", "Ice Burn", "Instruct", "King's Shield", "Life Dew", "Light of Ruin", "Mat Block", "Me First", "Meteor Assault", "Metronome", "Mimic", "Mind Blown", "Mirror Coat", "Mirror Move", "Moongeist Beam", "Nature Power", "Nature's Madness", "Obstruct", "Origin Pulse", "Overdrive", "Photon Geyser", "Plasma Fists", "Precipice Blades", "Protect", "Pyro Ball", "Quash", "Quick Guard", "Rage Powder", "Relic Song", "Secret Sword", "Shell Trap", "Sketch", "Sleep Talk", "Snap Trap", "Snarl", "Snatch", "Snore", "Spectral Thief", "Spiky Shield", "Spirit Break", "Spotlight", "Steam Eruption", "Steel Beam", "Strange Steam", "Struggle", "Sunsteel Strike", "Surging Strikes", "Switcheroo", "Techno Blast", "Thief", "Thousand Arrows", "Thousand Waves", "Thunder Cage", "Thunderous Kick", "Transform", "Trick", "V-create", "Wicked Blow", "Wide Guard",
-			"After You", "Apple Acid", "Assist", "Baneful Bunker", "Beak Blast", "Behemoth Bash", "Behemoth Blade", "Belch", "Bestow", "Body Press", "Branch Poke", "Breaking Swipe", "Celebrate", "Chatter", "Clangorous Soul", "Copycat", "Counter", "Covet", "Crafty Shield", "Decorate", "Destiny Bond", "Detect", "Diamond Storm", "Dragon Ascent", "Dragon Energy", "Drum Beating", "Endure", "False Surrender", "Feint", "Fiery Wrath", "Fleur Cannon", "Focus Punch", "Follow Me", "Freeze Shock", "Freezing Glare", "Grav Apple", "Helping Hand", "Hold Hands", "Hyperspace Fury", "Hyperspace Hole", "Ice Burn", "Instruct", "King's Shield", "Life Dew", "Light of Ruin", "Mat Block", "Me First", "Meteor Assault", "Metronome", "Mimic", "Mind Blown", "Mirror Coat", "Mirror Move", "Moongeist Beam", "Nature Power", "Nature's Madness", "Obstruct", "Origin Pulse", "Overdrive", "Photon Geyser", "Plasma Fists", "Precipice Blades", "Protect", "Pyro Ball", "Quash", "Quick Guard", "Rage Powder", "Relic Song", "Secret Sword", "Shell Trap", "Sketch", "Sleep Talk", "Snarl", "Snatch", "Snore", "Spectral Thief", "Spiky Shield", "Spirit Break", "Spotlight", "Steam Eruption", "Steel Beam", "Struggle", "Sunsteel Strike", "Surging Strikes", "Switcheroo", "Techno Blast", "Thief", "Thousand Arrows", "Thousand Waves", "Thunder Cage", "Thunderous Kick", "Transform", "Trick", "V-create", "Wicked Blow", "Wide Guard",
+			"After You", "Apple Acid", "Assist", "Baneful Bunker", "Beak Blast", "Behemoth Bash", "Behemoth Blade", "Belch", "Bestow", "Body Press", "Branch Poke", "Breaking Swipe", "Celebrate", "Chatter", "Clangorous Soul", "Copycat", "Counter", "Covet", "Crafty Shield", "Decorate", "Destiny Bond", "Detect", "Diamond Storm", "Dragon Ascent", "Dragon Energy", "Drum Beating", "Endure", "False Surrender", "Feint", "Fiery Wrath", "Fleur Cannon", "Focus Punch", "Follow Me", "Freeze Shock", "Freezing Glare", "Grav Apple", "Helping Hand", "Hold Hands", "Hyperspace Fury", "Hyperspace Hole", "Ice Burn", "Instruct", "King's Shield", "Legacy Shield", "Life Dew", "Light of Ruin", "Mat Block", "Me First", "Meteor Assault", "Metronome", "Mimic", "Mind Blown", "Mirror Coat", "Mirror Move", "Moongeist Beam", "Nature Power", "Nature's Madness", "Obstruct", "Origin Pulse", "Overdrive", "Photon Geyser", "Plasma Fists", "Precipice Blades", "Protect", "Pyro Ball", "Quash", "Quick Guard", "Rage Powder", "Relic Song", "Satellite Defense", "Secret Sword", "Shell Trap", "Sketch", "Sleep Talk", "Snarl", "Snatch", "Snore", "Spectral Thief", "Spiky Shield", "Spirit Break", "Spotlight", "Steam Eruption", "Steel Beam", "Struggle", "Sunsteel Strike", "Surging Strikes", "Switcheroo", "Techno Blast", "Thief", "Thousand Arrows", "Thousand Waves", "Thunder Cage", "Thunderous Kick", "Transform", "Trick", "V-create", "Wicked Blow", "Wide Guard",
 		],
 		onHit(target, source, effect) {
 			const moves: MoveData[] = [];
@@ -13070,7 +13039,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {spa: 1}},
 	},
-	minedeploy: {
+	minedeploy: {//FIX
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -13513,6 +13482,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			case 'raindance':
 			case 'primordialsea':
 			case 'sandstorm':
+			case 'ragingsandstorm':
 			case 'hail':
 				factor = 0.25;
 				break;
@@ -13549,6 +13519,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			case 'raindance':
 			case 'primordialsea':
 			case 'sandstorm':
+			case 'ragingsandstorm':
 			case 'hail':
 				factor = 0.25;
 				break;
@@ -13670,7 +13641,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Ground",
 		zMove: {boost: {spd: 1}},
 	},
-	muddywater: {
+	muddywater: {//FIX
 		accuracy: 85,
 		basePower: 90,
 		category: "Special",
@@ -14408,30 +14379,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {def: 1}},
 	},
-	paleowave: {
-		accuracy: 100,
-		basePower: 85,
-		category: "Special",
-		name: "Paleo Wave",
-		pp: 15,
-		priority: 0,
-		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		},
-		secondary: {
-			chance: 20,
-			boosts: {
-				atk: -1,
-			},
-		},
-		target: "normal",
-		type: "Rock",
-	},
 	paraboliccharge: {
 		accuracy: 100,
 		basePower: 65,
@@ -14598,7 +14545,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {effect: 'clearnegativeboost'},
 	},
-	permafrost: {
+	permafrost: {//FIX
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -14725,7 +14672,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Ghost",
 	},
 //CHANGE
-	pherogas: {
+	pherogas: {//FIX
 		accuracy: 100,
 		basePower: 0,
 		category: "Status",
@@ -14747,7 +14694,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Poison",
 		zMove: {effect: 'clearnegativeboost'},
 	},
-	photonblade: {
+	photonblade: {//FIX
 		accuracy: 100,
 		basePower: 90,
 		category: "Physical",
@@ -14796,6 +14743,29 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
+	},
+	photonkick: {//FIX
+		accuracy: 90,
+		basePower: 85,
+		category: "Physical",
+		name: "Photon Kick",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		critRatio: 2,
+		secondary: {
+			chance: 10,
+			status: 'par',
+		},
+		target: "normal",
+		type: "Electric",
 	},
 	pinmissile: {
 		accuracy: 95,
@@ -16305,7 +16275,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Water",
 	},
-	razorwhip: {
+	razorwhip: {//FIX
 		accuracy: 90,
 		basePower: 70,
 		category: "Physical",
@@ -17444,7 +17414,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Ground",
 	},
-	satellitedefense: {
+	satellitedefense: {//FIX
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -17502,7 +17472,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "???",
 		zMove: {boost: {def: 1, spd: 1}},
 	},
-	satellitestrike: {
+	satellitestrike: {//FIX
 		accuracy: 100,
 		basePower: 300,
 		category: "Special",
@@ -17591,7 +17561,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Scale Shot",
 		pp: 20,
 		priority: 0,
-		flags: {protect: 1, mirror: 1},
+		flags: {bullet: 1, protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
@@ -18216,7 +18186,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Steel",
 		zMove: {effect: 'clearnegativeboost'},
 	},
-	shiveringconduct: {
+	shiveringconduct: {//FIX
 		accuracy: 95,
 		basePower: 80,
 		category: "Special",
@@ -18680,8 +18650,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (source === this.effectData.target && target === this.effectData.source) {
 					return;
 				}
-				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows'].includes(move.id)) {
-				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows', 'helpinghand', 'tornadobacklash'].includes(move.id)) {
+				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows', 'tornadobacklash'].includes(move.id)) {
 					return;
 				}
 				return false;
@@ -19111,7 +19080,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Snipe Shot",
 		pp: 15,
 		priority: 0,
-		flags: {protect: 1, mirror: 1},
+		flags: {bullet: 1, protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
@@ -19323,7 +19292,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Ghost",
 	},
-	soulwrecker: {
+	soulwrecker: {//FIX
 		accuracy: 30,
 		basePower: 0,
 		category: "Special",
@@ -19344,7 +19313,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Psychic",
 		zMove: {basePower: 160},
 	},
-	soundstage: {
+	soundstage: {//FIX
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -19877,7 +19846,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {spd: 1}},
 	},
-	squawk: {
+	squawk: {//FIX
 		accuracy: 100,
 		basePower: 70,
 		category: "Special",
@@ -20566,7 +20535,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Dark",
 	},
-	suddenstrike: {
+	suddenstrike: {//FIX
 		accuracy: 100,
 		basePower: 40,
 		category: "Physical",
@@ -20648,7 +20617,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
-	supernova: {
+	supernova: {//FIX
 		accuracy: 100,
 		basePower: 225,
 		category: "Special",
@@ -20979,7 +20948,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {effect: 'clearnegativeboost'},
 	},
-	symphonicdiscord: {
+	symphonicdiscord: {//FIX
 		accuracy: 95,
 		basePower: 80,
 		category: "Physical",
@@ -21053,6 +21022,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			case 'raindance':
 			case 'primordialsea':
 			case 'sandstorm':
+			case 'ragingsandstorm':
 			case 'hail':
 				factor = 0.25;
 				break;
@@ -21163,7 +21133,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
-	talonswipe: {
+	talonswipe: {//FIX
 		accuracy: 100,
 		basePower: 70,
 		category: "Physical",
@@ -21520,7 +21490,11 @@ export const Moves: {[moveid: string]: MoveData} = {
 			case 'psychicterrain':
 				move.type = 'Psychic';
 				break;
+			case 'hellfire':
+				move.type = 'Fire';
+				break;
 			}
+			
 		},
 		onModifyMove(move, pokemon) {
 			if (this.field.terrain && pokemon.isGrounded()) {
@@ -21911,7 +21885,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {def: 1}},
 	},
-	titanicforce: {
+	titanicforce: {//FIX
 		accuracy: 30,
 		basePower: 0,
 		category: "Physical",
@@ -21996,7 +21970,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Dark",
 		zMove: {boost: {def: 1}},
 	},
-	tornadoclaw: {
+	tornadoclaw: {//FIX
 		accuracy: 90,
 		basePower: 70,
 		category: "Physical",
@@ -22563,7 +22537,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},
-	vampiricbite: {
+	vampiricbite: {//FIX
 		accuracy: 100,
 		basePower: 75,
 		category: "Physical",
@@ -23038,6 +23012,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				move.type = 'Water';
 				break;
 			case 'sandstorm':
+			case 'ragingsandstorm':
 				move.type = 'Rock';
 				break;
 			case 'hail':
@@ -23056,6 +23031,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				move.basePower *= 2;
 				break;
 			case 'sandstorm':
+			case 'ragingsandstorm':
 				move.basePower *= 2;
 				break;
 			case 'hail':
@@ -23385,7 +23361,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {atk: 1}},
 	},
-	wormhole: {
+	wormhole: {//FIX
 		accuracy: 100,
 		basePower: 40,
 		category: "Special",
@@ -23649,7 +23625,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 
 
 
-	tornadobacklash: {
+	tornadobacklash: {//FIX
 		accuracy: 95,
 		basePower: 60,
 		category: "Special",
