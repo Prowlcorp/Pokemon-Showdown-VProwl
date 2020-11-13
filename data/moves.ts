@@ -4783,37 +4783,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Electric",
 		zMove: {boost: {spd: 1}},
 	},
-	eeriespell: {
-		accuracy: 100,
-		basePower: 80,
-		category: "Special",
-		name: "Eerie Spell",
-		pp: 5,
-		priority: 0,
-		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		},
-		secondary: {
-			chance: 100,
-			onHit(target) {
-				if (!target.hp) return;
-				const move = target.lastMove;
-				if (!move || move.isZ) return;
-
-				const ppDeducted = target.deductPP(move.id, 3);
-				if (!ppDeducted) return;
-
-				this.add('-activate', target, 'move: Eerie Spell', move.name, ppDeducted);
-			},
-		},
-		target: "normal",
-		type: "Psychic",
-	},
 	eggbomb: {
 		accuracy: 75,
 		basePower: 100,
@@ -11551,7 +11520,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		noMetronome: [
-			"After You", "Apple Acid", "Assist", "Astral Barrage", "Aura Wheel", "Baneful Bunker", "Beak Blast", "Behemoth Bash", "Behemoth Blade", "Belch", "Bestow", "Body Press", "Branch Poke", "Breaking Swipe", "Celebrate", "Chatter", "Clangorous Soul", "Copycat", "Counter", "Covet", "Crafty Shield", "Decorate", "Destiny Bond", "Detect", "Diamond Storm", "Double Iron Bash", "Dragon Ascent", "Dragon Energy", "Drum Beating", "Endure", "False Surrender", "Feint", "Fiery Wrath", "Fleur Cannon", "Focus Punch", "Follow Me", "Freeze Shock", "Freezing Glare", "Glacial Lance", "Grav Apple", "Helping Hand", "Hold Hands", "Hyperspace Fury", "Hyperspace Hole", "Ice Burn", "Instruct", "Jungle Healing", "King's Shield", "Life Dew", "Light of Ruin", "Mat Block", "Me First", "Meteor Assault", "Metronome", "Mimic", "Mind Blown", "Mirror Coat", "Mirror Move", "Moongeist Beam", "Nature Power", "Nature's Madness", "Obstruct", "Origin Pulse", "Overdrive", "Photon Geyser", "Plasma Fists", "Precipice Blades", "Protect", "Pyro Ball", "Quash", "Quick Guard", "Rage Powder", "Relic Song", "Secret Sword", "Shell Trap", "Sketch", "Sleep Talk", "Snap Trap", "Snarl", "Snatch", "Snore", "Spectral Thief", "Spiky Shield", "Spirit Break", "Spotlight", "Steam Eruption", "Steel Beam", "Strange Steam", "Struggle", "Sunsteel Strike", "Surging Strikes", "Switcheroo", "Techno Blast", "Thief", "Thousand Arrows", "Thousand Waves", "Thunder Cage", "Thunderous Kick", "Transform", "Trick", "V-create", "Wicked Blow", "Wide Guard",
+			"After You", "Apple Acid", "Assist", "Astral Barrage", "Aura Wheel", "Baneful Bunker", "Beak Blast", "Behemoth Bash", "Behemoth Blade", "Belch", "Bestow", "Body Press", "Branch Poke", "Breaking Swipe", "Celebrate", "Chatter", "Clangorous Soul", "Copycat", "Counter", "Covet", "Crafty Shield", "Decorate", "Destiny Bond", "Detect", "Diamond Storm", "Double Iron Bash", "Dragon Ascent", "Dragon Energy", "Drum Beating", "Endure", "False Surrender", "Feint", "Fiery Wrath", "Fleur Cannon", "Focus Punch", "Follow Me", "Freeze Shock", "Freezing Glare", "Glacial Lance", "Grav Apple", "Helping Hand", "Hold Hands", "Hyperspace Fury", "Hyperspace Hole", "Ice Burn", "Instruct", "King's Shield", "Life Dew", "Light of Ruin", "Mat Block", "Me First", "Meteor Assault", "Metronome", "Mimic", "Mind Blown", "Mirror Coat", "Mirror Move", "Moongeist Beam", "Nature Power", "Nature's Madness", "Obstruct", "Origin Pulse", "Overdrive", "Photon Geyser", "Plasma Fists", "Precipice Blades", "Protect", "Pyro Ball", "Quash", "Quick Guard", "Rage Powder", "Relic Song", "Secret Sword", "Shell Trap", "Sketch", "Sleep Talk", "Snap Trap", "Snarl", "Snatch", "Snore", "Spectral Thief", "Spiky Shield", "Spirit Break", "Spotlight", "Steam Eruption", "Steel Beam", "Strange Steam", "Struggle", "Sunsteel Strike", "Surging Strikes", "Switcheroo", "Techno Blast", "Thief", "Thousand Arrows", "Thousand Waves", "Thunder Cage", "Thunderous Kick", "Transform", "Trick", "V-create", "Wicked Blow", "Wide Guard",
 		],
 		onHit(target, source, effect) {
 			const moves: MoveData[] = [];
@@ -16355,47 +16324,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Ice",
 		zMove: {basePower: 180},
 	},
-	shellsidearm: {
-		accuracy: 100,
-		basePower: 90,
-		category: "Special",
-		name: "Shell Side Arm",
-		pp: 10,
-		priority: 0,
-		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		},
-		onModifyMove(move, pokemon, target) {
-			if (!target) return;
-			const atk = pokemon.getStat('atk', false, true);
-			const spa = pokemon.getStat('spa', false, true);
-			const def = target.getStat('def', false, true);
-			const spd = target.getStat('spd', false, true);
-			const physical = Math.floor(Math.floor(Math.floor(Math.floor(2 * pokemon.level / 5 + 2) * 90 * atk) / def) / 50);
-			const special = Math.floor(Math.floor(Math.floor(Math.floor(2 * pokemon.level / 5 + 2) * 90 * spa) / spd) / 50);
-			if (physical > special || (physical === special && this.random(2) === 0)) {
-				move.category = 'Physical';
-				move.flags.contact = 1;
-			}
-		},
-		onHit(target, source, move) {
-			this.hint(move.category + " Shell Side Arm");
-		},
-		onAfterSubDamage(damage, target, source, move) {
-			this.hint(move.category + " Shell Side Arm");
-		},
-		secondary: {
-			chance: 20,
-			status: 'psn',
-		},
-		target: "normal",
-		type: "Poison",
-	},
 	shellsmash: {
 		accuracy: true,
 		basePower: 0,
@@ -17290,26 +17218,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Normal",
 		zMove: {boost: {evasion: 1}},
-	},
-	snaptrap: {
-		accuracy: 100,
-		basePower: 35,
-		category: "Physical",
-		name: "Snap Trap",
-		pp: 15,
-		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		},
-		volatileStatus: 'partiallytrapped',
-		secondary: null,
-		target: "normal",
-		type: "Grass",
 	},
 	snarl: {
 		accuracy: 95,
