@@ -23248,5 +23248,3 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {basePower: 120},
 	},
 };
-
-exports.BattleMovedex = BattleMovedex;
