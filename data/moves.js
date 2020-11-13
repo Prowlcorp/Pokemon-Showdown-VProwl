@@ -10294,48 +10294,48 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {},
 		onBasePower(basePower, pokemon, target) {
-		 if (pokemon.level > 100) {
-			let currentBoost = Math.floor((pokemon.level - 100) / 10);
-			currentBoost = currentBoost / 20 + 1;
-			return this.chainModify(currentBoost);
-		 }
-		},
-		onTryHit(target, source) {
-		 if (source.volatiles['hyperscan']) return false;
-		},
-		onHit(pokemon) {
-		 pokemon.addVolatile('hyperscan', pokemon);
-		 this.add('-activate', pokemon, 'move: Hyper Scan', '[of] ' + target);
-		},
-		condition: {
-		 noCopy: true,
-		 duration: 3,
-		 onRestart(pokemon) {
-			this.effectData.duration = 3;
-		 },
-		 onModifyMovePriority: -2,
-		 onModifyMove(move, source, target) {
-			if (move.category !== "Status") {
-				if (this.randomChance(7, 10)) {
-					source.addVolatile('lockon');
+			if (pokemon.level > 100) {
+				let currentBoost = Math.floor((pokemon.level - 100) / 10);
+				currentBoost = currentBoost / 20 + 1;
+				return this.chainModify(currentBoost);
 				}
-				if (this.randomChance(4, 10)) {
-					move.willCrit = true;
-				}
-				if (this.randomChance(6, 10)) {
-					if (target.getStat('def', false, true) > target.getStat('spd', false, true)) move.defensiveCategory = 'Special';
-					else move.defensiveCategory = 'Physical';
-				}
-				if (this.randomChance(6, 10)) {
-					move.ignoreAbility = true;
-				}
-				if (this.randomChance(5, 10)) {
-					if (move.priority >= 2) return;
-					move.priority = 2;
-				}
-			}
-		 },
-		},
+			},
+			onTryHit(target, source) {
+				if (source.volatiles['hyperscan']) return false;
+			},
+			onHit(pokemon) {
+				pokemon.addVolatile('hyperscan', pokemon);
+				this.add('-activate', pokemon, 'move: Hyper Scan', '[of] ' + target);
+			},
+			condition: {
+				noCopy: true,
+				duration: 3,
+				onRestart(pokemon) {
+					this.effectData.duration = 3;
+				},
+				onModifyMovePriority: -2,
+				onModifyMove(move, source, target) {
+					if (move.category !== "Status") {
+						if (this.randomChance(7, 10)) {
+							source.addVolatile('lockon');
+						}
+						if (this.randomChance(4, 10)) {
+							move.willCrit = true;
+						}
+						if (this.randomChance(6, 10)) {
+							if (target.getStat('def', false, true) > target.getStat('spd', false, true)) move.defensiveCategory = 'Special';
+							else move.defensiveCategory = 'Physical';
+						}
+						if (this.randomChance(6, 10)) {
+							move.ignoreAbility = true;
+						}
+						if (this.randomChance(5, 10)) {
+							if (move.priority >= 2) return;
+							move.priority = 2;
+						}
+					}
+				},
+			},
 		secondary: null,
 		target: "self",
 		type: "???",
@@ -17486,27 +17486,27 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 4,
 		flags: {},
 		onBasePower(basePower, pokemon, target) {
-		 if (pokemon.level > 100) {
-			let currentBoost = Math.floor((pokemon.level - 100) / 10);
-			currentBoost = currentBoost / 20 + 1;
-			return this.chainModify(currentBoost);
-		 }
+			if (pokemon.level > 100) {
+				let currentBoost = Math.floor((pokemon.level - 100) / 10);
+				currentBoost = currentBoost / 20 + 1;
+				return this.chainModify(currentBoost);
+			}
 		},
 		stallingMove: true,
 		volatileStatus: 'satellitedefense',
 		onTryHit(target, source, move) {
-		 return !!this.queue.willAct() && this.runEvent('StallMove', target);
+			return !!this.queue.willAct() && this.runEvent('StallMove', target);
 		},
 		onHit(pokemon) {
-		 pokemon.addVolatile('stall');
+			pokemon.addVolatile('stall');
 		},
 		condition: {
-		 duration: 1,
-		 onStart(target) {
+			duration: 1,
+			onStart(target) {
 			this.add('-singleturn', target, 'move: Protect');
-		 },
-		 onTryHitPriority: 3,
-		 onTryHit(target, source, move) {
+			},
+			onTryHitPriority: 3,
+			onTryHit(target, source, move) {
 			if (!move.flags['protect']) {
 				if (move.isZ) target.getMoveHitData(move).zBrokeProtect = true;
 				return;
@@ -17523,12 +17523,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.damage(source.maxhp / 6, source, target);
 			}
 			return this.NOT_FAIL;
-		 },
-		 onHit(target, source, move) {
+			},
+			onHit(target, source, move) {
 			if (move.isZPowered && move.flags['contact']) {
 				this.damage(source.maxhp / 6, source, target);
 			}
-		 },
+			},
 		},
 		secondary: null,
 		target: "self",
@@ -17544,31 +17544,31 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: { charge: 1, protect: 1, recharge: 1 },
 		onBasePower(basePower, pokemon, target) {
-		 let currentBoost = 1;
-		 if (pokemon.level > 100) {
-			currentBoost = Math.floor((pokemon.level - 100) / 10);
-			currentBoost = currentBoost / 20 + 1;
-		 }
-		 return this.chainModify(currentBoost);
+			let currentBoost = 1;
+			if (pokemon.level > 100) {
+				currentBoost = Math.floor((pokemon.level - 100) / 10);
+				currentBoost = currentBoost / 20 + 1;
+			}
+			return this.chainModify(currentBoost);
 		},
 		onTryMove(attacker, defender, move) {
-		 if (attacker.removeVolatile(move.id)) {
-			return;
-		 }
-		 this.add('-prepare', attacker, move.name, defender);
-		 if (attacker.volatiles['hyperscan']) {
-			this.attrLastMove('[still]');
-			this.addMove('-anim', attacker, move.name, defender);
-			return;
-		 }
-		 if (!this.runEvent('ChargeMove', attacker, defender, move)) {
-			return;
-		 }
-		 attacker.addVolatile('twoturnmove', defender);
-		 return null;
-		},
+			if (attacker.removeVolatile(move.id)) {
+				return;
+			}
+			this.add('-prepare', attacker, move.name, defender);
+			if (attacker.volatiles['hyperscan']) {
+				this.attrLastMove('[still]');
+				this.addMove('-anim', attacker, move.name, defender);
+				return;
+			}
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+			},
 		self: {
-		 volatileStatus: 'mustrecharge',
+			volatileStatus: 'mustrecharge',
 		},
 		secondary: null,
 		target: "normal",

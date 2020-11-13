@@ -1948,16 +1948,16 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
+			let currentBoost = 1;
 			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
+			}
+			if (target.hp * 2 <= target.maxhp) {
+				currentBoost *=2;
 				return this.chainModify(currentBoost);
 			}
-		},
-		onBasePower(basePower, pokemon, target) {
-			if (target.hp * 2 <= target.maxhp) {
-				return this.chainModify(2);
-			}
+			return this.chainModify(currentBoost);
 		},
 		secondary: null,
 		target: "normal",
@@ -5318,16 +5318,16 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
+			let currentBoost = 1;
 			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
+			}
+			if (pokemon.status && pokemon.status !== 'slp') {
+				currentBoost *=2;
 				return this.chainModify(currentBoost);
 			}
-		},
-		onBasePower(basePower, pokemon) {
-			if (pokemon.status && pokemon.status !== 'slp') {
-				return this.chainModify(2);
-			}
+			return this.chainModify(currentBoost);
 		},
 		secondary: null,
 		target: "normal",
@@ -6850,17 +6850,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
+			let currentBoost = 1;
 			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
 			}
-		},
-		onBasePower(basePower, pokemon) {
 			if (this.lastSuccessfulMoveThisTurn === 'fusionflare') {
 				this.debug('double power');
-				return this.chainModify(2);
+				currentBoost *=2;
+				return this.chainModify(currentBoost);
 			}
+			return this.chainModify(currentBoost);
 		},
 		secondary: null,
 		target: "normal",
@@ -6875,17 +6875,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1, defrost: 1},
 		onBasePower(basePower, pokemon, target) {
+			let currentBoost = 1;
 			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
 			}
-		},
-		onBasePower(basePower, pokemon) {
 			if (this.lastSuccessfulMoveThisTurn === 'fusionbolt') {
 				this.debug('double power');
-				return this.chainModify(2);
+				currentBoost *=2;
+				return this.chainModify(currentBoost);
 			}
+			return this.chainModify(currentBoost);
 		},
 		secondary: null,
 		target: "normal",
@@ -9915,19 +9915,19 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon, target, move) {
+			let currentBoost = 1;
 			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
 			}
-		},
-		onBasePower(basePower, source, target, move) {
 			const item = target.getItem();
 			if (!this.singleEvent('TakeItem', item, target.itemData, target, target, move, item)) return;
 			if (item.id) {
-				return this.chainModify(1.5);
+				currentBoost *=1.5;
+				return this.chainModify(currentBoost);
 			}
+			return this.chainModify(currentBoost);
 		},
 		onAfterHit(target, source) {
 			if (source.hp) {
@@ -14951,18 +14951,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+			let currentBoost = 1;
 			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
 			}
-		},
-		onBasePower(basePower, pokemon) {
 			if (pokemon.side.faintedLastTurn) {
 				this.debug('Boosted for a faint last turn');
-				return this.chainModify(2);
+				currentBoost *=2;
+				return this.chainModify(currentBoost);
 			}
+			return this.chainModify(currentBoost);
 		},
 		secondary: null,
 		target: "normal",
@@ -17346,12 +17345,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {charge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+			let currentBoost = 1;
 			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
+			}
+			if (this.field.isWeather(['raindance', 'primordialsea', 'sandstorm', 'hail'])) {
+				this.debug('weakened by weather');
+				currentBoost *= 0.5;
 				return this.chainModify(currentBoost);
 			}
+			return this.chainModify(currentBoost);
 		},
 		onTryMove(attacker, defender, move) {
 			if (attacker.removeVolatile(move.id)) {
@@ -17388,11 +17392,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {contact: 1, charge: 1, protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
+			let currentBoost = 1;
 			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
+			}
+			if (this.field.isWeather(['raindance', 'primordialsea', 'sandstorm', 'hail'])) {
+				this.debug('weakened by weather');
+				currentBoost *=0.5;
 				return this.chainModify(currentBoost);
 			}
+			return this.chainModify(currentBoost);
 		},
 		onTryMove(attacker, defender, move) {
 			if (attacker.removeVolatile(move.id)) {
@@ -20509,16 +20519,16 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
+			let currentBoost = 1;
 			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
+			}
+			if (target.status === 'psn' || target.status === 'tox') {
+				currentBoost *=2;
 				return this.chainModify(currentBoost);
 			}
-		},
-		onBasePower(basePower, pokemon, target) {
-			if (target.status === 'psn' || target.status === 'tox') {
-				return this.chainModify(2);
-			}
+			return this.chainModify(currentBoost);
 		},
 		secondary: null,
 		target: "normal",
