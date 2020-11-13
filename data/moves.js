@@ -161,7 +161,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Poison",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	aciddownpour: {
 		accuracy: true,
@@ -271,7 +271,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "adjacentAllyOrSelf",
 		type: "Normal",
-		zMoveEffect: 'crit2',
+		zMove: {effect: 'crit2'},
 	},
 	aerialace: {
 		accuracy: true,
@@ -343,7 +343,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spe: 2},
+		zMove: {boost: {spe: 2}},
 	},
 	agility: {
 		accuracy: true,
@@ -366,7 +366,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Psychic",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	aircutter: {
 		accuracy: 95,
@@ -470,7 +470,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "adjacentAlly",
 		type: "Electric",
-		zMoveBoost: {spd: 2},
+		zMove: {boost: {spd: 2}},
 	},
 	allyswitch: {
 		accuracy: true,
@@ -500,7 +500,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Psychic",
-		zMoveBoost: {spe: 2},
+		zMove: {boost: {spe: 2}},
 	},
 	amnesia: {
 		accuracy: true,
@@ -528,7 +528,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "self",
 		type: "Psychic",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	anchorshot: {
 		accuracy: 100,
@@ -639,7 +639,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	aquajet: {
 		accuracy: 100,
@@ -689,7 +689,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Water",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	aquatail: {
 		accuracy: 90,
@@ -761,7 +761,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allyTeam",
 		type: "Grass",
-		zMoveEffect: 'heal',
+		zMove: {effect: 'heal'},
 	},
 	aromaticmist: {
 		accuracy: true,
@@ -784,7 +784,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "adjacentAlly",
 		type: "Fairy",
-		zMoveBoost: {spd: 2},
+		zMove: {boost: {spd: 2}},
 	},
 	assist: {
 		accuracy: true,
@@ -955,7 +955,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 /*	"auraiaido": {
 		accuracy: 95,
@@ -1248,7 +1248,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allySide",
 		type: "Ice",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	autotomize: {
 		accuracy: true,
@@ -1301,7 +1301,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Steel",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	avalanche: {
 		accuracy: 100,
@@ -1405,7 +1405,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fairy",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	banefulbunker: {
 		accuracy: true,
@@ -1463,7 +1463,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Poison",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	barrage: {
 		accuracy: 85,
@@ -1507,7 +1507,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Psychic",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	batonpass: {
 		accuracy: true,
@@ -1528,7 +1528,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	beakblast: {
 		accuracy: 100,
@@ -1642,7 +1642,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'heal',
+		zMove: {effect: 'heal'},
 	},
 	bestow: {
 		accuracy: true,
@@ -1674,7 +1674,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spe: 2},
+		zMove: {boost: {spe: 2}},
 	},
 	bide: {
 		accuracy: true,
@@ -1953,7 +1953,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	bloodscythe: {//Cust
 		accuracy: 100,
@@ -2608,7 +2608,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Fighting",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	bulldoze: {
 		accuracy: 100,
@@ -2730,7 +2730,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Psychic",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	camouflage: {
 		accuracy: true,
@@ -2767,7 +2767,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {evasion: 1},
+		zMove: {boost: {evasion: 1}},
 	},
 	captivate: {
 		accuracy: 100,
@@ -2796,7 +2796,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Normal",
-		zMoveBoost: {spd: 2},
+		zMove: {boost: {spd: 2}},
 	},
 	catastropika: {
 		accuracy: true,
@@ -2839,7 +2839,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1},
+		zMove: {boost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1}},
 	},
 	charge: {
 		accuracy: true,
@@ -2879,7 +2879,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Electric",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	chargebeam: {
 		accuracy: 90,
@@ -2929,7 +2929,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fairy",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	chatter: {
 		accuracy: 100,
@@ -3147,7 +3147,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Poison",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	cometpunch: {
 		accuracy: 85,
@@ -3191,7 +3191,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	confuseray: {
 		accuracy: 100,
@@ -3212,7 +3212,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ghost",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	confusion: {
 		accuracy: 100,
@@ -3345,7 +3345,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Bug",
-		zMoveBoost: {def: 1, spd: 1},
+		zMove: {boost: {def: 1, spd: 1}},
 	},
 	conversion: {
 		accuracy: true,
@@ -3370,7 +3370,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1},
+		zMove: {boost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1}},
 	},
 	conversion2: {
 		accuracy: true,
@@ -3411,7 +3411,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveEffect: 'heal',
+		zMove: {effect: 'heal'},
 	},
 	copycat: {
 		accuracy: true,
@@ -3438,7 +3438,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {accuracy: 1},
+		zMove: {boost: {accuracy: 1}},
 	},
 	coreenforcer: {
 		accuracy: 100,
@@ -3539,7 +3539,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Psychic",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	cottonguard: {
 		accuracy: true,
@@ -3562,7 +3562,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Grass",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	cottonspore: {
 		accuracy: 100,
@@ -3585,7 +3585,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Grass",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	counter: {
 		accuracy: 100,
@@ -3692,7 +3692,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Normal",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	covet: {
 		accuracy: 100,
@@ -3783,7 +3783,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allySide",
 		type: "Fairy",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	crosschop: {
 		accuracy: 80,
@@ -4003,7 +4003,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		nonGhostTarget: "self",
 		type: "Ghost",
-		zMoveEffect: 'curse',
+		zMove: {effect: 'curse'},
 	},
 	cut: {
 		accuracy: 95,
@@ -4144,7 +4144,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Dark",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	dazzlinggleam: {
 		accuracy: 100,
@@ -4188,7 +4188,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fairy",
-		zMoveEffect: 'redirect',
+		zMove: {effect: 'redirect'},
 	},
 	defendorder: {
 		accuracy: true,
@@ -4212,7 +4212,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Bug",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	defensecurl: {
 		accuracy: true,
@@ -4239,7 +4239,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {accuracy: 1},
+		zMove: {boost: {accuracy: 1}},
 	},
 	defog: {
 		accuracy: true,
@@ -4279,7 +4279,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Flying",
-		zMoveBoost: {accuracy: 1},
+		zMove: {boost: {accuracy: 1}},
 	},
 	destinybond: {
 		accuracy: true,
@@ -4328,7 +4328,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Ghost",
-		zMoveEffect: 'redirect',
+		zMove: {effect: 'redirect'},
 	},
 	detect: {
 		accuracy: true,
@@ -4356,7 +4356,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Fighting",
-		zMoveBoost: {evasion: 1},
+		zMove: {boost: {evasion: 1}},
 	},
 	devastatingdrake: {
 		accuracy: true,
@@ -4553,7 +4553,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	disarmingvoice: {
 		accuracy: true,
@@ -4830,7 +4830,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	dracojet: {
 		accuracy: 100,
@@ -4967,7 +4967,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Dragon",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	dragondarts: {
 		accuracy: 100,
@@ -5443,7 +5443,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Bug",
-		zMoveEffect: 'crit2',
+		zMove: {effect: 'crit2'},
 	},
 	eerieimpulse: {
 		accuracy: 100,
@@ -5466,7 +5466,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Electric",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	eggbomb: {
 		accuracy: 75,
@@ -5549,7 +5549,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Electric",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	electrify: {
 		accuracy: true,
@@ -5586,7 +5586,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Electric",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	electroball: {
 		accuracy: 100,
@@ -5680,7 +5680,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	ember: {
 		accuracy: 100,
@@ -5773,7 +5773,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	endeavor: {
 		accuracy: 100,
@@ -5843,7 +5843,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	energyball: {
 		accuracy: 100,
@@ -5911,7 +5911,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	epicenter: {
 		accuracy: true,
@@ -5934,7 +5934,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Ground",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	eruption: {
 		accuracy: 100,
@@ -6197,7 +6197,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Fairy",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	fairywind: {
 		accuracy: 100,
@@ -6271,7 +6271,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	falsesurrender: {
 		accuracy: true,
@@ -6335,7 +6335,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Flying",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	feint: {
 		accuracy: 100,
@@ -7030,7 +7030,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {evasion: 1},
+		zMove: {boost: {evasion: 1}},
 	},
 	flashcannon: {
 		accuracy: 100,
@@ -7079,7 +7079,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	fleurcannon: {
 		accuracy: 90,
@@ -7185,7 +7185,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fairy",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	flowershield: {
 		accuracy: true,
@@ -7219,7 +7219,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Fairy",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	fly: {
 		accuracy: 95,
@@ -7352,7 +7352,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {accuracy: 1},
+		zMove: {boost: {accuracy: 1}},
 	},
 	focuspunch: {
 		accuracy: 100,
@@ -7433,7 +7433,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	forcepalm: {
 		accuracy: 100,
@@ -7494,7 +7494,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveEffect: 'crit2',
+		zMove: {effect: 'crit2'},
 	},
 	forestscurse: {
 		accuracy: 100,
@@ -7519,7 +7519,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMoveBoost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1},
+		zMove: {boost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1}},
 	},
 	foulplay: {
 		accuracy: 100,
@@ -7894,7 +7894,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Poison",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	geargrind: {
 		accuracy: 85,
@@ -7949,7 +7949,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allySide",
 		type: "Steel",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	gemshatter: {
 		accuracy: 95,
@@ -8083,7 +8083,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Fairy",
-		zMoveBoost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1},
+		zMove: {boost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1}},
 	},
 	gigadrain: {
 		accuracy: 100,
@@ -8193,7 +8193,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	grassknot: {
 		accuracy: 100,
@@ -8329,7 +8329,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	grassyterrain: {
 		accuracy: true,
@@ -8392,7 +8392,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Grass",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	gravity: {
 		accuracy: true,
@@ -8476,7 +8476,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Psychic",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	growl: {
 		accuracy: 100,
@@ -8499,7 +8499,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Normal",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	growth: {
 		accuracy: true,
@@ -8526,7 +8526,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	grudge: {
 		accuracy: true,
@@ -8568,7 +8568,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Ghost",
-		zMoveEffect: 'redirect',
+		zMove: {effect: 'redirect'},
 	},
 	guardianofalola: {
 		accuracy: true,
@@ -8624,7 +8624,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	guardswap: {
 		accuracy: true,
@@ -8660,7 +8660,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	guillotine: {
 		accuracy: 30,
@@ -8771,7 +8771,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Ice",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	hammerarm: {
 		accuracy: 90,
@@ -8819,7 +8819,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allySide",
 		type: "Normal",
-		zMoveBoost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1},
+		zMove: {boost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1}},
 	},
 	harden: {
 		accuracy: true,
@@ -8842,7 +8842,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	haze: {
 		accuracy: true,
@@ -8868,7 +8868,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Ice",
-		zMoveEffect: 'heal',
+		zMove: {effect: 'heal'},
 	},
 	headbutt: {
 		accuracy: 100,
@@ -8962,7 +8962,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allyTeam",
 		type: "Normal",
-		zMoveEffect: 'heal',
+		zMove: {effect: 'heal'},
 	},
 	healblock: {
 		accuracy: 100,
@@ -9018,7 +9018,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Psychic",
-		zMoveBoost: {spa: 2},
+		zMove: {boost: {spa: 2}},
 	},
 	healingwish: {
 		accuracy: true,
@@ -9078,7 +9078,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Bug",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	healpulse: {
 		accuracy: true,
@@ -9112,7 +9112,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Psychic",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	heartstamp: {
 		accuracy: 100,
@@ -9171,7 +9171,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveEffect: 'crit2',
+		zMove: {effect: 'crit2'},
 	},
 	heatcrash: {
 		accuracy: 100,
@@ -9373,7 +9373,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Fire",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	helpinghand: {
 		accuracy: true,
@@ -9413,7 +9413,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "adjacentAlly",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	hex: {
 		accuracy: 100,
@@ -9850,7 +9850,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "adjacentAlly",
 		type: "Normal",
-		zMoveBoost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1},
+		zMove: {boost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1}},
 	},
 	honeclaws: {
 		accuracy: true,
@@ -9874,7 +9874,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Dark",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	hornattack: {
 		accuracy: 100,
@@ -9959,7 +9959,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	hurricane: {
 		accuracy: 70,
@@ -10154,7 +10154,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "???",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	hyperspacefury: {
 		accuracy: true,
@@ -10254,7 +10254,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	iceball: {
 		accuracy: 90,
@@ -10569,7 +10569,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pressureTarget: "foeSide",
 		target: "self",
 		type: "Psychic",
-		zMoveBoost: {spd: 2},
+		zMove: {boost: {spd: 2}},
 	},
 	incinerate: {
 		accuracy: 100,
@@ -10731,7 +10731,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Grass",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	instruct: {
 		accuracy: true,
@@ -10766,7 +10766,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	iondeluge: {
 		accuracy: true,
@@ -10800,7 +10800,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Electric",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	irondefense: {
 		accuracy: true,
@@ -10823,7 +10823,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Steel",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	ironhead: {
 		accuracy: 100,
@@ -10990,7 +10990,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveBoost: {evasion: 1},
+		zMove: {boost: {evasion: 1}},
 	},
 	kingsshield: {
 		accuracy: true,
@@ -11048,7 +11048,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Steel",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	knockoff: {
 		accuracy: 100,
@@ -11190,7 +11190,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	lastresort: {
 		accuracy: 100,
@@ -11404,7 +11404,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	leer: {
 		accuracy: 100,
@@ -11427,7 +11427,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Normal",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	legacyshield: {
 		accuracy: true,
@@ -11491,7 +11491,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Steel",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	letssnuggleforever: {
 		accuracy: true,
@@ -11563,7 +11563,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allyTeam",
 		type: "Water",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	lightofruin: {
 		accuracy: 90,
@@ -11632,7 +11632,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allySide",
 		type: "Psychic",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	lightthatburnsthesky: {
 		accuracy: true,
@@ -11723,7 +11723,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "foeSide",
 		type: "Electric",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	lockon: {
 		accuracy: true,
@@ -11757,7 +11757,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	lovelykiss: {
 		accuracy: 75,
@@ -11778,7 +11778,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	lowkick: {
 		accuracy: 100,
@@ -11875,7 +11875,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allySide",
 		type: "Normal",
-		zMoveBoost: {evasion: 1},
+		zMove: {boost: {evasion: 1}},
 	},
 	lunardance: {
 		accuracy: true,
@@ -12076,7 +12076,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Psychic",
-		zMoveBoost: {spd: 2},
+		zMove: {boost: {spd: 2}},
 	},
 	magicroom: {
 		accuracy: true,
@@ -12118,7 +12118,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Psychic",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	magmadrift: {
 		accuracy: 100,
@@ -12213,7 +12213,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allySide",
 		type: "Electric",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	magnetrise: {
 		accuracy: true,
@@ -12248,7 +12248,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Electric",
-		zMoveBoost: {evasion: 1},
+		zMove: {boost: {evasion: 1}},
 	},
 	magnitude: {
 		accuracy: 100,
@@ -12367,7 +12367,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allySide",
 		type: "Fighting",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	meanlook: {
 		accuracy: true,
@@ -12390,7 +12390,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	meditate: {
 		accuracy: true,
@@ -12413,7 +12413,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Psychic",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	mefirst: {
 		accuracy: true,
@@ -12455,7 +12455,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "adjacentFoe",
 		type: "Normal",
-		zMoveBoost: {spe: 2},
+		zMove: {boost: {spe: 2}},
 	},
 	megadrain: {
 		accuracy: 100,
@@ -12561,7 +12561,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMoveEffect: 'healreplacement',
+		zMove: {effect: 'healreplacement'},
 	},
 	menacingmoonrazemaelstrom: {
 		accuracy: true,
@@ -12687,7 +12687,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Steel",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	metalwhip: {
 		accuracy: 90,
@@ -12822,7 +12822,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	mimic: {
 		accuracy: true,
@@ -12859,7 +12859,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {accuracy: 1},
+		zMove: {boost: {accuracy: 1}},
 	},
 	mindblown: {
 		accuracy: 100,
@@ -12912,7 +12912,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	minedeploy: {
 		accuracy: true,
@@ -12942,7 +12942,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "foeSide",
 		type: "Steel",
-		zMoveBoost: {spe: 2},
+		zMove: {boost: {spe: 2}},
 	},
 	minimize: {
 		accuracy: true,
@@ -12980,7 +12980,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	miracleeye: {
 		accuracy: true,
@@ -13018,7 +13018,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	mirrorcoat: {
 		accuracy: 100,
@@ -13095,7 +13095,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Flying",
-		zMoveBoost: {atk: 2},
+		zMove: {boost: {atk: 2}},
 	},
 	mirrorshot: {
 		accuracy: 85,
@@ -13169,7 +13169,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allySide",
 		type: "Ice",
-		zMoveEffect: 'heal',
+		zMove: {effect: 'heal'},
 	},
 	mistball: {
 		accuracy: 100,
@@ -13256,7 +13256,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Fairy",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	moonblast: {
 		accuracy: 100,
@@ -13331,7 +13331,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Fairy",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	morningsun: {
 		accuracy: true,
@@ -13360,7 +13360,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	mudbomb: {
 		accuracy: 85,
@@ -13473,7 +13473,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Ground",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	muddywater: {
 		accuracy: 85,
@@ -13573,7 +13573,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Dark",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	naturalgift: {
 		accuracy: 100,
@@ -13788,7 +13788,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ghost",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	nightshade: {
 		accuracy: 100,
@@ -13857,7 +13857,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	noretreat: {
 		accuracy: true,
@@ -13904,7 +13904,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Fighting",
-		zMoveBoost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1},
+		zMove: {boost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1}},
 	},
 	nuzzle: {
 		accuracy: 100,
@@ -14006,7 +14006,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Dark",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	oceanicoperetta: {
 		accuracy: true,
@@ -14075,7 +14075,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	ominouswind: {
 		accuracy: 100,
@@ -14225,7 +14225,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	paleowave: {
 		accuracy: 100,
@@ -14296,7 +14296,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMoveEffect: 'healreplacement',
+		zMove: {effect: 'healreplacement'},
 	},
 	payback: {
 		accuracy: 100,
@@ -14418,7 +14418,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	permafrost: {
 		accuracy: true,
@@ -14463,7 +14463,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "foeSide",
 		type: "Ice",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	petalblizzard: {
 		accuracy: 100,
@@ -14580,7 +14580,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Poison",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	photonblade: {
 		accuracy: 100,
@@ -14721,7 +14721,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	playrough: {
 		accuracy: 90,
@@ -14820,7 +14820,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Poison",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	poisonjab: {
 		accuracy: 100,
@@ -14864,7 +14864,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Poison",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	poisonsting: {
 		accuracy: 100,
@@ -14992,7 +14992,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Bug",
-		zMoveBoost: {spd: 2},
+		zMove: {boost: {spd: 2}},
 	},
 	powdersnow: {
 		accuracy: 100,
@@ -15064,7 +15064,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	powerswap: {
 		accuracy: true,
@@ -15100,7 +15100,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	powertrick: {
 		accuracy: true,
@@ -15146,7 +15146,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Psychic",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	powertrip: {
 		accuracy: 100,
@@ -15340,7 +15340,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	psybeam: {
 		accuracy: 100,
@@ -15398,7 +15398,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveEffect: 'heal',
+		zMove: {effect: 'heal'},
 	},
 	psychic: {
 		accuracy: 100,
@@ -15508,7 +15508,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Psychic",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	psychoboost: {
 		accuracy: 90,
@@ -15586,7 +15586,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveBoost: {spa: 2},
+		zMove: {boost: {spa: 2}},
 	},
 	psyshock: {
 		accuracy: 100,
@@ -15720,7 +15720,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Poison",
-		zMoveBoost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1},
+		zMove: {boost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1}},
 	},
 	pursuit: {
 		accuracy: 100,
@@ -15851,7 +15851,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	quickattack: {
 		accuracy: 100,
@@ -15923,7 +15923,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allySide",
 		type: "Fighting",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	quiverdance: {
 		accuracy: true,
@@ -15948,7 +15948,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Bug",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	rage: {
 		accuracy: 100,
@@ -16023,7 +16023,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Bug",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	raindance: {
 		accuracy: true,
@@ -16044,7 +16044,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Water",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	rapidspin: {
 		accuracy: 100,
@@ -16214,7 +16214,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	recycle: {
 		accuracy: true,
@@ -16241,7 +16241,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {spe: 2},
+		zMove: {boost: {spe: 2}},
 	},
 	reflect: {
 		accuracy: true,
@@ -16287,7 +16287,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allySide",
 		type: "Psychic",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	reflecttype: {
 		accuracy: true,
@@ -16322,7 +16322,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	refresh: {
 		accuracy: true,
@@ -16346,7 +16346,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'heal',
+		zMove: {effect: 'heal'},
 	},
 	relicsong: {
 		accuracy: 100,
@@ -16410,7 +16410,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Psychic",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	retaliate: {
 		accuracy: 100,
@@ -16574,7 +16574,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	roaroftime: {
 		accuracy: 90,
@@ -16664,7 +16664,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Rock",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	rockslide: {
 		accuracy: 90,
@@ -16820,7 +16820,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	rollingkick: {
 		accuracy: 85,
@@ -16930,7 +16930,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Flying",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	rototiller: {
 		accuracy: true,
@@ -16969,7 +16969,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Ground",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	round: {
 		accuracy: 100,
@@ -17114,7 +17114,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allySide",
 		type: "Normal",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	sandattack: {
 		accuracy: 100,
@@ -17137,7 +17137,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ground",
-		zMoveBoost: {evasion: 1},
+		zMove: {boost: {evasion: 1}},
 	},
 	sandburial: {
 		accuracy: true,
@@ -17240,7 +17240,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Rock",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	sandtomb: {
 		accuracy: 85,
@@ -17319,7 +17319,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "???",
-		zMoveBoost: {def: 1, spd: 1},
+		zMove: {boost: {def: 1, spd: 1}},
 	},
 	satellitestrike: {
 		accuracy: 100,
@@ -17426,7 +17426,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	scratch: {
 		accuracy: 100,
@@ -17469,7 +17469,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	searingshot: {
 		accuracy: 100,
@@ -17873,7 +17873,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	shatteredpsyche: {
 		accuracy: true,
@@ -17941,7 +17941,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	shelltrap: {
 		accuracy: 100,
@@ -18007,7 +18007,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Steel",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	shiveringconduct: {
 		accuracy: 95,
@@ -18082,7 +18082,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Ground",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	signalbeam: {
 		accuracy: 100,
@@ -18169,7 +18169,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	sing: {
 		accuracy: 55,
@@ -18190,7 +18190,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	sinisterarrowraid: {
 		accuracy: true,
@@ -18249,7 +18249,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1},
+		zMove: {boost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1}},
 	},
 	skillswap: {
 		accuracy: true,
@@ -18298,7 +18298,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	skullbash: {
 		accuracy: 100,
@@ -18567,7 +18567,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	sleeptalk: {
 		accuracy: true,
@@ -18609,7 +18609,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'crit2',
+		zMove: {effect: 'crit2'},
 	},
 	sludge: {
 		accuracy: 100,
@@ -18822,7 +18822,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {evasion: 1},
+		zMove: {boost: {evasion: 1}},
 	},
 	snarl: {
 		accuracy: 95,
@@ -18885,7 +18885,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pressureTarget: "foeSide",
 		target: "self",
 		type: "Dark",
-		zMoveBoost: {spe: 2},
+		zMove: {boost: {spe: 2}},
 	},
 	snipeshot: {
 		accuracy: 100,
@@ -18962,7 +18962,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	softboiled: {
 		accuracy: true,
@@ -18983,7 +18983,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	solarbeam: {
 		accuracy: 100,
@@ -19192,7 +19192,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Normal",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	spacialrend: {
 		accuracy: 95,
@@ -19310,7 +19310,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	spiderweb: {
 		accuracy: true,
@@ -19333,7 +19333,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Bug",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	spikecannon: {
 		accuracy: 100,
@@ -19392,7 +19392,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "foeSide",
 		type: "Ground",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	spikyshield: {
 		accuracy: true,
@@ -19450,7 +19450,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Grass",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	spiritbreak: {
 		accuracy: 100,
@@ -19562,7 +19562,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ghost",
-		zMoveEffect: 'heal',
+		zMove: {effect: 'heal'},
 	},
 	splash: {
 		accuracy: true,
@@ -19585,7 +19585,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {atk: 3},
+		zMove: {boost: {atk: 3}},
 	},
 	splinteredstormshards: {
 		accuracy: true,
@@ -19629,7 +19629,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	spotlight: {
 		accuracy: true,
@@ -19666,7 +19666,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	squawk: {
 		accuracy: 100,
@@ -19722,7 +19722,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "foeSide",
 		type: "Rock",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	steameruption: {
 		accuracy: 95,
@@ -19827,7 +19827,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "foeSide",
 		type: "Bug",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	stockpile: {
 		accuracy: true,
@@ -19887,7 +19887,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'heal',
+		zMove: {effect: 'heal'},
 	},
 	stokedsparksurfer: {
 		accuracy: true,
@@ -20068,7 +20068,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	stringshot: {
 		accuracy: 95,
@@ -20091,7 +20091,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Bug",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	struggle: {
 		accuracy: true,
@@ -20164,7 +20164,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	submission: {
 		accuracy: 80,
@@ -20264,7 +20264,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	subzeroslammer: {
 		accuracy: true,
@@ -20353,7 +20353,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Fire",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	sunsteelstrike: {
 		accuracy: 100,
@@ -20477,7 +20477,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	supersonicskystrike: {
 		accuracy: true,
@@ -20541,7 +20541,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	swallow: {
 		accuracy: true,
@@ -20570,7 +20570,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	sweetkiss: {
 		accuracy: 75,
@@ -20591,7 +20591,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fairy",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	sweetscent: {
 		accuracy: 100,
@@ -20614,7 +20614,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Normal",
-		zMoveBoost: {accuracy: 1},
+		zMove: {boost: {accuracy: 1}},
 	},
 	swift: {
 		accuracy: true,
@@ -20687,7 +20687,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMoveBoost: {spe: 2},
+		zMove: {boost: {spe: 2}},
 	},
 	swordsdance: {
 		accuracy: true,
@@ -20710,7 +20710,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	symphonicdiscord: {
 		accuracy: 95,
@@ -20793,7 +20793,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Grass",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	tailglow: {
 		accuracy: true,
@@ -20816,7 +20816,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Bug",
-		zMoveEffect: 'clearnegativeboost',
+		zMove: {effect: 'clearnegativeboost'},
 	},
 	tailslap: {
 		accuracy: 85,
@@ -20872,7 +20872,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allySide",
 		type: "Flying",
-		zMoveEffect: 'crit2',
+		zMove: {effect: 'crit2'},
 	},
 	takedown: {
 		accuracy: 85,
@@ -20965,7 +20965,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	tearfullook: {
 		accuracy: true,
@@ -20989,7 +20989,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	technoblast: {
 		accuracy: 100,
@@ -21078,7 +21078,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacent",
 		type: "Normal",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	telekinesis: {
 		accuracy: true,
@@ -21128,7 +21128,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveBoost: {spa: 1},
+		zMove: {boost: {spa: 1}},
 	},
 	teleport: {
 		accuracy: true,
@@ -21149,7 +21149,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Psychic",
-		zMoveEffect: 'heal',
+		zMove: {effect: 'heal'},
 	},
 	thief: {
 		accuracy: 100,
@@ -21462,7 +21462,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Electric",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	tickle: {
 		accuracy: 100,
@@ -21486,7 +21486,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	titanicforce: {
 		accuracy: 30,
@@ -21539,7 +21539,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	torment: {
 		accuracy: 100,
@@ -21572,7 +21572,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	tornadoclaw: {
 		accuracy: 90,
@@ -21614,7 +21614,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Poison",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	toxicspikes: {
 		accuracy: true,
@@ -21660,7 +21660,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "foeSide",
 		type: "Poison",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	toxicthread: {
 		accuracy: 100,
@@ -21684,7 +21684,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Poison",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	transform: {
 		accuracy: true,
@@ -21709,7 +21709,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveEffect: 'heal',
+		zMove: {effect: 'heal'},
 	},
 	triattack: {
 		accuracy: 100,
@@ -21794,7 +21794,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMoveBoost: {spe: 2},
+		zMove: {boost: {spe: 2}},
 	},
 	trickortreat: {
 		accuracy: 100,
@@ -21827,7 +21827,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ghost",
-		zMoveBoost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1},
+		zMove: {boost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1}},
 	},
 	trickroom: {
 		accuracy: true,
@@ -21869,7 +21869,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Psychic",
-		zMoveBoost: {accuracy: 1},
+		zMove: {boost: {accuracy: 1}},
 	},
 	triplekick: {
 		accuracy: 90,
@@ -22196,7 +22196,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Poison",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	venoshock: {
 		accuracy: 100,
@@ -22562,7 +22562,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Water",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	waterspout: {
 		accuracy: 100,
@@ -22669,7 +22669,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	wideguard: {
 		accuracy: true,
@@ -22722,7 +22722,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allySide",
 		type: "Rock",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	wildcharge: {
 		accuracy: 100,
@@ -22764,7 +22764,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fire",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	wingattack: {
 		accuracy: 100,
@@ -22818,7 +22818,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	withdraw: {
 		accuracy: true,
@@ -22841,7 +22841,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Water",
-		zMoveBoost: {def: 1},
+		zMove: {boost: {def: 1}},
 	},
 	wonderroom: {
 		accuracy: true,
@@ -22883,7 +22883,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "all",
 		type: "Psychic",
-		zMoveBoost: {spd: 1},
+		zMove: {boost: {spd: 1}},
 	},
 	woodhammer: {
 		accuracy: 100,
@@ -22928,7 +22928,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMoveBoost: {atk: 1},
+		zMove: {boost: {atk: 1}},
 	},
 	wormhole: {
 		accuracy: 100,
@@ -22991,7 +22991,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	wrap: {
 		accuracy: 90,
@@ -23100,7 +23100,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMoveBoost: {spe: 1},
+		zMove: {boost: {spe: 1}},
 	},
 	zapcannon: {
 		accuracy: 50,
