@@ -1219,7 +1219,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(target, source, effect) {
-				if (source && source.hasItem('lightclay')) {
+				if (source?.hasItem('lightclay')) {
 					return 8;
 				}
 				return 5;
@@ -1349,7 +1349,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onTryMove(pokemon, target, move) {
-			if (pokemon.template.species === 'Haxorus-Mega' || move.hasBounced) {
+			if (pokemon.species.name === 'Haxorus-Mega' || move.hasBounced) {
 				return;
 			}
 			this.add('-fail', pokemon, 'move: Axe Strike');
@@ -1807,10 +1807,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onModifyMove(move, pokemon) {
 			if (pokemon.getStat('spa', false, true) > pokemon.getStat('atk', false, true)) move.category = 'Special';
-			if (pokemon.template.species === 'Shukaku') {
+			if (pokemon.species.name === 'Shukaku') {
 				move.type='Ground';
 			}
-			if (pokemon.template.species === 'Kurama' || pokemon.template.species === 'Kurama-Medium' || pokemon.template.species === 'Kurama-Small') {
+			if (pokemon.species.name === 'Kurama' || pokemon.species.name === 'Kurama-Medium' || pokemon.species.name === 'Kurama-Small') {
 				move.type='Fire';
 			}
 		},
@@ -2268,7 +2268,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -2480,7 +2480,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		critRatio: 2,
 		onTryMove(pokemon, target, move) {
-			if (pokemon.template.species === 'Haxorus-Mega' || move.hasBounced) {
+			if (pokemon.species.name === 'Haxorus-Mega' || move.hasBounced) {
 				return;
 			}
 			this.add('-fail', pokemon, 'move: Brutal Slice');
@@ -4242,7 +4242,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		status: 'slp',
 		onTryMove(pokemon, target, move) {
-			if (pokemon.template.species === 'Darkrai' || move.hasBounced) {
+			if (pokemon.species.name === 'Darkrai' || move.hasBounced) {
 				return;
 			}
 			this.add('-fail', pokemon, 'move: Dark Void');
@@ -4550,7 +4550,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -4719,7 +4719,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -5620,7 +5620,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source && source.hasItem('terrainextender')) {
+				if (source?.hasItem('terrainextender')) {
 					return 8;
 				}
 				return 5;
@@ -5647,7 +5647,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			},
 			onStart(battle, source, effect) {
-				if (effect && effect.effectType === 'Ability') {
+				if (effect?.effectType === 'Ability') {
 					this.add('-fieldstart', 'move: Electric Terrain', '[from] ability: ' + effect, '[of] ' + source);
 				} else {
 					this.add('-fieldstart', 'move: Electric Terrain');
@@ -6088,7 +6088,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onTryMove(pokemon, target, move) {
-			if (pokemon.baseTemplate.baseSpecies === 'Vee' && move.type !== "???") {
+			if (pokemon.baseSpecies.baseSpecies === 'Vee' && move.type !== "???") {
 				return;
 			}
 			this.add('-fail', pokemon, 'move: Evo-Wave Destruction');
@@ -6096,7 +6096,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			return null;
 		},
 		onModifyMove(move, pokemon, target) {
-			if (pokemon.template.species !== 'Vee' && pokemon.template.baseSpecies === 'Vee') {
+			if (pokemon.species.name !== 'Vee' && pokemon.template.baseSpecies === 'Vee') {
 				move.type = pokemon.types[0];
 			}
 			if (pokemon.getStat('spa', false, true) > pokemon.getStat('atk', false, true)) move.category = 'Special';
@@ -6148,7 +6148,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onHit(target, pokemon, move) {
-			if (pokemon.baseTemplate.baseSpecies === 'Vee' && !pokemon.transformed) {
+			if (pokemon.baseSpecies.baseSpecies === 'Vee' && !pokemon.transformed) {
 				move.willChangeForme = true;
 			}
 		},
@@ -6738,7 +6738,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 /*
 		basePowerCallback(target, source, move) {	//This goes on close combat
-			if (['aurasphere'].includes(move.sourceEffect) && source.template.species === 'Zenkari') {
+			if (['aurasphere'].includes(move.sourceEffect) && source.species.name === 'Zenkari') {
 				this.add('-combine');
 				return 150;
 			}
@@ -7390,7 +7390,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -7731,7 +7731,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -8223,7 +8223,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -8525,7 +8525,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source && source.hasItem('terrainextender')) {
+				if (source?.hasItem('terrainextender')) {
 					return 8;
 				}
 				return 5;
@@ -8542,7 +8542,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			},
 			onStart(battle, source, effect) {
-				if (effect && effect.effectType === 'Ability') {
+				if (effect?.effectType === 'Ability') {
 					this.add('-fieldstart', 'move: Grassy Terrain', '[from] ability: ' + effect, '[of] ' + source);
 				} else {
 					this.add('-fieldstart', 'move: Grassy Terrain');
@@ -8617,7 +8617,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source && source.hasAbility('persistent')) {
+				if (source?.hasAbility('persistent')) {
 					this.add('-activate', source, 'ability: Persistent', effect);
 					return 7;
 				}
@@ -8629,12 +8629,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 					let applies = false;
 					if (pokemon.removeVolatile('bounce') || pokemon.removeVolatile('fly')) {
 						applies = true;
-						this.cancelMove(pokemon);
+						this.queue.cancelMove(pokemon);
 						pokemon.removeVolatile('twoturnmove');
 					}
 					if (pokemon.volatiles['skydrop']) {
 						applies = true;
-						this.cancelMove(pokemon);
+						this.queue.cancelMove(pokemon);
 
 						if (pokemon.volatiles['skydrop'].source) {
 							this.add('-end', pokemon.volatiles['twoturnmove'].source, 'Sky Drop', '[interrupt]');
@@ -8659,7 +8659,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onDisableMove(pokemon) {
 				for (const moveSlot of pokemon.moveSlots) {
-					if (this.getMove(moveSlot.id).flags['gravity']) {
+					if (this.dex.getMove(moveSlot.id).flags['gravity']) {
 						pokemon.disableMove(moveSlot.id);
 					}
 				}
@@ -9181,7 +9181,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(target, source, effect) {
-				if (source && source.hasAbility('persistent')) {
+				if (source?.hasAbility('persistent')) {
 					this.add('-activate', source, 'ability: Persistent', effect);
 					return 7;
 				}
@@ -9192,7 +9192,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onDisableMove(pokemon) {
 				for (const moveSlot of pokemon.moveSlots) {
-					if (this.getMove(moveSlot.id).flags['heal']) {
+					if (this.dex.getMove(moveSlot.id).flags['heal']) {
 						pokemon.disableMove(moveSlot.id);
 					}
 				}
@@ -9492,10 +9492,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source && source.hasAbility('hellfield')) {
+				if (source?.hasAbility('hellfield')) {
 					return 99;
 				}
-				if (source && source.hasItem('terrainextender')) {
+				if (source?.hasItem('terrainextender')) {
 					return 8;
 				}
 				return 5;
@@ -9515,7 +9515,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			},
 			onStart(battle, source, effect) {
-				if (effect && effect.effectType === 'Ability') {
+				if (effect?.effectType === 'Ability') {
 					this.add('-fieldstart', 'move: Hell Fire', '[from] ability: ' + effect, '[of] ' + source);
 
 				} else {
@@ -10358,11 +10358,11 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		breaksProtect: true,
 		onTry(pokemon) {
-			if (pokemon.template.species === 'Hoopa-Unbound' || pokemon.template.species === 'Mew-Mega') {
+			if (pokemon.species.name === 'Hoopa-Unbound' || pokemon.species.name === 'Mew-Mega') {
 				return;
 			}
 			this.hint("Only a Pokemon whose form is Hoopa Unbound can use this move.");
-			if (pokemon.template.species === 'Hoopa') {
+			if (pokemon.species.name === 'Hoopa') {
 				this.add('-fail', pokemon, 'move: Hyperspace Fury', '[forme]');
 				return null;
 			}
@@ -10529,7 +10529,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -11783,7 +11783,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(target, source, effect) {
-				if (source && source.hasItem('lightclay')) {
+				if (source?.hasItem('lightclay')) {
 					return 8;
 				}
 				return 5;
@@ -12291,7 +12291,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source && source.hasAbility('persistent')) {
+				if (source?.hasAbility('persistent')) {
 					this.add('-activate', source, 'ability: Persistent', effect);
 					return 7;
 				}
@@ -13458,7 +13458,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source && source.hasItem('terrainextender')) {
+				if (source?.hasItem('terrainextender')) {
 					return 8;
 				}
 				return 5;
@@ -13484,7 +13484,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			},
 			onStart(battle, source, effect) {
-				if (effect && effect.effectType === 'Ability') {
+				if (effect?.effectType === 'Ability') {
 					this.add('-fieldstart', 'move: Misty Terrain', '[from] ability: ' + effect, '[of] ' + source);
 				} else {
 					this.add('-fieldstart', 'move: Misty Terrain');
@@ -14749,7 +14749,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -15694,7 +15694,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source && source.hasItem('terrainextender')) {
+				if (source?.hasItem('terrainextender')) {
 					return 8;
 				}
 				return 5;
@@ -15715,7 +15715,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			},
 			onStart(battle, source, effect) {
-				if (effect && effect.effectType === 'Ability') {
+				if (effect?.effectType === 'Ability') {
 					this.add('-fieldstart', 'move: Psychic Terrain', '[from] ability: ' + effect, '[of] ' + source);
 				} else {
 					this.add('-fieldstart', 'move: Psychic Terrain');
@@ -15974,7 +15974,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onModifyMove(move, source, target) {
-			if (target && target.beingCalledBack) move.accuracy = true;
+			if (target?.beingCalledBack) move.accuracy = true;
 		},
 		onTryHit(target, pokemon) {
 			target.side.removeSideCondition('pursuit');
@@ -16388,7 +16388,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -16443,7 +16443,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (pokemon.item || !pokemon.lastItem) return false;
 			let item = pokemon.lastItem;
 			pokemon.lastItem = '';
-			this.add('-item', pokemon, this.getItem(item), '[from] move: Recycle');
+			this.add('-item', pokemon, this.dex.getItem(item), '[from] move: Recycle');
 			pokemon.setItem(item);
 		},
 		secondary: null,
@@ -16470,7 +16470,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(target, source, effect) {
-				if (source && source.hasItem('lightclay')) {
+				if (source?.hasItem('lightclay')) {
 					return 8;
 				}
 				return 5;
@@ -16576,13 +16576,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 			status: 'slp',
 		},
 		onHit(target, pokemon, move) {
-			if (pokemon.baseTemplate.baseSpecies === 'Meloetta' && !pokemon.transformed) {
+			if (pokemon.baseSpecies.baseSpecies === 'Meloetta' && !pokemon.transformed) {
 				move.willChangeForme = true;
 			}
 		},
 		onAfterMoveSecondarySelf(pokemon, target, move) {
 			if (move.willChangeForme) {
-				pokemon.formeChange(pokemon.template.speciesid === 'meloettapirouette' ? 'Meloetta' : 'Meloetta-Pirouette', this.effect, false, '[msg]');
+				pokemon.formeChange(pokemon.species.nameid === 'meloettapirouette' ? 'Meloetta' : 'Meloetta-Pirouette', this.effect, false, '[msg]');
 			}
 		},
 		target: "allAdjacentFoes",
@@ -17294,7 +17294,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(target, source, effect) {
-				if (source && source.hasAbility('persistent')) {
+				if (source?.hasAbility('persistent')) {
 					this.add('-activate', source, 'ability: Persistent', effect);
 					return 7;
 				}
@@ -17555,7 +17555,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			if (attacker.volatiles['hyperscan']) {
 				this.attrLastMove('[still]');
 				this.addMove('-anim', attacker, move.name, defender);
@@ -18037,7 +18037,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -18586,7 +18586,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			this.boost({def: 1}, attacker, attacker, move);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
@@ -18618,7 +18618,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -18699,7 +18699,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onFoeBeforeMovePriority: 12,
 			onFoeBeforeMove(attacker, defender, move) {
 				if (attacker === this.effectData.source) {
-					this.effectData.source.activeTurns--;
+					attacker.activeMoveActions--;
 					this.debug('Sky drop nullifying.');
 					return null;
 				}
@@ -18962,7 +18962,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (pokemon.hasItem('ironball') || pokemon.volatiles['ingrain'] || this.field.getPseudoWeather('gravity')) applies = false;
 				if (pokemon.removeVolatile('fly') || pokemon.removeVolatile('bounce')) {
 					applies = true;
-					this.cancelMove(pokemon);
+					this.queue.cancelMove(pokemon);
 					pokemon.removeVolatile('twoturnmove');
 				}
 				if (pokemon.volatiles['magnetrise']) {
@@ -18978,7 +18978,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onRestart(pokemon) {
 				if (pokemon.removeVolatile('fly') || pokemon.removeVolatile('bounce')) {
-					this.cancelMove(pokemon);
+					this.queue.cancelMove(pokemon);
 					this.add('-start', pokemon, 'Smack Down');
 				}
 			},
@@ -19261,7 +19261,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			if (this.field.isWeather(['sunnyday', 'desolateland'])) {
 				this.attrLastMove('[still]');
 				this.addMove('-anim', attacker, move.name, defender);
@@ -19302,7 +19302,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name, defender);
+			this.add('-prepare', attacker, move.name);
 			if (this.field.isWeather(['sunnyday', 'desolateland'])) {
 				this.attrLastMove('[still]');
 				this.addMove('-anim', attacker, move.name, defender);
@@ -19398,7 +19398,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source && source.hasItem('terrainextender')) {
+				if (source?.hasItem('terrainextender')) {
 					return 8;
 				}
 				return 5;
@@ -19425,7 +19425,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			},
 			onStart(battle, source, effect) {
-				if (effect && effect.effectType === 'Ability') {
+				if (effect?.effectType === 'Ability') {
 					this.add('-fieldstart', 'move: Sound Stage', '[from] ability: ' + effect, '[of] ' + source);
 				} else {
 					this.add('-fieldstart', 'move: Sound Stage');
@@ -21368,7 +21368,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onModifyMove(move, pokemon) {
 			if (pokemon.ignoringItem()) return;
 			move.type = this.runEvent('Drive', pokemon, null, move, 'Normal');
-			if(pokemon.template.speciesid === 'genesectmega') {
+			if(pokemon.species.nameid === 'genesectmega') {
 				move.priority = 2;
 				move.basePower = 80;
 				move.technoSuper = true;
@@ -21457,8 +21457,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 3,
 			onStart(target) {
-				if (['Diglett', 'Dugtrio', 'Palossand', 'Sandygast'].includes(target.baseTemplate.baseSpecies) ||
-						target.baseTemplate.species === 'Gengar-Mega') {
+				if (['Diglett', 'Dugtrio', 'Palossand', 'Sandygast'].includes(target.baseSpecies.baseSpecies) ||
+						target.baseSpecies.name === 'Gengar-Mega') {
 					this.add('-immune', target);
 					return null;
 				}
@@ -21473,7 +21473,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (type === 'Ground') return false;
 			},
 			onUpdate(pokemon) {
-				if (pokemon.baseTemplate.species === 'Gengar-Mega') {
+				if (pokemon.baseSpecies.name === 'Gengar-Mega') {
 					delete pokemon.volatiles['telekinesis'];
 					this.add('-end', pokemon, 'Telekinesis', '[silent]');
 				}
@@ -21685,7 +21685,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onDisableMove(pokemon) {
 				for (const moveSlot of pokemon.moveSlots) {
-					if (this.getMove(moveSlot.id).flags['sound']) {
+					if (this.dex.getMove(moveSlot.id).flags['sound']) {
 						pokemon.disableMove(moveSlot.id);
 					}
 				}
@@ -22281,7 +22281,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source && source.hasAbility('persistent')) {
+				if (source?.hasAbility('persistent')) {
 					this.add('-activate', source, 'ability: Persistent', effect);
 					return 7;
 				}
@@ -22673,25 +22673,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Poison",
 	},
-	vicegrip: {
-		accuracy: 100,
-		basePower: 55,
-		category: "Physical",
-		name: "Vice Grip",
-		pp: 30,
-		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		},
-		secondary: null,
-		target: "normal",
-		type: "Normal",
-	},
 	vinewhip: {
 		accuracy: 100,
 		basePower: 45,
@@ -22710,6 +22691,25 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
+	},
+	visegrip: {
+		accuracy: 100,
+		basePower: 55,
+		category: "Physical",
+		name: "Vise Grip",
+		pp: 30,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Normal",
 	},
 	vitalthrow: {
 		accuracy: true,
@@ -22940,7 +22940,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 100,
 		basePower: 15,
 		basePowerCallback(pokemon, target, move) {
-			if (pokemon.template.species === 'Greninja-Ash' && pokemon.hasAbility('battlebond')) {
+			if (pokemon.species.name === 'Greninja-Ash' && pokemon.hasAbility('battlebond')) {
 				return move.basePower + 5;
 			}
 			return move.basePower;
@@ -23158,7 +23158,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onTryHitPriority: 4,
 			onTryHit(target, source, move) {
 				// Wide Guard blocks all spread moves
-				if (move && move.target !== 'allAdjacent' && move.target !== 'allAdjacentFoes') {
+				if (move?.target !== 'allAdjacent' && move.target !== 'allAdjacentFoes') {
 					return;
 				}
 				if (move.isZ) {
@@ -23317,7 +23317,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source && source.hasAbility('persistent')) {
+				if (source?.hasAbility('persistent')) {
 					this.add('-activate', source, 'ability: Persistent', effect);
 					return 7;
 				}
@@ -23668,7 +23668,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (pokemon.hasItem('ironball') || pokemon.volatiles['ingrain'] || this.field.getPseudoWeather('gravity')) applies = false;
 				if (pokemon.removeVolatile('fly') || pokemon.removeVolatile('bounce')) {
 					applies = true;
-					this.cancelMove(pokemon);
+					this.queue.cancelMove(pokemon);
 					pokemon.removeVolatile('twoturnmove');
 				}
 				if (pokemon.volatiles['magnetrise']) {
@@ -23684,7 +23684,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onRestart(pokemon) {
 				if (pokemon.removeVolatile('fly') || pokemon.removeVolatile('bounce')) {
-					this.cancelMove(pokemon);
+					this.queue.cancelMove(pokemon);
 					this.add('-start', pokemon, 'Tornado Backlash');
 				}
 			},
