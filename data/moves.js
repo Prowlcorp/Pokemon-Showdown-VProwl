@@ -67,9 +67,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 100},
 	},
-	abyssalcrush: {//Cust
+	abyssalcrush: {
 		accuracy: 30,
 		basePower: 0,
 		category: "Special",
@@ -88,7 +87,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 180},
 	},
 	accelerock: {
 		accuracy: 100,
@@ -108,7 +106,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Rock",
-		zMove: {basePower: 100},
 	},
 	acid: {
 		accuracy: 100,
@@ -138,7 +135,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		],
 		target: "allAdjacentFoes",
 		type: "Poison",
-		zMove: {basePower: 100},
 	},
 	acidarmor: {
 		accuracy: true,
@@ -206,7 +202,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Poison",
-		zMove: {basePower: 100},
 	},
 	acrobatics: {
 		accuracy: 100,
@@ -233,7 +228,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 100},
 	},
 	acupressure: {
 		accuracy: true,
@@ -291,7 +285,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 120},
 	},
 	aeroblast: {
 		accuracy: 95,
@@ -312,7 +305,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 180},
 	},
 	afteryou: {
 		accuracy: true,
@@ -387,7 +379,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Flying",
-		zMove: {basePower: 120},
 	},
 	airslash: {
 		accuracy: 95,
@@ -410,7 +401,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 140},
 	},
 	alloutpummeling: {
 		accuracy: true,
@@ -432,7 +422,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},
-	allycharge: {//Cust
+	allycharge: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -451,7 +441,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			this.add('-activate', pokemon, 'move: Ally Charge');
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onRestart(pokemon) {
 				this.effectData.duration = 2;
@@ -553,7 +543,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 160},
 	},
 	ancientpower: {
 		accuracy: 100,
@@ -584,9 +573,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Rock",
-		zMove: {basePower: 120},
 	},
-	angelwings: {//Cust
+	angelwings: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -608,7 +596,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			evasion: 1,
 		},
 		volatileStatus: 'angelwings',
-		effect: {
+		condition: {
 			noCopy: true,
 			onStart(target, source, effect) {
 				if (effect && effect.id === 'zpower') {
@@ -659,7 +647,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 100},
 	},
 	aquaring: {
 		accuracy: true,
@@ -677,7 +664,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'aquaring',
-		effect: {
+		condition: {
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'Aqua Ring');
 			},
@@ -709,7 +696,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 175},
 	},
 	armthrust: {
 		accuracy: 100,
@@ -730,7 +716,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 100},
 	},
 	aromatherapy: {
 		accuracy: true,
@@ -851,7 +836,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 120},
 	},
 	astonish: {
 		accuracy: 100,
@@ -874,7 +858,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 100},
 	},
 	attackorder: {
 		accuracy: 100,
@@ -895,7 +878,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 175},
 	},
 //CHANGE
 	attract: {
@@ -914,7 +896,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'attract',
-		effect: {
+		condition: {
 			noCopy: true, // doesn't get copied by Baton Pass
 			onStart(pokemon, source, effect) {
 				if (!(pokemon.gender === 'M' && source.gender === 'F') && !(pokemon.gender === 'F' && source.gender === 'M')) {
@@ -986,7 +968,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if(this.effectData.multiplier === 3) move.priority = 3;
 			}
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onStart() {
 				this.effectData.multiplier = 1;
@@ -1001,9 +983,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 180},
 	},*/
-	aurarage: { //Cust
+	aurarage: { 
 		accuracy: 95,
 		basePower: 90,
 		category: "Special",
@@ -1022,7 +1003,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		self: {
 			volatileStatus: 'aurarage',
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(pokemon) {
 				this.add('-singleturn', pokemon, 'move: Aura Rage');
@@ -1048,9 +1029,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 175},
 	},
-	aurasealingstrike: { //Cust
+	aurasealingstrike: { 
 		accuracy: 90,
 		basePower: 10,
 		basePowerCallback(pokemon, target, move) {
@@ -1108,7 +1088,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				move.multihit = 1;
 			}
 		},
-		effect: {
+		condition: {
 			onStart(target) {
 				this.add('-start', target, 'Aura Sealing Strike');
 			},
@@ -1125,7 +1105,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 120},
 	},
 	aurasphere: {
 		accuracy: true,
@@ -1145,9 +1124,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Fighting",
-		zMove: {basePower: 160},
 	},
-	auricdoubleslash: {//Cust
+	auricdoubleslash: {
 		accuracy: 100,
 		basePower: 50,
 		category: "Physical",
@@ -1169,7 +1147,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 100},
 	},
 	aurorabeam: {
 		accuracy: 100,
@@ -1194,7 +1171,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 120},
 	},
 	auroraveil: {
 		accuracy: true,
@@ -1215,7 +1191,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onTryHitSide() {
 			if (!this.field.isWeather('hail')) return false;
 		},
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(target, source, effect) {
 				if (source && source.hasItem('lightclay')) {
@@ -1275,7 +1251,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			spe: 2,
 		},
 		volatileStatus: 'autotomize',
-		effect: {
+		condition: {
 			noCopy: true, // doesn't get copied by Baton Pass
 			onStart(pokemon) {
 				if (pokemon.template.weightkg > 0.1) {
@@ -1331,9 +1307,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 120},
 	},
-	axestrike: {//cust
+	axestrike: {
 		accuracy: 90,
 		basePower: 120,
 		category: "Physical",
@@ -1382,7 +1357,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		],
 		target: "normal",
 		type: "Dragon",
-		zMove: {basePower: 190},
 	},
 	babydolleyes: {
 		accuracy: 100,
@@ -1430,7 +1404,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target) {
 				this.add('-singleturn', target, 'move: Protect');
@@ -1484,7 +1458,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	barrier: {
 		accuracy: true,
@@ -1548,7 +1521,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		beforeTurnCallback(pokemon) {
 			pokemon.addVolatile('beakblast');
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(pokemon) {
 				this.add('-singleturn', pokemon, 'move: Beak Blast');
@@ -1566,7 +1539,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Flying",
-		zMove: {basePower: 180},
 	},
 	beatup: {
 		accuracy: 100,
@@ -1594,7 +1566,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 100},
 	},
 	belch: {
 		accuracy: 90,
@@ -1615,7 +1586,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Poison",
-		zMove: {basePower: 190},
 	},
 	bellydrum: {
 		accuracy: true,
@@ -1696,7 +1666,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		beforeMoveCallback(pokemon) {
 			if (pokemon.volatiles['bide']) return true;
 		},
-		effect: {
+		condition: {
 			duration: 3,
 			onLockMove: 'bide',
 			onStart(pokemon) {
@@ -1752,9 +1722,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "self",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
-	bijuubomb: {//Cust
+	bijuubomb: {
 		accuracy: 85,
 		basePower: 200,
 		category: "Physical",
@@ -1788,7 +1757,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "???",
-		zMove: {basePower: 200},
 	},
 	bind: {
 		accuracy: 85,
@@ -1809,7 +1777,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	bite: {
 		accuracy: 100,
@@ -1832,7 +1799,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 120},
 	},
 	blackholeeclipse: {
 		accuracy: true,
@@ -1880,7 +1846,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 200},
 	},
 	blazekick: {
 		accuracy: 90,
@@ -1904,7 +1869,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 160},
 	},
 	blizzard: {
 		accuracy: 70,
@@ -1930,7 +1894,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Ice",
-		zMove: {basePower: 185},
 	},
 	block: {
 		accuracy: true,
@@ -1955,7 +1918,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {def: 1}},
 	},
-	bloodscythe: {//Cust
+	bloodscythe: {
 		accuracy: 100,
 		basePower: 0,
 		basePowerCallback(pokemon) {
@@ -2049,7 +2012,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 195},
 	},
 	bodyslam: {
 		accuracy: 100,
@@ -2072,7 +2034,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 	boltbeak: {
 		accuracy: 100,
@@ -2122,7 +2083,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 195},
 	},
 	boneclub: {
 		accuracy: 85,
@@ -2145,7 +2105,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 120},
 	},
 	bonemerang: {
 		accuracy: 90,
@@ -2166,7 +2125,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 100},
 	},
 	bonerush: {
 		accuracy: 90,
@@ -2187,7 +2145,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 140},
 	},
 	boomburst: {
 		accuracy: 100,
@@ -2207,7 +2164,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacent",
 		type: "Normal",
-		zMove: {basePower: 200},
 	},
 	bounce: {
 		accuracy: 85,
@@ -2235,7 +2191,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onTryImmunity(target, source, move) {
 				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows', 'helpinghand', 'tornadobacklash'].includes(move.id)) {
@@ -2260,7 +2216,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 160},
 	},
 	branchpoke: {
 		accuracy: 100,
@@ -2280,7 +2235,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 100},
 	},
 	bravebird: {
 		accuracy: 100,
@@ -2301,7 +2255,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 190},
 	},
 	breakingswipe: {
 		accuracy: 100,
@@ -2326,7 +2279,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Dragon",
-		zMove: {basePower: 120},
 	},
 	breakneckblitz: {
 		accuracy: true,
@@ -2373,7 +2325,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 100},
 	},
 	brickbreak: {
 		accuracy: 100,
@@ -2403,7 +2354,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 140},
 	},
 	brine: {
 		accuracy: 100,
@@ -2428,9 +2378,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 120},
 	},
-	brutalslice: {//Cust
+	brutalslice: {
 		accuracy: 100,
 		basePower: 100,
 		category: "Physical",
@@ -2459,7 +2408,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 180},
 	},
 	brutalswing: {
 		accuracy: 100,
@@ -2479,7 +2427,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacent",
 		type: "Dark",
-		zMove: {basePower: 120},
 	},
 	bubble: {
 		accuracy: 100,
@@ -2504,7 +2451,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Water",
-		zMove: {basePower: 100},
 	},
 	bubblebeam: {
 		accuracy: 100,
@@ -2529,7 +2475,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 120},
 	},
 	bugbite: {
 		accuracy: 100,
@@ -2559,7 +2504,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 120},
 	},
 	bugbuzz: {
 		accuracy: 100,
@@ -2584,7 +2528,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 175},
 	},
 	bulkup: {
 		accuracy: true,
@@ -2633,7 +2576,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacent",
 		type: "Ground",
-		zMove: {basePower: 120},
 	},
 	bulletpunch: {
 		accuracy: 100,
@@ -2653,7 +2595,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 100},
 	},
 	bulletseed: {
 		accuracy: 100,
@@ -2674,7 +2615,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 140},
 	},
 	burnup: {
 		accuracy: 100,
@@ -2706,7 +2646,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 195},
 	},
 	calmmind: {
 		accuracy: true,
@@ -2860,7 +2799,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			this.add('-activate', pokemon, 'move: Charge');
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onRestart(pokemon) {
 				this.effectData.duration = 2;
@@ -2906,7 +2845,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 100},
 	},
 	charm: {
 		accuracy: 100,
@@ -2953,7 +2891,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 120},
 	},
 	chipaway: {
 		accuracy: 100,
@@ -2975,7 +2912,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 140},
 	},
 	circlethrow: {
 		accuracy: 90,
@@ -2995,7 +2931,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		forceSwitch: true,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 120},
 	},
 	clamp: {
 		accuracy: 85,
@@ -3016,7 +2951,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 100},
 	},
 	clangingscales: {
 		accuracy: 100,
@@ -3041,7 +2975,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Dragon",
-		zMove: {basePower: 185},
 	},
 	clangoroussoulblaze: {
 		accuracy: true,
@@ -3096,7 +3029,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Poison",
-		zMove: {basePower: 100},
 	},
 	closecombat: {
 		accuracy: 100,
@@ -3122,7 +3054,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 190},
 	},
 	coil: {
 		accuracy: true,
@@ -3168,7 +3099,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	confide: {
 		accuracy: true,
@@ -3235,7 +3165,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 100},
 	},
 	constrict: {
 		accuracy: 100,
@@ -3264,7 +3193,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	continentalcrush: {
 		accuracy: true,
@@ -3307,7 +3235,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onStart() {
 				this.effectData.multiplier = 1;
@@ -3322,7 +3250,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 100},
 	},
 	controlspore: {
 		accuracy: 85,
@@ -3468,7 +3395,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Dragon",
-		zMove: {basePower: 140},
 	},
 	corkscrewcrash: {
 		accuracy: true,
@@ -3515,7 +3441,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Poison",
-		zMove: {basePower: 140},
 	},
 	cosmicpower: {
 		accuracy: true,
@@ -3613,7 +3538,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (!source.volatiles['counter']) return false;
 			if (source.volatiles['counter'].position === null) return false;
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			noCopy: true,
 			onStart(target, source, move) {
@@ -3635,7 +3560,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "scripted",
 		type: "Fighting",
-		zMove: {basePower: 100},
 	},
 	courtchange: {
 		accuracy: 100,
@@ -3726,7 +3650,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 120},
 	},
 	crabhammer: {
 		accuracy: 90,
@@ -3747,7 +3670,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 180},
 	},
 	craftyshield: {
 		accuracy: true,
@@ -3768,7 +3690,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onTryHitSide(side, source) {
 			return !!this.queue.willAct();
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target, source) {
 				this.add('-singleturn', source, 'Crafty Shield');
@@ -3804,7 +3726,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 180},
 	},
 	crosspoison: {
 		accuracy: 100,
@@ -3828,7 +3749,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		critRatio: 2,
 		target: "normal",
 		type: "Poison",
-		zMove: {basePower: 140},
 	},
 	crunch: {
 		accuracy: 100,
@@ -3853,7 +3773,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 160},
 	},
 	crushclaw: {
 		accuracy: 95,
@@ -3878,7 +3797,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 140},
 	},
 	crushgrip: {
 		accuracy: 100,
@@ -3901,7 +3819,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 190},
 	},
 	cryokick: {
 		accuracy: 90,
@@ -3925,7 +3842,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 160},
 	},
 	cryoslash: {
 		accuracy: 100,
@@ -3954,7 +3870,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		],
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 140},
 	},
 	curse: {
 		accuracy: true,
@@ -3990,7 +3905,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(target, source) {
 			this.directDamage(source.maxhp / 2, source, source);
 		},
-		effect: {
+		condition: {
 			onStart(pokemon, source) {
 				this.add('-start', pokemon, 'Curse', '[of] ' + source);
 			},
@@ -4026,7 +3941,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	darkepitaph: {
 		accuracy: 30,
@@ -4047,7 +3961,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 180},
 	},
 	darkestlariat: {
 		accuracy: 100,
@@ -4069,7 +3982,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 160},
 	},
 	darkmatter: {
 		accuracy: 90,
@@ -4092,7 +4004,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 200},
 	},
 	darkpulse: {
 		accuracy: 100,
@@ -4115,7 +4026,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "any",
 		type: "Dark",
-		zMove: {basePower: 160},
 	},
 	darkvoid: {
 		accuracy: 50,
@@ -4164,7 +4074,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Fairy",
-		zMove: {basePower: 160},
 	},
 	decorate: {
 		accuracy: true,
@@ -4233,7 +4142,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			def: 1,
 		},
 		volatileStatus: 'defensecurl',
-		effect: {
+		condition: {
 			noCopy: true,
 		},
 		secondary: null,
@@ -4300,7 +4209,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onPrepareHit(pokemon) {
 			return !pokemon.removeVolatile('destinybond');
 		},
-		effect: {
+		condition: {
 			onStart(pokemon) {
 				this.add('-singlemove', pokemon, 'Destiny Bond');
 			},
@@ -4397,7 +4306,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dragon",
-		zMove: {basePower: 160},
 	},
 	diamondstorm: {
 		accuracy: 95,
@@ -4424,7 +4332,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Rock",
-		zMove: {basePower: 180},
 	},
 	dig: {
 		accuracy: 100,
@@ -4452,7 +4359,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onImmunity(type, pokemon) {
 				if (type === 'sandstorm' || type === 'hail') return false;
@@ -4477,7 +4384,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 160},
 	},
 	disable: {
 		accuracy: 100,
@@ -4500,7 +4406,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return false;
 			}
 		},
-		effect: {
+		condition: {
 			duration: 5,
 			noCopy: true, // doesn't get copied by Baton Pass
 			onStart(pokemon, source, effect) {
@@ -4573,7 +4479,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Fairy",
-		zMove: {basePower: 100},
 	},
 	discharge: {
 		accuracy: 100,
@@ -4596,7 +4501,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacent",
 		type: "Electric",
-		zMove: {basePower: 160},
 	},
 	dive: {
 		accuracy: 100,
@@ -4624,7 +4528,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onImmunity(type, pokemon) {
 				if (type === 'sandstorm' || type === 'hail') return false;
@@ -4652,7 +4556,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 160},
 	},
 	dizzypunch: {
 		accuracy: 100,
@@ -4675,7 +4578,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 140},
 	},
 	doomdesire: {
 		accuracy: 100,
@@ -4723,7 +4625,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 200},
 	},
 	doubleedge: {
 		accuracy: 100,
@@ -4744,7 +4645,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 190},
 	},
 	doublehit: {
 		accuracy: 90,
@@ -4765,7 +4665,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 140},
 	},
 	doublekick: {
 		accuracy: 100,
@@ -4786,7 +4685,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 100},
 	},
 	doubleslap: {
 		accuracy: 85,
@@ -4807,7 +4705,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	doubleteam: {
 		accuracy: true,
@@ -4850,7 +4747,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dragon",
-		zMove: {basePower: 100},
 	},
 	dracometeor: {
 		accuracy: 90,
@@ -4875,7 +4771,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dragon",
-		zMove: {basePower: 195},
 	},
 	dragonascent: {
 		accuracy: 100,
@@ -4900,7 +4795,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 190},
 	},
 	dragonbreath: {
 		accuracy: 100,
@@ -4923,7 +4817,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Dragon",
-		zMove: {basePower: 120},
 	},
 	dragonclaw: {
 		accuracy: 100,
@@ -4943,7 +4836,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dragon",
-		zMove: {basePower: 160},
 	},
 	dragondance: {
 		accuracy: true,
@@ -5001,7 +4893,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Dragon",
-		zMove: {basePower: 100},
 	},
 	dragonhammer: {
 		accuracy: 100,
@@ -5021,7 +4912,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dragon",
-		zMove: {basePower: 175},
 	},
 	dragonpulse: {
 		accuracy: 100,
@@ -5041,7 +4931,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Dragon",
-		zMove: {basePower: 160},
 	},
 	dragonrage: {
 		accuracy: 100,
@@ -5062,7 +4951,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dragon",
-		zMove: {basePower: 100},
 	},
 	dragonrush: {
 		accuracy: 75,
@@ -5085,7 +4973,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Dragon",
-		zMove: {basePower: 180},
 	},
 	dragontail: {
 		accuracy: 90,
@@ -5105,7 +4992,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		forceSwitch: true,
 		target: "normal",
 		type: "Dragon",
-		zMove: {basePower: 120},
 	},
 	drainingkiss: {
 		accuracy: 100,
@@ -5126,7 +5012,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fairy",
-		zMove: {basePower: 100},
 	},
 	drainpunch: {
 		accuracy: 100,
@@ -5147,7 +5032,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 140},
 	},
 	drakonvoice: {
 		accuracy: 90,
@@ -5167,7 +5051,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Dragon",
-		zMove: {basePower: 180},
 	},
 	dreameater: {
 		accuracy: 100,
@@ -5194,7 +5077,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 180},
 	},
 	drillpeck: {
 		accuracy: 100,
@@ -5214,7 +5096,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 160},
 	},
 	drillrun: {
 		accuracy: 95,
@@ -5235,7 +5116,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 160},
 	},
 	drumbeating: {
 		accuracy: 100,
@@ -5260,7 +5140,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 160},
 	},
 	dualchop: {
 		accuracy: 90,
@@ -5281,7 +5160,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dragon",
-		zMove: {basePower: 100},
 	},
 	dynamicentry: {
 		accuracy: 100,
@@ -5309,7 +5187,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 175},
 	},
 	dynamicpunch: {
 		accuracy: 50,
@@ -5332,7 +5209,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 180},
 	},
 	earthpower: {
 		accuracy: 100,
@@ -5357,7 +5233,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 175},
 	},
 	earthquake: {
 		accuracy: 100,
@@ -5377,7 +5252,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacent",
 		type: "Ground",
-		zMove: {basePower: 180},
 	},
 	echoedvoice: {
 		accuracy: 100,
@@ -5403,7 +5277,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onTry() {
 			this.field.addPseudoWeather('echoedvoice');
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onStart() {
 				this.effectData.multiplier = 1;
@@ -5420,7 +5294,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	echolocation: {
 		accuracy: true,
@@ -5486,7 +5359,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 180},
 	},
 	electricterrain: {
 		accuracy: true,
@@ -5504,7 +5376,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		terrain: 'electricterrain',
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
 				if (source && source.hasItem('terrainextender')) {
@@ -5570,7 +5442,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onTryHit(target) {
 			if (!this.queue.willMove(target) && target.activeTurns) return false;
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target) {
 				this.add('-singleturn', target, 'move: Electrify');
@@ -5623,7 +5495,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 160},
 	},
 	electroweb: {
 		accuracy: 95,
@@ -5648,7 +5519,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Electric",
-		zMove: {basePower: 100},
 	},
 	embargo: {
 		accuracy: 100,
@@ -5666,7 +5536,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'embargo',
-		effect: {
+		condition: {
 			duration: 5,
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'Embargo');
@@ -5710,7 +5580,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 100},
 	},
 	encore: {
 		accuracy: 100,
@@ -5728,7 +5597,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'encore',
-		effect: {
+		condition: {
 			duration: 3,
 			noCopy: true, // doesn't get copied by Z-Baton Pass
 			onStart(target) {
@@ -5802,7 +5671,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 	endure: {
 		accuracy: true,
@@ -5827,7 +5695,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target) {
 				this.add('-singleturn', target, 'move: Endure');
@@ -5868,7 +5736,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 175},
 	},
 	entrainment: {
 		accuracy: 100,
@@ -5957,7 +5824,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Fire",
-		zMove: {basePower: 200},
 	},
 	evowavedestruction: {
 		accuracy: 90,
@@ -6051,7 +5917,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "???",
-		zMove: {basePower: 200},
 	},
 	explosion: {
 		accuracy: 100,
@@ -6072,7 +5937,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacent",
 		type: "Normal",
-		zMove: {basePower: 200},
 	},
 	extrasensory: {
 		accuracy: 100,
@@ -6095,7 +5959,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 160},
 	},
 	extremeevoboost: {
 		accuracy: true,
@@ -6142,7 +6005,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 	facade: {
 		accuracy: 100,
@@ -6167,7 +6029,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 140},
 	},
 	fairylock: {
 		accuracy: true,
@@ -6185,7 +6046,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		pseudoWeather: 'fairylock',
-		effect: {
+		condition: {
 			duration: 2,
 			onStart(target) {
 				this.add('-fieldactivate', 'move: Fairy Lock');
@@ -6217,7 +6078,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fairy",
-		zMove: {basePower: 100},
 	},
 	fakeout: {
 		accuracy: 100,
@@ -6248,7 +6108,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	faketears: {
 		accuracy: 100,
@@ -6291,7 +6150,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 160},
 	},
 	falseswipe: {
 		accuracy: 100,
@@ -6312,7 +6170,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	featherdance: {
 		accuracy: 100,
@@ -6357,7 +6214,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	feintattack: {
 		accuracy: true,
@@ -6377,7 +6233,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 120},
 	},
 	fellstinger: {
 		accuracy: 100,
@@ -6400,7 +6255,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 100},
 	},
 	fierydance: {
 		accuracy: 100,
@@ -6427,7 +6281,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 160},
 	},
 	finalfeather: {
 		accuracy: 100,
@@ -6459,7 +6312,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Flying",
-		zMove: {basePower: 195},
 	},
 	finalgambit: {
 		accuracy: 100,
@@ -6485,7 +6337,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 180},
 	},
 	fireblast: {
 		accuracy: 85,
@@ -6515,7 +6366,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 185},
 	},
 	firefang: {
 		accuracy: 95,
@@ -6543,7 +6393,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		],
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 120},
 	},
 	firelash: {
 		accuracy: 100,
@@ -6568,7 +6417,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 160},
 	},
 	firepledge: {
 		accuracy: 100,
@@ -6652,7 +6500,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				source.side.addSideCondition('waterpledge');
 			}
 		},
-		effect: {
+		condition: {
 			duration: 4,
 			onStart(targetSide) {
 				this.add('-sidestart', targetSide, 'Fire Pledge');
@@ -6671,7 +6519,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 160},
 	},
 	firepunch: {
 		accuracy: 100,
@@ -6694,7 +6541,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 140},
 	},
 	firespin: {
 		accuracy: 85,
@@ -6715,7 +6561,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 100},
 	},
 	firstimpression: {
 		accuracy: 100,
@@ -6743,7 +6588,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 175},
 	},
 	fishiousrend: {
 		accuracy: 100,
@@ -6771,7 +6615,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 160},
 	},
 	fissure: {
 		accuracy: 30,
@@ -6792,7 +6635,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 180},
 	},
 	flail: {
 		accuracy: 100,
@@ -6831,7 +6673,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 	flameburst: {
 		accuracy: 100,
@@ -6876,7 +6717,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 140},
 	},
 	flamecharge: {
 		accuracy: 100,
@@ -6903,7 +6743,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 100},
 	},
 	flameimpact: {
 		accuracy: 100,
@@ -6923,7 +6762,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 100},
 	},
 	flamewheel: {
 		accuracy: 100,
@@ -6946,7 +6784,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 120},
 	},
 	flamethrower: {
 		accuracy: 100,
@@ -6976,7 +6813,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		],
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 175},
 	},
 	flareblitz: {
 		accuracy: 100,
@@ -7007,7 +6843,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 190},
 	},
 	flash: {
 		accuracy: 100,
@@ -7055,7 +6890,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 160},
 	},
 	flatter: {
 		accuracy: 100,
@@ -7104,7 +6938,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fairy",
-		zMove: {basePower: 195},
 	},
 	fling: {
 		accuracy: 100,
@@ -7153,7 +6986,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 100},
 	},
 	floralhealing: {
 		accuracy: true,
@@ -7247,7 +7079,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onTryImmunity(target, source, move) {
 				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows', 'helpinghand', 'tornadobacklash'].includes(move.id)) {
@@ -7269,7 +7101,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 175},
 	},
 	flyingpress: {
 		accuracy: 95,
@@ -7292,7 +7123,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Fighting",
-		zMove: {basePower: 170},
 	},
 	focusblast: {
 		accuracy: 70,
@@ -7317,7 +7147,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 190},
 	},
 	focusenergy: {
 		accuracy: true,
@@ -7335,7 +7164,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'focusenergy',
-		effect: {
+		condition: {
 			onStart(target, source, effect) {
 				if (effect && effect.id === 'zpower') {
 					this.add('-start', target, 'move: Focus Energy', '[zeffect]');
@@ -7378,7 +7207,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return true;
 			}
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(pokemon) {
 				this.add('-singleturn', pokemon, 'move: Focus Punch');
@@ -7392,7 +7221,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 200},
 	},
 	followme: {
 		accuracy: true,
@@ -7413,7 +7241,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onTryHit(target) {
 			if (target.side.active.length < 2) return false;
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target, source, effect) {
 				if (effect && effect.id === 'zpower') {
@@ -7456,7 +7284,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 120},
 	},
 	foresight: {
 		accuracy: true,
@@ -7477,7 +7304,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onTryHit(target) {
 			if (target.volatiles['miracleeye']) return false;
 		},
-		effect: {
+		condition: {
 			noCopy: true,
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'Foresight');
@@ -7540,7 +7367,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 175},
 	},
 	freezedry: {
 		accuracy: 100,
@@ -7566,7 +7392,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 140},
 	},
 	freezeshock: {
 		accuracy: 90,
@@ -7600,7 +7425,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 200},
 	},
 	frenzyplant: {
 		accuracy: 90,
@@ -7623,7 +7447,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 200},
 	},
 	frostbreath: {
 		accuracy: 90,
@@ -7644,7 +7467,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 120},
 	},
 	frustration: {
 		accuracy: 100,
@@ -7667,7 +7489,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 	furyattack: {
 		accuracy: 100,
@@ -7688,7 +7509,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	furycutter: {
 		accuracy: 95,
@@ -7711,7 +7531,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onStart() {
 				this.effectData.multiplier = 1;
@@ -7729,7 +7549,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 100},
 	},
 	furyswipes: {
 		accuracy: 100,
@@ -7750,7 +7569,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	fusionbolt: {
 		accuracy: 100,
@@ -7776,7 +7594,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 180},
 	},
 	fusionflare: {
 		accuracy: 100,
@@ -7807,7 +7624,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 180},
 	},
 	futuresight: {
 		accuracy: 100,
@@ -7858,7 +7674,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 190},
 	},
 	gastroacid: {
 		accuracy: 100,
@@ -7915,7 +7730,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 180},
 	},
 	gearup: {
 		accuracy: true,
@@ -7995,7 +7809,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Rock",
-		zMove: {basePower: 100},
 	},
 	gemstoneglimmer: {
 		accuracy: 95,
@@ -8020,7 +7833,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Rock",
-		zMove: {basePower: 140},
 	},
 	genesissupernova: {
 		accuracy: true,
@@ -8104,7 +7916,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 140},
 	},
 	gigaimpact: {
 		accuracy: 90,
@@ -8127,7 +7938,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 200},
 	},
 	gigavolthavoc: {
 		accuracy: true,
@@ -8172,7 +7982,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Ice",
-		zMove: {basePower: 120},
 	},
 	glare: {
 		accuracy: 100,
@@ -8238,7 +8047,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 160},
 	},
 	grasspledge: {
 		accuracy: 100,
@@ -8293,7 +8101,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				target.side.addSideCondition('firepledge');
 			}
 		},
-		effect: {
+		condition: {
 			duration: 4,
 			onStart(targetSide) {
 				this.add('-sidestart', targetSide, 'Grass Pledge');
@@ -8308,7 +8116,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 160},
 	},
 	grasswhistle: {
 		accuracy: 55,
@@ -8347,7 +8154,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		terrain: 'grassyterrain',
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
 				if (source && source.hasItem('terrainextender')) {
@@ -8410,7 +8217,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		pseudoWeather: 'gravity',
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
 				if (source && source.hasAbility('persistent')) {
@@ -8544,7 +8351,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'grudge',
-		effect: {
+		condition: {
 			onStart(pokemon) {
 				this.add('-singlemove', pokemon, 'Grudge');
 			},
@@ -8681,7 +8488,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 180},
 	},
 	gunkshot: {
 		accuracy: 80,
@@ -8704,7 +8510,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Poison",
-		zMove: {basePower: 190},
 	},
 	gust: {
 		accuracy: 100,
@@ -8724,7 +8529,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 100},
 	},
 	gyroball: {
 		accuracy: 100,
@@ -8750,7 +8554,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 160},
 	},
 	hail: {
 		accuracy: true,
@@ -8796,7 +8599,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 180},
 	},
 	happyhour: {
 		accuracy: true,
@@ -8891,7 +8693,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 140},
 	},
 	headcharge: {
 		accuracy: 100,
@@ -8912,7 +8713,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 190},
 	},
 	headsmash: {
 		accuracy: 80,
@@ -8933,7 +8733,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Rock",
-		zMove: {basePower: 200},
 	},
 	healbell: {
 		accuracy: true,
@@ -8980,7 +8779,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'healblock',
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(target, source, effect) {
 				if (source && source.hasAbility('persistent')) {
@@ -9043,7 +8842,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		selfdestruct: "ifHit",
 		slotCondition: 'healingwish',
-		effect: {
+		condition: {
 			duration: 2,
 			onSwitchInPriority: 1,
 			onSwitchIn(target) {
@@ -9135,7 +8934,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 120},
 	},
 	heartswap: {
 		accuracy: true,
@@ -9208,7 +9006,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 160},
 	},
 	heatwave: {
 		accuracy: 90,
@@ -9238,7 +9035,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Fire",
-		zMove: {basePower: 175},
 	},
 	heavyslam: {
 		accuracy: 100,
@@ -9275,7 +9071,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 160},
 	},
 	hellfire: {
 		accuracy: true,
@@ -9293,7 +9088,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		terrain: 'hellfire',
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
 				if (source && source.hasAbility('hellfield')) {
@@ -9394,7 +9189,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onTryHit(target) {
 			if (!target.newlySwitched && !this.queue.willMove(target)) return false;
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target, source) {
 				this.effectData.multiplier = 1.5;
@@ -9437,7 +9232,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 160},
 	},
 //FIX
 	hiddenpower: {
@@ -9461,7 +9255,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 120},
 	},
 	hiddenpowerbug: {
 		accuracy: 100,
@@ -9785,7 +9578,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 175},
 	},
 	highjumpkick: {
 		accuracy: 90,
@@ -9809,7 +9601,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 195},
 	},
 	holdback: {
 		accuracy: 100,
@@ -9830,7 +9621,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	holdhands: {
 		accuracy: true,
@@ -9894,7 +9684,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 120},
 	},
 	horndrill: {
 		accuracy: 30,
@@ -9915,7 +9704,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 180},
 	},
 	hornleech: {
 		accuracy: 100,
@@ -9936,7 +9724,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 140},
 	},
 	howl: {
 		accuracy: true,
@@ -9989,7 +9776,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 185},
 	},
 	hydrocannon: {
 		accuracy: 90,
@@ -10012,7 +9798,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 200},
 	},
 	hydropump: {
 		accuracy: 80,
@@ -10032,7 +9817,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 185},
 	},
 	hydrovortex: {
 		accuracy: true,
@@ -10075,7 +9859,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 200},
 	},
 	hyperfang: {
 		accuracy: 90,
@@ -10098,7 +9881,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 	hyperscan: {
 		accuracy: true,
@@ -10122,7 +9904,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		 pokemon.addVolatile('hyperscan', pokemon);
 		 this.add('-activate', pokemon, 'move: Hyper Scan', '[of] ' + target);
 		},
-		effect: {
+		condition: {
 		 noCopy: true,
 		 duration: 3,
 		 onRestart(pokemon) {
@@ -10192,7 +9974,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 180},
 	},
 	hyperspacehole: {
 		accuracy: true,
@@ -10213,7 +9994,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 160},
 	},
 	hypervoice: {
 		accuracy: 100,
@@ -10233,7 +10013,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Normal",
-		zMove: {basePower: 175},
 	},
 	hypnosis: {
 		accuracy: 60,
@@ -10283,7 +10062,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onLockMove: 'iceball',
 			onStart() {
@@ -10305,7 +10084,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 100},
 	},
 	icebeam: {
 		accuracy: 100,
@@ -10328,7 +10106,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 175},
 	},
 	iceburn: {
 		accuracy: 90,
@@ -10362,7 +10139,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 200},
 	},
 	icefang: {
 		accuracy: 95,
@@ -10390,7 +10166,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		],
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 120},
 	},
 	icehammer: {
 		accuracy: 90,
@@ -10415,7 +10190,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 180},
 	},
 	icepunch: {
 		accuracy: 100,
@@ -10438,7 +10212,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 140},
 	},
 	iceshard: {
 		accuracy: 100,
@@ -10458,7 +10231,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 100},
 	},
 	iciclecrash: {
 		accuracy: 90,
@@ -10481,7 +10253,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 160},
 	},
 	iciclespear: {
 		accuracy: 100,
@@ -10502,7 +10273,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 140},
 	},
 	icywind: {
 		accuracy: 95,
@@ -10527,7 +10297,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Ice",
-		zMove: {basePower: 100},
 	},
 	imprison: {
 		accuracy: true,
@@ -10545,7 +10314,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'imprison',
-		effect: {
+		condition: {
 			noCopy: true,
 			onStart(target) {
 				this.add('-start', target, 'move: Imprison');
@@ -10595,7 +10364,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Fire",
-		zMove: {basePower: 120},
 	},
 	infernalblade: {
 		accuracy: 100,
@@ -10622,7 +10390,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 175},
 	},
 	inferno: {
 		accuracy: 50,
@@ -10652,7 +10419,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 180},
 	},
 	infernooverdrive: {
 		accuracy: true,
@@ -10693,7 +10459,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 100},
 	},
 	ingrain: {
 		accuracy: true,
@@ -10711,7 +10476,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'ingrain',
-		effect: {
+		condition: {
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'move: Ingrain');
 			},
@@ -10784,7 +10549,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		pseudoWeather: 'iondeluge',
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target) {
 				this.add('-fieldactivate', 'move: Ion Deluge');
@@ -10846,7 +10611,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 160},
 	},
 	irontail: {
 		accuracy: 75,
@@ -10871,7 +10635,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 180},
 	},
 	jawlock: {
 		accuracy: 100,
@@ -10895,7 +10658,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 160},
 	},
 	judgment: {
 		accuracy: 100,
@@ -10922,7 +10684,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 180},
 	},
 	jumpkick: {
 		accuracy: 95,
@@ -10946,7 +10707,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 180},
 	},
 	karatechop: {
 		accuracy: 100,
@@ -10967,7 +10727,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 100},
 	},
 	kinesis: {
 		accuracy: 80,
@@ -11015,7 +10774,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target) {
 				this.add('-singleturn', target, 'Protect');
@@ -11083,7 +10842,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 120},
 	},
 	kyuubiburn: {
 		accuracy: 90,
@@ -11102,7 +10860,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'kyuubiburn',
-		effect: {
+		condition: {
 			onStart(target) {
 				this.add('-start', target, 'move: Kyuubi Burn');
 			},
@@ -11129,7 +10887,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 190},
 	},
 	landswrath: {
 		accuracy: 100,
@@ -11149,7 +10906,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Ground",
-		zMove: {basePower: 185},
 	},
 	laserfocus: {
 		accuracy: true,
@@ -11167,7 +10923,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'laserfocus',
-		effect: {
+		condition: {
 			duration: 2,
 			onStart(pokemon, source, effect) {
 				if (effect && (['imposter', 'psychup', 'transform'].includes(effect.id))) {
@@ -11222,7 +10978,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 200},
 	},
 	lavaplume: {
 		accuracy: 100,
@@ -11245,7 +11000,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacent",
 		type: "Fire",
-		zMove: {basePower: 160},
 	},
 	leafage: {
 		accuracy: 100,
@@ -11265,7 +11019,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 100},
 	},
 	leafblade: {
 		accuracy: 100,
@@ -11289,7 +11042,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 175},
 	},
 	leafstorm: {
 		accuracy: 90,
@@ -11314,7 +11066,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 195},
 	},
 	leaftornado: {
 		accuracy: 90,
@@ -11339,7 +11090,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 120},
 	},
 	leechlife: {
 		accuracy: 100,
@@ -11360,7 +11110,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 160},
 	},
 	leechseed: {
 		accuracy: 90,
@@ -11378,7 +11127,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'leechseed',
-		effect: {
+		condition: {
 			onStart(target) {
 				this.add('-start', target, 'move: Leech Seed');
 			},
@@ -11452,7 +11201,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target) {
 				this.add('-singleturn', target, 'Protect');
@@ -11534,7 +11283,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 100},
 	},
 	lifedew: {
 		accuracy: true,
@@ -11585,7 +11333,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fairy",
-		zMove: {basePower: 200},
 	},
 	lightscreen: {
 		accuracy: true,
@@ -11603,7 +11350,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'lightscreen',
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(target, source, effect) {
 				if (source && source.hasItem('lightclay')) {
@@ -11681,7 +11428,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 160},
 	},
 	livewire: {
 		accuracy: true,
@@ -11699,7 +11445,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'livewire',
-		effect: {
+		condition: {
 			// this is a side condition
 			onStart(side) {
 				this.add('-sidestart', side, 'move: Livewire');
@@ -11747,7 +11493,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			source.addVolatile('lockon', target);
 			this.add('-activate', source, 'move: Lock-On', '[of] ' + target);
 		},
-		effect: {
+		condition: {
 			noCopy: true, // doesn't get copied by Baton Pass
 			duration: 2,
 			onSourceAccuracy(accuracy, target, source, move) {
@@ -11817,7 +11563,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 160},
 	},
 	lowsweep: {
 		accuracy: 100,
@@ -11842,7 +11587,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 120},
 	},
 	luckychant: {
 		accuracy: true,
@@ -11860,7 +11604,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'luckychant',
-		effect: {
+		condition: {
 			duration: 5,
 			onStart(side) {
 				this.add('-sidestart', side, 'move: Lucky Chant'); // "The Lucky Chant shielded [side.name]'s team from critical hits!"
@@ -11900,7 +11644,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		selfdestruct: "ifHit",
 		sideCondition: 'lunardance',
-		effect: {
+		condition: {
 			duration: 2,
 			onStart(side, source) {
 				this.debug('Lunar Dance started on ' + side.name);
@@ -11960,7 +11704,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 160},
 	},
 	lusterpurge: {
 		accuracy: 100,
@@ -11985,7 +11728,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 140},
 	},
 	machpunch: {
 		accuracy: 100,
@@ -12005,7 +11747,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 100},
 	},
 	magicalleaf: {
 		accuracy: true,
@@ -12025,7 +11766,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 120},
 	},
 	magiccoat: {
 		accuracy: true,
@@ -12043,7 +11783,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'magiccoat',
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target, source, effect) {
 				this.add('-singleturn', target, 'move: Magic Coat');
@@ -12094,7 +11834,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		pseudoWeather: 'magicroom',
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
 				if (source && source.hasAbility('persistent')) {
@@ -12138,7 +11878,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacent",
 		type: "Fire",
-		zMove: {basePower: 175},
 	},
 	magmastorm: {
 		accuracy: 75,
@@ -12159,7 +11898,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 180},
 	},
 	magnetbomb: {
 		accuracy: true,
@@ -12179,7 +11917,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 120},
 	},
 	magneticflux: {
 		accuracy: true,
@@ -12231,7 +11968,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'magnetrise',
-		effect: {
+		condition: {
 			duration: 5,
 			onStart(target) {
 				if (target.volatiles['smackdown'] || target.volatiles['ingrain']) return false;
@@ -12296,7 +12033,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacent",
 		type: "Ground",
-		zMove: {basePower: 140},
 	},
 	maliciousmoonsault: {
 		accuracy: true,
@@ -12341,7 +12077,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return false;
 			}
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target, source) {
 				this.add('-singleturn', source, 'Mat Block');
@@ -12445,7 +12181,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 			return false;
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onBasePowerPriority: 4,
 			onBasePower(basePower) {
@@ -12476,7 +12212,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 120},
 	},
 	megahorn: {
 		accuracy: 85,
@@ -12496,7 +12231,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 190},
 	},
 	megakick: {
 		accuracy: 75,
@@ -12516,7 +12250,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 190},
 	},
 	megapunch: {
 		accuracy: 85,
@@ -12536,7 +12269,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 	memento: {
 		accuracy: 100,
@@ -12610,7 +12342,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (!source.volatiles['metalburst']) return false;
 			if (source.volatiles['metalburst'].position === null) return false;
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			noCopy: true,
 			onStart(target, source, move) {
@@ -12632,7 +12364,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "scripted",
 		type: "Steel",
-		zMove: {basePower: 100},
 	},
 	metalclaw: {
 		accuracy: 95,
@@ -12664,7 +12395,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		],
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 100},
 	},
 	metalsound: {
 		accuracy: 85,
@@ -12710,7 +12440,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 100},
 	},
 	meteorassault: {
 		accuracy: 100,
@@ -12733,7 +12462,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 200},
 	},
 	meteormash: {
 		accuracy: 90,
@@ -12760,7 +12488,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 175},
 	},
 	metronome: {
 		accuracy: true,
@@ -12885,7 +12612,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacent",
 		type: "Fire",
-		zMove: {basePower: 200},
 	},
 	mindreader: {
 		accuracy: true,
@@ -12930,7 +12656,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'minedeploy',
-		effect: {
+		condition: {
 			// this is a side condition
 			onStart(side) {
 				this.add('-sidestart', side, 'move: Mine Deploy');
@@ -12960,7 +12686,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'minimize',
-		effect: {
+		condition: {
 			noCopy: true,
 			onSourceModifyDamage(damage, source, target, move) {
 				if (['stomp', 'steamroller', 'bodyslam', 'flyingpress', 'dragonrush', 'heatcrash', 'heavyslam', 'maliciousmoonsault'].includes(move.id)) {
@@ -13001,7 +12727,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onTryHit(target) {
 			if (target.volatiles['foresight']) return false;
 		},
-		effect: {
+		condition: {
 			noCopy: true,
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'Miracle Eye');
@@ -13046,7 +12772,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (!source.volatiles['mirrorcoat']) return false;
 			if (source.volatiles['mirrorcoat'].position === null) return false;
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			noCopy: true,
 			onStart(target, source, move) {
@@ -13068,7 +12794,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "scripted",
 		type: "Psychic",
-		zMove: {basePower: 100},
 	},
 	mirrormove: {
 		accuracy: true,
@@ -13120,7 +12845,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 120},
 	},
 	mist: {
 		accuracy: true,
@@ -13138,7 +12862,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'mist',
-		effect: {
+		condition: {
 			duration: 5,
 			onBoost(boost, target, source, effect) {
 				if (effect.effectType === 'Move' && effect.infiltrates && target.side !== source.side) return;
@@ -13194,7 +12918,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 140},
 	},
 	mistyterrain: {
 		accuracy: true,
@@ -13212,7 +12935,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		terrain: 'mistyterrain',
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
 				if (source && source.hasItem('terrainextender')) {
@@ -13281,7 +13004,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fairy",
-		zMove: {basePower: 175},
 	},
 	moongeistbeam: {
 		accuracy: 100,
@@ -13302,7 +13024,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 180},
 	},
 	moonlight: {
 		accuracy: true,
@@ -13385,7 +13106,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 120},
 	},
 	mudshot: {
 		accuracy: 95,
@@ -13410,7 +13130,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 100},
 	},
 	mudslap: {
 		accuracy: 100,
@@ -13435,7 +13154,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 100},
 	},
 	mudsport: {
 		accuracy: true,
@@ -13453,7 +13171,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		pseudoWeather: 'mudsport',
-		effect: {
+		condition: {
 			duration: 5,
 			onStart(side, source) {
 				this.add('-fieldstart', 'move: Mud Sport', '[of] ' + source);
@@ -13501,7 +13219,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Water",
-		zMove: {basePower: 175},
 	},
 	multiattack: {
 		accuracy: 100,
@@ -13525,7 +13242,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 185},
 	},
 	mysticalfire: {
 		accuracy: 100,
@@ -13550,7 +13266,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 140},
 	},
 	nastyplot: {
 		accuracy: true,
@@ -13604,7 +13319,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 //FIX
 	naturepower: {
@@ -13665,7 +13379,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fairy",
-		zMove: {basePower: 100},
 	},
 	needlearm: {
 		accuracy: 100,
@@ -13688,7 +13401,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 120},
 	},
 	nervalcut: {
 		accuracy: 30,
@@ -13709,7 +13421,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 180},
 	},
 	neverendingnightmare: {
 		accuracy: true,
@@ -13754,7 +13465,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 160},
 	},
 	nightmare: {
 		accuracy: 100,
@@ -13772,7 +13482,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'nightmare',
-		effect: {
+		condition: {
 			noCopy: true,
 			onStart(pokemon) {
 				if (pokemon.status !== 'slp' && !pokemon.hasAbility('comatose')) {
@@ -13809,7 +13519,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 100},
 	},
 	nightslash: {
 		accuracy: 100,
@@ -13833,7 +13542,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 140},
 	},
 	nobleroar: {
 		accuracy: 100,
@@ -13875,7 +13583,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'noretreat',
-		effect: {
+		condition: {
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'move: No Retreat');
 			},
@@ -13927,7 +13635,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 100},
 	},
 	oblivionwing: {
 		accuracy: 100,
@@ -13948,7 +13655,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 160},
 	},
 	obstruct: {
 		accuracy: true,
@@ -13973,7 +13679,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target) {
 				this.add('-singleturn', target, 'Protect');
@@ -14051,7 +13757,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 120},
 	},
 	odorsleuth: {
 		accuracy: true,
@@ -14106,7 +13811,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 120},
 	},
 	originpulse: {
 		accuracy: 85,
@@ -14125,7 +13829,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Water",
-		zMove: {basePower: 185},
 	},
 	outrage: {
 		accuracy: 100,
@@ -14153,7 +13856,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "randomNormal",
 		type: "Dragon",
-		zMove: {basePower: 190},
 	},
 	overdrive: {
 		accuracy: 100,
@@ -14173,7 +13875,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Electric",
-		zMove: {basePower: 160},
 	},
 	overheat: {
 		accuracy: 90,
@@ -14198,7 +13899,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 195},
 	},
 	painsplit: {
 		accuracy: true,
@@ -14250,7 +13950,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Rock",
-		zMove: {basePower: 160},
 	},
 	paraboliccharge: {
 		accuracy: 100,
@@ -14271,7 +13970,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacent",
 		type: "Electric",
-		zMove: {basePower: 120},
 	},
 	partingshot: {
 		accuracy: 100,
@@ -14324,7 +14022,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 100},
 	},
 	payday: {
 		accuracy: 100,
@@ -14347,7 +14044,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	peck: {
 		accuracy: 100,
@@ -14367,7 +14063,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 100},
 	},
 	perishsong: {
 		accuracy: true,
@@ -14403,7 +14098,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (!result) return false;
 			if (message) this.add('-fieldactivate', 'move: Perish Song');
 		},
-		effect: {
+		condition: {
 			duration: 4,
 			onEnd(target) {
 				this.add('-start', target, 'perish0');
@@ -14436,7 +14131,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'permafrost',
-		effect: {
+		condition: {
 			// this is a side condition
 			onStart(side) {
 				this.add('-sidestart', side, 'move: Permafrost');
@@ -14483,7 +14178,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacent",
 		type: "Grass",
-		zMove: {basePower: 175},
 	},
 	petaldance: {
 		accuracy: 100,
@@ -14511,7 +14205,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "randomNormal",
 		type: "Grass",
-		zMove: {basePower: 190},
 	},
 	phantomforce: {
 		accuracy: 100,
@@ -14540,7 +14233,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onTryImmunity(target, source, move) {
 				if (move.id === 'helpinghand') {
@@ -14557,7 +14250,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 175},
 	},
 //CHANGE
 	pherogas: {
@@ -14608,7 +14300,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 175},
 	},
 	photongeyser: {
 		accuracy: 100,
@@ -14632,7 +14323,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 180},
 	},
 	photonkick: {
 		accuracy: 90,
@@ -14656,7 +14346,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 160},
 	},
 	pinmissile: {
 		accuracy: 95,
@@ -14677,7 +14366,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 140},
 	},
 	plasmafists: {
 		accuracy: 100,
@@ -14698,7 +14386,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 180},
 	},
 	playnice: {
 		accuracy: true,
@@ -14746,7 +14433,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fairy",
-		zMove: {basePower: 175},
 	},
 	pluck: {
 		accuracy: 100,
@@ -14776,7 +14462,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 120},
 	},
 	poisonfang: {
 		accuracy: 100,
@@ -14799,7 +14484,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Poison",
-		zMove: {basePower: 100},
 	},
 	poisongas: {
 		accuracy: 90,
@@ -14843,7 +14527,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Poison",
-		zMove: {basePower: 160},
 	},
 	poisonpowder: {
 		accuracy: 75,
@@ -14887,7 +14570,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Poison",
-		zMove: {basePower: 100},
 	},
 	poisontail: {
 		accuracy: 100,
@@ -14911,7 +14593,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Poison",
-		zMove: {basePower: 100},
 	},
 	pollenpuff: {
 		accuracy: 100,
@@ -14937,7 +14618,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 175},
 	},
 	pound: {
 		accuracy: 100,
@@ -14957,7 +14637,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	powder: {
 		accuracy: 100,
@@ -14975,7 +14654,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'powder',
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target) {
 				this.add('-singleturn', target, 'Powder');
@@ -15015,7 +14694,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Ice",
-		zMove: {basePower: 100},
 	},
 	powergem: {
 		accuracy: 100,
@@ -15035,7 +14713,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Rock",
-		zMove: {basePower: 160},
 	},
 	powersplit: {
 		accuracy: true,
@@ -15118,7 +14795,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'powertrick',
-		effect: {
+		condition: {
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'Power Trick');
 				let newatk = pokemon.storedStats.def;
@@ -15169,7 +14846,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 160},
 	},
 	poweruppunch: {
 		accuracy: 100,
@@ -15196,7 +14872,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 100},
 	},
 	powerwhip: {
 		accuracy: 85,
@@ -15216,7 +14891,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 190},
 	},
 	precipiceblades: {
 		accuracy: 85,
@@ -15235,7 +14909,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Ground",
-		zMove: {basePower: 190},
 	},
 	present: {
 		accuracy: 90,
@@ -15267,7 +14940,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	prismaticlaser: {
 		accuracy: 100,
@@ -15290,7 +14962,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 200},
 	},
 	protect: {
 		accuracy: true,
@@ -15315,7 +14986,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target) {
 				this.add('-singleturn', target, 'Protect');
@@ -15363,7 +15034,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 120},
 	},
 	psychup: {
 		accuracy: true,
@@ -15423,7 +15093,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 175},
 	},
 	psychicfangs: {
 		accuracy: 100,
@@ -15451,7 +15120,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 160},
 	},
 	psychicterrain: {
 		accuracy: true,
@@ -15469,7 +15137,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		terrain: 'psychicterrain',
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
 				if (source && source.hasItem('terrainextender')) {
@@ -15533,7 +15201,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 200},
 	},
 	psychocut: {
 		accuracy: 100,
@@ -15557,7 +15224,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 140},
 	},
 	psychoshift: {
 		accuracy: 100,
@@ -15607,7 +15273,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 160},
 	},
 	psystrike: {
 		accuracy: 100,
@@ -15628,7 +15293,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 180},
 	},
 	psywave: {
 		accuracy: 100,
@@ -15651,7 +15315,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 100},
 	},
 	pulverizingpancake: {
 		accuracy: true,
@@ -15696,7 +15359,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 160},
 	},
 	purify: {
 		accuracy: true,
@@ -15762,7 +15424,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onTryHit(target, pokemon) {
 			target.side.removeSideCondition('pursuit');
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onBeforeSwitchOut(pokemon) {
 				this.debug('Pursuit start');
@@ -15791,7 +15453,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 100},
 	},
 	pyroball: {
 		accuracy: 90,
@@ -15814,7 +15475,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 190},
 	},
 	quash: {
 		accuracy: 100,
@@ -15871,7 +15531,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	quickguard: {
 		accuracy: true,
@@ -15895,7 +15554,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHitSide(side, source) {
 			source.addVolatile('stall');
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target, source) {
 				this.add('-singleturn', source, 'Quick Guard');
@@ -15968,7 +15627,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		self: {
 			volatileStatus: 'rage',
 		},
-		effect: {
+		condition: {
 			onStart(pokemon) {
 				this.add('-singlemove', pokemon, 'Rage');
 			},
@@ -15986,7 +15645,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	ragepowder: {
 		accuracy: true,
@@ -16007,7 +15665,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onTryHit(target) {
 			if (target.side.active.length < 2) return false;
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(pokemon) {
 				this.add('-singleturn', pokemon, 'move: Rage Powder');
@@ -16080,7 +15738,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	razorleaf: {
 		accuracy: 95,
@@ -16104,7 +15761,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Grass",
-		zMove: {basePower: 100},
 	},
 	razorshell: {
 		accuracy: 95,
@@ -16134,7 +15790,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		],
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 140},
 	},
 	razorwhip: {
 		accuracy: 90,
@@ -16158,7 +15813,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 140},
 	},
 	razorwind: {
 		accuracy: 100,
@@ -16193,7 +15847,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 	recover: {
 		accuracy: true,
@@ -16259,7 +15912,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'reflect',
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(target, source, effect) {
 				if (source && source.hasItem('lightclay')) {
@@ -16379,7 +16032,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Normal",
-		zMove: {basePower: 140},
 	},
 	rest: {
 		accuracy: true,
@@ -16436,7 +16088,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 140},
 	},
 	return: {
 		accuracy: 100,
@@ -16459,7 +16110,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 	revelationdance: {
 		accuracy: 100,
@@ -16484,7 +16134,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 175},
 	},
 	revenge: {
 		accuracy: 100,
@@ -16514,7 +16163,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 120},
 	},
 	reversal: {
 		accuracy: 100,
@@ -16553,7 +16201,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 160},
 	},
 	roar: {
 		accuracy: true,
@@ -16597,7 +16244,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dragon",
-		zMove: {basePower: 200},
 	},
 	rockblast: {
 		accuracy: 90,
@@ -16618,7 +16264,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Rock",
-		zMove: {basePower: 140},
 	},
 	rockclimb: {
 		accuracy: 85,
@@ -16641,7 +16286,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 175},
 	},
 	rockpolish: {
 		accuracy: true,
@@ -16687,7 +16331,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Rock",
-		zMove: {basePower: 140},
 	},
 	rocksmash: {
 		accuracy: 100,
@@ -16712,7 +16355,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 100},
 	},
 	rockthrow: {
 		accuracy: 90,
@@ -16732,7 +16374,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Rock",
-		zMove: {basePower: 100},
 	},
 	rocktomb: {
 		accuracy: 95,
@@ -16757,7 +16398,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Rock",
-		zMove: {basePower: 120},
 	},
 	rockwrecker: {
 		accuracy: 90,
@@ -16780,7 +16420,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Rock",
-		zMove: {basePower: 200},
 	},
 	roleplay: {
 		accuracy: true,
@@ -16843,7 +16482,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 120},
 	},
 	rollout: {
 		accuracy: 90,
@@ -16872,7 +16510,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onLockMove: 'rollout',
 			onStart() {
@@ -16894,7 +16532,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Rock",
-		zMove: {basePower: 100},
 	},
 	roost: {
 		accuracy: true,
@@ -16915,7 +16552,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		self: {
 			volatileStatus: 'roost',
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onResidualOrder: 20,
 			onStart(target) {
@@ -17007,7 +16644,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 120},
 	},
 	sacredfire: {
 		accuracy: 95,
@@ -17034,7 +16670,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 180},
 	},
 	sacredsword: {
 		accuracy: 100,
@@ -17056,7 +16691,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 175},
 	},
 	safeguard: {
 		accuracy: true,
@@ -17074,7 +16708,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'safeguard',
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(target, source, effect) {
 				if (source && source.hasAbility('persistent')) {
@@ -17182,7 +16816,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		],
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 195},
 	},
 	sandcoffin: {
 		accuracy: 95,
@@ -17200,7 +16833,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'sandcoffin',
-		effect: {
+		condition: {
 			duration: 2,
 			onStart(target) {
 				this.add('-fieldactivate', 'move: Sand Coffin');
@@ -17219,7 +16852,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 100},
 	},
 	sandstorm: {
 		accuracy: true,
@@ -17261,7 +16893,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 100},
 	},
 	satellitedefense: {
 		accuracy: true,
@@ -17286,7 +16917,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 		 pokemon.addVolatile('stall');
 		},
-		effect: {
+		condition: {
 		 duration: 1,
 		 onStart(target) {
 			this.add('-singleturn', target, 'move: Protect');
@@ -17359,7 +16990,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "???",
-		zMove: {basePower: 190},
 	},
 	savagespinout: {
 		accuracy: true,
@@ -17403,7 +17033,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 160},
 	},
 	scaryface: {
 		accuracy: 100,
@@ -17446,7 +17075,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	screech: {
 		accuracy: 85,
@@ -17499,7 +17127,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacent",
 		type: "Fire",
-		zMove: {basePower: 180},
 	},
 	searingsunrazesmash: {
 		accuracy: true,
@@ -17582,7 +17209,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 140},
 	},
 	secretsword: {
 		accuracy: 100,
@@ -17603,7 +17229,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 160},
 	},
 	seedbomb: {
 		accuracy: 100,
@@ -17623,7 +17248,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 160},
 	},
 	seedflare: {
 		accuracy: 85,
@@ -17648,7 +17272,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 190},
 	},
 	seismictoss: {
 		accuracy: 100,
@@ -17669,7 +17292,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 100},
 	},
 	selfdestruct: {
 		accuracy: 100,
@@ -17690,7 +17312,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacent",
 		type: "Normal",
-		zMove: {basePower: 200},
 	},
 	shadowball: {
 		accuracy: 100,
@@ -17715,7 +17336,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 160},
 	},
 	shadowbone: {
 		accuracy: 100,
@@ -17740,7 +17360,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 160},
 	},
 	shadowclaw: {
 		accuracy: 100,
@@ -17764,7 +17383,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 140},
 	},
 	shadowforce: {
 		accuracy: 100,
@@ -17793,7 +17411,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onTryImmunity(target, source, move) {
 				if (move.id === 'helpinghand') {
@@ -17810,7 +17428,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 190},
 	},
 	shadowpunch: {
 		accuracy: true,
@@ -17830,7 +17447,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 120},
 	},
 	shadowsneak: {
 		accuracy: 100,
@@ -17850,7 +17466,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 100},
 	},
 	sharpen: {
 		accuracy: true,
@@ -17914,7 +17529,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		ohko: 'Ice',
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 180},
 	},
 	shellsmash: {
 		accuracy: true,
@@ -17969,7 +17583,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return true;
 			}
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(pokemon) {
 				this.add('-singleturn', pokemon, 'move: Shell Trap');
@@ -17983,7 +17597,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Fire",
-		zMove: {basePower: 200},
 	},
 	shiftgear: {
 		accuracy: true,
@@ -18035,7 +17648,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		],
 		target: "normal",
 		type: "Ice",
-		zMove: {basePower: 160},
 	},
 	shockwave: {
 		accuracy: true,
@@ -18055,7 +17667,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 120},
 	},
 	shoreup: {
 		accuracy: true,
@@ -18105,7 +17716,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 140},
 	},
 	silverwind: {
 		accuracy: 100,
@@ -18136,7 +17746,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 120},
 	},
 	simplebeam: {
 		accuracy: 100,
@@ -18330,7 +17939,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 195},
 	},
 	skyattack: {
 		accuracy: 90,
@@ -18365,7 +17973,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 200},
 	},
 	skydrop: {
 		accuracy: 100,
@@ -18421,7 +18028,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(target, source) {
 			this.add('-end', target, 'Sky Drop');
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onAnyDragOut(pokemon) {
 				if (pokemon === this.effectData.target || pokemon === this.effectData.source) return false;
@@ -18482,7 +18089,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 120},
 	},
 	skyuppercut: {
 		accuracy: 90,
@@ -18502,7 +18108,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 160},
 	},
 	slam: {
 		accuracy: 75,
@@ -18522,7 +18127,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 	slash: {
 		accuracy: 100,
@@ -18546,7 +18150,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 140},
 	},
 	sleeppowder: {
 		accuracy: 75,
@@ -18632,7 +18235,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Poison",
-		zMove: {basePower: 120},
 	},
 	sludgebomb: {
 		accuracy: 100,
@@ -18655,7 +18257,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Poison",
-		zMove: {basePower: 175},
 	},
 	sludgewave: {
 		accuracy: 100,
@@ -18678,7 +18279,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacent",
 		type: "Poison",
-		zMove: {basePower: 175},
 	},
 	smackdown: {
 		accuracy: 100,
@@ -18696,7 +18296,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'smackdown',
-		effect: {
+		condition: {
 			noCopy: true,
 			onStart(pokemon) {
 				let applies = false;
@@ -18729,7 +18329,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Rock",
-		zMove: {basePower: 100},
 	},
 	smartstrike: {
 		accuracy: true,
@@ -18749,7 +18348,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 140},
 	},
 	smellingsalts: {
 		accuracy: 100,
@@ -18776,7 +18374,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 140},
 	},
 	smog: {
 		accuracy: 70,
@@ -18799,7 +18396,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Poison",
-		zMove: {basePower: 100},
 	},
 	smokescreen: {
 		accuracy: 100,
@@ -18847,7 +18443,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Dark",
-		zMove: {basePower: 100},
 	},
 	snatch: {
 		accuracy: true,
@@ -18865,7 +18460,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'snatch',
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(pokemon) {
 				this.add('-singleturn', pokemon, 'Snatch');
@@ -18906,7 +18501,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 160},
 	},
 	snore: {
 		accuracy: 100,
@@ -18933,7 +18527,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	soak: {
 		accuracy: 100,
@@ -19025,7 +18618,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 190},
 	},
 	solarblade: {
 		accuracy: 100,
@@ -19067,7 +18659,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 190},
 	},
 	sonicboom: {
 		accuracy: 90,
@@ -19088,7 +18679,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	soulstealing7starstrike: {
 		accuracy: true,
@@ -19129,7 +18719,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 180},
 	},
 	soundstage: {
 		accuracy: true,
@@ -19147,7 +18736,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		terrain: 'soundstage',
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
 				if (source && source.hasItem('terrainextender')) {
@@ -19213,7 +18802,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dragon",
-		zMove: {basePower: 180},
 	},
 	spark: {
 		accuracy: 100,
@@ -19236,7 +18824,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 120},
 	},
 	sparklingaria: {
 		accuracy: 100,
@@ -19262,7 +18849,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacent",
 		type: "Water",
-		zMove: {basePower: 175},
 	},
 	spectralthief: {
 		accuracy: 100,
@@ -19284,7 +18870,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 175},
 	},
 	speedswap: {
 		accuracy: true,
@@ -19354,7 +18939,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	spikes: {
 		accuracy: true,
@@ -19372,7 +18956,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'spikes',
-		effect: {
+		condition: {
 			// this is a side condition
 			onStart(side) {
 				this.add('-sidestart', side, 'Spikes');
@@ -19417,7 +19001,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			pokemon.addVolatile('stall');
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target) {
 				this.add('-singleturn', target, 'move: Protect');
@@ -19475,7 +19059,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Fairy",
-		zMove: {basePower: 140},
 	},
 	spiritshackle: {
 		accuracy: 100,
@@ -19500,7 +19083,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Ghost",
-		zMove: {basePower: 160},
 	},
 	spitup: {
 		accuracy: 100,
@@ -19532,7 +19114,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	spite: {
 		accuracy: 100,
@@ -19650,7 +19231,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onTryHit(target) {
 			if (target.side.active.length < 2) return false;
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(pokemon) {
 				this.add('-singleturn', pokemon, 'move: Spotlight');
@@ -19691,7 +19272,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Flying",
-		zMove: {basePower: 140},
 	},
 	stealthrock: {
 		accuracy: true,
@@ -19709,7 +19289,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'stealthrock',
-		effect: {
+		condition: {
 			// this is a side condition
 			onStart(side) {
 				this.add('-sidestart', side, 'move: Stealth Rock');
@@ -19746,7 +19326,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 185},
 	},
 	steamroller: {
 		accuracy: 100,
@@ -19769,7 +19348,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 120},
 	},
 	steelwing: {
 		accuracy: 90,
@@ -19796,7 +19374,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 140},
 	},
 	stickyweb: {
 		accuracy: true,
@@ -19814,7 +19391,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'stickyweb',
-		effect: {
+		condition: {
 			onStart(side) {
 				this.add('-sidestart', side, 'move: Sticky Web');
 			},
@@ -19848,7 +19425,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (pokemon.volatiles['stockpile'] && pokemon.volatiles['stockpile'].layers >= 3) return false;
 		},
 		volatileStatus: 'stockpile',
-		effect: {
+		condition: {
 			noCopy: true,
 			onStart(target) {
 				this.effectData.layers = 1;
@@ -19933,7 +19510,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 120},
 	},
 	stompingtantrum: {
 		accuracy: 100,
@@ -19957,7 +19533,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Ground",
-		zMove: {basePower: 140},
 	},
 	stoneedge: {
 		accuracy: 80,
@@ -19978,7 +19553,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Rock",
-		zMove: {basePower: 180},
 	},
 	storedpower: {
 		accuracy: 100,
@@ -20001,7 +19575,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 160},
 	},
 	stormthrow: {
 		accuracy: 100,
@@ -20022,7 +19595,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 120},
 	},
 	strength: {
 		accuracy: 100,
@@ -20042,7 +19614,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 	strengthsap: {
 		accuracy: 100,
@@ -20118,7 +19689,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "randomNormal",
 		type: "Normal",
-		zMove: {basePower: 1},
 	},
 	strugglebug: {
 		accuracy: 100,
@@ -20143,7 +19713,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Bug",
-		zMove: {basePower: 100},
 	},
 	stunspore: {
 		accuracy: 75,
@@ -20185,7 +19754,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 160},
 	},
 	substitute: {
 		accuracy: true,
@@ -20216,7 +19784,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(target) {
 			this.directDamage(target.maxhp / 4);
 		},
-		effect: {
+		condition: {
 			onStart(target) {
 				this.add('-start', target, 'Substitute');
 				this.effectData.hp = Math.floor(target.maxhp / 4);
@@ -20312,7 +19880,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 140},
 	},
 	suddenstrike: {
 		accuracy: 100,
@@ -20332,7 +19899,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 100},
 	},
 	sunnyday: {
 		accuracy: true,
@@ -20374,7 +19940,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 180},
 	},
 	superfang: {
 		accuracy: 90,
@@ -20397,7 +19962,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	supernova: {
 		accuracy: 100,
@@ -20430,7 +19994,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		],
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 200},
 	},
 	superpower: {
 		accuracy: 100,
@@ -20456,7 +20019,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 190},
 	},
 	supersonic: {
 		accuracy: 55,
@@ -20517,7 +20079,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacent",
 		type: "Water",
-		zMove: {basePower: 175},
 	},
 	swagger: {
 		accuracy: 85,
@@ -20634,7 +20195,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Normal",
-		zMove: {basePower: 120},
 	},
 	switcheroo: {
 		accuracy: 100,
@@ -20738,7 +20298,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		],
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 160},
 	},
 	synchronoise: {
 		accuracy: 100,
@@ -20764,7 +20323,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacent",
 		type: "Psychic",
-		zMove: {basePower: 190},
 	},
 	synthesis: {
 		accuracy: true,
@@ -20837,7 +20395,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 140},
 	},
 	tailwind: {
 		accuracy: true,
@@ -20855,7 +20412,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'tailwind',
-		effect: {
+		condition: {
 			duration: 4,
 			onStart(side) {
 				this.add('-sidestart', side, 'move: Tailwind');
@@ -20893,7 +20450,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 175},
 	},
 	talonswipe: {
 		accuracy: 100,
@@ -20917,7 +20473,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Flying",
-		zMove: {basePower: 140},
 	},
 	taunt: {
 		accuracy: 100,
@@ -20935,7 +20490,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'taunt',
-		effect: {
+		condition: {
 			duration: 3,
 			onStart(target) {
 				if (target.activeTurns && !this.queue.willMove(target)) {
@@ -21037,7 +20592,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 190},
 	},
 	tectonicrage: {
 		accuracy: true,
@@ -21096,7 +20650,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'telekinesis',
-		effect: {
+		condition: {
 			duration: 3,
 			onStart(target) {
 				if (['Diglett', 'Dugtrio', 'Palossand', 'Sandygast'].includes(target.baseTemplate.baseSpecies) ||
@@ -21183,7 +20737,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 120},
 	},
 	thousandarrows: {
 		accuracy: 100,
@@ -21213,7 +20766,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Ground",
-		zMove: {basePower: 180},
 	},
 	thousandwaves: {
 		accuracy: 100,
@@ -21236,7 +20788,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Ground",
-		zMove: {basePower: 175},
 	},
 	thrash: {
 		accuracy: 100,
@@ -21264,7 +20815,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "randomNormal",
 		type: "Normal",
-		zMove: {basePower: 190},
 	},
 	throatchop: {
 		accuracy: 100,
@@ -21281,7 +20831,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		effect: {
+		condition: {
 			duration: 2,
 			onStart(target) {
 				this.add('-start', target, 'Throat Chop', '[silent]');
@@ -21313,7 +20863,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 160},
 	},
 	thunder: {
 		accuracy: 70,
@@ -21343,7 +20892,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 185},
 	},
 	thunderbolt: {
 		accuracy: 100,
@@ -21366,7 +20914,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 175},
 	},
 	thunderfang: {
 		accuracy: 95,
@@ -21394,7 +20941,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		],
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 120},
 	},
 	thunderpunch: {
 		accuracy: 100,
@@ -21417,7 +20963,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 140},
 	},
 	thundershock: {
 		accuracy: 100,
@@ -21440,7 +20985,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 100},
 	},
 	thunderwave: {
 		accuracy: 90,
@@ -21507,7 +21051,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Steel",
-		zMove: {basePower: 180},
 	},
 	topsyturvy: {
 		accuracy: true,
@@ -21557,7 +21100,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'torment',
-		effect: {
+		condition: {
 			noCopy: true,
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'Torment');
@@ -21592,7 +21135,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Flying",
-		zMove: {basePower: 140},
 	},
 	toxic: {
 		accuracy: 90,
@@ -21632,7 +21174,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'toxicspikes',
-		effect: {
+		condition: {
 			// this is a side condition
 			onStart(side) {
 				this.add('-sidestart', side, 'move: Toxic Spikes');
@@ -21741,7 +21283,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 	trick: {
 		accuracy: 100,
@@ -21845,7 +21386,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		pseudoWeather: 'trickroom',
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
 				if (source && source.hasAbility('persistent')) {
@@ -21894,7 +21435,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 120},
 	},
 	tropkick: {
 		accuracy: 100,
@@ -21919,7 +21459,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 140},
 	},
 	trumpcard: {
 		accuracy: true,
@@ -21957,7 +21496,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 	twineedle: {
 		accuracy: 100,
@@ -21981,7 +21519,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 100},
 	},
 	twinkletackle: {
 		accuracy: true,
@@ -22024,7 +21561,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "allAdjacentFoes",
 		type: "Dragon",
-		zMove: {basePower: 100},
 	},
 	uturn: {
 		accuracy: 100,
@@ -22045,7 +21581,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 140},
 	},
 	uproar: {
 		accuracy: 100,
@@ -22072,7 +21607,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (foeActive && foeActive.status === 'slp') foeActive.cureStatus();
 			}
 		},
-		effect: {
+		condition: {
 			duration: 3,
 			onStart(target) {
 				this.add('-start', target, 'Uproar');
@@ -22102,7 +21637,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "randomNormal",
 		type: "Normal",
-		zMove: {basePower: 175},
 	},
 	vacuumwave: {
 		accuracy: 100,
@@ -22122,7 +21656,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 100},
 	},
 	vampiricbite: {
 		accuracy: 100,
@@ -22143,7 +21676,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dark",
-		zMove: {basePower: 140},
 	},
 	vcreate: {
 		accuracy: 95,
@@ -22170,7 +21702,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fire",
-		zMove: {basePower: 220},
 	},
 	venomdrench: {
 		accuracy: 100,
@@ -22221,7 +21752,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Poison",
-		zMove: {basePower: 120},
 	},
 	vicegrip: {
 		accuracy: 100,
@@ -22241,7 +21771,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	vinewhip: {
 		accuracy: 100,
@@ -22261,7 +21790,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 100},
 	},
 	vitalthrow: {
 		accuracy: true,
@@ -22281,7 +21809,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 140},
 	},
 	voltswitch: {
 		accuracy: 100,
@@ -22302,7 +21829,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 140},
 	},
 	volttackle: {
 		accuracy: 100,
@@ -22326,7 +21852,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 190},
 	},
 	wakeupslap: {
 		accuracy: 100,
@@ -22353,7 +21878,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
-		zMove: {basePower: 140},
 	},
 	waterfall: {
 		accuracy: 100,
@@ -22376,7 +21900,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 160},
 	},
 	watergun: {
 		accuracy: 100,
@@ -22396,7 +21919,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 100},
 	},
 	waterpledge: {
 		accuracy: 100,
@@ -22451,7 +21973,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				target.side.addSideCondition('grasspledge');
 			}
 		},
-		effect: {
+		condition: {
 			duration: 4,
 			onStart(targetSide) {
 				this.add('-sidestart', targetSide, 'Water Pledge');
@@ -22471,7 +21993,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 160},
 	},
 	waterpulse: {
 		accuracy: 100,
@@ -22494,7 +22015,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "any",
 		type: "Water",
-		zMove: {basePower: 120},
 	},
 	watershuriken: {
 		accuracy: 100,
@@ -22524,7 +22044,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 100},
 	},
 	watersport: {
 		accuracy: true,
@@ -22542,7 +22061,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		pseudoWeather: 'watersport',
-		effect: {
+		condition: {
 			duration: 5,
 			onStart(side, source) {
 				this.add('-fieldstart', 'move: Water Sport', '[of] ' + source);
@@ -22585,7 +22104,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "allAdjacentFoes",
 		type: "Water",
-		zMove: {basePower: 200},
 	},
 	weatherball: {
 		accuracy: 100,
@@ -22627,7 +22145,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 160},
 	},
 	whirlpool: {
 		accuracy: 85,
@@ -22648,7 +22165,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Water",
-		zMove: {basePower: 100},
 	},
 	whirlwind: {
 		accuracy: true,
@@ -22693,7 +22209,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHitSide(side, source) {
 			source.addVolatile('stall');
 		},
-		effect: {
+		condition: {
 			duration: 1,
 			onStart(target, source) {
 				this.add('-singleturn', source, 'Wide Guard');
@@ -22743,7 +22259,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 175},
 	},
 	willowisp: {
 		accuracy: 85,
@@ -22784,7 +22299,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "any",
 		type: "Flying",
-		zMove: {basePower: 120},
 	},
 	wish: {
 		accuracy: true,
@@ -22802,7 +22316,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		slotCondition: 'Wish',
-		effect: {
+		condition: {
 			duration: 2,
 			onStart(pokemon, source) {
 				this.effectData.hp = source.maxhp / 2;
@@ -22859,7 +22373,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		pseudoWeather: 'wonderroom',
-		effect: {
+		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
 				if (source && source.hasAbility('persistent')) {
@@ -22904,7 +22418,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Grass",
-		zMove: {basePower: 190},
 	},
 	workup: {
 		accuracy: true,
@@ -22948,7 +22461,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 100},
 	},
 	worryseed: {
 		accuracy: 100,
@@ -23016,7 +22528,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 100},
 	},
 	wringout: {
 		accuracy: 100,
@@ -23039,7 +22550,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
-		zMove: {basePower: 190},
 	},
 	xscissor: {
 		accuracy: 100,
@@ -23062,7 +22572,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Bug",
-		zMove: {basePower: 160},
 	},
 	yawn: {
 		accuracy: true,
@@ -23085,7 +22594,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return false;
 			}
 		},
-		effect: {
+		condition: {
 			noCopy: true, // doesn't get copied by Baton Pass
 			duration: 2,
 			onStart(target, source) {
@@ -23123,7 +22632,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 190},
 	},
 	zenheadbutt: {
 		accuracy: 90,
@@ -23146,7 +22654,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Psychic",
-		zMove: {basePower: 160},
 	},
 	zingzap: {
 		accuracy: 100,
@@ -23169,7 +22676,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Electric",
-		zMove: {basePower: 160},
 	},
 	zippyzap: {
 		accuracy: 100,
@@ -23213,7 +22719,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			return target.addVolatile('trapped', source, move, 'trapper');
 		},
 		volatileStatus: 'tornadobacklash',
-		effect: {
+		condition: {
 			onStart(pokemon) {
 				let applies = false;
 				if (pokemon.hasType('Flying') || pokemon.hasAbility('levitate')) applies = true;
@@ -23245,6 +22751,5 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Flying",
-		zMove: {basePower: 120},
 	},
 };

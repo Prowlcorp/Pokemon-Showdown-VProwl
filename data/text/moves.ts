@@ -21,8 +21,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	acid: {
 		name: "Acid",
-		desc: "Has a 10% chance to lower the target's Special Defense by 1 stage.",
-		shortDesc: "10% chance to lower the foe(s) Sp. Def by 1.",
+		desc: "Has a 10% chance to lower the target's Special Defense by 1 stage. Has a 10% chance to burn the target.",
+		shortDesc: "10% chance to lower the foe(s) Sp. Def by 1. 10% chance to burn the target.",
 	},
 	acidarmor: {
 		name: "Acid Armor",

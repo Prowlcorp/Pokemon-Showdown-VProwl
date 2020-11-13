@@ -405,7 +405,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onResidualOrder: 6,
 			onResidual(pokemon) {
-				this.heal(pokemon.baseMaxhp / 16);
+				this.heal(pokemon.maxhp / 16);
 			},
 		},
 		secondary: null,
@@ -2558,7 +2558,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onResidualOrder: 10,
 			onResidual(pokemon) {
-				this.damage(pokemon.baseMaxhp / 4);
+				this.damage(pokemon.maxhp / 4);
 			},
 		},
 		secondary: null,
@@ -4295,7 +4295,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onEnd(targetSide) {
 				for (const pokemon of targetSide.active) {
 					if (pokemon && !pokemon.hasType('Fire')) {
-						this.damage(pokemon.baseMaxhp / 8, pokemon);
+						this.damage(pokemon.maxhp / 8, pokemon);
 					}
 				}
 				this.add('-sideend', targetSide, 'Fire Pledge');
@@ -4305,7 +4305,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onResidual(side) {
 				for (const pokemon of side.active) {
 					if (pokemon && !pokemon.hasType('Fire')) {
-						this.damage(pokemon.baseMaxhp / 8, pokemon);
+						this.damage(pokemon.maxhp / 8, pokemon);
 					}
 				}
 			},
@@ -4442,7 +4442,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 			for (const ally of target.side.active) {
 				if (ally && this.isAdjacent(target, ally)) {
-					this.damage(ally.baseMaxhp / 16, ally, source, this.dex.getEffect('Flame Burst'));
+					this.damage(ally.maxhp / 16, ally, source, this.dex.getEffect('Flame Burst'));
 				}
 			}
 		},
@@ -4452,7 +4452,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 			for (const ally of target.side.active) {
 				if (ally && this.isAdjacent(target, ally)) {
-					this.damage(ally.baseMaxhp / 16, ally, source, this.dex.getEffect('Flame Burst'));
+					this.damage(ally.maxhp / 16, ally, source, this.dex.getEffect('Flame Burst'));
 				}
 			}
 		},
@@ -4658,9 +4658,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(target, source) {
 			let success = false;
 			if (this.field.isTerrain('grassyterrain')) {
-				success = !!this.heal(this.modify(target.baseMaxhp, 0.667)); // TODO: find out the real value
+				success = !!this.heal(this.modify(target.maxhp, 0.667)); // TODO: find out the real value
 			} else {
-				success = !!this.heal(Math.ceil(target.baseMaxhp * 0.5));
+				success = !!this.heal(Math.ceil(target.maxhp * 0.5));
 			}
 			if (success && target.side !== source.side) {
 				target.staleness = 'external';
@@ -5535,7 +5535,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onTerrain(pokemon) {
 				if (pokemon.isGrounded() && !pokemon.isSemiInvulnerable()) {
 					this.debug('Pokemon is grounded, healing through Grassy Terrain.');
-					this.heal(pokemon.baseMaxhp / 16, pokemon, pokemon);
+					this.heal(pokemon.maxhp / 16, pokemon, pokemon);
 				}
 			},
 			onEnd() {
@@ -6104,9 +6104,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(target, source) {
 			let success = false;
 			if (source.hasAbility('megalauncher')) {
-				success = !!this.heal(this.modify(target.baseMaxhp, 0.75));
+				success = !!this.heal(this.modify(target.maxhp, 0.75));
 			} else {
-				success = !!this.heal(Math.ceil(target.baseMaxhp * 0.5));
+				success = !!this.heal(Math.ceil(target.maxhp * 0.5));
 			}
 			if (success && target.side !== source.side) {
 				target.staleness = 'external';
@@ -6531,7 +6531,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {contact: 1, protect: 1, mirror: 1, gravity: 1},
 		hasCrashDamage: true,
 		onMoveFail(target, source, move) {
-			this.damage(source.baseMaxhp / 2, source, source, this.dex.getEffect('High Jump Kick'));
+			this.damage(source.maxhp / 2, source, source, this.dex.getEffect('High Jump Kick'));
 		},
 		secondary: null,
 		target: "normal",
@@ -7104,7 +7104,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onResidualOrder: 7,
 			onResidual(pokemon) {
-				this.heal(pokemon.baseMaxhp / 16);
+				this.heal(pokemon.maxhp / 16);
 			},
 			onTrapPokemon(pokemon) {
 				pokemon.tryTrap();
@@ -7271,7 +7271,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {contact: 1, protect: 1, mirror: 1, gravity: 1},
 		hasCrashDamage: true,
 		onMoveFail(target, source, move) {
-			this.damage(source.baseMaxhp / 2, source, source, this.dex.getEffect('Jump Kick'));
+			this.damage(source.maxhp / 2, source, source, this.dex.getEffect('Jump Kick'));
 		},
 		secondary: null,
 		target: "normal",
@@ -7584,7 +7584,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					this.debug('Nothing to leech into');
 					return;
 				}
-				const damage = this.damage(pokemon.baseMaxhp / 8, pokemon, target);
+				const damage = this.damage(pokemon.maxhp / 8, pokemon, target);
 				if (damage) {
 					this.heal(damage, target, pokemon);
 				}
@@ -9292,7 +9292,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onResidualOrder: 9,
 			onResidual(pokemon) {
-				this.damage(pokemon.baseMaxhp / 4);
+				this.damage(pokemon.maxhp / 4);
 			},
 		},
 		secondary: null,
@@ -10015,7 +10015,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onHit(target, source) {
 			if (source.side === target.side) {
-				this.heal(Math.floor(target.baseMaxhp * 0.5));
+				this.heal(Math.floor(target.maxhp * 0.5));
 			}
 		},
 		secondary: null,
@@ -13244,13 +13244,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 				if (move.flags['contact']) {
-					this.damage(source.baseMaxhp / 8, source, target);
+					this.damage(source.maxhp / 8, source, target);
 				}
 				return this.NOT_FAIL;
 			},
 			onHit(target, source, move) {
 				if (move.isZOrMaxPowered && move.flags['contact']) {
-					this.damage(source.baseMaxhp / 8, source, target);
+					this.damage(source.maxhp / 8, source, target);
 				}
 			},
 		},
