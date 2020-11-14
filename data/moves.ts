@@ -573,7 +573,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Rock",
 	},
-	angelwings: { //FIX
+	angelwings: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -610,19 +610,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return false;
 			},
 			onEffectiveness(typeMod, target, type, move) {
-				if(target.angelChecked) return 0;
-				target.angelChecked = true;
+				if (!target) return;
+				if (type !== target.getTypes()[0]) return;
 				return 1;
-			},
-			onAfterDamage(damage, target, source, effect) {
-				delete target.angelChecked;
-			},
 		},
 		onTryMove(pokemon, target, move) {
-			if (!pokemon.volatiles['angelwings']) return;
-			this.add('-fail', pokemon, 'move: Angel Wings');
-			this.attrLastMove('[still]');
-			return null;
+			if (target.volatiles['angelwings']) return false;
 		},
 		target: "self",
 		type: "Normal",
@@ -1011,7 +1004,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},*/
-	aurarage: { //FIX
+	aurarage: {
 		accuracy: 95,
 		basePower: 90,
 		category: "Special",
@@ -1057,7 +1050,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Fighting",
 	},
-	aurasealingstrike: { //FIX
+	aurasealingstrike: {
 		accuracy: 90,
 		basePower: 10,
 		basePowerCallback(pokemon, target, move) {
@@ -1111,7 +1104,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onModifyMove(move, pokemon, target) {
 			if (pokemon.getStat('atk', false, true) > pokemon.getStat('spa', false, true)) move.category = 'Physical';
-			if(pokemon.sealing === (this.turn-1)) {
+			if (pokemon.sealing === (this.turn-1)) {
 				move.multihit = 1;
 			}
 		},
@@ -1317,7 +1310,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Ice",
 	},
-	axestrike: { //FIX
+	axestrike: {
 		accuracy: 90,
 		basePower: 120,
 		category: "Physical",
@@ -1970,7 +1963,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {def: 1}},
 	},
-	bloodscythe: {//FIX
+	bloodscythe: {
 		accuracy: 100,
 		basePower: 0,
 		basePowerCallback(pokemon) {
@@ -2448,7 +2441,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Water",
 	},
-	brutalslice: {//FIX
+	brutalslice: {
 		accuracy: 100,
 		basePower: 100,
 		category: "Physical",
@@ -3575,7 +3568,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Steel",
 	},
-	corrode: {//FIX
+	corrode: {
 		accuracy: 100,
 		basePower: 70,
 		category: "Special",
@@ -6030,7 +6023,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "allAdjacentFoes",
 		type: "Fire",
 	},
-	evowavedestruction: {//FIX
+	evowavedestruction: {
 		accuracy: 90,
 		basePower: 100,
 		category: "Physical",
@@ -6039,7 +6032,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
 		basePowerCallback(pokemon, target, move) {
-			if (target.baseTemplate.prevo) return move.basePower * 2;
+			if (target.baseSpecies.prevo) return move.basePower * 2;
 			return move.basePower;
 		},
 		onBasePower(basePower, pokemon, target) {
@@ -9360,7 +9353,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Steel",
 		zMove: {basePower: 160},
 	},
-	hellfire: {//FIX
+	hellfire: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -9409,8 +9402,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 					this.add('-fieldstart', 'move: Hell Fire');
 				}
 			},
-			onResidualOrder: 5,
-			onResidualSubOrder: 3,
+			onResidualOrder: 21,
+			onResidualSubOrder: 2,
 			onResidual() {
 				this.eachEvent('Terrain');
 			},
@@ -10192,7 +10185,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Normal",
 	},
-	hyperscan: {//FIX
+	hyperscan: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -10207,42 +10200,48 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 				}
 			},
-			onTryHit(target, source) {
-				if (source.volatiles['hyperscan']) return false;
+		onHit(pokemon) {//???
+			pokemon.addVolatile('hyperscan', pokemon);
+			this.add('-activate', pokemon, 'move: Hyper Scan', '[of] ' + target);
+		},
+		condition: {
+			noCopy: true,
+			duration: 3,
+			onStart(target, source, effect) {
+				if (effect?.id === 'zpower') {
+					this.add('-start', target, 'move: Hyper Scan', '[zeffect]');
+				} else if (effect && (['imposter', 'psychup', 'transform'].includes(effect.id))) {
+					this.add('-start', target, 'move: Hyper Scan', '[silent]');
+				} else {
+					this.add('-start', target, 'move: Hyper Scan');
+				}
 			},
-			onHit(pokemon) {
-				pokemon.addVolatile('hyperscan', pokemon);
-				this.add('-activate', pokemon, 'move: Hyper Scan', '[of] ' + target);
+			onRestart(pokemon) {
+				this.effectData.duration = 3;
 			},
-			condition: {
-				noCopy: true,
-				duration: 3,
-				onRestart(pokemon) {
-					this.effectData.duration = 3;
-				},
-				onModifyMovePriority: -2,
-				onModifyMove(move, source, target) {
-					if (move.category !== "Status") {
-						if (this.randomChance(7, 10)) {
-							source.addVolatile('lockon');
-						}
-						if (this.randomChance(4, 10)) {
-							move.willCrit = true;
-						}
-						if (this.randomChance(6, 10)) {
-							if (target.getStat('def', false, true) > target.getStat('spd', false, true)) move.defensiveCategory = 'Special';
-							else move.defensiveCategory = 'Physical';
-						}
-						if (this.randomChance(6, 10)) {
-							move.ignoreAbility = true;
-						}
-						if (this.randomChance(5, 10)) {
-							if (move.priority >= 2) return;
-							move.priority = 2;
-						}
+			onModifyMovePriority: -2,
+			onModifyMove(move, source, target) {
+				if (move.category !== "Status") {
+					if (this.randomChance(7, 10)) {
+						source.addVolatile('lockon');
 					}
-				},
+					if (this.randomChance(4, 10)) {
+						move.willCrit = true;
+					}
+					if (this.randomChance(6, 10)) {
+						if (target.getStat('def', false, true) > target.getStat('spd', false, true)) move.defensiveCategory = 'Special';
+						else move.defensiveCategory = 'Physical';
+					}
+					if (this.randomChance(6, 10)) {
+						move.ignoreAbility = true;
+					}
+					if (this.randomChance(5, 10)) {
+						if (move.priority >= 2) return;
+						move.priority = 2;
+					}
+				}
 			},
+		},
 		secondary: null,
 		target: "self",
 		type: "???",
@@ -11161,7 +11160,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Dark",
 	},
-	kyuubiburn: {//FIX
+	kyuubiburn: {
 		accuracy: 90,
 		basePower: 130,
 		category: "Physical",
@@ -11192,7 +11191,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.damage(pokemon.maxhp / 8, pokemon, target);
 			},
 			onBeforeSwitchOut(pokemon) {
-				pokemon.trySetStatus('Brn');
+				pokemon.trySetStatus('brn');
 			},
 		},
 		secondary: {
@@ -11770,7 +11769,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Water",
 	},
-	livewire: {//FIX
+	livewire: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -11802,6 +11801,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (pokemon.hasType('Electric')) {
 					this.add('-sideend', pokemon.side, 'move: Livewire', '[of] ' + pokemon);
 					pokemon.side.removeSideCondition('livewire');
+				} else if (pokemon.hasType('Ground')) {
+					return;
 				} else {
 					pokemon.trySetStatus('par', pokemon.side.foe.active[0]);
 				}
@@ -12783,7 +12784,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Steel",
 		zMove: {boost: {spa: 1}},
 	},
-	metalwhip: {//FIX
+	metalwhip: {
 		accuracy: 90,
 		basePower: 50,
 		category: "Physical",
@@ -13041,7 +13042,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {spa: 1}},
 	},
-	minedeploy: {//FIX
+	minedeploy: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -14547,7 +14548,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {effect: 'clearnegativeboost'},
 	},
-	permafrost: {//FIX
+	permafrost: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -14576,14 +14577,16 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onSwitchIn(pokemon) {
 				if (!pokemon.isGrounded()) return;
-				if (pokemon.hasType('Ice')||pokemon.hasType('Fire')) {
+				if (pokemon.hasType('Fire')) {
 					this.add('-sideend', pokemon.side, 'move: Permafrost', '[of] ' + pokemon);
 					pokemon.side.removeSideCondition('permafrost');
+				} else if (pokemon.hasType('Ice')) {
+					return;
 				} else if (this.effectData.layers >= 2) {
 					pokemon.trySetStatus('frz', pokemon.side.foe.active[0]);
 				} else {
 					this.add('-activate', pokemon, 'move: Permafrost');
-					this.boost({spe: -2}, pokemon, pokemon.side.foe.active[0], this.getActiveMove('permafrost'));
+					this.boost({spe: -2}, pokemon, this.effectData.source, this.dex.getActiveMove('permafrost'));
 				}
 			},
 		},
@@ -14674,7 +14677,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Ghost",
 	},
 //CHANGE
-	pherogas: {//FIX
+	pherogas: {
 		accuracy: 100,
 		basePower: 0,
 		category: "Status",
@@ -17478,7 +17481,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "???",
 		zMove: {boost: {def: 1, spd: 1}},
 	},
-	satellitestrike: {//FIX
+	satellitestrike: {
 		accuracy: 100,
 		basePower: 300,
 		category: "Special",
@@ -19319,7 +19322,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Psychic",
 		zMove: {basePower: 160},
 	},
-	soundstage: {//FIX
+	soundstage: {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
@@ -19345,7 +19348,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onSetStatus(status, target, source, effect) {
 				if (status.id === 'slp' && !target.isSemiInvulnerable()) {
-					if (effect.effectType === 'Move' && !effect.secondaries) {
+					if (effect.id === 'yawn' || (effect.effectType === 'Move' && !effect.secondaries)) {
 						this.add('-activate', target, 'move: Sound Stage');
 					}
 					return false;
@@ -19358,6 +19361,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					return null;
 				}
 			},
+			onBasePowerPriority: 6,
 			onBasePower(basePower, attacker, defender, move) {
 				if (move.flags.sound && !attacker.isSemiInvulnerable()) {
 					this.debug('sound stage boost');
@@ -19898,7 +19902,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-sidestart', side, 'move: Stealth Rock');
 			},
 			onSwitchIn(pokemon) {
-				if (pokemon.hasItem('heavydutyboots')) return;
 				const typeMod = this.clampIntRange(pokemon.runEffectiveness(this.dex.getActiveMove('stealthrock')), -6, 6);
 				this.damage(pokemon.maxhp * Math.pow(2, typeMod) / 8);
 			},
@@ -23631,7 +23634,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 
 
 
-	tornadobacklash: {//FIX
+	tornadobacklash: {
 		accuracy: 95,
 		basePower: 60,
 		category: "Special",

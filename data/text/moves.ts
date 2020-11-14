@@ -2749,7 +2749,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	permafrost: {
 		name: "Permafrost",
-		desc: "Sets up a hazard on the opposing side of the field, harshly slowing each opposing Pokemon that switches in, unless it is a Flying-type Pokemon or has the Levitate Ability. Can be used up to two times before failing. Opposing Pokemon become slowed with one layer and frozen with two layers. Can be removed from the opposing side if any opposing Pokemon uses Rapid Spin or Defog successfully, is hit by Defog, or a grounded Ice-type Pokemon switches in. Safeguard prevents the opposing party from being frozen on switch-in, but a substitute does not.",
+		desc: "Sets up a hazard on the opposing side of the field, harshly slowing each opposing Pokemon that switches in, unless it is a Flying-type or Ice-Type Pokemon or has the Levitate Ability. Can be used up to two times before failing. Opposing Pokemon become slowed with one layer and frozen with two layers. Can be removed from the opposing side if any opposing Pokemon uses Rapid Spin or Defog successfully, is hit by Defog, or a grounded Fire-type Pokemon switches in. Safeguard prevents the opposing party from being frozen on switch-in, but a substitute does not.",
 		shortDesc: "Slows or freezes grounded foes on switch-in. Max 2 layers.",
 	},
 	petalblizzard: {
