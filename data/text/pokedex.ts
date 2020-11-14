@@ -2495,7 +2495,7 @@ export const PokedexText: {[k: string]: PokedexText} = {
 	meowsticmega: {
 		name: "Meowstic-Mega",
 	},
-	meowsticf-Mega: {
+	meowsticfmega: {
 		name: "Meowstic-F-Mega",
 	},
 	honedge: {
