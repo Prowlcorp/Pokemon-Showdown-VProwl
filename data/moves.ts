@@ -23647,14 +23647,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 				boosts: {
 					evasion: 1,
 				},
+			}
+		},
 		willCrit: true,
 		secondary: null,
 		target: "normal",
 		type: "Electric",
 	},
-
-
-
+//Work
 	tornadobacklash: {
 		accuracy: 95,
 		basePower: 60,
