@@ -263,7 +263,7 @@ export const AbilitiesText = {
 		shortDesc: "30% chance a Pokemon making contact with this Pokemon will be frozen.",
 	},
 	deepseamine: {
-		name: "Deepsea Mine"
+		name: "Deepsea Mine",
 		desc: "Pokemon making contact with this Pokemon lose a random amount of their their maximum HP, rounded down.",
 		shortDesc: "Pokemon making contact with this Pokemon lose a random amount of their max HP.",
 	},
