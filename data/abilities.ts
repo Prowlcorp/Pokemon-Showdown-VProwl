@@ -1570,7 +1570,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					status: 'brn',
 					ability: this.getAbility('heatedcombat'),
 				});
-			},
+			}
 		},
 		name: "Heated Combat",
 	},
