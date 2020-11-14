@@ -6649,7 +6649,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			round: ["7M"],
 			scorchingsands: ["7T"],
 			sleeptalk: ["7M"],
-			smartstrike: ["7M", "7L0", "7L1],
+			smartstrike: ["7M", "7L0", "7L1"],
 			snore: ["7T"],
 			solarbeam: ["7M"],
 			solarblade: ["7M"],
