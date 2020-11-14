@@ -1124,7 +1124,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					status: 'brn',
 					ability: this.getAbility('firstforge'),
 				});
-			},
+			}
 		},
 		name: "First Forge",
 	},
