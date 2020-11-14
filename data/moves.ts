@@ -21524,7 +21524,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				move.type = 'Fire';
 				break;
 			}
-			
+
 		},
 		onModifyMove(move, pokemon) {
 			if (this.field.terrain && pokemon.isGrounded()) {
@@ -23650,7 +23650,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		willCrit: true,
-		secondary: null,
 		target: "normal",
 		type: "Electric",
 	},
