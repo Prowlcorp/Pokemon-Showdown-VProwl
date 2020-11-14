@@ -1798,7 +1798,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 	},
 	raichualola: {
 		learnset: {
-			agility ["7M"],
+			agility: ["7M"],
 			allyswitch: ["7T"],
 			attract: ["7M"],
 			breakstep: ["7M"],
