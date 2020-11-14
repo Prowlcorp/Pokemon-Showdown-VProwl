@@ -471,4 +471,5 @@ export class DataMove extends BasicEffect implements Readonly<BasicEffect & Move
 				this.zMove.basePower = 100;
 			}
 		}
+	}
 }
