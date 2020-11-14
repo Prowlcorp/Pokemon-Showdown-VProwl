@@ -117,6 +117,7 @@ List of all in-battle forme changes:
 - Mimikyu (Disguise)
 - Cherrim (Flower Gift)
 - Castform (Forecast)
+- Cramorant (Gulp Missile)
 - Eiscue (Ice Face)
 - Zygarde (Power Construct)
 - Wishiwashi (Schooling)
@@ -142,6 +143,7 @@ Visual in-battle formes
 Some Pokémon change their appearance mid-battle, but not in a way that changes their base stats, Ability, or type. These include:
 
 - Cherrim
+- Cramorant
 - Mimikyu
 
 PS treats these like regular in-battle formes.
