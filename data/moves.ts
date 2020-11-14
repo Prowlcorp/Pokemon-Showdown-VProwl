@@ -123,7 +123,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		secondary: [
+		secondaries: [
 			{
 				chance: 10,
 				boosts: {
@@ -582,9 +582,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: -2,
 		flags: {snatch: 1},
 		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
+			if (pokemon.level > 100) {
+				let currentBoost = Math.floor((pokemon.level - 100) / 10);
+				currentBoost = currentBoost / 20 + 1;
 				return this.chainModify(currentBoost);
 			}
 		},
@@ -613,13 +613,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (!target) return;
 				if (type !== target.getTypes()[0]) return;
 				return 1;
+			},
+			onTryMove(pokemon, target, move) {
+				if (target.volatiles['angelwings']) return false;
+			},
+			target: "self",
+			type: "Normal",
+			zMove: {effect: 'clearnegativeboost'},
 		},
-		onTryMove(pokemon, target, move) {
-			if (target.volatiles['angelwings']) return false;
-		},
-		target: "self",
-		type: "Normal",
-		zMove: {effect: 'clearnegativeboost'},
 	},
 	appleacid: {
 		accuracy: 100,
