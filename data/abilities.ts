@@ -1113,7 +1113,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.add('-immune', target, '[from] ability: First Forge');
 			}
 			return false;
-		}
+		},
 		onModifyMove(move) {
 			if (move?.type === 'Water' && move.target !== 'self') {
 				if (!move.secondaries) {
