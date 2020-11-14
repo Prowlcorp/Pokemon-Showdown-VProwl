@@ -12488,7 +12488,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			} else {
 				move.weather = 'sandstorm';
 			}
-		}
+		},
 		isZ: "castiumz",
 		secondary: null,
 		target: "normal",
