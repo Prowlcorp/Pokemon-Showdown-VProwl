@@ -7321,8 +7321,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 			let success = false;
 			for (const target of targets) {
-				success = this.boost({def: 1},
-		}, target, source, move) || success;
+				success = this.boost({def: 1}, target, source, move) || success;
 			}
 			return success;
 		},
@@ -17151,8 +17150,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 			if (!targets.length && !anyAirborne) return false; // Fails when there are no grounded Grass types or airborne Pokemon
 			for (const pokemon of targets) {
-				this.boost({atk: 1, spa: 1},
-		}, pokemon, source);
+				this.boost({atk: 1, spa: 1}, pokemon, source);
 				this.boost({atk: 1, spa: 1}, pokemon, source);
 			}
 		},
@@ -18554,8 +18552,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return;
 			}
 			this.add('-prepare', attacker, move.name);
-			this.boost({def: 1},
-		}, attacker, attacker, move);
+			this.boost({def: 1}, attacker, attacker, move);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -20116,8 +20113,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.effectData.spd = 0;
 				this.add('-start', target, 'stockpile' + this.effectData.layers);
 				const [curDef, curSpD] = [target.boosts.def, target.boosts.spd];
-				this.boost({def: 1, spd: 1},
-		}, target, target);
+				this.boost({def: 1, spd: 1}, target, target);
 				if (curDef !== target.boosts.def) this.effectData.def--;
 				if (curSpD !== target.boosts.spd) this.effectData.spd--;
 			},
@@ -20127,8 +20123,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-start', target, 'stockpile' + this.effectData.layers);
 				const curDef = target.boosts.def;
 				const curSpD = target.boosts.spd;
-				this.boost({def: 1, spd: 1},
-		}, target, target);
+				this.boost({def: 1, spd: 1}, target, target);
 				if (curDef !== target.boosts.def) this.effectData.def--;
 				if (curSpD !== target.boosts.spd) this.effectData.spd--;
 			},
