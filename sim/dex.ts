@@ -1412,7 +1412,7 @@ export class ModdedDex {
 			}
 		}
 		try {
-			Formats = mergeFormats(require(MAIN_FORMATS).Formats, customFormats);
+			Formats = mergeFormatLists(require(MAIN_FORMATS).Formats, customFormats);
 		} catch (e) {
 			if (e.code !== 'MODULE_NOT_FOUND' && e.code !== 'ENOENT') {
 				throw e;
