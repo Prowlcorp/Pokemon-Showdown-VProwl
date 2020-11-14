@@ -2247,8 +2247,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	liquidvoice: {
 		onModifyTypePriority: -1,
 		onModifyType(move, pokemon) {
-				move.type = 'Water';
-			}
+			move.type = 'Water';
 		},
 		name: "Liquid Voice",
 	},
