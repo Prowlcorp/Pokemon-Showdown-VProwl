@@ -325,7 +325,7 @@ export const AbilitiesText = {
 		shortDesc: "This Pokemon's attacking stat is multiplied by 1.5 while using a Dragon-type attack.",
 	},
 	dreamsembrace: {
-		name: "Dream's Embrace"
+		name: "Dream's Embrace",
 		shortDesc: "Opponent Pokemon asleep at the end of the turn lose all stat changes.",
 	},
 	drizzle: {
