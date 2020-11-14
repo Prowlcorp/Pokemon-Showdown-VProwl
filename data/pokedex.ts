@@ -11594,7 +11594,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		num: 662,
 		name: "Meowstic-F",
 		baseSpecies: "Meowstic",
-		forme: "F"
+		forme: "F",
 		types: ["Psychic"],
 		gender: "F",
 		baseStats: {hp: 74, atk: 48, def: 76, spa: 83, spd: 81, spe: 104},
@@ -15571,7 +15571,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		num: -5,
 		name: "Chloe",
 		types: ["Fighting", "Poison", "Dark"],
-		gender: "F"
+		gender: "F",
 		baseStats: {hp: 103, atk: 130, def: 80, spa: 71, spd: 85, spe: 84},
 		abilities: {0: "Guts", 1: "Aftermath", H: "Steadfast"},
 		heightm: 1.7,
