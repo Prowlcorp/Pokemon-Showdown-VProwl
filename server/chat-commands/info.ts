@@ -720,9 +720,7 @@ export const commands: ChatCommands = {
 					if (move.flags['dance'] && dex.gen >= 7) details["&#10003; Dance move"] = "";
 
 					if (dex.gen >= 7) {
-						if (move.gen >= 8 && move.isMax) {
-							// Don't display Z-Power for Max/G-Max moves
-						} else if (move.zMove?.basePower) {
+						if (move.zMove?.basePower) {
 							details["Z-Power"] = String(move.zMove.basePower);
 						} else if (move.zMove?.effect) {
 							const zEffects: {[k: string]: string} = {

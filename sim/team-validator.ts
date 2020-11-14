@@ -22,7 +22,7 @@ import {Utils} from '../lib/utils';
  *   because egg moves aren't restricted to fathers anymore
  * - S = event, 3rd char+ is the index in .eventData
  * - D = Dream World, only 5D is valid
- * - V = Virtual Console or Let's Go transfer, only 7V/8V is valid
+ * - V = Virtual Console transfer, only 7V/8V is valid
  *
  * Designed to match MoveSource where possible.
  */
@@ -1601,7 +1601,7 @@ export class TeamValidator {
 						//   only if that was the source
 						moveSources.add(learned + species.id);
 					} else if (learned.charAt(1) === 'V' && this.minSourceGen < learnedGen) {
-						// Virtual Console or Let's Go transfer moves:
+						// Virtual Console transfer moves:
 						//   only if that was the source
 						moveSources.add(learned);
 					}

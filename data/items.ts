@@ -587,6 +587,14 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
+	castiumz: {
+		name: "Castium Z",
+		spritenum: 688,
+		onTakeItem: false,
+		zMove: "Mayday Doomsday",
+		zMoveFrom: "Weather Ball",
+		itemUser: ["Castform", "Castform-Sunny", "Castform-Rainy", "Castform-Snowy", "Castform-Sandy"],
+	},
 	cellbattery: {
 		name: "Cell Battery",
 		spritenum: 60,
@@ -761,7 +769,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifyAtkPriority: 1,
 		onModifyAtk(atk, pokemon) {
-			if (pokemon.volatiles['dynamax']) return;
 			return this.chainModify(1.5);
 		},
 		isChoice: true,
@@ -782,7 +789,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			pokemon.addVolatile('choicelock');
 		},
 		onModifySpe(spe, pokemon) {
-			if (pokemon.volatiles['dynamax']) return;
 			return this.chainModify(1.5);
 		},
 		isChoice: true,
@@ -804,7 +810,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifySpAPriority: 1,
 		onModifySpA(spa, pokemon) {
-			if (pokemon.volatiles['dynamax']) return;
 			return this.chainModify(1.5);
 		},
 		isChoice: true,

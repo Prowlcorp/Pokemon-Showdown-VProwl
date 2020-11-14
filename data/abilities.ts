@@ -1278,6 +1278,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			case 'hail':
 				if (pokemon.species.id !== 'castformsnowy') forme = 'Castform-Snowy';
 				break;
+			case 'sandstorm':
+			case 'ragingsandstorm':
+				if (pokemon.species.id !== 'castformsandy') forme = 'Castform-Sandy';
+				break;
 			default:
 				if (pokemon.species.id !== 'castform') forme = 'Castform';
 				break;

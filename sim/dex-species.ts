@@ -143,8 +143,6 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	readonly heightm: number;
 	/** Color. */
 	readonly color: string;
-	/** Does this Pokemon have an unreleased hidden ability? */
-	readonly unreleasedHidden: boolean | 'Past';
 	/**
 	 * Is it only possible to get the hidden ability on a male pokemon?
 	 * This is mainly relevant to Gen 5.
@@ -229,7 +227,6 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.weighthg = this.weightkg * 10;
 		this.heightm = data.heightm || 0;
 		this.color = data.color || '';
-		this.unreleasedHidden = data.unreleasedHidden || false;
 		this.maleOnlyHidden = !!data.maleOnlyHidden;
 		this.maxHP = data.maxHP || undefined;
 		this.isMega = !!(this.forme && ['Mega', 'Mega-X', 'Mega-Y'].includes(this.forme)) || undefined;

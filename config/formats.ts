@@ -52,7 +52,6 @@ export const Formats: FormatList = [
 				const item = this.dex.getItem(set.item);
 				if (!item || !item.megaStone) continue;
 				const species = this.dex.getSpecies(set.species);
-				if (species.isNonstandard) return [`${species.baseSpecies} does not exist in gen 8.`];
 				if (this.ruleTable.isRestrictedSpecies(species) || this.toID(set.ability) === 'powerconstruct') {
 					return [`${species.name} is not allowed to hold ${item.name}.`];
 				}
@@ -177,14 +176,13 @@ export const Formats: FormatList = [
 			const onChangeSet = this.dex.getFormat('Pokemon').onChangeSet;
 			let problems = onChangeSet ? onChangeSet.call(this, set, this.format) : null;
 			if (Array.isArray(problems) && problems.length) return problems;
-			if (!crossSpecies.exists || crossSpecies.isNonstandard) return this.validateSet(set, teamHas);
+			if (!crossSpecies.exists) return this.validateSet(set, teamHas);
 			const species = this.dex.getSpecies(set.species);
 			const check = this.checkSpecies(set, species, species, {});
 			if (check) return [check];
-			if (!species.exists || species.isNonstandard || species === crossSpecies) return this.validateSet(set, teamHas);
+			if (!species.exists || species === crossSpecies) return this.validateSet(set, teamHas);
 			if (!species.nfe) return [`${species.name} cannot cross evolve because it doesn't evolve.`];
-			const crossIsUnreleased = (crossSpecies.tier === "Unreleased" && crossSpecies.isNonstandard === "Unobtainable");
-			if (crossSpecies.battleOnly || crossIsUnreleased || !crossSpecies.prevo) {
+			if (crossSpecies.battleOnly || !crossSpecies.prevo) {
 				return [`${species.name} cannot cross evolve into ${crossSpecies.name} because it isn't an evolution.`];
 			}
 			if (this.ruleTable.isRestrictedSpecies(crossSpecies)) {
@@ -219,8 +217,7 @@ export const Formats: FormatList = [
 			const crossSpecies = this.dex.getSpecies(target.set.name);
 			if (!crossSpecies.exists) return;
 			if (species.battleOnly || !species.nfe) return;
-			const crossIsUnreleased = (crossSpecies.tier === "Unreleased" && crossSpecies.isNonstandard === "Unobtainable");
-			if (crossSpecies.battleOnly || crossIsUnreleased || !crossSpecies.prevo) return;
+			if (crossSpecies.battleOnly || !crossSpecies.prevo) return;
 			const crossPrevoSpecies = this.dex.getSpecies(crossSpecies.prevo);
 			if (!crossPrevoSpecies.prevo !== !species.prevo) return;
 
@@ -313,12 +310,10 @@ export const Formats: FormatList = [
 			return species.id;
 		},
 		validateSet(set, teamHas) {
-			const unreleased = (pokemon: Species) => pokemon.tier === "Unreleased" && pokemon.isNonstandard === "Unobtainable";
 			if (!teamHas.abilityMap) {
 				teamHas.abilityMap = Object.create(null);
 				for (const speciesid in Dex.data.Pokedex) {
 					const pokemon = this.dex.getSpecies(speciesid);
-					if (pokemon.isNonstandard || unreleased(pokemon)) continue;
 					if (pokemon.requiredAbility || pokemon.requiredItem || pokemon.requiredMove) continue;
 					if (this.ruleTable.isRestrictedSpecies(pokemon)) continue;
 
@@ -338,9 +333,6 @@ export const Formats: FormatList = [
 
 			const species = this.dex.getSpecies(set.species);
 			if (!species.exists || species.num < 1) return [`The Pok\u00e9mon "${set.species}" does not exist.`];
-			if (species.isNonstandard || unreleased(species)) {
-				return [`${species.name} is not obtainable in Generation ${this.dex.gen}.`];
-			}
 
 			const name = set.name;
 			if (this.ruleTable.isBannedSpecies(species)) {
@@ -348,7 +340,7 @@ export const Formats: FormatList = [
 			}
 
 			const ability = this.dex.getAbility(set.ability);
-			if (!ability.exists || ability.isNonstandard) return [`${name} needs to have a valid ability.`];
+			if (!ability.exists) return [`${name} needs to have a valid ability.`];
 			const pokemonWithAbility = teamHas.abilityMap[ability.id];
 			if (!pokemonWithAbility) return [`${this.dex.getAbility(set.ability).name} is not available on a legal Pok\u00e9mon.`];
 
@@ -448,7 +440,7 @@ export const Formats: FormatList = [
 		searchShow: false,
 		ruleset: ['Standard'],
 		banlist: [
-			'Dialga', 'Eternatus', 'Giratina', 'Groudon', 'Ho-Oh', 'Kyogre',
+			'Dialga', 'Giratina', 'Groudon', 'Ho-Oh', 'Kyogre',
 			'Kyurem-Black', 'Kyurem-White', 'Lugia', 'Lunala', 'Marshadow', 'Mewtwo', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane',
 			'Palkia', 'Rayquaza', 'Reshiram', 'Shedinja', 'Solgaleo', 'Toxapex', 'Xerneas', 'Yveltal', 'Zacian', 'Zamazenta', 'Zekrom',
 			'Arena Trap', 'Contrary', 'Drizzle ++ Swift Swim', 'Drought ++ Chlorophyll', 'Electric Surge ++ Surge Surfer',
@@ -519,7 +511,7 @@ export const Formats: FormatList = [
 		searchShow: false,
 		ruleset: ['Standard'],
 		banlist: [
-			'Darmanitan-Galar', 'Dialga', 'Dracovish', 'Dragapult', 'Kyurem-Black', 'Kyurem-White',
+			'Dialga', 'Dracovish', 'Dragapult', 'Kyurem-Black', 'Kyurem-White',
 			'Giratina', 'Groudon', 'Ho-Oh', 'Kyogre', 'Lugia', 'Lunala', 'Magearna', 'Marshadow', 'Mewtwo', 'Necrozma-Dawn-Wings',
 			'Necrozma-Dusk-Mane', 'Palkia', 'Rayquaza', 'Reshiram', 'Solgaleo', 'Xerneas', 'Yveltal', 'Zacian', 'Zamazenta', 'Zekrom',
 			'Arena Trap', 'Moody', 'Shadow Tag', 'Baton Pass',

@@ -1488,9 +1488,6 @@ export class Battle {
 							if ((ruleTable.has('+hackmons') || !ruleTable.has('obtainableabilities')) && !this.format.team) {
 								// hackmons format
 								continue;
-							} else if (abilitySlot === 'H' && species.unreleasedHidden) {
-								// unreleased hidden ability
-								continue;
 							}
 							const ability = this.dex.getAbility(abilityName);
 							if (ruleTable.has('-ability:' + ability.id)) continue;
@@ -2013,7 +2010,6 @@ export class Battle {
 
 	natureModify(stats: StatsTable, set: PokemonSet): StatsTable {
 		// Natures are calculated with 16-bit truncation.
-		// This only affects Eternatus-Eternamax in Pure Hackmons.
 		const tr = this.trunc;
 		const nature = this.dex.getNature(set.nature);
 		let s: StatNameExceptHP;

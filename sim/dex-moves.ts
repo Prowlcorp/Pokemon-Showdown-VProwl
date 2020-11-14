@@ -137,7 +137,6 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	realMove?: string;
 
 	damage?: number | 'level' | false | null;
-	contestType?: string;
 	noPPBoosts?: boolean;
 
 	// Z-move data
@@ -290,8 +289,8 @@ export interface ActiveMove extends MutableMove {
 	infiltrates?: boolean;
 
 	/**
-	 * Has this move been boosted by a Z-crystal or used by a Dynamax Pokemon? Usually the same as
-	 * `isZ` or `isMax`, but hacked moves will have this be `false` and `isZ` / `isMax` be truthy.
+	 * Has this move been boosted by a Z-crystal? Usually the same as
+	 * `isZ`, but hacked moves will have this be `false` and `isZ` be truthy.
 	 */
 	isZPowered?: boolean;
 }

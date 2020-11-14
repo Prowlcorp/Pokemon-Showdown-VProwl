@@ -30,7 +30,7 @@ Note that `otherFormes` only exists on the dex entry for the _base_ forme.
 Examples include:
 
 - Wormadam
-- all Galarian and Alolan regional formes
+- all Konorian and Alolan regional formes
 
 
 Cosmetic formes

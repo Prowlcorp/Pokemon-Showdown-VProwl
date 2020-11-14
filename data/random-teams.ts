@@ -1403,7 +1403,6 @@ export class RandomTeams {
 				// Illusion shouldn't be on the last slot
 				if (species.name === 'Zoroark' && pokemon.length > 4) continue;
 
-				const tier = species.tier;
 				const types = species.types;
 				const typeCombo = types.slice().sort().join();
 

@@ -365,39 +365,6 @@ describe('Modlog conversion script', () => {
 			);
 		});
 
-		it('should handle Scavengers modlogs', () => {
-			assert.equal(
-				converter.modernizeLog('[2020-08-23T19:50:49.944Z] (scavengers) SCAV SETHOSTPOINTS: [room: subroom] by annika: 42'),
-				'[2020-08-23T19:50:49.944Z] (scavengers) SCAV SETHOSTPOINTS: by annika: 42 [room: subroom]'
-			);
-			assert.equal(
-				converter.modernizeLog('[2020-08-23T19:50:49.944Z] (scavengers) SCAV TWIST: [room: subroom] by annika: your mom'),
-				'[2020-08-23T19:50:49.944Z] (scavengers) SCAV TWIST: by annika: your mom [room: subroom]'
-			);
-			assert.equal(
-				converter.modernizeLog('[2020-08-23T19:50:49.944Z] (scavengers) SCAV SETPOINTS: [room: subroom] by annika: ååååååå'),
-				'[2020-08-23T19:50:49.944Z] (scavengers) SCAV SETPOINTS: by annika: ååååååå [room: subroom]'
-			);
-			assert.equal(
-				converter.modernizeLog('[2020-08-23T19:50:49.944Z] (scavengers) ([annika] has been caught attempting a hunt with 2 connections on the account. The user has also been given 1 infraction point on the player leaderboard.)'),
-				'[2020-08-23T19:50:49.944Z] (scavengers) SCAV CHEATER: [annika]: caught attempting a hunt with 2 connections on the account; has also been given 1 infraction point on the player leaderboard'
-			);
-			// No moderator actions containing has been caught trying to do their own hunt found on room scavengers.
-			// Apparently this never got written to main's modlog, so I am not going to write a special test case
-			// and converter logic for it.
-		});
-
-		it('should handle Wi-Fi modlogs', () => {
-			assert.equal(
-				converter.modernizeLog(`[2020-08-23T19:50:49.944Z] (wifi) GIVEAWAY WIN: Annika won Heart of Etheria's giveaway for a "deluxe shitposter 1000" (OT: Entrapta TID: 1337)`),
-				`[2020-08-23T19:50:49.944Z] (wifi) GIVEAWAY WIN: [annika]: Heart of Etheria's giveaway for a "deluxe shitposter 1000" (OT: Entrapta TID: 1337)`
-			);
-			assert.equal(
-				converter.modernizeLog(`[2020-08-23T19:50:49.944Z] (wifi) GTS FINISHED: Annika has finished their GTS giveaway for "deluxe shitposter 2000"`),
-				`[2020-08-23T19:50:49.944Z] (wifi) GTS FINISHED: [annika]: their GTS giveaway for "deluxe shitposter 2000"`
-			);
-		});
-
 		it('should handle global declarations mentioning promotions correctly', () => {
 			assert.equal(
 				converter.modernizeLog(`[2015-07-21T06:04:54.369Z] (lobby) xfix declared GrumpyGungan was promoted to a global voice, feel free to congratulate him :-).`),
@@ -506,16 +473,6 @@ describe('Modlog conversion script', () => {
 			);
 		});
 
-		it('should correctly handle hangman', () => {
-			assert.deepEqual(
-				converter.parseModlog(`[2020-09-19T23:25:24.908Z] (lobby) HANGMAN: by archastl`),
-				{
-					action: 'HANGMAN', roomID: 'lobby', isGlobal: false, loggedBy: 'archastl', time: 1600557924908,
-					alts: [], autoconfirmedID: null, ip: null, note: '', userid: null, visualRoomID: '',
-				}
-			);
-		});
-
 		it('should correctly handle nonstandard alt formats', () => {
 			assert.deepEqual(
 				converter.parseModlog(
@@ -580,13 +537,6 @@ describe('Modlog conversion script', () => {
 				`[2020-08-23T19:50:49.944Z] (development) OLD MODLOG: by unknown: hello hi test\n`,
 			);
 		});
-
-		it('should handle hangman', () => {
-			assert.deepEqual(
-				converter.rawifyLog({action: 'HANGMAN', roomID: 'lobby', isGlobal: false, loggedBy: 'archastl', time: 1600557924908, alts: []}),
-				`[2020-09-19T23:25:24.908Z] (lobby) HANGMAN: by archastl\n`
-			);
-		});
 	});
 
 	describe('reversability', () => {
@@ -595,7 +545,6 @@ describe('Modlog conversion script', () => {
 				`[2020-08-23T19:50:49.944Z] (development) OLD MODLOG: by unknown: hello hi test`,
 				`[2014-11-20T13:46:00.288Z] (lobby) OLD MODLOG: by unknown: [punchoface] would be muted by [thecaptain] but was already muted.)`,
 				`[2017-04-20T18:20:42.408Z] (1v1) OLD MODLOG: by unknown: The tournament auto disqualify timer was set to 2 by Scrappie`,
-				`[2020-09-19T23:28:49.309Z] (lobby) HANGMAN: by archastl`,
 				`[2020-09-20T22:57:27.263Z] (lobby) NOTIFYRANK: by officerjenny: %, You are the last staff left in lobby.`,
 				`[2020-08-12T00:23:49.183Z] (lobby) MUTE: [hypergigahax] [127.0.0.1]: please only speak english. Checking your modlog you should have understood the rules`,
 				`[2020-09-07T02:17:22.132Z] (lobby) ROOMBAN: [gamingisawesome] [127.0.0.1] by tenshi: wow this is the most written by a 10 year old sentence I've read in a long time`,
@@ -603,7 +552,6 @@ describe('Modlog conversion script', () => {
 				`[2018-01-18T18:09:49.765Z] (global) NAMELOCK: [guest130921] alts: [guest130921]: [127.0.0.1] NameMonitor: vvvv.xxx`,
 				`[2018-01-19T01:12:30.660Z] (wifi) GIVEAWAY WIN: [ikehylt]: rareassassin90's giveaway for "(Previously won from another giveaway)  Paradise the Shiny VC Ho-Oh - Poké Ball - Adamant - Regenerator - (31/31/31/30/31/31) Proof: https://imgur.com/a/5enjr, move list: nightmare, curse zap cannon, dragon breath" (OT: Kaushik TID: 00001 FC: 0276-3231-6110)`,
 				`[2018-02-12T23:44:16.498Z] (wifi) GTS FINISHED: [throwingstar]: their GTS giveaway for "Heracross - Adamant - Guts - '' Battle ready '' - 31/31/31/x/31/31 - 248Hp/252atk/8SpDef - [[item: beast ball]] - It's holding a [[item: flame orb]] because [[item: heracronite]] won't pass through GTS - OT TSK, 479870"`,
-				`[2016-03-09T02:39:04.064Z] (groupchat-arandomduck-becausememes) ROOMBAN: [theeaglesarecoming] by arandomduck: (A game of hangman was started  WORST FUCKIN MOD/DRIVER ON THIS SERVER SLKDJFS)`,
 				garfieldCopypasta,
 			];
 			for (const test of tests) {

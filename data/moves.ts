@@ -12299,14 +12299,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (!targets.length) return false;
 			let didSomething = false;
 			for (const target of targets) {
-				didSomething = this.boost({def: 1, spd: 1},
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
-				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
-			}
-		}, target, source, move, false, true) || didSomething;
+				didSomething = this.boost({def: 1, spd: 1}, target, source, move, false, true) || didSomething;
 			}
 			return didSomething;
 		},
@@ -12468,6 +12461,38 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "allySide",
 		type: "Fighting",
 		zMove: {boost: {def: 1}},
+	},
+	maydaydoomsday: {
+		accuracy: true,
+		basePower: 190,
+		category: "Special",
+		name: "Mayday Doomsday",
+		pp: 1,
+		priority: 0,
+		flags: {contact: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onPrepareHit(target, pokemon, move) {
+			const rand = this.random(3);
+			if (rand === 0) {
+				move.weather = 'raindance';
+			} else if (rand === 1) {
+				move.weather = 'sunnyday';
+			} else if (rand === 2) {
+				move.weather = 'hail';
+			} else {
+				move.weather = 'sandstorm';
+			}
+		}
+		isZ: "castiumz",
+		secondary: null,
+		target: "normal",
+		type: "Normal",
 	},
 	meanlook: {
 		accuracy: true,

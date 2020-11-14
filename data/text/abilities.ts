@@ -30,7 +30,7 @@ export const AbilitiesText = {
 		shortDesc: "While this Pokemon is active, the effects of weather conditions are disabled.",
 
 		start: "  The effects of the weather disappeared.",
-	},	
+	},
 	alluringgarden: {
 		name: "Alluring Garden",
 		shortDesc: "At the end of each turn, lowers other's defense, special defense, or speed by 1 stage.",
@@ -51,7 +51,7 @@ export const AbilitiesText = {
 		name: "Anticipation",
 		desc: "On switch-in, this Pokemon is alerted if any opposing Pokemon has an attack that is super effective on this Pokemon, or an OHKO move. Counter, Metal Burst, and Mirror Coat count as attacking moves of their respective types, Hidden Power counts as its determined type, and Judgment, Multi-Attack, Natural Gift, Revelation Dance, Techno Blast, and Weather Ball are considered Normal-type moves.",
 		shortDesc: "On switch-in, this Pokemon shudders if any foe has a supereffective or OHKO move.",
-		
+
 		activate: "  [POKEMON] shuddered!",
 	},
 	arenatrap: {
@@ -65,7 +65,7 @@ export const AbilitiesText = {
 		shortDesc: "Protects user/allies from Attract, Disable, Encore, Heal Block, Taunt, and Torment.",
 
 		block: "  [POKEMON] is protected by an aromatic veil!",
-	},	
+	},
 	assassinate: {
 		name: "Assassinate",
 		desc: "This Pokemon deals double damage to a pokemon below half health.",
@@ -425,8 +425,8 @@ export const AbilitiesText = {
 	},
 	forecast: {
 		name: "Forecast",
-		desc: "If this Pokemon is a Castform, its type changes to the current weather condition's type, except Sandstorm. If this Pokemon is holding Utility Umbrella and the weather condition is Sunny Day, Desolate Land, Rain Dance, or Primordial Sea, it will not change types.",
-		shortDesc: "Castform's type changes to the current weather condition's type, except Sandstorm.",
+		desc: "If this Pokemon is a Castform, its type changes to the current weather condition's type. If this Pokemon is holding Utility Umbrella and the weather condition is Sunny Day, Desolate Land, Rain Dance, or Primordial Sea, it will not change types.",
+		shortDesc: "Castform's type changes to the current weather condition's type.",
 	},
 	forewarn: {
 		name: "Forewarn",
@@ -493,7 +493,7 @@ export const AbilitiesText = {
 	},
 	gulpmissile: {
 		name: "Gulp Missile",
-		desc: "If this Pokemon is a Cramorant, it changes forme when it hits a target with Surf or uses the first turn of Dive successfully. It becomes Gulping Form with an Arrokuda in its mouth if it has more than 1/2 of its maximum HP remaining, or Gorging Form with a Pikachu in its mouth if it has 1/2 or less of its maximum HP remaining. If Cramorant gets hit in Gulping or Gorging Form, it spits the Arrokuda or Pikachu at its attacker, even if it has no HP remaining. The projectile deals damage equal to 1/4 of the target's maximum HP, rounded down; this damage is blocked by the Magic Guard Ability but not by a substitute. An Arrokuda also lowers the target's Defense by 1 stage, and a Pikachu paralyzes the target. Cramorant will return to normal if it spits out a projectile, switches out, or Dynamaxes.",
+		desc: "If this Pokemon is a Cramorant, it changes forme when it hits a target with Surf or uses the first turn of Dive successfully. It becomes Gulping Form with an Arrokuda in its mouth if it has more than 1/2 of its maximum HP remaining, or Gorging Form with a Pikachu in its mouth if it has 1/2 or less of its maximum HP remaining. If Cramorant gets hit in Gulping or Gorging Form, it spits the Arrokuda or Pikachu at its attacker, even if it has no HP remaining. The projectile deals damage equal to 1/4 of the target's maximum HP, rounded down; this damage is blocked by the Magic Guard Ability but not by a substitute. An Arrokuda also lowers the target's Defense by 1 stage, and a Pikachu paralyzes the target. Cramorant will return to normal if it spits out a projectile, switches out.",
 		shortDesc: "When hit after Surf/Dive, attacker takes 1/4 max HP and -1 Defense or paralysis.",
 	},
 	guts: {
@@ -1587,7 +1587,7 @@ export const AbilitiesText = {
 	},
 	zenmode: {
 		name: "Zen Mode",
-		desc: "If this Pokemon is a Darmanitan or Darmanitan-Galar, it changes to Zen Mode if it has 1/2 or less of its maximum HP at the end of a turn. If Darmanitan's HP is above 1/2 of its maximum HP at the end of a turn, it changes back to Standard Mode. This Ability cannot be removed or suppressed.",
+		desc: "If this Pokemon is a Darmanitan, it changes to Zen Mode if it has 1/2 or less of its maximum HP at the end of a turn. If Darmanitan's HP is above 1/2 of its maximum HP at the end of a turn, it changes back to Standard Mode. This Ability cannot be removed or suppressed.",
 		shortDesc: "If Darmanitan, at end of turn changes Mode to Standard if > 1/2 max HP, else Zen.",
 
 		transform: 'Zen Mode triggered!',

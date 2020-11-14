@@ -314,14 +314,14 @@ export const PokedexText: {[k: string]: PokedexText} = {
 	ponyta: {
 		name: "Ponyta",
 	},
-	ponytagalar: {
-		name: "Ponyta-Galar",
+	ponytakonor: {
+		name: "Ponyta-Konor",
 	},
 	rapidash: {
 		name: "Rapidash",
 	},
-	rapidashgalar: {
-		name: "Rapidash-Galar",
+	rapidashkonor: {
+		name: "Rapidash-Konor",
 	},
 	slowpoke: {
 		name: "Slowpoke",
@@ -971,14 +971,14 @@ export const PokedexText: {[k: string]: PokedexText} = {
 	zigzagoon: {
 		name: "Zigzagoon",
 	},
-	zigzagoongalar: {
-		name: "Zigzagoon-Galar",
+	zigzagoonkonor: {
+		name: "Zigzagoon-Konor",
 	},
 	linoone: {
 		name: "Linoone",
 	},
-	linoonegalar: {
-		name: "Linoone-Galar",
+	linoonekonor: {
+		name: "Linoone-Konor",
 	},
 	wurmple: {
 		name: "Wurmple",
@@ -1279,6 +1279,9 @@ export const PokedexText: {[k: string]: PokedexText} = {
 	},
 	castformsnowy: {
 		name: "Castform-Snowy",
+	},
+	castformsandy: {
+		name: "Castform-Sandy",
 	},
 	kecleon: {
 		name: "Kecleon",
@@ -2078,8 +2081,8 @@ export const PokedexText: {[k: string]: PokedexText} = {
 	yamask: {
 		name: "Yamask",
 	},
-	yamaskgalar: {
-		name: "Yamask-Galar",
+	yamaskkonor: {
+		name: "Yamask-Konor",
 	},
 	cofagrigus: {
 		name: "Cofagrigus",
@@ -3346,6 +3349,24 @@ export const PokedexText: {[k: string]: PokedexText} = {
 	},
 	loona: {
 		name: "Loona",
+	},
+	agito: {
+		name: "Agito",
+	},
+	agitomega: {
+		name: "Agito-Mega",
+	},
+	zen: {
+		name: "Zen",
+	},
+	zenmega: {
+		name: "Zen-Mega",
+	},
+	chloe: {
+		name: "Chloe",
+	},
+	lucaridon: {
+		name: "Lucaridon",
 	},
 	missingno: {
 		name: "MissingNo.",

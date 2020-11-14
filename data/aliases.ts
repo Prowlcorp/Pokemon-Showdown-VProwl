@@ -1490,6 +1490,4 @@ export const Aliases: {[alias: string]: string} = {
 	aagoyon: "Naganadel",
 	tsundetsunde: "Stakataka",
 	zugadoon: "Blacephalon",
-	merutan: "Meltan",
-	merumetaru: "Melmetal",
 };

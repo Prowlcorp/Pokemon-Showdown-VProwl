@@ -18,7 +18,7 @@ export const Formats: {[k: string]: FormatData} = {
 		name: 'Standard NEXT',
 		desc: "The standard ruleset for the NEXT mod",
 		ruleset: [
-			'+Unreleased', 'Sleep Clause Mod', 'Species Clause', 'Nickname Clause', 'OHKO Clause', 'HP Percentage Mod', 'Cancel Mod',
+			'Sleep Clause Mod', 'Species Clause', 'Nickname Clause', 'OHKO Clause', 'HP Percentage Mod', 'Cancel Mod',
 		],
 		banlist: ['Soul Dew'],
 	},
@@ -35,7 +35,7 @@ export const Formats: {[k: string]: FormatData} = {
 			'Victini', 'Reshiram', 'Zekrom', 'Kyurem', 'Keldeo', 'Meloetta', 'Genesect',
 			'Xerneas', 'Yveltal', 'Zygarde', 'Diancie', 'Hoopa', 'Volcanion',
 			'Cosmog', 'Cosmoem', 'Solgaleo', 'Lunala', 'Necrozma', 'Magearna', 'Marshadow', 'Zeraora',
-			'Meltan', 'Melmetal', 'Zacian', 'Zamazenta', 'Eternatus', 'Zarude', 'Calyrex',
+			'Zacian', 'Zamazenta',
 		],
 		onValidateSet(set, format) {
 			if (this.gen < 7 && this.toID(set.item) === 'souldew') {
@@ -81,29 +81,17 @@ export const Formats: {[k: string]: FormatData} = {
 		onValidateSet(set) {
 			// These Pokemon are still unobtainable
 			const unobtainables = [
-				'Eevee-Starter', 'Floette-Eternal', 'Pichu-Spiky-eared', 'Pikachu-Belle', 'Pikachu-Cosplay', 'Pikachu-Libre',
-				'Pikachu-PhD', 'Pikachu-Pop-Star', 'Pikachu-Rock-Star', 'Pikachu-Starter', 'Eternatus-Eternamax',
+				'Floette-Eternal', 'Pikachu-Belle', 'Pikachu-Cosplay', 'Pikachu-Libre',
+				'Pikachu-PhD', 'Pikachu-Pop-Star', 'Pikachu-Rock-Star',
 			];
 			const species = this.dex.getSpecies(set.species);
 			if (unobtainables.includes(species.name)) {
 				if (this.ruleTable.has(`+pokemon:${species.id}`)) return;
 				return [`${set.name || set.species} does not exist in the National Dex.`];
 			}
-			if (species.tier === "Unreleased") {
-				const basePokemon = this.toID(species.baseSpecies);
-				if (this.ruleTable.has(`+pokemon:${species.id}`) || this.ruleTable.has(`+basepokemon:${basePokemon}`)) {
-					return;
-				}
-				return [`${set.name || set.species} does not exist in the National Dex.`];
-			}
 			// Items other than Z-Crystals and Pokémon-specific items should be illegal
 			if (!set.item) return;
 			const item = this.dex.getItem(set.item);
-			if (!item.isNonstandard) return;
-			if (['Past', 'Unobtainable'].includes(item.isNonstandard) && !item.zMove && !item.itemUser && !item.forcedForme) {
-				if (this.ruleTable.has(`+item:${item.id}`)) return;
-				return [`${set.name}'s item ${item.name} does not exist in Gen ${this.dex.gen}.`];
-			}
 		},
 	},
 	teampreview: {
@@ -540,8 +528,7 @@ export const Formats: {[k: string]: FormatData} = {
 		name: 'STABmons Move Legality',
 		desc: "Allows Pok&eacute;mon to use any move that they or a previous evolution/out-of-battle forme share a type with",
 		checkLearnset(move, species, setSources, set) {
-			const nonstandard = move.isNonstandard === 'Past' && !this.ruleTable.has('standardnatdex');
-			if (!nonstandard && !move.isZ && !move.isMax && !this.ruleTable.isRestricted(`move:${move.id}`)) {
+			if (!move.isZ && !this.ruleTable.isRestricted(`move:${move.id}`)) {
 				const dex = this.dex;
 				let types: string[];
 				if (species.forme || species.otherFormes) {

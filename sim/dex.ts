@@ -377,10 +377,6 @@ export class ModdedDex {
 			species.canHatch = species.canHatch ||
 				(!['Ditto', 'Undiscovered'].includes(species.eggGroups[0]) && !species.prevo && species.name !== 'Manaphy');
 			if (this.gen === 1) species.bst -= species.baseStats.spd;
-		} else {
-			species = new Species({
-				id, name, exists: false, tier: 'Illegal', doublesTier: 'Illegal', isNonstandard: 'Custom',
-			});
 		}
 		if (species.exists) this.speciesCache.set(id, species);
 		return species;
@@ -886,7 +882,6 @@ export class ModdedDex {
 
 	validateBanRule(rule: string) {
 		let id = toID(rule);
-		if (id === 'unreleased') return 'unreleased';
 		if (id === 'nonexistent') return 'nonexistent';
 		const matches = [];
 		let matchTypes = ['pokemon', 'move', 'ability', 'item', 'nature', 'pokemontag'];
