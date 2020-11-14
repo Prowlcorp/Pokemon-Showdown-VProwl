@@ -6698,6 +6698,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 					action.pokemon.fainted || action.zmove
 				) {
 					continue;
+				}
+				if (action.pokemon.side === source.side && ['grasspledge', 'waterpledge'].includes(action.move.id)) {
+					this.queue.prioritizeAction(action, move);
+					this.add('-waiting', source, action.pokemon);
+					return null;
+				}
+			}
+		},
 /*
 		basePowerCallback(target, source, move) {	//This goes on close combat
 			if (['aurasphere'].includes(move.sourceEffect) && source.species.name === 'Zenkari') {
@@ -6727,13 +6735,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			}
 		},*/
-				if (action.pokemon.side === source.side && ['grasspledge', 'waterpledge'].includes(action.move.id)) {
-					this.queue.prioritizeAction(action, move);
-					this.add('-waiting', source, action.pokemon);
-					return null;
-				}
-			}
-		},
 		onModifyMove(move) {
 			if (move.sourceEffect === 'waterpledge') {
 				move.type = 'Water';
