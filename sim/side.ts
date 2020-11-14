@@ -325,7 +325,7 @@ export class Side {
 		return this.choice.actions.length >= this.active.length;
 	}
 
-	chooseMove(moveText?: string | number, targetLoc = 0, megaDynaOrZ: 'mega' | 'zmove' | 'ultra' | '' = '') {
+	chooseMove(moveText?: string | number, targetLoc = 0, megaOrZ: 'mega' | 'zmove' | 'ultra' | '' = '') {
 		if (this.requestState !== 'move') {
 			return this.emitChoiceError(`Can't move: You need a ${this.requestState} response`);
 		}
@@ -363,13 +363,13 @@ export class Side {
 				targetType = move.target || 'normal';
 				break;
 			}
-			if (!targetType && ['', 'zmove'].includes(megaDynaOrZ) && request.canZMove) {
+			if (!targetType && ['', 'zmove'].includes(megaOrZ) && request.canZMove) {
 				for (const [i, moveRequest] of request.canZMove.entries()) {
 					if (!moveRequest) continue;
 					if (moveid === toID(moveRequest.move)) {
 						moveid = request.moves[i].id;
 						targetType = moveRequest.target;
-						megaDynaOrZ = 'zmove';
+						megaOrZ = 'zmove';
 						break;
 					}
 				}
@@ -393,8 +393,8 @@ export class Side {
 
 		// Z-move
 
-		const zMove = megaDynaOrZ === 'zmove' ? this.battle.getZMove(move, pokemon) : undefined;
-		if (megaDynaOrZ === 'zmove' && !zMove) {
+		const zMove = megaOrZ === 'zmove' ? this.battle.getZMove(move, pokemon) : undefined;
+		if (megaOrZ === 'zmove' && !zMove) {
 			return this.emitChoiceError(`Can't move: ${pokemon.name} can't use ${move.name} as a Z-move`);
 		}
 		if (zMove && this.choice.zMove) {
@@ -477,14 +477,14 @@ export class Side {
 
 		// Mega evolution
 
-		const mega = (megaDynaOrZ === 'mega');
+		const mega = (megaOrZ === 'mega');
 		if (mega && !pokemon.canMegaEvo) {
 			return this.emitChoiceError(`Can't move: ${pokemon.name} can't mega evolve`);
 		}
 		if (mega && this.choice.mega) {
 			return this.emitChoiceError(`Can't move: You can only mega-evolve once per battle`);
 		}
-		const ultra = (megaDynaOrZ === 'ultra');
+		const ultra = (megaOrZ === 'ultra');
 		if (ultra && !pokemon.canUltraBurst) {
 			return this.emitChoiceError(`Can't move: ${pokemon.name} can't ultra burst`);
 		}
@@ -728,7 +728,7 @@ export class Side {
 				const original = data;
 				const error = () => this.emitChoiceError(`Conflicting arguments for "move": ${original}`);
 				let targetLoc: number | undefined;
-				let megaDynaOrZ: 'mega' | 'zmove' | 'ultra' | '' = '';
+				let megaOrZ: 'mega' | 'zmove' | 'ultra' | '' = '';
 				while (true) {
 					// If data ends with a number, treat it as a target location.
 					// We need to special case 'Conversion 2' so it doesn't get
@@ -739,22 +739,22 @@ export class Side {
 						targetLoc = parseInt(data.slice(-2));
 						data = data.slice(0, -2).trim();
 					} else if (data.endsWith(' mega')) {
-						if (megaDynaOrZ) return error();
-						megaDynaOrZ = 'mega';
+						if (megaOrZ) return error();
+						megaOrZ = 'mega';
 						data = data.slice(0, -5);
 					} else if (data.endsWith(' zmove')) {
-						if (megaDynaOrZ) return error();
-						megaDynaOrZ = 'zmove';
+						if (megaOrZ) return error();
+						megaOrZ = 'zmove';
 						data = data.slice(0, -6);
 					} else if (data.endsWith(' ultra')) {
-						if (megaDynaOrZ) return error();
-						megaDynaOrZ = 'ultra';
+						if (megaOrZ) return error();
+						megaOrZ = 'ultra';
 						data = data.slice(0, -6);
 					} else {
 						break;
 					}
 				}
-				if (!this.chooseMove(data, targetLoc, megaDynaOrZ)) return false;
+				if (!this.chooseMove(data, targetLoc, megaOrZ)) return false;
 				break;
 			case 'switch':
 				this.chooseSwitch(data);
