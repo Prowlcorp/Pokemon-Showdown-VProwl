@@ -7532,7 +7532,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		name: "Agito",
 		baseSpecies: "Lucario",
 		types: ["Fighting", "Steel", "Psychic"],
-		gender: "F".
+		gender: "F",
 		baseStats: {hp: 70, atk: 110, def: 70, spa: 115, spd: 70, spe: 90},
 		abilities: {0: "Adaptability"},
 		heightm: 1.5,
