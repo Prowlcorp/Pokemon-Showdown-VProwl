@@ -1450,7 +1450,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (pokemon.species.id !== 'shaymin' || pokemon.transformed) return;
 			pokemon.formeChange('Shaymin-Sky', this.effect);
 		},
-		isPermanent: true;
+		isPermanent: true,
 		name: "Gracidea Mastery",
 	},
 	grasspelt: {
