@@ -3314,28 +3314,28 @@ export const PokedexText: {[k: string]: PokedexText} = {
 	vee: {
 		name: "Vee",
 	},
-	vapor{
+	vapor: {
 		name: "Vapor",
 	},
-	jolt{
+	jolt: {
 		name: "Jolt",
 	},
-	flare{
+	flare: {
 		name: "Flare",
 	},
-	esp{
+	esp: {
 		name: "Esp",
 	},
-	umbra{
+	umbra: {
 		name: "Umbra",
 	},
-	glace{
+	glace: {
 		name: "Glace",
 	},
-	leaf{
+	leaf: {
 		name: "Leaf",
 	},
-	sylve{
+	sylve: {
 		name: "Sylve",
 	},
 	giracario: {
