@@ -30,7 +30,6 @@ export class RuleTable extends Map<string, string> {
 	// eslint-disable-next-line @typescript-eslint/ban-types
 	checkLearnset: [Function, string] | null;
 	timer: [Partial<GameTimerSettings>, string] | null;
-	minSourceGen: [number, string] | null;
 
 	constructor() {
 		super();
@@ -38,7 +37,6 @@ export class RuleTable extends Map<string, string> {
 		this.complexTeamBans = [];
 		this.checkLearnset = null;
 		this.timer = null;
-		this.minSourceGen = null;
 	}
 
 	isBanned(thing: string) {
@@ -157,8 +155,6 @@ export class Format extends BasicEffect implements Readonly<BasicEffect> {
 	readonly teamLength?: {battle?: number, validate?: [number, number]};
 	/** An optional function that runs at the start of a battle. */
 	readonly onBegin?: (this: Battle) => void;
-	/** Pokemon must be obtained from this generation or later. */
-	readonly minSourceGen?: number;
 	/**
 	 * Maximum possible level pokemon you can bring. Note that this is
 	 * still 100 in VGC, because you can bring level 100 pokemon,
@@ -183,7 +179,7 @@ export class Format extends BasicEffect implements Readonly<BasicEffect> {
 	readonly forcedLevel?: number;
 	/**
 	 * Forces all pokemon above this level down to this level. This
-	 * will allow e.g. level 50 Hydreigon in Gen 5, which is not
+	 * will allow e.g. level 50 Hydreigon, which is not
 	 * normally legal because Hydreigon doesn't evolve until level
 	 * 64.
 	 */
@@ -232,7 +228,7 @@ export class Format extends BasicEffect implements Readonly<BasicEffect> {
 		super(data, ...moreData);
 		data = this;
 
-		this.mod = Utils.getString(data.mod) || 'gen8';
+		this.mod = Utils.getString(data.mod);
 		this.effectType = Utils.getString(data.effectType) as FormatEffectType || 'Format';
 		this.debug = !!data.debug;
 		this.rated = (typeof data.rated === 'string' ? data.rated : data.rated !== false);
@@ -246,7 +242,6 @@ export class Format extends BasicEffect implements Readonly<BasicEffect> {
 		this.ruleTable = null;
 		this.teamLength = data.teamLength || undefined;
 		this.onBegin = data.onBegin || undefined;
-		this.minSourceGen = data.minSourceGen || undefined;
 		this.maxLevel = data.maxLevel || 100;
 		this.defaultLevel = data.defaultLevel || this.maxLevel;
 		this.forcedLevel = data.forcedLevel || undefined;

@@ -115,7 +115,6 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		missNoPokemon: "  [SOURCE]'s attack missed!", // old gens
 
 		center: "  Automatic center!",
-		noTarget: "  But there was no target...", // gen 5 and earlier
 		ohko: "  It's a one-hit KO!",
 		combine: "  The two moves have become one! It's a combined move!",
 		hitCount: "  The Pok\u00E9mon was hit [NUMBER] times!",

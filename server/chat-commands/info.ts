@@ -565,12 +565,12 @@ export const commands: ChatCommands = {
 		const newTargets = dex.dataSearch(target);
 		const showDetails = (cmd.startsWith('dt') || cmd === 'details');
 		if (!newTargets || !newTargets.length) {
-			return this.errorReply(`No Pok\u00e9mon, item, move, ability or nature named '${target}' was found${Dex.gen > dex.gen ? ` in Gen ${dex.gen}` : ""}. (Check your spelling?)`);
+			return this.errorReply(`No Pok\u00e9mon, item, move, ability or nature named '${target}' was found. (Check your spelling?)`);
 		}
 
 		for (const [i, newTarget] of newTargets.entries()) {
 			if (newTarget.isInexact && !i) {
-				buffer = `No Pok\u00e9mon, item, move, ability or nature named '${target}' was found${Dex.gen > dex.gen ? ` in Gen ${dex.gen}` : ""}. Showing the data of '${newTargets[0].name}' instead.\n`;
+				buffer = `No Pok\u00e9mon, item, move, ability or nature named '${target}' was found. Showing the data of '${newTargets[0].name}' instead.\n`;
 			}
 			let details: {[k: string]: string} = {};
 			switch (newTarget.searchType) {
@@ -591,19 +591,7 @@ export const commands: ChatCommands = {
 				if (format?.onModifySpecies) {
 					pokemon = format.onModifySpecies.call({dex, clampIntRange: Utils.clampIntRange, toID} as Battle, pokemon) || pokemon;
 				}
-				let tierDisplay = room?.settings.dataCommandTierDisplay;
-				if (!tierDisplay && room?.battle) {
-					if (room.battle.format.includes('doubles') || room.battle.format.includes('vgc')) {
-						tierDisplay = 'doubles tiers';
-					} else if (room.battle.format.includes('nationaldex')) {
-						tierDisplay = 'numbers';
-					}
-				}
-				if (!tierDisplay) tierDisplay = 'tiers';
-				const displayedTier = tierDisplay === 'tiers' ? pokemon.tier :
-					tierDisplay === 'doubles tiers' ? pokemon.doublesTier :
-					pokemon.num >= 0 ? String(pokemon.num) : pokemon.tier;
-				buffer += `|raw|${Chat.getDataPokemonHTML(pokemon, dex.gen, displayedTier)}\n`;
+				buffer += `|raw|${Chat.getDataPokemonHTML(pokemon, )}\n`;
 				if (showDetails) {
 					let weighthit = 20;
 					if (pokemon.weighthg >= 2000) {
@@ -619,42 +607,39 @@ export const commands: ChatCommands = {
 					}
 					details = {
 						"Dex#": String(pokemon.num),
-						Gen: String(pokemon.gen),
 						Height: `${pokemon.heightm} m`,
 					};
 					details["Weight"] = `${pokemon.weighthg / 10} kg <em>(${weighthit} BP)</em>`;
-					if (pokemon.color && dex.gen >= 5) details["Dex Colour"] = pokemon.color;
-					if (pokemon.eggGroups && dex.gen >= 2) details["Egg Group(s)"] = pokemon.eggGroups.join(", ");
+					if (pokemon.color) details["Dex Colour"] = pokemon.color;
+					if (pokemon.eggGroups) details["Egg Group(s)"] = pokemon.eggGroups.join(", ");
 					const evos: string[] = [];
 					for (const evoName of pokemon.evos) {
 						const evo = dex.getSpecies(evoName);
-						if (evo.gen <= dex.gen) {
-							const condition = evo.evoCondition ? ` ${evo.evoCondition}` : ``;
-							switch (evo.evoType) {
-							case 'levelExtra':
-								evos.push(`${evo.name} (level-up${condition})`);
-								break;
-							case 'levelFriendship':
-								evos.push(`${evo.name} (level-up with high Friendship${condition})`);
-								break;
-							case 'levelHold':
-								evos.push(`${evo.name} (level-up holding ${evo.evoItem}${condition})`);
-								break;
-							case 'useItem':
-								evos.push(`${evo.name} (${evo.evoItem})`);
-								break;
-							case 'levelMove':
-								evos.push(`${evo.name} (level-up with ${evo.evoMove}${condition})`);
-								break;
-							case 'other':
-								evos.push(`${evo.name} (${evo.evoCondition})`);
-								break;
-							case 'trade':
-								evos.push(`${evo.name} (trade${evo.evoItem ? ` holding ${evo.evoItem}` : condition})`);
-								break;
-							default:
-								evos.push(`${evo.name} (${evo.evoLevel}${condition})`);
-							}
+						const condition = evo.evoCondition ? ` ${evo.evoCondition}` : ``;
+						switch (evo.evoType) {
+						case 'levelExtra':
+							evos.push(`${evo.name} (level-up${condition})`);
+							break;
+						case 'levelFriendship':
+							evos.push(`${evo.name} (level-up with high Friendship${condition})`);
+							break;
+						case 'levelHold':
+							evos.push(`${evo.name} (level-up holding ${evo.evoItem}${condition})`);
+							break;
+						case 'useItem':
+							evos.push(`${evo.name} (${evo.evoItem})`);
+							break;
+						case 'levelMove':
+							evos.push(`${evo.name} (level-up with ${evo.evoMove}${condition})`);
+							break;
+						case 'other':
+							evos.push(`${evo.name} (${evo.evoCondition})`);
+							break;
+						case 'trade':
+							evos.push(`${evo.name} (trade${evo.evoItem ? ` holding ${evo.evoItem}` : condition})`);
+							break;
+						default:
+							evos.push(`${evo.name} (${evo.evoLevel}${condition})`);
 						}
 					}
 					if (!evos.length) {
@@ -668,26 +653,20 @@ export const commands: ChatCommands = {
 				const item = dex.getItem(newTarget.name);
 				buffer += `|raw|${Chat.getDataItemHTML(item)}\n`;
 				if (showDetails) {
-					details = {
-						Gen: String(item.gen),
-					};
-
-					if (dex.gen >= 4) {
-						if (item.fling) {
-							details["Fling Base Power"] = String(item.fling.basePower);
-							if (item.fling.status) details["Fling Effect"] = item.fling.status;
-							if (item.fling.volatileStatus) details["Fling Effect"] = item.fling.volatileStatus;
-							if (item.isBerry) details["Fling Effect"] = "Activates the Berry's effect on the target.";
-							if (item.id === 'whiteherb') details["Fling Effect"] = "Restores the target's negative stat stages to 0.";
-							if (item.id === 'mentalherb') {
-								const flingEffect = "Removes the effects of Attract, Disable, Encore, Heal Block, Taunt, and Torment from the target.";
-								details["Fling Effect"] = flingEffect;
-							}
-						} else {
-							details["Fling"] = "This item cannot be used with Fling.";
+					if (item.fling) {
+						details["Fling Base Power"] = String(item.fling.basePower);
+						if (item.fling.status) details["Fling Effect"] = item.fling.status;
+						if (item.fling.volatileStatus) details["Fling Effect"] = item.fling.volatileStatus;
+						if (item.isBerry) details["Fling Effect"] = "Activates the Berry's effect on the target.";
+						if (item.id === 'whiteherb') details["Fling Effect"] = "Restores the target's negative stat stages to 0.";
+						if (item.id === 'mentalherb') {
+							const flingEffect = "Removes the effects of Attract, Disable, Encore, Heal Block, Taunt, and Torment from the target.";
+							details["Fling Effect"] = flingEffect;
 						}
+					} else {
+						details["Fling"] = "This item cannot be used with Fling.";
 					}
-					if (item.naturalGift && dex.gen >= 3) {
+					if (item.naturalGift) {
 						details["Natural Gift Type"] = item.naturalGift.type;
 						details["Natural Gift Base Power"] = String(item.naturalGift.basePower);
 					}
@@ -699,7 +678,6 @@ export const commands: ChatCommands = {
 				if (showDetails) {
 					details = {
 						Priority: String(move.priority),
-						Gen: String(move.gen),
 					};
 
 					if (move.secondary || move.secondaries) details["&#10003; Secondary effect"] = "";
@@ -711,48 +689,47 @@ export const commands: ChatCommands = {
 					if (move.flags['authentic']) details["&#10003; Bypasses Substitutes"] = "";
 					if (move.flags['defrost']) details["&#10003; Thaws user"] = "";
 					if (move.flags['bite']) details["&#10003; Bite"] = "";
+					if (move.flags['sword']) details["&#10003; Sword"] = "";
 					if (move.flags['punch']) details["&#10003; Punch"] = "";
 					if (move.flags['powder']) details["&#10003; Powder"] = "";
 					if (move.flags['reflectable']) details["&#10003; Bounceable"] = "";
 					if (move.flags['charge']) details["&#10003; Two-turn move"] = "";
 					if (move.flags['recharge']) details["&#10003; Has recharge turn"] = "";
-					if (move.flags['gravity'] && dex.gen >= 4) details["&#10007; Suppressed by Gravity"] = "";
-					if (move.flags['dance'] && dex.gen >= 7) details["&#10003; Dance move"] = "";
+					if (move.flags['gravity']) details["&#10007; Suppressed by Gravity"] = "";
+					if (move.flags['dance']) details["&#10003; Dance move"] = "";
 
-					if (dex.gen >= 7) {
-						if (move.zMove?.basePower) {
-							details["Z-Power"] = String(move.zMove.basePower);
-						} else if (move.zMove?.effect) {
-							const zEffects: {[k: string]: string} = {
-								clearnegativeboost: "Restores negative stat stages to 0",
-								crit2: "Crit ratio +2",
-								heal: "Restores HP 100%",
-								curse: "Restores HP 100% if user is Ghost type, otherwise Attack +1",
-								redirect: "Redirects opposing attacks to user",
-								healreplacement: "Restores replacement's HP 100%",
-							};
-							details["Z-Effect"] = zEffects[move.zMove.effect];
-						} else if (move.zMove?.boost) {
-							details["Z-Effect"] = "";
-							const boost = move.zMove.boost;
-							const stats: {[k in BoostName]: string} = {
-								atk: 'Attack', def: 'Defense', spa: 'Sp. Atk', spd: 'Sp. Def', spe: 'Speed', accuracy: 'Accuracy', evasion: 'Evasiveness',
-							};
-							let h: BoostName;
-							for (h in boost) {
-								details["Z-Effect"] += ` ${stats[h]} +${boost[h]}`;
-							}
-						} else if (move.isZ && typeof move.isZ === 'string') {
-							details["&#10003; Z-Move"] = "";
-							const zCrystal = dex.getItem(move.isZ);
-							details["Z-Crystal"] = zCrystal.name;
-							if (zCrystal.itemUser) {
-								details["User"] = zCrystal.itemUser.join(", ");
-								details["Required Move"] = dex.getItem(move.isZ).zMoveFrom!;
-							}
-						} else {
-							details["Z-Effect"] = "None";
+					if (move.zMove?.basePower) {
+						details["Z-Power"] = String(move.zMove.basePower);
+					} else if (move.zMove?.effect) {
+						const zEffects: {[k: string]: string} = {
+							clearnegativeboost: "Restores negative stat stages to 0",
+							crit2: "Crit ratio +2",
+							heal: "Restores HP 100%",
+							curse: "Restores HP 100% if user is Ghost type, otherwise Attack +1",
+							redirect: "Redirects opposing attacks to user",
+							healreplacement: "Restores replacement's HP 100%",
+						};
+						details["Z-Effect"] = zEffects[move.zMove.effect];
+					} else if (move.zMove?.boost) {
+						details["Z-Effect"] = "";
+						const boost = move.zMove.boost;
+						const stats: {[k in BoostName]: string} = {
+							atk: 'Attack', def: 'Defense', spa: 'Sp. Atk', spd: 'Sp. Def', spe: 'Speed', accuracy: 'Accuracy', evasion: 'Evasiveness',
+						};
+						let h: BoostName;
+						for (h in boost) {
+							details["Z-Effect"] += ` ${stats[h]} +${boost[h]}`;
 						}
+					} else if (move.isZ && typeof move.isZ === 'string') {
+						details["&#10003; Z-Move"] = "";
+						const zCrystal = dex.getItem(move.isZ);
+						details["Z-Crystal"] = zCrystal.name;
+						if (zCrystal.itemUser) {
+							details["User"] = zCrystal.itemUser.join(", ");
+							details["Required Move"] = dex.getItem(move.isZ).zMoveFrom!;
+						}
+					} else {
+						details["Z-Effect"] = "None";
 					}
 
 					const targetTypes: {[k: string]: string} = {
@@ -774,7 +751,7 @@ export const commands: ChatCommands = {
 					};
 					details["Target"] = targetTypes[move.target] || "Unknown";
 
-					if (move.id === 'snatch' && dex.gen >= 3) {
+					if (move.id === 'snatch') {
 						details[`<a href="https://${Config.routes.dex}/tags/nonsnatchable">Non-Snatchable Moves</a>`] = '';
 					}
 					if (move.id === 'mirrormove') {
@@ -785,11 +762,6 @@ export const commands: ChatCommands = {
 			case 'ability':
 				const ability = dex.getAbility(newTarget.name);
 				buffer += `|raw|${Chat.getDataAbilityHTML(ability)}\n`;
-				if (showDetails) {
-					details = {
-						Gen: String(ability.gen),
-					};
-				}
 				break;
 			default:
 				throw new Error(`Unrecognized searchType`);
@@ -876,7 +848,7 @@ export const commands: ChatCommands = {
 			}
 
 			if (types.length === 0) {
-				return this.sendReplyBox(Utils.html`${target} isn't a recognized type or Pokemon${Dex.gen > mod.gen ? ` in Gen ${mod.gen}` : ""}.`);
+				return this.sendReplyBox(Utils.html`${target} isn't a recognized type or Pokemon.`);
 			}
 			species = {types: types};
 			target = types.join("/");
@@ -1074,8 +1046,6 @@ export const commands: ChatCommands = {
 			const move = dex.getMove(arg);
 			if (!move.exists) {
 				return this.errorReply(`Type or move '${arg}' not found.`);
-			} else if (move.gen > dex.gen) {
-				return this.errorReply(`Move '${arg}' is not available in Gen ${dex.gen}.`);
 			}
 
 			if (!move.basePower && !move.basePowerCallback) continue;
@@ -2080,9 +2050,6 @@ export const commands: ChatCommands = {
 		// Pokemon
 		if (pokemon.exists) {
 			atLeastOne = true;
-			if (genNumber < pokemon.gen) {
-				return this.sendReplyBox(`${pokemon.name} did not exist in ${generation.toUpperCase()}!`);
-			}
 
 			if ((pokemon.battleOnly && pokemon.baseSpecies !== 'Greninja') ||
 				['Keldeo', 'Genesect'].includes(pokemon.baseSpecies)) {
@@ -2145,19 +2112,19 @@ export const commands: ChatCommands = {
 		}
 
 		// Item
-		if (item.exists && genNumber > 1 && item.gen <= genNumber) {
+		if (item.exists) {
 			atLeastOne = true;
 			this.sendReplyBox(`<a href="https://www.smogon.com/dex/${generation}/items/${item.id}">${generation.toUpperCase()} ${item.name} item analysis</a>, brought to you by <a href="https://www.smogon.com">Smogon University</a>`);
 		}
 
 		// Ability
-		if (ability.exists && genNumber > 2 && ability.gen <= genNumber) {
+		if (ability.exists) {
 			atLeastOne = true;
 			this.sendReplyBox(`<a href="https://www.smogon.com/dex/${generation}/abilities/${ability.id}">${generation.toUpperCase()} ${ability.name} ability analysis</a>, brought to you by <a href="https://www.smogon.com">Smogon University</a>`);
 		}
 
 		// Move
-		if (move.exists && move.gen <= genNumber) {
+		if (move.exists) {
 			atLeastOne = true;
 			this.sendReplyBox(`<a href="https://www.smogon.com/dex/${generation}/moves/${toID(move.name)}">${generation.toUpperCase()} ${move.name} move analysis</a>, brought to you by <a href="https://www.smogon.com">Smogon University</a>`);
 		}
@@ -2226,7 +2193,7 @@ export const commands: ChatCommands = {
 			if (baseSpecies === 'Meowstic' && forme === 'F') forme = 'Female';
 			if (baseSpecies === 'Zygarde' && forme === '10%') forme = '10';
 			if (baseSpecies === 'Necrozma' && !Dex.getSpecies(baseSpecies + forme).battleOnly) forme = forme.substr(0, 4);
-			if (baseSpecies === 'Pikachu' && Dex.getSpecies(baseSpecies + forme).gen === 7) forme += '-Cap';
+			if (baseSpecies === 'Pikachu' && forme.endsWith('World')) forme += '-Cap';
 			if (forme.endsWith('Totem')) {
 				if (baseSpecies === 'Raticate') forme = 'Totem-Alola';
 				if (baseSpecies === 'Marowak') forme = 'Totem';

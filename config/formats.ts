@@ -27,8 +27,8 @@ export const Formats: FormatList = [
 		column: 2,
 	},
 	{
-		name: "[Gen 7] Mix and Mega",
-		desc: `Mega evolve any Pok&eacute;mon with any mega stone and no limit. Boosts based on mega evolution from gen 7.`,
+		name: "Mix and Mega",
+		desc: `Mega evolve any Pok&eacute;mon with any mega stone and no limit. Boosts based on mega evolution.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3656469/">Mix and Mega</a>`,
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3659028/">M&amp;M Resources</a>`,
@@ -87,13 +87,12 @@ export const Formats: FormatList = [
 		},
 	},
 	{
-		name: "[Gen 7] Almost Any Ability",
+		name: "Almost Any Ability",
 		desc: `Pok&eacute;mon have access to almost any ability.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3656414/">Almost Any Ability</a>`,
 		],
 
-		mod: 'gen7',
 		ruleset: ['Obtainable', '!Obtainable Abilities', 'Species Clause', 'Nickname Clause', '2 Ability Clause', 'OHKO Clause', 'Evasion Moves Clause', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Endless Battle Clause'],
 		banlist: [
 			'Dialga', 'Dracovish', 'Giratina', 'Groudon', 'Ho-Oh', 'Kartana', 'Keldeo', 'Kyogre', 'Kyurem-Black',
@@ -105,13 +104,12 @@ export const Formats: FormatList = [
 		],
 	},
 	{
-		name: "[Gen 7] STABmons",
+		name: "STABmons",
 		desc: `Pok&eacute;mon can use any move of their typing, in addition to the moves they can normally learn.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3656429/">STABmons</a>`,
 		],
 
-		mod: 'gen7',
 		ruleset: ['Standard', 'STABmons Move Legality'],
 		banlist: [
 			'Dialga', 'Dracovish', 'Dragapult', 'Genesect', 'Giratina', 'Groudon', 'Ho-Oh',
@@ -125,13 +123,12 @@ export const Formats: FormatList = [
 		],
 	},
 	{
-		name: "[Gen 7] Cross Evolution",
+		name: "Cross Evolution",
 		desc: `Give a Pok&eacute;mon a Pok&eacute;mon name of the next evolution stage as a nickname to inherit stat changes, typing, abilities, and stats, from the next stage Pok&eacute;mon.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3657562/">Cross Evolution</a>`,
 		],
 
-		mod: 'gen7',
 		searchShow: false,
 		ruleset: ['Standard', 'Overflow Stat Clause'],
 		banlist: ['Sneasel', 'Type: Null', 'Arena Trap', 'Ice Scales', 'Moody', 'Baton Pass', 'King\'s Rock'],
@@ -249,13 +246,12 @@ export const Formats: FormatList = [
 		},
 	},
 	{
-		name: "[Gen 7] Godly Gift",
+		name: "Godly Gift",
 		desc: `Each Pok&eacute;mon receives one base stat from a God (Uber Pok&eacute;mon) depending on its position in the team. If there is no Uber Pok&eacute;mon, it uses the Pok&eacute;mon in the first slot.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3660461/">Godly Gift</a>`,
 		],
 
-		mod: 'gen7',
 		searchShow: false,
 		ruleset: ['Standard'],
 		banlist: ['Blissey', 'Chansey', 'Toxapex', 'Uber > 1', 'AG + Uber > 1', 'Arena Trap', 'Huge Power', 'Moody', 'Pure Power', 'Shadow Tag', 'Baton Pass'],
@@ -264,7 +260,7 @@ export const Formats: FormatList = [
 			const god = target.side.team.find(set => {
 				let godSpecies = this.dex.getSpecies(set.species);
 				const validator = this.dex.getRuleTable(this.dex.getFormat(`gen${this.gen}ou`));
-				if (this.toID(set.ability) === 'powerconstruct' && this.gen === 7) {
+				if (this.toID(set.ability) === 'powerconstruct') {
 					return true;
 				}
 				if (set.item) {
@@ -285,13 +281,12 @@ export const Formats: FormatList = [
 		},
 	},
 	{
-		name: "[Gen 7] Inheritance",
+		name: "Inheritance",
 		desc: `Pok&eacute;mon may use the ability and moves of another, as long as they forfeit their own learnset.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3656811/">Inheritance</a>`,
 		],
 
-		mod: 'gen7',
 		searchShow: false,
 		ruleset: ['Standard'],
 		banlist: [
@@ -355,7 +350,7 @@ export const Formats: FormatList = [
 			for (const donor of pokemonWithAbility) {
 				const donorSpecies = this.dex.getSpecies(donor);
 				let format = this.format;
-				if (!format.getEvoFamily) format = this.dex.getFormat('gen8inheritance');
+				if (!format.getEvoFamily) format = this.dex.getFormat('inheritance');
 				const evoFamily = format.getEvoFamily!(donorSpecies.id);
 				if (validSources.includes(evoFamily)) continue;
 
@@ -391,7 +386,7 @@ export const Formats: FormatList = [
 				const abilitySources = teamHas.abilitySources?.[this.dex.toID(set.species)];
 				if (!abilitySources) continue;
 				let format = this.format;
-				if (!format.getEvoFamily) format = this.dex.getFormat('gen8inheritance');
+				if (!format.getEvoFamily) format = this.dex.getFormat('inheritance');
 				evoFamilyLists.push(abilitySources.map(format.getEvoFamily!));
 			}
 
@@ -430,13 +425,12 @@ export const Formats: FormatList = [
 		},
 	},
 	{
-		name: "[Gen 7] Shared Power",
+		name: "Shared Power",
 		desc: `Once a Pok&eacute;mon switches in, its ability is shared with the rest of the team.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3660877/">Shared Power</a>`,
 		],
 
-		mod: 'gen7',
 		searchShow: false,
 		ruleset: ['Standard'],
 		banlist: [
@@ -463,7 +457,7 @@ export const Formats: FormatList = [
 		},
 		onBeforeSwitchIn(pokemon) {
 			let format = this.format;
-			if (!format.getSharedPower) format = this.dex.getFormat('gen8sharedpower');
+			if (!format.getSharedPower) format = this.dex.getFormat('sharedpower');
 			for (const ability of format.getSharedPower!(pokemon)) {
 				const effect = 'ability:' + ability;
 				pokemon.volatiles[effect] = {id: this.toID(effect), target: pokemon};
@@ -472,7 +466,7 @@ export const Formats: FormatList = [
 		onSwitchInPriority: 2,
 		onSwitchIn(pokemon) {
 			let format = this.format;
-			if (!format.getSharedPower) format = this.dex.getFormat('gen8sharedpower');
+			if (!format.getSharedPower) format = this.dex.getFormat('sharedpower');
 			for (const ability of format.getSharedPower!(pokemon)) {
 				const effect = 'ability:' + ability;
 				delete pokemon.volatiles[effect];
@@ -501,13 +495,12 @@ export const Formats: FormatList = [
 		},
 	},
 	{
-		name: "[Gen 7] Trademarked",
+		name: "Trademarked",
 		desc: `Sacrifice your Pok&eacute;mon's ability for a status move that activates on switch-in.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3656980/">Trademarked</a>`,
 		],
 
-		mod: 'gen7',
 		searchShow: false,
 		ruleset: ['Standard'],
 		banlist: [
@@ -576,13 +569,12 @@ export const Formats: FormatList = [
 		},
 	},
 	{
-		name: "[Gen 7] Camomons",
+		name: "Camomons",
 		desc: `Pok&eacute;mon change type to match their first two moves.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3656413/">Camomons</a>`,
 		],
 
-		mod: 'gen7',
 		ruleset: ['Obtainable', 'Species Clause', 'Nickname Clause', 'OHKO Clause', 'Evasion Moves Clause', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Endless Battle Clause'],
 		banlist: [
 			'Dialga', 'Dragonite', 'Giratina', 'Groudon', 'Ho-Oh', 'Kartana',
@@ -604,14 +596,13 @@ export const Formats: FormatList = [
 		},
 	},
 	{
-		name: "[Gen 7] NFE",
+		name: "NFE",
 		desc: `Only Pok&eacute;mon that can evolve are allowed.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3656332/">NFE Metagame Discussion</a>`,
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3657558/">NFE Resources</a>`,
 		],
 
-		mod: 'gen7',
 		ruleset: ['Not Fully Evolved', 'Standard'],
 		banlist: [
 			'Chansey', 'Doublade', 'Magneton', 'Porygon2', 'Rhydon', 'Scyther', 'Sneasel', 'Type: Null',
@@ -627,16 +618,14 @@ export const Formats: FormatList = [
 		column: 2,
 	},
 	{
-		name: "[Gen 7] Monotype Random Battle",
+		name: "Monotype Random Battle",
 
-		mod: 'gen7',
 		team: 'random',
 		ruleset: ['Obtainable', 'Same Type Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
 	},
 	{
-		name: "[Gen 7] Challenge Cup 1v1",
+		name: "Challenge Cup 1v1",
 
-		mod: 'gen7',
 		team: 'randomCC',
 		teamLength: {
 			battle: 1,
@@ -644,9 +633,8 @@ export const Formats: FormatList = [
 		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
 	},
 	{
-		name: "[Gen 7] Challenge Cup 2v2",
+		name: "Challenge Cup 2v2",
 
-		mod: 'gen7',
 		team: 'randomCC',
 		gameType: 'doubles',
 		teamLength: {
@@ -656,35 +644,32 @@ export const Formats: FormatList = [
 		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
 	},
 	{
-		name: "[Gen 7] Random Battle",
+		name: "Random Battle",
 		desc: `Randomized teams of level-balanced Pok&eacute;mon with sets that are generated to be competitively viable.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3591157/">Sets and Suggestions</a>`,
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3616946/">Role Compendium</a>`,
 		],
 
-		mod: 'gen7',
 		team: 'random',
 		ruleset: ['Obtainable', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
 	},
 	{
-		name: "[Gen 7] Random Doubles Battle",
+		name: "Random Doubles Battle",
 		threads: [`&bullet; <a href="https://www.smogon.com/forums/threads/3601525/">Sets and Suggestions</a>`],
 
-		mod: 'gen7',
 		gameType: 'doubles',
 		team: 'random',
 		searchShow: false,
 		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod'],
 	},
 	{
-		name: "[Gen 7] BSS Factory",
+		name: "BSS Factory",
 		desc: `Randomized 3v3 Singles featuring Pok&eacute;mon and movesets popular in Battle Spot Singles.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3604845/">Information and Suggestions Thread</a>`,
 		],
 
-		mod: 'gen7',
 		team: 'randomBSSFactory',
 		searchShow: false,
 		teamLength: {
@@ -694,7 +679,7 @@ export const Formats: FormatList = [
 		ruleset: ['Obtainable', 'Standard GBU'],
 	},
 	{
-		name: "[Gen 7] Super Staff Bros Brawl",
+		name: "Super Staff Bros Brawl",
 		desc: "Super Staff Bros returns for another round! Battle with a random team of pokemon created by the sim staff.",
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/articles/super-staff-bros-brawl">Introduction &amp; Roster</a>`,
@@ -728,12 +713,11 @@ export const Formats: FormatList = [
 		},
 	},
 	{
-		name: '[Gen 7] Metronome Battle',
+		name: 'Metronome Battle',
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3632075/">Metronome Battle</a>`,
 		],
 
-		mod: 'gen7',
 		gameType: 'doubles',
 		// rated: false,
 		teamLength: {
@@ -779,9 +763,8 @@ export const Formats: FormatList = [
 		column: 3,
 	},
 	{
-		name: "[Gen 7] Custom Game",
+		name: "Custom Game",
 
-		mod: 'gen7',
 		searchShow: false,
 		debug: true,
 		maxLevel: 9999,
@@ -795,13 +778,12 @@ export const Formats: FormatList = [
 		ruleset: ['Team Preview', 'Cancel Mod'],
 	},
 	{
-		name: "[Gen 7] 1v1",
+		name: "1v1",
 		desc: `Bring three Pok&eacute;mon to Team Preview and choose one to battle.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/posts/8031460/">USUM 1v1</a>`,
 		],
 
-		mod: 'gen7',
 		searchShow: false,
 		teamLength: {
 			validate: [1, 3],
@@ -816,19 +798,18 @@ export const Formats: FormatList = [
 		],
 	},
 	{
-		name: "[Gen 7] Anything Goes",
+		name: "Anything Goes",
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3587441/">Anything Goes Metagame Discussion</a>`,
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3591711/">Anything Goes Viability Rankings</a>`,
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3646736/">Anything Goes Sample Teams</a>`,
 		],
 
-		mod: 'gen7',
 		// searchShow: false,
 		ruleset: ['Obtainable', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
 	},
 	{
-		name: "[Gen 7] Battle Spot Singles",
+		name: "Battle Spot Singles",
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3601012/">Introduction to Battle Spot Singles</a>`,
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3605970/">Battle Spot Singles Viability Rankings</a>`,
@@ -836,7 +817,6 @@ export const Formats: FormatList = [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3619162/">Battle Spot Singles Sample Teams</a>`,
 		],
 
-		mod: 'gen7',
 		searchShow: false,
 		maxForcedLevel: 50,
 		teamLength: {
@@ -844,7 +824,6 @@ export const Formats: FormatList = [
 			battle: 3,
 		},
 		ruleset: ['Standard GBU'],
-		minSourceGen: 6,
 	},
 
 	// US/UM Doubles/Triples
@@ -855,9 +834,8 @@ export const Formats: FormatList = [
 		column: 3,
 	},
 	{
-		name: "[Gen 7] Doubles Custom Game",
+		name: "Doubles Custom Game",
 
-		mod: 'gen7',
 		gameType: 'doubles',
 		searchShow: false,
 		maxLevel: 9999,
@@ -872,9 +850,8 @@ export const Formats: FormatList = [
 		ruleset: ['Team Preview', 'Cancel Mod'],
 	},
 	{
-		name: "[Gen 7] Triples Custom Game",
+		name: "Triples Custom Game",
 
-		mod: 'gen7',
 		gameType: 'triples',
 		searchShow: false,
 		maxLevel: 9999,
@@ -889,14 +866,13 @@ export const Formats: FormatList = [
 		ruleset: ['Team Preview', 'Cancel Mod'],
 	},
 	{
-		name: "[Gen 7] Battle Spot Doubles",
+		name: "Battle Spot Doubles",
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3595001/">Battle Spot Doubles Discussion</a>`,
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3593890/">Battle Spot Doubles Viability Rankings</a>`,
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3595859/">Battle Spot Doubles Sample Teams</a>`,
 		],
 
-		mod: 'gen7',
 		gameType: 'doubles',
 		searchShow: false,
 		maxForcedLevel: 50,
@@ -905,16 +881,14 @@ export const Formats: FormatList = [
 			battle: 4,
 		},
 		ruleset: ['Standard GBU'],
-		minSourceGen: 6,
 	},
 	{
-		name: "[Gen 7] Battle Spot Triples",
+		name: "Battle Spot Triples",
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3533914/">ORAS Battle Spot Triples Discussion</a>`,
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3549201/">ORAS BST Viability Rankings</a>`,
 		],
 
-		mod: 'gen7',
 		gameType: 'triples',
 		searchShow: false,
 		maxForcedLevel: 50,
@@ -922,16 +896,14 @@ export const Formats: FormatList = [
 			validate: [6, 6],
 		},
 		ruleset: ['Standard GBU'],
-		minSourceGen: 7,
 	},
 	{
-		name: "[Gen 7] 2v2 Doubles",
+		name: "2v2 Doubles",
 		desc: `Double battle where you bring four Pok&eacute;mon to Team Preview and choose only two.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3656321/">2v2 Doubles</a>`,
 		],
 
-		mod: 'gen7',
 		gameType: 'doubles',
 		teamLength: {
 			validate: [2, 4],

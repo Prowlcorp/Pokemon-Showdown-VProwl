@@ -15,7 +15,7 @@ stream = new Sim.BattleStream();
     }
 })();
 
-stream.write(`>start {"formatid":"gen7randombattle"}`);
+stream.write(`>start {"formatid":"randombattle"}`);
 stream.write(`>player p1 {"name":"Alice"}`);
 stream.write(`>player p2 {"name":"Bob"}`);
 ```
@@ -25,7 +25,7 @@ The stream can also be accessed from other programming languages using standard 
 In this case, you would clone the repository, and then run:
 
 ```bash
-echo '>start {"formatid":"gen7randombattle"}
+echo '>start {"formatid":"randombattle"}
 >player p1 {"name":"Alice"}
 >player p2 {"name":"Bob"}
 ' | ./pokemon-showdown simulate-battle
@@ -38,7 +38,7 @@ Writing to the simulator
 In a standard battle, what you write to the simulator looks something like this:
 
 ```
->start {"formatid":"gen7ou"}
+>start {"formatid":"ou"}
 >player p1 {"name":"Alice","team":"insert packed team here"}
 >player p2 {"name":"Bob","team":"insert packed team here"}
 >p1 team 123456

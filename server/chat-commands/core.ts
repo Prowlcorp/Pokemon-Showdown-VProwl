@@ -1464,9 +1464,9 @@ export const commands: ChatCommands = {
 		}
 		if (!target) return this.errorReply(this.tr("Provide a valid format."));
 		const originalFormat = Dex.getFormat(target);
-		// Note: The default here of [Gen 8] Anything Goes isn't normally hit; since the web client will send a default format
+		// Note: The default here of Anything Goes isn't normally hit; since the web client will send a default format
 		const format = originalFormat.effectType === 'Format' ? originalFormat : Dex.getFormat(
-			'[Gen 8] Anything Goes'
+			'Anything Goes'
 		);
 		if (format.effectType !== this.tr('Format')) return this.popupReply(this.tr("Please provide a valid format."));
 

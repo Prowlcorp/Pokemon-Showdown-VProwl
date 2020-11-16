@@ -68,10 +68,6 @@ export const Scripts: BattleScriptsData = {
 			if (!lockedMove) {
 				if (!pokemon.deductPP(baseMove, null, target) && (move.id !== 'struggle')) {
 					this.add('cant', pokemon, 'nopp', move);
-					const gameConsole = [
-						null, 'Game Boy', 'Game Boy Color', 'Game Boy Advance', 'DS', 'DS', '3DS', '3DS',
-					][this.gen] || 'Switch';
-					this.hint(`This is not a bug, this is really how it works on the ${gameConsole}; try it yourself if you don't believe us.`);
 					this.clearActiveMove(true);
 					pokemon.moveThisTurnResult = false;
 					return;
@@ -207,7 +203,7 @@ export const Scripts: BattleScriptsData = {
 
 		if (!target) {
 			this.attrLastMove('[notarget]');
-			this.add(this.gen >= 5 ? '-fail' : '-notarget', pokemon);
+			this.add('-fail', pokemon);
 			return false;
 		}
 
@@ -241,7 +237,7 @@ export const Scripts: BattleScriptsData = {
 			move.ignoreImmunity = (move.category === 'Status');
 		}
 
-		if (this.gen !== 4 && move.selfdestruct === 'always') {
+		if (move.selfdestruct === 'always') {
 			this.faint(pokemon, pokemon, move);
 		}
 
@@ -253,10 +249,10 @@ export const Scripts: BattleScriptsData = {
 		} else {
 			if (!targets.length) {
 				this.attrLastMove('[notarget]');
-				this.add(this.gen >= 5 ? '-fail' : '-notarget', pokemon);
+				this.add('-fail', pokemon);
 				return false;
 			}
-			if (this.gen === 4 && move.selfdestruct === 'always') {
+			if (move.selfdestruct === 'always') {
 				this.faint(pokemon, pokemon, move);
 			}
 			moveResult = this.trySpreadMoveHit(targets, pokemon, move);
@@ -293,7 +289,7 @@ export const Scripts: BattleScriptsData = {
 			// 0. check for semi invulnerability
 			this.hitStepInvulnerabilityEvent,
 
-			// 1. run the 'TryHit' event (Protect, Magic Bounce, Volt Absorb, etc.) (this is step 2 in gens 5 & 6, and step 4 in gen 4)
+			// 1. run the 'TryHit' event (Protect, Magic Bounce, Volt Absorb, etc.)
 			this.hitStepTryHitEvent,
 
 			// 2. check for type immunity (this is step 1 in gens 4-6)
@@ -314,14 +310,6 @@ export const Scripts: BattleScriptsData = {
 			// 7. loop that processes each hit of the move (has its own steps per iteration)
 			this.hitStepMoveHitLoop,
 		];
-		if (this.gen <= 6) {
-			// Swap step 1 with step 2
-			[moveSteps[1], moveSteps[2]] = [moveSteps[2], moveSteps[1]];
-		}
-		if (this.gen === 4) {
-			// Swap step 4 with new step 2 (old step 1)
-			[moveSteps[2], moveSteps[4]] = [moveSteps[4], moveSteps[2]];
-		}
 
 		this.setActiveMove(move, pokemon, targets[0]);
 
@@ -363,7 +351,7 @@ export const Scripts: BattleScriptsData = {
 		return moveResult;
 	},
 	hitStepInvulnerabilityEvent(targets, pokemon, move) {
-		if (move.id === 'helpinghand' || (this.gen >= 6 && move.id === 'toxic' && pokemon.hasType('Poison'))) {
+		if (move.id === 'helpinghand' || (move.id === 'toxic' && pokemon.hasType('Poison'))) {
 			return new Array(targets.length).fill(true);
 		}
 		const hitResults = this.runEvent('Invulnerability', targets, pokemon, move);
@@ -407,17 +395,17 @@ export const Scripts: BattleScriptsData = {
 	hitStepTryImmunity(targets, pokemon, move) {
 		const hitResults = [];
 		for (const [i, target] of targets.entries()) {
-			if (this.gen >= 6 && move.flags['powder'] && target !== pokemon && !this.dex.getImmunity('powder', target)) {
+			if (move.flags['powder'] && target !== pokemon && !this.dex.getImmunity('powder', target)) {
 				this.debug('natural powder immunity');
 				this.add('-immune', target);
 				hitResults[i] = false;
 			} else if (!this.singleEvent('TryImmunity', move, {}, target, pokemon, move)) {
 				this.add('-immune', target);
 				hitResults[i] = false;
-			} else if (this.gen >= 7 && move.pranksterBoosted && pokemon.hasAbility('prankster') &&
+			} else if (move.pranksterBoosted && pokemon.hasAbility('prankster') &&
 				targets[i].side !== pokemon.side && !this.dex.getImmunity('prankster', target)) {
 				this.debug('natural prankster immunity');
-				if (!target.illusion) this.hint("Since gen 7, Dark is immune to Prankster moves.");
+				if (!target.illusion) this.hint("Dark is immune to Prankster moves.");
 				this.add('-immune', target);
 				hitResults[i] = false;
 			} else {
@@ -435,7 +423,7 @@ export const Scripts: BattleScriptsData = {
 			if (move.ohko) { // bypasses accuracy modifiers
 				if (!target.isSemiInvulnerable()) {
 					accuracy = 30;
-					if (move.ohko === 'Ice' && this.gen >= 7 && !pokemon.hasType('Ice')) {
+					if (move.ohko === 'Ice' && !pokemon.hasType('Ice')) {
 						accuracy = 20;
 					}
 					if (pokemon.level >= target.level &&
@@ -474,7 +462,7 @@ export const Scripts: BattleScriptsData = {
 				}
 				accuracy = this.runEvent('ModifyAccuracy', target, pokemon, move, accuracy);
 			}
-			if (move.alwaysHit || (move.id === 'toxic' && this.gen >= 6 && pokemon.hasType('Poison'))) {
+			if (move.alwaysHit || (move.id === 'toxic' && pokemon.hasType('Poison'))) {
 				accuracy = true; // bypasses ohko accuracy modifiers
 			} else {
 				accuracy = this.runEvent('Accuracy', target, pokemon, move, accuracy);
@@ -503,7 +491,7 @@ export const Scripts: BattleScriptsData = {
 				for (const effectid of ['banefulbunker', 'kingsshield', 'obstruct', 'protect', 'spikyshield']) {
 					if (target.removeVolatile(effectid)) broke = true;
 				}
-				if (this.gen >= 6 || target.side !== pokemon.side) {
+				if (target.side !== pokemon.side) {
 					for (const effectid of ['craftyshield', 'matblock', 'quickguard', 'wideguard']) {
 						if (target.side.removeSideCondition(effectid)) broke = true;
 					}
@@ -514,7 +502,7 @@ export const Scripts: BattleScriptsData = {
 					} else {
 						this.add('-activate', target, 'move: ' + move.name, '[broken]');
 					}
-					if (this.gen >= 6) delete target.volatiles['stall'];
+					delete target.volatiles['stall'];
 				}
 			}
 		}
@@ -705,11 +693,7 @@ export const Scripts: BattleScriptsData = {
 
 		if (move.struggleRecoil) {
 			let recoilDamage;
-			if (this.dex.gen >= 5) {
-				recoilDamage = this.clampIntRange(Math.round(pokemon.baseMaxhp / 4), 1);
-			} else {
-				recoilDamage = this.trunc(pokemon.maxhp / 4);
-			}
+			recoilDamage = this.clampIntRange(Math.round(pokemon.baseMaxhp / 4), 1);
 			this.directDamage(recoilDamage, pokemon, pokemon, {id: 'strugglerecoil'} as Condition);
 		}
 
@@ -917,7 +901,7 @@ export const Scripts: BattleScriptsData = {
 						continue;
 					}
 					const amount = target.baseMaxhp * moveData.heal[0] / moveData.heal[1];
-					const d = target.heal((this.gen < 5 ? Math.floor : Math.round)(amount));
+					const d = target.heal(Math.round(amount));
 					if (!d && d !== 0) {
 						this.add('-fail', pokemon);
 						this.attrLastMove('[still]');

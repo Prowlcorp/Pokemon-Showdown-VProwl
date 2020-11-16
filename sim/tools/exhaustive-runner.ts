@@ -34,7 +34,7 @@ export class ExhaustiveRunner {
 
 	// TODO: Add triple battles once supported by the AI.
 	static readonly FORMATS = [
-		'gen7customgame', 'gen7doublescustomgame',
+		'customgame', 'doublescustomgame',
 	];
 
 	private readonly format: string;
@@ -64,7 +64,7 @@ export class ExhaustiveRunner {
 
 	async run() {
 		const dex = Dex.forFormat(this.format);
-		dex.loadData(); // FIXME: This is required for `dex.gen` to be set properly...
+		dex.loadData();
 
 		const seed = this.prng.seed;
 		const pools = this.createPools(dex);
@@ -103,11 +103,11 @@ export class ExhaustiveRunner {
 
 	private createPools(dex: typeof Dex): Pools {
 		return {
-			pokemon: new Pool(ExhaustiveRunner.onlyValid(dex.gen, dex.data.Pokedex, p => dex.getSpecies(p),
+			pokemon: new Pool(ExhaustiveRunner.onlyValid(dex.data.Pokedex, p => dex.getSpecies(p),
 				(_, p) => (p.name !== 'Pichu-Spiky-eared' && p.name.substr(0, 8) !== 'Pikachu-')), this.prng),
-			items: new Pool(ExhaustiveRunner.onlyValid(dex.gen, dex.data.Items, i => dex.getItem(i)), this.prng),
-			abilities: new Pool(ExhaustiveRunner.onlyValid(dex.gen, dex.data.Abilities, a => dex.getAbility(a)), this.prng),
-			moves: new Pool(ExhaustiveRunner.onlyValid(dex.gen, dex.data.Moves, m => dex.getMove(m),
+			items: new Pool(ExhaustiveRunner.onlyValid(dex.data.Items, i => dex.getItem(i)), this.prng),
+			abilities: new Pool(ExhaustiveRunner.onlyValid(dex.data.Abilities, a => dex.getAbility(a)), this.prng),
+			moves: new Pool(ExhaustiveRunner.onlyValid(dex.data.Moves, m => dex.getMove(m),
 				m => (m !== 'struggle' && (m === 'hiddenpower' || m.substr(0, 11) !== 'hiddenpower'))), this.prng),
 		};
 	}
@@ -153,13 +153,12 @@ export class ExhaustiveRunner {
 	}
 
 	private static onlyValid<T>(
-		gen: number, obj: {[key: string]: T}, getter: (k: string) => AnyObject,
+		obj: {[key: string]: T}, getter: (k: string) => AnyObject,
 		additional?: (k: string, v: AnyObject) => boolean
 	) {
 		return Object.keys(obj).filter(k => {
 			const v = getter(k);
-			return v.gen <= gen &&
-				(!additional || additional(k, v));
+			return (!additional || additional(k, v));
 		});
 	}
 }
@@ -195,8 +194,8 @@ class TeamGenerator {
 
 	get exhausted() {
 		const exhausted = [this.pools.pokemon.exhausted, this.pools.moves.exhausted];
-		if (this.dex.gen >= 2) exhausted.push(this.pools.items.exhausted);
-		if (this.dex.gen >= 3) exhausted.push(this.pools.abilities.exhausted);
+		exhausted.push(this.pools.items.exhausted);
+		exhausted.push(this.pools.abilities.exhausted);
 		return Math.min.apply(null, exhausted);
 	}
 
@@ -215,7 +214,7 @@ class TeamGenerator {
 				item = combo.item;
 				if (combo.move) moves.push(combo.move);
 			} else {
-				item = this.dex.gen >= 2 ? this.pools.items.next() : '';
+				item = this.pools.items.next();
 			}
 
 			team.push({
@@ -223,7 +222,7 @@ class TeamGenerator {
 				species: species.name,
 				gender: species.gender,
 				item,
-				ability: this.dex.gen >= 3 ? this.pools.abilities.next() : 'None',
+				ability: this.pools.abilities.next(),
 				moves: moves.concat(...this.pools.moves.next(4 - moves.length)),
 				evs: {
 					hp: randomEVs(),

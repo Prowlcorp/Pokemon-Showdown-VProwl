@@ -69,12 +69,6 @@ export class BasicEffect implements EffectData {
 	 */
 	num: number;
 	/**
-	 * The generation of Pokemon game this was INTRODUCED (NOT
-	 * necessarily the current gen being simulated.) Not all effects
-	 * track generation; this will be 0 if not known.
-	 */
-	gen: number;
-	/**
 	 * A shortened form of the description of this effect.
 	 * Not all effects have this.
 	 */
@@ -104,7 +98,6 @@ export class BasicEffect implements EffectData {
 		this.effectType = Utils.getString(data.effectType) as EffectType || 'Condition';
 		this.exists = !!(this.exists && this.id);
 		this.num = data.num || 0;
-		this.gen = data.gen || 0;
 		this.shortDesc = data.shortDesc || '';
 		this.desc = data.desc || '';
 		this.duration = data.duration;
@@ -154,7 +147,6 @@ export class Nature extends BasicEffect implements Readonly<BasicEffect & Nature
 
 		this.fullname = `nature: ${this.name}`;
 		this.effectType = 'Nature';
-		this.gen = 3;
 		this.plus = data.plus || undefined;
 		this.minus = data.minus || undefined;
 	}
@@ -179,17 +171,11 @@ export class TypeInfo implements Readonly<TypeData> {
 	 */
 	readonly exists: boolean;
 	/**
-	 * The generation of Pokemon game this was INTRODUCED (NOT
-	 * necessarily the current gen being simulated.) Not all effects
-	 * track generation; this will be 0 if not known.
-	 */
-	readonly gen: number;
-	/**
 	 * Type chart, attackingTypeName:result, effectid:result
 	 * result is: 0 = normal, 1 = weakness, 2 = resistance, 3 = immunity
 	 */
 	readonly damageTaken: {[attackingTypeNameOrEffectid: string]: number};
-	/** The IVs to get this Type Hidden Power (in gen 3 and later) */
+	/** The IVs to get this Type Hidden Power */
 	readonly HPivs: SparseStatsTable;
 
 	constructor(data: AnyObject, ...moreData: (AnyObject | null)[]) {
@@ -200,7 +186,6 @@ export class TypeInfo implements Readonly<TypeData> {
 		this.name = Utils.getString(data.name).trim();
 		this.effectType = Utils.getString(data.effectType) as TypeInfoEffectType || 'Type';
 		this.exists = !!(this.exists && this.id);
-		this.gen = data.gen || 0;
 		this.damageTaken = data.damageTaken || {};
 		this.HPivs = data.HPivs || {};
 	}
@@ -285,13 +270,6 @@ export function combine(obj: AnyObject, ...data: (AnyObject | null)[]): AnyObjec
 // 	 * This value must be between 0 and 255, inclusive.
 // 	 */
 // 	happiness: number;
-// 	/**
-// 	 * The Pokemon's set's Hidden Power type. This value is intended
-// 	 * to be used to manually set a set's HP type in Gen 7 where
-// 	 * its IVs do not necessarily reflect the user's intended type.
-// 	 * TODO: actually support this in the teambuilder.
-// 	 */
-// 	hpType?: string;
 // 	/**
 // 	 * The pokeball this Pokemon is in. Like shininess, this property
 // 	 * has no direct competitive effects, but has implications for

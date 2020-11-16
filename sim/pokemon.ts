@@ -45,9 +45,6 @@ export class Pokemon {
 	readonly happiness: number;
 	readonly pokeball: string;
 
-	/** Transform keeps the original pre-transformed Hidden Power in Gen 2-4. */
-	readonly baseHpType: string;
-	readonly baseHpPower: number;
 
 	readonly baseMoveSlots: MoveSlot[];
 	moveSlots: MoveSlot[];
@@ -83,9 +80,6 @@ export class Pokemon {
 	 * Stat multipliers from abilities, items, and volatiles, such as
 	 * Solar Power, Choice Band, or Swords Dance, are not stored in
 	 * `storedStats`, but applied on top and accessed by `pokemon.getStat`.
-	 *
-	 * (Except in Gen 1, where stat multipliers are stored, leading
-	 * to several famous glitches.)
 	 */
 	storedStats: StatsExceptHPTable;
 	boosts: BoostsTable;
@@ -230,12 +224,6 @@ export class Pokemon {
 	pendingStaleness?: 'internal' | 'external';
 	/** Temporary staleness that lasts only until the Pokemon switches. */
 	volatileStaleness?: 'external';
-
-	// Gen 1 only
-	modifiedStats?: StatsExceptHPTable;
-	modifyStat?: (this: Pokemon, statName: StatNameExceptHP, modifier: number) => void;
-	// Stadium only
-	recalculateStats?: (this: Pokemon) => void;
 
 	/**
 	 * An object for storing untyped data, for mods to use.
@@ -688,7 +676,7 @@ export class Pokemon {
 		}
 
 		return !!(
-			(this.battle.gen >= 5 && !this.isActive) ||
+			(!this.isActive) ||
 			((this.volatiles['gastroacid'] || (neutralizinggas && this.ability !== ('neutralizinggas' as ID))) &&
 			!this.getAbility().isPermanent
 			)
@@ -696,22 +684,21 @@ export class Pokemon {
 	}
 
 	ignoringItem() {
-		return !!((this.battle.gen >= 5 && !this.isActive) ||
+		return !!(!this.isActive ||
 			(this.hasAbility('klutz') && !this.getItem().ignoreKlutz) ||
 			this.volatiles['embargo'] || this.battle.field.pseudoWeather['magicroom']);
 	}
 
 	deductPP(move: string | Move, amount?: number | null, target?: Pokemon | null | false) {
-		const gen = this.battle.gen;
 		move = this.battle.dex.getMove(move);
 		const ppData = this.getMoveData(move);
 		if (!ppData) return 0;
 		ppData.used = true;
-		if (!ppData.pp && gen > 1) return 0;
+		if (!ppData.pp) return 0;
 
 		if (!amount) amount = 1;
 		ppData.pp -= amount;
-		if (ppData.pp < 0 && gen > 1) {
+		if (ppData.pp < 0) {
 			amount += ppData.pp;
 			ppData.pp = 0;
 		}
@@ -782,7 +769,7 @@ export class Pokemon {
 			let moveName = moveSlot.move;
 			if (moveSlot.id === 'hiddenpower') {
 				moveName = 'Hidden Power ' + this.hpType;
-				if (this.battle.gen < 6) moveName += ' ' + this.hpPower;
+				moveName += ' ' + this.hpPower;
 			} else if (moveSlot.id === 'return' || moveSlot.id === 'frustration') {
 				const basePowerCallback = this.battle.dex.getMove(moveSlot.id).basePowerCallback as (pokemon: Pokemon) => number;
 				moveName += ' ' + basePowerCallback(this);
@@ -885,7 +872,7 @@ export class Pokemon {
 			},
 			moves: this.moves.map(move => {
 				if (move === 'hiddenpower') {
-					return move + toID(this.hpType) + (this.battle.gen < 6 ? '' : this.hpPower);
+					return move + toID(this.hpType) + this.hpPower;
 				}
 				if (move === 'frustration' || move === 'return') {
 					const basePowerCallback = this.battle.dex.getMove(move).basePowerCallback as (pokemon: Pokemon) => number;
@@ -897,7 +884,7 @@ export class Pokemon {
 			item: this.item,
 			pokeball: this.pokeball,
 		};
-		if (this.battle.gen > 6) entry.ability = this.ability;
+		entry.ability = this.ability;
 		return entry;
 	}
 
@@ -976,8 +963,8 @@ export class Pokemon {
 
 	transformInto(pokemon: Pokemon, effect?: Effect) {
 		const species = pokemon.species;
-		if (pokemon.fainted || pokemon.illusion || (pokemon.volatiles['substitute'] && this.battle.gen >= 5) ||
-			(pokemon.transformed && this.battle.gen >= 2) || (this.transformed && this.battle.gen >= 5)) {
+		if (pokemon.fainted || pokemon.illusion || (pokemon.volatiles['substitute']) ||
+			(pokemon.transformed) || (this.transformed) {
 			return false;
 		}
 
@@ -997,9 +984,6 @@ export class Pokemon {
 			this.storedStats[statName] = pokemon.storedStats[statName];
 		}
 		this.moveSlots = [];
-		this.set.ivs = (this.battle.gen >= 5 ? this.set.ivs : pokemon.set.ivs);
-		this.hpType = (this.battle.gen >= 5 ? this.hpType : pokemon.hpType);
-		this.hpPower = (this.battle.gen >= 5 ? this.hpPower : pokemon.hpPower);
 		for (const moveSlot of pokemon.moveSlots) {
 			let moveName = moveSlot.move;
 			if (moveSlot.id === 'hiddenpower') {
@@ -1009,7 +993,7 @@ export class Pokemon {
 				move: moveName,
 				id: moveSlot.id,
 				pp: moveSlot.maxpp === 1 ? 1 : 5,
-				maxpp: this.battle.gen >= 5 ? (moveSlot.maxpp === 1 ? 1 : 5) : moveSlot.maxpp,
+				maxpp: moveSlot.maxpp === 1 ? 1 : 5,
 				target: moveSlot.target,
 				disabled: false,
 				used: false,
@@ -1020,14 +1004,12 @@ export class Pokemon {
 		for (boostName in pokemon.boosts) {
 			this.boosts[boostName] = pokemon.boosts[boostName]!;
 		}
-		if (this.battle.gen >= 6) {
-			const volatilesToCopy = ['focusenergy', 'laserfocus'];
-			for (const volatile of volatilesToCopy) {
-				if (pokemon.volatiles[volatile]) {
-					this.addVolatile(volatile);
-				} else {
-					this.removeVolatile(volatile);
-				}
+		const volatilesToCopy = ['focusenergy', 'laserfocus'];
+		for (const volatile of volatilesToCopy) {
+			if (pokemon.volatiles[volatile]) {
+				this.addVolatile(volatile);
+			} else {
+				this.removeVolatile(volatile);
 			}
 		}
 		if (effect) {
@@ -1035,28 +1017,7 @@ export class Pokemon {
 		} else {
 			this.battle.add('-transform', this, pokemon);
 		}
-		if (this.battle.gen > 2) this.setAbility(pokemon.ability, this, true);
-
-		// Change formes based on held items (for Transform)
-		// Only ever relevant in Generation 4 since Generation 3 didn't have item-based forme changes
-		if (this.battle.gen === 4) {
-			if (this.species.num === 487) {
-				// Giratina formes
-				if (this.species.name === 'Giratina' && this.item === 'griseousorb') {
-					this.formeChange('Giratina-Origin');
-				} else if (this.species.name === 'Giratina-Origin' && this.item !== 'griseousorb') {
-					this.formeChange('Giratina');
-				}
-			}
-			if (this.species.num === 493) {
-				// Arceus formes
-				const item = this.getItem();
-				const targetForme = (item?.onPlate ? 'Arceus-' + item.onPlate : 'Arceus');
-				if (this.species.name !== targetForme) {
-					this.formeChange(targetForme);
-				}
-			}
-		}
+		this.setAbility(pokemon.ability, this, true);
 
 		return true;
 	}
@@ -1090,12 +1051,6 @@ export class Pokemon {
 		let statName: StatNameExceptHP;
 		for (statName in this.storedStats) {
 			this.storedStats[statName] = stats[statName];
-			if (this.modifiedStats) this.modifiedStats[statName] = stats[statName]; // Gen 1: Reset modified stats.
-		}
-		if (this.battle.gen <= 1) {
-			// Gen 1: Re-Apply burn and para drops.
-			if (this.status === 'par') this.modifyStat!('spe', 0.25);
-			if (this.status === 'brn') this.modifyStat!('atk', 0.5);
 		}
 		this.speed = this.storedStats.spe;
 		return species;
@@ -1114,8 +1069,6 @@ export class Pokemon {
 
 		const species = this.setSpecies(rawSpecies, source);
 		if (!species) return false;
-
-		if (this.battle.gen <= 2) return true;
 
 		// The species the opponent sees
 		const apparentSpecies =
@@ -1172,14 +1125,7 @@ export class Pokemon {
 			evasion: 0,
 		};
 
-		if (this.battle.gen === 1 && this.baseMoves.includes('mimic' as ID) && !this.transformed) {
-			const moveslot = this.baseMoves.indexOf('mimic' as ID);
-			const mimicPP = this.moveSlots[moveslot] ? this.moveSlots[moveslot].pp : 16;
-			this.moveSlots = this.baseMoveSlots.slice();
-			this.moveSlots[moveslot].pp = mimicPP;
-		} else {
-			this.moveSlots = this.baseMoveSlots.slice();
-		}
+		this.moveSlots = this.baseMoveSlots.slice();
 
 		this.transformed = false;
 		this.ability = this.baseAbility;
@@ -1488,10 +1434,6 @@ export class Pokemon {
 		if (!this.isActive) return false;
 		if (!this.item) return false;
 		if (!source) source = this;
-		if (this.battle.gen === 4) {
-			if (toID(this.ability) === 'multitype') return false;
-			if (source && toID(source.ability) === 'multitype') return false;
-		}
 		const item = this.getItem();
 		if (this.battle.runEvent('TakeItem', this, source, null, item)) {
 			this.item = '';
@@ -1552,7 +1494,7 @@ export class Pokemon {
 		}
 		this.ability = ability.id;
 		this.abilityData = {id: ability.id, target: this};
-		if (ability.id && this.battle.gen > 3) {
+		if (ability.id) {
 			this.battle.singleEvent('Start', ability, this.abilityData, this, source);
 		}
 		this.abilityOrder = this.battle.abilityOrder++;
@@ -1710,8 +1652,7 @@ export class Pokemon {
 	setType(newType: string | string[], enforce = false) {
 		// First type of Arceus, Silvally cannot be normally changed
 		if (!enforce) {
-			if ((this.battle.gen >= 5 && (this.species.num === 493 || this.species.num === 773)) ||
-				(this.battle.gen === 4 && this.hasAbility('multitype'))) {
+			if (this.species.num === 479 || this.species.num === 757) {
 				return false;
 			}
 		}
@@ -1735,12 +1676,12 @@ export class Pokemon {
 		const types = this.battle.runEvent('Type', this, null, null, this.types);
 		if (!excludeAdded && this.addedType) return types.concat(this.addedType);
 		if (types.length) return types;
-		return [this.battle.gen >= 5 ? 'Normal' : '???'];
+		return ['Normal'];
 	}
 
 	isGrounded(negateImmunity = false) {
 		if ('gravity' in this.battle.field.pseudoWeather) return true;
-		if ('ingrain' in this.volatiles && this.battle.gen >= 4) return true;
+		if ('ingrain' in this.volatiles) return true;
 		if ('smackdown' in this.volatiles) return true;
 		const item = (this.ignoringItem() ? '' : this.item);
 		if (item === 'ironball') return true;

@@ -83,7 +83,6 @@ export class Battle {
 	readonly sides: [Side, Side] | [Side, Side, Side, Side];
 	readonly prngSeed: PRNGSeed;
 	dex: ModdedDex;
-	gen: number;
 	ruleTable: Dex.RuleTable;
 	prng: PRNG;
 	rated: boolean | string;
@@ -147,7 +146,6 @@ export class Battle {
 		const format = options.format || Dex.getFormat(options.formatid, true);
 		this.format = format;
 		this.dex = Dex.forFormat(format);
-		this.gen = this.dex.gen;
 		this.ruleTable = this.dex.getRuleTable(format);
 
 		this.zMoveTable = {};
@@ -375,7 +373,7 @@ export class Battle {
 		for (const pokemon of actives) {
 			this.runEvent(eventid, pokemon, null, effect, relayVar);
 		}
-		if (eventid === 'Weather' && this.gen >= 7) {
+		if (eventid === 'Weather') {
 			// TODO: further research when updates happen
 			this.eachEvent('Update');
 		}
@@ -1260,9 +1258,7 @@ export class Battle {
 			}
 			if (!oldActive.switchCopyFlag && !isDrag) {
 				this.runEvent('BeforeSwitchOut', oldActive);
-				if (this.gen >= 5) {
-					this.eachEvent('Update');
-				}
+				this.eachEvent('Update');
 			}
 			if (!this.runEvent('SwitchOut', oldActive)) {
 				// Warning: DO NOT interrupt a switch-out if you just want to trap a pokemon.
@@ -1287,9 +1283,6 @@ export class Battle {
 			this.queue.cancelAction(oldActive);
 
 			let newMove = null;
-			if (this.gen === 4 && sourceEffect) {
-				newMove = oldActive.lastMove;
-			}
 			if (oldActive.switchCopyFlag) {
 				oldActive.switchCopyFlag = false;
 				pokemon.copyVolatileFrom(oldActive);
@@ -1315,12 +1308,11 @@ export class Battle {
 		}
 		this.runEvent('BeforeSwitchIn', pokemon);
 		this.add(isDrag ? 'drag' : 'switch', pokemon, pokemon.getDetails);
-		if (isDrag && this.gen === 2) pokemon.draggedIn = this.turn;
 		if (sourceEffect) this.log[this.log.length - 1] += `|[from]${sourceEffect.fullname}`;
 		pokemon.previouslySwitchedIn++;
 
 		this.queue.insertChoice({choice: 'runUnnerve', pokemon});
-		if (isDrag && this.gen >= 5) {
+		if (isDrag) {
 			// runSwitch happens immediately so that Mold Breaker can make hazards bypass Clear Body and Levitate
 			this.runSwitch(pokemon);
 		} else {
@@ -1332,20 +1324,12 @@ export class Battle {
 	runSwitch(pokemon: Pokemon) {
 		this.runEvent('Swap', pokemon);
 		this.runEvent('SwitchIn', pokemon);
-		if (this.gen <= 2 && !pokemon.side.faintedThisTurn && pokemon.draggedIn !== this.turn) {
-			this.runEvent('AfterSwitchInSelf', pokemon);
-		}
 		if (!pokemon.hp) return false;
 		pokemon.isStarted = true;
 		if (!pokemon.fainted) {
 			this.singleEvent('Start', pokemon.getAbility(), pokemon.abilityData, pokemon);
 			pokemon.abilityOrder = this.abilityOrder++;
 			this.singleEvent('Start', pokemon.getItem(), pokemon.itemData, pokemon);
-		}
-		if (this.gen === 4) {
-			for (const foeActive of pokemon.side.foe.active) {
-				foeActive.removeVolatile('substitutebroken');
-			}
 		}
 		pokemon.draggedIn = null;
 		return true;
@@ -1440,7 +1424,7 @@ export class Battle {
 				if (!pokemon.getItem().isBerry) pokemon.disableMove('stuffcheeks');
 
 				// If it was an illusion, it's not any more
-				if (pokemon.getLastAttackedBy() && this.gen >= 7) pokemon.knownType = true;
+				if (pokemon.getLastAttackedBy()) pokemon.knownType = true;
 
 				for (let i = pokemon.attackedBy.length - 1; i >= 0; i--) {
 					const attack = pokemon.attackedBy[i];
@@ -1451,17 +1435,15 @@ export class Battle {
 					}
 				}
 
-				if (this.gen >= 7) {
-					// In Gen 7, the real type of every Pokemon is visible to all players via the bottom screen while making choices
-					const seenPokemon = pokemon.illusion || pokemon;
-					const realTypeString = seenPokemon.getTypes(true).join('/');
-					if (realTypeString !== seenPokemon.apparentType) {
-						this.add('-start', pokemon, 'typechange', realTypeString, '[silent]');
-						seenPokemon.apparentType = realTypeString;
-						if (pokemon.addedType) {
-							// The typechange message removes the added type, so put it back
-							this.add('-start', pokemon, 'typeadd', pokemon.addedType, '[silent]');
-						}
+				// The real type of every Pokemon is visible to all players via the bottom screen while making choices
+				const seenPokemon = pokemon.illusion || pokemon;
+				const realTypeString = seenPokemon.getTypes(true).join('/');
+				if (realTypeString !== seenPokemon.apparentType) {
+					this.add('-start', pokemon, 'typechange', realTypeString, '[silent]');
+					seenPokemon.apparentType = realTypeString;
+					if (pokemon.addedType) {
+						// The typechange message removes the added type, so put it back
+						this.add('-start', pokemon, 'typeadd', pokemon.addedType, '[silent]');
 					}
 				}
 
@@ -1472,28 +1454,26 @@ export class Battle {
 				}
 				// canceling switches would leak information
 				// if a foe might have a trapping ability
-				if (this.gen > 2) {
-					for (const source of pokemon.side.foe.active) {
-						if (!source || source.fainted) continue;
-						const species = (source.illusion || source).species;
-						if (!species.abilities) continue;
-						for (const abilitySlot in species.abilities) {
-							const abilityName = species.abilities[abilitySlot as keyof Species['abilities']];
-							if (abilityName === source.ability) {
-								// pokemon event was already run above so we don't need
-								// to run it again.
-								continue;
-							}
-							const ruleTable = this.ruleTable;
-							if ((ruleTable.has('+hackmons') || !ruleTable.has('obtainableabilities')) && !this.format.team) {
-								// hackmons format
-								continue;
-							}
-							const ability = this.dex.getAbility(abilityName);
-							if (ruleTable.has('-ability:' + ability.id)) continue;
-							if (pokemon.knownType && !this.dex.getImmunity('trapped', pokemon)) continue;
-							this.singleEvent('FoeMaybeTrapPokemon', ability, {}, pokemon, source);
+				for (const source of pokemon.side.foe.active) {
+					if (!source || source.fainted) continue;
+					const species = (source.illusion || source).species;
+					if (!species.abilities) continue;
+					for (const abilitySlot in species.abilities) {
+						const abilityName = species.abilities[abilitySlot as keyof Species['abilities']];
+						if (abilityName === source.ability) {
+							// pokemon event was already run above so we don't need
+							// to run it again.
+							continue;
 						}
+						const ruleTable = this.ruleTable;
+						if ((ruleTable.has('+hackmons') || !ruleTable.has('obtainableabilities')) && !this.format.team) {
+							// hackmons format
+							continue;
+						}
+						const ability = this.dex.getAbility(abilityName);
+						if (ruleTable.has('-ability:' + ability.id)) continue;
+						if (pokemon.knownType && !this.dex.getImmunity('trapped', pokemon)) continue;
+						this.singleEvent('FoeMaybeTrapPokemon', ability, {}, pokemon, source);
 					}
 				}
 
@@ -1609,7 +1589,6 @@ export class Battle {
 		}
 
 		this.add('gametype', this.gameType);
-		this.add('gen', this.gen);
 
 		const format = this.format;
 
@@ -1678,7 +1657,7 @@ export class Battle {
 		}
 		if (!target || !target.hp) return 0;
 		if (!target.isActive) return false;
-		if (this.gen > 5 && !target.side.foe.pokemonLeft) return false;
+		if (!target.side.foe.pokemonLeft) return false;
 		boost = this.runEvent('Boost', target, source, effect, {...boost});
 		let success = null;
 		let boosted = isSecondary;
@@ -1697,10 +1676,6 @@ export class Battle {
 				switch (effect?.id) {
 				case 'bellydrum':
 					this.add('-setboost', target, 'atk', target.boosts['atk'], '[from] move: Belly Drum');
-					break;
-				case 'bellydrum2':
-					this.add(msg, target, boostName, boostBy, '[silent]');
-					this.hint("In Gen 2, Belly Drum boosts by 2 when it fails.");
 					break;
 				case 'zpower':
 					this.add(msg, target, boostName, boostBy, '[zeffect]');
@@ -1772,13 +1747,6 @@ export class Battle {
 			}
 			if (targetDamage !== 0) targetDamage = this.clampIntRange(targetDamage, 1);
 
-			if (this.gen <= 1) {
-				if (this.dex.currentMod === 'stadium' ||
-					!['recoil', 'drain'].includes(effect.id) && effect.effectType !== 'Status') {
-					this.lastDamage = targetDamage;
-				}
-			}
-
 			retVals[i] = targetDamage = target.damage(targetDamage, source, effect);
 			if (targetDamage !== 0) target.hurtThisTurn = true;
 			if (source && effect.effectType === 'Move') source.lastDamage = targetDamage;
@@ -1806,17 +1774,7 @@ export class Battle {
 			}
 
 			if (targetDamage && effect.effectType === 'Move') {
-				if (this.gen <= 1 && effect.recoil && source) {
-					if (this.dex.currentMod !== 'stadium' || target.hp > 0) {
-						const amount = this.clampIntRange(Math.floor(targetDamage * effect.recoil[0] / effect.recoil[1]), 1);
-						this.damage(amount, source, target, 'recoil');
-					}
-				}
-				if (this.gen <= 4 && effect.drain && source) {
-					const amount = this.clampIntRange(Math.floor(targetDamage * effect.drain[0] / effect.drain[1]), 1);
-					this.heal(amount, source, target, 'drain');
-				}
-				if (this.gen > 4 && effect.drain && source) {
+				if (effect.drain && source) {
 					const amount = Math.round(targetDamage * effect.drain[0] / effect.drain[1]);
 					this.heal(amount, source, target, 'drain');
 				}
@@ -1830,10 +1788,6 @@ export class Battle {
 				if (target.hp <= 0) {
 					this.debug('instafaint: ' + this.faintQueue.map(entry => entry.target.name));
 					this.faintMessages(true);
-					if (this.gen <= 2) {
-						target.faint();
-						if (this.gen <= 1) this.queue.clear();
-					}
 				}
 			}
 		}
@@ -1864,26 +1818,6 @@ export class Battle {
 		damage = this.clampIntRange(damage, 1);
 
 		if (typeof effect === 'string' || !effect) effect = this.dex.getEffectByID((effect || '') as ID);
-
-		// In Gen 1 BUT NOT STADIUM, Substitute also takes confusion and HJK recoil damage
-		if (this.gen <= 1 && this.dex.currentMod !== 'stadium' &&
-			['confusion', 'jumpkick', 'highjumpkick'].includes(effect.id) && target.volatiles['substitute']) {
-			const hint = "In Gen 1, if a Pokemon with a Substitute hurts itself due to confusion or Jump Kick/Hi Jump Kick recoil and the target";
-			if (source?.volatiles['substitute']) {
-				source.volatiles['substitute'].hp -= damage;
-				if (source.volatiles['substitute'].hp <= 0) {
-					source.removeVolatile('substitute');
-					source.subFainted = true;
-				} else {
-					this.add('-activate', source, 'Substitute', '[damage]');
-				}
-				this.hint(hint + " has a Substitute, the target's Substitute takes the damage.");
-				return damage;
-			} else {
-				this.hint(hint + " does not have a Substitute there is no damage dealt.");
-				return 0;
-			}
-		}
 
 		damage = target.damage(damage, source, effect);
 		switch (effect.id) {
@@ -2077,17 +2011,8 @@ export class Battle {
 
 		let critMult;
 		let critRatio = this.runEvent('ModifyCritRatio', pokemon, target, move, move.critRatio || 0);
-		if (this.gen <= 5) {
-			critRatio = this.clampIntRange(critRatio, 0, 5);
-			critMult = [0, 16, 8, 4, 3, 2];
-		} else {
-			critRatio = this.clampIntRange(critRatio, 0, 4);
-			if (this.gen === 6) {
-				critMult = [0, 16, 8, 2, 1];
-			} else {
-				critMult = [0, 24, 8, 2, 1];
-			}
-		}
+		critRatio = this.clampIntRange(critRatio, 0, 4);
+		critMult = [0, 16, 8, 2, 1];
 
 		const moveHit = target.getMoveHitData(move);
 		moveHit.crit = move.willCrit || false;
@@ -2169,10 +2094,6 @@ export class Battle {
 		attack = this.runEvent('Modify' + statTable[attackStat], attacker, defender, move, attack);
 		defense = this.runEvent('Modify' + statTable[defenseStat], defender, attacker, move, defense);
 
-		if (this.gen <= 4 && ['explosion', 'selfdestruct'].includes(move.id) && defenseStat === 'def') {
-			defense = this.clampIntRange(Math.floor(defense / 2), 1);
-		}
-
 		const tr = this.trunc;
 
 		// int(int(int(2 * L / 5 + 2) * A * P / D) / 50);
@@ -2204,7 +2125,7 @@ export class Battle {
 		// crit - not a modifier
 		const isCrit = target.getMoveHitData(move).crit;
 		if (isCrit) {
-			baseDamage = tr(baseDamage * (move.critModifier || (this.gen >= 6 ? 1.5 : 2)));
+			baseDamage = tr(baseDamage * (move.critModifier || 1.5));
 		}
 
 		// random factor - also not a modifier
@@ -2213,9 +2134,6 @@ export class Battle {
 		// STAB
 		if (move.forceSTAB || (type !== '???' && pokemon.hasType(type))) {
 			// The "???" type never gets STAB
-			// Not even if you Roost in Gen 4 and somehow manage to use
-			// Struggle in the same turn.
-			// (On second thought, it might be easier to get a MissingNo.)
 			baseDamage = this.modify(baseDamage, move.stab || 1.5);
 		}
 		// types
@@ -2239,15 +2157,6 @@ export class Battle {
 
 		if (isCrit && !suppressMessages) this.add('-crit', target);
 
-		if (pokemon.status === 'brn' && move.category === 'Physical' && !pokemon.hasAbility('guts')) {
-			if (this.gen < 6 || move.id !== 'facade') {
-				baseDamage = this.modify(baseDamage, 0.5);
-			}
-		}
-
-		// Generation 5, but nothing later, sets damage to 1 before the final damage modifiers
-		if (this.gen === 5 && !baseDamage) baseDamage = 1;
-
 		// Final modifier. Modifiers that modify damage after min damage check, such as Life Orb.
 		baseDamage = this.runEvent('ModifyDamage', pokemon, target, move, baseDamage);
 
@@ -2257,7 +2166,7 @@ export class Battle {
 		}
 
 		// Generation 6-7 moves the check for minimum 1 damage after the final modifier...
-		if (this.gen !== 5 && !baseDamage) return 1;
+		if (!baseDamage) return 1;
 
 		// ...but 16-bit truncation happens even later, and can truncate to 0
 		return tr(baseDamage, 16);
@@ -2432,23 +2341,6 @@ export class Battle {
 			}
 		}
 
-		if (this.gen <= 1) {
-			// in gen 1, fainting skips the rest of the turn
-			// residuals don't exist in gen 1
-			this.queue.clear();
-		} else if (this.gen <= 3 && this.gameType === 'singles') {
-			// in gen 3 or earlier, fainting in singles skips to residuals
-			for (const pokemon of this.getAllActive()) {
-				if (this.gen <= 2) {
-					// in gen 2, fainting skips moves only
-					this.queue.cancelMove(pokemon);
-				} else {
-					// in gen 3, fainting skips all moves and switches
-					this.queue.cancelAction(pokemon);
-				}
-			}
-		}
-
 		let team1PokemonLeft = this.sides[0].pokemonLeft;
 		let team2PokemonLeft = this.sides[1].pokemonLeft;
 		const team3PokemonLeft = this.gameType === 'free-for-all' && this.sides[2]!.pokemonLeft;
@@ -2458,7 +2350,7 @@ export class Battle {
 			team2PokemonLeft = this.sides.reduce((total, side) => total + (side.n % 2 === 1 ? side.pokemonLeft : 0), 0);
 		}
 		if (!team1PokemonLeft && !team2PokemonLeft && !team3PokemonLeft && !team4PokemonLeft) {
-			this.win(faintData && this.gen > 4 ? faintData.target.side : null);
+			this.win(faintData && faintData.target.side);
 			return true;
 		}
 		if (!team2PokemonLeft && !team3PokemonLeft && !team4PokemonLeft) {
@@ -2503,8 +2395,7 @@ export class Battle {
 			priority = this.singleEvent('ModifyPriority', move, null, action.pokemon, null, null, priority);
 			priority = this.runEvent('ModifyPriority', action.pokemon, null, move, priority);
 			action.priority = priority + action.fractionalPriority;
-			// In Gen 6, Quick Guard blocks moves with artificially enhanced priority.
-			if (this.gen > 5) action.move.priority = priority;
+			action.move.priority = priority;
 		}
 
 		if (!action.pokemon) {
@@ -2587,17 +2478,8 @@ export class Battle {
 			}
 			if (this.switchIn(action.target, action.pokemon.position, action.sourceEffect) === 'pursuitfaint') {
 				// a pokemon fainted from Pursuit before it could switch
-				if (this.gen <= 4) {
-					// in gen 2-4, the switch still happens
-					this.hint("Previously chosen switches continue in Gen 2-4 after a Pursuit target faints.");
-					action.priority = -101;
-					this.queue.unshift(action);
-					break;
-				} else {
-					// in gen 5+, the switch is cancelled
-					this.hint("A Pokemon can't switch between when it runs out of HP and when it faints");
-					break;
-				}
+				this.hint("A Pokemon can't switch between when it runs out of HP and when it faints");
+				break;
 			}
 			break;
 		case 'runUnnerve':
@@ -2655,13 +2537,9 @@ export class Battle {
 
 		// switching (fainted pokemon, U-turn, Baton Pass, etc)
 
-		if (!this.queue.peek() || (this.gen <= 3 && ['move', 'residual'].includes(this.queue.peek()!.choice))) {
-			// in gen 3 or earlier, switching in fainted pokemon is done after
-			// every move, rather than only at the end of the turn.
-			this.checkFainted();
-		} else if (action.choice === 'megaEvo' && this.gen === 7) {
+		if (action.choice === 'megaEvo') {
 			this.eachEvent('Update');
-			// In Gen 7, the action order is recalculated for a Pokémon that mega evolves.
+			// The action order is recalculated for a Pokémon that mega evolves.
 			for (const [i, queuedAction] of this.queue.list.entries()) {
 				if (queuedAction.pokemon === action.pokemon && queuedAction.choice === 'move') {
 					this.queue.list.splice(i, 1);
@@ -2675,9 +2553,7 @@ export class Battle {
 			return false;
 		}
 
-		if (this.gen >= 5) {
-			this.eachEvent('Update');
-		}
+		this.eachEvent('Update');
 
 		if (action.choice === 'runSwitch') {
 			const pokemon = action.pokemon;
@@ -2706,10 +2582,8 @@ export class Battle {
 			}
 		}
 
-		if (this.gen < 5) this.eachEvent('Update');
-
-		if (this.gen >= 8 && this.queue.peek()?.choice === 'move') {
-			// In gen 8, speed is updated dynamically so update the queue's speed properties and sort it.
+		if (this.queue.peek()?.choice === 'move') {
+			// Speed is updated dynamically so update the queue's speed properties and sort it.
 			this.updateSpeed();
 			for (const queueAction of this.queue.list) {
 				if (queueAction.pokemon) this.getActionSpeed(queueAction);

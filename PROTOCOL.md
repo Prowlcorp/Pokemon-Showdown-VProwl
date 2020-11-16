@@ -430,7 +430,7 @@ challenges.
 if you haven't.
 
 If you are challenging someone, `challengeTo` will be in the format:
-`{"to":"player1","format":"gen7randombattle"}`.
+`{"to":"player1","format":"randombattle"}`.
 
 To challenge someone, send:
 
@@ -524,7 +524,7 @@ NICKNAME|SPECIES|ITEM|ABILITY|MOVES|NATURE|EVS|GENDER|IVS|SHINY|LEVEL|HAPPINESS,
 
 - `MOVES` is a comma-separated list of move IDs.
 
-- `NATURE` left blank means Serious, except in Gen 1-2, where it means no Nature.
+- `NATURE` left blank means Serious
 
 - `EVS` and `IVS` are comma-separated in standard order:
   HP, Atk, Def, SpA, SpD, Spe. EVs left blank are 0, IVs left blank are 31.

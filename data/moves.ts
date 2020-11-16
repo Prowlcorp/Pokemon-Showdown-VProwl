@@ -12936,7 +12936,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (move.realMove) continue;
 				if (move.isZ) continue;
 				if (effect.noMetronome!.includes(move.name)) continue;
-				if (this.dex.getMove(id).gen > this.gen) continue;
 				moves.push(move);
 			}
 			let randomMove = '';
@@ -13355,7 +13354,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 	},
 	mistyexplosion: {
 		accuracy: 100,
-		basePower: 100,
+		basePower: 150,
 		category: "Special",
 		name: "Misty Explosion",
 		pp: 5,
@@ -16473,7 +16472,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onHit(target, source) {
-			if (source.species && (source.species.num === 493 || source.species.num === 773)) return false;
+			if (source.species && (source.species.num === 479 || source.species.num === 757)) return false;
 			let newBaseTypes = target.getTypes(true).filter(type => type !== '???');
 			if (!newBaseTypes.length) {
 				if (target.addedType) {
@@ -16989,7 +16988,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (target.ability === source.ability) return false;
 
 			const additionalBannedTargetAbilities = [
-				// Zen Mode included here for compatability with Gen 5-6
 				'flowergift', 'forecast', 'hungerswitch', 'illusion', 'imposter', 'neutralizinggas', 'powerofalchemy', 'receiver', 'trace', 'wonderguard', 'zenmode',
 				'bijuuboost', 'crisisevolution', 'flowergift', 'forecast', 'illusion', 'imposter', 'misdirection', 'neutralizinggas', 'powerofalchemy', 'receiver', 'shadowstrikesealed', 'trace', 'wonderguard'
 			];
@@ -20137,7 +20135,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				this.add('-end', target, 'Stockpile');
 				if (this.effectData.def !== this.effectData.layers * -1 || this.effectData.spd !== this.effectData.layers * -1) {
-					this.hint("In Gen 7, Stockpile keeps track of how many times it successfully altered each stat individually.");
+					this.hint("Stockpile keeps track of how many times it successfully altered each stat individually.");
 				}
 			},
 		},

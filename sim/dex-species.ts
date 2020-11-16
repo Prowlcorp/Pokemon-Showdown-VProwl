@@ -86,10 +86,6 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	 * List of forme speciesNames in the order they appear in the game data -
 	 * the union of baseSpecies, otherFormes and cosmeticFormes. Appears only on
 	 * the base species forme.
-	 *
-	 * A species's alternate formeindex may change from generation to generation -
-	 * the forme with index N in Gen A is not guaranteed to be the same forme as the
-	 * forme with index in Gen B.
 	 */
 	readonly formeOrder?: string[];
 	/**
@@ -143,11 +139,6 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	readonly heightm: number;
 	/** Color. */
 	readonly color: string;
-	/**
-	 * Is it only possible to get the hidden ability on a male pokemon?
-	 * This is mainly relevant to Gen 5.
-	 */
-	readonly maleOnlyHidden: boolean;
 	/** True if a pokemon is mega. */
 	readonly isMega?: boolean;
 	/** True if a pokemon is primal. */
@@ -227,36 +218,11 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.weighthg = this.weightkg * 10;
 		this.heightm = data.heightm || 0;
 		this.color = data.color || '';
-		this.maleOnlyHidden = !!data.maleOnlyHidden;
 		this.maxHP = data.maxHP || undefined;
 		this.isMega = !!(this.forme && ['Mega', 'Mega-X', 'Mega-Y'].includes(this.forme)) || undefined;
 		this.battleOnly = data.battleOnly || (this.isMega ? this.baseSpecies : undefined);
 		this.changesFrom = data.changesFrom ||
 			(this.battleOnly !== this.baseSpecies ? this.battleOnly : this.baseSpecies);
 		if (Array.isArray(data.changesFrom)) this.changesFrom = data.changesFrom[0];
-
-		if (!this.gen && this.num >= 1) {
-			if (this.num >= 810 || ['Konor'].includes(this.forme)) {
-				this.gen = 8;
-			} else if (this.num >= 722 || this.forme.startsWith('Alola')) {
-				this.gen = 7;
-			} else if (this.forme === 'Primal') {
-				this.gen = 6;
-				this.isPrimal = true;
-				this.battleOnly = this.baseSpecies;
-			} else if (this.num >= 650 || this.isMega) {
-				this.gen = 6;
-			} else if (this.num >= 494) {
-				this.gen = 5;
-			} else if (this.num >= 387) {
-				this.gen = 4;
-			} else if (this.num >= 252) {
-				this.gen = 3;
-			} else if (this.num >= 152) {
-				this.gen = 2;
-			} else {
-				this.gen = 1;
-			}
-		}
 	}
 }

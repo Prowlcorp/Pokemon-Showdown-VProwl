@@ -151,10 +151,7 @@ export const commands: ChatCommands = {
 		if (!species.exists) {
 			return this.errorReply(`Error: Pok\u00e9mon '${args[0].trim()}' does not exist.`);
 		}
-		let formatName = dex.getFormat(`gen${dex.gen}randombattle`).name;
-		if (!species.randomBattleMoves) {
-			return this.errorReply(`Error: No moves data found for ${species.name}${`gen${dex.gen}` in GEN_NAMES ? ` in ${GEN_NAMES[`gen${dex.gen}`]}` : ``}.`);
-		}
+		let formatName = dex.getFormat(`randombattle`).name;
 		const moves: string[] = [];
 		// Done because species.randomBattleMoves is readonly
 		for (const move of species.randomBattleMoves) {
@@ -164,7 +161,7 @@ export const commands: ChatCommands = {
 		this.sendReplyBox(`<span style="color:#999999;">Moves for ${species.name} in ${formatName}:</span><br />${m.join(`, `)}`);
 	},
 	randombattleshelp: [
-		`/randombattles OR /randbats [pokemon], [gen] - Displays a Pok\u00e9mon's Random Battle Moves. Defaults to Gen 8. If used in a battle, defaults to the gen of that battle.`,
+		`/randombattles OR /randbats [pokemon] - Displays a Pok\u00e9mon's Random Battle Moves.`,
 	],
 
 	randdubs: 'randomdoublesbattle',
@@ -188,14 +185,9 @@ export const commands: ChatCommands = {
 			}
 		}
 		const species = dex.getSpecies(args[0]);
-		const formatName = dex.gen > 6 ? dex.getFormat(`gen${dex.gen}randomdoublesbattle`).name : dex.gen === 6 ?
-			'[Gen 6] Random Doubles Battle' : dex.gen === 5 ?
-				'[Gen 5] Random Doubles Battle' : '[Gen 4] Random Doubles Battle';
+		const formatName = dex.getFormat(`randomdoublesbattle`).name;
 		if (!species.exists) {
 			return this.errorReply(`Error: Pok\u00e9mon '${args[0].trim()}' does not exist.`);
-		}
-		if (!species.randomDoubleBattleMoves) {
-			return this.errorReply(`Error: No doubles moves data found for ${species.name}${`gen${dex.gen}` in GEN_NAMES ? ` in ${GEN_NAMES[`gen${dex.gen}`]}` : ``}.`);
 		}
 		const moves: string[] = [];
 		// Done because species.randomDoubleBattleMoves is readonly
@@ -206,7 +198,7 @@ export const commands: ChatCommands = {
 		this.sendReplyBox(`<span style="color:#999999;">Doubles moves for ${species.name} in ${formatName}:</span><br />${m.join(`, `)}`);
 	},
 	randomdoublesbattlehelp: [
-		`/randomdoublesbattle OR /randdubs [pokemon], [gen] - Displays a Pok\u00e9mon's Random Doubles Battle Moves. Supports Gens 4-8. Defaults to Gen 8. If used in a battle, defaults to that gen.`,
+		`/randomdoublesbattle OR /randdubs [pokemon]- Displays a Pok\u00e9mon's Random Doubles Battle Moves.`,
 	],
 
 	bssfactory: 'battlefactory',
@@ -221,10 +213,7 @@ export const commands: ChatCommands = {
 			if (!species.exists) {
 				return this.errorReply(`Error: Pok\u00e9mon '${args[0].trim()}' not found.`);
 			}
-			let mod = 'gen7';
-			// There is only [Gen 7] BSS Factory right now
-			if (args[1] && toID(args[1]) in Dex.dexes && Dex.dexes[toID(args[1])].gen === 7) mod = toID(args[1]);
-			const bssSets = battleFactorySets(species, null, mod, true);
+			const bssSets = battleFactorySets(species, null, true);
 			if (!bssSets) return this.parse(`/help battlefactory`);
 			if (typeof bssSets !== 'string') {
 				return this.errorReply(`Error: ${bssSets.e}`);
@@ -266,8 +255,7 @@ export const commands: ChatCommands = {
 		}
 	},
 	battlefactoryhelp: [
-		`/battlefactory [pokemon], [tier], [gen] - Displays a Pok\u00e9mon's Battle Factory sets. Supports Gens 6-7. Defaults to Gen 7. If no tier is provided, defaults to OU.`,
-		`- Supported tiers: OU, Ubers, UU, RU, NU, PU, Monotype (Gen 7 only), LC (Gen 7 only)`,
-		`/bssfactory [pokemon], [gen] - Displays a Pok\u00e9mon's BSS Factory sets. Supports Gen 7. Defaults to Gen 7.`,
+		`/battlefactory [pokemon] - Displays a Pok\u00e9mon's Battle Factory sets.`,
+		`/bssfactory [pokemon] - Displays a Pok\u00e9mon's BSS Factory sets.`,
 	],
 };

@@ -118,7 +118,7 @@ export interface ActionChoice {
 }
 
 /**
- * Kind of like a priority queue, although not sorted mid-turn in Gen 1-7.
+ * Kind of like a priority queue, although not sorted.
  *
  * Sort order is documented in `BattleQueue.comparePriority`.
  */
@@ -215,7 +215,7 @@ export class BattleQueue {
 			}
 		}
 
-		const deferPriority = this.battle.gen === 7 && action.mega && action.mega !== 'done';
+		const deferPriority = action.mega && action.mega !== 'done';
 		if (action.move) {
 			let target = null;
 			action.move = this.battle.dex.getActiveMove(action.move);

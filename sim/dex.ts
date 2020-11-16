@@ -41,8 +41,6 @@ import {Format, RuleTable, mergeFormatLists, ComplexBan, ComplexTeamBan} from '.
 import {PRNG, PRNGSeed} from './prng';
 import {Utils} from '../lib/utils';
 
-const BASE_MOD = 'gen8' as ID;
-const DEFAULT_MOD = BASE_MOD;
 const DATA_DIR = path.resolve(__dirname, '../.data-dist');
 const MODS_DIR = path.resolve(__dirname, '../.data-dist/mods');
 const MAIN_FORMATS = path.resolve(__dirname, '../.config-dist/formats');
@@ -124,7 +122,6 @@ export class ModdedDex {
 	readonly natureCache = new Map<ID, Nature>();
 	readonly typeCache = new Map<string, TypeInfo>();
 
-	gen = 0;
 	parentMod = '';
 	modsLoaded = false;
 
@@ -146,7 +143,6 @@ export class ModdedDex {
 			const original = dexes['base'].mod(mod).includeData();
 			this.currentMod = original.currentMod;
 
-			this.gen = original.gen;
 			this.parentMod = original.parentMod;
 
 			this.abilityCache = original.abilityCache;
@@ -181,11 +177,6 @@ export class ModdedDex {
 	mod(mod: string | undefined): ModdedDex {
 		if (!dexes['base'].modsLoaded) dexes['base'].includeMods();
 		return dexes[mod || 'base'];
-	}
-
-	forGen(gen: number) {
-		if (!gen) return this;
-		return this.mod(`gen${gen}`);
 	}
 
 	forFormat(format: Format | string): ModdedDex {
@@ -373,10 +364,9 @@ export class ModdedDex {
 					if (!(key in species)) species[key] = baseSpeciesStatuses[key];
 				}
 			}
-			species.nfe = species.evos.length && this.getSpecies(species.evos[0]).gen <= this.gen;
+			species.nfe = species.evos.length;
 			species.canHatch = species.canHatch ||
 				(!['Ditto', 'Undiscovered'].includes(species.eggGroups[0]) && !species.prevo && species.name !== 'Manaphy');
-			if (this.gen === 1) species.bst -= species.baseStats.spd;
 		}
 		if (species.exists) this.speciesCache.set(id, species);
 		return species;
@@ -406,17 +396,6 @@ export class ModdedDex {
 			desc: '',
 			shortDesc: '',
 		};
-		for (let i = this.gen; i < dexes['base'].gen; i++) {
-			const curDesc = entry[`gen${i}`]?.desc;
-			const curShortDesc = entry[`gen${i}`]?.shortDesc;
-			if (!descs.desc && curDesc) {
-				descs.desc = curDesc;
-			}
-			if (!descs.shortDesc && curShortDesc) {
-				descs.shortDesc = curShortDesc;
-			}
-			if (descs.desc && descs.shortDesc) break;
-		}
 		if (!descs.shortDesc) descs.shortDesc = entry.shortDesc || '';
 		if (!descs.desc) descs.desc = entry.desc || descs.shortDesc;
 		return descs;
@@ -689,7 +668,7 @@ export class ModdedDex {
 		];
 		const tr = this.trunc;
 		const stats = {hp: 31, atk: 31, def: 31, spe: 31, spa: 31, spd: 31};
-		// Hidden Power check for Gen 3 onwards
+		// Hidden Power check
 		let hpTypeX = 0;
 		let hpPowerX = 0;
 		let i = 1;
@@ -700,8 +679,7 @@ export class ModdedDex {
 		}
 		return {
 			type: hpTypes[tr(hpTypeX * 15 / 63)],
-			// After Gen 6, Hidden Power is always 60 base power
-			power: (this.gen && this.gen < 6) ? tr(hpPowerX * 40 / 63) + 30 : 60,
+			power: 60,
 		};
 	}
 
@@ -731,9 +709,6 @@ export class ModdedDex {
 		}
 		if (format.timer) {
 			ruleTable.timer = [format.timer, format.name];
-		}
-		if (format.minSourceGen) {
-			ruleTable.minSourceGen = [format.minSourceGen, format.name];
 		}
 
 		// apply rule repeals before other rules
@@ -822,17 +797,6 @@ export class ModdedDex {
 					);
 				}
 				ruleTable.timer = subRuleTable.timer;
-			}
-			// minSourceGen is automatically ignored if higher than current gen
-			// this helps the common situation where Standard has a minSourceGen in the
-			// latest gen but not in any past gens
-			if (subRuleTable.minSourceGen && subRuleTable.minSourceGen[0] <= this.gen) {
-				if (ruleTable.minSourceGen) {
-					throw new Error(
-						`"${format.name}" has conflicting minSourceGen from "${ruleTable.minSourceGen[1]}" and "${subRuleTable.minSourceGen[1]}"`
-					);
-				}
-				ruleTable.minSourceGen = subRuleTable.minSourceGen;
 			}
 		}
 
@@ -973,7 +937,7 @@ export class ModdedDex {
 		for (const table of searchIn) {
 			// @ts-ignore
 			const res: AnyObject = this[searchFunctions[table]](target);
-			if (res.exists && res.gen <= this.gen) {
+			if (res.exists) {
 				searchResults.push({
 					isInexact,
 					searchType: searchTypes[table],
@@ -1383,9 +1347,6 @@ export class ModdedDex {
 			dataCache['Aliases'] = parentDex.data['Aliases'];
 		}
 
-		// Flag the generation. Required for team validator.
-		this.gen = dataCache.Scripts.gen;
-		if (!this.gen) throw new Error(`Mod ${this.currentMod} needs a generation number in scripts.js`);
 		this.dataCache = dataCache as DexTableData;
 
 		// Execute initialization script.

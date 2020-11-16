@@ -120,9 +120,6 @@ export class Side {
 			mega: false,
 			ultra: false,
 		};
-
-		// old-gens
-		this.lastMove = null;
 	}
 
 	toJSON(): AnyObject {
@@ -432,8 +429,6 @@ export class Side {
 			return true;
 		} else if (!moves.length && !zMove) {
 			// Override action and use Struggle if there are no enabled moves with PP
-			// Gen 4 and earlier announce a Pokemon has no moves left before the turn begins, and only to that player's side.
-			if (this.battle.gen <= 4) this.send('-activate', pokemon, 'move: Struggle');
 			moveid = 'struggle';
 		} else if (!zMove) {
 			// Check for disabled moves

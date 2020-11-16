@@ -20,7 +20,7 @@ export interface MultiRandomRunnerOptions extends RunnerOptions {
 
 export class MultiRandomRunner {
 	static readonly FORMATS = [
-		'gen7randombattle', 'gen7randomdoublesbattle', 'gen7battlefactory',
+		'randombattle', 'randomdoublesbattle', 'battlefactory',
 	];
 
 	private readonly options: Partial<RunnerOptions>;

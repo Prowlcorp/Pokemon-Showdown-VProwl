@@ -33,7 +33,7 @@ type Referable = Battle | Field | Side | Pokemon | Condition | Ability | Item | 
 // need special treatment from these sets are then handled manually.
 
 const BATTLE = new Set([
-	'dex', 'gen', 'ruleTable', 'id', 'log', 'inherit', 'format', 'zMoveTable', 'teamGenerator',
+	'dex', 'ruleTable', 'id', 'log', 'inherit', 'format', 'zMoveTable', 'teamGenerator',
 	'HIT_SUBSTITUTE', 'NOT_FAIL', 'FAIL', 'SILENT_FAIL', 'field', 'sides', 'prng', 'hints',
 	'deserialized', 'queue',
 ]);

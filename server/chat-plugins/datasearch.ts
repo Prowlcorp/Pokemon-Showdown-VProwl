@@ -415,8 +415,6 @@ export const commands: ChatCommands = {
 		`!learn [ruleset], [pokemon], [move, move, ...] - Show everyone that information. Requires: + % @ # &`,
 		`Specifying a ruleset is entirely optional. The ruleset can be a format, a generation (e.g.: gen3) or 'pentagon'. A value of 'pentagon' indicates that trading from previous generations is not allowed.`,
 		`/learn5 displays how the Pok\u00e9mon can learn the given moves at level 5, if it can at all.`,
-		`/learnall displays all of the possible fathers for egg moves.`,
-		`/learn can also be prefixed by a generation acronym (e.g.: /dpplearn) to indicate which generation is used. Valid options are: rby gsc adv dpp bw2 oras usum`,
 	],
 };
 
@@ -791,7 +789,6 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 			(fullyEvolvedSearch === false && species.nfe)
 		);
 		if (
-			species.gen <= maxGen &&
 			megaSearchResult &&
 			fullyEvolvedSearchResult
 		) {
@@ -810,10 +807,6 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 		if (alts.skip) continue;
 		for (const mon in dex) {
 			let matched = false;
-			if (alts.gens && Object.keys(alts.gens).length) {
-				if (alts.gens[dex[mon].gen]) continue;
-				if (Object.values(alts.gens).includes(false) && alts.gens[dex[mon].gen] !== false) continue;
-			}
 
 			if (alts.colors && Object.keys(alts.colors).length) {
 				if (alts.colors[dex[mon].color]) continue;
@@ -883,8 +876,6 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 					monStat = dex[mon].weighthg / 10;
 				} else if (stat === 'height') {
 					monStat = dex[mon].heightm;
-				} else if (stat === 'gen') {
-					monStat = dex[mon].gen;
 				} else {
 					monStat = dex[mon].baseStats[stat as StatName];
 				}
@@ -912,7 +903,7 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 			const validator = TeamValidator.get(nationalSearch ? `gen8nationaldexag` : `gen${maxGen}ou`);
 			const pokemonSource = validator.allSources();
 			for (const move of Object.keys(alts.moves).map(x => Dex.getMove(x))) {
-				if (move.gen <= maxGen && !validator.checkLearnset(move, dex[mon], pokemonSource) === alts.moves[move.id]) {
+				if (!validator.checkLearnset(move, dex[mon], pokemonSource) === alts.moves[move.id]) {
 					matched = true;
 					break;
 				}
@@ -957,9 +948,6 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 				} else if (stat === 'height') {
 					monStat1 = mon1.heightm;
 					monStat2 = mon2.heightm;
-				} else if (stat === 'gen') {
-					monStat1 = mon1.gen;
-					monStat2 = mon2.gen;
 				} else {
 					monStat1 = mon1.baseStats[stat as StatName];
 					monStat2 = mon2.baseStats[stat as StatName];
@@ -1413,9 +1401,7 @@ function runMovesearch(target: string, cmd: string, canAll: boolean, message: st
 	const dex: {[moveid: string]: Move} = {};
 	for (const moveid of validMoves) {
 		const move = mod.getMove(moveid);
-		if (move.gen <= maxGen) {
-			dex[moveid] = move;
-		}
+		dex[moveid] = move;
 	}
 
 	for (const alts of searches) {
@@ -1474,10 +1460,6 @@ function runMovesearch(target: string, cmd: string, canAll: boolean, message: st
 				}
 			}
 			if (matched) continue;
-			if (Object.keys(alts.gens).length) {
-				if (alts.gens[String(move.gen)]) continue;
-				if (Object.values(alts.gens).includes(false) && alts.gens[String(move.gen)] !== false) continue;
-			}
 			for (const recoveryType in alts.recovery) {
 				let hasRecovery = false;
 				if (recoveryType === "recovery") {
@@ -1793,7 +1775,7 @@ function runItemsearch(target: string, cmd: string, canAll: boolean, message: st
 
 		for (const n in dex.data.Items) {
 			const item = dex.getItem(n);
-			if (!item.fling || (gen && item.gen !== gen) || (maxGen && item.gen <= maxGen)) continue;
+			if (!item.fling) continue;
 
 			if (basePower && effect) {
 				if (item.fling.basePower === basePower &&
@@ -1825,7 +1807,7 @@ function runItemsearch(target: string, cmd: string, canAll: boolean, message: st
 
 		for (const n in dex.data.Items) {
 			const item = dex.getItem(n);
-			if (!item.isBerry || !item.naturalGift || (gen && item.gen !== gen) || (maxGen && item.gen <= maxGen)) continue;
+			if (!item.isBerry || !item.naturalGift) continue;
 
 			if (basePower && type) {
 				if (item.naturalGift.basePower === basePower && item.naturalGift.type === type) foundItems.push(item.name);
@@ -1867,7 +1849,7 @@ function runItemsearch(target: string, cmd: string, canAll: boolean, message: st
 				}
 			}
 
-			if (matched >= (searchedWords.length * 3 / 5) && (!maxGen || item.gen <= maxGen) && (!gen || item.gen === gen)) {
+			if (matched >= (searchedWords.length * 3 / 5)) {
 				if (matched === bestMatched) {
 					foundItems.push(item.name);
 				} else if (matched > bestMatched) {
@@ -2016,7 +1998,7 @@ function runAbilitysearch(target: string, cmd: string, canAll: boolean, message:
 			}
 		}
 
-		if (matched >= (searchedWords.length * 3 / 5) && (!maxGen || ability.gen <= maxGen) && (!gen || ability.gen === gen)) {
+		if (matched >= (searchedWords.length * 3 / 5)) {
 			if (matched === bestMatched) {
 				foundAbilities.push(ability.name);
 			} else if (matched > bestMatched) {
@@ -2104,10 +2086,6 @@ function runLearn(target: string, cmd: string, canAll: boolean, message: string)
 		return {error: `Pok\u00e9mon '${species.id}' not found.`};
 	}
 
-	if (species.gen > gen) {
-		return {error: `${species.name} didn't exist yet in generation ${gen}.`};
-	}
-
 	if (!targets.length) {
 		return {error: "You must specify at least one move."};
 	}
@@ -2123,9 +2101,6 @@ function runLearn(target: string, cmd: string, canAll: boolean, message: string)
 		moveNames.push(move.name);
 		if (!move.exists) {
 			return {error: `Move '${move.id}' not found.`};
-		}
-		if (move.gen > gen) {
-			return {error: `${move.name} didn't exist yet in generation ${gen}.`};
 		}
 		const checkLsetProblem = validator.checkLearnset(move, species, setSources, set);
 		if (checkLsetProblem !== null && Object.keys(checkLsetProblem).length) {
@@ -2143,14 +2118,8 @@ function runLearn(target: string, cmd: string, canAll: boolean, message: string)
 	const problems: string[] = [];
 	if (lsetProblems) problems.push(...lsetProblems);
 	let sources: string[] = setSources.sources.map(source => {
-		if (source.charAt(1) !== 'E') return source;
-		const fathers = validator.findEggMoveFathers(source, species, setSources, true);
-		if (!fathers) return '';
-		return source + ':' + fathers.join(',');
+		return source;
 	}).filter(Boolean);
-	if (setSources.sources.length && !sources.length) {
-		problems.push(`${species.name} doesn't have a valid father for its egg moves (${setSources.limitedEggMoves!.join(', ')})`);
-	}
 	let buffer = `In ${formatName}, `;
 	if (setSources.isHidden) {
 		buffer += `${species.abilities['H'] || 'HA'} `;
@@ -2158,7 +2127,7 @@ function runLearn(target: string, cmd: string, canAll: boolean, message: string)
 	buffer += `${species.name}` + (problems.length ? ` <span class="message-learn-cannotlearn">can't</span> learn ` : ` <span class="message-learn-canlearn">can</span> learn `) + Chat.toListString(moveNames);
 	if (!problems.length) {
 		const sourceNames: {[k: string]: string} = {
-			E: "", S: "event", D: "dream world", X: "traded-back ", Y: "traded-back event",
+			E: "", S: "event",
 		};
 		const sourcesBefore = setSources.sourcesBefore;
 		if (sources.length || sourcesBefore < gen) buffer += " only when obtained";
@@ -2177,23 +2146,11 @@ function runLearn(target: string, cmd: string, canAll: boolean, message: string)
 				buffer += `<li>Gen ${source.charAt(0)} ${sourceNames[source] || sourceNames[source.charAt(1)]}`;
 
 				if (source.charAt(1) === 'E') {
-					let fathers;
-					[source, fathers] = source.split(':');
-					fathers = fathers.split(',');
-					if (fathers.length > 4 && !all) fathers = fathers.slice(-4).concat('...');
+					[source] = source.split(':');
 					if (source.length > 2) {
 						buffer += `${source.slice(2)} `;
 					}
 					buffer += `egg`;
-					if (!fathers[0]) {
-						buffer += `: chainbreed`;
-					} else {
-						buffer += `: breed ${fathers.join(', ')}`;
-					}
-				}
-
-				if (source.startsWith('5E') && species.maleOnlyHidden) {
-					buffer += " (no hidden ability)";
 				}
 			}
 		}

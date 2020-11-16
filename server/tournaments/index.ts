@@ -1273,7 +1273,7 @@ const commands: ChatCommands = {
 			let section = undefined;
 			for (const format of Object.values(Dex.formats)) {
 				if (!format.tournamentShow) continue;
-				const name = format.name.startsWith(`[Gen ${Dex.gen}] `) ? format.name.slice(8) : format.name;
+				const name = format.name;
 				if (format.section !== section) {
 					section = format.section;
 					buf += Utils.html`<br /><strong>${section}:</strong><br />&bull; ${name}`;

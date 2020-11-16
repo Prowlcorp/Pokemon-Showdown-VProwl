@@ -19,7 +19,6 @@ export interface TeamData {
 
 export class RandomTeams {
 	dex: ModdedDex;
-	gen: number;
 	factoryTier: string;
 	format: Format;
 	prng: PRNG;
@@ -27,7 +26,6 @@ export class RandomTeams {
 	constructor(format: Format | string, prng: PRNG | PRNGSeed | null) {
 		format = Dex.getFormat(format);
 		this.dex = Dex.forFormat(format);
-		this.gen = this.dex.gen;
 
 		this.factoryTier = '';
 		this.format = format;
@@ -118,11 +116,7 @@ export class RandomTeams {
 
 			// Random legal item
 			let item = '';
-			if (this.gen >= 2) {
-				do {
-					item = this.sample(items);
-				} while (this.dex.getItem(item).gen > this.gen);
-			}
+			item = this.sample(items);
 
 			// Make sure forme is legal
 			if (species.battleOnly) {
@@ -144,12 +138,12 @@ export class RandomTeams {
 				do {
 					item = this.sample(items);
 					itemData = this.dex.getItem(item);
-				} while (itemData.gen > this.gen || itemData.forcedForme && forme === this.dex.getSpecies(itemData.forcedForme).baseSpecies);
+				} while (itemData.forcedForme && forme === this.dex.getSpecies(itemData.forcedForme).baseSpecies);
 			}
 
 			// Random legal ability
 			const abilities = Object.values(species.abilities).filter(a => this.dex.getAbility(a).gen <= this.gen);
-			const ability: string = this.gen <= 2 ? 'None' : this.sample(abilities);
+			const ability: string = this.sample(abilities);
 
 			// Four random unique moves from the movepool
 			let moves;
@@ -256,7 +250,7 @@ export class RandomTeams {
 	random6Pokemon() {
 		// Pick six random pokemon--no repeats, even among formes
 		// Also need to either normalize for formes or select formes at random
-		const last = [0, 151, 251, 386, 493, 649, 721, 807, 890][this.gen];
+		const last = [864];
 
 		const pool: number[] = [];
 		for (const id in this.dex.data.FormatsData) {
@@ -277,9 +271,7 @@ export class RandomTeams {
 		for (const id in this.dex.data.Pokedex) {
 			if (!(this.dex.data.Pokedex[id].num in hasDexNumber)) continue;
 			const species = this.dex.getSpecies(id);
-			if (species.gen <= this.gen ) {
-				formes[hasDexNumber[species.num]].push(species.name);
-			}
+			formes[hasDexNumber[species.num]].push(species.name);
 		}
 
 		const sixPokemon = [];
@@ -1322,7 +1314,7 @@ export class RandomTeams {
 		const pokemonPool = [];
 		for (const id in this.dex.data.FormatsData) {
 			let species = this.dex.getSpecies(id);
-			if (species.gen > this.gen || exclude.includes(species.id)) continue;
+			if (exclude.includes(species.id)) continue;
 			if (isMonotype) {
 				if (!species.types.includes(type)) continue;
 				if (species.battleOnly && typeof species.battleOnly === 'string') {
@@ -1389,14 +1381,14 @@ export class RandomTeams {
 					if (this.randomChance(1, 2)) continue;
 					break;
 				case 'Greninja':
-					if (this.gen >= 7 && this.randomChance(1, 2)) continue;
+					if (this.randomChance(1, 2)) continue;
 					break;
 				case 'Darmanitan':
-					if (species.gen === 8 && this.randomChance(1, 2)) continue;
+					if (this.randomChance(1, 2)) continue;
 					break;
 				case 'Magearna': case 'Toxtricity': case 'Zacian': case 'Zamazenta':
 				case 'Appletun': case 'Blastoise': case 'Butterfree': case 'Copperajah': case 'Grimmsnarl': case 'Inteleon': case 'Rillaboom': case 'Snorlax': case 'Urshifu':
-					if (this.gen >= 8 && this.randomChance(1, 2)) continue;
+					if (this.randomChance(1, 2)) continue;
 					break;
 				}
 

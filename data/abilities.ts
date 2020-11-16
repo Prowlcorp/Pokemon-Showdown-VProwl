@@ -843,7 +843,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (!['mimikyu', 'mimikyutotem'].includes(target.species.id) || target.transformed) {
 				return;
 			}
-			const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+			const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 			if (hitSub) return;
 
 			if (!target.runImmunity(move.type)) return;
@@ -854,7 +854,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (!['mimikyu', 'mimikyutotem'].includes(target.species.id) || target.transformed) {
 				return;
 			}
-			const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates && this.gen >= 6);
+			const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 			if (hitSub) return;
 
 			if (!target.runImmunity(move.type)) return;
@@ -3436,7 +3436,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onStart(source) {
 			this.field.setWeather('ragingsandstorm');
 		},
-		
+
 		onAnySetWeather(target, source, weather) {
 			const strongWeathers = ['desolateland', 'primordialsea', 'deltastream'];
 			if (this.field.getWeather().id === 'ragingsandstorm' && !strongWeathers.includes(weather.id)) return false;
@@ -4749,7 +4749,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (source.getAbility().isPermanent || additionalBannedAbilities.includes(source.ability)) {
 				return;
 			}
-			
+
 			if (move.flags['contact']) {
 				const sourceAbility = source.setAbility('wanderingspirit', target);
 				if (!sourceAbility) return;

@@ -271,7 +271,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Hits one time for the user and one time for each unfainted Pokemon without a major status condition in the user's party. The power of each hit is equal to 5+(X/10), where X is each participating Pokemon's base Attack; each hit is considered to come from the user.",
 		shortDesc: "All healthy allies aid in damaging the target.",
 
-		activate: "  [NAME]'s attack!", // past gen only
+		activate: "  [NAME]'s attack!",
 	},
 	behemothbash: {
 		name: "Behemoth Bash",
@@ -320,7 +320,6 @@ export const MovesText: {[k: string]: MoveText} = {
 		shortDesc: "Traps and damages the target for 4-5 turns.",
 
 		start: "  [POKEMON] was squeezed by [SOURCE]!",
-		move: "#wrap", // gen 1 only
 	},
 	bite: {
 		name: "Bite",
@@ -570,7 +569,6 @@ export const MovesText: {[k: string]: MoveText} = {
 		shortDesc: "Traps and damages the target for 4-5 turns.",
 
 		start: "  [SOURCE] clamped down on [POKEMON]!",
-		move: "#wrap", // gen 1 only
 	},
 	clangingscales: {
 		name: "Clanging Scales",
@@ -1293,7 +1291,6 @@ export const MovesText: {[k: string]: MoveText} = {
 		shortDesc: "Traps and damages the target for 4-5 turns.",
 
 		start: "  [POKEMON] became trapped in the fiery vortex!",
-		move: "#wrap", // gen 1 only
 	},
 	firstimpression: {
 		name: "First Impression",
@@ -4466,7 +4463,6 @@ export const MovesText: {[k: string]: MoveText} = {
 		shortDesc: "Traps and damages the target for 4-5 turns.",
 
 		start: "  [POKEMON] was wrapped by [SOURCE]!",
-		move: "[POKEMON]'s attack continues!", // gen 1 only
 	},
 	wringout: {
 		name: "Wring Out",

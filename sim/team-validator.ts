@@ -15,13 +15,10 @@ import {Utils} from '../lib/utils';
  * sourcesBefore covers all sources that do not have exclusive
  * moves (like catching wild pokemon).
  *
- * First character is a generation number, 1-8.
- * Second character is a source ID, one of:
+ * Character is a source ID, one of:
  *
- * - E = egg, 3rd char+ is the father in gen 2-5, empty in gen 6-7
- *   because egg moves aren't restricted to fathers anymore
+ * - E = egg
  * - S = event, 3rd char+ is the index in .eventData
- * - D = Dream World, only 5D is valid
  * - V = Virtual Console transfer, only 7V/8V is valid
  *
  * Designed to match MoveSource where possible.
@@ -33,16 +30,8 @@ export type PokemonSource = string;
  * set.
  *
  * `new PokemonSources()` creates an empty set;
- * `new PokemonSources(dex.gen)` allows all Pokemon.
  *
- * The set mainly stored as an Array `sources`, but for sets that
- * could be sourced from anywhere (for instance, TM moves), we
- * instead just set `sourcesBefore` to a number meaning "any
- * source at or before this gen is possible."
- *
- * In other words, this variable represents the set of all
- * sources in `sources`, union all sources at or before
- * gen `sourcesBefore`.
+ * The set mainly stored as an Array `sources`.
  */
 export class PokemonSources {
 	/**
@@ -50,37 +39,7 @@ export class PokemonSources {
 	 * an Array rather than a Set for perf reasons.
 	 */
 	sources: PokemonSource[];
-	/**
-	 * if nonzero: the set also contains all possible sources from
-	 * this gen and earlier.
-	 */
-	sourcesBefore: number;
-	/**
-	 * the set requires sources from this gen or later
-	 * this should be unchanged from the format's minimum past gen
-	 * (3 in modern games, 6 if pentagon is required, etc)
-	 */
-	sourcesAfter: number;
 	isHidden: boolean | null;
-	/**
-	 * `limitedEggMoves` is a list of moves that can only be obtained from an
-	 * egg with another father in gen 2-5. If there are multiple such moves,
-	 * potential fathers need to be checked to see if they can actually
-	 * learn the move combination in question.
-	 *
-	 * `null` = the current move is definitely not a limited egg move
-	 *
-	 * `undefined` = the current move may or may not be a limited egg move
-	 */
-	limitedEggMoves?: ID[] | null;
-	/**
-	 * Some Pokemon evolve by having a move in their learnset (like Piloswine
-	 * with Ancient Power). These can only carry three other moves from their
-	 * prevo, because the fourth move must be the evo move. This restriction
-	 * doesn't apply to gen 6+ eggs, which can get around the restriction with
-	 * the relearner.
-	 */
-	moveEvoCarryCount: number;
 
 	babyOnly?: string;
 	sketchMove?: string;
@@ -109,49 +68,7 @@ export class PokemonSources {
 			this.limitedEggMoves = null;
 		}
 	}
-	addGen(sourceGen: number) {
-		this.sourcesBefore = Math.max(this.sourcesBefore, sourceGen);
-		this.limitedEggMoves = null;
-	}
-	minSourceGen() {
-		if (this.sourcesBefore) return this.sourcesAfter || 1;
-		let min = 10;
-		for (const source of this.sources) {
-			const sourceGen = parseInt(source.charAt(0));
-			if (sourceGen < min) min = sourceGen;
-		}
-		if (min === 10) return 0;
-		return min;
-	}
-	maxSourceGen() {
-		let max = this.sourcesBefore;
-		for (const source of this.sources) {
-			const sourceGen = parseInt(source.charAt(0));
-			if (sourceGen > max) max = sourceGen;
-		}
-		return max;
-	}
 	intersectWith(other: PokemonSources) {
-		if (other.sourcesBefore || this.sourcesBefore) {
-			// having sourcesBefore is the equivalent of having everything before that gen
-			// in sources, so we fill the other array in preparation for intersection
-			if (other.sourcesBefore > this.sourcesBefore) {
-				for (const source of this.sources) {
-					const sourceGen = parseInt(source.charAt(0));
-					if (sourceGen <= other.sourcesBefore) {
-						other.sources.push(source);
-					}
-				}
-			} else if (this.sourcesBefore > other.sourcesBefore) {
-				for (const source of other.sources) {
-					const sourceGen = parseInt(source.charAt(0));
-					if (sourceGen <= this.sourcesBefore) {
-						this.sources.push(source);
-					}
-				}
-			}
-			this.sourcesBefore = Math.min(other.sourcesBefore, this.sourcesBefore);
-		}
 		if (this.sources.length) {
 			if (other.sources.length) {
 				const sourcesSet = new Set(other.sources);
@@ -187,19 +104,13 @@ export class PokemonSources {
 export class TeamValidator {
 	readonly format: Format;
 	readonly dex: ModdedDex;
-	readonly gen: number;
 	readonly ruleTable: import('./dex-formats').RuleTable;
-	readonly minSourceGen: number;
 
 	readonly toID: (str: any) => ID;
 	constructor(format: string | Format, dex = Dex) {
 		this.format = dex.getFormat(format);
 		this.dex = dex.forFormat(this.format);
-		this.gen = this.dex.gen;
 		this.ruleTable = this.dex.getRuleTable(this.format);
-
-		this.minSourceGen = this.ruleTable.minSourceGen ?
-			this.ruleTable.minSourceGen[0] : 1;
 
 		this.toID = toID;
 	}
@@ -273,7 +184,7 @@ export class TeamValidator {
 			if (options.removeNicknames) {
 				const species = dex.getSpecies(set.species);
 				let crossSpecies: Species;
-				if (format.name === '[Gen 8] Cross Evolution' && (crossSpecies = dex.getSpecies(set.name)).exists) {
+				if (format.name === 'Cross Evolution' && (crossSpecies = dex.getSpecies(set.name)).exists) {
 					set.name = crossSpecies.name;
 				} else {
 					set.name = species.baseSpecies;
@@ -370,7 +281,7 @@ export class TeamValidator {
 		}
 
 		const setHas: {[k: string]: true} = {};
-		const capEVs = dex.gen > 2 && (ruleTable.has('obtainablemisc') || dex.gen === 6);
+		const capEVs = ruleTable.has('obtainablemisc');
 		if (!set.evs) set.evs = TeamValidator.fillStats(null, !capEVs ? 252 : 0);
 		if (!set.ivs) set.ivs = TeamValidator.fillStats(null, 31);
 
@@ -415,22 +326,10 @@ export class TeamValidator {
 			return [`"${set.item}" is an invalid item.`];
 		}
 		if (ability.id && !ability.exists) {
-			if (dex.gen < 3) {
-				// gen 1-2 don't have abilities, just silently remove
-				ability = dex.getAbility('');
-				set.ability = '';
-			} else {
-				return [`"${set.ability}" is an invalid ability.`];
-			}
+			return [`"${set.ability}" is an invalid ability.`];
 		}
 		if (nature.id && !nature.exists) {
-			if (dex.gen < 3) {
-				// gen 1-2 don't have natures, just remove them
-				nature = dex.getNature('');
-				set.nature = '';
-			} else {
-				problems.push(`"${set.nature}" is an invalid nature.`);
-			}
+			problems.push(`"${set.nature}" is an invalid nature.`);
 		}
 		if (set.happiness !== undefined && isNaN(set.happiness)) {
 			problems.push(`${name} has an invalid happiness value.`);
@@ -444,7 +343,7 @@ export class TeamValidator {
 			}
 		}
 
-		if (ruleTable.has('obtainableformes') && (dex.gen <= 7 || this.format.id.includes('nationaldex'))) {
+		if (ruleTable.has('obtainableformes')) {
 			if (item.megaEvolves === species.name) {
 				if (!item.megaStone) throw new Error(`Item ${item.name} has no base form for mega evolution`);
 				tierSpecies = dex.getSpecies(item.megaStone);
@@ -476,14 +375,6 @@ export class TeamValidator {
 			}
 			if (ability.name === species.abilities['H']) {
 				setSources.isHidden = true;
-
-				if (species.maleOnlyHidden) {
-					if (set.gender && set.gender !== 'M') {
-						problems.push(`${name} must be male to have a Hidden Ability.`);
-					}
-					set.gender = 'M';
-					setSources.sources = ['5D'];
-				}
 			} else {
 				setSources.isHidden = false;
 			}
@@ -493,7 +384,7 @@ export class TeamValidator {
 		problem = this.checkAbility(set, ability, setHas);
 		if (problem) problems.push(problem);
 
-		if (!set.nature || dex.gen <= 2) {
+		if (!set.nature) {
 			set.nature = '';
 		}
 		nature = dex.getNature(set.nature);
@@ -562,19 +453,14 @@ export class TeamValidator {
 						break;
 					}
 				}
-				if (!nonEggSource) {
-					// all egg moves
-					problems.push(`${name} can't get its egg move combination (${setSources.limitedEggMoves!.join(', ')}) from any possible father.`);
-					problems.push(`(Is this incorrect? If so, post the chainbreeding instructions in Bug Reports)`);
-				} else {
-					if (setSources.sources.length > 1) {
-						problems.push(`${name} has an event-exclusive move that it doesn't qualify for (only one of several ways to get the move will be listed):`);
-					}
-					const eventProblems = this.validateSource(
-						set, nonEggSource, setSources, outOfBattleSpecies, ` because it has a move only available`
-					);
-					if (eventProblems) problems.push(...eventProblems);
+
+				if (setSources.sources.length > 1) {
+					problems.push(`${name} has an event-exclusive move that it doesn't qualify for (only one of several ways to get the move will be listed):`);
 				}
+				const eventProblems = this.validateSource(
+					set, nonEggSource, setSources, outOfBattleSpecies, ` because it has a move only available`
+				);
+				if (eventProblems) problems.push(...eventProblems);
 			}
 		} else if (ruleTable.has('obtainablemisc') && learnsetSpecies.eventOnly) {
 			const eventSpecies = !learnsetSpecies.eventData &&
@@ -589,7 +475,7 @@ export class TeamValidator {
 				legal = true;
 				break;
 			}
-			if (!legal && species.gen <= 2 && dex.gen >= 7 && !this.validateSource(set, '7V', setSources, species)) {
+			if (!legal && !this.validateSource(set, 'V', setSources, species)) {
 				legal = true;
 			}
 			if (!legal) {
@@ -600,13 +486,6 @@ export class TeamValidator {
 				}
 				let eventInfo = eventData[0];
 				let eventNum = 1;
-				for (const [i, event] of eventData.entries()) {
-					if (event.generation <= dex.gen && event.generation >= this.minSourceGen) {
-						eventInfo = event;
-						eventNum = i + 1;
-						break;
-					}
-				}
 				const eventName = eventData.length > 1 ? ` #${eventNum}` : ``;
 				const eventProblems = this.validateEvent(set, eventInfo, eventSpecies, ` to be`, `from its event${eventName}`);
 				if (eventProblems) problems.push(...eventProblems);
@@ -615,24 +494,6 @@ export class TeamValidator {
 		if (ruleTable.has('obtainablemisc') && set.level < (species.evoLevel || 0)) {
 			// FIXME: Event pokemon given at a level under what it normally can be attained at gives a false positive
 			problems.push(`${name} must be at least level ${species.evoLevel} to be evolved.`);
-		}
-		if (ruleTable.has('obtainablemoves') && species.id === 'keldeo' && set.moves.includes('secretsword') &&
-			this.minSourceGen > 5 && dex.gen <= 7) {
-			problems.push(`${name} has Secret Sword, which is only compatible with Keldeo-Ordinary obtained from Gen 5.`);
-		}
-		const requiresGen3Source = setSources.maxSourceGen() <= 3;
-		if (requiresGen3Source && dex.getAbility(set.ability).gen === 4 && !species.prevo && dex.gen <= 5) {
-			// Ability Capsule allows this in Gen 6+
-			problems.push(`${name} has a Gen 4 ability and isn't evolved - it can't use moves from Gen 3.`);
-		}
-		if (setSources.maxSourceGen() < 5 && setSources.isHidden && (dex.gen <= 7 || format.mod === 'gen8dlc1')) {
-			problems.push(`${name} has a Hidden Ability - it can't use moves from before Gen 5.`);
-		}
-		if (
-			species.maleOnlyHidden && setSources.isHidden && setSources.sourcesBefore < 5 &&
-			setSources.sources.every(source => source.charAt(1) === 'E')
-		) {
-			problems.push(`${name} has an unbreedable Hidden Ability - it can't use egg moves.`);
 		}
 
 		if (teamHas) {
@@ -697,7 +558,7 @@ export class TeamValidator {
 		const ruleTable = this.ruleTable;
 		const dex = this.dex;
 
-		const capEVs = dex.gen > 2 && (ruleTable.has('obtainablemisc') || dex.gen === 6);
+		const capEVs = ruleTable.has('obtainablemisc');
 
 		if (!set.evs) set.evs = TeamValidator.fillStats(null, !capEVs ? 252 : 0);
 		if (!set.ivs) set.ivs = TeamValidator.fillStats(null, 31);
@@ -726,14 +587,7 @@ export class TeamValidator {
 			'Manaphy', 'Cosmog', 'Cosmoem', 'Solgaleo', 'Lunala',
 		].includes(species.baseSpecies);
 		const diancieException = species.name === 'Diancie' && set.shiny;
-		const has3PerfectIVs = setSources.minSourceGen() >= 6 && isLegendary && !diancieException;
-
-		if (set.hpType === 'Fighting' && ruleTable.has('obtainablemisc')) {
-			if (has3PerfectIVs) {
-				// Legendary Pokemon must have at least 3 perfect IVs in gen 6+
-				problems.push(`${name} must not have Hidden Power Fighting because it starts with 3 perfect IVs because it's a gen 6+ legendary.`);
-			}
-		}
+		const has3PerfectIVs = isLegendary && !diancieException;
 
 		if (has3PerfectIVs) {
 			let perfectIVs = 0;
@@ -741,8 +595,7 @@ export class TeamValidator {
 				if (set.ivs[stat as 'hp'] >= 31) perfectIVs++;
 			}
 			if (perfectIVs < 3) {
-				const reason = (this.minSourceGen === 6 ? ` and this format requires gen ${dex.gen} Pokémon` : ` in gen 6 or later`);
-				problems.push(`${name} must have at least three perfect IVs because it's a legendary${reason}.`);
+				problems.push(`${name} must have at least three perfect IVs because it's a legendary.`);
 			}
 		}
 
@@ -804,24 +657,14 @@ export class TeamValidator {
 		let eventSpecies = species;
 		if (source.charAt(1) === 'S') {
 			const splitSource = source.substr(source.charAt(2) === 'T' ? 3 : 2).split(' ');
-			const dex = (this.dex.gen === 1 ? this.dex.mod('gen2') : this.dex);
+			const dex = this.dex;
 			eventSpecies = dex.getSpecies(splitSource[1]);
 			const eventLsetData = this.dex.getLearnsetData(eventSpecies.id);
 			eventData = eventLsetData.eventData?.[parseInt(splitSource[0])];
 			if (!eventData) {
 				throw new Error(`${eventSpecies.name} from ${species.name} doesn't have data for event ${source}`);
 			}
-		} else if (source.charAt(1) === 'D') {
-			eventData = {
-				generation: 5,
-				level: 10,
-				from: 'Gen 5 Dream World',
-				isHidden: true,
-			};
 		} else if (source.charAt(1) === 'E') {
-			if (this.findEggMoveFathers(source, species, setSources)) {
-				return undefined;
-			}
 			if (because) throw new Error(`Wrong place to get an egg incompatibility message`);
 			return true;
 		} else {
@@ -830,125 +673,6 @@ export class TeamValidator {
 
 		// complicated fancy return signature
 		return this.validateEvent(set, eventData, eventSpecies, because as any) as any;
-	}
-
-	findEggMoveFathers(source: PokemonSource, species: Species, setSources: PokemonSources): boolean;
-	findEggMoveFathers(source: PokemonSource, species: Species, setSources: PokemonSources, getAll: true): ID[] | null;
-	findEggMoveFathers(source: PokemonSource, species: Species, setSources: PokemonSources, getAll = false) {
-		// tradebacks have an eggGen of 2 even though the source is 1ET
-		const eggGen = Math.max(parseInt(source.charAt(0)), 2);
-		const fathers: ID[] = [];
-		// Gen 6+ don't have egg move incompatibilities
-		// (except for certain cases with baby Pokemon not handled here)
-		if (!getAll && eggGen >= 6) return true;
-
-		const eggMoves = setSources.limitedEggMoves;
-		// must have 2 or more egg moves to have egg move incompatibilities
-		if (!eggMoves) {
-			// happens often in gen 1-6 LC if your only egg moves are level-up moves,
-			// which aren't limited and so aren't in `limitedEggMoves`
-			return getAll ? ['*'] : true;
-		}
-		if (!getAll && eggMoves.length <= 1) return true;
-
-		// gen 1 eggs come from gen 2 breeding
-		const dex = this.dex.gen === 1 ? this.dex.mod('gen2') : this.dex;
-		// In Gen 5 and earlier, egg moves can only be inherited from the father
-		// we'll test each possible father separately
-		let eggGroups = species.eggGroups;
-		if (species.id === 'nidoqueen' || species.id === 'nidorina') {
-			eggGroups = dex.getSpecies('nidoranf').eggGroups;
-		} else if (dex !== this.dex) {
-			// Gen 1 tradeback; grab the egg groups from Gen 2
-			eggGroups = dex.getSpecies(species.id).eggGroups;
-		}
-		if (eggGroups[0] === 'Undiscovered') eggGroups = dex.getSpecies(species.evos[0]).eggGroups;
-		if (eggGroups[0] === 'Undiscovered' || !eggGroups.length) {
-			throw new Error(`${species.name} has no egg groups for source ${source}`);
-		}
-		// no chainbreeding necessary if the father can be Smeargle
-		if (!getAll && eggGroups.includes('Field')) return true;
-
-		// try to find a father to inherit the egg move combination from
-		for (const fatherid in dex.data.Pokedex) {
-			const father = dex.getSpecies(fatherid);
-			const fatherLsetData = dex.getLearnsetData(fatherid as ID);
-			// can't breed mons from future gens
-			if (father.gen > eggGen) continue;
-			// father must be male
-			if (father.gender === 'N' || father.gender === 'F') continue;
-			// can't inherit from dex entries with no learnsets
-			if (!fatherLsetData.exists || !fatherLsetData.learnset) continue;
-			// something is clearly wrong if its only possible father is itself
-			// (exceptions: ExtremeSpeed Dragonite, Self-destruct Snorlax)
-			if (species.id === fatherid && !['dragonite', 'snorlax'].includes(fatherid)) continue;
-			// don't check NFE Pokémon - their evolutions will know all their moves and more
-			// exception: Combee/Salandit, because their evos can't be fathers
-			if (father.evos.length) {
-				const evolvedFather = dex.getSpecies(father.evos[0]);
-				if (evolvedFather.gen <= eggGen && evolvedFather.gender !== 'F') continue;
-			}
-
-			// must be able to breed with father
-			if (!father.eggGroups.some(eggGroup => eggGroups.includes(eggGroup))) continue;
-
-			// father must be able to learn the move
-			if (!this.fatherCanLearn(father, eggMoves, eggGen)) continue;
-
-			// father found!
-			if (!getAll) return true;
-			fathers.push(fatherid as ID);
-		}
-		if (!getAll) return false;
-		return (!fathers.length && eggGen < 6) ? null : fathers;
-	}
-
-	/**
-	 * We could, if we wanted, do a complete move validation of the father's
-	 * moveset to see if it's valid. This would recurse and be NP-Hard so
-	 * instead we won't. We'll instead use a simplified algorithm: The father
-	 * can learn the moveset if it has at most one egg/event move.
-	 *
-	 * `eggGen` should be 5 or earlier. Later gens should never call this
-	 * function (the answer is always yes).
-	 */
-	fatherCanLearn(species: Species, moves: ID[], eggGen: number) {
-		let lsetData = this.dex.getLearnsetData(species.id);
-		if (!lsetData.learnset) return false;
-		if (species.id === 'smeargle') return true;
-		let eggMoveCount = 0;
-		const noEggIncompatibility = species.eggGroups.includes('Field');
-		for (const move of moves) {
-			let curSpecies: Species | null = species;
-			/** 1 = can learn from egg, 2 = can learn unrestricted */
-			let canLearn: 0 | 1 | 2 = 0;
-
-			while (curSpecies) {
-				lsetData = this.dex.getLearnsetData(curSpecies.id);
-				if (lsetData.learnset && lsetData.learnset[move]) {
-					for (const moveSource of lsetData.learnset[move]) {
-						if (parseInt(moveSource.charAt(0)) > eggGen) continue;
-						if (!'ESDV'.includes(moveSource.charAt(1)) || (
-							moveSource.charAt(1) === 'E' && noEggIncompatibility
-						)) {
-							canLearn = 2;
-							break;
-						} else {
-							canLearn = 1;
-						}
-					}
-				}
-				if (canLearn === 2) break;
-				curSpecies = this.learnsetParent(curSpecies);
-			}
-
-			if (!canLearn) return false;
-			if (canLearn === 1) {
-				eggMoveCount++;
-				if (eggMoveCount > 1) return false;
-			}
-		}
-		return true;
 	}
 
 	validateForme(set: PokemonSet) {
@@ -1046,7 +770,7 @@ export class TeamValidator {
 			}
 		}
 
-		if (species.name === 'Keldeo' && set.moves.includes('secretsword') && dex.gen >= 8) {
+		if (species.name === 'Keldeo' && set.moves.includes('secretsword')) {
 			set.species = 'Keldeo-Resolute';
 		}
 
@@ -1205,7 +929,6 @@ export class TeamValidator {
 		const dex = this.dex;
 		let name = set.species;
 		const species = dex.getSpecies(set.species);
-		const maxSourceGen = this.ruleTable.has('allowtradeback') ? 2 : dex.gen;
 		if (!eventSpecies) eventSpecies = species;
 		if (set.name && set.species !== set.name && species.baseSpecies !== set.name) name = `${set.name} (${set.species})`;
 
@@ -1214,20 +937,6 @@ export class TeamValidator {
 		const etc = `${because} ${from}`;
 
 		const problems = [];
-
-		if (dex.gen < 8 && this.minSourceGen > eventData.generation) {
-			if (fastReturn) return true;
-			problems.push(`This format requires Pokemon from gen ${this.minSourceGen} or later and ${name} is from gen ${eventData.generation}${etc}.`);
-		}
-		if (maxSourceGen < eventData.generation) {
-			if (fastReturn) return true;
-			problems.push(`This format is in gen ${dex.gen} and ${name} is from gen ${eventData.generation}${etc}.`);
-		}
-
-		if (eventData.japan) {
-			if (fastReturn) return true;
-			problems.push(`${name} has moves from Japan-only events, but this format simulates International Yellow/Crystal which can't trade with Japanese games.`);
-		}
 
 		if (eventData.level && (set.level || 0) < eventData.level) {
 			if (fastReturn) return true;
@@ -1243,11 +952,6 @@ export class TeamValidator {
 				if (fastReturn) return true;
 				problems.push(`${name}'s gender must be ${eventData.gender}${etc}.`);
 			}
-		}
-		const canMint = dex.gen > 7;
-		if (eventData.nature && eventData.nature !== set.nature && !canMint) {
-			if (fastReturn) return true;
-			problems.push(`${name} must have a ${eventData.nature} nature${etc} - Mints are only available starting gen 8.`);
 		}
 		let requiredIVs = 0;
 		if (eventData.ivs) {
@@ -1266,7 +970,7 @@ export class TeamValidator {
 			requiredIVs = eventData.perfectIVs || 0;
 		}
 		if (requiredIVs && set.ivs) {
-			// Legendary Pokemon must have at least 3 perfect IVs in gen 6
+			// Legendary Pokemon must have at least 3 perfect IVs in
 			// Events can also have a certain amount of guaranteed perfect IVs
 			let perfectIVs = 0;
 			let statName: StatName;
@@ -1280,62 +984,17 @@ export class TeamValidator {
 				}
 			}
 			// The perfect IV count affects Hidden Power availability
-			if (dex.gen >= 3 && requiredIVs >= 3 && set.hpType === 'Fighting') {
+			if (requiredIVs >= 3 && set.hpType === 'Fighting') {
 				if (fastReturn) return true;
 				problems.push(`${name} can't use Hidden Power Fighting because it must have at least three perfect IVs${etc}.`);
-			} else if (dex.gen >= 3 && requiredIVs >= 5 && set.hpType &&
+			} else if (requiredIVs >= 5 && set.hpType &&
 					!['Dark', 'Dragon', 'Electric', 'Steel', 'Ice'].includes(set.hpType)) {
 				if (fastReturn) return true;
 				problems.push(`${name} can only use Hidden Power Dark/Dragon/Electric/Steel/Ice because it must have at least 5 perfect IVs${etc}.`);
 			}
 		}
-		// Event-related ability restrictions only matter if we care about illegal abilities
-		const ruleTable = this.ruleTable;
-		if (ruleTable.has('obtainableabilities')) {
-			if (dex.gen <= 5 && eventData.abilities && eventData.abilities.length === 1 && !eventData.isHidden) {
-				if (species.name === eventSpecies.name) {
-					// has not evolved, abilities must match
-					const requiredAbility = dex.getAbility(eventData.abilities[0]).name;
-					if (set.ability !== requiredAbility) {
-						if (fastReturn) return true;
-						problems.push(`${name} must have ${requiredAbility}${etc}.`);
-					}
-				} else {
-					// has evolved
-					const ability1 = dex.getAbility(eventSpecies.abilities['1']);
-					if (ability1.gen && eventData.generation >= ability1.gen) {
-						// pokemon had 2 available abilities in the gen the event happened
-						// ability is restricted to a single ability slot
-						const requiredAbilitySlot = (toID(eventData.abilities[0]) === ability1.id ? 1 : 0);
-						const requiredAbility = dex.getAbility(species.abilities[requiredAbilitySlot] || species.abilities['0']).name;
-						if (set.ability !== requiredAbility) {
-							const originalAbility = dex.getAbility(eventData.abilities[0]).name;
-							if (fastReturn) return true;
-							problems.push(`${name} must have ${requiredAbility}${because} from a ${originalAbility} ${eventSpecies.name} event.`);
-						}
-					}
-				}
-			}
-			if (species.abilities['H']) {
-				const isHidden = (set.ability === species.abilities['H']);
-
-				if ((!isHidden && eventData.isHidden) ||
-					(isHidden && !eventData.isHidden && (dex.gen <= 7 || this.format.mod === 'gen8dlc1'))) {
-					if (fastReturn) return true;
-					problems.push(`${name} must ${eventData.isHidden ? 'have' : 'not have'} its Hidden Ability${etc}.`);
-				}
-			}
-		}
 		if (problems.length) return problems;
 		if (eventData.gender) set.gender = eventData.gender;
-	}
-
-	allSources(species?: Species) {
-		let minSourceGen = this.minSourceGen;
-		if (this.dex.gen >= 3 && minSourceGen < 3) minSourceGen = 3;
-		if (species) minSourceGen = Math.max(minSourceGen, species.gen);
-		const maxSourceGen = this.ruleTable.has('allowtradeback') ? 2 : this.dex.gen;
-		return new PokemonSources(maxSourceGen, minSourceGen);
 	}
 
 	reconcileLearnset(
@@ -1347,15 +1006,11 @@ export class TeamValidator {
 
 		if (problem) {
 			let problemString = `${name}'s move ${problem.moveName}`;
-			if (problem.type === 'incompatibleAbility') {
-				problemString += ` can only be learned in past gens without Hidden Abilities.`;
-			} else if (problem.type === 'incompatible') {
+			if (problem.type === 'incompatible') {
 				problemString = `${name}'s moves ${(setSources.restrictiveMoves || []).join(', ')} are incompatible.`;
 			} else if (problem.type === 'oversketched') {
 				const plural = (parseInt(problem.maxSketches) === 1 ? '' : 's');
 				problemString += ` can't be Sketched because it can only Sketch ${problem.maxSketches} move${plural}.`;
-			} else if (problem.type === 'pastgen') {
-				problemString += ` is not available in generation ${problem.gen}.`;
 			} else if (problem.type === 'invalid') {
 				problemString = `${name} can't learn ${problem.moveName}.`;
 			} else {
@@ -1380,11 +1035,6 @@ export class TeamValidator {
 			setSources.sources = setSources.sources.filter(
 				source => parseInt(source.charAt(0)) >= 5
 			);
-			if (setSources.sourcesBefore < 5) setSources.sourcesBefore = 0;
-			if (!setSources.sourcesBefore && !setSources.sources.length && (dex.gen <= 7 || this.format.mod === 'gen8dlc1')) {
-				problems.push(`${name} has a hidden ability - it can't have moves only learned before gen 5.`);
-				return problems;
-			}
 		}
 
 		if (setSources.babyOnly && setSources.sources.length) {
@@ -1410,14 +1060,9 @@ export class TeamValidator {
 		if (setSources.babyOnly && setSources.size()) {
 			const baby = dex.getSpecies(setSources.babyOnly);
 			setSources.sources = setSources.sources.filter(source => {
-				if (baby.gen > parseInt(source.charAt(0)) && !source.startsWith('1ST')) return false;
-				if (baby.gen > 2 && source === '7V') return false;
+				if (source === 'V') return false;
 				return true;
 			});
-			if (setSources.sourcesBefore < baby.gen) setSources.sourcesBefore = 0;
-			if (!setSources.sources.length && !setSources.sourcesBefore) {
-				problems.push(`${name} has moves from before Gen ${baby.gen}, which are incompatible with its moves from ${baby.name}.`);
-			}
 		}
 
 		return problems.length ? problems : null;
@@ -1462,16 +1107,8 @@ export class TeamValidator {
 		// set of possible sources of a pokemon with this move
 		const moveSources = new PokemonSources();
 
-		/**
-		 * The format doesn't allow Pokemon traded from the future
-		 * (This is everything except in Gen 1 Tradeback)
-		 */
-		const noFutureGen = !ruleTable.has('allowtradeback');
-
-		let tradebackEligible = false;
 		while (species?.name && !alreadyChecked[species.id]) {
 			alreadyChecked[species.id] = true;
-			if (dex.gen <= 2 && species.gen === 1) tradebackEligible = true;
 			const lsetData = dex.getLearnsetData(species.id);
 			if (!lsetData.learnset) {
 				if ((species.changesFrom || species.baseSpecies) !== species.name) {
@@ -1497,7 +1134,7 @@ export class TeamValidator {
 				if (moveid === 'sketch' || !lset || species.id === 'smeargle') {
 					// The logic behind this comes from the idea that a Pokemon that learns Sketch
 					// should be able to Sketch any move before transferring into Generation 8.
-					if (move.noSketch || move.isZ || (move.gen > 7 && !this.format.id.includes('nationaldex'))) {
+					if (move.noSketch || move.isZ) {
 						return {type: 'invalid'};
 					}
 					lset = lsetData.learnset['sketch'];
@@ -1513,42 +1150,20 @@ export class TeamValidator {
 					// `return false`
 					//   means we can learn it with no restrictions
 					//   (there's a way to just teach any pokemon of this species
-					//   the move in the current gen, like a TM.)
+					//   the move, like a TM.)
 					// `moveSources.add(source)`
 					//   means we can learn it only if obtained that exact way described
 					//   in source
-					// `moveSources.addGen(learnedGen)`
-					//   means we can learn it only if obtained at or before learnedGen
-					//   (i.e. get the pokemon however you want, transfer to that gen,
-					//   teach it, and transfer it to the current gen.)
-
-					const learnedGen = parseInt(learned.charAt(0));
-					if (learnedGen < this.minSourceGen) continue;
-					if (noFutureGen && learnedGen > dex.gen) continue;
-
-					// redundant
-					if (learnedGen <= moveSources.sourcesBefore) continue;
-
-					if (
-						learnedGen < 7 && setSources.isHidden && (dex.gen <= 7 || format.mod === 'gen8dlc1') &&
-						!dex.mod('gen' + learnedGen).getSpecies(baseSpecies.name).abilities['H']
-					) {
-						// check if the Pokemon's hidden ability was available
-						incompatibleAbility = true;
-						continue;
-					}
 
 					if (learned.charAt(1) === 'L') {
 						// special checking for level-up moves
-						if (level >= parseInt(learned.substr(2)) || learnedGen === 7) {
+						if (level >= parseInt(learned.substr(2))) {
 							// we're past the required level to learn it
-							// (gen 7 level-up moves can be relearnered at any level)
+							// (level-up moves can be relearnered at any level)
 							// falls through to LMT check below
-						} else if (level >= 5 && learnedGen === 3 && species.canHatch) {
-							// Pomeg Glitch
-						} else if ((!species.gender || species.gender === 'F') && learnedGen >= 2 && species.canHatch) {
+						} else if ((!species.gender || species.gender === 'F') && species.canHatch) {
 							// available as egg move
-							learned = learnedGen + 'Eany';
+							learned = 'Eany';
 							// falls through to E check below
 						} else {
 							// this move is unavailable, skip it
@@ -1556,73 +1171,30 @@ export class TeamValidator {
 						}
 					}
 
-					// Gen 8 egg moves can be taught to any pokemon from any source
-					if (learned === '8E' || 'LMTR'.includes(learned.charAt(1))) {
-						if (learnedGen === dex.gen && learned.charAt(1) !== 'R') {
+					// Egg moves can be taught to any pokemon from any source
+					if (learned === 'E' || 'LMTR'.includes(learned.charAt(1))) {
+						if (learned.charAt(1) !== 'R') {
 							// current-gen level-up, TM or tutor moves:
 							//   always available
-							if (learned !== '8E' && babyOnly) setSources.babyOnly = babyOnly;
+							if (learned !== 'E' && babyOnly) setSources.babyOnly = babyOnly;
 							if (!moveSources.moveEvoCarryCount) return null;
 						}
-						// past-gen level-up, TM, or tutor moves:
-						//   available as long as the source gen was or was before this gen
+						// Level-up, TM, or tutor moves:
 						if (learned.charAt(1) === 'R') {
 							moveSources.restrictedMove = moveid;
 						}
 						limit1 = false;
-						moveSources.addGen(learnedGen);
 					} else if (learned.charAt(1) === 'E') {
 						// egg moves:
 						//   only if hatched from an egg
 						let limitedEggMove: ID | null | undefined = undefined;
 						if (learned.slice(1) === 'Eany') {
 							limitedEggMove = null;
-						} else if (learnedGen < 6) {
-							limitedEggMove = move.id;
 						}
-						learned = learnedGen + 'E' + (species.prevo ? species.id : '');
-						if (tradebackEligible && learnedGen === 2 && move.gen <= 1) {
-							// can tradeback
-							moveSources.add('1ET' + learned.slice(2));
-						}
+						learned = 'E' + (species.prevo ? species.id : '');
 						moveSources.add(learned, limitedEggMove);
 					} else if (learned.charAt(1) === 'S') {
-						// event moves:
-						//   only if that was the source
-						// Event Pokémon:
-						// 	Available as long as the past gen can get the Pokémon and then trade it back.
-						if (tradebackEligible && learnedGen === 2 && move.gen <= 1) {
-							// can tradeback
-							moveSources.add('1ST' + learned.slice(2) + ' ' + species.id);
-						}
 						moveSources.add(learned + ' ' + species.id);
-					} else if (learned.charAt(1) === 'D') {
-						// DW moves:
-						//   only if that was the source
-						moveSources.add(learned + species.id);
-					} else if (learned.charAt(1) === 'V' && this.minSourceGen < learnedGen) {
-						// Virtual Console transfer moves:
-						//   only if that was the source
-						moveSources.add(learned);
-					}
-				}
-			}
-			if (ruleTable.has('mimicglitch') && species.gen < 5) {
-				// include the Mimic Glitch when checking this mon's learnset
-				const glitchMoves = ['metronome', 'copycat', 'transform', 'mimic', 'assist'];
-				let getGlitch = false;
-				for (const i of glitchMoves) {
-					if (lsetData.learnset[i]) {
-						if (!(i === 'mimic' && dex.getAbility(set.ability).gen === 4 && !species.prevo)) {
-							getGlitch = true;
-							break;
-						}
-					}
-				}
-				if (getGlitch) {
-					moveSources.addGen(4);
-					if (move.gen < 5) {
-						limit1 = false;
 					}
 				}
 			}
@@ -1661,7 +1233,6 @@ export class TeamValidator {
 
 		// Now that we have our list of possible sources, intersect it with the current list
 		if (!moveSources.size()) {
-			if (this.minSourceGen > 1 && sometimesPossible) return {type: 'pastgen', gen: this.minSourceGen};
 			if (incompatibleAbility) return {type: 'incompatibleAbility'};
 			return {type: 'invalid'};
 		}
@@ -1686,12 +1257,6 @@ export class TeamValidator {
 			return this.dex.getSpecies('Rockruff-Dusk');
 		} else if (species.name === 'Greninja-Ash') {
 			return null;
-		} else if (species.prevo) {
-			// there used to be a check for Hidden Ability here, but apparently it's unnecessary
-			// Shed Skin Pupitar can definitely evolve into Unnerve Tyranitar
-			species = this.dex.getSpecies(species.prevo);
-			if (species.gen > Math.max(2, this.dex.gen)) return null;
-			return species;
 		} else if (species.changesFrom && species.baseSpecies !== 'Kyurem') {
 			// For Pokemon like Rotom and Necrozma whose movesets are extensions are their base formes
 			return this.dex.getSpecies(species.changesFrom);

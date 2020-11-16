@@ -20,15 +20,15 @@ import {RandomPlayerAI} from '../tools/random-player-ai';
 const streams = getPlayerStreams(new BattleStream());
 
 const spec = {
-	formatid: "gen7customgame",
+	formatid: "customgame",
 };
 const p1spec = {
 	name: "Bot 1",
-	team: Dex.packTeam(Dex.generateTeam('gen7randombattle')),
+	team: Dex.packTeam(Dex.generateTeam('randombattle')),
 };
 const p2spec = {
 	name: "Bot 2",
-	team: Dex.packTeam(Dex.generateTeam('gen7randombattle')),
+	team: Dex.packTeam(Dex.generateTeam('randombattle')),
 };
 
 const p1 = new RandomPlayerAI(streams.p1);

@@ -383,13 +383,13 @@ export const Conditions: {[id: string]: ConditionData} = {
 			target.removeVolatile('Protect');
 			target.removeVolatile('Endure');
 
-			if (data.source.hasAbility('infiltrator') && this.gen >= 6) {
+			if (data.source.hasAbility('infiltrator')) {
 				data.moveData.infiltrates = true;
 			}
-			if (data.source.hasAbility('normalize') && this.gen >= 6) {
+			if (data.source.hasAbility('normalize')) {
 				data.moveData.type = 'Normal';
 			}
-			if (data.source.hasAbility('adaptability') && this.gen >= 6) {
+			if (data.source.hasAbility('adaptability')) {
 				data.moveData.stab = 2;
 			}
 			const hitMove = new this.dex.Data.Move(data.moveData) as Move as ActiveMove;
@@ -473,7 +473,6 @@ export const Conditions: {[id: string]: ConditionData} = {
 		},
 		onStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5) this.effectData.duration = 0;
 				this.add('-weather', 'RainDance', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'RainDance');
@@ -543,7 +542,6 @@ export const Conditions: {[id: string]: ConditionData} = {
 		},
 		onStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5) this.effectData.duration = 0;
 				this.add('-weather', 'SunnyDay', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'SunnyDay');
@@ -672,7 +670,6 @@ export const Conditions: {[id: string]: ConditionData} = {
 		},
 		onStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5) this.effectData.duration = 0;
 				this.add('-weather', 'Sandstorm', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'Sandstorm');
@@ -702,7 +699,6 @@ export const Conditions: {[id: string]: ConditionData} = {
 		},
 		onStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5) this.effectData.duration = 0;
 				this.add('-weather', 'Hail', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'Hail');

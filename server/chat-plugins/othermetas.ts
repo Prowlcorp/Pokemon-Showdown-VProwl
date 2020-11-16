@@ -30,7 +30,6 @@ function getMegaStone(stone: string, mod = 'gen8'): Item | null {
 				megaStone: 'Rayquaza-Mega',
 				exists: true,
 				// Adding extra values to appease typescript
-				gen: 6,
 				num: -1,
 				effectType: 'Item',
 				sourceEffect: '',
@@ -100,7 +99,7 @@ export const commands: ChatCommands = {
 		}
 		const stone = getMegaStone(stoneName[0], mod);
 		const species = dex.getSpecies(sep[0]);
-		if (!stone || (dex.gen >= 8 && ['redorb', 'blueorb'].includes(stone.id))) {
+		if (!stone || ['redorb', 'blueorb'].includes(stone.id)) {
 			throw new Chat.ErrorMessage(`Error: Mega Stone not found.`);
 		}
 		if (!species.exists) throw new Chat.ErrorMessage(`Error: Pok\u00e9mon not found.`);
@@ -125,7 +124,7 @@ export const commands: ChatCommands = {
 		if (megaSpecies.types.length > baseSpecies.types.length) {
 			deltas.type = megaSpecies.types[1];
 		} else if (megaSpecies.types.length < baseSpecies.types.length) {
-			deltas.type = dex.gen >= 8 ? 'mono' : megaSpecies.types[0];
+			deltas.type = megaSpecies.types[0];
 		} else if (megaSpecies.types[1] !== baseSpecies.types[1]) {
 			deltas.type = megaSpecies.types[1];
 		}
@@ -162,7 +161,6 @@ export const commands: ChatCommands = {
 		}
 		const details: {[k: string]: string} = {
 			"Dex#": '' + mixedSpecies.num,
-			Gen: '' + mixedSpecies.gen,
 			Height: mixedSpecies.heightm + " m",
 			Weight: mixedSpecies.weighthg / 10 + " kg <em>(" + weighthit + " BP)</em>",
 			"Dex Colour": mixedSpecies.color,
@@ -198,9 +196,6 @@ export const commands: ChatCommands = {
 		if (!targetid) return this.parse('/help stone');
 		this.runBroadcast();
 		const stone = getMegaStone(targetid, sep[1]);
-		if (stone && dex.gen >= 8 && ['redorb', 'blueorb'].includes(stone.id)) {
-			throw new Chat.ErrorMessage("The Orbs do not exist in Gen 8 and later.");
-		}
 		const stones = [];
 		if (!stone) {
 			const species = dex.getSpecies(targetid.replace(/(?:mega[xy]?|primal)$/, ''));
@@ -221,9 +216,6 @@ export const commands: ChatCommands = {
 			if (!aStone) return;
 			let baseSpecies = dex.getSpecies(aStone.megaEvolves);
 			let megaSpecies = dex.getSpecies(aStone.megaStone);
-			if (dex.gen >= 8 && ['redorb', 'blueorb'].includes(aStone.id)) {
-				throw new Chat.ErrorMessage("The Orbs do not exist in Gen 8 and later.");
-			}
 			if (aStone.id === 'redorb') { // Orbs do not have 'Item.megaStone' or 'Item.megaEvolves' properties.
 				megaSpecies = dex.getSpecies("Groudon-Primal");
 				baseSpecies = dex.getSpecies("Groudon");
@@ -243,12 +235,11 @@ export const commands: ChatCommands = {
 			if (megaSpecies.types.length > baseSpecies.types.length) {
 				deltas.type = megaSpecies.types[1];
 			} else if (megaSpecies.types.length < baseSpecies.types.length) {
-				deltas.type = dex.gen >= 8 ? 'mono' : megaSpecies.types[0];
+				deltas.type = megaSpecies.types[0];
 			} else if (megaSpecies.types[1] !== baseSpecies.types[1]) {
 				deltas.type = megaSpecies.types[1];
 			}
 			const details = {
-				Gen: aStone.gen,
 				Weight: (deltas.weighthg < 0 ? "" : "+") + deltas.weighthg / 10 + " kg",
 			};
 			let tier;
@@ -291,7 +282,7 @@ export const commands: ChatCommands = {
 			buf += `</span>`;
 			buf += `</li>`;
 			this.sendReply(`|raw|<div class="message"><ul class="utilichart">${buf}<li style="clear:both"></li></ul></div>`);
-			this.sendReply(`|raw|<font size="1"><font color="#686868">Gen:</font> ${details["Gen"]}&nbsp;|&ThickSpace;<font color="#686868">Weight:</font> ${details["Weight"]}</font>`);
+			this.sendReply(`|raw|<font size="1"><font color="#686868">Weight:</font> ${details["Weight"]}</font>`);
 		}
 	},
 	stonehelp: [`/stone <mega stone>[, generation] - Shows the changes that a mega stone/orb applies to a Pok\u00e9mon.`],
@@ -366,7 +357,6 @@ export const commands: ChatCommands = {
 		}
 		const details: {[k: string]: string} = {
 			"Dex#": mixedSpecies.num,
-			Gen: mixedSpecies.gen,
 			Height: mixedSpecies.heightm + " m",
 			Weight: mixedSpecies.weighthg / 10 + " kg <em>(" + weighthit + " BP)</em>",
 			"Dex Colour": mixedSpecies.color,
@@ -419,12 +409,11 @@ export const commands: ChatCommands = {
 			deltas.types = null;
 		}
 		const details = {
-			Gen: evo.gen,
 			Weight: (deltas.weighthg < 0 ? "" : "+") + deltas.weighthg / 10 + " kg",
 			Stage: (Dex.getSpecies(prevoSpecies.prevo).exists ? 3 : 2),
 		};
 		this.sendReply(`|raw|${Chat.getDataPokemonHTML(deltas)}`);
-		this.sendReply(`|raw|<font size="1"><font color="#686868">Gen:</font> ${details["Gen"]}&nbsp;|&ThickSpace;<font color="#686868">Weight:</font> ${details["Weight"]}&nbsp;|&ThickSpace;<font color="#686868">Stage:</font> ${details["Stage"]}</font>`);
+		this.sendReply(`|raw|<font size="1"><font color="#686868">Weight:</font> ${details["Weight"]}&nbsp;|&ThickSpace;<font color="#686868">Stage:</font> ${details["Stage"]}</font>`);
 	},
 	showevohelp: [
 		`/showevo <Pok\u00e9mon> - Shows the changes that a Pok\u00e9mon applies in Cross Evolution`,

@@ -37,11 +37,6 @@ export const Formats: {[k: string]: FormatData} = {
 			'Cosmog', 'Cosmoem', 'Solgaleo', 'Lunala', 'Necrozma', 'Magearna', 'Marshadow', 'Zeraora',
 			'Zacian', 'Zamazenta',
 		],
-		onValidateSet(set, format) {
-			if (this.gen < 7 && this.toID(set.item) === 'souldew') {
-				return [`${set.name || set.species} has Soul Dew, which is banned in ${format.name}.`];
-			}
-		},
 	},
 	minimalgbu: {
 		effectType: 'ValidatorRule',
@@ -57,11 +52,6 @@ export const Formats: {[k: string]: FormatData} = {
 			'Diancie', 'Hoopa', 'Volcanion',
 			'Magearna', 'Marshadow', 'Zeraora',
 		],
-		onValidateSet(set, format) {
-			if (this.gen < 7 && this.toID(set.item) === 'souldew') {
-				return [`${set.name || set.species} has Soul Dew, which is banned in ${format.name}.`];
-			}
-		},
 	},
 	standarddoubles: {
 		effectType: 'ValidatorRule',
@@ -481,16 +471,14 @@ export const Formats: {[k: string]: FormatData} = {
 				} else {
 					typeTable = typeTable.filter(type => species.types.includes(type));
 				}
-				if (this.gen >= 7) {
-					const item = this.dex.getItem(set.item);
-					if (item.megaStone && species.baseSpecies === item.megaEvolves) {
-						species = this.dex.getSpecies(item.megaStone);
-						typeTable = typeTable.filter(type => species.types.includes(type));
-					}
-					if (item.id === "ultranecroziumz" && species.baseSpecies === "Necrozma") {
-						species = this.dex.getSpecies("Necrozma-Ultra");
-						typeTable = typeTable.filter(type => species.types.includes(type));
-					}
+				const item = this.dex.getItem(set.item);
+				if (item.megaStone && species.baseSpecies === item.megaEvolves) {
+					species = this.dex.getSpecies(item.megaStone);
+					typeTable = typeTable.filter(type => species.types.includes(type));
+				}
+				if (item.id === "ultranecroziumz" && species.baseSpecies === "Necrozma") {
+					species = this.dex.getSpecies("Necrozma-Ultra");
+					typeTable = typeTable.filter(type => species.types.includes(type));
 				}
 				if (!typeTable.length) return [`Your team must share a type.`];
 			}

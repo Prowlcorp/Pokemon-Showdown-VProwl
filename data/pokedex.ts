@@ -468,7 +468,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		otherFormes: ["Pikachu-Cosplay", "Pikachu-Rock-Star", "Pikachu-Belle", "Pikachu-Pop-Star", "Pikachu-PhD", "Pikachu-Libre", "Pikachu-Partner", "Pikachu-World"],
 		formeOrder: [
 			"Pikachu", "Pikachu-Partner", "Pikachu-World",
-			"Pikachu-Rock-Star", "Pikachu-Belle", "Pikachu-Pop-Star", "Pikachu-PhD", "Pikachu-Libre", "Pikachu-Cosplay", // formes 1-6 from Gen 6
+			"Pikachu-Rock-Star", "Pikachu-Belle", "Pikachu-Pop-Star", "Pikachu-PhD", "Pikachu-Libre", "Pikachu-Cosplay",
 		],
 	},
 	pikachucosplay: {
@@ -484,7 +484,6 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 6,
 		color: "Yellow",
 		eggGroups: ["Undiscovered"],
-		gen: 6,
 	},
 	pikachurockstar: {
 		num: 23,
@@ -5583,7 +5582,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		otherFormes: ["Zangoose-Mega", "Yun"],
 		formeOrder: ["Zangoose", "Zangoose-Mega", "Yun"],
 	},
-/*	
+/*
 	yun: {
 		num: 325,
 		name: "Yun",
@@ -9555,7 +9554,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 115.3,
 		color: "Red",
 		eggGroups: ["Field"],
-		requiredItem: "Krookonite", 
+		requiredItem: "Krookonite",
 	},
 	darumaka: {
 		num: 539,

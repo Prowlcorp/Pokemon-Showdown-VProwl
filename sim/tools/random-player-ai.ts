@@ -86,7 +86,7 @@ export class RandomPlayerAI extends BattlePlayer {
 					!possibleMoves[j - 1].disabled
 					// NOTE: we don't actually check for whether we have PP or not because the
 					// simulator will mark the move as disabled if there is zero PP and there are
-					// situations where we actually need to use a move with 0 PP (Gen 1 Wrap).
+					// situations where we actually need to use a move with 0 PP.
 				)).map(j => ({
 					slot: j,
 					move: possibleMoves[j - 1].move,

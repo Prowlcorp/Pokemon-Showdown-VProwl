@@ -16,8 +16,7 @@ The beginning of a battle will look something like this:
     |teamsize|p1|4
     |teamsize|p2|5
     |gametype|doubles
-    |gen|7
-    |tier|[Gen 7] Doubles Ubers
+    |tier|Doubles Ubers
     |rule|Species Clause: Limit one of each Pokémon
     |rule|OHKO Clause: OHKO moves are banned
     |rule|Moody Clause: Moody is banned
@@ -60,12 +59,6 @@ The beginning of a battle will look something like this:
 `|gametype|GAMETYPE`
 
 > - `GAMETYPE` is `singles`, `doubles`, `triples`, `multi`, or `free-for-all`.
-
-`|gen|GENNUM`
-
-> Generation number, from 1 to 7. Stadium counts as its respective gens;
-> Modded formats count as whatever gen they were
-> based on.
 
 `|tier|FORMATNAME`
 
@@ -326,12 +319,6 @@ stat boosts are minor actions.
 > specify that the effect was a `MOVE` from `ATTACKER`. `[of]SOURCE` will note
 > the owner of the `EFFECT`, in the case that it's not `EFFECT` (for instance,
 > an ally with Aroma Veil.)
-
-`|-notarget|POKEMON`
-
-> A move has failed due to their being no target Pokémon `POKEMON`. `POKEMON` is
-> not present in Generation 1. This action is specific to Generations 1-4 as in
-> later Generations a failed move will display using `-fail`.
 
 `|-miss|SOURCE|TARGET`
 

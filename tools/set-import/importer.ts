@@ -37,16 +37,14 @@ interface FormatData {
 	[source: string]: PokemonSets;
 }
 
-type GenerationNum = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-
 // The tiers we support, ie. ones that we have data sources for.
-const FORMATS = new Map<ID, {gen: GenerationNum, format: Format}>();
+const FORMATS = new Map<ID, {format: Format}>();
 const VALIDATORS = new Map<ID, TeamValidator>();
 for (let gen = 1; gen <= 8; gen++) {
 	for (const tier of TIERS) {
 		const format = Dex.getFormat(`gen${gen}${tier}`);
 		if (format.exists) {
-			FORMATS.set(format.id, {gen: gen as GenerationNum, format});
+			FORMATS.set(format.id, {format});
 			VALIDATORS.set(format.id, new TeamValidator(format));
 		}
 	}
@@ -57,13 +55,13 @@ export async function importAll() {
 
 	const imports = [];
 	for (let gen = 1; gen <= 8; gen++) {
-		imports.push(importGen(gen as GenerationNum, index));
+		imports.push(importGen(index));
 	}
 
 	return Promise.all(imports);
 }
 
-async function importGen(gen: GenerationNum, index: string) {
+async function importGen(index: string) {
 	const data: GenerationData = {};
 
 	const smogonSetsByFormat: {[formatid: string]: PokemonSets} = {};
@@ -80,9 +78,7 @@ async function importGen(gen: GenerationNum, index: string) {
 	}
 	await Promise.all(imports);
 
-	for (const {format, gen: g} of FORMATS.values()) {
-		if (g !== gen) continue;
-
+	for (const {format} of FORMATS.values()) {
 		if (smogonSetsByFormat[format.id] && Object.keys(smogonSetsByFormat[format.id]).length) {
 			data[format.id] = {};
 			data[format.id]['dex'] = smogonSetsByFormat[format.id];
@@ -115,8 +111,6 @@ async function importGen(gen: GenerationNum, index: string) {
 }
 
 function eligible(dex: ModdedDex, id: ID) {
-	const gen = toGen(dex, id);
-	if (!gen || gen > dex.gen) return false;
 
 	const species = dex.getSpecies(id);
 	if (['Mega', 'Primal', 'Ultra'].some(f => species.forme.startsWith(f))) return true;
@@ -124,7 +118,7 @@ function eligible(dex: ModdedDex, id: ID) {
 	// Species with formes distinct enough to merit inclusion
 	const unique = ['darmanitan', 'meloetta', 'greninja', 'zygarde'];
 	// Too similar to their base forme/species to matter
-	const similar = ['pichu', 'pikachu', 'genesect', 'basculin', 'magearna', 'keldeo', 'vivillon'];
+	const similar = ['pikachu', 'genesect', 'basculin', 'magearna', 'keldeo', 'vivillon'];
 
 	if (species.battleOnly && !unique.some(f => id.startsWith(f))) return false;
 
@@ -132,23 +126,8 @@ function eligible(dex: ModdedDex, id: ID) {
 	return !id.endsWith('totem') && !capNFE && !similar.some(f => id.startsWith(f) && id !== f);
 }
 
-function toGen(dex: ModdedDex, name: string): GenerationNum | undefined {
-	const pokemon = dex.getSpecies(name);
-
-	const n = pokemon.num;
-	if (n > 810) return 8;
-	if (n > 721 || (n <= -23 && n >= -28) || (n <= -120 && n >= -126)) return 7;
-	if (n > 649 || (n <= -8 && n >= -22) || (n <= -106 && n >= -110)) return 6;
-	if (n > 493 || (n <= -12 && n >= -17) || (n <= -111 && n >= -115)) return 5;
-	if (n > 386 || (n <= -1 && n >= -11) || (n <= -101 && n >= -104) || (n <= -116 && n >= -119)) return 4;
-	if (n > 251) return 3;
-	if (n > 151) return 2;
-	if (n > 0) return 1;
-}
-
 async function importSmogonSets(
 	pokemon: string,
-	gen: GenerationNum,
 	setsByFormat: {[format: string]: PokemonSets},
 	numByFormat: {[format: string]: number}
 ) {
@@ -245,7 +224,6 @@ function toStatsTable(stats?: StatsTable, elide = 0) {
 }
 
 function fixedAbility(dex: ModdedDex, pokemon: string, ability?: string) {
-	if (dex.gen <= 2) return undefined;
 	const species = dex.getSpecies(pokemon);
 	if (ability && !['Mega', 'Primal', 'Ultra'].some(f => species.forme.startsWith(f))) return ability;
 	return species.abilities[0];
@@ -272,12 +250,6 @@ function validSet(
 		invalid = VALIDATORS.get(format.id)!.validateSet(pset, {});
 		if (!invalid) return true;
 	}
-	// Allow Gen 4 Arceus sets because they're occasionally useful for tournaments
-	if (format.id === 'gen4ubers' && invalid.includes(`${pokemon} is banned.`)) return true;
-	const title = `${format.name}: ${pokemon} (${name})'`;
-	const details = `${JSON.stringify(set)} = ${invalid.join(', ')}`;
-	// console.error(`${color(source, 94)} Invalid set ${color(title, 91)}: ${color(details, 90)}`);
-	console.error(color(`${source} Invalid set ${title}: ${details}`, 90));
 
 	return false;
 }
@@ -316,11 +288,11 @@ function toPokemonSet(
 ): PokemonSet {
 	// To simplify things, during validation we mutate the input set to correct for HP mismatches
 	const hp = set.moves && set.moves.find(m => m.startsWith('Hidden Power'));
-	let fill = dex.gen === 2 ? 30 : 31;
+	let fill = 31;
 	if (hp) {
 		const type = hp.slice(13);
 		if (type && dex.getHiddenPower(fillStats(set.ivs, fill)).type !== type) {
-			if (!set.ivs || (dex.gen >= 7 && (!set.level || set.level === 100))) {
+			if (!set.ivs || (!set.level || set.level === 100)) {
 				set.hpType = type;
 				fill = 31;
 			} else {
@@ -331,7 +303,7 @@ function toPokemonSet(
 
 	const copy = {species: pokemon, ...set} as PokemonSet;
 	copy.ivs = fillStats(set.ivs, fill);
-	copy.evs = fillStats(set.evs, dex.gen <= 2 ? 252 : 0);
+	copy.evs = fillStats(set.evs, 0);
 	// The validator wants an ability even when Gen < 3
 	copy.ability = copy.ability || 'None';
 
@@ -366,7 +338,7 @@ const getAnalysis = retrying(async (u: string) => {
 	}
 }, 3, 50);
 
-async function getAnalysesByFormat(pokemon: string, gen: GenerationNum) {
+async function getAnalysesByFormat(pokemon: string) {
 	const u = smogon.Analyses.url(pokemon === 'Meowstic' ? 'Meowstic-M' : pokemon, gen);
 	try {
 		const analysesByTier = await getAnalysis(u);
@@ -408,7 +380,7 @@ export async function getStatisticsURL(
 }
 
 // TODO: Use bigram matrix, bucketed spreads and generative validation logic for more realistic sets
-function importUsageBasedSets(gen: GenerationNum, format: Format, statistics: smogon.UsageStatistics, count: number) {
+function importUsageBasedSets(format: Format, statistics: smogon.UsageStatistics, count: number) {
 	const sets: PokemonSets = {};
 	const dex = Dex.forFormat(format);
 	const threshold = getUsageThreshold(format, count);

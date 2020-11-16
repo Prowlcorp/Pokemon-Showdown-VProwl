@@ -49,28 +49,18 @@ interface PokemonSet {
 /**
  * Describes a possible way to get a move onto a pokemon.
  *
- * First character is a generation number, 1-7.
- * Second character is a source ID, one of:
+ * Character is a source ID, one of:
  *
  * - M = TM/HM
  * - T = tutor
  * - L = start or level-up, 3rd char+ is the level
  * - R = restricted (special moves like Rotom moves)
  * - E = egg
- * - D = Dream World, only 5D is valid
  * - S = event, 3rd char+ is the index in .eventData
- * - C = NOT A REAL SOURCE, see note, only 3C/4C is valid
- *
- * C marks certain moves learned by a pokemon's prevo. It's used to
- * work around the chainbreeding checker's shortcuts for performance;
- * it lets the pokemon be a valid father for teaching the move, but
- * is otherwise ignored by the learnset checker (which will actually
- * check prevos for compatibility).
  */
 type MoveSource = string;
 
 interface EventInfo {
-	generation: number;
 	level?: number;
 	/** true: always shiny, 1: sometimes shiny, false | undefined: never shiny */
 	shiny?: boolean | 1;
@@ -85,8 +75,6 @@ interface EventInfo {
 	moves?: string[];
 	pokeball?: string;
 	from?: string;
-	/** Japan-only events can't be transferred to international games in Gen 1 */
-	japan?: boolean;
 }
 
 type Effect = Ability | Item | ActiveMove | Species | Condition | Format;
@@ -139,7 +127,6 @@ interface BasicEffect extends EffectData {
 	effectType: EffectType;
 	exists: boolean;
 	fullname: string;
-	gen: number;
 	sourceEffect: string;
 	toString: () => string;
 }
@@ -213,7 +200,6 @@ type SpreadMoveDamage = (number | boolean | undefined)[];
 type ZMoveOptions = ({move: string, target: MoveTarget} | null)[];
 
 interface BattleScriptsData {
-	gen: number;
 	zMoveTable?: {[k: string]: string};
 	afterMoveSecondaryEvent?: (this: Battle, targets: Pokemon[], pokemon: Pokemon, move: ActiveMove) => undefined;
 	calcRecoilDamage?: (this: Battle, damageDealt: number, move: Move) => number;
@@ -381,7 +367,6 @@ type ModdedTypeData = TypeData | Partial<Omit<TypeData, 'name'>> & {inherit: tru
 interface TypeInfo extends Readonly<TypeData> {
 	readonly effectType: 'Type' | 'EffectType';
 	readonly exists: boolean;
-	readonly gen: number;
 	readonly HPivs: SparseStatsTable;
 	readonly id: ID;
 	readonly name: string;
@@ -416,7 +401,6 @@ interface Plines {
 
 interface TextFile extends TextObject {
 	name: string;
-	gen7?: ModdedTextObject;
 }
 
 interface MovePlines extends Plines {
