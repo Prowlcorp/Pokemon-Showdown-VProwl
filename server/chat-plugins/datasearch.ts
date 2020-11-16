@@ -372,20 +372,13 @@ export const commands: ChatCommands = {
 	abilitysearchhelp() {
 		this.sendReplyBox(
 			`<code>/abilitysearch [ability description]</code>: finds abilities that match the given keywords.<br/>` +
-			`This command accepts natural language. (tip: fewer words tend to work better)<br/>` +
+			`This command accepts natural language. (tip: fewer words tend to work better)<br/>`
 		);
 	},
 
 	learnset: 'learn',
 	learnall: 'learn',
 	learn5: 'learn',
-	rbylearn: 'learn',
-	gsclearn: 'learn',
-	advlearn: 'learn',
-	dpplearn: 'learn',
-	bw2learn: 'learn',
-	oraslearn: 'learn',
-	usumlearn: 'learn',
 	async learn(target, room, user, connection, cmd, message) {
 		if (!target) return this.parse('/help learn');
 		target = target.slice(0, 300);
