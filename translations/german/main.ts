@@ -64,7 +64,6 @@ export const translations: Translations = {
 		"- /announce OR /wall <em>message</em>: make an announcement": "- /announce oder /wall <em>Nachricht</em>: Macht eine Ankündigung",
 		"- /modlog <em>username</em>: search the moderator log of the room": "- /modlog <em>Nutzername</em>: Ruft den Modlog des Nutzers für den Raum auf",
 		"- /modnote <em>note</em>: add a moderator note that can be read through modlog": "- /modnote <em>Notiz</em>: Fügt eine Notiz hinzu, die über den Modlog gelesen werden kann",
-		"- !show [image or youtube link]: display given media in chat.": "- !show [Bild oder Youtube-Link]: Zeigt den jeweiligen Medien-Link im Raum an",
 		"- /whitelist [user]: whitelist a non-staff user to use !show.": "- /whitelist [Nutzer]: Erlaubt es einem Nutzer, welcher über keinen Rang im Raum verfügt, !show zu benutzen",
 		"- /unwhitelist [user]: removes the user from !show whitelist.": "- /unwhitelist [Nutzer]: Entfernt einem Nutzer die Berechtigung, !show zu benutzen",
 

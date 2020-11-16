@@ -9,7 +9,6 @@
  * @license MIT
  */
 import * as net from 'net';
-import {YoutubeInterface} from '../chat-plugins/youtube';
 import {Utils} from '../../lib/utils';
 import {Net} from '../../lib/net';
 
@@ -1834,7 +1833,6 @@ export const commands: ChatCommands = {
 				`- /announce OR /wall <em>message</em>: make an announcement`,
 				`- /modlog <em>username</em>: search the moderator log of the room`,
 				`- /modnote <em>note</em>: add a moderator note that can be read through modlog`,
-				`- !show [image or youtube link]: display given media in chat.`,
 			],
 			[
 				`<strong>Room moderators (@)</strong> can also use:`,
@@ -2215,46 +2213,6 @@ export const commands: ChatCommands = {
 		return this.errorReply(`/showimage has been deprecated - use /show instead.`);
 	},
 
-	async requestshow(target, room, user) {
-		room = this.requireRoom();
-		this.checkChat();
-		if (!room.settings.requestShowEnabled) {
-			return this.errorReply(`Media approvals are disabled in this room.`);
-		}
-		if (user.can('showmedia', null, room)) return this.errorReply(`Use !show instead.`);
-		if (room.pendingApprovals?.has(user.id)) return this.errorReply('You have a request pending already.');
-		if (!toID(target)) return this.parse(`/help requestshow`);
-
-		let [link, comment] = target.split(',');
-		if (!/^https?:\/\//.test(link)) link = `https://${link}`;
-		link = encodeURI(link);
-		let dimensions;
-		if (!/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)(\/|$)/i.test(link)) {
-			try {
-				dimensions = await Chat.fitImage(link);
-			} catch (e) {
-				throw new Chat.ErrorMessage('Invalid link.');
-			}
-		}
-		if (!room.pendingApprovals) room.pendingApprovals = new Map();
-		room.pendingApprovals.set(user.id, {
-			name: user.name,
-			link: link,
-			comment: comment,
-			dimensions: dimensions,
-		});
-		this.sendReply(`You have requested to show the link: ${link}${comment ? ` (with the comment ${comment})` : ''}.`);
-		const message = `|tempnotify|pendingapprovals|Pending media request!` +
-			`|${user.name} has requested to show media in ${room.title}.|new media request`;
-		room.sendRankedUsers(message, '%');
-		room.sendMods(
-			Utils.html`|uhtml|request-${user.id}|<div class="infobox">${user.name} wants to show <a href="${link}">${link}</a><br>` +
-			`<button class="button" name="send" value="/approveshow ${user.id}">Approve</button><br>` +
-			`<button class="button" name="send" value="/denyshow ${user.id}">Deny</button></div>`
-		);
-	},
-	requestshowhelp: [`/requestshow [link], [comment] - Requests permission to show media in the room.`],
-
 	async approveshow(target, room, user) {
 		room = this.requireRoom();
 		this.checkCan('mute', null, room);
@@ -2277,10 +2235,6 @@ export const commands: ChatCommands = {
 			const [width, height, resized] = request.dimensions;
 			buf = Utils.html`<img src="${request.link}" width="${width}" height="${height}" />`;
 			if (resized) buf += Utils.html`<br /><a href="${request.link}" target="_blank">full-size image</a>`;
-		} else {
-			const YouTube = new YoutubeInterface();
-			buf = await YouTube.generateVideoDisplay(request.link);
-			if (!buf) return this.errorReply('Could not get YouTube video');
 		}
 		buf += Utils.html`<br /><div class="infobox"><small>(Requested by ${request.name})</small>`;
 		if (request.comment) {
