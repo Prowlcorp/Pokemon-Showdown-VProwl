@@ -182,7 +182,7 @@ export class ModdedDex {
 	forFormat(format: Format | string): ModdedDex {
 		if (!this.modsLoaded) this.includeMods();
 		const mod = this.getFormat(format).mod;
-		return dexes[mod || BASE_MOD].includeData();
+		return dexes[mod].includeData();
 	}
 
 	modData(dataType: DataType, id: string) {
@@ -533,8 +533,8 @@ export class ModdedDex {
 			name = this.data.Aliases[id];
 			id = toID(name);
 		}
-		if (this.data.Formats.hasOwnProperty(DEFAULT_MOD + id)) {
-			id = (DEFAULT_MOD + id) as ID;
+		if (this.data.Formats.hasOwnProperty(id)) {
+			id = id as ID;
 		}
 		let supplementaryAttributes: AnyObject | null = null;
 		if (name.includes('@@@')) {
@@ -1410,9 +1410,6 @@ export class ModdedDex {
 }
 
 dexes['base'] = new ModdedDex(undefined, true);
-
-// "gen8" is an alias for the current base data
-dexes[BASE_MOD] = dexes['base'];
 
 export const Dex = dexes['base'];
 export namespace Dex {
