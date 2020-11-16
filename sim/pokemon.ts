@@ -964,7 +964,7 @@ export class Pokemon {
 	transformInto(pokemon: Pokemon, effect?: Effect) {
 		const species = pokemon.species;
 		if (pokemon.fainted || pokemon.illusion || (pokemon.volatiles['substitute']) ||
-			(pokemon.transformed) || (this.transformed) {
+			(pokemon.transformed) || (this.transformed) ) {
 			return false;
 		}
 
