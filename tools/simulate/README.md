@@ -54,7 +54,7 @@ games asynchronously.
 
 ## exhaustive
 
-The `exhaustive` subcommand cycles through all generations and game types,
+The `exhaustive` subcommand cycles through all game types,
 attempting to use as many different effects as possible in the battles it
 randomly simulates. This can be useful as a form of
 ['smoke testing'](https://en.wikipedia.org/wiki/Smoke_testing_\(software\)), a

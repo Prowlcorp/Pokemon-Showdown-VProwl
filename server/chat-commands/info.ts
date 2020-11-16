@@ -45,10 +45,6 @@ export function findFormats(targetId: string, isOMSearch = false) {
 		const subformat = Dex.getFormat(mode);
 		const sectionId = toID(subformat.section);
 		let formatId = subformat.id;
-		if (!/^gen\d+/.test(targetId)) {
-			// Skip generation prefix if it wasn't provided
-			formatId = formatId.replace(/^gen\d+/, '') as ID;
-		}
 		if (targetId && !(subformat as any)[targetId + 'Show'] && sectionId !== targetId &&
 		subformat.id === mode && !formatId.startsWith(targetId)) continue;
 		totalMatches++;
@@ -778,7 +774,6 @@ export const commands: ChatCommands = {
 	},
 	datahelp: [
 		`/data [pokemon/item/move/ability/nature] - Get details on this pokemon/item/move/ability/nature.`,
-		`/data [pokemon/item/move/ability/nature], Gen [generation number/format name] - Get details on this pokemon/item/move/ability/nature for that generation/format.`,
 		`!data [pokemon/item/move/ability/nature] - Show everyone these details. Requires: + % @ # &`,
 	],
 
@@ -798,8 +793,6 @@ export const commands: ChatCommands = {
 	detailshelp() {
 		this.sendReplyBox(
 			`<code>/details [Pok\u00e9mon/item/move/ability/nature]</code>: get additional details on this Pok\u00e9mon/item/move/ability/nature.<br />` +
-			`<code>/details [Pok\u00e9mon/item/move/ability/nature], Gen [generation number]</code>: get details on this Pok\u00e9mon/item/move/ability/nature in that generation.<br />` +
-			`You can also append the generation number to <code>/dt</code>; for example, <code>/dt1 Mewtwo</code> gets details on Mewtwo in Gen 1.<br />` +
 			`<code>/details [Pok\u00e9mon/item/move/ability/nature], [format]</code>: get details on this Pok\u00e9mon/item/move/ability/nature in that format.<br />` +
 			`<code>!details [Pok\u00e9mon/item/move/ability/nature]</code>: show everyone these details. Requires: + % @ # &`
 		);
@@ -1687,10 +1680,10 @@ export const commands: ChatCommands = {
 		const RANDOMS_CALC_COMMANDS = ['randomscalc', 'randbatscalc', 'rcalc'];
 		const BATTLESPOT_CALC_COMMANDS = ['bsscalc', 'cantsaycalc'];
 		const SUPPORTED_RANDOM_FORMATS = [
-			'gen8randombattle', 'gen8unratedrandombattle', 'gen7randombattle', 'gen6randombattle', 'gen5randombattle', 'gen4randombattle', 'gen3randombattle', 'gen2randombattle', 'gen1randombattle',
+			'randombattle',
 		];
 		const SUPPORTED_BATTLESPOT_FORMATS = [
-			'gen5gbusingles', 'gen5gbudoubles', 'gen6battlespotsingles', 'gen6battlespotdoubles', 'gen6battlespottriples', 'gen7battlespotsingles', 'gen7battlespotdoubles', 'gen7bssfactory',
+			'battlespottriples', 'battlespotsingles', 'battlespotdoubles', 'bssfactory',
 		];
 		const isRandomBattle = (room?.battle && SUPPORTED_RANDOM_FORMATS.includes(room.battle.format));
 		const isBattleSpotBattle = (room?.battle && (SUPPORTED_BATTLESPOT_FORMATS.includes(room.battle.format) ||
@@ -2001,172 +1994,6 @@ export const commands: ChatCommands = {
 	faqhelp: [
 		`/faq [theme] - Provides a link to the FAQ. Add autoconfirmed, badges, ladder, staff, or tiers for a link to these questions. Add all for all of them.`,
 		`!faq [theme] - Shows everyone a link to the FAQ. Add autoconfirmed, badges, ladder, staff, or tiers for a link to these questions. Add all for all of them. Requires: + % @ # &`,
-	],
-
-	analysis: 'smogdex',
-	strategy: 'smogdex',
-	smogdex(target, room, user) {
-		if (!target) return this.parse('/help smogdex');
-		if (!this.runBroadcast()) return;
-
-		const targets = target.split(',');
-		let pokemon = Dex.getSpecies(targets[0]);
-		const item = Dex.getItem(targets[0]);
-		const move = Dex.getMove(targets[0]);
-		const ability = Dex.getAbility(targets[0]);
-		const format = Dex.getFormat(targets[0]);
-		let atLeastOne = false;
-		let generation = (targets[1] || 'ss').trim().toLowerCase();
-		let genNumber = 8;
-		const extraFormat = Dex.getFormat(targets[2]);
-
-		if (['8', 'gen8', 'eight', 'ss', 'swsh'].includes(generation)) {
-			generation = 'ss';
-		} else if (['7', 'gen7', 'seven', 'sm', 'sumo', 'usm', 'usum'].includes(generation)) {
-			generation = 'sm';
-			genNumber = 7;
-		} else if (['6', 'gen6', 'oras', 'six', 'xy'].includes(generation)) {
-			generation = 'xy';
-			genNumber = 6;
-		} else if (['5', 'b2w2', 'bw', 'bw2', 'five', 'gen5'].includes(generation)) {
-			generation = 'bw';
-			genNumber = 5;
-		} else if (['4', 'dp', 'dpp', 'four', 'gen4', 'hgss'].includes(generation)) {
-			generation = 'dp';
-			genNumber = 4;
-		} else if (['3', 'adv', 'frlg', 'gen3', 'rs', 'rse', 'three'].includes(generation)) {
-			generation = 'rs';
-			genNumber = 3;
-		} else if (['2', 'gen2', 'gs', 'gsc', 'two'].includes(generation)) {
-			generation = 'gs';
-			genNumber = 2;
-		} else if (['1', 'gen1', 'one', 'rb', 'rby', 'rgy'].includes(generation)) {
-			generation = 'rb';
-			genNumber = 1;
-		} else {
-			generation = 'ss';
-		}
-
-		// Pokemon
-		if (pokemon.exists) {
-			atLeastOne = true;
-
-			if ((pokemon.battleOnly && pokemon.baseSpecies !== 'Greninja') ||
-				['Keldeo', 'Genesect'].includes(pokemon.baseSpecies)) {
-				pokemon = Dex.getSpecies(pokemon.changesFrom || pokemon.baseSpecies);
-			}
-
-			let formatName = extraFormat.name;
-			let formatId: string = extraFormat.id;
-			if (formatName.startsWith('[Gen ') && formatName.slice(6, 8) === '] ') {
-				formatName = formatName.slice(8);
-				formatId = toID(formatName);
-			}
-			if (formatId === 'battlespotdoubles') {
-				formatId = 'battle_spot_doubles';
-			} else if (formatId === 'battlespottriples') {
-				formatId = 'battle_spot_triples';
-				if (genNumber > 6) {
-					return this.sendReplyBox(`Triples formats are not an available format in Pok&eacute;mon generation ${generation.toUpperCase()}.`);
-				}
-			} else if (formatId === 'doublesou') {
-				formatId = 'doubles';
-			} else if (formatId === 'balancedhackmons') {
-				formatId = 'bh';
-			} else if (formatId === 'battlespotsingles') {
-				formatId = 'battle_spot_singles';
-			} else if (formatId === 'ubers') {
-				formatId = 'uber';
-			} else if (formatId.includes('vgc')) {
-				formatId = 'vgc' + formatId.slice(-2);
-				formatName = 'VGC20' + formatId.slice(-2);
-			} else if (extraFormat.effectType !== 'Format') {
-				formatName = formatId = '';
-			}
-			const supportedLanguages: {[k: string]: string} = {
-				spanish: 'es',
-				french: 'fr',
-				italian: 'it',
-				german: 'de',
-				portuguese: 'pt',
-			};
-			let id = pokemon.id;
-			// Special case for Meowstic-M
-			if (id === 'meowstic') id = 'meowsticm' as ID;
-			if (['ou', 'uu'].includes(formatId) && generation === 'sm' &&
-				room?.settings.language && room.settings.language in supportedLanguages) {
-				// Limited support for translated analysis
-				// Translated analysis do not support automatic redirects from a id to the proper page
-				this.sendReplyBox(
-					Utils.html`<a href="https://www.smogon.com/dex/${generation}/pokemon/${id}/${formatId}/?lang=${supportedLanguages[room.settings.language]}">${generation.toUpperCase()} ${formatName} ${pokemon.name} analysis</a>, brought to you by <a href="https://www.smogon.com">Smogon University</a>`
-				);
-			} else if (['ou', 'uu'].includes(formatId) && generation === 'sm') {
-				this.sendReplyBox(
-					Utils.html`<a href="https://www.smogon.com/dex/${generation}/pokemon/${id}/${formatId}">${generation.toUpperCase()} ${formatName} ${pokemon.name} analysis</a>, brought to you by <a href="https://www.smogon.com">Smogon University</a><br />` +
-					`Other languages: <a href="https://www.smogon.com/dex/${generation}/pokemon/${id}/${formatId}/?lang=es">Español</a>, <a href="https://www.smogon.com/dex/${generation}/pokemon/${id}/${formatId}/?lang=fr">Français</a>, <a href="https://www.smogon.com/dex/${generation}/pokemon/${id}/${formatId}/?lang=it">Italiano</a>, ` +
-					`<a href="https://www.smogon.com/dex/${generation}/pokemon/${id}/${formatId}/?lang=de">Deutsch</a>, <a href="https://www.smogon.com/dex/${generation}/pokemon/${id}/${formatId}/?lang=pt">Português</a>`
-				);
-			} else {
-				this.sendReplyBox(Utils.html`<a href="https://www.smogon.com/dex/${generation}/pokemon/${id}${(formatId ? '/' + formatId : '')}">${generation.toUpperCase()} ${formatName} ${pokemon.name} analysis</a>, brought to you by <a href="https://www.smogon.com">Smogon University</a>`);
-			}
-		}
-
-		// Item
-		if (item.exists) {
-			atLeastOne = true;
-			this.sendReplyBox(`<a href="https://www.smogon.com/dex/${generation}/items/${item.id}">${generation.toUpperCase()} ${item.name} item analysis</a>, brought to you by <a href="https://www.smogon.com">Smogon University</a>`);
-		}
-
-		// Ability
-		if (ability.exists) {
-			atLeastOne = true;
-			this.sendReplyBox(`<a href="https://www.smogon.com/dex/${generation}/abilities/${ability.id}">${generation.toUpperCase()} ${ability.name} ability analysis</a>, brought to you by <a href="https://www.smogon.com">Smogon University</a>`);
-		}
-
-		// Move
-		if (move.exists) {
-			atLeastOne = true;
-			this.sendReplyBox(`<a href="https://www.smogon.com/dex/${generation}/moves/${toID(move.name)}">${generation.toUpperCase()} ${move.name} move analysis</a>, brought to you by <a href="https://www.smogon.com">Smogon University</a>`);
-		}
-
-		// Format
-		if (format.id) {
-			let formatName = format.name;
-			let formatId: string = format.id;
-			if (formatId === 'battlespotdoubles') {
-				formatId = 'battle_spot_doubles';
-			} else if (formatId === 'battlespottriples') {
-				formatId = 'battle_spot_triples';
-				if (genNumber > 6) {
-					return this.sendReplyBox(`Triples formats are not an available format in Pok&eacute;mon generation ${generation.toUpperCase()}.`);
-				}
-			} else if (formatId === 'doublesou') {
-				formatId = 'doubles';
-			} else if (formatId === 'balancedhackmons') {
-				formatId = 'bh';
-			} else if (formatId === 'battlespotsingles') {
-				formatId = 'battle_spot_singles';
-			} else if (formatId === 'ubers') {
-				formatId = 'uber';
-			} else if (formatId.includes('vgc')) {
-				formatId = `vgc${formatId.slice(-2)}`;
-				formatName = `VGC20${formatId.slice(-2)}`;
-			} else if (format.effectType !== 'Format') {
-				formatName = formatId = '';
-			}
-			if (formatName) {
-				atLeastOne = true;
-				this.sendReplyBox(Utils.html`<a href="https://www.smogon.com/dex/${generation}/formats/${formatId}">${generation.toUpperCase()} ${formatName} format analysis</a>, brought to you by <a href="https://www.smogon.com">Smogon University</a>`);
-			}
-		}
-
-		if (!atLeastOne) {
-			return this.sendReplyBox(`Pok&eacute;mon, item, move, ability, or format not found for generation ${generation.toUpperCase()}.`);
-		}
-	},
-	smogdexhelp: [
-		`/analysis [pokemon], [generation], [format] - Links to the Smogon University analysis for this Pok\u00e9mon in the given generation.`,
-		`!analysis [pokemon], [generation], [format] - Shows everyone this link. Requires: + % @ # &`,
 	],
 
 	veekun(target, broadcast, user) {

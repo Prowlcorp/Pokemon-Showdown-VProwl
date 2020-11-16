@@ -141,7 +141,6 @@ export const commands: ChatCommands = {
 			`The parameter <code>mega</code> can be added to search for Mega Evolutions only, and the parameter <code>Fully Evolved</code> (or <code>FE</code>) can be added to search for fully-evolved Pok\u00e9mon.<br/>` +
 			`<code>Alola</code>, <code>Konor</code>, <code>Therian</code>, <code>Totem</code>, or <code>Primal</code> can be used as parameters to search for those formes.<br/>` +
 			`Parameters separated with <code>|</code> will be searched as alternatives for each other; e.g., <code>trick | switcheroo</code> searches for all Pok\u00e9mon that learn either Trick or Switcheroo.<br/>` +
-			`You can search for info in a specific generation by appending the generation to ds or by using the <code>maxgen</code> keyword; e.g. <code>/ds1 normal</code> or <code>/ds normal, maxgen1</code> searches for all Pok\u00e9mon that were Normal type in Generation I.<br/>` +
 			`<code>/dexsearch</code> will search the Konor Pokedex; you can search the National Pokedex by using <code>/nds</code> or by adding <code>natdex</code> as a parameter.<br/>` +
 			`Searching for a Pok\u00e9mon with both egg group and type parameters can be differentiated by adding the suffix <code>group</code> onto the egg group parameter; e.g., seaching for <code>grass, grass group</code> will show all Grass types in the Grass egg group.<br/>` +
 			`The parameter <code>monotype</code> will only show Pok\u00e9mon that are single-typed.<br/>` +
@@ -291,7 +290,6 @@ export const commands: ChatCommands = {
 			`<code>protection</code> as a parameter will search protection moves like Protect, Detect, etc.<br/>` +
 			`Parameters separated with <code>|</code> will be searched as alternatives for each other; e.g., <code>fire | water</code> searches for all moves that are either Fire type or Water type.<br/>` +
 			`If a Pok\u00e9mon is included as a parameter, only moves from its movepool will be included in the search.<br/>` +
-			`You can search for info in a specific generation by appending the generation to ms; e.g. <code>ms1 normal</code> searches for all moves that were Normal type in Generation I.<br/>` +
 			`<code>/ms</code> will search the Konor Moves; you can search the National Moves by using <code>/nms</code> or by adding <code>natdex</code> as a parameter.<br/>` +
 			`The order of the parameters does not matter.`
 		);
@@ -334,8 +332,6 @@ export const commands: ChatCommands = {
 		this.sendReplyBox(
 			`<code>/itemsearch [item description]</code>: finds items that match the given keywords.<br/>` +
 			`This command accepts natural language. (tip: fewer words tend to work better)<br/>` +
-			`The <code>gen</code> keyword can be used to search for items introduced in a given generation; e.g., <code>/is gen4</code> searches for items introduced in Generation 4.<br/>` +
-			`To search for items within a generation, append the generation to <code>/is</code> or use the <code>maxgen</code> keyword; e.g., <code>/is4 Water-type</code> or <code>/is maxgen4 Water-type</code> searches for items whose Generation 4 description includes "Water-type".<br/>` +
 			`Searches with <code>fling</code> in them will find items with the specified Fling behavior.<br/>` +
 			`Searches with <code>natural gift</code> in them will find items with the specified Natural Gift behavior.`
 		);
@@ -377,8 +373,6 @@ export const commands: ChatCommands = {
 		this.sendReplyBox(
 			`<code>/abilitysearch [ability description]</code>: finds abilities that match the given keywords.<br/>` +
 			`This command accepts natural language. (tip: fewer words tend to work better)<br/>` +
-			`The <code>gen</code> keyword can be used to search for abilities introduced in a given generation; e.g., <code>/as gen4</code> searches for abilities introduced in Generation 4.<br/>` +
-			`To search for abilities within a generation, append the generation to <code>/as</code> or use the <code>maxgen</code> keyword; e.g., <code>/as4 Water-type</code> or <code>/as maxgen4 Water-type</code> searches for abilities whose Generation 4 description includes "Water-type".`
 		);
 	},
 
@@ -413,7 +407,7 @@ export const commands: ChatCommands = {
 	learnhelp: [
 		`/learn [ruleset], [pokemon], [move, move, ...] - Displays how the Pok\u00e9mon can learn the given moves, if it can at all.`,
 		`!learn [ruleset], [pokemon], [move, move, ...] - Show everyone that information. Requires: + % @ # &`,
-		`Specifying a ruleset is entirely optional. The ruleset can be a format, a generation (e.g.: gen3) or 'pentagon'. A value of 'pentagon' indicates that trading from previous generations is not allowed.`,
+		`Specifying a ruleset is entirely optional. The ruleset can be a format.`,
 		`/learn5 displays how the Pok\u00e9mon can learn the given moves at level 5, if it can at all.`,
 	],
 };
@@ -446,7 +440,7 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 	const allStats = ['hp', 'atk', 'def', 'spa', 'spd', 'spe', 'bst', 'weight', 'height', 'gen'];
 	const allStatAliases: {[k: string]: string} = {
 		attack: 'atk', defense: 'def', specialattack: 'spa', spc: 'spa', special: 'spa', spatk: 'spa',
-		specialdefense: 'spd', spdef: 'spd', speed: 'spe', wt: 'weight', ht: 'height', generation: 'gen',
+		specialdefense: 'spd', spdef: 'spd', speed: 'spe', wt: 'weight', ht: 'height',
 	};
 	let showAll = false;
 	let sort = null;
@@ -536,13 +530,6 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 
 			if (['mono', 'monotype'].includes(toID(target))) {
 				singleTypeSearch = !isNotSearch;
-				orGroup.skip = true;
-				continue;
-			}
-
-			if (target.substr(0, 6) === 'maxgen') {
-				maxGen = parseInt(target[6]);
-				if (!maxGen || maxGen < 1 || maxGen > 8) return {error: "The generation must be between 1 and 8"};
 				orGroup.skip = true;
 				continue;
 			}
@@ -900,17 +887,6 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 			}
 			if (matched) continue;
 
-			const validator = TeamValidator.get(nationalSearch ? `gen8nationaldexag` : `gen${maxGen}ou`);
-			const pokemonSource = validator.allSources();
-			for (const move of Object.keys(alts.moves).map(x => Dex.getMove(x))) {
-				if (!validator.checkLearnset(move, dex[mon], pokemonSource) === alts.moves[move.id]) {
-					matched = true;
-					break;
-				}
-				if (!pokemonSource.size()) break;
-			}
-			if (matched) continue;
-
 			delete dex[mon];
 		}
 	}
@@ -1103,13 +1079,6 @@ function runMovesearch(target: string, cmd: string, canAll: boolean, message: st
 			if (target === 'all') {
 				if (!canAll) return {error: "A search with the parameter 'all' cannot be broadcast."};
 				showAll = true;
-				orGroup.skip = true;
-				continue;
-			}
-
-			if (target.substr(0, 6) === 'maxgen') {
-				maxGen = parseInt(target[6]);
-				if (!maxGen || maxGen < 1 || maxGen > 8) return {error: "The generation must be between 1 and 8"};
 				orGroup.skip = true;
 				continue;
 			}
@@ -1653,17 +1622,6 @@ function runItemsearch(target: string, cmd: string, canAll: boolean, message: st
 	// Refine searched words
 	for (const [i, search] of rawSearch.entries()) {
 		let newWord = search.trim();
-		if (newWord.substr(0, 6) === 'maxgen' && parseInt(newWord[6])) {
-			if (maxGen) return {error: "You cannot specify 'maxgen' multiple times."};
-			maxGen = parseInt(newWord[6]);
-			if (maxGen < 2 || maxGen > 8) return {error: "The generation must be between 2 and 8"};
-			continue;
-		} else if (newWord.substr(0, 3) === 'gen' && parseInt(newWord[3])) {
-			if (gen) return {error: "You cannot specify 'gen' multiple times."};
-			gen = parseInt(newWord[3]);
-			if (gen < 2 || gen > 8) return {error: "The generation must be between 2 and 8"};
-			continue;
-		}
 		if (isNaN(parseFloat(newWord))) newWord = newWord.replace('.', '');
 		switch (newWord) {
 		// Words that don't really help identify item removed to speed up search
@@ -1902,17 +1860,6 @@ function runAbilitysearch(target: string, cmd: string, canAll: boolean, message:
 
 	for (const [i, search] of rawSearch.entries()) {
 		let newWord = search.trim();
-		if (newWord.substr(0, 6) === 'maxgen' && parseInt(newWord[6])) {
-			if (maxGen) return {error: "You cannot specify 'maxgen' multiple times."};
-			maxGen = parseInt(newWord[6]);
-			if (maxGen < 3 || maxGen > 8) return {error: "The generation must be between 3 and 8"};
-			continue;
-		} else if (newWord.substr(0, 3) === 'gen' && parseInt(newWord[3])) {
-			if (gen) return {error: "You cannot specify 'gen' multiple times."};
-			gen = parseInt(newWord[3]);
-			if (gen < 3 || gen > 8) return {error: "The generation must be between 3 and 8"};
-			continue;
-		}
 		if (isNaN(parseFloat(newWord))) newWord = newWord.replace('.', '');
 		switch (newWord) {
 		// remove extraneous words

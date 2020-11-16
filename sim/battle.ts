@@ -2099,7 +2099,7 @@ export class Battle {
 		// int(int(int(2 * L / 5 + 2) * A * P / D) / 50);
 		const baseDamage = tr(tr(tr(tr(2 * level / 5 + 2) * basePower * attack) / defense) / 50);
 
-		// Calculate damage modifiers separately (order differs between generations)
+		// Calculate damage modifiers separately
 		return this.modifyDamage(baseDamage, pokemon, target, move, suppressMessages);
 	}
 

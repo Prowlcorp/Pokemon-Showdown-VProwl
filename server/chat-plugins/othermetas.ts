@@ -15,9 +15,8 @@ interface StoneDeltas {
 }
 
 
-function getMegaStone(stone: string, mod = 'gen8'): Item | null {
+function getMegaStone(stone: string): Item | null {
 	let dex = Dex;
-	if (mod && toID(mod) in Dex.dexes) dex = Dex.mod(toID(mod));
 	const item = dex.getItem(stone);
 	if (!item.exists) {
 		if (toID(stone) === 'dragonascent') {
@@ -174,7 +173,7 @@ export const commands: ChatCommands = {
 		}).join("&nbsp;|&ThickSpace;") + '</font>');
 	},
 	mixandmegahelp: [
-		`/mnm <pokemon> @ <mega stone>[, generation] - Shows the Mix and Mega evolved Pok\u00e9mon's type and stats.`,
+		`/mnm <pokemon> @ <mega stone> - Shows the Mix and Mega evolved Pok\u00e9mon's type and stats.`,
 	],
 
 	orb: 'stone',
@@ -285,7 +284,7 @@ export const commands: ChatCommands = {
 			this.sendReply(`|raw|<font size="1"><font color="#686868">Weight:</font> ${details["Weight"]}</font>`);
 		}
 	},
-	stonehelp: [`/stone <mega stone>[, generation] - Shows the changes that a mega stone/orb applies to a Pok\u00e9mon.`],
+	stonehelp: [`/stone <mega stone> - Shows the changes that a mega stone/orb applies to a Pok\u00e9mon.`],
 
 	ce: 'crossevolve',
 	crossevo: 'crossevolve',

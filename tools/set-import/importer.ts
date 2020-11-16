@@ -339,13 +339,9 @@ const getAnalysis = retrying(async (u: string) => {
 }, 3, 50);
 
 async function getAnalysesByFormat(pokemon: string) {
-	const u = smogon.Analyses.url(pokemon === 'Meowstic' ? 'Meowstic-M' : pokemon, gen);
+	const u = smogon.Analyses.url(pokemon === 'Meowstic' ? 'Meowstic-M' : pokemon);
 	try {
 		const analysesByTier = await getAnalysis(u);
-		if (!analysesByTier) {
-			error(`Unable to process analysis for ${pokemon} in generation ${gen}`);
-			return undefined;
-		}
 
 		const analysesByFormat = new Map<Format, smogon.Analysis[]>();
 		for (const [tier, analyses] of analysesByTier.entries()) {
@@ -356,7 +352,7 @@ async function getAnalysesByFormat(pokemon: string) {
 
 		return analysesByFormat;
 	} catch (err) {
-		error(`Unable to process analysis for ${pokemon} in generation ${gen}`);
+		error(`Unable to process analysis for ${pokemon}`);
 		return undefined;
 	}
 }
