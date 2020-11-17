@@ -777,14 +777,6 @@ export const commands: ChatCommands = {
 	],
 
 	dt: 'details',
-	dt1: 'details',
-	dt2: 'details',
-	dt3: 'details',
-	dt4: 'details',
-	dt5: 'details',
-	dt6: 'details',
-	dt7: 'details',
-	dt8: 'details',
 	details(target) {
 		if (!target) return this.parse('/help details');
 		this.run('data');

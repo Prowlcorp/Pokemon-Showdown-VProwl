@@ -15583,7 +15583,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		name: "Lucaridon",
 		types: ["Fighting", "Steel", "Ground"],
 		genderRatio: {M: 0.875, F: 0.125},
-		baseStats: {hp: 70, atk: 110, def: 70, spa: 115, spd: 70, spe: 90},
+		baseStats: {hp: 100, atk: 150, def: 140, spa: 115, spd: 90, spe: 90},
 		abilities: {0: "Inner Focus", 1: "Justified", H: "Drought"},
 		heightm: 2.2,
 		weightkg: 203.2,

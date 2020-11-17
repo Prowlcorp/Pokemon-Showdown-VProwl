@@ -3,7 +3,6 @@ export const Aliases: {[alias: string]: string} = {
 	randbats: "Random Battle",
 	mono: "Monotype",
 	ag: "Anything Goes",
-	bss: "Battle Stadium Singles",
 	randdubs: "Random Doubles Battle",
 	"2v2": "2v2 Doubles",
 	mnm: "Mix and Mega",
@@ -13,13 +12,10 @@ export const Aliases: {[alias: string]: string} = {
 	cc1v1: "Challenge Cup 1v1",
 	cc2v2: "Challenge Cup 2v2",
 	monorandom: "Monotype Random Battle",
-	bf: "Battle Factory",
-	bssf: "BSS Factory",
-	gen7bss: "Battle Spot Singles",
-	gen7bsd: "Battle Spot Doubles",
+	bss: "Battle Spot Singles",
+	bsd: "Battle Spot Doubles",
 	crossevo: "Cross Evolution",
 	pmots: "Megamax",
-	opti: "Optimons",
 
 	// mega evos
 	fabio: "Ampharos-Mega",

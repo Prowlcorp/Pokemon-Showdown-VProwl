@@ -367,6 +367,10 @@ export class ModdedDex {
 			species.nfe = species.evos.length;
 			species.canHatch = species.canHatch ||
 				(!['Ditto', 'Undiscovered'].includes(species.eggGroups[0]) && !species.prevo && species.name !== 'Manaphy');
+		} else {
+			species = new Species({
+				id, name, exists: false, tier: 'Illegal', doublesTier: 'Illegal', isNonstandard: 'Custom',
+			});
 		}
 		if (species.exists) this.speciesCache.set(id, species);
 		return species;
