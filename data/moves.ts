@@ -12482,6 +12482,25 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onPrepareHit(target, pokemon, move) {
 			this.field.setWeather(['raindance', 'sunnyday', 'hail', 'sandstorm'][this.random(4)], source)
 		},
+		onModifyType(move, pokemon) {
+			switch (pokemon.effectiveWeather()) {
+			case 'sunnyday':
+			case 'desolateland':
+				move.type = 'Fire';
+				break;
+			case 'raindance':
+			case 'primordialsea':
+				move.type = 'Water';
+				break;
+			case 'sandstorm':
+			case 'ragingsandstorm':
+				move.type = 'Rock';
+				break;
+			case 'hail':
+				move.type = 'Ice';
+				break;
+			}
+		},
 		isZ: "castiumz",
 		secondary: null,
 		target: "normal",
