@@ -6033,8 +6033,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
 		basePowerCallback(pokemon, target, move) {
-			if (target.baseSpecies.prevo) return move.basePower * 2;
-			return move.basePower;
+			if (target.baseSpecies.prevo) {
+				return this.chainModify(2);
+			}
 		},
 		onBasePower(basePower, pokemon, target) {
 			if (pokemon.level> 100) {
@@ -12479,16 +12480,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onPrepareHit(target, pokemon, move) {
-			const rand = this.random(3);
-			if (rand === 0) {
-				move.weather = 'raindance';
-			} else if (rand === 1) {
-				move.weather = 'sunnyday';
-			} else if (rand === 2) {
-				move.weather = 'hail';
-			} else {
-				move.weather = 'sandstorm';
-			}
+			this.field.setWeather(['raindance', 'sunnyday', 'hail', 'sandstorm'][this.random(4)], source)
 		},
 		isZ: "castiumz",
 		secondary: null,

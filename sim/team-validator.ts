@@ -725,8 +725,8 @@ export class TeamValidator {
 				throw new Error(`Species ${species.name} has a required ability despite not being a battle-only forme; it should just be in its abilities table.`);
 			}
 			if (species.requiredItems && !species.requiredItems.includes(item.name)) {
-				if (dex.gen >= 8 && (species.baseSpecies === 'Arceus' || species.baseSpecies === 'Silvally')) {
-					// Arceus/Silvally formes in gen 8 only require the item with Multitype/RKS System
+				if (species.baseSpecies === 'Arceus' || species.baseSpecies === 'Silvally') {
+					// Arceus/Silvally formes only require the item with Multitype/RKS System
 					if (set.ability === species.abilities[0]) {
 						problems.push(
 							`${name} needs to hold ${species.requiredItems.join(' or ')}.`,
@@ -1174,7 +1174,7 @@ export class TeamValidator {
 					// Egg moves can be taught to any pokemon from any source
 					if (learned === 'E' || 'LMTR'.includes(learned.charAt(1))) {
 						if (learned.charAt(1) !== 'R') {
-							// current-gen level-up, TM or tutor moves:
+							// Level-up, TM or tutor moves:
 							//   always available
 							if (learned !== 'E' && babyOnly) setSources.babyOnly = babyOnly;
 							if (!moveSources.moveEvoCarryCount) return null;

@@ -76,11 +76,6 @@ export interface SecondaryEffect extends HitEffect {
 	 * Sheer Force but not Shield Dust.
 	 */
 	dustproof?: boolean;
-	/**
-	 * Gen 2 specific mechanics: Bypasses Substitute only on Twineedle,
-	 * and allows it to flinch sleeping/frozen targets
-	 */
-	kingsrock?: boolean;
 	self?: HitEffect;
 }
 
