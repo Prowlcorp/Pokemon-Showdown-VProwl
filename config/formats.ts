@@ -19,6 +19,161 @@ The column value will be ignored for repeat sections.
 
 export const Formats: FormatList = [
 
+	// US/UM Singles
+	///////////////////////////////////////////////////////////////////
+	{
+		section: "US/UM Singles",
+		column: 1,
+	},
+	{
+		name: "Custom Game",
+
+		debug: true,
+		maxLevel: 9999,
+		battle: {trunc: Math.trunc},
+		defaultLevel: 100,
+		teamLength: {
+			validate: [1, 24],
+			battle: 24,
+		},
+		// no restrictions, for serious (other than team preview)
+		ruleset: ['Team Preview', 'Cancel Mod'],
+	},
+	{
+		name: "1v1",
+		desc: `Bring three Pok&eacute;mon to Team Preview and choose one to battle.`,
+		threads: [
+			`&bullet; <a href="https://www.smogon.com/forums/posts/8031460/">USUM 1v1</a>`,
+		],
+
+		teamLength: {
+			validate: [1, 3],
+			battle: 1,
+		},
+		ruleset: ['Obtainable', 'Species Clause', 'Nickname Clause', 'OHKO Clause', 'Swagger Clause', 'Evasion Moves Clause', 'Accuracy Moves Clause', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+		banlist: [
+			'Arceus', 'Darkrai', 'Deoxys-Base', 'Deoxys-Attack', 'Deoxys-Defense', 'Dialga', 'Giratina',
+			'Groudon', 'Ho-Oh', 'Kangaskhan-Mega', 'Kyogre', 'Kyurem-Black', 'Kyurem-White', 'Lugia', 'Lunala', 'Marshadow', 'Mewtwo',
+			'Mimikyu', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane', 'Palkia', 'Rayquaza', 'Reshiram', 'Salamence-Mega', 'Shaymin-Sky',
+			'Snorlax', 'Solgaleo', 'Tapu Koko', 'Xerneas', 'Yveltal', 'Zekrom', 'Focus Sash', 'Moody', 'Perish Song', 'Detect + Fightinium Z',
+		],
+	},
+	{
+		name: "Anything Goes",
+		threads: [
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3587441/">Anything Goes Metagame Discussion</a>`,
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3591711/">Anything Goes Viability Rankings</a>`,
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3646736/">Anything Goes Sample Teams</a>`,
+		],
+
+		ruleset: ['Obtainable', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
+	},
+	{
+		name: "Battle Spot Singles",
+		threads: [
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3601012/">Introduction to Battle Spot Singles</a>`,
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3605970/">Battle Spot Singles Viability Rankings</a>`,
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3601658/">Battle Spot Singles Role Compendium</a>`,
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3619162/">Battle Spot Singles Sample Teams</a>`,
+		],
+
+		maxForcedLevel: 50,
+		teamLength: {
+			validate: [3, 6],
+			battle: 3,
+		},
+		ruleset: ['Standard GBU'],
+	},
+
+	// US/UM Doubles/Triples
+	///////////////////////////////////////////////////////////////////
+
+	{
+		section: "US/UM Doubles",
+		column: 2,
+	},
+	{
+		name: "Doubles Custom Game",
+
+		gameType: 'doubles',
+		maxLevel: 9999,
+		battle: {trunc: Math.trunc},
+		defaultLevel: 100,
+		debug: true,
+		teamLength: {
+			validate: [2, 24],
+			battle: 24,
+		},
+		// no restrictions, for serious (other than team preview)
+		ruleset: ['Team Preview', 'Cancel Mod'],
+	},
+	{
+		name: "Triples Custom Game",
+
+		gameType: 'triples',
+		searchShow: false,
+		maxLevel: 9999,
+		battle: {trunc: Math.trunc},
+		defaultLevel: 100,
+		debug: true,
+		teamLength: {
+			validate: [1, 24],
+			battle: 24,
+		},
+		// no restrictions, for serious (other than team preview)
+		ruleset: ['Team Preview', 'Cancel Mod'],
+	},
+	{
+		name: "Battle Spot Doubles",
+		threads: [
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3595001/">Battle Spot Doubles Discussion</a>`,
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3593890/">Battle Spot Doubles Viability Rankings</a>`,
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3595859/">Battle Spot Doubles Sample Teams</a>`,
+		],
+
+		gameType: 'doubles',
+		maxForcedLevel: 50,
+		teamLength: {
+			validate: [4, 6],
+			battle: 4,
+		},
+		ruleset: ['Standard GBU'],
+	},
+	{
+		name: "Battle Spot Triples",
+		threads: [
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3533914/">ORAS Battle Spot Triples Discussion</a>`,
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3549201/">ORAS BST Viability Rankings</a>`,
+		],
+
+		gameType: 'triples',
+		searchShow: false,
+		maxForcedLevel: 50,
+		teamLength: {
+			validate: [6, 6],
+		},
+		ruleset: ['Standard GBU'],
+	},
+	{
+		name: "2v2 Doubles",
+		desc: `Double battle where you bring four Pok&eacute;mon to Team Preview and choose only two.`,
+		threads: [
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3656321/">2v2 Doubles</a>`,
+		],
+
+		gameType: 'doubles',
+		teamLength: {
+			validate: [2, 4],
+			battle: 2,
+		},
+		ruleset: ['Standard Doubles', 'Accuracy Moves Clause', 'Sleep Clause Mod'],
+		banlist: [
+			'Dialga', 'Giratina', 'Groudon', 'Ho-Oh', 'Jirachi', 'Kyogre', 'Kyurem-White',
+			'Lugia', 'Lunala', 'Magearna', 'Marshadow', 'Mewtwo', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane',
+			'Palkia', 'Rayquaza', 'Reshiram', 'Solgaleo', 'Xerneas', 'Yveltal', 'Zacian', 'Zamazenta', 'Zekrom',
+			'Focus Sash', 'Power Construct', 'Final Gambit', 'Perish Song', 'Swagger',
+		],
+	},
 	// Other Metagames
 	///////////////////////////////////////////////////////////////////
 
@@ -129,7 +284,6 @@ export const Formats: FormatList = [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3657562/">Cross Evolution</a>`,
 		],
 
-		searchShow: false,
 		ruleset: ['Standard', 'Overflow Stat Clause'],
 		banlist: ['Sneasel', 'Type: Null', 'Arena Trap', 'Ice Scales', 'Moody', 'Baton Pass', 'King\'s Rock'],
 		restricted: ['Chansey', 'Lunala', 'Shedinja', 'Solgaleo', 'Gorilla Tactics', 'Huge Power', 'Pure Power', 'Shadow Tag'],
@@ -252,7 +406,6 @@ export const Formats: FormatList = [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3656811/">Inheritance</a>`,
 		],
 
-		searchShow: false,
 		ruleset: ['Standard'],
 		banlist: [
 			'Dialga', 'Dracovish', 'Giratina', 'Groudon', 'Kartana', 'Kyogre',
@@ -396,7 +549,6 @@ export const Formats: FormatList = [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3660877/">Shared Power</a>`,
 		],
 
-		searchShow: false,
 		ruleset: ['Standard'],
 		banlist: [
 			'Dialga', 'Giratina', 'Groudon', 'Ho-Oh', 'Kyogre',
@@ -466,7 +618,6 @@ export const Formats: FormatList = [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3656980/">Trademarked</a>`,
 		],
 
-		searchShow: false,
 		ruleset: ['Standard'],
 		banlist: [
 			'Dialga', 'Dracovish', 'Dragapult', 'Kyurem-Black', 'Kyurem-White',
@@ -605,7 +756,6 @@ export const Formats: FormatList = [
 		teamLength: {
 			battle: 2,
 		},
-		searchShow: false,
 		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
 	},
 	{
@@ -625,7 +775,6 @@ export const Formats: FormatList = [
 
 		gameType: 'doubles',
 		team: 'random',
-		searchShow: false,
 		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod'],
 	},
 	{
@@ -672,165 +821,4 @@ export const Formats: FormatList = [
 		},
 	},
 
-	// US/UM Singles
-	///////////////////////////////////////////////////////////////////
-	{
-		section: "US/UM Singles",
-		column: 3,
-	},
-	{
-		name: "Custom Game",
-
-		searchShow: false,
-		debug: true,
-		maxLevel: 9999,
-		battle: {trunc: Math.trunc},
-		defaultLevel: 100,
-		teamLength: {
-			validate: [1, 24],
-			battle: 24,
-		},
-		// no restrictions, for serious (other than team preview)
-		ruleset: ['Team Preview', 'Cancel Mod'],
-	},
-	{
-		name: "1v1",
-		desc: `Bring three Pok&eacute;mon to Team Preview and choose one to battle.`,
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/posts/8031460/">USUM 1v1</a>`,
-		],
-
-		searchShow: false,
-		teamLength: {
-			validate: [1, 3],
-			battle: 1,
-		},
-		ruleset: ['Obtainable', 'Species Clause', 'Nickname Clause', 'OHKO Clause', 'Swagger Clause', 'Evasion Moves Clause', 'Accuracy Moves Clause', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
-		banlist: [
-			'Arceus', 'Darkrai', 'Deoxys-Base', 'Deoxys-Attack', 'Deoxys-Defense', 'Dialga', 'Giratina',
-			'Groudon', 'Ho-Oh', 'Kangaskhan-Mega', 'Kyogre', 'Kyurem-Black', 'Kyurem-White', 'Lugia', 'Lunala', 'Marshadow', 'Mewtwo',
-			'Mimikyu', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane', 'Palkia', 'Rayquaza', 'Reshiram', 'Salamence-Mega', 'Shaymin-Sky',
-			'Snorlax', 'Solgaleo', 'Tapu Koko', 'Xerneas', 'Yveltal', 'Zekrom', 'Focus Sash', 'Moody', 'Perish Song', 'Detect + Fightinium Z',
-		],
-	},
-	{
-		name: "Anything Goes",
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3587441/">Anything Goes Metagame Discussion</a>`,
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3591711/">Anything Goes Viability Rankings</a>`,
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3646736/">Anything Goes Sample Teams</a>`,
-		],
-
-		// searchShow: false,
-		ruleset: ['Obtainable', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
-	},
-	{
-		name: "Battle Spot Singles",
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3601012/">Introduction to Battle Spot Singles</a>`,
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3605970/">Battle Spot Singles Viability Rankings</a>`,
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3601658/">Battle Spot Singles Role Compendium</a>`,
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3619162/">Battle Spot Singles Sample Teams</a>`,
-		],
-
-		searchShow: false,
-		maxForcedLevel: 50,
-		teamLength: {
-			validate: [3, 6],
-			battle: 3,
-		},
-		ruleset: ['Standard GBU'],
-	},
-
-	// US/UM Doubles/Triples
-	///////////////////////////////////////////////////////////////////
-
-	{
-		section: "US/UM Doubles",
-		column: 3,
-	},
-	{
-		name: "Doubles Custom Game",
-
-		gameType: 'doubles',
-		searchShow: false,
-		maxLevel: 9999,
-		battle: {trunc: Math.trunc},
-		defaultLevel: 100,
-		debug: true,
-		teamLength: {
-			validate: [2, 24],
-			battle: 24,
-		},
-		// no restrictions, for serious (other than team preview)
-		ruleset: ['Team Preview', 'Cancel Mod'],
-	},
-	{
-		name: "Triples Custom Game",
-
-		gameType: 'triples',
-		searchShow: false,
-		maxLevel: 9999,
-		battle: {trunc: Math.trunc},
-		defaultLevel: 100,
-		debug: true,
-		teamLength: {
-			validate: [1, 24],
-			battle: 24,
-		},
-		// no restrictions, for serious (other than team preview)
-		ruleset: ['Team Preview', 'Cancel Mod'],
-	},
-	{
-		name: "Battle Spot Doubles",
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3595001/">Battle Spot Doubles Discussion</a>`,
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3593890/">Battle Spot Doubles Viability Rankings</a>`,
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3595859/">Battle Spot Doubles Sample Teams</a>`,
-		],
-
-		gameType: 'doubles',
-		searchShow: false,
-		maxForcedLevel: 50,
-		teamLength: {
-			validate: [4, 6],
-			battle: 4,
-		},
-		ruleset: ['Standard GBU'],
-	},
-	{
-		name: "Battle Spot Triples",
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3533914/">ORAS Battle Spot Triples Discussion</a>`,
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3549201/">ORAS BST Viability Rankings</a>`,
-		],
-
-		gameType: 'triples',
-		searchShow: false,
-		maxForcedLevel: 50,
-		teamLength: {
-			validate: [6, 6],
-		},
-		ruleset: ['Standard GBU'],
-	},
-	{
-		name: "2v2 Doubles",
-		desc: `Double battle where you bring four Pok&eacute;mon to Team Preview and choose only two.`,
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3656321/">2v2 Doubles</a>`,
-		],
-
-		gameType: 'doubles',
-		teamLength: {
-			validate: [2, 4],
-			battle: 2,
-		},
-		ruleset: ['Standard Doubles', 'Accuracy Moves Clause', 'Sleep Clause Mod'],
-		banlist: [
-			'Dialga', 'Giratina', 'Groudon', 'Ho-Oh', 'Jirachi', 'Kyogre', 'Kyurem-White',
-			'Lugia', 'Lunala', 'Magearna', 'Marshadow', 'Mewtwo', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane',
-			'Palkia', 'Rayquaza', 'Reshiram', 'Solgaleo', 'Xerneas', 'Yveltal', 'Zacian', 'Zamazenta', 'Zekrom',
-			'Focus Sash', 'Power Construct', 'Final Gambit', 'Perish Song', 'Swagger',
-		],
-	},
 ];
