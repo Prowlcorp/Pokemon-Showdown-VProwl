@@ -50,23 +50,13 @@ export class PokemonSources {
 
 	constructor(sourcesBefore = 0, sourcesAfter = 0) {
 		this.sources = [];
-		this.sourcesBefore = sourcesBefore;
-		this.sourcesAfter = sourcesAfter;
 		this.isHidden = null;
-		this.limitedEggMoves = undefined;
-		this.moveEvoCarryCount = 0;
 	}
 	size() {
-		if (this.sourcesBefore) return Infinity;
 		return this.sources.length;
 	}
-	add(source: PokemonSource, limitedEggMove?: ID | null) {
+	add(source: PokemonSource) {
 		if (this.sources[this.sources.length - 1] !== source) this.sources.push(source);
-		if (limitedEggMove && this.limitedEggMoves !== null) {
-			this.limitedEggMoves = [limitedEggMove];
-		} else if (limitedEggMove === null) {
-			this.limitedEggMoves = null;
-		}
 	}
 	intersectWith(other: PokemonSources) {
 		if (this.sources.length) {
@@ -83,20 +73,10 @@ export class PokemonSources {
 			if (this.restrictedMove) {
 				// incompatible
 				this.sources = [];
-				this.sourcesBefore = 0;
 			} else {
 				this.restrictedMove = other.restrictedMove;
 			}
 		}
-		if (other.limitedEggMoves) {
-			if (!this.limitedEggMoves) {
-				this.limitedEggMoves = other.limitedEggMoves;
-			} else {
-				this.limitedEggMoves.push(...other.limitedEggMoves);
-			}
-		}
-		this.moveEvoCarryCount += other.moveEvoCarryCount;
-		if (other.sourcesAfter > this.sourcesAfter) this.sourcesAfter = other.sourcesAfter;
 		if (other.isHidden) this.isHidden = true;
 	}
 }
@@ -1019,14 +999,10 @@ export class TeamValidator {
 			problems.push(problemString);
 		}
 
-		if (setSources.size() && setSources.moveEvoCarryCount > 3) {
-			if (setSources.sourcesBefore < 6) setSources.sourcesBefore = 0;
+		if (setSources.size()) {
 			setSources.sources = setSources.sources.filter(
-				source => source.charAt(1) === 'E' && parseInt(source.charAt(0)) >= 6
+				source => source.charAt(0) === 'E'
 			);
-			if (!setSources.size()) {
-				problems.push(`${name} needs to know ${species.evoMove || 'a Fairy-type move'} to evolve, so it can only know 3 other moves from ${species.prevo}.`);
-			}
 		}
 
 		if (problems.length) return problems;
@@ -1053,7 +1029,7 @@ export class TeamValidator {
 				}
 				return true;
 			});
-			if (!setSources.sources.length && !setSources.sourcesBefore) {
+			if (!setSources.sources.length) {
 				problems.push(`${name}'s event/egg moves are from an evolution, and are incompatible with its moves from ${baby.name}.`);
 			}
 		}
@@ -1155,7 +1131,7 @@ export class TeamValidator {
 					//   means we can learn it only if obtained that exact way described
 					//   in source
 
-					if (learned.charAt(1) === 'L') {
+					if (learned.charAt(0) === 'L') {
 						// special checking for level-up moves
 						if (level >= parseInt(learned.substr(2))) {
 							// we're past the required level to learn it
@@ -1172,19 +1148,18 @@ export class TeamValidator {
 					}
 
 					// Egg moves can be taught to any pokemon from any source
-					if (learned === 'E' || 'LMTR'.includes(learned.charAt(1))) {
-						if (learned.charAt(1) !== 'R') {
+					if (learned === 'E' || 'LMTR'.includes(learned.charAt(0))) {
+						if (learned.charAt(0) !== 'R') {
 							// Level-up, TM or tutor moves:
 							//   always available
 							if (learned !== 'E' && babyOnly) setSources.babyOnly = babyOnly;
-							if (!moveSources.moveEvoCarryCount) return null;
 						}
 						// Level-up, TM, or tutor moves:
-						if (learned.charAt(1) === 'R') {
+						if (learned.charAt(0) === 'R') {
 							moveSources.restrictedMove = moveid;
 						}
 						limit1 = false;
-					} else if (learned.charAt(1) === 'E') {
+					} else if (learned.charAt(0) === 'E') {
 						// egg moves:
 						//   only if hatched from an egg
 						let limitedEggMove: ID | null | undefined = undefined;
@@ -1192,19 +1167,10 @@ export class TeamValidator {
 							limitedEggMove = null;
 						}
 						learned = 'E' + (species.prevo ? species.id : '');
-						moveSources.add(learned, limitedEggMove);
-					} else if (learned.charAt(1) === 'S') {
+						moveSources.add(learned);
+					} else if (learned.charAt(0) === 'S') {
 						moveSources.add(learned + ' ' + species.id);
 					}
-				}
-			}
-
-			if (!moveSources.size()) {
-				if (
-					(species.evoType === 'levelMove' && species.evoMove !== move.name) ||
-					(species.id === 'sylveon' && move.type !== 'Fairy')
-				) {
-					moveSources.moveEvoCarryCount = 1;
 				}
 			}
 
