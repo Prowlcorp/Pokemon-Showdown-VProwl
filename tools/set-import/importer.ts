@@ -388,19 +388,15 @@ function importUsageBasedSets(format: Format, statistics: smogon.UsageStatistics
 				level: getLevel(format),
 				moves: (top(stats.Moves, 4) as string[]).map(m => dex.getMove(m).name).filter(m => m),
 			};
-			if (gen >= 2) {
-				const id = top(stats.Items) as string;
-				set.item = dex.getItem(id).name;
-				if (set.item === 'nothing') set.item = undefined;
-			}
-			if (gen >= 3) {
-				const id = top(stats.Abilities) as string;
-				set.ability = fixedAbility(dex, pokemon, dex.getAbility(id).name);
-				const {nature, evs} = fromSpread(top(stats.Spreads) as string);
-				set.nature = nature;
-				if (!evs || !Object.keys(evs).length) continue;
-				set.evs = evs;
-			}
+			const id = top(stats.Items) as string;
+			set.item = dex.getItem(id).name;
+			if (set.item === 'nothing') set.item = undefined;
+			const id2 = top(stats.Abilities) as string;
+			set.ability = fixedAbility(dex, pokemon, dex.getAbility(id2).name);
+			const {nature, evs} = fromSpread(top(stats.Spreads) as string);
+			set.nature = nature;
+			if (!evs || !Object.keys(evs).length) continue;
+			set.evs = evs;
 			const name = 'Showdown Usage';
 			if (validSet('stats', dex, format, pokemon, name, set)) {
 				sets[pokemon] = {};

@@ -19,7 +19,6 @@ export interface TeamData {
 
 export class RandomTeams {
 	dex: ModdedDex;
-	factoryTier: string;
 	format: Format;
 	prng: PRNG;
 
@@ -27,7 +26,6 @@ export class RandomTeams {
 		format = Dex.getFormat(format);
 		this.dex = Dex.forFormat(format);
 
-		this.factoryTier = '';
 		this.format = format;
 		this.prng = prng && !Array.isArray(prng) ? prng : new PRNG(prng);
 	}
