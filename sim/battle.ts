@@ -1120,7 +1120,7 @@ export class Battle {
 		const requests: any[] = Array(this.sides.length).fill(null);
 
 		switch (type) {
-			case 'switch':
+			case 'switch': {
 				for (let i = 0; i < this.sides.length; i++) {
 					const side = this.sides[i];
 					const switchTable = [];
@@ -1132,6 +1132,7 @@ export class Battle {
 					}
 				}
 				break;
+			}
 
 			case 'teampreview':
 				for (let i = 0; i < this.sides.length; i++) {
@@ -1141,13 +1142,14 @@ export class Battle {
 				}
 				break;
 
-			default:
+			default: {
 				for (let i = 0; i < this.sides.length; i++) {
 					const side = this.sides[i];
 					const activeData = side.active.map(pokemon => pokemon?.getMoveRequestData());
 					requests[i] = {active: activeData, side: side.getRequestData()};
 				}
 				break;
+			}
 		}
 
 		const allRequestsMade = requests.every(request => request);
@@ -1674,26 +1676,26 @@ export class Battle {
 			if (boostBy) {
 				success = true;
 				switch (effect?.id) {
-				case 'bellydrum':
-					this.add('-setboost', target, 'atk', target.boosts['atk'], '[from] move: Belly Drum');
-					break;
-				case 'zpower':
-					this.add(msg, target, boostName, boostBy, '[zeffect]');
-					break;
-				default:
-					if (!effect) break;
-					if (effect.effectType === 'Move') {
-						this.add(msg, target, boostName, boostBy);
-					} else if (effect.effectType === 'Item') {
-						this.add(msg, target, boostName, boostBy, '[from] item: ' + effect.name);
-					} else {
-						if (effect.effectType === 'Ability' && !boosted) {
-							this.add('-ability', target, effect.name, 'boost');
-							boosted = true;
+					case 'bellydrum':
+						this.add('-setboost', target, 'atk', target.boosts['atk'], '[from] move: Belly Drum');
+						break;
+					case 'zpower':
+						this.add(msg, target, boostName, boostBy, '[zeffect]');
+						break;
+					default:
+						if (!effect) break;
+						if (effect.effectType === 'Move') {
+							this.add(msg, target, boostName, boostBy);
+						} else if (effect.effectType === 'Item') {
+							this.add(msg, target, boostName, boostBy, '[from] item: ' + effect.name);
+						} else {
+							if (effect.effectType === 'Ability' && !boosted) {
+								this.add('-ability', target, effect.name, 'boost');
+								boosted = true;
+							}
+							this.add(msg, target, boostName, boostBy);
 						}
-						this.add(msg, target, boostName, boostBy);
-					}
-					break;
+						break;
 				}
 				this.runEvent('AfterEachBoost', target, source, effect, currentBoost);
 			} else if (effect && effect.effectType === 'Ability') {
@@ -1752,7 +1754,7 @@ export class Battle {
 			if (source && effect.effectType === 'Move') source.lastDamage = targetDamage;
 
 			const name = effect.fullname === 'tox' ? 'psn' : effect.fullname;
-			switch (effect?.id) {
+			switch (effect.id) {
 				case 'partiallytrapped':
 					this.add('-damage', target, target.getHealth, '[from] ' + this.effectData.sourceEffect.fullname, '[partiallytrapped]');
 					break;
