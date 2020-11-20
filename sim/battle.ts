@@ -83,6 +83,7 @@ export class Battle {
 	readonly sides: [Side, Side] | [Side, Side, Side, Side];
 	readonly prngSeed: PRNGSeed;
 	dex: ModdedDex;
+	gen: number;
 	ruleTable: Dex.RuleTable;
 	prng: PRNG;
 	rated: boolean | string;
@@ -146,6 +147,7 @@ export class Battle {
 		const format = options.format || Dex.getFormat(options.formatid, true);
 		this.format = format;
 		this.dex = Dex.forFormat(format);
+		this.gen = this.dex.gen;
 		this.ruleTable = this.dex.getRuleTable(format);
 
 		this.zMoveTable = {};

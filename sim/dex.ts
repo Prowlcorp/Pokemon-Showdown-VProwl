@@ -41,6 +41,8 @@ import {Format, RuleTable, mergeFormatLists, ComplexBan, ComplexTeamBan} from '.
 import {PRNG, PRNGSeed} from './prng';
 import {Utils} from '../lib/utils';
 
+const BASE_MOD = 'gen999' as ID;
+const DEFAULT_MOD = BASE_MOD;
 const DATA_DIR = path.resolve(__dirname, '../.data-dist');
 const MODS_DIR = path.resolve(__dirname, '../.data-dist/mods');
 const MAIN_FORMATS = path.resolve(__dirname, '../.config-dist/formats');
@@ -122,6 +124,7 @@ export class ModdedDex {
 	readonly natureCache = new Map<ID, Nature>();
 	readonly typeCache = new Map<string, TypeInfo>();
 
+	gen = 0;
 	parentMod = '';
 	modsLoaded = false;
 
@@ -143,6 +146,7 @@ export class ModdedDex {
 			const original = dexes['base'].mod(mod).includeData();
 			this.currentMod = original.currentMod;
 
+			this.gen = original.gen;
 			this.parentMod = original.parentMod;
 
 			this.abilityCache = original.abilityCache;
@@ -179,10 +183,15 @@ export class ModdedDex {
 		return dexes[mod || 'base'];
 	}
 
+	forGen(gen: number) {
+		if (!gen) return this;
+		return this.mod(`gen${gen}`);
+	}
+
 	forFormat(format: Format | string): ModdedDex {
 		if (!this.modsLoaded) this.includeMods();
 		const mod = this.getFormat(format).mod;
-		return dexes[mod].includeData();
+		return dexes[mod || BASE_MOD].includeData();
 	}
 
 	modData(dataType: DataType, id: string) {
@@ -400,6 +409,17 @@ export class ModdedDex {
 			desc: '',
 			shortDesc: '',
 		};
+		for (let i = this.gen; i < dexes['base'].gen; i++) {
+			const curDesc = entry[`gen${i}`]?.desc;
+			const curShortDesc = entry[`gen${i}`]?.shortDesc;
+			if (!descs.desc && curDesc) {
+				descs.desc = curDesc;
+			}
+			if (!descs.shortDesc && curShortDesc) {
+				descs.shortDesc = curShortDesc;
+			}
+			if (descs.desc && descs.shortDesc) break;
+		}
 		if (!descs.shortDesc) descs.shortDesc = entry.shortDesc || '';
 		if (!descs.desc) descs.desc = entry.desc || descs.shortDesc;
 		return descs;
@@ -537,8 +557,8 @@ export class ModdedDex {
 			name = this.data.Aliases[id];
 			id = toID(name);
 		}
-		if (this.data.Formats.hasOwnProperty(id)) {
-			id = id as ID;
+		if (this.data.Formats.hasOwnProperty(DEFAULT_MOD + id)) {
+			id = (DEFAULT_MOD + id) as ID;
 		}
 		let supplementaryAttributes: AnyObject | null = null;
 		if (name.includes('@@@')) {
@@ -1353,6 +1373,10 @@ export class ModdedDex {
 
 		this.dataCache = dataCache as DexTableData;
 
+		// Flag the generation. Required for team validator.
+		this.gen = dataCache.Scripts.gen;
+		if (!this.gen) throw new Error(`Mod ${this.currentMod} needs a generation number in scripts.js`);
+
 		// Execute initialization script.
 		if (Scripts.init) Scripts.init.call(this);
 
@@ -1404,6 +1428,8 @@ export class ModdedDex {
 			if (format.challengeShow === undefined) format.challengeShow = true;
 			if (format.searchShow === undefined) format.searchShow = true;
 			if (format.tournamentShow === undefined) format.tournamentShow = true;
+			if (format.mod === undefined) format.mod = 'gen999';
+			if (!dexes[format.mod]) throw new Error(`Format "${format.name}" requires nonexistent mod: '${format.mod}'`);
 			this.formatsCache[id] = format;
 		}
 
@@ -1412,6 +1438,8 @@ export class ModdedDex {
 }
 
 dexes['base'] = new ModdedDex(undefined, true);
+// "gen999" is an alias for the current base data
+dexes[BASE_MOD] = dexes['base'];
 
 export const Dex = dexes['base'];
 export namespace Dex {

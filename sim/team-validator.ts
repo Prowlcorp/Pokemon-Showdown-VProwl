@@ -84,12 +84,14 @@ export class PokemonSources {
 export class TeamValidator {
 	readonly format: Format;
 	readonly dex: ModdedDex;
+	readonly gen: number;
 	readonly ruleTable: import('./dex-formats').RuleTable;
 
 	readonly toID: (str: any) => ID;
 	constructor(format: string | Format, dex = Dex) {
 		this.format = dex.getFormat(format);
 		this.dex = dex.forFormat(this.format);
+		this.gen = this.dex.gen;
 		this.ruleTable = this.dex.getRuleTable(this.format);
 
 		this.toID = toID;

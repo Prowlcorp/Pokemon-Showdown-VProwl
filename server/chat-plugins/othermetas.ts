@@ -160,6 +160,7 @@ export const commands: ChatCommands = {
 		}
 		const details: {[k: string]: string} = {
 			"Dex#": '' + mixedSpecies.num,
+			Gen: mixedSpecies.gen,
 			Height: mixedSpecies.heightm + " m",
 			Weight: mixedSpecies.weighthg / 10 + " kg <em>(" + weighthit + " BP)</em>",
 			"Dex Colour": mixedSpecies.color,

@@ -200,6 +200,7 @@ type SpreadMoveDamage = (number | boolean | undefined)[];
 type ZMoveOptions = ({move: string, target: MoveTarget} | null)[];
 
 interface BattleScriptsData {
+	gen: number;
 	zMoveTable?: {[k: string]: string};
 	afterMoveSecondaryEvent?: (this: Battle, targets: Pokemon[], pokemon: Pokemon, move: ActiveMove) => undefined;
 	calcRecoilDamage?: (this: Battle, damageDealt: number, move: Move) => number;
