@@ -1120,7 +1120,7 @@ export class Battle {
 		const requests: any[] = Array(this.sides.length).fill(null);
 
 		switch (type) {
-			case 'switch': {
+			case 'switch':
 				for (let i = 0; i < this.sides.length; i++) {
 					const side = this.sides[i];
 					const switchTable = [];
@@ -1132,7 +1132,6 @@ export class Battle {
 					}
 				}
 				break;
-			}
 
 			case 'teampreview':
 				for (let i = 0; i < this.sides.length; i++) {
@@ -1142,14 +1141,13 @@ export class Battle {
 				}
 				break;
 
-			default: {
+			default:
 				for (let i = 0; i < this.sides.length; i++) {
 					const side = this.sides[i];
 					const activeData = side.active.map(pokemon => pokemon?.getMoveRequestData());
 					requests[i] = {active: activeData, side: side.getRequestData()};
 				}
 				break;
-			}
 		}
 
 		const allRequestsMade = requests.every(request => request);
@@ -1754,25 +1752,25 @@ export class Battle {
 			if (source && effect.effectType === 'Move') source.lastDamage = targetDamage;
 
 			const name = effect.fullname === 'tox' ? 'psn' : effect.fullname;
-			switch (effect.id) {
-			case 'partiallytrapped':
-				this.add('-damage', target, target.getHealth, '[from] ' + this.effectData.sourceEffect.fullname, '[partiallytrapped]');
-				break;
-			case 'powder':
-				this.add('-damage', target, target.getHealth, '[silent]');
-				break;
-			case 'confused':
-				this.add('-damage', target, target.getHealth, '[from] confusion');
-				break;
-			default:
-				if (effect.effectType === 'Move' || !name) {
-					this.add('-damage', target, target.getHealth);
-				} else if (source && (source !== target || effect.effectType === 'Ability')) {
-					this.add('-damage', target, target.getHealth, '[from] ' + name, '[of] ' + source);
-				} else {
-					this.add('-damage', target, target.getHealth, '[from] ' + name);
-				}
-				break;
+			switch (effect?.id) {
+				case 'partiallytrapped':
+					this.add('-damage', target, target.getHealth, '[from] ' + this.effectData.sourceEffect.fullname, '[partiallytrapped]');
+					break;
+				case 'powder':
+					this.add('-damage', target, target.getHealth, '[silent]');
+					break;
+				case 'confused':
+					this.add('-damage', target, target.getHealth, '[from] confusion');
+					break;
+				default:
+					if (effect.effectType === 'Move' || !name) {
+						this.add('-damage', target, target.getHealth);
+					} else if (source && (source !== target || effect.effectType === 'Ability')) {
+						this.add('-damage', target, target.getHealth, '[from] ' + name, '[of] ' + source);
+					} else {
+						this.add('-damage', target, target.getHealth, '[from] ' + name);
+					}
+					break;
 			}
 
 			if (targetDamage && effect.effectType === 'Move') {
