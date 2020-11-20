@@ -1951,10 +1951,12 @@ export class Battle {
 		let s: StatNameExceptHP;
 		if (nature.plus) {
 			s = nature.plus;
+			const stat = stats[s];
 			stats[s] = tr(tr(stat * 110, 16) / 100);
 		}
 		if (nature.minus) {
 			s = nature.minus;
+			const stat = stats[s];
 			stats[s] = tr(tr(stat * 90, 16) / 100);
 		}
 		return stats;
