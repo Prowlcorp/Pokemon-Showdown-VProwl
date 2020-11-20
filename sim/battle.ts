@@ -1468,7 +1468,7 @@ export class Battle {
 							continue;
 						}
 						const ruleTable = this.ruleTable;
-						if ((ruleTable.has('+hackmons') || !ruleTable.has('obtainableabilities')) && !this.format.team) {
+						if ( !ruleTable.has('obtainableabilities') && !this.format.team) {
 							// hackmons format
 							continue;
 						}
