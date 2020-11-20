@@ -979,6 +979,10 @@ export class TeamValidator {
 		if (eventData.gender) set.gender = eventData.gender;
 	}
 
+	allSources(species?: Species) {
+		return new PokemonSources(999, 999);
+	}
+
 	reconcileLearnset(
 		species: Species, setSources: PokemonSources, problem: {type: string, moveName: string, [key: string]: any} | null,
 		name: string = species.name
