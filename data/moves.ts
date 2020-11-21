@@ -12479,10 +12479,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTryMove(target, pokemon, move) {
-			this.field.setWeather(['raindance', 'sunnyday', 'hail', 'sandstorm'][this.random(4)], pokemon)
-		},
-		onModifyType(move, pokemon) {
+		onPrepareHit(target, pokemon, move) {
+			this.field.setWeather(['raindance', 'sunnyday', 'hail', 'sandstorm'][this.random(4)], pokemon);
 			switch (pokemon.effectiveWeather()) {
 				case 'sunnyday':
 				case 'desolateland':
@@ -21055,17 +21053,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			let factor = 0.5;
 			switch (pokemon.effectiveWeather()) {
-			case 'sunnyday':
-			case 'desolateland':
-				factor = 0.667;
-				break;
-			case 'raindance':
-			case 'primordialsea':
-			case 'sandstorm':
-			case 'ragingsandstorm':
-			case 'hail':
-				factor = 0.25;
-				break;
+				case 'sunnyday':
+				case 'desolateland':
+					factor = 0.667;
+					break;
+				case 'raindance':
+				case 'primordialsea':
+				case 'sandstorm':
+				case 'ragingsandstorm':
+				case 'hail':
+					factor = 0.25;
+					break;
 			}
 			return !!this.heal(this.modify(pokemon.maxhp, factor));
 		},
