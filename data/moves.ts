@@ -12479,26 +12479,26 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		onPrepareHit(target, pokemon, move) {
+		onTryMove(target, pokemon, move) {
 			this.field.setWeather(['raindance', 'sunnyday', 'hail', 'sandstorm'][this.random(4)], pokemon)
 		},
 		onModifyType(move, pokemon) {
 			switch (pokemon.effectiveWeather()) {
-			case 'sunnyday':
-			case 'desolateland':
-				move.type = 'Fire';
-				break;
-			case 'raindance':
-			case 'primordialsea':
-				move.type = 'Water';
-				break;
-			case 'sandstorm':
-			case 'ragingsandstorm':
-				move.type = 'Rock';
-				break;
-			case 'hail':
-				move.type = 'Ice';
-				break;
+				case 'sunnyday':
+				case 'desolateland':
+					move.type = 'Fire';
+					break;
+				case 'raindance':
+				case 'primordialsea':
+					move.type = 'Water';
+					break;
+				case 'sandstorm':
+				case 'ragingsandstorm':
+					move.type = 'Rock';
+					break;
+				case 'hail':
+					move.type = 'Ice';
+					break;
 			}
 		},
 		isZ: "castiumz",
@@ -23043,40 +23043,40 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onModifyType(move, pokemon) {
 			switch (pokemon.effectiveWeather()) {
-			case 'sunnyday':
-			case 'desolateland':
-				move.type = 'Fire';
-				break;
-			case 'raindance':
-			case 'primordialsea':
-				move.type = 'Water';
-				break;
-			case 'sandstorm':
-			case 'ragingsandstorm':
-				move.type = 'Rock';
-				break;
-			case 'hail':
-				move.type = 'Ice';
-				break;
+				case 'sunnyday':
+				case 'desolateland':
+					move.type = 'Fire';
+					break;
+				case 'raindance':
+				case 'primordialsea':
+					move.type = 'Water';
+					break;
+				case 'sandstorm':
+				case 'ragingsandstorm':
+					move.type = 'Rock';
+					break;
+				case 'hail':
+					move.type = 'Ice';
+					break;
 			}
 		},
 		onModifyMove(move, pokemon) {
 			switch (pokemon.effectiveWeather()) {
-			case 'sunnyday':
-			case 'desolateland':
-				move.basePower *= 2;
-				break;
-			case 'raindance':
-			case 'primordialsea':
-				move.basePower *= 2;
-				break;
-			case 'sandstorm':
-			case 'ragingsandstorm':
-				move.basePower *= 2;
-				break;
-			case 'hail':
-				move.basePower *= 2;
-				break;
+				case 'sunnyday':
+				case 'desolateland':
+					move.basePower *= 2;
+					break;
+				case 'raindance':
+				case 'primordialsea':
+					move.basePower *= 2;
+					break;
+				case 'sandstorm':
+				case 'ragingsandstorm':
+					move.basePower *= 2;
+					break;
+				case 'hail':
+					move.basePower *= 2;
+					break;
 			}
 		},
 		secondary: null,
