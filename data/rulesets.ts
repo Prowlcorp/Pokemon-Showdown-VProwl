@@ -10,7 +10,7 @@ export const Formats: {[k: string]: FormatData} = {
 		name: 'Standard',
 		desc: "The standard ruleset for all offical Smogon singles tiers (Ubers, OU, etc.)",
 		ruleset: [
-			'Obtainable', 'Team Preview', 'Sleep Clause Mod', 'Species Clause', 'Nickname Clause', 'OHKO Clause', 'Evasion Moves Clause', 'Endless Battle Clause', 'HP Percentage Mod', 'Cancel Mod',
+			'Team Preview', 'Sleep Clause Mod', 'Species Clause', 'Nickname Clause', 'OHKO Clause', 'Endless Battle Clause', 'HP Percentage Mod', 'Cancel Mod',
 		],
 	},
 	standardnext: {
@@ -26,7 +26,7 @@ export const Formats: {[k: string]: FormatData} = {
 		effectType: 'ValidatorRule',
 		name: 'Standard GBU',
 		desc: "The standard ruleset for all official in-game Pok&eacute;mon tournaments and Battle Spot",
-		ruleset: ['Obtainable', 'Team Preview', 'Species Clause', 'Nickname Clause', 'Item Clause', 'Cancel Mod'],
+		ruleset: ['Team Preview', 'Species Clause', 'Nickname Clause', 'Item Clause', 'Cancel Mod'],
 		banlist: ['Battle Bond',
 			'Mewtwo', 'Mew',
 			'Lugia', 'Ho-Oh', 'Celebi',
@@ -42,7 +42,7 @@ export const Formats: {[k: string]: FormatData} = {
 		effectType: 'ValidatorRule',
 		name: 'Minimal GBU',
 		desc: "The standard ruleset for official tournaments, but without Restricted Legendary bans",
-		ruleset: ['Obtainable', 'Species Clause', 'Nickname Clause', 'Item Clause', 'Team Preview', 'Cancel Mod'],
+		ruleset: ['Species Clause', 'Nickname Clause', 'Item Clause', 'Team Preview', 'Cancel Mod'],
 		banlist: ['Battle Bond',
 			'Mew',
 			'Celebi',
@@ -58,7 +58,7 @@ export const Formats: {[k: string]: FormatData} = {
 		name: 'Standard Doubles',
 		desc: "The standard ruleset for all official Smogon doubles tiers",
 		ruleset: [
-			'Obtainable', 'Team Preview', 'Species Clause', 'Nickname Clause', 'OHKO Clause', 'Evasion Moves Clause', 'Gravity Sleep Clause', 'Endless Battle Clause', 'HP Percentage Mod', 'Cancel Mod',
+			'Team Preview', 'Species Clause', 'Nickname Clause', 'OHKO Clause', 'Endless Battle Clause', 'HP Percentage Mod', 'Cancel Mod',
 		],
 	},
 	standardnatdex: {
@@ -66,7 +66,7 @@ export const Formats: {[k: string]: FormatData} = {
 		name: 'Standard NatDex',
 		desc: "The standard ruleset for all National Dex tiers",
 		ruleset: [
-			'Obtainable', '+Unobtainable', '+Past', 'Team Preview', 'Nickname Clause', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause',
+			'+Unobtainable', 'Team Preview', 'Nickname Clause', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause',
 		],
 		onValidateSet(set) {
 			// These Pokemon are still unobtainable

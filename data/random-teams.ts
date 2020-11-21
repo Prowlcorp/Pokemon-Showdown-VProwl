@@ -1142,7 +1142,7 @@ export class RandomTeams {
 			item = 'Sitrus Berry';
 		} else if (ability === 'Gluttony') {
 			item = this.sample(['Aguav', 'Figy', 'Iapapa', 'Mago', 'Wiki']) + ' Berry';
-		} else if (ability === 'Gorilla Tactics' || ability === 'Imposter' || (ability === 'Magnet Pull' && hasMove['bodypress'] && !isDoubles)) {
+		} else if (ability === 'Imposter' || (ability === 'Magnet Pull' && hasMove['bodypress'] && !isDoubles)) {
 			item = 'Choice Scarf';
 		} else if (hasMove['trick'] || hasMove['switcheroo'] && !isDoubles) {
 			if (species.baseStats.spe >= 60 && species.baseStats.spe <= 108 && !counter['priority']) {

@@ -12472,6 +12472,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {contact: 1},
+		forceSTAB: true,
 		onBasePower(basePower, pokemon, target) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
