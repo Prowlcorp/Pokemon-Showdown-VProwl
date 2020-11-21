@@ -1114,7 +1114,7 @@ export class RandomTeams {
 			item = this.sample(species.requiredItems);
 
 		// First, the extra high-priority items
-		} else if (species.name === 'Farfetch\u2019d' || species.name === 'Mallar\u2019kee) {
+		} else if (species.name === 'Farfetch\u2019d' || species.name === 'Mallar\u2019kee') {
 			item = 'Leek';
 		} else if (species.name === 'Froslass' && !isDoubles) {
 			item = 'Wide Lens';
