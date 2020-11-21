@@ -125,12 +125,6 @@ exports.debugsimprocesses = true;
 exports.debugvalidatorprocesses = true;
 exports.debugdexsearchprocesses = true;
 
-/**
- * Pokemon of the Day - put a pokemon's name here to make it Pokemon of the Day
- *   The PotD will always be in the #2 slot (not #1 so it won't be a lead)
- *   in every Random Battle team.
- */
-exports.potd = '';
 
 /**
  * crash guard - write errors to log file instead of crashing
@@ -534,7 +528,6 @@ exports.chatlogreader = 'fs';
  *     - declare: /declare command.
  *     - announce: /announce command.
  *     - modchat: Set modchat.
- *     - potd: Set PotD.
  *     - forcewin: /forcewin command.
  *     - battlemessage: /a command.
  *     - tournaments: creating tournaments (/tour new, settype etc.)
@@ -567,7 +560,6 @@ exports.grouplist = [
 		makeroom: true,
 		editroom: true,
 		editprivacy: true,
-		potd: true,
 		disableladder: true,
 		gdeclare: true,
 		gamemanagement: true,

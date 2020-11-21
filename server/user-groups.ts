@@ -13,7 +13,7 @@ export const ROOM_PERMISSIONS = [
 
 export const GLOBAL_PERMISSIONS = [
 	// administrative
-	'bypassall', 'console', 'disableladder', 'lockdown', 'potd',
+	'bypassall', 'console', 'disableladder', 'lockdown',
 	// other
 	'addhtml', 'alts', 'altsself', 'autotimer', 'globalban', 'bypassblocks', 'bypassafktimer', 'forcepromote', 'forcerename', 'forcewin', 'gdeclare', 'hiderank', 'ignorelimits', 'importinputlog', 'ip', 'ipself', 'lock', 'makeroom', 'modlog', 'rangeban', 'promote',
 ] as const;

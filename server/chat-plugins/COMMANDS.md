@@ -128,7 +128,7 @@ Commands have access to the following functions:
 
 	Should usually be near the top of the command, like:
 
-		this.checkCan('potd');
+		this.checkCan('');
 
 `this.runBroadcast()`
 *	Signifies that a message can be broadcast, as long as the user has
