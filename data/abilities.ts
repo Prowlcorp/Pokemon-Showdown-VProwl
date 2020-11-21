@@ -4010,10 +4010,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 						let move = this.dex.getMove('brutalslice');
 						pokemon.moveSlots.push({
 							move: move.name,
-							pp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
+							id: move.id,
+							pp: (((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
+							),
 							maxpp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
 							target: move.target,
 							disabled: false,
+							disabledSource: '',
 							used: false,
 						});
 					}
@@ -4021,12 +4024,20 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 						let move = this.dex.getMove('axestrike');
 						pokemon.moveSlots.push({
 							move: move.name,
-							pp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
+							id: move.id,
+							pp: (((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
+							),
 							maxpp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
 							target: move.target,
 							disabled: false,
+							disabledSource: '',
 							used: false,
 						});
+					}
+				}
+				for (let movenum = pokemon.moveSlots.length-1; movenum>=0; movenum--) {
+					if(movenum.id === 'slash' || movenum.id === 'irontail' || movenum.id === 'dragontail') {
+						pokemon.moveSlots.splice(movenum, 1);
 					}
 				}
 			}
