@@ -2452,7 +2452,6 @@ export class Battle {
 			case 'megaEvo':
 				this.runMegaEvo(action.pokemon);
 				break;
-				}
 			case 'beforeTurnMove': {
 				if (!action.pokemon.isActive) return false;
 				if (action.pokemon.fainted) return false;
