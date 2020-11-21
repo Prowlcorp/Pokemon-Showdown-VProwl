@@ -12480,7 +12480,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onPrepareHit(target, pokemon, move) {
-			this.field.setWeather(['raindance', 'sunnyday', 'hail', 'sandstorm'][this.random(4)], source)
+			this.field.setWeather(['raindance', 'sunnyday', 'hail', 'sandstorm'][this.random(4)], pokemon)
 		},
 		onModifyType(move, pokemon) {
 			switch (pokemon.effectiveWeather()) {

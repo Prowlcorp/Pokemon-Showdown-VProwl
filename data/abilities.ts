@@ -4033,11 +4033,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 						});
 					}
 				}
-				for (let movenum = pokemon.moveSlots.length-1; movenum>=0; movenum--) {
+/*				for (let movenum = pokemon.moveSlots.length-1; movenum>=0; movenum--) {
 					if(movenum.id === 'slash' || movenum.id === 'irontail' || movenum.id === 'dragontail') {
 						pokemon.moveSlots.splice(movenum, 1);
 					}
-				}
+				}*/
 			}
 		},
 		onBasePowerPriority: 8,
