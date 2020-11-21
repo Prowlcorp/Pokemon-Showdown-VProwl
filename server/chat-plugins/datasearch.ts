@@ -618,7 +618,7 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 				if (parameters.length > 1) return {error: "The parameter 'recovery' cannot have alternative parameters"};
 				const recoveryMoves = [
 					"recover", "roost", "moonlight", "morningsun", "synthesis", "milkdrink",
-					"slackoff", "softboiled", "wish", "healorder", "shoreup", "lifedew",
+					"softboiled", "wish", "healorder", "shoreup", "lifedew",
 				];
 				for (const move of recoveryMoves) {
 					const invalid = validParameter("moves", move, isNotSearch, target);
