@@ -88,7 +88,6 @@ export const Scripts: BattleScriptsData = {
 				this.singleEvent('End', this.dex.getAbility('Illusion'), pokemon.abilityData, pokemon);
 			}
 			this.add('-zpower', pokemon);
-			pokemon.side.zMoveUsed = true;
 		}
 		const moveDidSomething = this.useMove(baseMove, pokemon, target, sourceEffect, zMove);
 		this.lastSuccessfulMoveThisTurn = moveDidSomething ? this.activeMove && this.activeMove.id : null;
@@ -193,7 +192,7 @@ export const Scripts: BattleScriptsData = {
 
 		let movename = move.name;
 		if (move.id === 'hiddenpower') movename = 'Hidden Power';
-		if (sourceEffect) attrs += '|[from]' + this.dex.getEffect(sourceEffect);
+		if (sourceEffect) attrs += `|[from]${sourceEffect.fullname}`;
 		if (zMove && move.isZ === true) {
 			attrs = '|[anim]' + movename + attrs;
 			movename = 'Z-' + movename;
@@ -588,7 +587,7 @@ export const Scripts: BattleScriptsData = {
 		if (Array.isArray(targetHits)) {
 			// yes, it's hardcoded... meh
 			if (targetHits[0] === 2 && targetHits[1] === 5) {
-				targetHits = this.sample([2, 2, 3, 3, 4, 5]);
+				targetHits = this.sample([2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5]);
 			} else if (targetHits[0] === 4 && targetHits[1] === 10) {
 				targetHits = this.sample([6,6,6,7,7,8,8,9,10]);
 			} else if (targetHits[0] === 6 && targetHits[1] === 15) {

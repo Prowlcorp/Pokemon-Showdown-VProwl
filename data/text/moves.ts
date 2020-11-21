@@ -75,8 +75,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	airslash: {
 		name: "Air Slash",
-		desc: "Has a 30% chance to flinch the target.",
-		shortDesc: "30% chance to flinch the target.",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
 	},
 	alloutpummeling: {
 		name: "All-Out Pummeling",
@@ -138,12 +138,12 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	armthrust: {
 		name: "Arm Thrust",
-		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
 		shortDesc: "Hits 2-5 times in one turn.",
 	},
 	aromatherapy: {
 		name: "Aromatherapy",
-		desc: "Every Pokemon in the user's party is cured of its major status condition. Active Pokemon with the Sap Sipper Ability are not cured, unless they are the user.",
+		desc: "Every Pokemon in the user's party is cured of its non-volatile status condition. Active Pokemon with the Sap Sipper Ability are not cured, unless they are the user.",
 		shortDesc: "Cures the user's party of all status conditions.",
 
 		activate: "  A soothing aroma wafted through the area!",
@@ -165,8 +165,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	astonish: {
 		name: "Astonish",
-		desc: "Has a 30% chance to flinch the target.",
-		shortDesc: "30% chance to flinch the target.",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
 	},
 	attackorder: {
 		name: "Attack Order",
@@ -246,7 +246,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	barrage: {
 		name: "Barrage",
-		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
 		shortDesc: "Hits 2-5 times in one turn.",
 	},
 	barrier: {
@@ -268,7 +268,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	beatup: {
 		name: "Beat Up",
-		desc: "Hits one time for the user and one time for each unfainted Pokemon without a major status condition in the user's party. The power of each hit is equal to 5+(X/10), where X is each participating Pokemon's base Attack; each hit is considered to come from the user.",
+		desc: "Hits one time for the user and one time for each unfainted Pokemon without a non-volatile status condition in the user's party. The power of each hit is equal to 5+(X/10), where X is each participating Pokemon's base Attack; each hit is considered to come from the user.",
 		shortDesc: "All healthy allies aid in damaging the target.",
 
 		activate: "  [NAME]'s attack!",
@@ -323,8 +323,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	bite: {
 		name: "Bite",
-		desc: "Has a 30% chance to flinch the target.",
-		shortDesc: "30% chance to flinch the target.",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
 	},
 	blackholeeclipse: {
 		name: "Black Hole Eclipse",
@@ -386,8 +386,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	boneclub: {
 		name: "Bone Club",
-		desc: "Has a 10% chance to flinch the target.",
-		shortDesc: "10% chance to flinch the target.",
+		desc: "Has a 10% chance to make the target flinch.",
+		shortDesc: "10% chance to make the target flinch.",
 	},
 	bonemerang: {
 		name: "Bonemerang",
@@ -396,7 +396,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	bonerush: {
 		name: "Bone Rush",
-		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
 		shortDesc: "Hits 2-5 times in one turn.",
 	},
 	boomburst: {
@@ -491,7 +491,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	bulletseed: {
 		name: "Bullet Seed",
-		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
 		shortDesc: "Hits 2-5 times in one turn.",
 	},
 	burningjealousy: {
@@ -606,7 +606,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	cometpunch: {
 		name: "Comet Punch",
-		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
 		shortDesc: "Hits 2-5 times in one turn.",
 	},
 	confide: {
@@ -787,8 +787,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	darkpulse: {
 		name: "Dark Pulse",
-		desc: "Has a 20% chance to flinch the target.",
-		shortDesc: "20% chance to flinch the target.",
+		desc: "Has a 20% chance to make the target flinch.",
+		shortDesc: "20% chance to make the target flinch.",
 	},
 	darkvoid: {
 		name: "Dark Void",
@@ -912,7 +912,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	doubleslap: {
 		name: "Double Slap",
-		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
 		shortDesc: "Hits 2-5 times in one turn.",
 	},
 	doubleteam: {
@@ -975,8 +975,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	dragonrush: {
 		name: "Dragon Rush",
-		desc: "Has a 20% chance to flinch the target. Damage doubles and no accuracy check is done if the target has used Minimize while active.",
-		shortDesc: "20% chance to flinch the target.",
+		desc: "Has a 20% chance to make the target flinch. Damage doubles and no accuracy check is done if the target has used Minimize while active.",
+		shortDesc: "20% chance to make the target flinch.",
 	},
 	dragontail: {
 		name: "Dragon Tail",
@@ -1075,7 +1075,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	electricterrain: {
 		name: "Electric Terrain",
-		desc: "For 5 turns, the terrain becomes Electric Terrain. During the effect, the power of Electric-type attacks made by grounded Pokemon is multiplied by 1.3 and grounded Pokemon cannot fall asleep; Pokemon already asleep do not wake up. Camouflage transforms the user into an Electric type, Nature Power becomes Thunderbolt, and Secret Power has a 30% chance to cause paralysis. Fails if the current terrain is Electric Terrain.",
+		desc: "For 5 turns, the terrain becomes Electric Terrain. During the effect, the power of Electric-type attacks made by grounded Pokemon is multiplied by 1.3 and grounded Pokemon cannot fall asleep; Pokemon already asleep do not wake up. Grounded Pokemon cannot become affected by Yawn or fall asleep from its effect. Camouflage transforms the user into an Electric type, Nature Power becomes Thunderbolt, and Secret Power has a 30% chance to cause paralysis. Fails if the current terrain is Electric Terrain.",
 		shortDesc: "5 turns. Grounded: +Electric power, can't sleep.",
 	},
 	electrify: {
@@ -1166,8 +1166,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	extrasensory: {
 		name: "Extrasensory",
-		desc: "Has a 10% chance to flinch the target.",
-		shortDesc: "10% chance to flinch the target.",
+		desc: "Has a 10% chance to make the target flinch.",
+		shortDesc: "10% chance to make the target flinch.",
 	},
 	extremeevoboost: {
 		name: "Extreme Evoboost",
@@ -1197,7 +1197,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	fakeout: {
 		name: "Fake Out",
-		desc: "Has a 100% chance to flinch the target. Fails unless it is the user's first turn on the field.",
+		desc: "Has a 100% chance to make the target flinch. Fails unless it is the user's first turn on the field.",
 		shortDesc: "Hits first. First turn out only. 100% flinch chance.",
 	},
 	faketears: {
@@ -1242,7 +1242,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	fierywrath: {
 		name: "Fiery Wrath",
-		desc: "Has a 20% chance to flinch the target.",
+		desc: "Has a 20% chance to make the target flinch.",
 		shortDesc: "20% chance to flinch the foe(s).",
 	},
 	finalfeather: {
@@ -1262,8 +1262,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	firefang: {
 		name: "Fire Fang",
-		desc: "Has a 10% chance to burn the target and a 10% chance to flinch it.",
-		shortDesc: "10% chance to burn. 10% chance to flinch.",
+		desc: "Has a 10% chance to burn the target and a 10% chance to make it flinch.",
+		shortDesc: "10% chance to burn. 10% chance to make the target flinch.",
 	},
 	firelash: {
 		name: "Fire Lash",
@@ -1484,7 +1484,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	furyattack: {
 		name: "Fury Attack",
-		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
 		shortDesc: "Hits 2-5 times in one turn.",
 	},
 	furycutter: {
@@ -1494,7 +1494,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	furyswipes: {
 		name: "Fury Swipes",
-		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
 		shortDesc: "Hits 2-5 times in one turn.",
 	},
 	fusionbolt: {
@@ -1699,8 +1699,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	headbutt: {
 		name: "Headbutt",
-		desc: "Has a 30% chance to flinch the target.",
-		shortDesc: "30% chance to flinch the target.",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
 	},
 	headcharge: {
 		name: "Head Charge",
@@ -1714,7 +1714,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	healbell: {
 		name: "Heal Bell",
-		desc: "Every Pokemon in the user's party is cured of its major status condition. Active Pokemon with the Soundproof Ability are not cured, unless they are the user.",
+		desc: "Every Pokemon in the user's party is cured of its non-volatile status condition. Active Pokemon with the Soundproof Ability are not cured, unless they are the user.",
 		shortDesc: "Cures the user's party of all status conditions.",
 
 		activate: "  A bell chimed!",
@@ -1730,7 +1730,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	healingwish: {
 		name: "Healing Wish",
-		desc: "The user faints and the next injured or statused Pokemon brought in has its HP fully restored along with having any major status condition cured. The healing happens before hazards take effect. Is not consumed if the Pokemon sent out is not injured or statused. Fails if the user is the last unfainted Pokemon in its party.",
+		desc: "The user faints and the next injured or statused Pokemon brought in has its HP fully restored along with having any non-volatile status condition cured. The healing happens before hazards take effect. Is not consumed if the Pokemon sent out is not injured or statused. Fails if the user is the last unfainted Pokemon in its party.",
 		shortDesc: "User faints. Next hurt Pokemon is fully healed.",
 
 		heal: "  The healing wish came true for [POKEMON]!",
@@ -1747,8 +1747,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	heartstamp: {
 		name: "Heart Stamp",
-		desc: "Has a 30% chance to flinch the target.",
-		shortDesc: "30% chance to flinch the target.",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
 	},
 	heartswap: {
 		name: "Heart Swap",
@@ -1784,7 +1784,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	hex: {
 		name: "Hex",
-		desc: "Power doubles if the target has a major status condition.",
+		desc: "Power doubles if the target has a non-volatile status condition.",
 		shortDesc: "Power doubles if the target has a status ailment.",
 	},
 	hiddenpower: {
@@ -1910,8 +1910,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	hyperfang: {
 		name: "Hyper Fang",
-		desc: "Has a 10% chance to flinch the target.",
-		shortDesc: "10% chance to flinch the target.",
+		desc: "Has a 10% chance to make the target flinch.",
+		shortDesc: "10% chance to make the target flinch.",
 	},
 	hyperscan: {
 		name: "Hyper Scan",
@@ -1961,8 +1961,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	icefang: {
 		name: "Ice Fang",
-		desc: "Has a 10% chance to freeze the target and a 10% chance to flinch it.",
-		shortDesc: "10% chance to freeze. 10% chance to flinch.",
+		desc: "Has a 10% chance to freeze the target and a 10% chance to make it flinch.",
+		shortDesc: "10% chance to freeze. 10% chance to make the target flinch.",
 	},
 	icehammer: {
 		name: "Ice Hammer",
@@ -1981,12 +1981,12 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	iciclecrash: {
 		name: "Icicle Crash",
-		desc: "Has a 30% chance to flinch the target.",
-		shortDesc: "30% chance to flinch the target.",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
 	},
 	iciclespear: {
 		name: "Icicle Spear",
-		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
 		shortDesc: "Hits 2-5 times in one turn.",
 	},
 	icywind: {
@@ -2060,8 +2060,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	ironhead: {
 		name: "Iron Head",
-		desc: "Has a 30% chance to flinch the target.",
-		shortDesc: "30% chance to flinch the target.",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
 	},
 	irontail: {
 		name: "Iron Tail",
@@ -2260,7 +2260,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	lunardance: {
 		name: "Lunar Dance",
-		desc: "The user faints and the Pokemon brought out to replace it has its HP and PP fully restored along with having any major status condition cured. The new Pokemon is sent out at the end of the turn, and the healing happens before hazards take effect. Fails if the user is the last unfainted Pokemon in its party.",
+		desc: "The user faints and the Pokemon brought out to replace it has its HP and PP fully restored along with having any non-volatile status condition cured. The new Pokemon is sent out at the end of the turn, and the healing happens before hazards take effect. Fails if the user is the last unfainted Pokemon in its party.",
 		shortDesc: "User faints. Replacement is fully healed, with PP.",
 
 		heal: "  [POKEMON] became cloaked in mystical moonlight!",
@@ -2518,7 +2518,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	mistyterrain: {
 		name: "Misty Terrain",
-		desc: "For 5 turns, the terrain becomes Misty Terrain. During the effect, the power of Dragon-type attacks used against grounded Pokemon is multiplied by 0.5 and grounded Pokemon cannot be inflicted with a major status condition nor confusion. Camouflage transforms the user into a Fairy type, Nature Power becomes Moonblast, and Secret Power has a 30% chance to lower Special Attack by 1 stage. Fails if the current terrain is Misty Terrain.",
+		desc: "For 5 turns, the terrain becomes Misty Terrain. During the effect, the power of Dragon-type attacks used against grounded Pokemon is multiplied by 0.5 and grounded Pokemon cannot be inflicted with a non-volatile status condition nor confusion. Grounded Pokemon can become affected by Yawn but cannot fall asleep from its effect. Camouflage transforms the user into a Fairy type, Nature Power becomes Moonblast, and Secret Power has a 30% chance to lower Special Attack by 1 stage. Fails if the current terrain is Misty Terrain.",
 		shortDesc: "5 turns. Can't status,-Dragon power vs grounded.",
 	},
 	moonblast: {
@@ -2600,8 +2600,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	needlearm: {
 		name: "Needle Arm",
-		desc: "Has a 30% chance to flinch the target.",
-		shortDesc: "30% chance to flinch the target.",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
 	},
 	nervalcut: {
 		name: "Nerval Cut",
@@ -2789,7 +2789,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	pinmissile: {
 		name: "Pin Missile",
-		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
 		shortDesc: "Hits 2-5 times in one turn.",
 	},
 	plasmafists: {
@@ -2970,7 +2970,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	psychoshift: {
 		name: "Psycho Shift",
-		desc: "The user's major status condition is transferred to the target, and the user is then cured. Fails if the user has no major status condition or if the target already has one.",
+		desc: "The user's non-volatile status condition is transferred to the target, and the user is then cured. Fails if the user has no non-volatile status condition or if the target already has one.",
 		shortDesc: "Transfers the user's status ailment to the target.",
 	},
 	psyshock: {
@@ -2999,7 +2999,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	purify: {
 		name: "Purify",
-		desc: "The target is cured if it has a major status condition. If the target was cured, the user restores 1/2 of its maximum HP, rounded half up.",
+		desc: "The target is cured if it has a non-volatile status condition. If the target was cured, the user restores 1/2 of its maximum HP, rounded half up.",
 		shortDesc: "Cures target's status; heals user 1/2 max HP if so.",
 	},
 	pursuit: {
@@ -3128,7 +3128,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	rest: {
 		name: "Rest",
-		desc: "The user falls asleep for the next two turns and restores all of its HP, curing itself of any major status condition in the process. Fails if the user has full HP, is already asleep, or if another effect is preventing sleep.",
+		desc: "The user falls asleep for the next two turns and restores all of its HP, curing itself of any non-volatile status condition in the process. Fails if the user has full HP, is already asleep, or if another effect is preventing sleep.",
 		shortDesc: "User sleeps 2 turns and restores HP and status.",
 	},
 	retaliate: {
@@ -3173,7 +3173,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	rockblast: {
 		name: "Rock Blast",
-		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
 		shortDesc: "Hits 2-5 times in one turn.",
 	},
 	rockclimb: {
@@ -3188,7 +3188,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	rockslide: {
 		name: "Rock Slide",
-		desc: "Has a 30% chance to flinch the target.",
+		desc: "Has a 30% chance to make the target flinch.",
 		shortDesc: "30% chance to flinch the foe(s).",
 	},
 	rocksmash: {
@@ -3219,8 +3219,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	rollingkick: {
 		name: "Rolling Kick",
-		desc: "Has a 30% chance to flinch the target.",
-		shortDesc: "30% chance to flinch the target.",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
 	},
 	rollout: {
 		name: "Rollout",
@@ -3257,7 +3257,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	safeguard: {
 		name: "Safeguard",
-		desc: "For 5 turns, the user and its party members cannot have major status conditions or confusion inflicted on them by other Pokemon. It is removed from the user's side if the user or an ally is successfully hit by Defog. Fails if the effect is already active on the user's side.",
+		desc: "For 5 turns, the user and its party members cannot have non-volatile status conditions or confusion inflicted on them by other Pokemon. Pokemon on the user's side cannot become affected by Yawn but can fall asleep from its effect. It is removed from the user's side if the user or an ally is successfully hit by Defog. Fails if the effect is already active on the user's side.",
 		shortDesc: "For 5 turns, protects user's party from status.",
 
 		start: "  [TEAM] cloaked itself in a mystical veil!",
@@ -3445,8 +3445,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	shiveringconduct: {
 		name: "Shivering Conduct",
-		desc: "Has a 10% chance to burn the target and a 10% chance to flinch it.",
-		shortDesc: "10% chance to burn. 10% chance to flinch.",
+		desc: "Has a 10% chance to burn the target and a 10% chance to make it flinch.",
+		shortDesc: "10% chance to burn. 10% chance to make the target flinch.",
 	},
 	shockwave: {
 		name: "Shock Wave",
@@ -3508,7 +3508,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	skyattack: {
 		name: "Sky Attack",
-		desc: "Has a 30% chance to flinch the target and a higher chance for a critical hit. This attack charges on the first turn and executes on the second. If the user is holding a Power Herb, the move completes in one turn.",
+		desc: "Has a 30% chance to make the target flinch and a higher chance for a critical hit. This attack charges on the first turn and executes on the second. If the user is holding a Power Herb, the move completes in one turn.",
 		shortDesc: "Charges, then hits turn 2. 30% flinch. High crit.",
 
 		prepare: "[POKEMON] became cloaked in a harsh light!",
@@ -3614,7 +3614,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	snore: {
 		name: "Snore",
-		desc: "Has a 30% chance to flinch the target. Fails if the user is not asleep.",
+		desc: "Has a 30% chance to make the target flinch. Fails if the user is not asleep.",
 		shortDesc: "User must be asleep. 30% chance to flinch target.",
 	},
 	soak: {
@@ -3696,7 +3696,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	spikecannon: {
 		name: "Spike Cannon",
-		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
 		shortDesc: "Hits 2-5 times in one turn.",
 	},
 	spikes: {
@@ -3781,8 +3781,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	steamroller: {
 		name: "Steamroller",
-		desc: "Has a 30% chance to flinch the target. Damage doubles and no accuracy check is done if the target has used Minimize while active.",
-		shortDesc: "30% chance to flinch the target.",
+		desc: "Has a 30% chance to make the target flinch. Damage doubles and no accuracy check is done if the target has used Minimize while active.",
+		shortDesc: "30% chance to make the target flinch.",
 	},
 	steelbeam: {
 		name: "Steel Beam",
@@ -3823,8 +3823,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	stomp: {
 		name: "Stomp",
-		desc: "Has a 30% chance to flinch the target. Damage doubles and no accuracy check is done if the target has used Minimize while active.",
-		shortDesc: "30% chance to flinch the target.",
+		desc: "Has a 30% chance to make the target flinch. Damage doubles and no accuracy check is done if the target has used Minimize while active.",
+		shortDesc: "30% chance to make the target flinch.",
 	},
 	stompingtantrum: {
 		name: "Stomping Tantrum",
@@ -3986,8 +3986,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	symphonicdiscord: {
 		name: "Symphonic Discord",
-		desc: "Has a 10% chance to flinch the target and a 10% chance to paralyze it.",
-		shortDesc: "10% chance to flinch. 10% chance to paralyze.",
+		desc: "Has a 10% chance to make the target flinch and a 10% chance to paralyze it.",
+		shortDesc: "10% chance to make the target flinch. 10% chance to paralyze.",
 	},
 	synchronoise: {
 		name: "Synchronoise",
@@ -4006,7 +4006,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	tailslap: {
 		name: "Tail Slap",
-		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
 		shortDesc: "Hits 2-5 times in one turn.",
 	},
 	tailwind: {
@@ -4131,8 +4131,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	thunderfang: {
 		name: "Thunder Fang",
-		desc: "Has a 10% chance to paralyze the target and a 10% chance to flinch it.",
-		shortDesc: "10% chance to paralyze. 10% chance to flinch.",
+		desc: "Has a 10% chance to paralyze the target and a 10% chance to make it flinch.",
+		shortDesc: "10% chance to paralyze. 10% chance to make the target flinch.",
 	},
 	thunderouskick: {
 		name: "Thunderous Kick",
@@ -4260,7 +4260,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	twister: {
 		name: "Twister",
-		desc: "Has a 20% chance to flinch the target. Power doubles if the target is using Bounce, Fly, or Sky Drop, or is under the effect of Sky Drop.",
+		desc: "Has a 20% chance to make the target flinch. Power doubles if the target is using Bounce, Fly, or Sky Drop, or is under the effect of Sky Drop.",
 		shortDesc: "20% chance to flinch the foe(s).",
 	},
 	uturn: {
@@ -4338,8 +4338,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	waterfall: {
 		name: "Waterfall",
-		desc: "Has a 20% chance to flinch the target.",
-		shortDesc: "20% chance to flinch the target.",
+		desc: "Has a 20% chance to make the target flinch.",
+		shortDesc: "20% chance to make the target flinch.",
 	},
 	watergun: {
 		name: "Water Gun",
@@ -4361,7 +4361,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	watershuriken: {
 		name: "Water Shuriken",
-		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times. If the user is an Ash-Greninja with the Battle Bond Ability, this move has a power of 20 and always hits three times. Has a 10% chance to cause bleeding each hit.",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times. If the user is an Ash-Greninja with the Battle Bond Ability, this move has a power of 20 and always hits three times. Has a 10% chance to cause bleeding each hit.",
 		shortDesc: "Usually goes first. Hits 2-5 times in one turn. 10% chance of bleed each hit.",
 	},
 	watersport: {
@@ -4475,7 +4475,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	yawn: {
 		name: "Yawn",
-		desc: "Causes the target to fall asleep at the end of the next turn. Fails when used if the target cannot fall asleep or if it already has a major status condition. At the end of the next turn, if the target is still active, does not have a major status condition, and can fall asleep, it falls asleep. If the target becomes affected, this effect cannot be prevented by Safeguard or a substitute, or by falling asleep and waking up during the effect.",
+		desc: "Causes the target to fall asleep at the end of the next turn. Fails when used if the target cannot fall asleep or if it already has a non-volatile status condition. At the end of the next turn, if the target is still active, does not have a non-volatile status condition, and can fall asleep, it falls asleep. If the target becomes affected, this effect cannot be prevented by Safeguard or a substitute, or by falling asleep and waking up during the effect.",
 		shortDesc: "Puts the target to sleep after 1 turn.",
 
 		start: "  [POKEMON] grew drowsy!",
@@ -4487,13 +4487,13 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	zenheadbutt: {
 		name: "Zen Headbutt",
-		desc: "Has a 20% chance to flinch the target.",
-		shortDesc: "20% chance to flinch the target.",
+		desc: "Has a 20% chance to make the target flinch.",
+		shortDesc: "20% chance to make the target flinch.",
 	},
 	zingzap: {
 		name: "Zing Zap",
-		desc: "Has a 30% chance to flinch the target.",
-		shortDesc: "30% chance to flinch the target.",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
 	},
 	zippyzap: {
 		name: "Zippy Zap",

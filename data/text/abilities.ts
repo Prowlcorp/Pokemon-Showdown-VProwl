@@ -413,7 +413,7 @@ export const AbilitiesText = {
 	},
 	flowerveil: {
 		name: "Flower Veil",
-		desc: "Grass-type Pokemon on this Pokemon's side cannot have their stat stages lowered by other Pokemon or have a major status condition inflicted on them by other Pokemon.",
+		desc: "Grass-type Pokemon on this Pokemon's side cannot have their stat stages lowered by other Pokemon or have a non-volatile status condition inflicted on them by other Pokemon.",
 		shortDesc: "This side's Grass types can't have stats lowered or status inflicted by other Pokemon.",
 
 		block: "  [POKEMON] surrounded itself with a veil of petals!",
@@ -498,7 +498,7 @@ export const AbilitiesText = {
 	},
 	guts: {
 		name: "Guts",
-		desc: "If this Pokemon has a major status condition, its Attack is multiplied by 1.5; burn's physical damage halving is ignored.",
+		desc: "If this Pokemon has a non-volatile status condition, its Attack is multiplied by 1.5; burn's physical damage halving is ignored.",
 		shortDesc: "If this Pokemon is statused, its Attack is 1.5x; ignores burn halving physical damage.",
 	},
 	harvest: {
@@ -510,7 +510,7 @@ export const AbilitiesText = {
 	},
 	healer: {
 		name: "Healer",
-		desc: "There is a 30% chance of curing an adjacent ally's major status condition at the end of each turn.",
+		desc: "There is a 30% chance of curing an adjacent ally's non-volatile status condition at the end of each turn.",
 		shortDesc: "30% chance of curing an adjacent ally's status at the end of each turn.",
 	},
 	healerheart: {
@@ -565,7 +565,7 @@ export const AbilitiesText = {
 	},
 	hydration: {
 		name: "Hydration",
-		desc: "This Pokemon has its major status condition cured at the end of each turn if Rain Dance is active. If this Pokemon is holding Utility Umbrella, its major status condition will not be cured.",
+		desc: "This Pokemon has its non-volatile status condition cured at the end of each turn if Rain Dance is active. If this Pokemon is holding Utility Umbrella, its non-volatile status condition will not be cured.",
 		shortDesc: "This Pokemon has its status cured at the end of each turn if Rain Dance is active.",
 	},
 	hypercutter: {
@@ -673,7 +673,7 @@ export const AbilitiesText = {
 	},
 	leafguard: {
 		name: "Leaf Guard",
-		desc: "If Sunny Day is active and this Pokemon is not holding Utility Umbrella, this Pokemon cannot gain a major status condition and Rest will fail for it.",
+		desc: "If Sunny Day is active and this Pokemon is not holding Utility Umbrella, this Pokemon cannot gain a non-volatile status condition and Rest will fail for it.",
 		shortDesc: "If Sunny Day is active, this Pokemon cannot be statused and Rest will fail for it.",
 	},
 	levitate: {
@@ -749,7 +749,7 @@ export const AbilitiesText = {
 	},
 	marvelscale: {
 		name: "Marvel Scale",
-		desc: "If this Pokemon has a major status condition, its Defense is multiplied by 1.5.",
+		desc: "If this Pokemon has a non-volatile status condition, its Defense is multiplied by 1.5.",
 		shortDesc: "If this Pokemon is statused, its Defense is 1.5x.",
 	},
 	megalauncher: {
@@ -828,7 +828,7 @@ export const AbilitiesText = {
 	},
 	naturalcure: {
 		name: "Natural Cure",
-		shortDesc: "This Pokemon has its major status condition cured when it switches out.",
+		shortDesc: "This Pokemon has its non-volatile status condition cured when it switches out.",
 
 		activate: "  ([POKEMON] is cured by its Natural Cure!)",
 	},
@@ -1008,7 +1008,7 @@ export const AbilitiesText = {
 	},
 	quickfeet: {
 		name: "Quick Feet",
-		desc: "If this Pokemon has a major status condition, its Speed is multiplied by 1.5; the Speed drop from paralysis is ignored.",
+		desc: "If this Pokemon has a non-volatile status condition, its Speed is multiplied by 1.5; the Speed drop from paralysis is ignored.",
 		shortDesc: "If this Pokemon is statused, its Speed is 1.5x; ignores Speed drop from paralysis.",
 	},
 	raindish: {
@@ -1165,12 +1165,12 @@ export const AbilitiesText = {
 	},
 	shedskin: {
 		name: "Shed Skin",
-		desc: "This Pokemon has a 33% chance to have its major status condition cured at the end of each turn.",
+		desc: "This Pokemon has a 33% chance to have its non-volatile status condition cured at the end of each turn.",
 		shortDesc: "This Pokemon has a 33% chance to have its status cured at the end of each turn.",
 	},
 	sheerforce: {
 		name: "Sheer Force",
-		desc: "This Pokemon's attacks with secondary effects have their power multiplied by 1.3, but the secondary effects are removed.",
+		desc: "This Pokemon's attacks with secondary effects have their power multiplied by 1.3, but the secondary effects are removed. If a secondary effect was removed, it also removes the user's Life Orb recoil and Shell Bell recovery, and prevents the target's Berserk, Color Change, Emergency Exit, Pickpocket, Wimp Out, Red Card, Eject Button, Kee Berry, and Maranga Berry from activating.",
 		shortDesc: "This Pokemon's attacks with secondary effects have 1.3x power; nullifies the effects.",
 	},
 	shellarmor: {
@@ -1183,7 +1183,7 @@ export const AbilitiesText = {
 	},
 	shieldsdown: {
 		name: "Shields Down",
-		desc: "If this Pokemon is a Minior, it changes to its Core forme if it has 1/2 or less of its maximum HP, and changes to Meteor Form if it has more than 1/2 its maximum HP. This check is done on switch-in and at the end of each turn. While in its Meteor Form, it cannot become affected by major status conditions. Moongeist Beam, Sunsteel Strike, and the Mold Breaker, Teravolt, and Turboblaze Abilities cannot ignore this Ability.",
+		desc: "If this Pokemon is a Minior, it changes to its Core forme if it has 1/2 or less of its maximum HP, and changes to Meteor Form if it has more than 1/2 its maximum HP. This check is done on switch-in and at the end of each turn. While in its Meteor Form, it cannot become affected by non-volatile status conditions. Moongeist Beam, Sunsteel Strike, and the Mold Breaker, Teravolt, and Turboblaze Abilities cannot ignore this Ability.",
 		shortDesc: "If Minior, switch-in/end of turn it changes to Core at 1/2 max HP or less, else Meteor.",
 		// n.b. this isn't a bug, the game actually says "Shields Down deactivated" on first transformation
 		// https://www.youtube.com/watch?v=SThjYBz4SEA
@@ -1309,7 +1309,8 @@ export const AbilitiesText = {
 	},
 	stench: {
 		name: "Stench",
-		shortDesc: "This Pokemon's attacks without a chance to flinch have a 10% chance to flinch.",
+		desc: "This Pokemon's attacks without a chance to make the target flinch gain a 10% chance to make the target flinch.",
+		shortDesc: "This Pokemon's attacks without a chance to flinch gain a 10% chance to flinch.",
 	},
 	stickyhold: {
 		name: "Sticky Hold",
@@ -1388,7 +1389,7 @@ export const AbilitiesText = {
 	},
 	synchronize: {
 		name: "Synchronize",
-		desc: "If another Pokemon burns, paralyzes, poisons, or badly poisons this Pokemon, that Pokemon receives the same major status condition.",
+		desc: "If another Pokemon burns, paralyzes, poisons, or badly poisons this Pokemon, that Pokemon receives the same non-volatile status condition.",
 		shortDesc: "If another Pokemon burns/poisons/paralyzes this Pokemon, it also gets that status.",
 	},
 	tangledfeet: {

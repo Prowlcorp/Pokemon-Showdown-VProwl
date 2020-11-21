@@ -7236,11 +7236,18 @@ export const Moves: {[moveid: string]: MoveData} = {
 					move.secondaries.push({volatileStatus: item.fling.volatileStatus});
 				}
 			}
-			source.setItem('');
-			source.lastItem = item.id;
-			source.usedItemThisTurn = true;
-			this.add("-enditem", source, item.name, '[from] move: Fling');
-			this.runEvent('AfterUseItem', source, null, null, item);
+			source.addVolatile('fling');
+		},
+		condition: {
+			onUpdate(pokemon) {
+				const item = pokemon.getItem();
+				pokemon.setItem('');
+				pokemon.lastItem = item.id;
+				pokemon.usedItemThisTurn = true;
+				this.add('-enditem', pokemon, item.name, '[from] move: Fling');
+				this.runEvent('AfterUseItem', pokemon, null, null, item);
+				pokemon.removeVolatile('fling');
+			},
 		},
 		secondary: null,
 		target: "normal",
@@ -7284,7 +7291,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(target, source) {
 			let success = false;
 			if (this.field.isTerrain('grassyterrain')) {
-				success = !!this.heal(this.modify(target.maxhp, 0.667)); // TODO: find out the real value
+				success = !!this.heal(this.modify(target.maxhp, 0.667));
 			} else {
 				success = !!this.heal(Math.ceil(target.maxhp * 0.5));
 			}
@@ -15074,11 +15081,15 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onTryHit(target, source, move) {
 			if (source.side === target.side) {
 				move.basePower = 0;
+				move.infiltrates = true;
 			}
 		},
 		onHit(target, source) {
 			if (source.side === target.side) {
-				this.heal(Math.floor(target.maxhp * 0.5));
+				this.heal(Math.floor(target.baseMaxhp * 0.5));
+				if (!this.heal(Math.floor(target.baseMaxhp * 0.5))) {
+					this.add('-immune', target);
+				}
 			}
 		},
 		secondary: null,
