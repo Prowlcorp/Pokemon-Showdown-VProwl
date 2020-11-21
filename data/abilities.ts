@@ -4007,7 +4007,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if(pokemon.species.name === 'Haxorus-Mega') {
 				for (let moveSlot of pokemon.moveSlots) {
 					if(moveSlot.id === 'slash') {
-						let move = this.getMove('brutalslice');
+						let move = this.dex.getMove('brutalslice');
 						pokemon.moveSlots.push({
 							move: move.name,
 							pp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
@@ -4018,7 +4018,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 						});
 					}
 					if(moveSlot.id === 'irontail' || moveSlot.id === 'dragontail') {
-						let move = this.getMove('axestrike');
+						let move = this.dex.getMove('axestrike');
 						pokemon.moveSlots.push({
 							move: move.name,
 							pp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
