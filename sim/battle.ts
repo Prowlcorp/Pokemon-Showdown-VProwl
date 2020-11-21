@@ -2550,7 +2550,9 @@ export class Battle {
 
 		// switching (fainted pokemon, U-turn, Baton Pass, etc)
 
-		if (action.choice === 'megaEvo') {
+		if (!this.queue.peek()) {
+			this.checkFainted();
+		} else if (action.choice === 'megaEvo') {
 			this.eachEvent('Update');
 			// The action order is recalculated for a Pokémon that mega evolves.
 			for (const [i, queuedAction] of this.queue.list.entries()) {
