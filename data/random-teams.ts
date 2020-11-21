@@ -872,7 +872,6 @@ export class RandomTeams {
 				if (!rejected && !move.damage && !isSetup && !move.weather && !move.stallingMove &&
 					(isDoubles || (!['facade', 'lightscreen', 'reflect', 'sleeptalk', 'spore', 'substitute', 'toxic', 'whirlpool'].includes(moveid) && (move.category !== 'Status' || !move.flags.heal))) &&
 					(!counter.setupType || counter.setupType === 'Mixed' || (move.category !== counter.setupType && move.category !== 'Status') || (counter[counter.setupType] + counter.Status > 3 && !counter.hazards)) &&
-					((movePool.includes('morningsun') || movePool.includes('recover') || movePool.includes('roost') || movePool.includes('softboiled')) &&
 					(
 						(!counter.stab && counter['physicalpool'] + counter['specialpool'] > 0) ||
 						(hasType['Bug'] && movePool.includes('megahorn')) ||
@@ -895,6 +894,7 @@ export class RandomTeams {
 						(hasType['Water'] && ((!counter['Water'] && !hasMove['hypervoice']) || movePool.includes('hypervoice'))) ||
 						((hasAbility['Moody'] || hasMove['wish']) && movePool.includes('protect')) ||
 						(((hasMove['lightscreen'] && movePool.includes('reflect')) || (hasMove['reflect'] && movePool.includes('lightscreen'))) && !teamDetails.screens) ||
+						((movePool.includes('morningsun') || movePool.includes('recover') || movePool.includes('roost') || movePool.includes('softboiled')) &&
 							!!counter.Status && !counter.setupType && !hasMove['healingwish'] && !hasMove['switcheroo'] && !hasMove['trick'] && !hasMove['trickroom'] && !isDoubles) ||
 						(movePool.includes('milkdrink') || movePool.includes('quiverdance') || movePool.includes('stickyweb') && !counter.setupType && !teamDetails.stickyWeb) ||
 						(isLead && movePool.includes('stealthrock') && !!counter.Status && !counter.setupType && !counter['speedsetup'] && !hasMove['substitute']) ||
