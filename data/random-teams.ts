@@ -19,12 +19,14 @@ export interface TeamData {
 
 export class RandomTeams {
 	dex: ModdedDex;
+	gen: number;
 	format: Format;
 	prng: PRNG;
 
 	constructor(format: Format | string, prng: PRNG | PRNGSeed | null) {
 		format = Dex.getFormat(format);
 		this.dex = Dex.forFormat(format);
+		this.gen = this.dex.gen;
 
 		this.format = format;
 		this.prng = prng && !Array.isArray(prng) ? prng : new PRNG(prng);
