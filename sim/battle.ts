@@ -2447,7 +2447,7 @@ export class Battle {
 				if (!action.pokemon.isActive) return false;
 				if (action.pokemon.fainted) return false;
 				this.runMove(action.move, action.pokemon, action.targetLoc, action.sourceEffect,
-					action.zmove, undefined, action.maxMove, action.originalTarget);
+					action.zmove, undefined, action.originalTarget);
 				break;
 			case 'megaEvo':
 				this.runMegaEvo(action.pokemon);
@@ -2482,17 +2482,8 @@ export class Battle {
 				}
 				if (this.switchIn(action.target, action.pokemon.position, action.sourceEffect) === 'pursuitfaint') {
 					// a pokemon fainted from Pursuit before it could switch
-					if (this.gen <= 4) {
-						// in gen 2-4, the switch still happens
-						this.hint("Previously chosen switches continue in Gen 2-4 after a Pursuit target faints.");
-						action.priority = -101;
-						this.queue.unshift(action);
-						break;
-					} else {
-						// in gen 5+, the switch is cancelled
-						this.hint("A Pokemon can't switch between when it runs out of HP and when it faints");
-						break;
-					}
+					this.hint("A Pokemon can't switch between when it runs out of HP and when it faints");
+					break;
 				}
 				break;
 			case 'runUnnerve':
