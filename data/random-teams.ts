@@ -1396,7 +1396,7 @@ export class RandomTeams {
 				}
 
 				const set = this.randomSet(species, teamDetails, pokemon.length === 0, this.format.gameType !== 'singles');
-
+				if (!set) throw new Error(`Could not build a random team for ${this.format} (seed=${seed}), currently having ${pokemon.length} pokemon. Random Set has failed.`);
 				// Okay, the set passes, add it to our team
 				pokemon.push(set);
 
