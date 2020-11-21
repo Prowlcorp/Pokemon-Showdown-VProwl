@@ -4011,8 +4011,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 						pokemon.moveSlots.push({
 							move: move.name,
 							id: move.id,
-							pp: (((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
-							),
+							pp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
 							maxpp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
 							target: move.target,
 							disabled: false,
@@ -4025,8 +4024,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 						pokemon.moveSlots.push({
 							move: move.name,
 							id: move.id,
-							pp: (((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
-							),
+							pp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
 							maxpp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
 							target: move.target,
 							disabled: false,
