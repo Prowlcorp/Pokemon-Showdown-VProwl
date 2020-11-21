@@ -1454,7 +1454,7 @@ export class RandomTeams {
 				if (set.ability === 'Illusion') teamDetails['illusion'] = pokemon.length;
 			}
 		}
-		if (pokemon.length < 6) throw new Error(`Could not build a random team for ${this.format} (seed=${seed})`);
+		if (pokemon.length < 6) throw new Error(`Could not build a random team for ${this.format} (seed=${seed}), currently having ${pokemon.length} pokemon`);
 
 		return pokemon;
 	}
