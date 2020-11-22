@@ -22,6 +22,7 @@ export function getCommonBattles(
 			(user1?.inRooms.has(curRoom.roomid) || curRoom.auth.get(userID1) === Users.PLAYER_SYMBOL) &&
 			(user2?.inRooms.has(curRoom.roomid) || curRoom.auth.get(userID2) === Users.PLAYER_SYMBOL)
 		) {
+			if (connection) void curRoom.uploadReplay(connection.user, connection, "forpunishment");
 			battles.push(curRoom.roomid);
 		}
 	}
@@ -197,7 +198,7 @@ export const commands: ChatCommands = {
 			}
 
 			if (targetUser.semilocked) {
-				buf += `<br />Semilocked: ${targetUser.semilocked}`;
+				buf += `<br />Semilocked: ${user.can('lock') ? targetUser.semilocked : "(reason hidden)"}`;
 			}
 		}
 		if (user === targetUser ? user.can('ipself') : user.can('ip', targetUser)) {
@@ -277,7 +278,7 @@ export const commands: ChatCommands = {
 			const targetId = toID(target);
 			for (const alt of Users.users.values()) {
 				if (alt !== targetUser && alt.previousIDs.includes(targetId)) {
-					this.parse(`/altsnorecurse ${alt.name}`);
+					void this.parse(`/altsnorecurse ${alt.name}`);
 				}
 			}
 		}
@@ -454,12 +455,34 @@ export const commands: ChatCommands = {
 			}
 		}
 		if (!results.length) {
-			if (!IPTools.ipRegex.test(ip)) return this.errorReply(`${ip} is not a valid IP or host.`);
+			if (!IPTools.ipRangeRegex.test(ip)) return this.errorReply(`${ip} is not a valid IP or host.`);
 			return this.sendReply(`No results found.`);
 		}
 		return this.sendReply(results.join('; '));
 	},
 	ipsearchhelp: [`/ipsearch [ip|range|host], (room) - Find all users with specified IP, IP range, or host. If a room is provided only users in the room will be shown. Requires: &`],
+
+	usersearch(target) {
+		this.checkCan('lock');
+		const results = [];
+		target = toID(target);
+		if (!target) {
+			return this.parse(`/help usersearch`);
+		}
+		if (target.length < 3) {
+			return this.errorReply(`That's too short of a term to search for.`);
+		}
+		for (const curUser of Users.users.values()) {
+			if (!curUser.id.includes(target)) continue;
+			results.push(
+				Utils.html`${curUser.connected ? ` \u25C9 ` : ` \u25CC `} ${curUser.name}`
+			);
+		}
+		return this.sendReplyBox(
+			`Users with a name matching '${target}':<br />${results.join('; ')}`
+		);
+	},
+	usersearchhelp: [`/usersearch [pattern]: Looks for all names matching the [pattern]. Requires: &`],
 
 	checkchallenges(target, room, user) {
 		room = this.requireRoom();
@@ -757,6 +780,12 @@ export const commands: ChatCommands = {
 			case 'ability':
 				const ability = dex.getAbility(newTarget.name);
 				buffer += `|raw|${Chat.getDataAbilityHTML(ability)}\n`;
+				if (showDetails) {
+					details = {
+					};
+					if (ability.isPermanent) details["&#10003; Not affected by Gastro Acid"] = "";
+					if (ability.isUnbreakable) details["&#10003; Not affected by Mold Breaker"] = "";
+				}
 				break;
 			default:
 				throw new Error(`Unrecognized searchType`);
@@ -1955,7 +1984,7 @@ export const commands: ChatCommands = {
 		}
 		if (showAll || target === 'autoconfirmed' || target === 'ac') {
 			buffer.push(this.tr`A user is autoconfirmed when they have won at least one rated battle and have been registered for one week or longer. In order to prevent spamming and trolling, most chatrooms only allow autoconfirmed users to chat. If you are not autoconfirmed, you can politely PM a staff member (staff have %, @, or # in front of their username) in the room you would like to chat and ask them to disable modchat. However, staff are not obligated to disable modchat.`);
-			if (!this.broadcasting) this.parse(`/regtime`);
+			if (!this.broadcasting) void this.parse(`/regtime`);
 		}
 		if (showAll || target === 'ladder' || target === 'ladderhelp' || target === 'decay') {
 			buffer.push(`<a href="https://${Config.routes.root}/${this.tr`pages/ladderhelp`}">${this.tr`How the ladder works`}</a>`);
