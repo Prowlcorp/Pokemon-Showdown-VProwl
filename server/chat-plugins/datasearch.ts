@@ -691,7 +691,7 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 
 			if (target.substr(0, 5) === 'weak ') {
 				const targetWeak = target.substr(5, 1).toUpperCase() + target.substr(6);
-				if (targetWeak in Dex.data.TypeChart) {
+				if (targetWeak in Dex.data.TypeChart || toID(targetWeak) in Dex.data.Moves) {
 					const invalid = validParameter("weak", targetWeak, isNotSearch, target);
 					if (invalid) return {error: invalid};
 					orGroup.weak[targetWeak] = !isNotSearch;
@@ -808,11 +808,22 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 			}
 			if (matched) continue;
 
-			for (const type in alts.resists) {
+			for (const targetResist in alts.resists) {
 				let effectiveness = 0;
-				const notImmune = mod.getImmunity(type, dex[mon]);
-				if (notImmune) effectiveness = mod.getEffectiveness(type, dex[mon]);
-				if (!alts.resists[type]) {
+				const move = Dex.getMove(targetResist);
+				const attackingType = move.type || targetResist;
+				const notImmune = mod.getImmunity(attackingType, dex[mon]) || !move.exists ||
+					!move.ignoreImmunity || (move.ignoreImmunity !== true && !move.ignoreImmunity[move.type]);
+				if (notImmune) {
+					for (const defenderType of dex[mon].types) {
+						const baseMod = Dex.getEffectiveness(attackingType, defenderType);
+						const moveMod = move.onEffectiveness?.call(
+							{dex: Dex} as Battle, baseMod, null, defenderType, move as ActiveMove,
+						);
+						effectiveness += typeof moveMod === 'number' ? moveMod : baseMod;
+					}
+				}
+				if (!alts.resists[targetResist]) {
 					if (notImmune && effectiveness >= 0) matched = true;
 				} else {
 					if (!notImmune || effectiveness < 0) matched = true;
@@ -820,11 +831,22 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 			}
 			if (matched) continue;
 
-			for (const type in alts.weak) {
+			for (const targetWeak in alts.weak) {
 				let effectiveness = 0;
-				const notImmune = mod.getImmunity(type, dex[mon]);
-				if (notImmune) effectiveness = mod.getEffectiveness(type, dex[mon]);
-				if (alts.weak[type]) {
+				const move = Dex.getMove(targetWeak);
+				const attackingType = move.type || targetWeak;
+				const notImmune = mod.getImmunity(attackingType, dex[mon]) || !move.exists ||
+				!move.ignoreImmunity || (move.ignoreImmunity !== true && !move.ignoreImmunity[move.type]);
+				if (notImmune) {
+					for (const defenderType of dex[mon].types) {
+						const baseMod = Dex.getEffectiveness(attackingType, defenderType);
+						const moveMod = move.onEffectiveness?.call(
+							{dex: Dex} as Battle, baseMod, null, defenderType, move as ActiveMove,
+						);
+						effectiveness += typeof moveMod === 'number' ? moveMod : baseMod;
+					}
+				}
+				if (alts.weak[targetWeak]) {
 					if (notImmune && effectiveness >= 1) matched = true;
 				} else {
 					if (!notImmune || effectiveness < 1) matched = true;
