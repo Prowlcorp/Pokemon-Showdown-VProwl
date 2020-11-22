@@ -325,9 +325,6 @@ export class Pokemon {
 		this.hpType = set.hpType || hpData.type;
 		this.hpPower = hpData.power;
 
-		this.baseHpType = this.hpType;
-		this.baseHpPower = this.hpPower;
-
 		// initialized in this.setSpecies(this.baseSpecies)
 		this.baseStoredStats = null!;
 		this.storedStats = {atk: 0, def: 0, spa: 0, spd: 0, spe: 0};

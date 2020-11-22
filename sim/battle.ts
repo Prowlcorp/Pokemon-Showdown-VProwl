@@ -1941,6 +1941,15 @@ export class Battle {
 			const stat = baseStats['hp'];
 			modStats['hp'] = tr(tr(2 * stat + set.ivs['hp'] + tr(set.evs['hp'] / 4) + 100) * set.level / 100 + 10);
 		}
+		const shiny = set.shiny;
+		if (shiny) {
+			for (statName in modStats) {
+				modStats[statName] *= 1.25;
+			}
+			if (modStats['hp'] && 'hp' in baseStats) {
+				modStats['hp'] *= 1.25;
+			}
+		}
 		return this.natureModify(modStats as StatsTable, set);
 	}
 
