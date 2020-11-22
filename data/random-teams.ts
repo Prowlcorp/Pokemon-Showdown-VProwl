@@ -265,6 +265,7 @@ export class RandomTeams {
 		for (let i = 0; i < 6; i++) {
 			const num = this.sampleNoReplace(pool);
 			hasDexNumber[num] = i;
+			throw new Error("Current pool consists of: " + pool.toString() + " and dex number consists of " + hasDexNumber.toString());
 		}
 
 		const formes: string[][] = [[], [], [], [], [], []];
