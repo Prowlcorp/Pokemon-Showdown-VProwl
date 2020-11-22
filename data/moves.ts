@@ -9190,7 +9190,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			} else if (source.hasAbility('healerheart')) {
 				success = !!this.heal(this.modify(target.maxhp * 0.75));
 			} else {
-				success = !!this.heal(Math.cell(target.maxhp * 0.5));
+				success = !!this.heal(Math.ceil(target.maxhp * 0.5));
 			}
 			if (success && target.side !== source.side) {
 				target.staleness = 'external';
