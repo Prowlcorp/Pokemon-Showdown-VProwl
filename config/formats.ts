@@ -412,7 +412,7 @@ export const Formats: FormatList = [
 		},
 	},
 	{
-		name: "[Gen 8] Godly Gift",
+		name: "Godly Gift",
 		desc: `Each Pok&eacute;mon receives one base stat from a "God" depending on its position in the team. If there is no "God", it uses the Pok&eacute;mon in the first slot.`,
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3660461/">Godly Gift</a>`,
@@ -657,80 +657,6 @@ export const Formats: FormatList = [
 				if (Array.isArray(ability)) return ability.some(abil => this.hasAbility(abil));
 				const abilityid = this.battle.toID(ability);
 				return this.ability === abilityid || !!this.volatiles['ability:' + abilityid];
-			},
-		},
-	},
-	{
-		name: "Trademarked",
-		mod: 'gen999',
-		desc: `Sacrifice your Pok&eacute;mon's ability for a status move that activates on switch-in.`,
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3656980/">Trademarked</a>`,
-		],
-
-		ruleset: ['Standard'],
-		banlist: [
-			'Dialga', 'Dracovish', 'Dragapult', 'Kyurem-Black', 'Kyurem-White',
-			'Giratina', 'Groudon', 'Ho-Oh', 'Kyogre', 'Lugia', 'Lunala', 'Magearna', 'Marshadow', 'Mewtwo', 'Necrozma-Dawn-Wings',
-			'Necrozma-Dusk-Mane', 'Palkia', 'Rayquaza', 'Reshiram', 'Solgaleo', 'Xerneas', 'Yveltal', 'Zacian', 'Zamazenta', 'Zekrom',
-			'Arena Trap', 'Moody', 'Shadow Tag', 'Baton Pass',
-		],
-		restricted: [
-			'Baneful Bunker', 'Block', 'Copycat', 'Detect', 'Destiny Bond', 'Disable', 'Encore', 'Ingrain', 'King\'s Shield',
-			'Mean Look', 'move:Metronome', 'Obstruct', 'Nature Power', 'Parting Shot', 'Psycho Shift', 'Protect',
-			'Roar', 'Skill Swap', 'Sleep Talk', 'Spiky Shield', 'Substitute', 'Teleport', 'Whirlwind', 'Wish', 'Yawn',
-		],
-		onValidateTeam(team, format, teamHas) {
-			const problems = [];
-			for (const trademark in teamHas.trademarks) {
-				if (teamHas.trademarks[trademark] > 1) {
-					problems.push(`You are limited to 1 of each Trademark.`, `(You have ${teamHas.trademarks[trademark]} Pok\u00e9mon with ${trademark} as a Trademark.)`);
-				}
-			}
-			return problems;
-		},
-		validateSet(set, teamHas) {
-			const dex = this.dex;
-			const ability = dex.getMove(set.ability);
-			if (ability.category !== 'Status' || ability.status === 'slp' ||
-				this.ruleTable.isRestricted(`move:${ability.id}`) || set.moves.map(this.dex.toID).includes(ability.id)) {
-				return this.validateSet(set, teamHas);
-			}
-			const customRules = this.format.customRules || [];
-			if (!customRules.includes('!obtainableabilities')) customRules.push('!obtainableabilities');
-
-			const TeamValidator: typeof import('../sim/team-validator').TeamValidator =
-				require('../sim/team-validator').TeamValidator;
-
-			const validator = new TeamValidator(dex.getFormat(`${this.format.id}@@@${customRules.join(',')}`));
-			const moves = set.moves;
-			set.moves = [ability.id];
-			set.ability = dex.getSpecies(set.species).abilities['0'];
-			let problems = validator.validateSet(set, {}) || [];
-			if (problems.length) return problems;
-			set.moves = moves;
-			set.ability = dex.getSpecies(set.species).abilities['0'];
-			problems = problems.concat(validator.validateSet(set, teamHas) || []);
-			set.ability = ability.id;
-			if (!teamHas.trademarks) teamHas.trademarks = {};
-			teamHas.trademarks[ability.name] = (teamHas.trademarks[ability.name] || 0) + 1;
-			return problems.length ? problems : null;
-		},
-		pokemon: {
-			getAbility() {
-				const move = this.battle.dex.getMove(this.battle.toID(this.ability));
-				if (!move.exists) return Object.getPrototypeOf(this).getAbility.call(this);
-				return {
-					id: move.id,
-					name: move.name,
-					onStart(pokemon) {
-						this.add('-activate', pokemon, 'ability: ' + move.name);
-						this.useMove(move, pokemon);
-					},
-					toString() {
-						return "";
-					},
-				};
 			},
 		},
 	},
