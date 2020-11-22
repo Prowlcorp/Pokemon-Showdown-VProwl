@@ -1,9 +1,7 @@
 export const Aliases: {[alias: string]: string} = {
 	// formats
-	randbats: "Random Battle",
 	mono: "Monotype",
 	ag: "Anything Goes",
-	randdubs: "Random Doubles Battle",
 	"2v2": "2v2 Doubles",
 	mnm: "Mix and Mega",
 	aaa: "Almost Any Ability",

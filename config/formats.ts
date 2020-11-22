@@ -814,27 +814,6 @@ export const Formats: FormatList = [
 		ruleset: ['HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
 	},
 	{
-		name: "Random Battle",
-		mod: 'gen999',
-		desc: `Randomized teams of level-balanced Pok&eacute;mon with sets that are generated to be competitively viable.`,
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3591157/">Sets and Suggestions</a>`,
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3616946/">Role Compendium</a>`,
-		],
-
-		team: 'random',
-		ruleset: ['Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
-	},
-	{
-		name: "Random Doubles Battle",
-		mod: 'gen999',
-		threads: [`&bullet; <a href="https://www.smogon.com/forums/threads/3601525/">Sets and Suggestions</a>`],
-
-		gameType: 'doubles',
-		team: 'random',
-		ruleset: ['HP Percentage Mod', 'Cancel Mod'],
-	},
-	{
 		name: 'Metronome Battle',
 		mod: 'gen999',
 		threads: [
