@@ -271,7 +271,6 @@ export class RandomTeams {
 		for (const id in this.dex.data.Pokedex) {
 			if (!(this.dex.data.Pokedex[id].num in hasDexNumber)) continue;
 			const species = this.dex.getSpecies(id);
-			throw new Error("Current pokemon is " + species.name);
 			formes[hasDexNumber[species.num]].push(species.name);
 		}
 
