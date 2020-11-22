@@ -1946,9 +1946,6 @@ export class Battle {
 			for (statName in modStats) {
 				modStats[statName] = tr(modStats[statName] * 1.25);
 			}
-			if ('hp' in baseStats) {
-				modStats['hp'] = tr(modStats['hp'] * 1.25);
-			}
 		}
 		return this.natureModify(modStats as StatsTable, set);
 	}
