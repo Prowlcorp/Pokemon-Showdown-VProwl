@@ -213,7 +213,9 @@ export const commands: ChatCommands = {
 			if (!species.exists) {
 				return this.errorReply(`Error: Pok\u00e9mon '${args[0].trim()}' not found.`);
 			}
-			const bssSets = battleFactorySets(species, null, true);
+			let mod = 'gen999';
+			if (args[1] && toID(args[1]) in Dex.dexes && Dex.dexes[toID(args[1])].gen === 7) mod = toID(args[1]);
+			const bssSets = battleFactorySets(species, null, mod, true);
 			if (!bssSets) return this.parse(`/help battlefactory`);
 			if (typeof bssSets !== 'string') {
 				return this.errorReply(`Error: ${bssSets.e}`);

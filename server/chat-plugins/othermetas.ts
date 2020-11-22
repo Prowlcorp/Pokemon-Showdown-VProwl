@@ -15,8 +15,9 @@ interface StoneDeltas {
 }
 
 
-function getMegaStone(stone: string): Item | null {
+function getMegaStone(stone: string, mod = 'gen999'): Item | null {
 	let dex = Dex;
+	if (mod && toID(mod) in Dex.dexes) dex = Dex.mod(toID(mod));
 	const item = dex.getItem(stone);
 	if (!item.exists) {
 		if (toID(stone) === 'dragonascent') {
@@ -160,7 +161,7 @@ export const commands: ChatCommands = {
 		}
 		const details: {[k: string]: string} = {
 			"Dex#": '' + mixedSpecies.num,
-			Gen: mixedSpecies.gen,
+			Gen: '' + mixedSpecies.gen,
 			Height: mixedSpecies.heightm + " m",
 			Weight: mixedSpecies.weighthg / 10 + " kg <em>(" + weighthit + " BP)</em>",
 			"Dex Colour": mixedSpecies.color,
