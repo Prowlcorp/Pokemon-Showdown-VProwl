@@ -16,7 +16,6 @@ The beginning of a battle will look something like this:
     |teamsize|p1|4
     |teamsize|p2|5
     |gametype|doubles
-    |tier|Doubles Ubers
     |rule|Species Clause: Limit one of each Pokémon
     |rule|OHKO Clause: OHKO moves are banned
     |rule|Moody Clause: Moody is banned
