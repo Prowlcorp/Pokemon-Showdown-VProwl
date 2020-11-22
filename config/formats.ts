@@ -786,13 +786,6 @@ export const Formats: FormatList = [
 		column: 2,
 	},
 	{
-		name: "Monotype Random Battle",
-		mod: 'gen999',
-
-		team: 'random',
-		ruleset: ['Same Type Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
-	},
-	{
 		name: "Challenge Cup 1v1",
 		mod: 'gen999',
 

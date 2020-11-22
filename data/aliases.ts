@@ -9,7 +9,6 @@ export const Aliases: {[alias: string]: string} = {
 	camo: "Camomons",
 	cc1v1: "Challenge Cup 1v1",
 	cc2v2: "Challenge Cup 2v2",
-	monorandom: "Monotype Random Battle",
 	bss: "Battle Spot Singles",
 	bsd: "Battle Spot Doubles",
 	crossevo: "Cross Evolution",
