@@ -128,6 +128,11 @@ function eligible(dex: ModdedDex, id: ID) {
 	return !id.endsWith('totem') && !capNFE && !similar.some(f => id.startsWith(f) && id !== f);
 }
 
+
+function toGen(dex: ModdedDex, name: string): GenerationNum | undefined {
+	return 999;
+}
+
 async function importSmogonSets(
 	pokemon: string,
 	setsByFormat: {[format: string]: PokemonSets},
