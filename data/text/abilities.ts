@@ -1349,8 +1349,8 @@ export const AbilitiesText = {
 	},
 	superdownload: {
 		name: "Super Download",
-		desc: "On switch-in, this Pokemon's Attack or Special Attack is raised by 1 stage based on the weaker combined defensive stat of all opposing Pokemon. Attack is raised if their Defense is lower, and Special Attack is raised if their Special Defense is the same or lower.",
-		shortDesc: "On switch-in, Attack or Sp. Atk is raised 1 stage based on the foes' weaker Defense.",
+		desc: "On switch-in, this Pokemon's Attack or Special Attack is raised by 2 stages based on the weaker combined defensive stat of all opposing Pokemon. Attack is raised if their Defense is lower, and Special Attack is raised if their Special Defense is the same or lower, and this Pokemon's Defense or Special Defense is raised by 1 stages based on the stronger combined Offensive stat of all opposing Pokemon. Defense is raised if their Attack is higher, and Special Defense is raised if their Special Attack is the same or higher.",
+		shortDesc: "On switch-in, Attack or Sp. Atk is raised 2 stage based on the foes' weaker Defense, Defense or Sp. Def is raised 1 stage based on foes' stronger Attack.",
 	},
 	superluck: {
 		name: "Super Luck",

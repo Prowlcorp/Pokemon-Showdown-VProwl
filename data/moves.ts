@@ -21388,10 +21388,18 @@ export const Moves: {[moveid: string]: MoveData} = {
 						}
 					},
 				});
+				if (!move.ignoreImmunity) move.ignoreImmunity = {};
+				if (move.ignoreImmunity !== true) {
+				move.ignoreImmunity['Normal'] = true;
+				}
 			}
 		},
 		onEffectiveness(typeMod, target, type, move) {
-			if (move.technoSuper) return 1;
+			if (move.technoSuper) {
+				if (!target) return;
+				if (type !== target.getTypes()[0]) return;
+				return 1;
+			}
 		},
 		secondary: null,
 		target: "normal",

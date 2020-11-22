@@ -10995,7 +10995,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		name: "Genesect-Mega",
 		baseSpecies: "Genesect",
 		forme: "Mega",
-		types: ["Bug", "Steel", "Fire", "Water", "Electric", "Grass"],
+		types: ["Bug", "Steel", "Fire", "Water", "Electric", "Ice"],
 		gender: "N",
 		baseStats: {hp: 71, atk: 150, def: 95, spa: 150, spd: 95, spe: 139},
 		abilities: {0: "Super Download"},
