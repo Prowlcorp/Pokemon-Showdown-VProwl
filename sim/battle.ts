@@ -1944,10 +1944,10 @@ export class Battle {
 		const shiny = set.shiny;
 		if (shiny) {
 			for (statName in modStats) {
-				modStats[statName] *= 1.25;
+				modStats[statName] = tr(modStats[statName] * 1.25);
 			}
-			if (modStats['hp'] && 'hp' in baseStats) {
-				modStats['hp'] *= 1.25;
+			if ('hp' in baseStats) {
+				modStats['hp'] = tr(modStats['hp'] * 1.25);
 			}
 		}
 		return this.natureModify(modStats as StatsTable, set);
