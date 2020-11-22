@@ -25,7 +25,7 @@ export const commands: ChatCommands = {
 		if (!target) {
 			room.update();
 		} else {
-			this.parse(`/${target}`);
+			void this.parse(`/${target}`);
 			uhtml = 'uhtmlchange';
 		}
 
@@ -218,15 +218,15 @@ export const commands: ChatCommands = {
 			this.modlog('MODJOIN', null, target);
 		} else {
 			this.errorReply(`Unrecognized modjoin setting.`);
-			this.parse('/help modjoin');
+			void this.parse('/help modjoin');
 			return false;
 		}
 		room.saveSettings();
 		if (target === 'sync' && !room.settings.modchat) {
 			const lowestStaffGroup = Config.groupsranking.filter(group => Config.groups[group]?.mute)[0];
-			if (lowestStaffGroup) this.parse(`/modchat ${lowestStaffGroup}`);
+			if (lowestStaffGroup) void this.parse(`/modchat ${lowestStaffGroup}`);
 		}
-		if (!room.settings.isPrivate) this.parse('/hiddenroom');
+		if (!room.settings.isPrivate) return this.parse('/hiddenroom');
 	},
 	modjoinhelp: [
 		`/modjoin [+|%|@|*|player|&|#|off] - Sets modjoin. Users lower than the specified rank can't join this room unless they have a room rank. Requires: \u2606 # &`,
@@ -342,8 +342,8 @@ export const commands: ChatCommands = {
 			this.room = Rooms.get(roomid) || null;
 			if (!this.room) return this.errorReply(`must specify roomid`);
 			this.pmTarget = null;
-			this.parse(`/permissions set ${newTarget}`);
-			this.parse(`/join view-permissions-${this.room.roomid}`);
+			void this.parse(`/permissions set ${newTarget}`);
+			return this.parse(`/join view-permissions-${this.room.roomid}`);
 		},
 
 		view(target, room, user) {
@@ -624,7 +624,7 @@ export const commands: ChatCommands = {
 
 	showmedia(target, room, user) {
 		this.errorReply(`/showmedia has been deprecated. Use /permissions instead.`);
-		this.parse(`/help permissions`);
+		return this.parse(`/help permissions`);
 	},
 
 	hightraffic(target, room, user) {
@@ -668,10 +668,8 @@ export const commands: ChatCommands = {
 		const targetRoom = Rooms.search(target);
 		if (!targetRoom) throw new Error(`Error in room creation.`);
 		if (cmd === 'makeprivatechatroom') {
-			targetRoom.settings.isPrivate = true;
 			if (!targetRoom.persist) throw new Error(`Private chat room created without settings.`);
-			targetRoom.settings.isPrivate = true;
-			room.saveSettings();
+			targetRoom.setPrivate(true);
 			const upperStaffRoom = Rooms.get('upperstaff');
 			if (upperStaffRoom) {
 				upperStaffRoom.add(`|raw|<div class="broadcast-green">Private chat room created: <b>${Utils.escapeHTML(target)}</b></div>`).update();
@@ -1015,12 +1013,10 @@ export const commands: ChatCommands = {
 					return this.sendReply(`You are no longer forcing the room to stay private, but ${privacySetters} also need${Chat.plural(room.privacySetter, "", "s")} to use /publicroom to make the room public.`);
 				}
 			}
-			delete room.settings.isPrivate;
 			room.privacySetter = null;
 			this.addModAction(`${user.name} made this room public.`);
 			this.modlog('PUBLICROOM');
-			delete room.settings.isPrivate;
-			room.saveSettings();
+			room.setPrivate(false);
 		} else {
 			const settingName = (setting === true ? 'secret' : setting);
 			if (room.subRooms) {
@@ -1040,16 +1036,7 @@ export const commands: ChatCommands = {
 			}
 			this.addModAction(`${user.name} made this room ${settingName}.`);
 			this.modlog(`${settingName.toUpperCase()}ROOM`);
-			if (room.battle) {
-				if (setting) {
-					room.makePrivate(setting);
-				} else {
-					room.makePublic();
-				}
-			} else {
-				room.settings.isPrivate = setting;
-				room.saveSettings();
-			}
+			room.setPrivate(setting);
 			room.privacySetter = new Set([user.id]);
 		}
 	},
