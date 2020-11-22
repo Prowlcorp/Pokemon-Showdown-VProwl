@@ -1139,7 +1139,7 @@ export class TeamValidator {
 
 					if (learned.charAt(0) === 'L') {
 						// special checking for level-up moves
-						if (level >= parseInt(learned.substr(2))) {
+						if (level >= parseInt(learned.substr(1))) {
 							// we're past the required level to learn it
 							// (level-up moves can be relearnered at any level)
 							// falls through to LMT check below
