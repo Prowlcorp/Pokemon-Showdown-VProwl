@@ -711,7 +711,7 @@ export const Formats: FormatList = [
 		section: "Randomized Metas",
 		column: 2,
 	},
-	{
+/*	{
 		name: "Challenge Cup 1v1",
 		mod: 'gen999',
 
@@ -731,7 +731,7 @@ export const Formats: FormatList = [
 			battle: 2,
 		},
 		ruleset: ['HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
-	},
+	},*/
 	{
 		name: 'Metronome Battle',
 		mod: 'gen999',
