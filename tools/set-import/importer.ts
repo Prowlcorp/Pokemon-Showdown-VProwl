@@ -37,6 +37,8 @@ interface FormatData {
 	[source: string]: PokemonSets;
 }
 
+type GenerationNum = 999;
+
 // The tiers we support, ie. ones that we have data sources for.
 const FORMATS = new Map<ID, {format: Format}>();
 const VALIDATORS = new Map<ID, TeamValidator>();
