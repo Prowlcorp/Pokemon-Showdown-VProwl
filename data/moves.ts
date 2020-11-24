@@ -10211,7 +10211,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 		onHit(pokemon) {//???
 			pokemon.addVolatile('hyperscan', pokemon);
-			this.add('-activate', pokemon, 'move: Hyper Scan', '[of] ' + target);
+			this.add('-activate', pokemon, 'move: Hyper Scan');
 		},
 		condition: {
 			noCopy: true,
