@@ -392,7 +392,7 @@ export const Conditions: {[id: string]: ConditionData} = {
 			if (data.source.hasAbility('adaptability')) {
 				data.moveData.stab = 2;
 			}
-			const hitMove = new this.dex.Data.Move(data.moveData) as Move as ActiveMove;
+			const hitMove = new this.dex.Move(data.moveData) as ActiveMove;
 
 			this.trySpreadMoveHit([target], data.source, hitMove);
 		},
