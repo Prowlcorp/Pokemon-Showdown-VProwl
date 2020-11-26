@@ -98,7 +98,7 @@ async function importGen(index: string) {
 		if (!stats) continue;
 		try {
 			const statistics = smogon.Statistics.process(await request(stats.url));
-			const sets = importUsageBasedSets(gen, format, statistics, stats.count);
+			const sets = importUsageBasedSets(format, statistics, stats.count);
 			if (Object.keys(sets).length) {
 				data[format.id] = data[format.id] || {};
 				data[format.id]['stats'] = sets;
