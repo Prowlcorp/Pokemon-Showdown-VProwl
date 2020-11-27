@@ -738,7 +738,7 @@ export const Formats: FormatList = [
 		banlist: [//Anything that: Changes stats multiple times, powers up permanently, multi attacks, heals, negates, or changes weather
 			'Alluring Garden', 'Battle Bond', 'Bijuu Boost', 'Cheek Pouch', 'Crisis Evolution', 'Cursed Body', 'Dry Skin', 'Fluffy', 'Fur Coat',
 			'Grassy Surge', 'Huge Power', 'Ice Body', 'Iron Barbs', 'Libero', 'Molten Scales', 'Moody', 'Neutralizing Gas', 'Otherworld Lure', 'Parental Bond', 'Poison Heal',
-			'Power Construct', 'Pressure', 'Protean', 'Pure Power', 'Rain Dish', 'Rough Skin', 'Sand Defense', 'Sand Spit', 'Sand Stream', 'Shadow Strike (Sealed)', 'Snow Warning', 'Stamina', 'Super Brain',
+			'Power Construct', 'Pressure', 'Protean', 'Pure Power', 'Rain Dish', 'Rough Skin', 'Sand Defense', 'Sand Spit', 'Sand Stream', 'shadowstrikesealed', 'Snow Warning', 'Stamina', 'Super Brain',
 			'Volt Absorb', 'Volt Conduit', 'Water Absorb', 'Wonder Guard', 'Abomasite', 'Aguav Berry', 'Assault Vest', 'Berry Juice', 'Berserk Gene',
 			'Black Sludge', 'Enigma Berry', 'Figy Berry', 'Iapapa Berry', 'Kangaskhanite', 'Leftovers', 'Mago Berry', 'Medichamite',
 			'Oran Berry', 'Rocky Helmet', 'Shell Bell', 'Sitrus Berry', 'Wiki Berry', 'Harvest + Jaboca Berry', 'Harvest + Rowap Berry',
