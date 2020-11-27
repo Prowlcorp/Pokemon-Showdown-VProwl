@@ -61,17 +61,6 @@ export const Formats: FormatList = [
 		],
 	},
 	{
-		name: "Anything Goes",
-		mod: 'gen999',
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3587441/">Anything Goes Metagame Discussion</a>`,
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3591711/">Anything Goes Viability Rankings</a>`,
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3646736/">Anything Goes Sample Teams</a>`,
-		],
-
-		ruleset: ['Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause'],
-	},
-	{
 		name: "Battle Spot Singles",
 		mod: 'gen999',
 		threads: [
@@ -746,11 +735,11 @@ export const Formats: FormatList = [
 			battle: 2,
 		},
 		ruleset: ['HP Percentage Mod', 'Cancel Mod'],
-		banlist: [
+		banlist: [//Anything that: Changes stats multiple times, powers up permanently, multi attacks, heals, negates, or changes weather
 			'Alluring Garden', 'Battle Bond', 'Bijuu Boost', 'Cheek Pouch', 'Crisis Evolution', 'Cursed Body', 'Dry Skin', 'Fluffy', 'Fur Coat',
-			'Grassy Surge', 'Huge Power', 'Ice Body', 'Iron Barbs', 'Libero', 'Moody', 'Neutralizing Gas', 'Parental Bond', 'Poison Heal',
-			'Power Construct', 'Pressure', 'Protean', 'Pure Power', 'Rain Dish', 'Rough Skin', 'Sand Spit', 'Sand Stream', 'Snow Warning', 'Stamina', 'Super Brain',
-			'Volt Absorb', 'Water Absorb', 'Wonder Guard', 'Abomasite', 'Aguav Berry', 'Assault Vest', 'Berry Juice', 'Berserk Gene',
+			'Grassy Surge', 'Huge Power', 'Ice Body', 'Iron Barbs', 'Libero', 'Molten Scales', 'Moody', 'Neutralizing Gas', 'Otherworld Lure', 'Parental Bond', 'Poison Heal',
+			'Power Construct', 'Pressure', 'Protean', 'Pure Power', 'Rain Dish', 'Rough Skin', 'Sand Defense', 'Sand Spit', 'Sand Stream', 'Shadow Strike (Sealed)', 'Snow Warning', 'Stamina', 'Super Brain',
+			'Volt Absorb', 'Volt Conduit', 'Water Absorb', 'Wonder Guard', 'Abomasite', 'Aguav Berry', 'Assault Vest', 'Berry Juice', 'Berserk Gene',
 			'Black Sludge', 'Enigma Berry', 'Figy Berry', 'Iapapa Berry', 'Kangaskhanite', 'Leftovers', 'Mago Berry', 'Medichamite',
 			'Oran Berry', 'Rocky Helmet', 'Shell Bell', 'Sitrus Berry', 'Wiki Berry', 'Harvest + Jaboca Berry', 'Harvest + Rowap Berry',
 		],

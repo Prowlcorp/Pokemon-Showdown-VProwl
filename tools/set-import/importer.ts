@@ -382,48 +382,6 @@ export async function getStatisticsURL(
 	return {url: smogon.Statistics.url(latest.date, format.id, current || 1500), count: latest.count};
 }
 
-// TODO: Use bigram matrix, bucketed spreads and generative validation logic for more realistic sets
-function importUsageBasedSets(format: Format, statistics: smogon.UsageStatistics, count: number) {
-	const sets: PokemonSets = {};
-	const dex = Dex.forFormat(format);
-	const threshold = getUsageThreshold(format, count);
-	let num = 0;
-	for (const pokemon in statistics.data) {
-		const stats = statistics.data[pokemon];
-		if (eligible(dex, toID(pokemon)) && stats.usage >= threshold) {
-			const set: DeepPartial<PokemonSet> = {
-				level: getLevel(format),
-				moves: (top(stats.Moves, 4) as string[]).map(m => dex.getMove(m).name).filter(m => m),
-			};
-			const id = top(stats.Items) as string;
-			set.item = dex.getItem(id).name;
-			if (set.item === 'nothing') set.item = undefined;
-			const id2 = top(stats.Abilities) as string;
-			set.ability = fixedAbility(dex, pokemon, dex.getAbility(id2).name);
-			const {nature, evs} = fromSpread(top(stats.Spreads) as string);
-			set.nature = nature;
-			if (!evs || !Object.keys(evs).length) continue;
-			set.evs = evs;
-			const name = 'Showdown Usage';
-			if (validSet('stats', dex, format, pokemon, name, set)) {
-				sets[pokemon] = {};
-				sets[pokemon][name] = set;
-				num++;
-			}
-		}
-	}
-	report(format, num, 'stats');
-	return sets;
-}
-
-function getUsageThreshold(format: Format, count: number) {
-	// For old metagames with extremely low total battle counts we adjust the thresholds
-	if (count < 100) return Infinity;
-	if (count < 400) return 0.05;
-	// These formats are deemed to have playerbases of lower quality than normal
-	return /uber|anythinggoes|doublesou/.test(format.id) ? 0.03 : 0.01;
-}
-
 const STATS: StatName[] = ['hp', 'atk', 'def', 'spa', 'spd', 'spe'];
 
 function fromSpread(spread: string) {
