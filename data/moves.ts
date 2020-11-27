@@ -573,33 +573,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Rock",
 	},
-		volatileStatus: 'noretreat',
-		onTryHit(target, source, move) {
-			if (target.volatiles['noretreat']) return false;
-			if (target.volatiles['trapped']) {
-				delete move.volatileStatus;
-			}
-		},
-		condition: {
-			onStart(pokemon) {
-				this.add('-start', pokemon, 'move: No Retreat');
-			},
-			onTrapPokemon(pokemon) {
-				pokemon.tryTrap();
-			},
-		},
-		boosts: {
-			atk: 1,
-			def: 1,
-			spa: 1,
-			spd: 1,
-			spe: 1,
-		},
-		secondary: null,
-		target: "self",
-		type: "Fighting",
-		zMove: {boost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1}},
-	},
 	angelwings: {
 		accuracy: true,
 		basePower: 0,
