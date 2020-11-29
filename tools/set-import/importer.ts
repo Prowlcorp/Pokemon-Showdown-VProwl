@@ -251,9 +251,14 @@ function validSet(
 	let invalid = VALIDATORS.get(format.id)!.validateSet(pset, {});
 	if (!invalid) return true;
 	// Correct invalidations where set is required to be shiny due to an event
-	if (invalid.length === 1 && invalid[0].includes('must be shiny')) {
-		set.shiny = true;
-		pset.shiny = true;
+	if (invalid.length === 1 && invalid[0].includes('must be albino')) {
+		set.shiny = "Albino";
+		pset.shiny = "Albino";
+		invalid = VALIDATORS.get(format.id)!.validateSet(pset, {});
+		if (!invalid) return true;
+	} else if (invalid.length === 1 && invalid[0].includes('must be shiny')) {
+		set.shiny = "Shiny";
+		pset.shiny = "Shiny";
 		invalid = VALIDATORS.get(format.id)!.validateSet(pset, {});
 		if (!invalid) return true;
 	}

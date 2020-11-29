@@ -568,8 +568,7 @@ export class TeamValidator {
 		].includes(species.baseSpecies)) || [
 			'Manaphy', 'Cosmog', 'Cosmoem', 'Solgaleo', 'Lunala',
 		].includes(species.baseSpecies);
-		const diancieException = species.name === 'Diancie' && set.shiny;
-		const has3PerfectIVs = isLegendary && !diancieException;
+		const has3PerfectIVs = isLegendary;
 
 		if (has3PerfectIVs) {
 			let perfectIVs = 0;
@@ -924,9 +923,9 @@ export class TeamValidator {
 			if (fastReturn) return true;
 			problems.push(`${name} must be at least level ${eventData.level}${etc}.`);
 		}
-		if ((eventData.shiny === true && !set.shiny) || (!eventData.shiny && set.shiny)) {
+		if (((eventData.shiny === "Shiny" || eventData.shiny === "Albino") && !set.shiny) || (!eventData.shiny && set.shiny)) {
 			if (fastReturn) return true;
-			const shinyReq = eventData.shiny ? ` be shiny` : ` not be shiny`;
+			const shinyReq = eventData.shiny === "Albino" ? ` be albino` : eventData.shiny === "Shiny" ? ` be shiny` : ` not be shiny`;
 			problems.push(`${name} must${shinyReq}${etc}.`);
 		}
 		if (eventData.gender) {

@@ -59,7 +59,7 @@ You will still be able to get a data entry for a cosmetic forme with `getSpecies
 Visual formes
 -------------
 
-Some formes are _nearly_ cosmetic formes, but they have differences in what moves they can learn (or whether they can be shiny) due to the existence of events that only distribute one visual forme.
+Some formes are _nearly_ cosmetic formes, but they have differences in what moves they can learn (or whether they can be shiny or albino) due to the existence of events that only distribute one visual forme.
 
 Other formes are nearly cosmetic formes, but require a specific held item to attain that forme.
 

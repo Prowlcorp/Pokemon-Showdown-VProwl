@@ -197,7 +197,7 @@ For example: `p1a: Sparky` could be a Charizard named Sparky.
 
 - `DETAILS` is a comma-separated list of all information about a pokemon
   visible on the battle screen: species, shininess, gender, and level. So it
-  starts with `SPECIES`, adding `, shiny` if it's shiny, `, M` if it's male,
+  starts with `SPECIES`, adding `, shiny` if it's shiny or `, albino` if it's albino, `, M` if it's male,
   `, F` if it's female, `, L##` if it's not level 100.
 
 So, for instance, `Deoxys-Speed` is a level 100 non-shiny genderless

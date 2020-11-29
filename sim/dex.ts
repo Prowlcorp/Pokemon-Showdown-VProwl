@@ -1063,8 +1063,10 @@ export class ModdedDex {
 			}
 
 			// shiny
-			if (set.shiny) {
+			if (set.shiny === "Shiny") {
 				buf += '|S';
+			} else if (set.shiny === "Albino") {
+				buf += '|A';
 			} else {
 				buf += '|';
 			}
@@ -1189,7 +1191,7 @@ export class ModdedDex {
 			// shiny
 			j = buf.indexOf('|', i);
 			if (j < 0) return null;
-			if (i !== j) set.shiny = true;
+			if (i !== j) set.shiny = buf.substring(i, j) === 'A' ? "Albino" : "Shiny";
 			i = j + 1;
 
 			// level

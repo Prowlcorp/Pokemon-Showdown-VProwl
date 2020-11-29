@@ -40,7 +40,7 @@ interface PokemonSet {
 	evs: StatsTable;
 	ivs: StatsTable;
 	level: number;
-	shiny?: boolean;
+	shiny?: string;
 	happiness?: number;
 	pokeball?: string;
 	hpType?: string;
@@ -62,8 +62,8 @@ type MoveSource = string;
 
 interface EventInfo {
 	level?: number;
-	/** true: always shiny, 1: sometimes shiny, false | undefined: never shiny */
-	shiny?: boolean | 1;
+	/** 1: sometimes shiny, false | undefined: never shiny */
+	shiny?: string | 1;
 	gender?: GenderName;
 	nature?: string;
 	ivs?: SparseStatsTable;
@@ -481,7 +481,7 @@ namespace RandomTeamsTypes {
 		ivs: SparseStatsTable;
 		item: string;
 		level: number;
-		shiny: boolean;
+		shiny: string | null;
 		nature?: string;
 		happiness?: number;
 		moveset?: RandomTeamsTypes.RandomSet;
@@ -493,7 +493,7 @@ namespace RandomTeamsTypes {
 		gender: string;
 		item: string;
 		ability: string;
-		shiny: boolean;
+		shiny: string | null;
 		level: number;
 		happiness: number;
 		evs: SparseStatsTable;

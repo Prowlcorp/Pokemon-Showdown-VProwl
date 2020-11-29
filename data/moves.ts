@@ -13845,6 +13845,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 				move = 'moonblast';
 			} else if (this.field.isTerrain('psychicterrain')) {
 				move = 'psychic';
+			} else if (this.field.isTerrain('hellfire')) {
+				move = 'flamethrower';
 			}
 			this.useMove(move, pokemon, target);
 			return null;

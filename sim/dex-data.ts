@@ -258,12 +258,12 @@ export function combine(obj: AnyObject, ...data: (AnyObject | null)[]): AnyObjec
 // 	 */
 // 	level: number;
 // 	/**
-// 	 * Whether the Pokemon is shiny or not. While having no direct
+// 	 * Whether the Pokemon is shiny, albino, or not. While having no direct
 // 	 * competitive effect except in a few OMs, certain Pokemon cannot
-// 	 * be legally obtained as shiny, either as a whole or with certain
+// 	 * be legally obtained as shiny or albino, either as a whole or with certain
 // 	 * event-only abilities or moves.
 // 	 */
-// 	shiny?: boolean;
+// 	shiny?: string;
 // 	/**
 // 	 * The Pokemon's set's happiness value. This is used only for
 // 	 * calculating the base power of the moves Return and Frustration.

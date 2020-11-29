@@ -530,7 +530,7 @@ NICKNAME|SPECIES|ITEM|ABILITY|MOVES|NATURE|EVS|GENDER|IVS|SHINY|LEVEL|HAPPINESS,
   HP, Atk, Def, SpA, SpD, Spe. EVs left blank are 0, IVs left blank are 31.
   If all EVs or IVs are blank, the commas can all be left off.
 
-- `SHINY` is `S` for shiny, and blank for non-shiny.
+- `SHINY` is `A` for albino, `S` for shiny, and blank for non-shiny.
 
 - `LEVEL` is left blank for level 100.
 

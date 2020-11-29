@@ -295,7 +295,7 @@ export class Pokemon {
 
 		this.position = 0;
 		this.details = this.species.name + (this.level === 100 ? '' : ', L' + this.level) +
-			(this.gender === '' ? '' : ', ' + this.gender) + (this.set.shiny ? ', shiny' : '');
+			(this.gender === '' ? '' : ', ' + this.gender) + (this.set.shiny === "Albino" ? ', albino' : this.set.shiny === "Shiny" ? ', shiny' : '');
 
 		this.status = '';
 		this.statusData = {};
@@ -421,7 +421,7 @@ export class Pokemon {
 		let details = this.details;
 		if (this.illusion) {
 			const illusionDetails = this.illusion.species.name + (this.level === 100 ? '' : ', L' + this.level) +
-				(this.illusion.gender === '' ? '' : ', ' + this.illusion.gender) + (this.illusion.set.shiny ? ', shiny' : '');
+				(this.illusion.gender === '' ? '' : ', ' + this.illusion.gender) + (this.illusion.set.shiny === "Albino" ? ', albino' : this.illusion.set.shiny === "Shiny" ? ', shiny' : '');
 			details = illusionDetails;
 		}
 		return {side: health.side, secret: `${details}|${health.secret}`, shared: `${details}|${health.shared}`};
@@ -1073,7 +1073,7 @@ export class Pokemon {
 		if (isPermanent) {
 			this.baseSpecies = rawSpecies;
 			this.details = species.name + (this.level === 100 ? '' : ', L' + this.level) +
-				(this.gender === '' ? '' : ', ' + this.gender) + (this.set.shiny ? ', shiny' : '');
+				(this.gender === '' ? '' : ', ' + this.gender) + (this.set.shiny === "Albino" ? ', albino' : this.set.shiny === "Shiny" ? ', shiny' : '');
 			this.battle.add('detailschange', this, (this.illusion || this).details);
 			if (source.effectType === 'Item') {
 				if (source.zMove) {

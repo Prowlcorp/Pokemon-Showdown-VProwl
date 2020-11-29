@@ -62,7 +62,8 @@ function battleFactorySets(species: string | Species, tier: string | null, gen =
 			buf += `<li>Ability: ${Array.isArray(set.ability) ? set.ability.map(formatAbility).join(" / ") : formatAbility(set.ability)}</li>`;
 			if (TIERS[toID(tier)] === "LC" && !set.level) buf += `<li>Level: 5</li>`;
 			if (set.level && set.level < 100) buf += `<li>Level: ${set.level}</li>`;
-			if (set.shiny) buf += `<li>Shiny: Yes</li>`;
+			if (set.shiny === "Shiny") buf += `<li>Shiny: Shiny</li>`;
+			else if (set.shiny === "Albino") buf += `<li>Shiny: Albino</li>`;
 			if (set.happiness) buf += `<li>Happiness: ${set.happiness}</li>`;
 			if (set.evs) {
 				buf += `<li>EVs: `;
@@ -102,7 +103,8 @@ function battleFactorySets(species: string | Species, tier: string | null, gen =
 			buf += `<li>Ability: ${Array.isArray(set.ability) ? set.ability.map(formatAbility).join(" / ") : formatAbility(set.ability)}</li>`;
 			if (!set.level) buf += `<li>Level: 50</li>`;
 			if (set.level && set.level < 50) buf += `<li>Level: ${set.level}</li>`;
-			if (set.shiny) buf += `<li>Shiny: Yes</li>`;
+			if (set.shiny === "Shiny") buf += `<li>Shiny: Shiny</li>`;
+			else if (set.shiny === "Albino") buf += `<li>Shiny: Albino</li>`;
 			if (set.happiness) buf += `<li>Happiness: ${set.happiness}</li>`;
 			if (set.evs) {
 				buf += `<li>EVs: `;

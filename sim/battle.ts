@@ -1942,9 +1942,13 @@ export class Battle {
 			modStats['hp'] = tr(tr(2 * stat + set.ivs['hp'] + tr(set.evs['hp'] / 4) + 100) * set.level / 100 + 10);
 		}
 		const shiny = set.shiny;
-		if (shiny) {
+		if (shiny === "Shiny") {
 			for (statName in modStats) {
 				modStats[statName] = tr(modStats[statName] * 1.25);
+			}
+		} else if (shiny === "Albino") {
+			for (statName in modStats) {
+				modStats[statName] = tr(modStats[statName] * 1.5);
 			}
 		}
 		return this.natureModify(modStats as StatsTable, set);
