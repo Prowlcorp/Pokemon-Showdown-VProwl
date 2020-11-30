@@ -1,6 +1,3 @@
-/config/*
-!/config/formats.ts
-!/config/config.js
 /logs/*
 /test/modlogs
 /node_modules
