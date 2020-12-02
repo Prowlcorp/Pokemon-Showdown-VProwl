@@ -375,7 +375,6 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 	},
 	slowpokekonor: {
 		tier: "Filler",
-	},
 	slowbro: {
 		tier: "Filler",
 		doublestier: "Filler",
@@ -383,15 +382,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 	slowbromega: {
 		tier: "Filler",
 	},
-	slowbrokonor: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
 	slowking: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	slowkingkonor: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -407,13 +398,6 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		doublestier: "Filler",
 	},
 	farfetchd: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	farfetchdkonor: {
-		tier: "Filler",
-	},
-	sirfetchd: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -542,10 +526,6 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 	},
 	weezing: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	weezingkonor: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -1023,14 +1003,6 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		doublestier: "Filler",
 	},
 	corsola: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	corsolakonor: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	cursola: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -2208,18 +2180,9 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 	darumaka: {
 		tier: "Filler",
 	},
-	darumakakonor: {
-		tier: "Filler",
-	},
 	darmanitan: {
 		tier: "Filler",
 		doublestier: "Filler",
-	},
-	darmanitankonor: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	darmanitankonorzen: {
 	},
 	maractus: {
 		tier: "Filler",
@@ -2439,10 +2402,6 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		doublestier: "Filler",
 	},
 	stunfisk: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	stunfiskkonor: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
