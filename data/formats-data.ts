@@ -373,8 +373,6 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 	slowpoke: {
 		tier: "Filler",
 	},
-	slowpokekonor: {
-		tier: "Filler",
 	slowbro: {
 		tier: "Filler",
 		doublestier: "Filler",
