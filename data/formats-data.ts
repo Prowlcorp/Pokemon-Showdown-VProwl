@@ -287,6 +287,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
+	parapod: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
 	venonat: {
 		tier: "Filler",
 		doublestier: "Filler",
@@ -455,6 +459,14 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
+	pegasoltea: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	pegasolteakonor: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
 	slowpoke: {
 		tier: "Filler",
 		doublestier: "Filler",
@@ -484,6 +496,14 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		doublestier: "Filler",
 	},
 	farfetchd: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	mallarkee: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	mallarkeef: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -999,6 +1019,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
+	lediosso: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
 	spinarak: {
 		tier: "Filler",
 		doublestier: "Filler",
@@ -1155,6 +1179,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
+	dunseraph: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
 	gligar: {
 		tier: "Filler",
 		doublestier: "Filler",
@@ -1172,6 +1200,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		doublestier: "Filler",
 	},
 	qwilfish: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	Qwilomber: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -1259,7 +1291,15 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
+	houndourhell: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
 	houndoom: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	houndoomhell: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -1280,10 +1320,6 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		doublestier: "Filler",
 	},
 	smeargle: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	pokestarsmeargle: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -1747,6 +1783,14 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
+	yun: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	yunmega: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
 	seviper: {
 		tier: "Filler",
 		doublestier: "Filler",
@@ -1820,6 +1864,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		doublestier: "Filler",
 	},
 	castformrainy: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	castformsandy: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -2155,6 +2203,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
+	ararisu: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
 	buizel: {
 		tier: "Filler",
 		doublestier: "Filler",
@@ -2231,6 +2283,14 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
+	trebil: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	basclef: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
 	spiritomb: {
 		tier: "Filler",
 		doublestier: "Filler",
@@ -2267,11 +2327,27 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
+	agito: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	agitomega: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	zen: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	zenmega: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
 	giracario: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
-	giracarioalt: {
+	giracarioshadow: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -3283,14 +3359,6 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
-	vivillonfancy: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	vivillonpokeball: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
 	litleo: {
 		tier: "Filler",
 		doublestier: "Filler",
@@ -3447,10 +3515,6 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
-	sylveon: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
 	hawlucha: {
 		tier: "Filler",
 		doublestier: "Filler",
@@ -3544,6 +3608,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		doublestier: "Filler",
 	},
 	xerneas: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	xerneasneutral: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -3779,6 +3847,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
+	salazzleholy: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
 	salazzletotem: {
 		tier: "Filler",
 		doublestier: "Filler",
@@ -3876,6 +3948,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		doublestier: "Filler",
 	},
 	silvallyflying: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	silvallyfull: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -4087,14 +4163,6 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
-	obstagoon: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	runerigus: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
 	grookey: {
 		tier: "Filler",
 		doublestier: "Filler",
@@ -4151,6 +4219,22 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
+	chewtle: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	drednaw: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	yamper: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	boltund: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
 	rolycoly: {
 		tier: "Filler",
 		doublestier: "Filler",
@@ -4160,6 +4244,38 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		doublestier: "Filler",
 	},
 	coalossal: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	applin: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	flapple: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	appletun: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	silicobra: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	sandaconda: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	cramorant: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	arrokuda: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	barraskewda: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -4180,6 +4296,14 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		doublestier: "Filler",
 	},
 	centiskorch: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	sinistea: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	polteageist: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -4255,46 +4379,6 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
-	parapod: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	pegasoltea: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	mallarkee: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	mallarkeef: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	lediosso: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	Qwilomber: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	trebil: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	basclef: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	ararisu: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
-	dunseraph: {
-		tier: "Filler",
-		doublestier: "Filler",
-	},
 	zacian: {
 		tier: "Filler",
 		doublestier: "Filler",
@@ -4308,6 +4392,26 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		doublestier: "Filler",
 	},
 	zamazentacrowned: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	kubfu: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	urshifu: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	urshifurapidstrike: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	regieleki: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	regidrago: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -4331,7 +4435,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
-   drake: {
+	drake: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
@@ -4368,6 +4472,18 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		doublestier: "Filler",
 	},
 	sylve: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	loona: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	chloe: {
+		tier: "Filler",
+		doublestier: "Filler",
+	},
+	lucaridon: {
 		tier: "Filler",
 		doublestier: "Filler",
 	},
