@@ -35,24 +35,6 @@ Bans are just a `-` followed by the thing you want to ban.
 
 ### Group bans
 
-`- OU` or `- DUU` - ban a tier
-
-`- CAP` or `- Mega` - ban a pokemon category
-
-`- LGPE` - ban things only available Let's Ge Pikachu/Eevee
-
-`- Past` - ban things that only appear in a past generation (such as Berserk Gene in Gen 5, spiky-eared Pichu in Gen 5, or Unown in Gen 8)
-
-`- Future` - ban things that only appears in a future generation (such as Arceus in Gen 1)
-
-`- Custom` - ban made-up things other than CAP (such as Magikarp's Revenge, or Staff Bros moves)
-
-`- Nonexistent` - catch-all to ban all nonexistent Pokémon, items, etc. Includes: `- CAP, - Past, - Future, - LGPE`
-
-`- Unobtainable` - ban all things designed never to be released (Pokestars in Gen 5, Eternatus-E, Floette-E)
-
-`- Unreleased` - ban all things that will probably be released eventually (Venusaur in Gen 8)
-
 `- all items` - ban all items
 
 `- all abilities, + No Ability` - ban all abilities (No Ability needs to be specifically allowed to allow Pokemon with no abilities)
@@ -204,8 +186,6 @@ In-battle rules
 
 `Gen 8 Camomons` - Pokémon will change their typing to match their first two moveslots
 
-`Gen 7 Tier Shift` - Pokémon will have higher base stats the lower their Gen 7 Smogon tier is
-
 `Dynamax Clause` - prevent Pokémon from Dynamaxing during battle. Cannot be used to allow Dynamaxing in old gens
 
 `Endless Battle Clause` - prevent battles from proceeding endlessly
@@ -260,10 +240,4 @@ Any format (starting with `Gen [number]`) can be used as a rule, to add all rule
 
 For example:
 
-`Gen 8 OU` - add all clauses and bans from Gen 8 OU.
-
 `Gen 8 Almost Any Ability` - add all clauses and bans from Gen 8 Almost Any Ability, allowing Pokémon to use almost any ability in the game.
-
-People often use "tier" to mean "format", but in rulesets, the difference is important. A format is a list of rules for a game you can play, such as "Gen 8 OU". A tier is a list of Pokémon which can be banned or unbanned, such as "OU".
-
-`- OU, + Ubers` - ban all Pokémon currently in OU and unban all Pokémon currently in Ubers

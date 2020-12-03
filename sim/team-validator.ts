@@ -783,6 +783,14 @@ export class TeamValidator {
 			}
 		}
 
+		const tier = tierSpecies.tier;
+		const tierTag = 'pokemontag:' + toID(tier);
+		setHas[tierTag] = true;
+
+		const doublesTier = tierSpecies.doublesTier;
+		const doublesTierTag = 'pokemontag:' + toID(doublesTier);
+		setHas[doublesTierTag] = true;
+
 		let banReason = ruleTable.check('pokemon:' + species.id);
 		if (banReason) {
 			return `${species.name} is ${banReason}.`;

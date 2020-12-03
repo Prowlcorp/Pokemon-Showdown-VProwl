@@ -40,6 +40,9 @@ interface FormatData {
 type GenerationNum = 999;
 
 // The tiers we support, ie. ones that we have data sources for.
+export const TIERS = new Set([
+	'filler',
+]);
 const FORMATS = new Map<ID, {format: Format}>();
 const VALIDATORS = new Map<ID, TeamValidator>();
 for (let gen = 1; gen <= 8; gen++) {

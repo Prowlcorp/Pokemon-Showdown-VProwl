@@ -14,6 +14,8 @@ import {TeamValidator} from '../../sim/team-validator';
 
 interface DexOrGroup {
 	abilities: {[k: string]: boolean};
+	tiers: {[k: string]: boolean};
+	doublesTiers: {[k: string]: boolean};
 	colors: {[k: string]: boolean};
 	'egg groups': {[k: string]: boolean};
 	formes: {[k: string]: boolean};
@@ -407,6 +409,8 @@ export const commands: ChatCommands = {
 
 function runDexsearch(target: string, cmd: string, canAll: boolean, message: string) {
 	const searches: DexOrGroup[] = [];
+	const allTiers: {[k: string]: TierTypes.Singles | TierTypes.Other} = Object.assign(Object.create(null), {filler: 'Filler'});
+	const allDoublesTiers: {[k: string]: TierTypes.Singles | TierTypes.Other} = Object.assign(Object.create(null), {filler: 'Filler'});
 	const allTypes = Object.create(null);
 	for (const i in Dex.data.TypeChart) {
 		allTypes[toID(i)] = i;
@@ -438,6 +442,7 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 	let showAll = false;
 	let sort = null;
 	let megaSearch = null;
+	let tierSearch = null;
 	let nationalSearch = null;
 	let fullyEvolvedSearch = null;
 	let singleTypeSearch = null;
@@ -467,7 +472,7 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 
 	for (const andGroup of target.split(',')) {
 		const orGroup: DexOrGroup = {
-			abilities: {}, colors: {}, 'egg groups': {}, formes: {},
+			abilities: {}, tiers: {}, doublesTiers: {}, colors: {}, 'egg groups': {}, formes: {},
 			gens: {}, moves: {}, types: {}, resists: {}, weak: {}, stats: {}, skip: false,
 		};
 		const parameters = andGroup.split("|");
@@ -485,6 +490,24 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 				const invalid = validParameter("abilities", targetAbility.id, isNotSearch, targetAbility.name);
 				if (invalid) return {error: invalid};
 				orGroup.abilities[targetAbility.name] = !isNotSearch;
+				continue;
+			}
+
+			if (toID(target) in allTiers) {
+				target = allTiers[toID(target)];
+				const invalid = validParameter("tiers", target, isNotSearch, target);
+				if (invalid) return {error: invalid};
+				tierSearch = tierSearch || !isNotSearch;
+				orGroup.tiers[target] = !isNotSearch;
+				continue;
+			}
+
+			if (toID(target) in allDoublesTiers) {
+				target = allDoublesTiers[toID(target)];
+				const invalid = validParameter("doubles tiers", target, isNotSearch, target);
+				if (invalid) return {error: invalid};
+				tierSearch = tierSearch || !isNotSearch;
+				orGroup.doublesTiers[target] = !isNotSearch;
 				continue;
 			}
 
@@ -800,6 +823,17 @@ function runDexsearch(target: string, cmd: string, canAll: boolean, message: str
 				}
 			}
 
+			if (alts.tiers && Object.keys(alts.tiers).length) {
+				let tier = dex[mon].tier;
+				if (alts.tiers[tier]) continue;
+				if (Object.values(alts.tiers).includes(false) && alts.tiers[tier] !== false) continue;
+			}
+
+			if (alts.doublesTiers && Object.keys(alts.doublesTiers).length) {
+				let tier = dex[mon].doublesTier;
+				if (alts.doublesTiers[tier]) continue;
+				if (Object.values(alts.doublesTiers).includes(false) && alts.doublesTiers[tier] !== false) continue;
+			}
 			for (const type in alts.types) {
 				if (dex[mon].types.includes(type) === alts.types[type]) {
 					matched = true;

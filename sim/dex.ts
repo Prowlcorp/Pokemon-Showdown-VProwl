@@ -893,6 +893,10 @@ export class ModdedDex {
 			case 'pokemontag':
 				// valid pokemontags
 				const validTags = [
+					// singles tiers
+					'filler',
+					// doubles tiers
+					'filler',
 					// custom tags
 					'mega',
 					// all

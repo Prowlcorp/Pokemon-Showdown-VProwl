@@ -254,14 +254,11 @@ export class RandomTeams {
 
 		const pool: number[] = [];
 		for (const id in this.dex.data.FormatsData) {
-			throw new Error("Current pokemon " + id);
 			if (!this.dex.data.Pokedex[id]) continue;
 			const num = this.dex.data.Pokedex[id].num;
-			throw new Error("Current pokemon " + num);
 			if (num <= 0 || pool.includes(num)) continue;
 			if (num > last) break;
 			pool.push(num);
-			throw new Error("Current pokemon " + pool[0]);
 		}
 
 		const hasDexNumber: {[k: string]: number} = {};

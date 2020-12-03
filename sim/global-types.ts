@@ -60,6 +60,11 @@ interface PokemonSet {
  */
 type MoveSource = string;
 
+namespace TierTypes {
+	export type Singles = "Filler";
+	export type Doubles = "Filler";
+}
+
 interface EventInfo {
 	level?: number;
 	/** 1: sometimes shiny, false | undefined: never shiny */

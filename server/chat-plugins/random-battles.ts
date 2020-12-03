@@ -5,6 +5,10 @@
 
 import {FS} from "../../lib/fs";
 
+const TIERS: {[k: string]: string} = {
+	filler: "Filler",
+};
+
 function formatAbility(ability: Ability | string) {
 	ability = Dex.getAbility(ability);
 	return `<a href="https://${Config.routes.dex}/abilities/${ability.id}" target="_blank" class="subtle" style="white-space:nowrap">${ability.name}</a>`;

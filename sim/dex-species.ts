@@ -23,12 +23,14 @@ export type ModdedSpeciesData = SpeciesData | Partial<Omit<SpeciesData, 'name'>>
 
 export interface SpeciesFormatsData {
 	comboMoves?: readonly string[];
+	doublesTier?: TierTypes.Doubles;
 	essentialMove?: string;
 	exclusiveMoves?: readonly string[];
 	randomBattleMoves?: readonly string[];
 	randomBattleLevel?: number;
 	randomDoubleBattleMoves?: readonly string[];
 	randomDoubleBattleLevel?: number;
+	tier?: TierTypes.Singles;
 }
 
 export type ModdedSpeciesFormatsData = SpeciesFormatsData & {inherit?: true};
@@ -168,7 +170,16 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	 * for in-battle formes.
 	 */
 	readonly changesFrom?: string;
-
+	/**
+	 * Singles Tier. The Pokemon's location in the Smogon tier system.
+	 * Do not use for LC bans (usage tier will override LC Uber).
+	 */
+	readonly tier: TierTypes.Singles | TierTypes.Other;
+	/**
+	 * Doubles Tier. The Pokemon's location in the Smogon doubles tier system.
+	 * Do not use for LC bans (usage tier will override LC Uber).
+	 */
+	readonly doublesTier: TierTypes.Doubles;
 	readonly randomBattleMoves?: readonly ID[];
 	readonly randomBattleLevel?: number;
 	readonly randomDoubleBattleMoves?: readonly ID[];
@@ -197,6 +208,8 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.types = data.types || ['???'];
 		this.addedType = data.addedType || undefined;
 		this.prevo = data.prevo || '';
+		this.tier = data.tier || '';
+		this.doublesTier = data.doublesTier || '';
 		this.evos = data.evos || [];
 		this.evoType = data.evoType || undefined;
 		this.evoMove = data.evoMove || undefined;
