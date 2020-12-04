@@ -102,4 +102,17 @@ export const Tags: {[id: string]: TagData} = {
 		desc: "Bypasses but does not break a Substitute.",
 		moveFilter: move => 'authentic' in move.flags,
 	},
+	
+	// Tiers
+	// -----
+	filler: {
+		name: "Filler",
+		pokemonFilter: species => species.tier === 'Filler',
+		pokemonFilter: species => species.doublesTier === 'Filler',
+	},
+	custom: {
+		name: "Custom",
+		pokemonFilter: species => species.isNonstandard === 'Custom',
+		moveFilter: move => move.isNonstandard === 'Custom',
+	},
 };
