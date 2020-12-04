@@ -1951,6 +1951,16 @@ export class Battle {
 				modStats[statName] = tr(modStats[statName] * 1.5);
 			}
 		}
+		const card = set.card;
+		if (card === "Shiny") {
+			for (statName in modStats) {
+				modStats[statName] = tr(modStats[statName] * 1.5);
+			}
+		} else if (card === "Albino") {
+			for (statName in modStats) {
+				modStats[statName] = tr(modStats[statName] * 2);
+			}
+		}
 		return this.natureModify(modStats as StatsTable, set);
 	}
 

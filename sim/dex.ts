@@ -1075,6 +1075,15 @@ export class ModdedDex {
 				buf += '|';
 			}
 
+			// card
+			if (set.card === "Shiny") {
+				buf += '|S';
+			} else if (set.card === "Albino") {
+				buf += '|A';
+			} else {
+				buf += '|';
+			}
+
 			// level
 			if (set.level && set.level !== 100) {
 				buf += '|' + set.level;
@@ -1196,6 +1205,12 @@ export class ModdedDex {
 			j = buf.indexOf('|', i);
 			if (j < 0) return null;
 			if (i !== j) set.shiny = buf.substring(i, j) === 'A' ? "Albino" : "Shiny";
+			i = j + 1;
+
+			// card
+			j = buf.indexOf('|', i);
+			if (j < 0) return null;
+			if (i !== j) set.card = buf.substring(i, j) === 'A' ? "Albino" : "Shiny";
 			i = j + 1;
 
 			// level

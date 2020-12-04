@@ -258,8 +258,7 @@ export function combine(obj: AnyObject, ...data: (AnyObject | null)[]): AnyObjec
 // 	 */
 // 	level: number;
 // 	/**
-// 	 * Whether the Pokemon is shiny, albino, or not. While having no direct
-// 	 * competitive effect except in a few OMs, certain Pokemon cannot
+// 	 * Whether the Pokemon is shiny, albino, or not. Certain Pokemon cannot
 // 	 * be legally obtained as shiny or albino, either as a whole or with certain
 // 	 * event-only abilities or moves.
 // 	 */

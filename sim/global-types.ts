@@ -41,6 +41,7 @@ interface PokemonSet {
 	ivs: StatsTable;
 	level: number;
 	shiny?: string;
+	card?: string;
 	happiness?: number;
 	pokeball?: string;
 	hpType?: string;
