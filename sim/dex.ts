@@ -558,7 +558,9 @@ export class ModdedDex {
 			id = toID(name);
 		}
 		if (this.data.Formats.hasOwnProperty(DEFAULT_MOD + id)) {
-			id = (DEFAULT_MOD + id) as ID;
+			if (id !== 'customgame' && id !== 'doublescustomgame' && id !== 'triplescustomgame') {
+				id = (DEFAULT_MOD + id) ;
+			}
 		}
 		let supplementaryAttributes: AnyObject | null = null;
 		if (name.includes('@@@')) {
