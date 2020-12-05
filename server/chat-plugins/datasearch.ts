@@ -2028,8 +2028,7 @@ function runAbilitysearch(target: string, cmd: string, canAll: boolean, message:
 function runLearn(target: string, cmd: string, canAll: boolean, message: string) {
 	let format: Format = Object.create(null);
 	const targets = target.split(',');
-	const gens: {[k: string]: number} = {rby: 1, gsc: 2, adv: 3, dpp: 4, bw2: 5, oras: 6, usum: 7};
-	let gen = (gens[cmd.slice(0, -5)] || 8);
+	let gen = 999;
 	let formatid;
 	let formatName;
 	let minSourceGen;
