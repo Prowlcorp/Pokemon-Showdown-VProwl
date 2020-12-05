@@ -374,9 +374,9 @@ async function getAnalysesByFormat(pokemon: string) {
 
 function getLevel(format: Format, level = 0) {
 	if (format.forcedLevel) return format.forcedLevel;
-	const maxLevel = format.maxLevel || 100;
+	const maxLevel = format.maxLevel || 9999;
 	const maxForcedLevel = format.maxForcedLevel || maxLevel;
-	if (!level) level = format.defaultLevel || maxLevel;
+	if (!level) level = format.defaultLevel || 100;
 	return level > maxForcedLevel ? maxForcedLevel : level;
 }
 

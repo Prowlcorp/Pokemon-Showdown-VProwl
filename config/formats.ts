@@ -27,7 +27,6 @@ export const Formats: FormatList = [
 	},
 	{
 		name: "Custom Game",
-		mod: 'gen999',
 
 		debug: true,
 		maxLevel: 9999,
@@ -87,7 +86,6 @@ export const Formats: FormatList = [
 	},
 	{
 		name: "Doubles Custom Game",
-		mod: 'gen999',
 
 		gameType: 'doubles',
 		maxLevel: 9999,
@@ -103,7 +101,6 @@ export const Formats: FormatList = [
 	},
 	{
 		name: "Triples Custom Game",
-		mod: 'gen999',
 
 		gameType: 'triples',
 		searchShow: false,

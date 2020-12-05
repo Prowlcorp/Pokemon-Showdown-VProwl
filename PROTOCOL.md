@@ -532,7 +532,7 @@ NICKNAME|SPECIES|ITEM|ABILITY|MOVES|NATURE|EVS|GENDER|IVS|SHINY|LEVEL|HAPPINESS,
 
 - `SHINY` is `A` for albino, `S` for shiny, and blank for non-shiny.
 
-- `CARD` is `A` for albino, `S` for shiny, and blank for non-shiny.
+- `CARD` is `A` for albino, `S` for shiny, `N` for normal and blank for non-shiny.
 
 - `LEVEL` is left blank for level 100.
 

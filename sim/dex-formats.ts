@@ -242,8 +242,8 @@ export class Format extends BasicEffect implements Readonly<BasicEffect> {
 		this.ruleTable = null;
 		this.teamLength = data.teamLength || undefined;
 		this.onBegin = data.onBegin || undefined;
-		this.maxLevel = data.maxLevel || 100;
-		this.defaultLevel = data.defaultLevel || this.maxLevel;
+		this.maxLevel = data.maxLevel || 9999;
+		this.defaultLevel = data.defaultLevel || 100;
 		this.forcedLevel = data.forcedLevel || undefined;
 		this.maxForcedLevel = data.maxForcedLevel || undefined;
 		this.noLog = !!data.noLog;

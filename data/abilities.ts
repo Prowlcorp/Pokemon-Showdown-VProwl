@@ -2002,7 +2002,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.debug('illusion cleared');
 				pokemon.illusion = null;
 				const details = pokemon.species.name + (pokemon.level === 100 ? '' : ', L' + pokemon.level) +
-					(pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny === "Albino" ? ', albino' : pokemon.set.shiny === "Shiny" ? ', shiny' : '') + (pokemon.set.card === "Albino" ? ', albino' : pokemon.set.card === "Shiny" ? ', shiny' : '');
+					(pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny === "Albino" ? ', albino' : pokemon.set.shiny === "Shiny" ? ', shiny' : '') + (pokemon.set.card === "Albino" ? ', albino' : pokemon.set.card === "Shiny" ? ', shiny' : pokemon.set.card === "Normal" ? ', normal' : '');
 				this.add('replace', pokemon, details);
 				this.add('-end', pokemon, 'Illusion');
 			}
@@ -2435,7 +2435,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (pokemon.illusion) {
 				this.debug('illusion cleared');
 				pokemon.illusion = null;
-				const details = pokemon.species.name + (pokemon.level === 100 ? '' : ', L' + pokemon.level) + (pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny === "Albino" ? ', albino' : pokemon.set.shiny === "Shiny" ? ', shiny' : '');
+				const details = pokemon.species.name + (pokemon.level === 100 ? '' : ', L' + pokemon.level) + (pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny === "Albino" ? ', albino' : pokemon.set.shiny === "Shiny" ? ', shiny' : '') + (pokemon.set.card === "Albino" ? ', albino' : pokemon.set.card === "Shiny" ? ', shiny' : pokemon.set.card === "Normal" ? ', normal' : '');
 				this.add('replace', pokemon, details);
 				this.add('-end', pokemon, 'Illusion');
 			}

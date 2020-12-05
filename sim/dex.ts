@@ -1080,6 +1080,8 @@ export class ModdedDex {
 				buf += '|S';
 			} else if (set.card === "Albino") {
 				buf += '|A';
+			} else if (set.card === "Normal") {
+				buf += '|N';
 			} else {
 				buf += '|';
 			}
@@ -1210,7 +1212,7 @@ export class ModdedDex {
 			// card
 			j = buf.indexOf('|', i);
 			if (j < 0) return null;
-			if (i !== j) set.card = buf.substring(i, j) === 'A' ? "Albino" : "Shiny";
+			if (i !== j) set.card = buf.substring(i, j) === 'A' ? "Albino" : buf.substring(i, j) === 'S' ? "Shiny" : "Normal";
 			i = j + 1;
 
 			// level

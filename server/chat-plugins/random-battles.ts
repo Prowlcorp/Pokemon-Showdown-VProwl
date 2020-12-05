@@ -70,6 +70,7 @@ function battleFactorySets(species: string | Species, tier: string | null, gen =
 			else if (set.shiny === "Albino") buf += `<li>Shiny: Albino</li>`;
 			if (set.card === "Shiny") buf += `<li>Card: Shiny</li>`;
 			else if (set.card === "Albino") buf += `<li>Card: Albino</li>`;
+			else if (set.card === "Normal") buf += `<li>Card: Normal</li>`;
 			if (set.happiness) buf += `<li>Happiness: ${set.happiness}</li>`;
 			if (set.evs) {
 				buf += `<li>EVs: `;
@@ -113,6 +114,7 @@ function battleFactorySets(species: string | Species, tier: string | null, gen =
 			else if (set.shiny === "Albino") buf += `<li>Shiny: Albino</li>`;
 			if (set.card === "Shiny") buf += `<li>Card: Shiny</li>`;
 			else if (set.card === "Albino") buf += `<li>Card: Albino</li>`;
+			else if (set.card === "Normal") buf += `<li>Card: Normal</li>`;
 			if (set.happiness) buf += `<li>Happiness: ${set.happiness}</li>`;
 			if (set.evs) {
 				buf += `<li>EVs: `;

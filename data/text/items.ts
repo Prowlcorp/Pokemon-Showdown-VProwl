@@ -184,6 +184,10 @@ export const ItemsText: {[k: string]: ItemText} = {
 		name: "Cameruptite",
 		desc: "If held by a Camerupt, this item allows it to Mega Evolve in battle.",
 	},
+	castiumz: {
+		name: "Castium Z",
+		desc: "If held by an Castform with Weatherball, it can use Mayday Doomsday.",
+	},
 	cellbattery: {
 		name: "Cell Battery",
 		desc: "Raises holder's Attack by 1 if hit by an Electric-type attack. Single use.",

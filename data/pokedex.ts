@@ -15384,7 +15384,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		name: "Giracario-Shadow",
 		baseSpecies: "Giracario",
 		forme: "Shadow",
-		types: ["Fighting", "Steel", "Dragon"],
+		types: ["Fighting", "Steel", "Dragon", "Ghost"],
 		gender: "M",
 		baseStats: {hp: 90, atk: 85, def: 115, spa: 85, spd: 120, spe: 90},
 		abilities: {0: "Shadow Strike (Sealed)"},

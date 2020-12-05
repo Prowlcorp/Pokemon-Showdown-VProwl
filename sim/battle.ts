@@ -1960,6 +1960,10 @@ export class Battle {
 			for (statName in modStats) {
 				modStats[statName] = tr(modStats[statName] * 2);
 			}
+		} else if (card === "Normal") {
+			for (statName in modStats) {
+				modStats[statName] = tr(modStats[statName] * 1.5);
+			}
 		}
 		return this.natureModify(modStats as StatsTable, set);
 	}

@@ -234,11 +234,11 @@ export class TeamValidator {
 		set.nature = nature.name;
 		if (!Array.isArray(set.moves)) set.moves = [];
 
-		const maxLevel = format.maxLevel || 100;
+		const maxLevel = format.maxLevel || 9999;
 		const maxForcedLevel = format.maxForcedLevel || maxLevel;
 		let forcedLevel: number | null = null;
 		if (!set.level) {
-			set.level = (format.defaultLevel || maxLevel);
+			set.level = (format.defaultLevel || 100);
 		}
 		if (format.forcedLevel) {
 			forcedLevel = format.forcedLevel;
