@@ -2031,14 +2031,10 @@ function runLearn(target: string, cmd: string, canAll: boolean, message: string)
 	let gen = 999;
 	let formatid;
 	let formatName;
-	let minSourceGen;
 
 	while (targets.length) {
 		const targetid = toID(targets[0]);
 		if (Dex.getFormat(targetid).exists) {
-			if (format.minSourceGen && format.minSourceGen === 6) {
-				return {error: "'pentagon' can't be used with formats."};
-			}
 			format = Utils.deepClone(Dex.getFormat(targetid));
 			formatid = targetid;
 			formatName = format.name;
@@ -2050,21 +2046,12 @@ function runLearn(target: string, cmd: string, canAll: boolean, message: string)
 			targets.shift();
 			continue;
 		}
-		if (targetid === 'pentagon') {
-			if (formatid) {
-				return {error: "'pentagon' can't be used with formats."};
-			}
-			minSourceGen = 6;
-			targets.shift();
-			continue;
-		}
 		break;
 	}
 	if (!formatName) {
 		if (!Dex.mod(`gen${gen}`)) return {error: `Gen ${gen} does not exist.`};
 		format = new Dex.Format(format, {mod: `gen${gen}`});
 		formatName = `Gen ${gen}`;
-		if (minSourceGen === 6) formatName += ' Pentagon';
 	}
 	const validator = TeamValidator.get(format);
 
@@ -2125,7 +2112,7 @@ function runLearn(target: string, cmd: string, canAll: boolean, message: string)
 			E: "", S: "event",
 		};
 		const sourcesBefore = setSources.sourcesBefore;
-		if (sources.length || sourcesBefore < gen) buffer += " only when obtained";
+		if (sources.length) buffer += " only when obtained";
 		buffer += " from:<ul class=\"message-learn-list\">";
 		if (sources.length) {
 			sources = sources.map(source => {
@@ -2138,12 +2125,12 @@ function runLearn(target: string, cmd: string, canAll: boolean, message: string)
 				return source;
 			}).sort();
 			for (let source of sources) {
-				buffer += `<li>Gen ${source.charAt(0)} ${sourceNames[source] || sourceNames[source.charAt(1)]}`;
+				buffer += `<li>Gen ${source.charAt(0)} ${sourceNames[source] || sourceNames[source.charAt(4)]}`;
 
-				if (source.charAt(1) === 'E') {
+				if (source.charAt(4) === 'E') {
 					[source] = source.split(':');
 					if (source.length > 2) {
-						buffer += `${source.slice(2)} `;
+						buffer += `${source.slice(5)} `;
 					}
 					buffer += `egg`;
 				}
