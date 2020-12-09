@@ -23351,7 +23351,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		name: "Fairy Lock",
+		name: "Wind Arena",
 		pp: 10,
 		priority: 0,
 		flags: {mirror: 1, authentic: 1},
@@ -24161,8 +24161,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onResidualOrder: 21,
 			onResidual(pokemon) {
-				if((this.effectData.source && this.effectData.source !== pokemon) && !pokemon.hasType("Ice")) {
-					if(this.random(1, 2)) pokemon.trySetStatus('frz');
+				if(this.effectData.source && this.effectData.source !== pokemon) {
+					if(!pokemon.hasType("Ice")) {
+						if(this.random(1, 2)) pokemon.trySetStatus('frz');
+					}
 				}
 			},
 			onResidualSubOrder: 2,
@@ -24460,11 +24462,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onResidualOrder: 6,
 			onResidual(pokemon) {
-				if(this.effectData.source === pokemon) {
-					this.heal(pokemon.maxhp / 5);
-				} else {
-					this.heal(pokemon.maxhp / 10);
-				}
+				this.heal(pokemon.maxhp / 8);
 			},
 		},
 		secondary: null,

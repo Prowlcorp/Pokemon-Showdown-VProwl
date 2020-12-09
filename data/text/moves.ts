@@ -4630,8 +4630,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	healzone: {
 		name: "Heal Zone",
-		desc: "The user has 1/5 of its maximum HP and allies have 1/10 of their maximum HP, rounded down, restored at the end of each turn while it remains active. If Big Root is held by the user, the HP recovered is 1.3x normal, rounded half down. If the user uses Baton Pass, the replacement will receive the healing effect.",
-		shortDesc: "User recovers 1/10 max HP per turn. Allies recover 1/5 max HP per turn.",
+		desc: "The user and its allies have 1/8 of their maximum HP, rounded down, restored at the end of each turn while it remains active. If Big Root is held by the user, the HP recovered is 1.3x normal, rounded half down. If the user uses Baton Pass, the replacement will receive the healing effect.",
+		shortDesc: "User and team recover 1/8 max HP per turn.",
 
 		start: "  [POKEMON] surrounded their team with a healing light!",
 		heal: "  A healing light restored [POKEMON]'s HP!",
