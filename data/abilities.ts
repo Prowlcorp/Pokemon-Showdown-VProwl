@@ -1559,7 +1559,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.add('-end', target, 'ability: Haunted House', '[silent]');
 			},
 		},
-	}
+	},
 	healer: {
 		name: "Healer",
 		onResidualOrder: 5,
