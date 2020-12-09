@@ -353,7 +353,6 @@ export const Aliases: {[alias: string]: string} = {
 
 	// abilities
 	ph: "Poison Heal",
-	regen: "Regenerator",
 	stag: "Shadow Tag",
 
 	// items
