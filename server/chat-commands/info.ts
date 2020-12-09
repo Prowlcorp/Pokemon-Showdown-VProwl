@@ -1245,10 +1245,6 @@ export const commands: ChatCommands = {
 					level = 5;
 					lvlSet = true;
 					continue;
-				} else if (lowercase === 'vgc') {
-					level = 50;
-					lvlSet = true;
-					continue;
 				} else if (lowercase.startsWith('lv') || lowercase.startsWith('level')) {
 					level = parseInt(arg.replace(/\D/g, ''));
 					lvlSet = true;

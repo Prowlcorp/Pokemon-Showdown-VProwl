@@ -3368,6 +3368,21 @@ export const PokedexText: {[k: string]: PokedexText} = {
 	lucaridon: {
 		name: "Lucaridon",
 	},
+	mystique: {
+		name: "Mystique",
+	},
+	dragonfolf: {
+		name: "Dragon Folf",
+	},
+	dragonfolfflying: {
+		name: "Dragon Folf-Flying",
+	},
+	khylacet: {
+		name: "Khylacet",
+	},
+	draceusfolf: {
+		name: "Draceus Folf",
+	},
 	missingno: {
 		name: "MissingNo.",
 	},

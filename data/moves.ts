@@ -23,7 +23,6 @@ reflectable: Bounced back to the original user by Magic Coat or the Magic Bounce
 snatch: Can be stolen from the original user and instead used by another Pokemon using Snatch.
 sound: Has no effect on Pokemon with the Soundproof Ability.
 sword: Power is multiplied by 1.5 when used by a pokemon with the Unbending Blade ability.
-
 */
 
 export const Moves: {[moveid: string]: MoveData} = {
@@ -2788,7 +2787,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 			} else if (this.field.isTerrain('psychicterrain')) {
 				newType = 'Psychic';
 			} else if (this.field.isTerrain('hellfire')) {
-				newType = ['Fire', 'Dark'];
+				newType = ['Fire'];
+			} else if (this.field.isTerrain('hauntedterrain')) {
+				newType = 'Ghost';
 			}
 
 			if (target.getTypes().join() === newType || !target.setType(newType)) return false;
@@ -5181,6 +5182,32 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Dragon",
 	},
+	draininghold: {
+		accuracy: 90,
+		basePower: 80,
+		category: "Special",
+		name: "Draining Hold",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, punch: 1, heal: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onEffectiveness(typeMod, target, type, move) {
+			return typeMod + this.dex.getEffectiveness('Fire', type);
+		},
+		drain: [1, 2],
+		secondary: {
+			chance: 40,
+			status: 'slp',
+		},
+		target: "normal",
+		type: "Ghost",
+	},
 	drainingkiss: {
 		accuracy: 100,
 		basePower: 50,
@@ -6127,17 +6154,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
+			let currentBoost = 1;
 			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
+			}
+			if (this.field.isTerrain('psychicterrain') && pokemon.isGrounded()) {
+				this.debug('psychic terrain boost');
+				currentBoost *=1.5;
 				return this.chainModify(currentBoost);
 			}
-		},
-		onBasePower(basePower, source) {
-			if (this.field.isTerrain('psychicterrain') && source.isGrounded()) {
-				this.debug('terrain buff');
-				return this.chainModify(1.5);
-			}
+			return this.chainModify(currentBoost);
 		},
 		onModifyMove(move, source, target) {
 			if (this.field.isTerrain('psychicterrain') && source.isGrounded()) {
@@ -8937,6 +8964,62 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {boost: {def: 1}},
 	},
+	hauntedterrain: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Haunted Terrain",
+		pp: 10,
+		priority: 0,
+		flags: {},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		terrain: 'hauntedterrain',
+		condition: {
+			duration: 5,
+			durationCallback(source, effect) {
+				if (source?.hasItem('terrainextender')) {
+					return 8;
+				}
+				return 5;
+			},
+			onTryHitPriority: 4,
+			onBasePowerPriority: 6,
+			onBasePower(basePower, attacker, defender, move) {
+				let chainMod = 1;
+				if (move.type === 'Ghost' && attacker.isGrounded() && !attacker.isSemiInvulnerable()) {
+					this.debug('haunted terrain boost');
+					chainMod *= 1.5
+				}
+				if (attacker.type === 'Ghost' && attacker.isGrounded() && !attacker.isSemiInvulnerable()) {
+					this.debug('haunted terrain boost');
+					chainMod *= 1.3
+				}
+				return this.chainModify(chainMod);
+			},
+			onStart(battle, source, effect) {
+				if (effect?.effectType === 'Ability') {
+					this.add('-fieldstart', 'move: Haunted Terrain', '[from] ability: ' + effect, '[of] ' + source);
+				} else {
+					this.add('-fieldstart', 'move: Haunted Terrain');
+				}
+			},
+			onResidualOrder: 21,
+			onResidualSubOrder: 2,
+			onEnd() {
+				this.add('-fieldend', 'move: Haunted Terrain');
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Ghost",
+		zMove: {boost: {spa: 1}},
+	},
 	haze: {
 		accuracy: true,
 		basePower: 0,
@@ -10231,20 +10314,20 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifyMovePriority: -2,
 			onModifyMove(move, source, target) {
 				if (move.category !== "Status") {
-					if (this.randomChance(7, 10)) {
+					if (this.random(7, 10)) {
 						source.addVolatile('lockon');
 					}
-					if (this.randomChance(4, 10)) {
+					if (this.random(4, 10)) {
 						move.willCrit = true;
 					}
-					if (this.randomChance(6, 10)) {
+					if (this.random(6, 10)) {
 						if (target.getStat('def', false, true) > target.getStat('spd', false, true)) move.defensiveCategory = 'Special';
 						else move.defensiveCategory = 'Physical';
 					}
-					if (this.randomChance(6, 10)) {
+					if (this.random(6, 10)) {
 						move.ignoreAbility = true;
 					}
-					if (this.randomChance(5, 10)) {
+					if (this.random(5, 10)) {
 						if (move.priority >= 2) return;
 						move.priority = 2;
 					}
@@ -13378,19 +13461,19 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
+			let currentBoost = 1;
 			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
+			}
+			if (this.field.isTerrain('mistyterrain') && pokemon.isGrounded()) {
+				this.debug('misty terrain boost');
+				currentBoost *=1.5;
 				return this.chainModify(currentBoost);
 			}
+			return this.chainModify(currentBoost);
 		},
 		selfdestruct: "always",
-		onBasePower(basePower, source) {
-			if (this.field.isTerrain('mistyterrain') && source.isGrounded()) {
-				this.debug('misty terrain boost');
-				return this.chainModify(1.5);
-			}
-		},
 		secondary: null,
 		target: "allAdjacent",
 		type: "Fairy",
@@ -13847,6 +13930,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 				move = 'psychic';
 			} else if (this.field.isTerrain('hellfire')) {
 				move = 'flamethrower';
+			} else if (this.field.isTerrain('hellfire')) {
+				move = 'shadowball';
 			}
 			this.useMove(move, pokemon, target);
 			return null;
@@ -15525,6 +15610,25 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "self",
 		type: "Normal",
 		zMove: {effect: 'clearnegativeboost'},
+	},
+	providenceblaster: {
+		accuracy: 130,
+		basePower: 200,
+		category: "Physical",
+		name: "Providence Blaster",
+		pp: 10,
+		priority: -1,
+		flags: {protect: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "???",
 	},
 	psybeam: {
 		accuracy: 100,
@@ -17534,7 +17638,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Satellite Strike",
 		pp: 10,
 		priority: 0,
-		flags: { charge: 1, protect: 1, recharge: 1 },
+		flags: {charge: 1, protect: 1, recharge: 1},
 		onBasePower(basePower, pokemon, target) {
 			let currentBoost = 1;
 			if (pokemon.level > 100) {
@@ -17819,6 +17923,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 					chance: 30,
 					boosts: {
 						spe: -1,
+					},
+				});
+			} else if (this.field.isTerrain('hauntedterrain')) {
+				move.secondaries.push({
+					chance: 30,
+					boosts: {
+						atk: -1,
 					},
 				});
 			} else if (this.field.isTerrain('soundstage')) {
@@ -21553,6 +21664,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 			case 'hellfire':
 				move.type = 'Fire';
 				break;
+			case 'hauntedterrain':
+				move.type = 'Ghost';
+				break;
 			}
 
 		},
@@ -23259,6 +23373,57 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Fire",
 		zMove: {boost: {atk: 1}},
 	},
+	windarena: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Fairy Lock",
+		pp: 10,
+		priority: 0,
+		flags: {mirror: 1, authentic: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		pseudoWeather: 'windarena',
+		condition: {
+			duration: 2,
+			onStart(target) {
+				this.add('-fieldactivate', 'move: Wind Arena');
+			},
+			onTrapPokemon(pokemon) {
+				if (this.field.weatherData.source !== pokemon) return;
+				true;
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Flying",
+		zMove: {boost: {def: 1}},
+	},
+	windscar: {
+		accuracy: 90,
+		basePower: 90,
+		category: "Physical",
+		name: "Wind Scar",
+		pp: 25,
+		priority: 1,
+		flags: {protect: 1, mirror: 1, sword: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		critRatio: 1,
+		secondary: null,
+		target: "normal",
+		type: "Flying",
+	},
 	wingattack: {
 		accuracy: 100,
 		basePower: 60,
@@ -23634,6 +23799,33 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Psychic",
 	},
+	zephyrgale: {
+		accuracy: 95,
+		basePower: 100,
+		category: "Special",
+		name: "Zephyr Gale",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		secondaries: [
+			{
+				chance: 20,
+				volatileStatus: 'flinch',
+			}, {
+				chance: 20,
+				status: 'bld',
+			},
+		],
+		target: "normal",
+		type: "Flying",
+	},
 	zingzap: {
 		accuracy: 100,
 		basePower: 80,
@@ -23682,6 +23874,672 @@ export const Moves: {[moveid: string]: MoveData} = {
 		willCrit: true,
 		target: "normal",
 		type: "Electric",
+	},
+
+	//Magic Moves
+	firebolt: {
+		accuracy: 100,
+		basePower: 20,
+		category: "Special",
+		name: "Firebolt",
+		pp: 25,
+		priority: 0,
+		flags: {bullet: 1, protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		multihit: [2, 5],
+		secondary: null,
+		target: "normal",
+		type: "Fire",
+	},
+	fireball: {
+		accuracy: 95,
+		basePower: 90,
+		basePowerCallback(pokemon, target, move) {
+			if (target.status === 'frz') return move.basePower * 1.5;
+			return move.basePower;
+		},
+		category: "Special",
+		name: "Fireball",
+		pp: 10,
+		priority: 0,
+		flags: {bullet: 1, protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		secondary: {
+			chance: 20,
+			onHit(target, source) {
+				if (target.status === 'bld') {
+					target.cureStatus();
+					target.trySetStatus('brn', source);
+				} else {
+					target.trySetStatus('brn', source);
+				}
+			},
+		},
+		target: "normal",
+		type: "Fire",
+	},
+	meteor: {
+		accuracy: 90,
+		basePower: 250,
+		category: "Special",
+		name: "Meteor",
+		pp: 5,
+		priority: 0,
+		flags: {charge: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onTryMove(attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				return;
+			}
+			this.add('-prepare', attacker, move.name);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+		},
+		status: 'brn',
+		secondary: null,
+		target: "normal",
+		type: "Fire",
+	},
+	waterbullet: {
+		accuracy: 100,
+		basePower: 20,
+		category: "Special",
+		defensiveCategory: "Physical",
+		name: "Water Bullet",
+		pp: 25,
+		priority: 0,
+		flags: {bullet: 1, protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		multihit: [2, 5],
+		secondary: null,
+		target: "normal",
+		type: "Water",
+	},
+	aquaticshakedown: {
+		accuracy: 95,
+		basePower: 90,
+		category: "Special",
+		defensiveCategory: "Physical",
+		name: "Aquatic Shakedown",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		secondary: {
+			chance: 20,
+			volatileStatus: 'flinch',
+		},
+		target: "normal",
+		type: "Water",
+	},
+	aquacrush: {
+		accuracy: 90,
+		basePower: 250,
+		category: "Special",
+		name: "Aqua Crush",
+		pp: 5,
+		priority: 0,
+		flags: {charge: 1, protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onTryMove(attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				return;
+			}
+			this.add('-prepare', attacker, move.name);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+		},
+		volatileStatus: 'aquacrush',
+		condition: {
+			duration: 3,
+			onStart(target) {
+				if (target.activeTurns && !this.queue.willMove(target)) {
+					this.effectData.duration++;
+				}
+				this.add('-start', target, 'move: Aqua Crush');
+			},
+			onResidualOrder: 12,
+			onEnd(target) {
+				this.add('-end', target, 'move: Aqua Crush');
+			},
+			onDisableMove(pokemon) {
+				for (const moveSlot of pokemon.moveSlots) {
+					const move = this.dex.getMove(moveSlot.id);
+					if (move.category === 'Physical') {
+						pokemon.disableMove(moveSlot.id);
+					}
+				}
+			},
+			onBeforeMovePriority: 5,
+			onBeforeMove(attacker, defender, move) {
+				if (!move.isZ && move.category === 'Physical') {
+					this.add('cant', attacker, 'move: Aqua Crush', move);
+					return false;
+				}
+			},
+		},
+		secondary: {
+			chance: 100,
+			volatileStatus: 'confusion',
+		},
+		target: "normal",
+		type: "Water",
+	},
+	iceneedles: {
+		accuracy: 100,
+		basePower: 15,
+		category: "Special",
+		name: "Ice Needles",
+		pp: 25,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onHit(target) {
+			if(this.random(1, 10)) {
+				const stats: BoostName[] = [];
+				let stat: BoostName;
+				for (stat in target.boosts) {
+					if (target.boosts[stat] < 6) {
+						stats.push(stat);
+					}
+				}
+				if (stats.length) {
+					const randomStat = this.sample(stats);
+					const boost: SparseBoostsTable = {};
+					boost[randomStat] = 1;
+					this.boost(boost);
+				} else {
+					return false;
+				}
+			}
+		},
+		multihit: [2, 5],
+		secondary: {
+			chance: 10,
+			status: 'bld',
+		},
+		target: "normal",
+		type: "Ice",
+	},
+	cryograsp: {
+		accuracy: 95,
+		basePower: 90,
+		category: "Special",
+		defensiveCategory: "Physical",
+		name: "Cryo Grasp",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onHit(target, source, move) {
+			return target.addVolatile('trapped', source, move, 'trapper');
+		},
+		secondary: {
+			chance: 50,
+			boosts: {
+				spe: -2,
+			},
+		},
+		target: "normal",
+		type: "Ice",
+	},
+	niflheim: {
+		accuracy: 85,
+		basePower: 250,
+		category: "Special",
+		name: "Niflheim",
+		pp: 5,
+		priority: 0,
+		flags: {charge: 1, protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onTryMove(attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				return;
+			}
+			this.add('-prepare', attacker, move.name);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+		},
+		terrain: 'niflheim',
+		condition: {
+			duration: 5,
+			durationCallback(source, effect) {
+				if (source?.hasItem('terrainextender')) {
+					return 8;
+				}
+				return 5;
+			},
+			onStart(battle, source, effect) {
+				if (effect?.effectType === 'Ability') {
+					this.add('-fieldstart', 'move: Niflheim', '[from] ability: ' + effect, '[of] ' + source);
+				} else {
+					this.add('-fieldstart', 'move: Niflheim');
+				}
+			},
+			onTryMove(pokemon, target, move) {
+				if (move.type === "Fire") {
+					this.add('-fail', pokemon, move);
+					this.hint("Its too cold to use Fire-Type moves in Niflheim");
+					return null;
+				}
+			},
+			onEffectiveness(typeMod, target, type, move) {
+				return typeMod + this.dex.getEffectiveness('Ice', type);
+			},
+			onResidualOrder: 21,
+			onResidual(pokemon) {
+				if(this.field.terrainData.source !== pokemon && !pokemon.hasType("Ice")) {
+					if(this.random(1, 2)) pokemon.trySetStatus('frz');
+				}
+			},
+			onResidualSubOrder: 2,
+			onEnd() {
+				this.add('-fieldend', 'move: Niflheim');
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Ice",
+	},
+	shortcircuit: {
+		accuracy: 100,
+		basePower: 40,
+		category: "Special",
+		name: "Short Circuit",
+		pp: 25,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onHit(target) {
+			let success = false;
+			let i: BoostName;
+			for (i in target.boosts) {
+				if (target.boosts[i] === 0) continue;
+				target.boosts[i] = -target.boosts[i];
+				success = true;
+			}
+			if (success) {
+				this.add('-invertboost', target, '[from] move: Topsy-Turvy');
+			}
+		},
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "Electric",
+	},
+	zeusfury: {
+		accuracy: 100,
+		basePower: 250,
+		category: "Special",
+		name: "Zeus' Fury",
+		pp: 5,
+		priority: 0,
+		flags: {charge: 1, protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onTryMove(attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				return;
+			}
+			this.add('-prepare', attacker, move.name);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+		},
+		status: 'par',
+		volatileStatus: 'flinch',
+		secondary: null,
+		target: "normal",
+		type: "Electric",
+	},
+	firesaber: {
+		accuracy: 95,
+		basePower: 80,
+		category: "Special",
+		defensiveCategory: "Physical",
+		name: "Fire Saber",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, sword: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		secondaries: [
+			{
+				chance: 10,
+				status: 'bld',
+			}, {
+				chance: 10,
+				status: 'brn',
+			},
+		],
+		target: "normal",
+		type: "Fire",
+	},
+	watersaber: {
+		accuracy: 95,
+		basePower: 80,
+		category: "Special",
+		defensiveCategory: "Physical",
+		name: "Water Saber",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, sword: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		secondary: {
+			chance: 20,
+			status: 'bld',
+		},
+		target: "normal",
+		type: "Water",
+	},
+	icesaber: {
+		accuracy: 95,
+		basePower: 80,
+		category: "Special",
+		defensiveCategory: "Physical",
+		name: "Ice Saber",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, sword: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		secondaries: [
+			{
+				chance: 10,
+				status: 'bld',
+			}, {
+				chance: 10,
+				status: 'frz',
+			},
+		],
+		target: "normal",
+		type: "Ice",
+	},
+	thundersaber: {
+		accuracy: 95,
+		basePower: 80,
+		category: "Special",
+		defensiveCategory: "Physical",
+		name: "Thunder Saber",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, sword: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		secondaries: [
+			{
+				chance: 10,
+				status: 'bld',
+			}, {
+				chance: 10,
+				status: 'par',
+			},
+		],
+		target: "normal",
+		type: "Electric",
+	},
+	elementsaber: {
+		accuracy: 90,
+		basePower: 60,
+		category: "Special",
+		defensiveCategory: "Physical",
+		name: "Element Saber",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, sword: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onModifyMove(move, source, target) {
+			if (!move.secondaries) move.secondaries = [];
+			if (move.hit === 1) {
+				move.secondaries.push({
+					chance: 10,
+					status: 'bld',
+				});
+				move.secondaries.push({
+					chance: 10,
+					status: 'brn',
+				});
+				move.type = "Fire";
+			}
+			if(move.hit === 2) {
+				move.secondaries.push({
+					chance: 10,
+					status: 'bld',
+				});
+				move.secondaries.push({
+					chance: 10,
+					status: 'frz',
+				});
+				move.type = "Ice";
+			}
+			if(move.hit === 3) {
+				move.secondaries.push({
+					chance: 20,
+					status: 'bld',
+				});
+				move.type = "Water";
+			}
+			if(move.hit === 4) {
+				move.secondaries.push({
+					chance: 10,
+					status: 'bld',
+				});
+				move.secondaries.push({
+					chance: 10,
+					status: 'par',
+				});
+			}
+			move.type = "Electric";
+		},
+		multihit: 4,
+		multiaccuracy: true,
+		secondaries: [],
+		target: "normal",
+		type: "???",
+	},
+	regen: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Regen",
+		pp: 20,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, snatch: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		volatileStatus: 'regen',
+		condition: {
+			onStart(pokemon) {
+				this.add('-start', pokemon, 'Regen');
+			},
+			onResidualOrder: 6,
+			onResidual(pokemon) {
+				this.heal(pokemon.maxhp / 10);
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "???",
+	},
+	healzone: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Heal Zone",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, snatch: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		volatileStatus: 'regen',
+		condition: {
+			onStart(pokemon) {
+				this.add('-start', pokemon, 'Heal Zone');
+			},
+			onResidualOrder: 6,
+			onResidual(pokemon) {
+				if(this.volatileStatus.source === pokemon) {
+					this.heal(pokemon.maxhp / 5);
+				} else {
+					this.heal(pokemon.maxhp / 10);
+				}
+			},
+		},
+		secondary: null,
+		target: "allies",
+		type: "???",
+	},
+	maxhealzone: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Max Heal Zone",
+		pp: 5,
+		priority: 0,
+		flags: {charge: 1, protect: 1, mirror: 1, snatch: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		onTryMove(attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				return;
+			}
+			this.add('-prepare', attacker, move.name);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+		},
+		volatileStatus: 'regen',
+		condition: {
+			onStart(pokemon) {
+				this.add('-start', pokemon, 'Max Heal Zone');
+			},
+			onResidualOrder: 6,
+			onResidual(pokemon) {
+				this.heal(pokemon.maxhp / 5);
+			},
+		},
+		secondary: null,
+		target: "allies",
+		type: "???",
 	},
 //Work
 	tornadobacklash: {

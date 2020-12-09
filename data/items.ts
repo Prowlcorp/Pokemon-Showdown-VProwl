@@ -574,7 +574,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
 			return true;
 		},
-		desc: "If held by a Butterfree, this item allows it to Mega Evolve in battle.",
 	},
 	cameruptite: {
 		name: "Cameruptite",
@@ -3671,6 +3670,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	powerherb: {
 		onChargeMove(pokemon, target, move) {
+			if (["Meteor", "Aqua Crush", "Niflheim", "Zeus' Fury", "Max Heal Zone", "Satellite Strike"].includes(move.name)) return;
 			if (pokemon.useItem()) {
 				this.debug('power herb - remove charge turn for ' + move.id);
 				this.attrLastMove('[still]');

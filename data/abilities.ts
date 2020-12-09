@@ -1091,6 +1091,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isUnbreakable: true,
 		name: "Fairy Aura",
 	},
+	fastlearner: {
+		name: "Fast Learner",
+	},
 	filter: {
 		onSourceModifyDamage(damage, source, target, move) {
 			if (target.getMoveHitData(move).typeMod > 0) {
@@ -1515,6 +1518,48 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 		},
 	},
+	hauntedhouse: {
+		name: "Haunted House",
+		onDamagePriority: -100,
+		onStart(source) {
+			this.field.setTerrain('hauntedterrain');
+		},
+		onDamage(damage, target, source, effect) {
+			if (effect && effect.effectType === 'Move' && effect.type === "Fire" &&
+				target.species.id === 'mystique' && !target.transformed) {
+				target.addVolatile('hauntedhouse');
+				this.add('-ability', target, 'Haunted House');
+				if(target.hasType("Fire")) return damage*4;
+				return damage*2;
+			}
+		},
+		onEnd(pokemon) {
+			pokemon.removeVolatile('hauntedhouse');
+		},
+		condition: {
+			noCopy: true, // doesn't get copied by Baton Pass
+			onStart(target) {
+				this.add('-start', target, 'ability: Haunted House');
+			},
+			onModifyAtkPriority: 5,
+			onModifyAtk(atk, attacker, defender, move) {
+				if (move.type === 'Fire' && attacker.hasAbility('hauntedhouse')) {
+					this.debug('Haunted House boost');
+					return this.chainModify(2);
+				}
+			},
+			onModifySpAPriority: 5,
+			onModifySpA(atk, attacker, defender, move) {
+				if (move.type === 'Fire' && attacker.hasAbility('hauntedhouse')) {
+					this.debug('Haunted House boost');
+					return this.chainModify(2);
+				}
+			},
+			onEnd(target) {
+				this.add('-end', target, 'ability: Haunted House', '[silent]');
+			},
+		},
+	}
 	healer: {
 		name: "Healer",
 		onResidualOrder: 5,
@@ -4008,65 +4053,39 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				for (let moveSlot of pokemon.moveSlots) {
 					if(moveSlot.id === 'slash') {
 						let move = this.dex.getMove('brutalslice');
-						pokemon.moveSlots.push({
+						const moveIndex = pokemon.moves.indexOf(moveSlot.id);
+						pokemon.moveSlots[moveIndex] = {
 							move: move.name,
 							id: move.id,
-							pp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
-							maxpp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
+							pp: move.pp,
+							maxpp: move.pp,
 							target: move.target,
 							disabled: false,
-							disabledSource: '',
 							used: false,
-						});
+							virtual: true,
+						};
 					}
 					if(moveSlot.id === 'irontail' || moveSlot.id === 'dragontail') {
 						let move = this.dex.getMove('axestrike');
-						pokemon.moveSlots.push({
+						const moveIndex = pokemon.moves.indexOf(moveSlot.id);
+						pokemon.moveSlots[moveIndex] = {
 							move: move.name,
 							id: move.id,
-							pp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
-							maxpp: ((move.noPPBoosts || move.isZ) ? move.pp : move.pp * 8 / 5),
+							pp: move.pp,
+							maxpp: move.pp,
 							target: move.target,
 							disabled: false,
-							disabledSource: '',
 							used: false,
-						});
+							virtual: true,
+						};
 					}
 				}
-/*				for (let movenum = pokemon.moveSlots.length-1; movenum>=0; movenum--) {
-					if(movenum.id === 'slash' || movenum.id === 'irontail' || movenum.id === 'dragontail') {
-						pokemon.moveSlots.splice(movenum, 1);
-					}
-				}*/
 			}
 		},
 		onBasePowerPriority: 8,
 		onBasePower(basePower, attacker, defender, move) {
 			if (move.flags['sword'] && move.id !== 'aircutter' && move.id !== 'airslash') {
 				return this.chainModify(1.3);
-			}
-		},
-		onModifyMove(move, pokemon) {
-			if(move.id === 'slash' && pokemon.species.name === 'Haxorus-Mega') {
-				move.accuracy = true;
-				move.secondary = null;
-				move.onTryHit = function(target,pokemon) {
-					this.useMove('brutalslice', pokemon, target);
-					return null;
-				}
-			}
-			if((move.id === 'irontail' || move.id === 'dragontail') && pokemon.species.name === 'Haxorus-Mega') {
-				move.accuracy = true;
-				move.secondary = null;
-				move.onTryHit = function(target,pokemon) {
-					this.useMove('axestrike', pokemon, target);
-					return null;
-				}
-			}
-			if(move.flags['sword'] && move.id !== 'aircutter' && move.id !== 'airslash') {
-				move.onEffectiveness = function (typeMod, target, type) {
-					if(type === 'Steel' && typeMod<=0) return 1;
-				};
 			}
 		},
 		name: "Steel Breaker",
@@ -4771,6 +4790,26 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 		},
 		name: "Wandering Spirit",
+	},
+	warcry: {
+		onStart(pokemon) {
+			let activated = false;
+			for (const target of pokemon.side.foe.active) {
+				if (!target || !this.isAdjacent(target, pokemon)) continue;
+				if (!activated) {
+					this.add('-ability', pokemon, 'War Cry', 'boost');
+					activated = true;
+				}
+				if (target.volatiles['substitute']) {
+					this.add('-immune', target);
+				} else {
+					this.boost({def: -1}, target, pokemon, null, true);
+					target.addVolatile('taunt', this.effectData.pokemon);
+					target.addVolatile('flinch', this.effectData.pokemon);
+				}
+			}
+		},
+		name: "War Cry",
 	},
 	waterabsorb: {
 		onTryHit(target, source, move) {

@@ -340,6 +340,10 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		end: "  The flames from the battlefield!",
 		damage: "  [POKEMON] is hurt by the Hell Fire!",
 	},
+	hauntedterrain: {
+		start: "  The battlefield got creepy!",
+		end: "  The creepiness disappeared from the battlefield!",
+	},
 
 	// field effects
 	gravity: {

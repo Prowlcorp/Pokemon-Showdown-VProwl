@@ -654,7 +654,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	copycat: {
 		name: "Copycat",
-		desc: "The user uses the last move used by any Pokemon, including itself. The base move of Max and G-Max Moves is considered for this purpose. Fails if no move has been used, or if the last move used was Assist, Baneful Bunker, Beak Blast, Belch, Bestow, Celebrate, Chatter, Circle Throw, Copycat, Counter, Covet, Crafty Shield, Destiny Bond, Detect, Dragon Tail, Endure, Feint, Focus Punch, Follow Me, Helping Hand, Hold Hands, King's Shield, Mat Block, Me First, Metronome, Mimic, Mirror Coat, Mirror Move, Nature Power, Obstruct, Protect, Rage Powder, Roar, Shell Trap, Sketch, Sleep Talk, Snatch, Spiky Shield, Spotlight, Struggle, Switcheroo, Thief, Transform, Trick, or Whirlwind.",
+		desc: "The user uses the last move used by any Pokemon, including itself. Fails if no move has been used, or if the last move used was Assist, Baneful Bunker, Beak Blast, Belch, Bestow, Celebrate, Chatter, Circle Throw, Copycat, Counter, Covet, Crafty Shield, Destiny Bond, Detect, Dragon Tail, Endure, Feint, Focus Punch, Follow Me, Helping Hand, Hold Hands, King's Shield, Mat Block, Me First, Metronome, Mimic, Mirror Coat, Mirror Move, Nature Power, Obstruct, Protect, Rage Powder, Roar, Shell Trap, Sketch, Sleep Talk, Snatch, Spiky Shield, Spotlight, Struggle, Switcheroo, Thief, Transform, Trick, or Whirlwind.",
 		shortDesc: "Uses the last move used in the battle.",
 	},
 	coreenforcer: {
@@ -700,7 +700,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	courtchange: {
 		name: "Court Change",
-		desc: "Switches the Mist, Light Screen, Reflect, Spikes, Safeguard, Tailwind, Toxic Spikes, Stealth Rock, Water Pledge, Fire Pledge, Grass Pledge, Sticky Web, Aurora Veil, G-Max Steelsurge, G-Max Cannonade, G-Max Vine Lash, and G-Max Wildfire effects from the user's side to the opposing side and vice versa.",
+		desc: "Switches the Mist, Light Screen, Reflect, Spikes, Safeguard, Tailwind, Toxic Spikes, Stealth Rock, Water Pledge, Fire Pledge, Grass Pledge, Sticky Web, and Aurora Veil effects from the user's side to the opposing side and vice versa.",
 		shortDesc: "Swaps user's field effects with the opposing side.",
 
 		activate: "  [POKEMON] swapped the battle effects affecting each side of the field!",
@@ -859,7 +859,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	disable: {
 		name: "Disable",
-		desc: "For 4 turns, the target's last move used becomes disabled. Fails if one of the target's moves is already disabled, if the target has not made a move, if the target no longer knows the move, or if the move was a Max or G-Max Move.",
+		desc: "For 4 turns, the target's last move used becomes disabled. Fails if one of the target's moves is already disabled, if the target has not made a move, if the target no longer knows the move.",
 		shortDesc: "For 4 turns, disables the target's last move used.",
 
 		start: "  [POKEMON]'s [MOVE] was disabled!",
@@ -987,6 +987,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Draining Kiss",
 		desc: "The user recovers 3/4 the HP lost by the target, rounded half up. If Big Root is held by the user, the HP recovered is 1.3x normal, rounded half down.",
 		shortDesc: "User recovers 75% of the damage dealt.",
+	},
+	draininghold: {
+		name: "Draining Hold",
+		desc: "The user recovers 1/2 the HP lost by the target, rounded up. If Big Root is held by the user, the HP recovered is 1.3x normal, rounded half down. Has a 40% chance to put the target to sleep.",
+		shortDesc: "User recovers 50% of the damage dealt. May make target sleep.",
 	},
 	drainpunch: {
 		name: "Drain Punch",
@@ -1692,6 +1697,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Raises the user's Defense by 1 stage.",
 		shortDesc: "Raises the user's Defense by 1.",
 	},
+	hauntedterrain: {
+		name: "Haunted Terrain",
+		desc: "For 5 turns, the terrain becomes Haunted Terrain. During the effect, the power of Ghost-type attacks made by grounded Pokemon is multiplied by 1.5, the power of moves made by grounded Ghost-type pokemon is multiplied by 1.3X. Camouflage transforms the user into an Ghost type, Nature Power becomes Shadow Ball, and Secret Power has a 30% chance to lower attack one stage. Fails if the current terrain is Haunted Terrain.",
+		shortDesc: "5 turns. Grounded: +Ghost power.",
+	},
 	haze: {
 		name: "Haze",
 		desc: "Resets the stat stages of all active Pokemon to 0.",
@@ -2041,7 +2051,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	instruct: {
 		name: "Instruct",
-		desc: "The target immediately uses its last used move. Fails if the target has not made a move, if the move has 0 PP, if the target is preparing to use Beak Blast, Focus Punch, or Shell Trap, or if the move is Assist, Beak Blast, Belch, Bide, Celebrate, Copycat, Focus Punch, Ice Ball, Instruct, King's Shield, Me First, Metronome, Mimic, Mirror Move, Nature Power, Outrage, Petal Dance, Rollout, Shell Trap, Sketch, Sleep Talk, Struggle, Thrash, Transform, Uproar, any two-turn move, any recharge move, any Z-Move, or any Max or G-Max Move.",
+		desc: "The target immediately uses its last used move. Fails if the target has not made a move, if the move has 0 PP, if the target is preparing to use Beak Blast, Focus Punch, or Shell Trap, or if the move is Assist, Beak Blast, Belch, Bide, Celebrate, Copycat, Focus Punch, Ice Ball, Instruct, King's Shield, Me First, Metronome, Mimic, Mirror Move, Nature Power, Outrage, Petal Dance, Rollout, Shell Trap, Sketch, Sleep Talk, Struggle, Thrash, Transform, Uproar, any two-turn move, any recharge move, or any Z-Move.",
 		shortDesc: "The target immediately uses its last used move.",
 
 		activate: "  [TARGET] followed [POKEMON]'s instructions!",
@@ -2659,7 +2669,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	obstruct: {
 		name: "Obstruct",
-		desc: "The user is protected from most attacks made by other Pokemon during this turn, and Pokemon trying to make contact with the user have their Defense lowered by 2 stages. Non-damaging moves go through this protection. This move has a 1/X chance of being successful, where X starts at 1 and triples each time this move is successfully used. X resets to 1 if this move fails, if the user's last move used is not Baneful Bunker, Detect, Endure, King's Shield, Max Guard, Obstruct, Protect, Quick Guard, Spiky Shield, or Wide Guard, or if it was one of those moves and the user's protection was broken. Fails if the user moves last this turn.",
+		desc: "The user is protected from most attacks made by other Pokemon during this turn, and Pokemon trying to make contact with the user have their Defense lowered by 2 stages. Non-damaging moves go through this protection. This move has a 1/X chance of being successful, where X starts at 1 and triples each time this move is successfully used. X resets to 1 if this move fails, if the user's last move used is not Baneful Bunker, Detect, Endure, King's Shield, Obstruct, Protect, Quick Guard, Spiky Shield, or Wide Guard, or if it was one of those moves and the user's protection was broken. Fails if the user moves last this turn.",
 		shortDesc: "Protects from damaging attacks. Contact: -2 Def.",
 	},
 	oceanicoperetta: {
@@ -2932,6 +2942,10 @@ export const MovesText: {[k: string]: MoveText} = {
 
 		start: "  [POKEMON] protected itself!",
 		block: "  [POKEMON] protected itself!",
+	},
+	providenceblaster: {
+		name: "Providence Blaster",
+		shortDesc: "Goes last.",
 	},
 	psybeam: {
 		name: "Psybeam",
@@ -3543,7 +3557,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	sleeptalk: {
 		name: "Sleep Talk",
-		desc: "One of the user's known moves, besides this move, is selected for use at random. Fails if the user is not asleep. The selected move does not have PP deducted from it, and can currently have 0 PP. This move cannot select Assist, Beak Blast, Belch, Bide, Celebrate, Chatter, Copycat, Focus Punch, Hold Hands, Me First, Metronome, Mimic, Mirror Move, Nature Power, Shell Trap, Sketch, Sleep Talk, Struggle, Uproar, any two-turn move, or any Max Move.",
+		desc: "One of the user's known moves, besides this move, is selected for use at random. Fails if the user is not asleep. The selected move does not have PP deducted from it, and can currently have 0 PP. This move cannot select Assist, Beak Blast, Belch, Bide, Celebrate, Chatter, Copycat, Focus Punch, Hold Hands, Me First, Metronome, Mimic, Mirror Move, Nature Power, Shell Trap, Sketch, Sleep Talk, Struggle, Uproar, or any two-turn move.",
 		shortDesc: "User must be asleep. Uses another known move.",
 	},
 	sludge: {
@@ -4416,6 +4430,18 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Burns the target.",
 		shortDesc: "Burns the target.",
 	},
+	windarena: {
+		name: "Wind Arena",
+		desc: "Prevents all active Pokemon but the user from switching for the next 5 turns. Fails if the effect is already active.",
+		shortDesc: "Prevents other Pokemon from switching.",
+
+		activate: "  No one will be able to run away during the next 5 turns!",
+	},
+	windscar: {
+		name: "Wind Scar",
+		desc: "Has a higher chance for a critical hit.",
+		shortDesc: "High critical hit ratio. Usually goes first.",
+	},
 	wingattack: {
 		name: "Wing Attack",
 		shortDesc: "No additional effect.",
@@ -4490,6 +4516,10 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Has a 20% chance to make the target flinch.",
 		shortDesc: "20% chance to make the target flinch.",
 	},
+	zephyrgale: {
+		name: "Zephyr Gale",
+		shortDesc: "20% chance to make target bleed. 20% chance to make target flinch.",
+	},
 	zingzap: {
 		name: "Zing Zap",
 		desc: "Has a 30% chance to make the target flinch.",
@@ -4501,7 +4531,120 @@ export const MovesText: {[k: string]: MoveText} = {
 		shortDesc: "Goes first. Raises user's evasion by 1.",
 	},
 
+//Magic Moves
+	firebolt: {
+		name: "Firebolt",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		shortDesc: "Hits 2-5 times in one turn.",
+	},
+	fireball: {
+		name: "Fireball",
+		desc: "If target is frozen, deals 50% more damage. Has a 20% chance to burn, curing bleed if burns.",
+		shortDesc: "Target frozen: Powers up. Chance to burn",
+	},
+	meteor: {
+		name: "Meteor",
+		desc: "Bypasses Protect, Detect, and other protection moves and burns. This attack charges on the first turn and executes on the second.",
+		shortDesc: "Charges turn 1. Hits turn 2. Bypass Protect moves. Burns.",
 
+		prepare: "  [POKEMON] started to form a dark red circle!",
+	},
+	waterbullet: {
+		name: "Water Bulllet",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		shortDesc: "Hits 2-5 times in one turn.",
+	},
+	aquaticshakedown: {
+		name: "Aquatic Shakedown",
+		desc: "Has a 20% chance to make the target flinch. Hits target's Defense",
+		shortDesc: "20% chance to make the target flinch. Hits Def",
+	},
+	aquacrush: {
+		name: "Aqua Crush",
+		desc: "Confuses the target and prevents them from using Physical moves for 3 turns. This attack charges on the first turn and executes on the second.",
+		shortDesc: "Charges turn 1. Hits turn 2. Confuses and Physical Taunt.",
+
+		prepare: "  [POKEMON] heavily stirred the waters!",
+	},
+	iceneedles: {
+		name: "Ice Needles",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times. Has a 10% chance to make the target bleed. 10% chance to lower a random stat by 1 stages as long as the stat is not already at stage 6. Fails if no stat stage can be lowered or if used on a target with a substitute.",
+		shortDesc: "Hits 2-5 times in one turn. 10% bleed chance. Chance to lower a random stat of the target by 1.",
+	},
+	cryograsp: {
+		name: "Cryo Grasp",
+		desc: "Has a 20% chance to lower target's speed by 2. Hits target's Defense and traps the target.",
+		shortDesc: "20% chance to sharply lower speed. Hits Def and traps the target",
+	},
+	Niflheim: {
+		name: "Niflheim",
+		desc: "Sets up a terrain that causes fire moves to fail, gives ground type moves Ice-Type effectiveness, and has a 50% chance to freeze non Ice-Types other than the user at the end of each turn. This attack charges on the first turn and executes on the second.",
+		shortDesc: "Terrain: Fire moves fail, Ground has Ice effectiveness, may frz non-Ice at the end of turn. Charges.",
+
+		prepare: "  [POKEMON] started to freeze over the ground beneath them!",
+	},
+	shortcircuit: {
+		name: "Short Circuit",
+		desc: "The target's positive stat stages become negative and vice versa.",
+		shortDesc: "Hits adjacent foes. Inverts the target's stat stages.",
+	},
+	zeusfury: {
+		name: "Zeus' Fury",
+		desc: "Paralyzes the target and causes the target to flinch. This attack charges on the first turn and executes on the second.",
+		shortDesc: "Charges turn 1. Hits turn 2. Paralyze and flinch.",
+
+		prepare: "  [POKEMON] became extremely electrically charged!",
+	},
+	firesaber: {
+		name: "Fire Saber",
+		desc: "Has a 10% chance to cause bleeding. Has a 10% chance to cause burn. Hits Defense.",
+		shortDesc: "10% chance to cause bleed. 10% chance to burn. Hits Defense.",
+	},
+	watersaber: {
+		name: "Water Saber",
+		desc: "Has a 20% chance to cause bleeding. Hits Defense.",
+		shortDesc: "20% chance to cause bleed. Hits Defense.",
+	},
+	icesaber: {
+		name: "Ice Saber",
+		desc: "Has a 10% chance to cause bleeding. Has a 10% chance to cause freeze. Hits Defense.",
+		shortDesc: "10% chance to cause bleed. 10% chance to freeze. Hits Defense.",
+	},
+	thundersaber: {
+		name: "Thunder Saber",
+		desc: "Has a 10% chance to cause bleeding. Has a 10% chance to cause paralysis. Hits Defense.",
+		shortDesc: "10% chance to cause bleed. 10% chance to paralyze. Hits Defense.",
+	},
+	elementsaber: {
+		name: "Element Saber",
+		desc: "Uses Fire Saber, Water Saber, Ice Saber, and Thunder Saber in succession at 60 base power with 90% accuracy.",
+		shortDesc: "Uses Fire, Water, Ice, and Thunder Saber in succession at 60 base power with 90% accuracy.",
+	},
+	regen: {
+		name: "Regen",
+		desc: "The user has 1/10 of its maximum HP, rounded down, restored at the end of each turn while it remains active. If Big Root is held by the user, the HP recovered is 1.3x normal, rounded half down. If the user uses Baton Pass, the replacement will receive the healing effect.",
+		shortDesc: "User recovers 1/10 max HP per turn.",
+
+		start: "  [POKEMON] surrounded itself with a healing light!",
+		heal: "  A healing light restored [POKEMON]'s HP!",
+	},
+	healzone: {
+		name: "Heal Zone",
+		desc: "The user has 1/5 of its maximum HP and allies have 1/10 of their maximum HP, rounded down, restored at the end of each turn while it remains active. If Big Root is held by the user, the HP recovered is 1.3x normal, rounded half down. If the user uses Baton Pass, the replacement will receive the healing effect.",
+		shortDesc: "User recovers 1/10 max HP per turn. Allies recover 1/5 max HP per turn.",
+
+		start: "  [POKEMON] surrounded their team with a healing light!",
+		heal: "  A healing light restored [POKEMON]'s HP!",
+	},
+	maxhealzone: {
+		name: "Max Heal Zone",
+		desc: "The user and its allies have 1/5 of its maximum HP, rounded down, restored at the end of each turn while it remains active. If Big Root is held by the user, the HP recovered is 1.3x normal, rounded half down. If the user uses Baton Pass, the replacement will receive the healing effect. This attack charges on the first turn and executes on the second.",
+		shortDesc: "Charges turn 1. User and team recovers 1/5 max HP per turn.",
+
+		prepare: "  [POKEMON]'s surrounding area is becoming vibrant!",
+		start: "  [POKEMON] surrounded their team with a healing light!",
+		heal: "  A healing light restored [POKEMON]'s HP!",
+	},
 	tornadobacklash: {
 		name: "Tornado Backlash",
 		desc: "Prevents opponent from swapping out while this pokemon is on the field. Opponent is grounded.",

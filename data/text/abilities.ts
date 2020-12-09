@@ -382,6 +382,10 @@ export const AbilitiesText = {
 
 		start: "  [POKEMON] is radiating a fairy aura!",
 	},
+	fastlearner: {
+		name: "Fast Learner",
+		shortDesc: "No competitive use. Double exp gain.",
+	},
 	filter: {
 		name: "Filter",
 		shortDesc: "This Pokemon receives 3/4 damage from supereffective attacks.",
@@ -507,6 +511,11 @@ export const AbilitiesText = {
 		shortDesc: "If last item used is a Berry, 50% chance to restore it each end of turn. 100% in Sun.",
 
 		addItem: "  [POKEMON] harvested one [ITEM]!",
+	},
+	hauntedhouse: {
+		name: "Haunted House",
+		desc: "On switch-in, this Pokemon summons Electric Terrain. 30% chance a Pokemon making contact with this Pokemon will be burned. This pokemon takes double damage from fire type moves. The first time it is hit by a Fire-type move, its attacking stat is multiplied by 2 while using a Fire-type attack as long as it remains active and has this Ability. If this Pokemon is frozen, it cannot be defrosted by Fire-type attacks.",
+		shortDesc: "Switch: Haunted Terrain. This Pokemon's Fire attacks do 2x damage if hit by one Fire move; Fire weakness. Attacker may be burned if making contact.",
 	},
 	healer: {
 		name: "Healer",
@@ -1544,6 +1553,11 @@ export const AbilitiesText = {
 		shortDesc: "Pokemon making contact with this Pokemon have their Ability swapped with this one.",
 
 		activate: "#skillswap",
+	},
+	warcry: {
+		name: "War Cry",
+		desc: "On switch in lowers foe's defense by 1 and causes opponent to flinch and become taunted",
+		shortDesc: "Switch: Foe -1 def, flinch, taunt.",
 	},
 	waterabsorb: {
 		name: "Water Absorb",
