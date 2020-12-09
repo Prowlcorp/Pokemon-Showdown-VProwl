@@ -23369,7 +23369,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-fieldactivate', 'move: Wind Arena');
 			},
 			onTrapPokemon(pokemon) {
-				if (this.field.weatherData.source !== pokemon) return;
+				if (this.effectData.source && this.effectData.source !== pokemon) return;
 				true;
 			},
 		},
@@ -24130,7 +24130,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
-		terrain: 'niflheim',
+		onHit() {
+			this.field.setTerrain('niflheim');
+		},
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
@@ -24158,7 +24160,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onResidualOrder: 21,
 			onResidual(pokemon) {
-				if(this.field.terrainData.source !== pokemon && !pokemon.hasType("Ice")) {
+				if((this.effectData.source && this.effectData.source !== pokemon) && !pokemon.hasType("Ice")) {
 					if(this.random(1, 2)) pokemon.trySetStatus('frz');
 				}
 			},
@@ -24453,11 +24455,11 @@ export const Moves: {[moveid: string]: MoveData} = {
 		volatileStatus: 'regen',
 		condition: {
 			onStart(pokemon) {
-				this.add('-start', pokemon, 'Heal Zone');
+				this.add('-start', pokemon, 'Regen');
 			},
 			onResidualOrder: 6,
 			onResidual(pokemon) {
-				if(this.volatileStatus.source === pokemon) {
+				if(this.effectData.source === pokemon) {
 					this.heal(pokemon.maxhp / 5);
 				} else {
 					this.heal(pokemon.maxhp / 10);
@@ -24497,7 +24499,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		volatileStatus: 'regen',
 		condition: {
 			onStart(pokemon) {
-				this.add('-start', pokemon, 'Max Heal Zone');
+				this.add('-start', pokemon, 'Regen');
 			},
 			onResidualOrder: 6,
 			onResidual(pokemon) {

@@ -4576,7 +4576,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Has a 20% chance to lower target's speed by 2. Hits target's Defense and traps the target.",
 		shortDesc: "20% chance to sharply lower speed. Hits Def and traps the target",
 	},
-	Niflheim: {
+	niflheim: {
 		name: "Niflheim",
 		desc: "Sets up a terrain that causes fire moves to fail, gives ground type moves Ice-Type effectiveness, and has a 50% chance to freeze non Ice-Types other than the user at the end of each turn. This attack charges on the first turn and executes on the second.",
 		shortDesc: "Terrain: Fire moves fail, Ground has Ice effectiveness, may frz non-Ice at the end of turn. Charges.",
