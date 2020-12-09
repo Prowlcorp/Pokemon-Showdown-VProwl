@@ -24050,18 +24050,19 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onHit(target) {
-			if(this.random(1, 10)) {
+			const rand = this.random(10);
+			if(rand === 1) {
 				const stats: BoostName[] = [];
 				let stat: BoostName;
 				for (stat in target.boosts) {
-					if (target.boosts[stat] < 6) {
+					if (target.boosts[stat] > -6) {
 						stats.push(stat);
 					}
 				}
 				if (stats.length) {
 					const randomStat = this.sample(stats);
 					const boost: SparseBoostsTable = {};
-					boost[randomStat] = 1;
+					boost[randomStat] = -1;
 					this.boost(boost);
 				} else {
 					return false;
