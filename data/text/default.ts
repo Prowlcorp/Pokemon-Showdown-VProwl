@@ -344,6 +344,10 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		start: "  The battlefield got creepy!",
 		end: "  The creepiness disappeared from the battlefield!",
 	},
+	niflheim: {
+		start: "  The battlefield froze over!",
+		end: "  The ice disappeared from the battlefield!",
+	},
 
 	// field effects
 	gravity: {

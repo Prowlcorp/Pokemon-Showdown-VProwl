@@ -1080,7 +1080,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (target.lastMove && !target.lastMove.isZ) {
 					let ppDeducted = target.deductPP(target.lastMove.id, 4);
 					if (ppDeducted) {
-						this.add("-activate", target, 'move: Aura Sealing Strike', this.getMove(target.lastMove.id).name, ppDeducted);
+						this.add("-activate", target, 'move: Aura Sealing Strike', target.lastMove.name, ppDeducted);
 					}
 				}
 			}
@@ -1088,7 +1088,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (target.lastMove && !target.lastMove.isZ) {
 					let ppDeducted = target.deductPP(target.lastMove.id, 7);
 					if (ppDeducted) {
-						this.add("-activate", target, 'move: Aura Sealing Strike', this.getMove(target.lastMove.id).name, ppDeducted);
+						this.add("-activate", target, 'move: Aura Sealing Strike', target.lastMove.name, ppDeducted);
 					}
 				}
 				source.sealing = this.turn;
@@ -2787,7 +2787,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			} else if (this.field.isTerrain('psychicterrain')) {
 				newType = 'Psychic';
 			} else if (this.field.isTerrain('hellfire')) {
-				newType = ['Fire'];
+				newType = 'Fire';
 			} else if (this.field.isTerrain('hauntedterrain')) {
 				newType = 'Ghost';
 			}
@@ -6061,8 +6061,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {protect: 1, reflectable: 1, mirror: 1},
 		basePowerCallback(pokemon, target, move) {
 			if (target.baseSpecies.prevo) {
-				return this.chainModify(2);
+				return move.basePower*2;
 			}
+			return move.basePower;
 		},
 		onBasePower(basePower, pokemon, target) {
 			if (pokemon.level> 100) {
@@ -6080,7 +6081,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			return null;
 		},
 		onModifyMove(move, pokemon, target) {
-			if (pokemon.species.name !== 'Vee' && pokemon.template.baseSpecies === 'Vee') {
+			if (pokemon.species.name !== 'Vee' && pokemon.baseSpecies.name === 'Vee') {
 				move.type = pokemon.types[0];
 			}
 			if (pokemon.getStat('spa', false, true) > pokemon.getStat('atk', false, true)) move.category = 'Special';
@@ -8490,17 +8491,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
+
 		onBasePower(basePower, pokemon, target) {
+			let currentBoost = 1;
 			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
 			}
-		},
-		onBasePower(basePower) {
 			if (this.field.getPseudoWeather('gravity')) {
-				return this.chainModify(1.5);
+				currentBoost *= 1.5;
 			}
+			return this.chainModify(currentBoost);
 		},
 		secondary: {
 			chance: 100,
@@ -8529,13 +8530,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pseudoWeather: 'gravity',
 		condition: {
 			duration: 5,
-			durationCallback(source, effect) {
-				if (source?.hasAbility('persistent')) {
-					this.add('-activate', source, 'ability: Persistent', effect);
-					return 7;
-				}
-				return 5;
-			},
 			onStart() {
 				this.add('-fieldstart', 'move: Gravity');
 				for (const pokemon of this.getAllActive()) {
@@ -8996,7 +8990,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					this.debug('haunted terrain boost');
 					chainMod *= 1.5
 				}
-				if (attacker.type === 'Ghost' && attacker.isGrounded() && !attacker.isSemiInvulnerable()) {
+				if (attacker.hasType("Ghost") && attacker.isGrounded() && !attacker.isSemiInvulnerable()) {
 					this.debug('haunted terrain boost');
 					chainMod *= 1.3
 				}
@@ -9155,13 +9149,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		volatileStatus: 'healblock',
 		condition: {
 			duration: 5,
-			durationCallback(target, source, effect) {
-				if (source?.hasAbility('persistent')) {
-					this.add('-activate', source, 'ability: Persistent', effect);
-					return 7;
-				}
-				return 5;
-			},
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'move: Heal Block');
 			},
@@ -9271,7 +9258,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (source.hasAbility('megalauncher')) {
 				success = !!this.heal(this.modify(target.maxhp, 0.75));
 			} else if (source.hasAbility('healerheart')) {
-				success = !!this.heal(this.modify(target.maxhp * 0.75));
+				success = !!this.heal(this.modify(target.maxhp, 0.75));
 			} else {
 				success = !!this.heal(Math.ceil(target.maxhp * 0.5));
 			}
@@ -11367,17 +11354,16 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
+			let currentBoost = 1;
 			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
 			}
-		},
-		onBasePower(basePower, source) {
-			if (source.statsLoweredThisTurn) {
+			if (pokemon.statsLoweredThisTurn) {
 				this.debug('lashout buff');
-				return this.chainModify(2);
+				currentBoost *= 2;
 			}
+			return this.chainModify(currentBoost);
 		},
 		secondary: null,
 		target: "normal",
@@ -11736,7 +11722,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onModifyMove(move, pokemon) {
-			if (source.hasAbility('healerheart')) {
+			if (pokemon.hasAbility('healerheart')) {
 				move.heal = [37, 100];
 			}
 		},
@@ -12284,13 +12270,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pseudoWeather: 'magicroom',
 		condition: {
 			duration: 5,
-			durationCallback(source, effect) {
-				if (source?.hasAbility('persistent')) {
-					this.add('-activate', source, 'ability: Persistent', effect);
-					return 7;
-				}
-				return 5;
-			},
 			onStart(target, source) {
 				this.add('-fieldstart', 'move: Magic Room', '[of] ' + source);
 			},
@@ -13930,8 +13909,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 				move = 'psychic';
 			} else if (this.field.isTerrain('hellfire')) {
 				move = 'flamethrower';
-			} else if (this.field.isTerrain('hellfire')) {
+			} else if (this.field.isTerrain('hauntedterrain')) {
 				move = 'shadowball';
+			} else if (this.field.isTerrain('niflheim')) {
+				move = 'icebeam';
 			}
 			this.useMove(move, pokemon, target);
 			return null;
@@ -16860,17 +16841,16 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
+			let currentBoost = 1;
 			if (pokemon.level> 100) {
-				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
-				return this.chainModify(currentBoost);
 			}
-		},
-		onBasePower(basePower, pokemon, target) {
 			if (this.field.isTerrain('electricterrain') && target.isGrounded()) {
 				this.debug('terrain buff');
-				return this.chainModify(2);
+				currentBoost *= 2;
 			}
+			return this.chainModify(currentBoost);
 		},
 		secondary: null,
 		target: "normal",
@@ -17384,13 +17364,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		sideCondition: 'safeguard',
 		condition: {
 			duration: 5,
-			durationCallback(target, source, effect) {
-				if (source?.hasAbility('persistent')) {
-					this.add('-activate', source, 'ability: Persistent', effect);
-					return 7;
-				}
-				return 5;
-			},
 			onSetStatus(status, target, source, effect) {
 				if (!effect || !source) return;
 				if (effect.id === 'yawn') return;
@@ -17936,6 +17909,11 @@ export const Moves: {[moveid: string]: MoveData} = {
 				move.secondaries.push({
 					chance: 30,
 					volatileStatus: 'confusion',
+				});
+			} else if (this.field.isTerrain('niflheim')) {
+				move.secondaries.push({
+					chance: 30,
+					status: 'frz',
 				});
 			}
 		},
@@ -21481,7 +21459,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onModifyType(move, pokemon) {
 			if (pokemon.ignoringItem()) return;
 			move.type = this.runEvent('Drive', pokemon, null, move, 'Normal');
-			if(pokemon.species.nameid === 'genesectmega') {
+			if(pokemon.species.name === 'genesectmega') {
 				move.priority = 2;
 				move.basePower = 80;
 				move.technoSuper = true;
@@ -21666,6 +21644,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 				break;
 			case 'hauntedterrain':
 				move.type = 'Ghost';
+				break;
+			case 'niflheim':
+				move.type = 'Ice';
 				break;
 			}
 
@@ -22415,13 +22396,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pseudoWeather: 'trickroom',
 		condition: {
 			duration: 5,
-			durationCallback(source, effect) {
-				if (source?.hasAbility('persistent')) {
-					this.add('-activate', source, 'ability: Persistent', effect);
-					return 7;
-				}
-				return 5;
-			},
 			onStart(target, source) {
 				this.add('-fieldstart', 'move: Trick Room', '[of] ' + source);
 			},
@@ -23518,13 +23492,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pseudoWeather: 'wonderroom',
 		condition: {
 			duration: 5,
-			durationCallback(source, effect) {
-				if (source?.hasAbility('persistent')) {
-					this.add('-activate', source, 'ability: Persistent', effect);
-					return 7;
-				}
-				return 5;
-			},
 			onStart(side, source) {
 				this.add('-fieldstart', 'move: Wonder Room', '[of] ' + source);
 			},
