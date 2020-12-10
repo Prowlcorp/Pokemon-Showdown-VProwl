@@ -24393,8 +24393,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 					chance: 10,
 					status: 'par',
 				});
+				move.type = "Electric";
 			}
-			move.type = "Electric";
 		},
 		multihit: 4,
 		multiaccuracy: true,
