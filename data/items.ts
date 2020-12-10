@@ -3670,7 +3670,6 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	powerherb: {
 		onChargeMove(pokemon, target, move) {
-			if (["Meteor", "Aqua Crush", "Niflheim", "Zeus' Fury", "Max Heal Zone", "Satellite Strike"].includes(move.name)) return;
 			if (pokemon.useItem()) {
 				this.debug('power herb - remove charge turn for ' + move.id);
 				this.attrLastMove('[still]');
