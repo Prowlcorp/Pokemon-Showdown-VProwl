@@ -514,7 +514,7 @@ export const AbilitiesText = {
 	},
 	hauntedhouse: {
 		name: "Haunted House",
-		desc: "On switch-in, this Pokemon summons Electric Terrain. 30% chance a Pokemon making contact with this Pokemon will be burned. This pokemon takes double damage from fire type moves. The first time it is hit by a Fire-type move, its attacking stat is multiplied by 2 while using a Fire-type attack as long as it remains active and has this Ability. If this Pokemon is frozen, it cannot be defrosted by Fire-type attacks.",
+		desc: "On switch-in, this Pokemon summons Haunted Terrain. 30% chance a Pokemon making contact with this Pokemon will be burned. This pokemon takes double damage from fire type moves. The first time it is hit by a Fire-type move, its attacking stat is multiplied by 2 while using a Fire-type attack as long as it remains active and has this Ability. If this Pokemon is frozen, it cannot be defrosted by Fire-type attacks.",
 		shortDesc: "Switch: Haunted Terrain. This Pokemon's Fire attacks do 2x damage if hit by one Fire move; Fire weakness. Attacker may be burned if making contact.",
 	},
 	healer: {

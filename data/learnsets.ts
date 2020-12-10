@@ -61663,6 +61663,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			doubleteam: ["999M"],
 			dragonclaw: ["999M"],
 			dragontail: ["999M"],
+			drainhold: ["999L70"],
 			drainpunch: ["999T"],
 			dreameater: ["999M"],
 			dynamicentry: ["999T"],

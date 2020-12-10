@@ -330,12 +330,12 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 100,
 			type: "Electric",
 		},
-		onStart(Pokemon) {
+		onStart(pokemon) {
 			if (!pokemon.status) {
 				pokemon.eatItem();
 			}
 		},
-		onResidual(Pokemon) {
+		onResidual(pokemon) {
 			if (!pokemon.status) {
 				pokemon.eatItem();
 			}
@@ -1205,12 +1205,12 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 100,
 			type: "Poison",
 		},
-		onStart(Pokemon) {
+		onStart(pokemon) {
 			if (!pokemon.status) {
 				pokemon.eatItem();
 			}
 		},
-		onResidual(Pokemon) {
+		onResidual(pokemon) {
 			if (!pokemon.status) {
 				pokemon.eatItem();
 			}
@@ -3369,12 +3369,12 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 100,
 			type: "Ice",
 		},
-		onStart(Pokemon) {
+		onStart(pokemon) {
 			if (!pokemon.status || pokemon.status === 'brn') {
 				pokemon.eatItem();
 			}
 		},
-		onResidual(Pokemon) {
+		onResidual(pokemon) {
 			if (!pokemon.status || pokemon.status === 'brn') {
 				pokemon.eatItem();
 			}
@@ -4591,12 +4591,12 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 100,
 			type: "Fire",
 		},
-		onStart(Pokemon) {
+		onStart(pokemon) {
 			if (!pokemon.status || pokemon.status === 'frz') {
 				pokemon.eatItem();
 			}
 		},
-		onResidual(Pokemon) {
+		onResidual(pokemon) {
 			if (!pokemon.status || pokemon.status === 'frz') {
 				pokemon.eatItem();
 			}

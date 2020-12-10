@@ -1528,9 +1528,15 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (effect && effect.effectType === 'Move' && effect.type === "Fire" &&
 				target.species.id === 'mystique' && !target.transformed) {
 				target.addVolatile('hauntedhouse');
-				this.add('-ability', target, 'Haunted House');
 				if(target.hasType("Fire")) return damage*4;
 				return damage*2;
+			}
+		},
+		onDamagingHit(damage, target, source, move) {
+			if (move.flags['contact']) {
+				if (this.randomChance(3, 10)) {
+					source.trySetStatus('brn', target);
+				}
 			}
 		},
 		onEnd(pokemon) {
