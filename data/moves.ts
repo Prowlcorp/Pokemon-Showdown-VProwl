@@ -24116,56 +24116,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onTryMove(attacker, defender, move) {
 			if (attacker.removeVolatile(move.id)) {
-				move.terrain = 'nifleheim';
-				move.condition = {};
-				move.condition.duration = 5;
-				move.condition.durationCallback = function(source, effect) {
-					if (source?.hasItem('terrainextender')) {
-						return 8;
-					}
-					return 5;
-				};
-				move.condition.onStart = function(battle, source, effect) {
-					if (effect?.effectType === 'Ability') {
-						this.add('-fieldstart', 'move: Niflheim', '[from] ability: ' + effect, '[of] ' + source);
-					} else {
-						this.add('-fieldstart', 'move: Niflheim');
-					}
-				};
-				move.condition.onTryMove = function(pokemon, target, move) {
-					if (move.type === "Fire") {
-						this.add('-fail', pokemon, move);
-						this.hint("Its too cold to use Fire-Type moves in Niflheim");
-						return null;
-					}
-				};
-				move.condition.onEffectiveness = function(typemod, target, type, move) {
-					return typeMod + this.dex.getEffectiveness('Ice', type);
-				};
-				move.condition.onResidualOrder = 21;
-				move.condition.onResidual = function() {
-					this.eachEvent('Terrain');
-				};
-				move.condition.onTerrain = function(pokemon) {
-					if (pokemon.isGrounded() && !pokemon.isSemiInvulnerable()) {
-						this.debug('Pokemon is grounded, attempting freeze through Niflheim.');
-						if(pokemon.hasType('Ice')) return;
-						if(this.effectData.source && this.effectData.source !== pokemon) return;
-						const rand = this.rand(2);
-						if(rand === 1) pokemon.trySetStatus('frz');
-					}
-				};
-				move.condition.onResidualSubOrder = 2;
-				move.condition.onEnd = function() {
-					this.add('-fieldend', 'move: Niflheim');
-				};
 				return;
 			}
 			this.add('-prepare', attacker, move.name);
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
-/*		terrain: 'niflheim',
+		terrain: 'niflheim',
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
@@ -24200,7 +24157,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					this.debug('Pokemon is grounded, attempting freeze through Niflheim.');
 					if(pokemon.hasType('Ice')) return;
 					if(this.effectData.source && this.effectData.source !== pokemon) return;
-					const rand = this.rand(2);
+					const rand = this.random(2);
 					if(rand === 1) pokemon.trySetStatus('frz');
 				}
 			},
@@ -24208,7 +24165,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onEnd() {
 				this.add('-fieldend', 'move: Niflheim');
 			},
-		},*/
+		},
 		secondary: null,
 		target: "normal",
 		type: "Ice",
