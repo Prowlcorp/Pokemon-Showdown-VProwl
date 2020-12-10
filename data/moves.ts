@@ -24353,7 +24353,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		onModifyMove(move, source, target) {
+		onTryHit(target, source, move) {
 			if (!move.secondaries) move.secondaries = [];
 			if (move.hit === 1) {
 				move.secondaries.push({

@@ -4617,8 +4617,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	elementsaber: {
 		name: "Element Saber",
-		desc: "Uses Fire Saber, Water Saber, Ice Saber, and Thunder Saber in succession at 60 base power with 90% accuracy.",
-		shortDesc: "Uses Fire, Water, Ice, and Thunder Saber in succession at 60 base power with 90% accuracy.",
+		desc: "Uses Fire Saber, Ice Saber, Water Saber, and Thunder Saber in succession at 60 base power with 90% accuracy.",
+		shortDesc: "Uses Fire, Ice, Water, and Thunder Saber in succession at 60 base power with 90% accuracy.",
 	},
 	regen: {
 		name: "Regen",
