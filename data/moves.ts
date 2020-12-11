@@ -24118,15 +24118,11 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
+			delete move.terrain;
+			delete move.condition;
 			this.add('-prepare', attacker, move.name);
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
-		},
-		onModifyMove(move, pokemon, target) {
-			if(!pokemon.volatiles['twoturnmove']) {
-				delete move.condition;
-				delete move.terrain;
-			}
 		},
 		terrain: 'nifleheim',
 		condition: {
