@@ -24106,7 +24106,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Niflheim",
 		pp: 5,
 		priority: 0,
-		flags: {charge: 1, protect: 1, mirror: 1},
+		flags: {recharge: 1, protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
@@ -24114,17 +24114,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTryMove(attacker, defender, move) {
-			if (attacker.removeVolatile(move.id)) {
-				return;
-			}
-			delete move.terrain;
-			delete move.condition;
-			this.add('-prepare', attacker, move.name);
-			attacker.addVolatile('twoturnmove', defender);
-			return null;
+		self: {
+			volatileStatus: 'mustrecharge',
 		},
-		terrain: 'nifleheim',
+		terrain: 'niflheim',
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
@@ -24157,10 +24150,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onTerrain(pokemon) {
 				if (pokemon.isGrounded() && !pokemon.isSemiInvulnerable()) {
 					this.debug('Pokemon is grounded, attempting freeze through Niflheim.');
-					if(pokemon.hasType('Ice')) return;
-					if(this.field.terrainData.source && this.field.terrainData.source === pokemon) return;
-					const rand = this.random(2);
-					if(rand === 1) pokemon.trySetStatus('frz');
+					if(pokemon.hasType('Ice') || pokemon.hasMove('niflheim')) return;
+					const rand = this.random(10);
+					if(rand <= 2) pokemon.trySetStatus('frz');
 				}
 			},
 			onResidualSubOrder: 2,

@@ -4578,10 +4578,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	niflheim: {
 		name: "Niflheim",
-		desc: "Sets up a terrain that causes fire moves to fail, gives ground type moves Ice-Type effectiveness, and has a 50% chance to freeze non Ice-Types other than the user at the end of each turn. This attack charges on the first turn and executes on the second.",
-		shortDesc: "Terrain: Fire moves fail, Ground has Ice effectiveness, may frz non-Ice at the end of turn. Charges.",
-
-		prepare: "  [POKEMON] started to freeze over the ground beneath them!",
+		desc: "Sets up a terrain that causes fire moves to fail, gives ground type moves Ice-Type effectiveness, and has a 30% chance to freeze non Ice-Types other than the user at the end of each turn. If this move is successful, the user must recharge on the following turn and cannot select a move.",
+		shortDesc: "Terrain: Fire moves fail, Ground has Ice effectiveness, may frz non-Ice at the end of turn.",
 	},
 	shortcircuit: {
 		name: "Short Circuit",
