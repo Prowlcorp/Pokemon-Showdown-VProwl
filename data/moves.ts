@@ -24114,6 +24114,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return this.chainModify(currentBoost);
 			}
 		},
+		onEffectiveness(typeMod, target, type) {
+			if (type === 'Water') return 1;
+		},
 		self: {
 			volatileStatus: 'mustrecharge',
 		},
