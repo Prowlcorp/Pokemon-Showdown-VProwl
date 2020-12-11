@@ -24122,6 +24122,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 			attacker.addVolatile('twoturnmove', defender);
 			return null;
 		},
+		onModifyMove(move, pokemon, target) {
+			if(!pokemon.volatiles['twoturnmove']) {
+				delete move.condition;
+				delete move.terrain;
+			}
+		},
+		terrain: 'nifleheim',
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
@@ -24155,7 +24162,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (pokemon.isGrounded() && !pokemon.isSemiInvulnerable()) {
 					this.debug('Pokemon is grounded, attempting freeze through Niflheim.');
 					if(pokemon.hasType('Ice')) return;
-					if(this.effectData.source && this.effectData.source === pokemon) return;
+					if(this.field.terrainData.source && this.field.terrainData.source === pokemon) return;
 					const rand = this.random(2);
 					if(rand === 1) pokemon.trySetStatus('frz');
 				}
@@ -24165,14 +24172,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-fieldend', 'move: Niflheim');
 			},
 		},
-		secondary: {
-			chance: 100,
-			self: {
-				onHit() {
-					this.field.setTerrain('niflheim');
-				},
-			},
-		},
+		secondary: null,
 		target: "normal",
 		type: "Ice",
 	},
