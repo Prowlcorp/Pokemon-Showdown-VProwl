@@ -1641,7 +1641,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	heavensguidance: {
 		onBasePower(basePower, attacker, defender, move) {
-			if (attacker.species.name === 'Mew-Mega' || attacker.transformed) return;
+			if (attacker.species.name !== 'Mew-Mega' || attacker.transformed) return;
 			if (move.type === 'Grass' && move.category !== "Status") {
 				return this.chainModify(1.2);
 			}
@@ -1663,7 +1663,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			return false;
 		},
 		onModifyMove(move, pokemon) {
-			if (pokemon.species.name === 'Mew-Mega' || pokemon.transformed) return;
+			if (pokemon.species.name !== 'Mew-Mega' || pokemon.transformed) return;
 			if(move.type === 'Normal' && move.category !== "Status") {
 				move.name = "Ancestral Radiance";
 				move.basePower= 130;
@@ -1687,7 +1687,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
-				move.onTryHit = function(target,pokemon) {
+				move.onTryHit = function(target, pokemon) {
 					this.useMove('sacredfire', pokemon, target);
 					return null;
 				}
@@ -1720,7 +1720,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
-				move.onTryHit = function(target,pokemon) {
+				move.onTryHit = function(target, pokemon) {
 					this.useMove('steameruption', pokemon, target);
 					return null;
 				}
@@ -1738,7 +1738,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
-				move.onTryHit = function(target,pokemon) {
+				move.onTryHit = function(target, pokemon) {
 					this.useMove('aeroblast', pokemon, target);
 					return null;
 				}
@@ -1747,7 +1747,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
-				move.onTryHit = function(target,pokemon) {
+				move.onTryHit = function(target, pokemon) {
 					this.useMove('boltstrike', pokemon, target);
 					return null;
 				}
@@ -1759,7 +1759,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
-				move.onTryHit = function(target,pokemon) {
+				move.onTryHit = function(target, pokemon) {
 					this.useMove('precipiceblades', pokemon, target);
 					return null;
 				}
@@ -1768,7 +1768,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
-				move.onTryHit = function(target,pokemon) {
+				move.onTryHit = function(target, pokemon) {
 					this.useMove('glaciate', pokemon, target);
 					return null;
 				}
@@ -1777,7 +1777,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
-				move.onTryHit = function(target,pokemon) {
+				move.onTryHit = function(target, pokemon) {
 					this.useMove('moongeistbeam', pokemon, target);
 					return null;
 				}
@@ -1791,7 +1791,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
-				move.onTryHit = function(target,pokemon) {
+				move.onTryHit = function(target, pokemon) {
 					this.useMove('hyperspacefury', pokemon, target);
 					return null;
 				}
@@ -1800,7 +1800,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
-				move.onTryHit = function(target,pokemon) {
+				move.onTryHit = function(target, pokemon) {
 					this.useMove('sunsteelstrike', pokemon, target);
 					return null;
 				}
@@ -1809,7 +1809,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.accuracy = true;
 				move.secondary = null;
 				move.secondaries = null;
-				move.onTryHit = function(target,pokemon) {
+				move.onTryHit = function(target, pokemon) {
 					this.useMove('fleurcannon', pokemon, target);
 					return null;
 				}
