@@ -1664,11 +1664,104 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onModifyMove(move, pokemon) {
 			if (pokemon.species.name !== 'Mew-Mega' || pokemon.transformed) return;
-			if(move.type === 'Normal' && move.category !== "Status") {
-				move.name = "Ancestral Radiance";
-				move.basePower= 130;
+			if(['Fire', 'Water', 'Flying', 'Ice', 'Ghost', 'Dark', 'Fairy'].includes(move.type) && move.category === "Special") {
+				move.category = "Status";
+				move.accuracy = true;
+				move.secondary = null;
+				move.secondaries = null;
+				move.basePower = 0;
+				move.priority = 0;
+				move.flags = {};
+				if(move.type === 'Fire' && move.id !== 'sacredfire') {
+					move.onTryHit = function(target, pokemon) {
+						this.useMove('sacredfire', pokemon, target);
+						return null;
+					}
+				}
+				if(move.type === 'Water' && move.id !== 'steameruption') {
+					move.onTryHit = function(target, pokemon) {
+						this.useMove('steameruption', pokemon, target);
+						return null;
+					}
+				}
+				if(move.type === 'Flying' && move.id !== 'aeroblast') {
+					move.onTryHit = function(target, pokemon) {
+						this.useMove('aeroblast', pokemon, target);
+						return null;
+					}
+				}
+				if(move.type === 'Ice' && move.id !== 'glaciate') {
+					move.onTryHit = function(target, pokemon) {
+						this.useMove('glaciate', pokemon, target);
+						return null;
+					}
+				}
+				if(move.type === 'Ghost' && move.id !== 'moongeistbeam') {
+					move.onTryHit = function(target, pokemon) {
+						this.useMove('moongeistbeam', pokemon, target);
+						return null;
+					}
+				}
+				if(move.type === 'Dark' && move.id !== 'hyperspacefury') {
+					move.onTryHit = function(target, pokemon) {
+						this.useMove('hyperspacefury', pokemon, target);
+						return null;
+					}
+				}
+				if(move.type === 'Fairy' && move.id !== 'fleurcannon') {
+					move.onTryHit = function(target, pokemon) {
+						this.useMove('fleurcannon', pokemon, target);
+						return null;
+					}
+				}
+			}
+			if(['Fire', 'Electric', 'Ground', 'Steel'].includes(move.type) && move.category === "Physical") {
+				move.category = "Status";
+				move.accuracy = true;
+				move.secondary = null;
+				move.secondaries = null;
+				move.basePower = 0;
+				move.priority = 0;
+				move.flags = {};
+				if(move.type === 'Fire' && move.id !== 'sacredfire') {
+					move.onTryHit = function(target, pokemon) {
+						this.useMove('sacredfire', pokemon, target);
+						return null;
+					}
+				}
+				if(move.type === 'Electric' && move.id !== 'boltstrike') {
+					move.onTryHit = function(target, pokemon) {
+						this.useMove('boltstrike', pokemon, target);
+						return null;
+					}
+				}
+				if(move.type === 'Ground' && move.id !== 'precipiceblades') {
+					move.onTryHit = function(target, pokemon) {
+						this.useMove('precipiceblades', pokemon, target);
+						return null;
+					}
+				}
+				if(move.type === 'Steel' && move.id !== 'sunsteelstrike') {
+					move.onTryHit = function(target, pokemon) {
+						this.useMove('sunsteelstrike', pokemon, target);
+						return null;
+					}
+				}
+			}
+			if (move.type === 'Normal' && move.category !== "Status") {
+				if (move.multihit === 2) {
+					move.name = "Ancestral Echo";
+					move.basePower= 70;
+				} else if (move.multihit[1] === 5) {
+					move.name = "Ancestral Echo";
+					move.basePower= 50;
+				} else {
+					move.name = "Ancestral Radiance";
+					move.basePower= 130;
+				}
 			}
 			if(move.type === 'Psychic' && move.category !== "Status") {
+				delete move.multihit;
 				move.basePower = 130;
 				if (pokemon.getStat('atk', false, true) > pokemon.getStat('spa', false, true)) move.category = 'Physical';
 				if (!move.secondaries) {
@@ -1683,16 +1776,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					},
 				});
 			}
-			if(move.type === 'Fire' && move.category !== "Status" && move.id !== 'sacredfire') {
-				move.accuracy = true;
-				move.secondary = null;
-				move.secondaries = null;
-				move.onTryHit = function(target, pokemon) {
-					this.useMove('sacredfire', pokemon, target);
-					return null;
-				}
-			}
 			if(move.type === 'Dragon' && move.category === "Special" ) {
+				delete move.multihit;
 				move.basePower = 180;
 				move.accuracy = 90;
 				move.name = "Roar of Time Alpha";
@@ -1703,6 +1788,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.flags.recharge = 1;
 			}
 			if(move.type === 'Dragon' && move.category === "Physical") {
+				delete move.multihit;
 				move.basePower = 120;
 				move.accuracy = 95;
 				move.name = "Spacial Rend Omega";
@@ -1711,108 +1797,31 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if(move.type === 'Grass' && !move.drain && move.category !== "Status") {
 				move.drain = [1,3];
 			}
-			if(move.type === 'Fighting' && move.category !== "Status" ) {
-				if(move.id !== 'dynamicpunch') {
-					move.accuracy=true;
-				}
-			}
-			if(move.type === 'Water' && move.category === "Special" && move.id !== 'steameruption') {
-				move.accuracy = true;
-				move.secondary = null;
-				move.secondaries = null;
-				move.onTryHit = function(target, pokemon) {
-					this.useMove('steameruption', pokemon, target);
-					return null;
-				}
+			if(move.type === 'Fighting' && move.id !== 'dynamicpunch' && move.category !== "Status" ) {
+				move.accuracy=true;
 			}
 			if(move.type === 'Flying' && move.category === "Physical") {
-				move.basePower= 80;
-				move.accuracy= 100;
+				if (move.multihit === 2) {
+					move.basePower= 45;
+				} else if (move.multihit[1] === 5) {
+					move.basePower= 35;
+				} else {
+					move.basePower= 80;
+				}
 				move.name = "Oblivion Wing";
+				move.accuracy= 100;
 				if (!move.drain) {
 					move.drain = [];
 				}
 				move.drain = [3,4];
 			}
-			if(move.type === 'Flying' && move.category === "Special" && move.id !== 'aeroblast') {
-				move.accuracy = true;
-				move.secondary = null;
-				move.secondaries = null;
-				move.onTryHit = function(target, pokemon) {
-					this.useMove('aeroblast', pokemon, target);
-					return null;
-				}
-			}
-			if(move.type === 'Electric' && move.category === "Physical" && move.id !== 'boltstrike') {
-				move.accuracy = true;
-				move.secondary = null;
-				move.secondaries = null;
-				move.onTryHit = function(target, pokemon) {
-					this.useMove('boltstrike', pokemon, target);
-					return null;
-				}
-			}
 			if(move.type === 'Electric' && move.category === "Special" ) {
 				move.name = "Maximum " + move.name;
-			}
-			if(move.type === 'Ground' && move.category === "Physical" && move.id !== 'precipiceblades') {
-				move.accuracy = true;
-				move.secondary = null;
-				move.secondaries = null;
-				move.onTryHit = function(target, pokemon) {
-					this.useMove('precipiceblades', pokemon, target);
-					return null;
-				}
-			}
-			if(move.type === 'Ice' && move.category === "Special"  && move.id !== 'glaciate') {
-				move.accuracy = true;
-				move.secondary = null;
-				move.secondaries = null;
-				move.onTryHit = function(target, pokemon) {
-					this.useMove('glaciate', pokemon, target);
-					return null;
-				}
-			}
-			if(move.type === 'Ghost' && move.category === "Special" && move.id !== 'moongeistbeam') {
-				move.accuracy = true;
-				move.secondary = null;
-				move.secondaries = null;
-				move.onTryHit = function(target, pokemon) {
-					this.useMove('moongeistbeam', pokemon, target);
-					return null;
-				}
 			}
 			if(move.type === 'Dark' && move.category === "Status" && move.target === "normal") {
 				move.name = "Dark Abyss";
 				move.accuracy = 80;
 				move.status = 'slp';
-			}
-			if(move.type === 'Dark' && move.category === "Special" && move.id !== 'hyperspacehole') {
-				move.accuracy = true;
-				move.secondary = null;
-				move.secondaries = null;
-				move.onTryHit = function(target, pokemon) {
-					this.useMove('hyperspacefury', pokemon, target);
-					return null;
-				}
-			}
-			if(move.type === 'Steel' && move.category === "Physical" && move.id !== 'sunsteelstrike') {
-				move.accuracy = true;
-				move.secondary = null;
-				move.secondaries = null;
-				move.onTryHit = function(target, pokemon) {
-					this.useMove('sunsteelstrike', pokemon, target);
-					return null;
-				}
-			}
-			if(move.type === 'Fairy' && move.category === "Special" && move.id !== 'fleurcannon') {
-				move.accuracy = true;
-				move.secondary = null;
-				move.secondaries = null;
-				move.onTryHit = function(target, pokemon) {
-					this.useMove('fleurcannon', pokemon, target);
-					return null;
-				}
 			}
 		},
 		name: "Heaven's Guidance",
