@@ -915,8 +915,8 @@ export const AbilitiesText = {
 	},
 	plasmaoverload: {
 		name: "Plasma Overload",
-		desc: "Normal-Type sound moves become Electric-Type, others gain the Electric-type.",
-		shortDesc: "Normal-Type sound moves become Electric-type, others gain the Electric-type.",
+		desc: "Electric type moves have 1.7 times power. If this pokemon is hit by an electric type move, it loses 3/16 its hp.",
+		shortDesc: "Electric: 1.7X power. Received: 3/16 hp damage.",
 	},
 	plus: {
 		name: "Plus",

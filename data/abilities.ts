@@ -2983,7 +2983,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		name: "Pixilate",
 	},
-	plasmaoverload: {
+	plasmaoverload: { //CLIENT MODULE
 		onBasePowerPriority: 8,
 		onBasePower(basePower, attacker, defender, move) {
 			if (move.type === 'Electric') {
@@ -4205,7 +4205,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		name: "Suction Cups",
 	},
-//Does not show modded line
 	superbrain: {
 		onModifySpAPriority: 1,
 		onModifySpA(spa) {
