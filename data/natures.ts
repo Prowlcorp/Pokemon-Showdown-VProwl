@@ -11,7 +11,7 @@ export const Natures: {[k: string]: NatureData} = {
 		plus3: 'spe',
 		minus: 'def',
 		minus2: 'spd',
-	}
+	},
 	bashful: {
 		name: "Bashful",
 	},
@@ -98,7 +98,7 @@ export const Natures: {[k: string]: NatureData} = {
 		plus3: 'spe',
 		minus: 'atk',
 		minus2: 'spa',
-	}
+	},
 	quiet: {
 		name: "Quiet",
 		plus: 'spa',
