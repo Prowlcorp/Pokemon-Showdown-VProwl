@@ -1973,15 +1973,44 @@ export class Battle {
 		const tr = this.trunc;
 		const nature = this.dex.getNature(set.nature);
 		let s: StatNameExceptHP;
-		if (nature.plus) {
-			s = nature.plus;
-			const stat = stats[s];
-			stats[s] = tr(tr(stat * 110, 16) / 100);
+		if(nature.plus && !nature.plus2) {
+			if (nature.plus) {
+				s = nature.plus;
+				const stat = stats[s];
+				stats[s] = tr(tr(stat * 110, 16) / 100);
+			}
+			if (nature.minus) {
+				s = nature.minus;
+				const stat = stats[s];
+				stats[s] = tr(tr(stat * 90, 16) / 100);
+			}
 		}
-		if (nature.minus) {
-			s = nature.minus;
-			const stat = stats[s];
-			stats[s] = tr(tr(stat * 90, 16) / 100);
+		if(nature.plus && nature.plus2) {
+			if (nature.plus) {
+				s = nature.plus;
+				const stat = stats[s];
+				stats[s] = tr(tr(stat * 110, 16) / 100);
+			}
+			if (nature.plus2) {
+				s = nature.plus2;
+				const stat = stats[s];
+				stats[s] = tr(tr(stat * 110, 16) / 100);
+			}
+			if (nature.plus3) {
+				s = nature.plus3;
+				const stat = stats[s];
+				stats[s] = tr(tr(stat * 110, 16) / 100);
+			}
+			if (nature.minus) {
+				s = nature.minus;
+				const stat = stats[s];
+				stats[s] = tr(tr(stat * 85, 16) / 100);
+			}
+			if (nature.minus2) {
+				s = nature.minus2;
+				const stat = stats[s];
+				stats[s] = tr(tr(stat * 85, 16) / 100);
+			}
 		}
 		return stats;
 	}

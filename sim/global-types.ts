@@ -19,7 +19,7 @@ interface DexTable<T> {
 	[key: string]: T;
 }
 
-type GenderName = 'M' | 'F' | 'N' | '';
+type GenderName = 'M' | 'F' | 'N' | 'H' | '';
 type StatNameExceptHP = 'atk' | 'def' | 'spa' | 'spd' | 'spe';
 type StatName = 'hp' | StatNameExceptHP;
 type StatsExceptHPTable = {[stat in StatNameExceptHP]: number};
@@ -179,7 +179,10 @@ type ModdedLearnsetData = LearnsetData & {inherit?: true};
 interface NatureData {
 	name: string;
 	plus?: StatNameExceptHP;
+	plus2?: StatNameExceptHP;
+	plus3?: StatNameExceptHP;
 	minus?: StatNameExceptHP;
+	minus2?: StatNameExceptHP;
 }
 
 type ModdedNatureData = NatureData | Partial<Omit<NatureData, 'name'>> & {inherit: true};

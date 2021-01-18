@@ -140,7 +140,10 @@ export class Learnset {
 export class Nature extends BasicEffect implements Readonly<BasicEffect & NatureData> {
 	readonly effectType: 'Nature';
 	readonly plus?: StatNameExceptHP;
+	readonly plus2?: StatNameExceptHP;
+	readonly plus3?: StatNameExceptHP;
 	readonly minus?: StatNameExceptHP;
+	readonly minus2?: StatNameExceptHP;
 	constructor(data: AnyObject, ...moreData: (AnyObject | null)[]) {
 		super(data, moreData);
 		data = this;
@@ -148,7 +151,10 @@ export class Nature extends BasicEffect implements Readonly<BasicEffect & Nature
 		this.fullname = `nature: ${this.name}`;
 		this.effectType = 'Nature';
 		this.plus = data.plus || undefined;
+		this.plus2 = data.plus2 || undefined;
+		this.plus3 = data.plus3 || undefined;
 		this.minus = data.minus || undefined;
+		this.minus2 = data.minus2 || undefined;
 	}
 }
 

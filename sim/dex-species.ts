@@ -122,10 +122,10 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	readonly canHatch: boolean;
 	/**
 	 * Gender. M = always male, F = always female, N = always
-	 * genderless, '' = sometimes male sometimes female.
+	 * genderless, '' = sometimes male sometimes female, H = hermaphrodite.
 	 */
 	readonly gender: GenderName;
-	/** Gender ratio. Should add up to 1 unless genderless. */
+	/** Gender ratio. Should add up to 1 unless genderless or herm. */
 	readonly genderRatio: {M: number, F: number};
 	/** Base stats. */
 	readonly baseStats: StatsTable;
@@ -220,6 +220,7 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.gender = data.gender || '';
 		this.genderRatio = data.genderRatio || (this.gender === 'M' ? {M: 1, F: 0} :
 			this.gender === 'F' ? {M: 0, F: 1} :
+			this.gender === 'H' ? {M: 0, F: 0} :
 			this.gender === 'N' ? {M: 0, F: 0} :
 			{M: 0.5, F: 0.5});
 		this.requiredItem = data.requiredItem || undefined;

@@ -599,7 +599,21 @@ export const commands: ChatCommands = {
 					const statNames = {
 						atk: "Attack", def: "Defense", spa: "Special Attack", spd: "Special Defense", spe: "Speed",
 					};
-					buffer += `+10% ${statNames[nature.plus]}, -10% ${statNames[nature.minus!]}.`;
+					buffer += `+10% ${statNames[nature.plus]}`;
+					if(nature.plus2) {
+						buffer += `, +10% ${statNames[nature.plus2]}`;
+						if(nature.plus3) {
+							buffer += `, +10% ${statNames[nature.plus3]}`;
+						}
+					}
+					if(nature.minus) {
+						if(nature.minus2) {
+							buffer += `, -15% ${statNames[nature.minus!]}, -15% ${statNames[nature.minus2!]}.`;
+						}
+						if(!nature.minus2) {
+							buffer += `, -10% ${statNames[nature.minus!]}.`;
+						}
+					}
 				} else {
 					buffer += `No effect.`;
 				}

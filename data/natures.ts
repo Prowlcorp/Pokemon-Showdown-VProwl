@@ -4,6 +4,14 @@ export const Natures: {[k: string]: NatureData} = {
 		plus: 'atk',
 		minus: 'spa',
 	},
+	agressive: {
+		name: "Agressive",
+		plus: 'atk',
+		plus2: 'spa',
+		plus3: 'spe',
+		minus: 'def',
+		minus2: 'spd',
+	}
 	bashful: {
 		name: "Bashful",
 	},
@@ -83,6 +91,14 @@ export const Natures: {[k: string]: NatureData} = {
 		plus: 'atk',
 		minus: 'spd',
 	},
+	pacifist: {
+		name: "Pacifist",
+		plus: 'def',
+		plus2: 'spd',
+		plus3: 'spe',
+		minus: 'atk',
+		minus2: 'spa',
+	}
 	quiet: {
 		name: "Quiet",
 		plus: 'spa',
