@@ -919,7 +919,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			noCopy: true, // doesn't get copied by Baton Pass
 			onStart(pokemon, source, effect) {
-				if (!(pokemon.gender === 'M' && source.gender === 'F') && !(pokemon.gender === 'F' && source.gender === 'M')) {
+				if (!(pokemon.gender === 'M' && source.gender === 'F') && !(pokemon.gender === 'F' && source.gender === 'M')
+					&& !(pokemon.gender === 'H' && source.gender === 'M') && !(pokemon.gender === 'H' && source.gender === 'F')
+					&& !(pokemon.gender === 'M' && source.gender === 'H') && !(pokemon.gender === 'F' && source.gender === 'H')
+					&& !(pokemon.gender === 'H' && source.gender === 'H')) {
 					this.debug('incompatible gender');
 					return false;
 				}
@@ -2816,7 +2819,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onTryImmunity(pokemon, source) {
-			return (pokemon.gender === 'M' && source.gender === 'F') || (pokemon.gender === 'F' && source.gender === 'M');
+			return (pokemon.gender === 'M' && source.gender === 'F') || (pokemon.gender === 'F' && source.gender === 'M') || (pokemon.gender === 'H' && source.gender === 'M')
+				|| (pokemon.gender === 'H' && source.gender === 'F') || (pokemon.gender === 'M' && source.gender === 'H') || (pokemon.gender === 'F' && source.gender === 'H')
+				|| (pokemon.gender === 'H' && source.gender === 'H');
 		},
 		boosts: {
 			spa: -2,

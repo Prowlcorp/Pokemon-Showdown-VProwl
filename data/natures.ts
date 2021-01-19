@@ -4,8 +4,8 @@ export const Natures: {[k: string]: NatureData} = {
 		plus: 'atk',
 		minus: 'spa',
 	},
-	agressive: {
-		name: "Agressive",
+	aggressive: {
+		name: "Aggressive",
 		plus: 'atk',
 		plus2: 'spa',
 		plus3: 'spe',

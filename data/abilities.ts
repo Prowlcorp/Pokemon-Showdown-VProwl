@@ -3425,6 +3425,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	rivalry: {
 		onBasePowerPriority: 24,
 		onBasePower(basePower, attacker, defender, move) {
+			if (attacker.gender === "H") return;
 			if (attacker.gender && defender.gender) {
 				if (attacker.gender === defender.gender) {
 					this.debug('Rivalry boost');
