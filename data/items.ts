@@ -307,7 +307,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				if (!target || target.fainted) continue;
 				if (target.volatiles['scanned']) continue;
 				target.addVolatile('scanned');
-				this.hint(`Name: ${(target.illusion || target).name} (${(target.illusion || target).species}), Level: ${(target.illusion || target).level}, Ability: ${(target.illusion || target).ability}, Item: ${(target.illusion || target).item}, HP: ${(target.illusion || target).baseStoredStats.hp}/ ${(target.illusion || target).baseStoredStats.maxhp}, Atk: ${(target.illusion || target).baseStoredStats.atk}, Def: ${(target.illusion || target).baseStoredStats.def}, SpA: ${(target.illusion || target).baseStoredStats.spa}, SpD: ${(target.illusion || target).baseStoredStats.spd}, Spe: ${(target.illusion || target).baseStoredStats.spe}`);
+				this.hint(`Name: ${(target.illusion || target).name} (${(target.illusion || target).species}), Level: ${(target.illusion || target).level}, Ability: ${(target.illusion || target).ability}, Item: ${(target.illusion || target).item}, HP: ${(target.illusion || target).baseStoredStats.hp}/ ${(target.illusion || target).baseStoredStats.maxhp}, Atk: ${(target.illusion || target).baseStoredStats.atk}, Def: ${(target.illusion || target).baseStoredStats.def}, SpA: ${(target.illusion || target).baseStoredStats.spa}, SpD: ${(target.illusion || target).baseStoredStats.spd}, Spe: ${(target.illusion || target).baseStoredStats.spe}`, true, pokemon.side);
 			}
 		},
 		onResidual(pokemon) {
@@ -316,7 +316,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				if (!target || target.fainted) continue;
 				if (target.volatiles['scanned']) continue;
 				target.addVolatile('scanned');
-				this.hint(`Name: ${(target.illusion || target).name} (${(target.illusion || target).species}), Level: ${(target.illusion || target).level}, Ability: ${(target.illusion || target).ability}, Item: ${(target.illusion || target).item}, HP: ${(target.illusion || target).baseStoredStats.hp}/ ${(target.illusion || target).baseStoredStats.maxhp}, Atk: ${(target.illusion || target).baseStoredStats.atk}, Def: ${(target.illusion || target).baseStoredStats.def}, SpA: ${(target.illusion || target).baseStoredStats.spa}, SpD: ${(target.illusion || target).baseStoredStats.spd}, Spe: ${(target.illusion || target).baseStoredStats.spe}`);
+				this.hint(`Name: ${(target.illusion || target).name} (${(target.illusion || target).species}), Level: ${(target.illusion || target).level}, Ability: ${(target.illusion || target).ability}, Item: ${(target.illusion || target).item}, HP: ${(target.illusion || target).baseStoredStats.hp}/ ${(target.illusion || target).baseStoredStats.maxhp}, Atk: ${(target.illusion || target).baseStoredStats.atk}, Def: ${(target.illusion || target).baseStoredStats.def}, SpA: ${(target.illusion || target).baseStoredStats.spa}, SpD: ${(target.illusion || target).baseStoredStats.spd}, Spe: ${(target.illusion || target).baseStoredStats.spe}`, true, pokemon.side);
 			}
 		},
 		itemUser: ["Porygon", "Porygon2", "Porygon-Z"],
@@ -1462,6 +1462,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	excalibur: {
 		name: "Excalibur",
 		spritenum: 68,
+		onTakeItem: false,
 		onStart(pokemon) {
 			pokemon.level = pokemon.set.level + 50;
 		},

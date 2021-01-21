@@ -86,6 +86,10 @@ export const ItemsText: {[k: string]: ItemText} = {
 		name: "Banettite",
 		desc: "If held by a Banette, this item allows it to Mega Evolve in battle.",
 	},
+	battlescanner: {
+		name: "Battle Scanner",
+		desc: "On switch in and opponent pokemon swapping, shows the name, level, ability, item, and core stats of the pokemon.",
+	},
 	bearticite: {
 		name: "Bearticite",
 		desc: "If held by a Beartic, this item allows it to Mega Evolve in battle.",
@@ -451,6 +455,10 @@ export const ItemsText: {[k: string]: ItemText} = {
 	eviolite: {
 		name: "Eviolite",
 		desc: "If holder's species can evolve, its Defense and Sp. Def are 1.5x.",
+	},
+	excalibur: {
+		name: "Excalibur",
+		desc: "Raises a pokemons power by a considerable margin, less noticeable the stronger the pokemon.",
 	},
 	expertbelt: {
 		name: "Expert Belt",
