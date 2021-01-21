@@ -3293,8 +3293,8 @@ export const PokedexText: {[k: string]: PokedexText} = {
 	trebil: {
 		name: "Trebil",
 	},
-	basclef: {
-		name: "Basclef",
+	basclaf: {
+		name: "Basclaf",
 	},
 	shukaku: {
 		name: "Shukaku",

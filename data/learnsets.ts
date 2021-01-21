@@ -57268,7 +57268,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			workup: ["999M"],
 		},
 	},
-	basclef: {
+	basclaf: {
 		learnset: {
 			//15 Catch Rate, 205 Exp yield
 			aerialace: ["999M"],

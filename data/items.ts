@@ -295,6 +295,32 @@ export const Items: {[itemid: string]: ItemData} = {
 			return true;
 		},
 	},
+	battlescanner: {
+		name: "Battle Scanner",
+		spritenum: 459,
+		fling: {
+			basePower: 30,
+		},
+		onStart(pokemon) {
+			if (pokemon.baseSpecies.num !== 134 && pokemon.baseSpecies.num !== 228 && pokemon.baseSpecies.num !== 460) return;
+			for (const target of pokemon.side.foe.active) {
+				if (!target || target.fainted) continue;
+				if (target.volatiles['scanned']) continue;
+				target.addVolatile('scanned');
+				this.hint(`Name: ${(target.illusion || target).name} (${(target.illusion || target).species}), Level: ${(target.illusion || target).level}, Ability: ${(target.illusion || target).ability}, Item: ${(target.illusion || target).item}, HP: ${(target.illusion || target).baseStoredStats.hp}/ ${(target.illusion || target).baseStoredStats.maxhp}, Atk: ${(target.illusion || target).baseStoredStats.atk}, Def: ${(target.illusion || target).baseStoredStats.def}, SpA: ${(target.illusion || target).baseStoredStats.spa}, SpD: ${(target.illusion || target).baseStoredStats.spd}, Spe: ${(target.illusion || target).baseStoredStats.spe}`);
+			}
+		},
+		onResidual(pokemon) {
+			if (pokemon.baseSpecies.num !== 134 && pokemon.baseSpecies.num !== 228 && pokemon.baseSpecies.num !== 460) return;
+			for (const target of pokemon.side.foe.active) {
+				if (!target || target.fainted) continue;
+				if (target.volatiles['scanned']) continue;
+				target.addVolatile('scanned');
+				this.hint(`Name: ${(target.illusion || target).name} (${(target.illusion || target).species}), Level: ${(target.illusion || target).level}, Ability: ${(target.illusion || target).ability}, Item: ${(target.illusion || target).item}, HP: ${(target.illusion || target).baseStoredStats.hp}/ ${(target.illusion || target).baseStoredStats.maxhp}, Atk: ${(target.illusion || target).baseStoredStats.atk}, Def: ${(target.illusion || target).baseStoredStats.def}, SpA: ${(target.illusion || target).baseStoredStats.spa}, SpD: ${(target.illusion || target).baseStoredStats.spd}, Spe: ${(target.illusion || target).baseStoredStats.spe}`);
+			}
+		},
+		itemUser: ["Porygon", "Porygon2", "Porygon-Z"],
+	},
 	bearticite: {
 		name: "Bearticite",
 		spritenum: 594, //CHANGE
@@ -1431,6 +1457,13 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (pokemon.baseSpecies.nfe) {
 				return this.chainModify(1.5);
 			}
+		},
+	},
+	excalibur: {
+		name: "Excalibur",
+		spritenum: 68,
+		onStart(pokemon) {
+			pokemon.level = pokemon.set.level + 50;
 		},
 	},
 	expertbelt: {

@@ -7380,7 +7380,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.5,
 		weightkg: 1.9,
 		color: "Black",
-		evos: ["Trebil", "Basclef"],
+		evos: ["Trebil", "Basclaf"],
 		eggGroups: ["Flying"],
 	},
 	spiritomb: {
@@ -15249,9 +15249,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Be hit by an Ice-Type attack and survive the battle",
 		eggGroups: ["Flying"],
 	},
-	basclef: {
+	basclaf: {
 		num: 858,
-		name: "Basclef",
+		name: "Basclaf",
 		types: ["Electric", "Flying"],
 		baseStats: {hp: 86, atk: 122, def: 64, spa: 92, spd: 62, spe: 116},
 		abilities: {0: "Diva Shock", 1: "Power Chord", H: "Static"},

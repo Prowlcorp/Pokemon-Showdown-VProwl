@@ -1,4494 +1,4494 @@
 export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 	bulbasaur: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ivysaur: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	venusaur: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	venusaurmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	charmander: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	charmeleon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	charizard: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	charizardmegax: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	charizardmegay: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	squirtle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	wartortle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	blastoise: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	blastoisemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	caterpie: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	metapod: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	butterfree: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	butterfreemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	weedle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kakuna: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	beedrill: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	beedrillmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pidgey: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pidgeotto: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pidgeot: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pidgeotmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rattata: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rattataalola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	raticate: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	raticatealola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	raticatealolatotem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ekans: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arbok: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pichu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pikachu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pikachucosplay: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pikachurockstar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pikachubelle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pikachupopstar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pikachuphd: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pikachulibre: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pikachuworld: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	raichu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	raichualola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sandshrew: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sandshrewalola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sandslash: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sandslashalola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	nidoranf: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	nidorina: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	nidoqueen: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	nidoranm: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	nidorino: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	nidoking: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cleffa: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	clefairy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	clefable: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vulpix: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vulpixalola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ninetales: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ninetalesalola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	igglybuff: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	jigglypuff: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	wigglytuff: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zubat: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	golbat: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	crobat: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	oddish: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gloom: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vileplume: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bellossom: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	paras: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	parasect: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	parapod: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	venonat: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	venomoth: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	diglett: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	diglettalola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dugtrio: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dugtrioalola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	meowth: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	meowthalola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	persian: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	persianalola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	psyduck: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	golduck: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mankey: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	primeape: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	growlithe: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arcanine: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	poliwag: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	poliwhirl: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	poliwrath: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	abra: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kadabra: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	alakazam: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	alakazammega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	machop: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	machoke: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	machamp: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	machampmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bellsprout: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	weepinbell: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	victreebel: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tentacool: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tentacruel: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	geodude: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	geodudealola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	graveler: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	graveleralola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	golem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	golemalola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ponyta: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ponytakonor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rapidash: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rapidashkonor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pegasoltea: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pegasolteakonor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	slowpoke: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	slowbro: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	slowbromega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	slowking: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	magnemite: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	magneton: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	magnezone: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	farfetchd: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mallarkee: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mallarkeef: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	doduo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dodrio: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	seel: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dewgong: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	grimer: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	grimeralola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	muk: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mukalola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shellder: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cloyster: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gastly: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	haunter: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gengar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gengarmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	onix: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	steelix: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	steelixmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	drowzee: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hypno: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hypnomega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	krabby: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kingler: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	voltorb: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	electrode: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	exeggcute: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	exeggutor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	exeggutoralola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cubone: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	marowak: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	marowakalola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	marowakalolatotem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tyrogue: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hitmonlee: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hitmonchan: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hitmontop: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lickitung: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lickilicky: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	koffing: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	weezing: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rhyhorn: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rhydon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rhyperior: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	happiny: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	chansey: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	blissey: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tangela: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tangrowth: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kangaskhan: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kangaskhanmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	horsea: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	seadra: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kingdra: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	goldeen: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	seaking: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	staryu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	starmie: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mrmime: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	scyther: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	scizor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	scizormega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	elekid: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	electabuzz: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	electivire: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	magby: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	magmar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	magmortar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pinsir: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pinsirmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tauros: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	magikarp: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gyarados: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gyaradosmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lapras: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ditto: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	eevee: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vaporeon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	jolteon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	flareon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	espeon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	umbreon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	leafeon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	glaceon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sylveon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	porygon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	porygon2: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	porygonz: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	porygonzmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	omanyte: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	omastar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kabuto: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kabutops: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	aerodactyl: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	aerodactylmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	munchlax: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	snorlax: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	articuno: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	articunokonor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zapdos: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zapdoskonor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	moltres: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	moltreskonor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dratini: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dragonair: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dragonite: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mewtwo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mewtwomegax: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mewtwomegay: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mew: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mewmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	chikorita: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bayleef: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	meganium: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	meganiummega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cyndaquil: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	quilava: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	typhlosion: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	typhlosionmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	totodile: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	croconaw: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	feraligatr: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	feraligatrmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sentret: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	furret: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	furretmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hoothoot: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	noctowl: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ledyba: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ledian: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lediosso: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	spinarak: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ariados: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ariadosmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	chinchou: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lanturn: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	togepi: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	togetic: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	togekiss: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	natu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	xatu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mareep: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	flaaffy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ampharos: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ampharosmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	azurill: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	marill: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	azumarill: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bonsly: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sudowoodo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hoppip: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	skiploom: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	jumpluff: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	aipom: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ambipom: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sunkern: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sunflora: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	yanma: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	yanmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	wooper: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	quagsire: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	murkrow: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	honchkrow: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	misdreavus: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mismagius: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	wobbuffet: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	girafarig: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pineco: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	forretress: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dunsparce: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dunseraph: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gligar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gliscor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	snubbull: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	granbull: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	qwilfish: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	Qwilomber: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shuckle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	heracross: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	heracrossmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sneasel: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	weavile: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	weavilemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	teddiursa: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ursaring: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	slugma: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	magcargo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	swinub: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	piloswine: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mamoswine: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	corsola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	remoraid: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	octillery: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	delibird: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mantyke: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mantine: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	skarmory: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	houndour: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	houndourhell: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	houndoom: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	houndoomhell: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	houndoommega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	phanpy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	donphan: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	stantler: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	smeargle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	miltank: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	raikou: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	entei: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	suicune: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	larvitar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pupitar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tyranitar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tyranitarmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lugia: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hooh: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	celebi: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	treecko: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	grovyle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sceptile: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sceptilemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	torchic: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	combusken: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	blaziken: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	blazikenmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mudkip: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	marshtomp: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	swampert: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	swampertmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	poochyena: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mightyena: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mightyenamega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zigzagoon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zigzagoonkonor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	linoone: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	linoonekonor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	obstagoon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	wurmple: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silcoon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	beautifly: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cascoon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dustox: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lotad: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lombre: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ludicolo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	seedot: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	nuzleaf: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shiftry: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	taillow: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	swellow: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	swellowmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	wingull: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pelipper: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ralts: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kirlia: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gardevoir: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gardevoirmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gallade: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gallademega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	surskit: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	masquerain: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shroomish: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	breloom: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	breloommega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	slakoth: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vigoroth: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	slaking: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	nincada: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ninjask: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shedinja: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	whismur: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	loudred: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	exploud: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	makuhita: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hariyama: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	nosepass: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	probopass: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	skitty: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	delcatty: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sableye: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sableyemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mawile: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mawilemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	aron: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lairon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	aggron: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	aggronmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	meditite: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	medicham: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	medichammega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	electrike: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	manectric: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	manectricmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	polaris: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	volbeat: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	illumise: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	budew: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	roselia: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	roserade: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gulpin: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	swalot: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	carvanha: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sharpedo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sharpedomega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	wailmer: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	wailord: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	numel: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	camerupt: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cameruptmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	torkoal: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	trapinch: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vibrava: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	flygon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	flygonmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cacnea: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cacturne: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	swablu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	altaria: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	altariamega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zangoose: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zangoosemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	yun: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	yunmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	seviper: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sevipermega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lunatone: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	solrock: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	barboach: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	whiscash: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	corphish: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	crawdaunt: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	baltoy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	claydol: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lileep: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cradily: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	anorith: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	armaldo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	feebas: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	milotic: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	castform: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	castformsunny: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	castformrainy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	castformsandy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	castformsnowy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kecleon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shuppet: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	banette: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	banettemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	duskull: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dusclops: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dusknoir: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tropius: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	chingling: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	chimecho: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	absol: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	absolmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	snorunt: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	glalie: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	glaliemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	froslass: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	spheal: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sealeo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	walrein: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	clamperl: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	huntail: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gorebyss: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	relicanth: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bagon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shelgon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	salamence: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	salamencemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	beldum: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	metang: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	metagross: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	metagrossmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	regirock: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	regice: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	registeel: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	latias: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	latiasmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	latios: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	latiosmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kyogre: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kyogreprimal: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	groudon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	groudonprimal: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rayquaza: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rayquazamega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	jirachi: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	deoxys: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	deoxysattack: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	deoxysdefense: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	deoxysspeed: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	turtwig: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	grotle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	torterra: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	torterramega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	chimchar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	monferno: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	infernape: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	infernapemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	piplup: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	prinplup: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	empoleon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	empoleonemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	starly: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	staravia: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	staraptor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bidoof: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bibarel: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shinx: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	luxio: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	luxray: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cranidos: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rampardos: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shieldon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bastiodon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	burmy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	wormadam: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	wormadamsandy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	wormadamtrash: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mothim: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	combee: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vespiquen: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vespiquenmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pachirisu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ararisu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	buizel: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	floatzel: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cherubi: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cherrim: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cherrimsunshine: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shellos: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gastrodon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	drifloon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	drifblim: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	buneary: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lopunny: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lopunnymega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	glameow: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	purugly: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	stunky: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	skuntank: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bronzor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bronzong: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	chatot: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	trebil: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
-	basclef: {
+	basclaf: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	spiritomb: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	spiritombmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gible: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gabite: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	garchomp: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	garchompmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	riolu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lucario: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lucariomega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	agito: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	agitomega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zen: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zenmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	giracario: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	giracarioshadow: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hippopotas: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hippowdon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	skorupi: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	drapion: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	croagunk: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	toxicroak: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	carnivine: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	finneon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lumineon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	snover: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	abomasnow: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	abomasnowmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rotom: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rotomheat: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rotomwash: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rotomfrost: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rotomfan: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rotommow: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	uxie: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mesprit: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	azelf: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dialga: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	palkia: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	heatran: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	regigigas: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	giratina: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	giratinaorigin: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cresselia: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cresseliamega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	phione: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	manaphy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	darkrai: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	darkraimega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shaymin: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shayminsky: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceus: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceusbug: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceusdark: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceusdragon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceuselectric: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceusfairy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceusfighting: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceusfire: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceusflying: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceusghost: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceusgrass: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceusground: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceusice: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceuspoison: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceuspsychic: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceusrock: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceussteel: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arceuswater: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	victini: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	snivy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	servine: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	serperior: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	serperiormega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tepig: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pignite: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	emboar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	emboarmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	oshawott: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dewott: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	samurott: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	samurottmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	patrat: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	watchog: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lillipup: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	herdier: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	stoutland: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	purrloin: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	liepard: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pansage: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	simisage: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pansear: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	simisear: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	panpour: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	simipour: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	munna: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	musharna: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pidove: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tranquill: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	unfezant: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	blitzle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zebstrika: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	roggenrola: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	boldore: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gigalith: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	woobat: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	swoobat: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	drilbur: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	excadrill: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	audino: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	audinomega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	timburr: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gurdurr: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	conkeldurr: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tympole: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	palpitoad: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	seismitoad: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	throh: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sawk: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sewaddle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	swadloon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	leavanny: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	venipede: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	whirlipede: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	scolipede: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cottonee: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	whimsicott: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	petilil: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lilligant: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	basculin: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	basculinbluestriped: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sandile: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	krokorok: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	krookodile: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	krookodilemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	darumaka: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	darmanitan: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	darmanitanzen: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	maractus: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dwebble: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	crustle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	scraggy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	scrafty: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sigilyph: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	yamask: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	yamaskkonor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cofagrigus: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	runerigus: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tirtouga: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	carracosta: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	archen: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	archeops: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	trubbish: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	garbodor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zorua: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zoroark: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zoroarkmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	minccino: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cinccino: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gothita: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gothorita: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gothitelle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	solosis: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	duosion: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	reuniclus: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ducklett: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	swanna: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vanillite: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vanillish: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vanilluxe: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	deerling: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sawsbuck: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	emolga: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	karrablast: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	escavalier: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	foongus: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	amoonguss: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	frillish: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	jellicent: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	joltik: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	galvantula: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ferroseed: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ferrothorn: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	klink: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	klang: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	klinklang: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tynamo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	eelektrik: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	eelektross: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	elgyem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	beheeyem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	litwick: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lampent: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	chandelure: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	axew: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	fraxure: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	haxorus: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	haxorusmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cubchoo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	beartic: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bearticmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cryogonal: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shelmet: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	accelgor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	stunfisk: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mienfoo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mienshao: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	druddigon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	druddigonmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	golett: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	golurk: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pawniard: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bisharp: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bouffalant: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rufflet: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	braviary: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vullaby: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mandibuzz: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	heatmor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	durant: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	deino: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zweilous: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hydreigon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	larvesta: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	volcarona: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cobalion: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	terrakion: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	virizion: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tornadus: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tornadustherian: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	thundurus: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	thundurustherian: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	reshiram: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zekrom: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	landorus: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	landorustherian: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kyurem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kyuremblack: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kyuremwhite: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	keldeo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	keldeoresolute: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	meloetta: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	meloettapirouette: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	genesect: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	genesectmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	genesectburn: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	genesectchill: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	genesectdouse: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	genesectshock: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	chespin: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	quilladin: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	chesnaught: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	fennekin: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	braixen: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	delphox: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	froakie: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	frogadier: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	greninja: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	greninjaash: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bunnelby: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	diggersby: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	fletchling: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	fletchinder: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	talonflame: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	talonflamemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	scatterbug: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	spewpa: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vivillon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	litleo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pyroar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	flabebe: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	floette: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	floetteeternal: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	florges: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	skiddo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gogoat: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pancham: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pangoro: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pangoromega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	furfrou: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	espurr: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	meowstic: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	meowsticmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	meowsticf: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	meowsticfmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	honedge: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	doublade: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	aegislash: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	aegislashblade: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	spritzee: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	aromatisse: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	swirlix: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	slurpuff: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	inkay: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	malamar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	binacle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	barbaracle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	skrelp: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dragalge: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	clauncher: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	clawitzer: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	helioptile: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	heliolisk: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tyrunt: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tyrantrum: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	amaura: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	aurorus: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hawlucha: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dedenne: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	carbink: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	goomy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sliggoo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	goodra: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	klefki: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	klefkimega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	phantump: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	trevenant: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pumpkaboo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pumpkaboosmall: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pumpkaboolarge: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pumpkaboosuper: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gourgeist: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gourgeistsmall: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gourgeistlarge: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gourgeistsuper: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bergmite: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	avalugg: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	noibat: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	noivern: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	noivernmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	xerneas: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	xerneasneutral: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	yveltal: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zygarde: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zygarde10: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zygardecomplete: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	diancie: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dianciemega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hoopa: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hoopaunbound: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	volcanion: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rowlet: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dartrix: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	decidueye: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	litten: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	torracat: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	incineroar: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	popplio: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	brionne: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	primarina: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pikipek: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	trumbeak: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	toucannon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	yungoos: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gumshoos: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	gumshoostotem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	grubbin: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	charjabug: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vikavolt: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vikavolttotem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	crabrawler: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	crabominable: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	oricorio: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	oricoriopompom: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	oricoriopau: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	oricoriosensu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cutiefly: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ribombee: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	ribombeetotem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rockruff: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rockruffdusk: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lycanroc: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lycanrocmidnight: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lycanrocdusk: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	wishiwashi: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	wishiwashischool: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mareanie: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	toxapex: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mudbray: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mudsdale: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dewpider: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	araquanid: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	araquanidtotem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	fomantis: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lurantis: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lurantistotem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	morelull: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shiinotic: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	salandit: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	salazzle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	salazzleholy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	salazzletotem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	stufful: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bewear: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bounsweet: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	steenee: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tsareena: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	comfey: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	oranguru: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	passimian: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	wimpod: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	golisopod: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sandygast: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	palossand: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	palossandmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pyukumuku: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	typenull: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvally: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallybug: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallydark: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallydragon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallyelectric: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallyfairy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallyfighting: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallyfire: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallyflying: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallyfull: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallyghost: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallygrass: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallyground: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallyice: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallypoison: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallypsychic: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallyrock: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallysteel: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silvallywater: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	minior: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	miniormeteor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	komala: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	turtonator: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	togedemaru: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	togedemarutotem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mimikyu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mimikyubusted: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mimikyutotem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	mimikyubustedtotem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	bruxish: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dhelmise: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	jangmoo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hakamoo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kommoo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kommoototem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tapukoko: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tapulele: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tapubulu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	tapufini: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cosmog: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cosmoem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	solgaleo: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lunala: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	nihilego: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	buzzwole: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	pheromosa: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	xurkitree: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	celesteela: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kartana: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	guzzlord: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	necrozma: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	necrozmaduskmane: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	necrozmadawnwings: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	necrozmaultra: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	magearna: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	magearnaoriginal: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	marshadow: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	poipole: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	naganadel: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	stakataka: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	blacephalon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zeraora: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	grookey: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	thwackey: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rillaboom: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	scorbunny: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	raboot: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cinderace: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sobble: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	drizzile: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	inteleon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rookidee: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	corvisquire: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	corviknight: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	nickit: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	thievul: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	chewtle: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	drednaw: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	yamper: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	boltund: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	rolycoly: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	carkol: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	coalossal: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	applin: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	flapple: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	appletun: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	silicobra: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sandaconda: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	cramorant: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	arrokuda: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	barraskewda: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	toxel: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	toxtricity: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	toxtricitylowkey: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sizzlipede: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	centiskorch: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sinistea: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	polteageist: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hatenna: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hattrem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	hatterene: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	impidimp: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	morgrem: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	grimmsnarl: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	grimmsnarlmega: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	milcery: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	alcremie: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	falinks: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	stonjourner: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	eiscue: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	eiscuenoice: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dracozolt: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dracovish: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dreepy: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	drakloak: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	dragapult: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zacian: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zaciancrowned: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zamazenta: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	zamazentacrowned: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kubfu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	urshifu: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	urshifurapidstrike: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	regieleki: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	regidrago: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kerberos: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	shukaku: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kuramasmall: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kuramamedium: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	kurama: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	drake: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vee: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	vapor: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	jolt: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	flare: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	esp: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	umbra: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	leaf: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	glace: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	sylve: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	loona: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	chloe: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	lucaridon: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 	missingno: {
 		tier: "Filler",
-		doublestier: "Filler",
+		doublesTier: "Filler",
 	},
 };
