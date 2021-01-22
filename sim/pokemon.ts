@@ -40,7 +40,7 @@ export class Pokemon {
 	readonly set: PokemonSet;
 	readonly name: string;
 	readonly fullname: string;
-	level: number;
+	readonly level: number;
 	readonly gender: GenderName;
 	readonly happiness: number;
 	readonly pokeball: string;
