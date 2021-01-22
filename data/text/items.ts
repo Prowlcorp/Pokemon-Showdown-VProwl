@@ -458,7 +458,7 @@ export const ItemsText: {[k: string]: ItemText} = {
 	},
 	excalibur: {
 		name: "Excalibur",
-		desc: "Raises a pokemons power by a considerable margin, less noticeable the stronger the pokemon.",
+		desc: "Ignores abilities and typing that make the target immune and powers up moves considerably.",
 	},
 	expertbelt: {
 		name: "Expert Belt",
@@ -1201,6 +1201,10 @@ export const ItemsText: {[k: string]: ItemText} = {
 	premierball: {
 		name: "Premier Ball",
 		desc: "A rare Poke Ball that has been crafted to commemorate an event.",
+	},
+	pridwen: {
+		name: "Excalibur",
+		desc: "Holder cannot be critically hit. Reduces damage by 25%. Negates attempts by opponents to lower holder's stats.",
 	},
 	primariumz: {
 		name: "Primarium Z",
