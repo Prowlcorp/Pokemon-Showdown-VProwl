@@ -1476,6 +1476,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onModifyDamage(damage, source, target, move) {
 			return this.chainModify(1.2);
 		},
+		forcedForme: "Zacian-Crowned",
 	},
 	expertbelt: {
 		name: "Expert Belt",
@@ -3776,6 +3777,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				this.add("-fail", target, "unboost", "[from] item: Pridwen", "[of] " + target);
 			}
 		},
+		forcedForme: "Zamazenta-Crowned",
 	},
 	primariumz: {
 		name: "Primarium Z",
