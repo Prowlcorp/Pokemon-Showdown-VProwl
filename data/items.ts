@@ -1463,8 +1463,18 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Excalibur",
 		spritenum: 68,
 		onTakeItem: false,
-		onStart(pokemon) {
-			pokemon.level = pokemon.set.level + 50;
+		onModifyMove(move, pokemon) {
+			move.ignoreImmunity = true;
+			move.ignoreAbility = true;
+			let chainMod = 1;
+			if(move.flags['Bite'] || move.flags['Punch'] || move.flags['Sword']) chainMod += 0.3;
+			if(move.flags['Bullet']) chainMod += 0.3;
+			if(move.flags['Contact']) chainMod += 0.3;
+			if(move.flags['Pulse']) chainMod += 0.3;
+			if(move.flags['Sound']) chainMod += 0.4;
+		},
+		onModifyDamage(damage, source, target, move) {
+			return this.chainModify(1.2);
 		},
 	},
 	expertbelt: {
@@ -3743,6 +3753,29 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Premier Ball",
 		spritenum: 363,
 		isPokeball: true,
+	},
+	pridwen: {
+		name: "Pridwen",
+		spritenum: 68,
+		onTakeItem: false,
+		onCriticalHit: false,
+		onSourceModifyDamage(damage, source, target, move) {
+			return this.chainModify(0.75);
+		},
+		onBoost(boost, target, source, effect) {
+			if (source && target === source) return;
+			let showMsg = false;
+			let i: BoostName;
+			for (i in boost) {
+				if (boost[i]! < 0) {
+					delete boost[i];
+					showMsg = true;
+				}
+			}
+			if (showMsg && !(effect as ActiveMove).secondaries && effect.id !== 'octolock') {
+				this.add("-fail", target, "unboost", "[from] item: Pridwen", "[of] " + target);
+			}
+		},
 	},
 	primariumz: {
 		name: "Primarium Z",
