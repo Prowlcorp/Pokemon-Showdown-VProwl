@@ -15645,6 +15645,17 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Yellow",
 		eggGroups: ["Dragon", "Field", "Human-Like"],
 	},
+	kyozen: {
+		num: -11,
+		name: "Kyozen",
+		types: ["Fighting", "Steel", "Water"],
+		baseStats: {hp: 100, atk: 120, def: 90, spa: 150, spd: 140, spe: 90},
+		abilities: {0: "Speed Boost", 1: "Drizzle"},
+		heightm: 2.5,
+		weightkg: 178.4,
+		color: "Blue",
+		eggGroups: ["Undiscovered"],
+	},
 	missingno: {
 		num: 0,
 		name: "MissingNo.",
