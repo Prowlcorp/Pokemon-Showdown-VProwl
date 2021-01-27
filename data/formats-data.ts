@@ -4487,6 +4487,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublesTier: "Filler",
 	},
+	kyozen: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
 	missingno: {
 		tier: "Filler",
 		doublesTier: "Filler",
