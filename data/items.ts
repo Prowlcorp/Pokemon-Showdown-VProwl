@@ -5469,6 +5469,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Rocket Gear V1",
 		spritenum: 242,
 		onTakeItem: false,
+		onCriticalHit: false,
 		onResidualOrder: 5,
 		onResidualSubOrder: 5,
 		onResidual(pokemon) {
@@ -5477,18 +5478,14 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onTerrain(pokemon) {
 			if (!this.field.isTerrain('grassyterrain')) return;
-			this.heal(pokemon.maxhp / 4);
+			this.heal(pokemon.maxhp / 3);
 		},
 		onModifyAtkPriority: 1,
 		onModifyAtk(atk, pokemon) {
 			return this.chainModify(1.5);
 		},
 		onTryAddVolatile(status, pokemon) {
-			if (status.id === 'confusion') return null;
-			if (status.id === 'attract') return null;
-			if (status.id === 'taunt') return null;
-			if (status.id === 'torment') return null;
-			if (status.id === 'embargo') return null;
+			if (['confusion', 'attract', 'taunt', 'torment', 'embargo'].includes(status.id)) return null;
 		},
 		onBasePower(basePower, attacker, defender, move) {
 			if (move.flags['contact']) {
