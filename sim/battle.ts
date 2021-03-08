@@ -2502,7 +2502,7 @@ export class Battle {
 				this.runMove(action.move, action.pokemon, action.targetLoc, action.sourceEffect,
 					action.zmove, undefined, action.originalTarget);
 				break;
-			case 'megaEvo':
+			case 'megaEvo'://CHECK
 				this.runMegaEvo(action.pokemon);
 				break;
 			case 'beforeTurnMove': {
@@ -3010,6 +3010,10 @@ export class Battle {
 		throw new UnimplementedError('canUltraBurst');
 	}
 
+	canFormChange(pokemon: Pokemon): string | null {
+		throw new UnimplementedError('canFormChange');
+	}
+
 	canZMove(pokemon: Pokemon): (AnyObject | null)[] | void {
 		throw new UnimplementedError('canZMove');
 	}
@@ -3087,6 +3091,10 @@ export class Battle {
 	 */
 	runMegaEvo(pokemon: Pokemon): boolean {
 		throw new UnimplementedError('runMegaEvo');
+	}
+
+	runFormChange(pokemon: Pokemon): boolean {
+		throw new UnimplementedError('runFormChange');
 	}
 
 	runMove(

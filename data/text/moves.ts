@@ -2215,11 +2215,6 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Light Screen",
 		desc: "For 5 turns, the user and its party members take 0.5x damage from special attacks, or 0.66x damage if in a Double Battle. Damage is not reduced further with Aurora Veil. Critical hits ignore this effect. It is removed from the user's side if the user or an ally is successfully hit by Brick Break, Psychic Fangs, or Defog. Lasts for 8 turns if the user is holding Light Clay. Fails if the effect is already active on the user's side.",
 		shortDesc: "For 5 turns, special damage to allies is halved.",
-		gen1: {
-			desc: "While the user remains active, its Special is doubled when taking damage. Critical hits ignore this effect. If any Pokemon uses Haze, this effect ends.",
-			shortDesc: "While active, user's Special is 2x when damaged.",
-			start: "  [POKEMON]'s protected against special attacks!",
-		},
 
 		start: "  Light Screen made [TEAM] stronger against special moves!",
 		end: "  [TEAM]'s Light Screen wore off!",
@@ -3114,11 +3109,6 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Reflect",
 		desc: "For 5 turns, the user and its party members take 0.5x damage from physical attacks, or 0.66x damage if in a Double Battle. Damage is not reduced further with Aurora Veil. Critical hits ignore this effect. It is removed from the user's side if the user or an ally is successfully hit by Brick Break, Psychic Fangs, or Defog. Lasts for 8 turns if the user is holding Light Clay. Fails if the effect is already active on the user's side.",
 		shortDesc: "For 5 turns, physical damage to allies is halved.",
-		gen1: {
-			desc: "While the user remains active, its Defense is doubled when taking damage. Critical hits ignore this protection. This effect can be removed by Haze.",
-			shortDesc: "While active, the user's Defense is doubled.",
-			start: "  [POKEMON] gained armor!",
-		},
 
 		start: "  Reflect made [TEAM] stronger against physical moves!",
 		end: "  [TEAM]'s Reflect wore off!",
@@ -3260,7 +3250,6 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	sacredfire: {
 		name: "Sacred Fire",
-		desc: "Has a 50% chance to burn the target.",
 		desc: "Has a 50% chance to burn the target. Cures bleed from attacker and opponent",
 		shortDesc: "50% chance to burn the target. Thaws user. Cures bleed on both.",
 	},

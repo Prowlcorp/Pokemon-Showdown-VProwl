@@ -215,6 +215,7 @@ interface BattleScriptsData {
 	calcRecoilDamage?: (this: Battle, damageDealt: number, move: Move) => number;
 	canMegaEvo?: (this: Battle, pokemon: Pokemon) => string | undefined | null;
 	canUltraBurst?: (this: Battle, pokemon: Pokemon) => string | null;
+	canFormChange?: (this: Battle, pokemon: Pokemon) => string | null;
 	canZMove?: (this: Battle, pokemon: Pokemon) => ZMoveOptions | void;
 	forceSwitch?: (
 		this: Battle, damage: SpreadMoveDamage, targets: SpreadMoveTargets, source: Pokemon,
@@ -241,6 +242,7 @@ interface BattleScriptsData {
 	) => number | undefined | false;
 	runAction?: (this: Battle, action: Action) => void;
 	runMegaEvo?: (this: Battle, pokemon: Pokemon) => boolean;
+	runFormChange?: (this: Battle, pokemon: Pokemon) => boolean;
 	runMove?: (
 		this: Battle, moveOrMoveName: Move | string, pokemon: Pokemon, targetLoc: number, sourceEffect?: Effect | null,
 		zMove?: string, externalMove?: boolean, originalTarget?: Pokemon
@@ -292,7 +294,7 @@ interface ModdedBattlePokemon {
 	getMoveRequestData?: (this: Pokemon) => {
 		moves: {move: string, id: ID, target?: string, disabled?: boolean}[],
 		maybeDisabled?: boolean, trapped?: boolean, maybeTrapped?: boolean,
-		canMegaEvo?: boolean, canUltraBurst?: boolean, canZMove?: ZMoveOptions,
+		canMegaEvo?: boolean, canUltraBurst?: boolean, canFormChange?: boolean, canZMove?: ZMoveOptions,
 	};
 	getStat?: (
 		this: Pokemon, statName: StatNameExceptHP, unboosted?: boolean, unmodified?: boolean, fastReturn?: boolean

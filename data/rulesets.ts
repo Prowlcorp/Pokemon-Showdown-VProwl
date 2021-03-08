@@ -455,6 +455,48 @@ export const Formats: {[k: string]: FormatData} = {
 			}
 		},
 	},
+	bleedclausemod: {
+		effectType: 'Rule',
+		name: 'Bleed Clause Mod',
+		desc: "Prevents players from wounding more than one of their opponent's Pok&eacute;mon at a time",
+		onBegin() {
+			this.add('rule', 'Bleed Clause Mod: Limit one foe wounded');
+		},
+		onSetStatus(status, target, source) {
+			if (source && source.side === target.side) {
+				return;
+			}
+			if (status.id === 'bld') {
+				for (const pokemon of target.side.pokemon) {
+					if (pokemon.status === 'bld') {
+						this.add('-message', 'Bleed Clause activated.');
+						return false;
+					}
+				}
+			}
+		},
+	},
+	paralyzeclausemod: {
+		effectType: 'Rule',
+		name: 'Paralyze Clause Mod',
+		desc: "Prevents players from paralyzing more than one of their opponent's Pok&eacute;mon at a time",
+		onBegin() {
+			this.add('rule', 'Paralyze Clause Mod: Limit one foe paralyzed');
+		},
+		onSetStatus(status, target, source) {
+			if (source && source.side === target.side) {
+				return;
+			}
+			if (status.id === 'para') {
+				for (const pokemon of target.side.pokemon) {
+					if (pokemon.status === 'para') {
+						this.add('-message', 'Paralyze Clause activated.');
+						return false;
+					}
+				}
+			}
+		},
+	},
 	sametypeclause: {
 		effectType: 'ValidatorRule',
 		name: 'Same Type Clause',
@@ -508,6 +550,9 @@ export const Formats: {[k: string]: FormatData} = {
 		onEffectiveness(typeMod, target, type, move) {
 			// The effectiveness of Freeze Dry on Water isn't reverted
 			if (move && move.id === 'freezedry' && type === 'Water') return;
+			if (move && move.id === 'niflheim' && type === 'Water') return;
+			if (move && move.id === 'corrode' && type === 'Steel') return;
+			if (move && move.id === 'infernalblade' && target.hasType('Fairy')) return;
 			if (move && !this.dex.getImmunity(move, type)) return 1;
 			return -typeMod;
 		},
@@ -551,6 +596,25 @@ export const Formats: {[k: string]: FormatData} = {
 			return this.checkLearnset(move, species, setSources, set);
 		},
 	},
+/*	alphabetcupmovelegality: {
+		effectType: 'ValidatorRule',
+		name: 'Alphabet Cup Move Legality',
+		desc: "Allows Pok&eacute;mon to use any move that shares the same first letter as their name or a previous evolution's name.",
+		checkCanLearn(move, species, setSources, set) {
+			const nonstandard = move.isNonstandard === 'Past' && !this.ruleTable.has('standardnatdex');
+			if (!nonstandard && !move.isZ && !move.isMax && !this.ruleTable.isRestricted(`move:${move.id}`)) {
+				const letters = [species.id[0]];
+				let prevo = species.prevo;
+				while (prevo) {
+					const prevoSpecies = this.dex.getSpecies(prevo);
+					letters.push(prevoSpecies.id[0]);
+					prevo = prevoSpecies.prevo;
+				}
+				if (letters.includes(move.id[0])) return null;
+			}
+			return this.checkCanLearn(move, species, setSources, set);
+		},
+	},*/
 	nfeclause: {
 		effectType: 'ValidatorRule',
 		name: 'NFE Clause',
@@ -562,12 +626,6 @@ export const Formats: {[k: string]: FormatData} = {
 				return [`${set.species} is banned due to NFE Clause.`];
 			}
 		},
-	},
-	mimicglitch: {
-		effectType: 'ValidatorRule',
-		name: 'Mimic Glitch',
-		desc: "Allows any Pokemon with access to Assist, Copycat, Metronome, Mimic, or Transform to gain access to almost any other move.",
-		// Implemented in sim/team-validator.ts
 	},
 	formeclause: {
 		effectType: 'ValidatorRule',

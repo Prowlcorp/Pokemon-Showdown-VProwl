@@ -217,6 +217,7 @@ export class Pokemon {
 
 	canMegaEvo: string | null | undefined;
 	canUltraBurst: string | null | undefined;
+	canFormChange: string | null | undefined;
 
 	/** A Pokemon's currently 'staleness' with respect to the Endless Battle Clause. */
 	staleness?: 'internal' | 'external';
@@ -234,6 +235,7 @@ export class Pokemon {
 		originalSpecies?: string, // Mix and Mega
 		[key: string]: any,
 	};
+	restrainedCrit?: boolean;
 
 	constructor(set: string | AnyObject, side: Side) {
 		this.side = side;
@@ -385,6 +387,7 @@ export class Pokemon {
 
 		this.canMegaEvo = this.battle.canMegaEvo(this);
 		this.canUltraBurst = this.battle.canUltraBurst(this);
+		this.canFormChange = this.battle.canFormChange(this);
 
 		this.maxhp = 0;
 		this.baseMaxhp = 0;
@@ -823,6 +826,7 @@ export class Pokemon {
 			maybeTrapped?: boolean,
 			canMegaEvo?: boolean,
 			canUltraBurst?: boolean,
+			canFormChange?: boolean,
 			canZMove?: AnyObject | null,
 		} = {
 			moves,
@@ -847,6 +851,7 @@ export class Pokemon {
 		if (!lockedMove) {
 			if (this.canMegaEvo) data.canMegaEvo = true;
 			if (this.canUltraBurst) data.canUltraBurst = true;
+			if (this.canFormChange) data.canFormChange = true;
 			const canZMove = this.battle.canZMove(this);
 			if (canZMove) data.canZMove = canZMove;
 		}

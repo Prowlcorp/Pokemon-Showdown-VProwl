@@ -246,7 +246,7 @@ interface MoveHitData {
 
 type MutableMove = BasicEffect & MoveData;
 export interface ActiveMove extends MutableMove {
-	readonly name: string;
+	name: string;
 	readonly effectType: 'Move';
 	readonly id: ID;
 	num: number;
@@ -255,11 +255,13 @@ export interface ActiveMove extends MutableMove {
 	hit: number;
 	moveHitData?: MoveHitData;
 	ability?: Ability;
+	accelerationBoosted?: boolean;
 	aerilateBoosted?: boolean;
 	allies?: Pokemon[];
 	auraBooster?: Pokemon;
 	causedCrashDamage?: boolean;
 	colonizeBoosted?: boolean;
+	elementalistBoosted?: boolean;
 	forceStatus?: ID;
 	galvanizeBoosted?: boolean;
 	hasAuraBreak?: boolean;

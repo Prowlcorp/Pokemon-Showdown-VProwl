@@ -419,8 +419,7 @@ export const Formats: FormatList = [
 					const item = this.dex.getItem(set.item);
 					if (item.megaEvolves === set.species) godSpecies = this.dex.getSpecies(item.megaStone);
 				}
-				const isBanned = validator.isBannedSpecies(godSpecies);
-				return isBanned;
+				return validator.isBannedSpecies(godSpecies);
 			}) || target.side.team[0];
 			const stat = ['hp', 'atk', 'def', 'spa', 'spd', 'spe'][target.side.team.indexOf(target.set)];
 			const newSpecies = this.dex.deepClone(species);

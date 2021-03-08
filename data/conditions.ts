@@ -141,7 +141,7 @@ export const Conditions: {[id: string]: ConditionData} = {
 			this.effectData.stage = 0;
 		},
 		onResidualOrder: 9,
-		onResidual(pokemon) {
+		onResidual() {
 			if (this.effectData.stage < 15) {
 				this.effectData.stage++;
 			}
@@ -150,7 +150,7 @@ export const Conditions: {[id: string]: ConditionData} = {
 	bld: {
 		name: 'bld',
 		effectType: 'Status',
-		onStart(target, source, sourceEffect) {
+		onStart(target) {
 /*			if (sourceEffect && sourceEffect.id === 'flameorb') {
 				this.add('-status', target, 'brn', '[from] item: Flame Orb');
 			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
@@ -288,7 +288,7 @@ export const Conditions: {[id: string]: ConditionData} = {
 			if (this.effectData.trueDuration > 1) return;
 			target.addVolatile('confusion');
 		},
-		onLockMove(pokemon) {
+		onLockMove() {
 			return this.effectData.move;
 		},
 	},
@@ -314,7 +314,7 @@ export const Conditions: {[id: string]: ConditionData} = {
 	choicelock: {
 		name: 'choicelock',
 		noCopy: true,
-		onStart(pokemon) {
+		onStart() {
 			if (!this.activeMove) throw new Error("Battle.activeMove is null");
 			if (!this.activeMove.id || this.activeMove.hasBounced) return false;
 			this.effectData.move = this.activeMove.id;
@@ -442,7 +442,7 @@ export const Conditions: {[id: string]: ConditionData} = {
 		duration: 1,
 		affectsFainted: true,
 		onBasePowerPriority: 14,
-		onBasePower(basePower, user, target, move) {
+		onBasePower() {
 			this.debug('Gem Boost');
 			return this.chainModify([0x14CD, 0x1000]);
 		},
@@ -454,7 +454,7 @@ export const Conditions: {[id: string]: ConditionData} = {
 		name: 'RainDance',
 		effectType: 'Weather',
 		duration: 5,
-		durationCallback(source, effect) {
+		durationCallback(source) {
 			if (source?.hasItem('damprock')) {
 				return 8;
 			}
@@ -523,7 +523,7 @@ export const Conditions: {[id: string]: ConditionData} = {
 		name: 'SunnyDay',
 		effectType: 'Weather',
 		duration: 5,
-		durationCallback(source, effect) {
+		durationCallback(source) {
 			if (source?.hasItem('heatrock')) {
 				return 8;
 			}
@@ -603,7 +603,6 @@ export const Conditions: {[id: string]: ConditionData} = {
 	},
 	ragingsandstorm: {
 		name: 'RagingSandstorm',
-		id: 'ragingsandstorm',
 		effectType: 'Weather',
 		duration: 0,
 		// This should be applied directly to the stat before any of the other modifiers are chained
@@ -654,7 +653,7 @@ export const Conditions: {[id: string]: ConditionData} = {
 		name: 'Sandstorm',
 		effectType: 'Weather',
 		duration: 5,
-		durationCallback(source, effect) {
+		durationCallback(source) {
 			if (source?.hasItem('smoothrock')) {
 				return 8;
 			}
@@ -691,7 +690,7 @@ export const Conditions: {[id: string]: ConditionData} = {
 		name: 'Hail',
 		effectType: 'Weather',
 		duration: 5,
-		durationCallback(source, effect) {
+		durationCallback(source) {
 			if (source?.hasItem('icyrock')) {
 				return 8;
 			}

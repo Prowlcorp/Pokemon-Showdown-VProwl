@@ -34,7 +34,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -55,7 +55,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -75,7 +75,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -96,7 +96,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -115,7 +115,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -144,7 +144,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -167,7 +167,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -187,7 +187,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -218,7 +218,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -237,7 +237,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -274,7 +274,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -293,7 +293,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -313,7 +313,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -343,7 +343,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -366,7 +366,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -386,7 +386,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, distance: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -408,7 +408,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -428,7 +428,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 1,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -441,7 +441,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		condition: {
 			duration: 2,
-			onRestart(pokemon) {
+			onRestart() {
 				this.effectData.duration = 2;
 			},
 			onBasePowerPriority: 3,
@@ -468,7 +468,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 2,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -498,7 +498,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -526,7 +526,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -550,7 +550,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -580,7 +580,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: -2,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level > 100) {
 				let currentBoost = Math.floor((pokemon.level - 100) / 10);
 				currentBoost = currentBoost / 20 + 1;
@@ -594,7 +594,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			evasion: 1,
 		},
 		volatileStatus: 'angelwings',
-		onTryHit(target, source, move) {
+		onTryHit(target) {
 			if (target.volatiles['angelwings']) return false;
 		},
 		condition: {
@@ -608,10 +608,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 					this.add('-start', target, 'move: Angel Wings');
 				}
 			},
-			onNegateImmunity(pokemon, type) {
+			onNegateImmunity() {
 				return false;
 			},
-			onEffectiveness(typeMod, target, type, move) {
+			onEffectiveness(typeMod, target, type) {
 				if (!target) return;
 				if (type !== target.getTypes()[0]) return;
 				return 1;
@@ -629,7 +629,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -653,7 +653,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -672,7 +672,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -702,7 +702,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -721,7 +721,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -741,7 +741,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {snatch: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -772,7 +772,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -795,7 +795,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -846,7 +846,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -865,7 +865,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -887,7 +887,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -908,7 +908,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -946,7 +946,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			},
 			onBeforeMovePriority: 2,
-			onBeforeMove(pokemon, target, move) {
+			onBeforeMove(pokemon) {
 				this.add('-activate', pokemon, 'move: Attract', '[of] ' + this.effectData.source);
 				if (this.randomChance(1, 2)) {
 					this.add('cant', pokemon, 'Attract');
@@ -977,7 +977,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1016,7 +1016,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1031,7 +1031,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onStart(pokemon) {
 				this.add('-singleturn', pokemon, 'move: Aura Rage');
 			},
-			onEffectiveness(typeMod, target, type, move) {
+			onEffectiveness(typeMod, target, type) {
 				if (type === 'Steel') return 0;
 			},
 			onSourceModifyDamage(damage, source, target, move) {
@@ -1067,7 +1067,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1105,7 +1105,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				move.self = null;
 			}
 		},
-		onModifyMove(move, pokemon, target) {
+		onModifyMove(move, pokemon) {
 			if (pokemon.getStat('atk', false, true) > pokemon.getStat('spa', false, true)) move.category = 'Physical';
 			if (pokemon.sealing === (this.turn-1)) {
 				move.multihit = 1;
@@ -1137,7 +1137,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, pulse: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1156,7 +1156,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1179,7 +1179,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1203,7 +1203,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1216,7 +1216,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		condition: {
 			duration: 5,
-			durationCallback(target, source, effect) {
+			durationCallback(target, source) {
 				if (source?.hasItem('lightclay')) {
 					return 8;
 				}
@@ -1257,7 +1257,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1302,7 +1302,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: -4,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1321,7 +1321,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1336,7 +1336,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			this.hint("Only a Pokemon whose form is Haxorus-Mega can use this move.");
 			return null;
 		},
-		onEffectiveness(typeMod, target, type, move) {
+		onEffectiveness(typeMod, target, type) {
 			return typeMod + this.dex.getEffectiveness('Steel', type);
 		},
 		self: {
@@ -1371,7 +1371,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 1,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1394,7 +1394,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 4,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1403,7 +1403,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		stallingMove: true,
 		volatileStatus: 'banefulbunker',
-		onTryHit(target, source, move) {
+		onTryHit(target) {
 			return !!this.queue.willAct() && this.runEvent('StallMove', target);
 		},
 		onHit(pokemon) {
@@ -1456,7 +1456,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1476,7 +1476,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1499,7 +1499,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1520,7 +1520,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: -3,
 		flags: {bullet: 1, protect: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1560,7 +1560,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1583,7 +1583,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1602,7 +1602,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1621,7 +1621,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1641,7 +1641,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1668,7 +1668,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {mirror: 1, authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1700,7 +1700,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 1,
 		flags: {contact: 1, protect: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1725,7 +1725,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.effectData.totalDamage += damage;
 				this.effectData.lastDamageSource = source;
 			},
-			onBeforeMove(pokemon, target, move) {
+			onBeforeMove(pokemon, target) {
 				if (this.effectData.duration === 1) {
 					this.add('-end', pokemon, 'move: Bide');
 					target = this.effectData.lastDamageSource;
@@ -1781,7 +1781,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		self: {
 			volatileStatus: 'mustrecharge',
 		},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1799,7 +1799,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onModifyMove(move, pokemon) {
 			if (pokemon.getStat('spa', false, true) > pokemon.getStat('atk', false, true)) move.category = 'Special';
 		},
-		onEffectiveness(typeMod, target, type, move) {
+		onEffectiveness(typeMod, target, type) {
 			return typeMod + this.dex.getEffectiveness('Dark', type);
 		},
 		secondary: null,
@@ -1814,7 +1814,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1834,7 +1834,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1856,7 +1856,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1876,7 +1876,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {recharge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1903,7 +1903,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1926,7 +1926,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1951,7 +1951,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -1976,14 +1976,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Blood Scythe",
 		pp: 5,
 		flags: {protect: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTryMove(pokemon, target, move) {
+		onTryMove(pokemon) {
 			if (pokemon.hp === 1) {
 				this.add('-fail', pokemon, 'move: Blood Scythe');
 				this.attrLastMove('[still]');
@@ -1998,7 +1998,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			}
 		},
-		onEffectiveness(typeMod, target, type, move) {
+		onEffectiveness(typeMod, target, type) {
 			return typeMod + this.dex.getEffectiveness('Poison', type);
 		},
 		onHit(target, pokemon) {
@@ -2020,7 +2020,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2040,7 +2040,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2069,7 +2069,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2089,7 +2089,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2119,7 +2119,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2138,7 +2138,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2160,7 +2160,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2182,7 +2182,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2202,7 +2202,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2223,7 +2223,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2242,7 +2242,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, charge: 1, protect: 1, mirror: 1, gravity: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2289,7 +2289,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2308,7 +2308,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2328,7 +2328,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2352,7 +2352,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2372,7 +2372,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2398,7 +2398,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2452,7 +2452,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2482,7 +2482,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2501,7 +2501,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2525,7 +2525,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2549,7 +2549,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2579,7 +2579,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2603,7 +2603,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2627,7 +2627,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2651,7 +2651,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 2,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2670,7 +2670,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2691,7 +2691,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2717,14 +2717,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, defrost: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTryMove(pokemon, target, move) {
+		onTryMove(pokemon) {
 			if (pokemon.hasType('Fire')) return;
 			this.add('-fail', pokemon, 'move: Burn Up');
 			this.attrLastMove('[still]');
@@ -2748,7 +2748,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2772,7 +2772,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2811,7 +2811,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2839,7 +2839,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {contact: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2859,14 +2859,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTryHit(target, source) {
+		onTryHit(target) {
 			this.add('-activate', target, 'move: Celebrate');
 		},
 		secondary: null,
@@ -2882,7 +2882,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2895,7 +2895,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		condition: {
 			duration: 2,
-			onRestart(pokemon) {
+			onRestart() {
 				this.effectData.duration = 2;
 			},
 			onBasePowerPriority: 9,
@@ -2922,7 +2922,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2948,7 +2948,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2971,7 +2971,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, distance: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -2994,7 +2994,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3015,7 +3015,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: -6,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3034,7 +3034,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3054,7 +3054,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3078,7 +3078,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {snatch: 1, sound: 1, dance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3114,7 +3114,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3145,7 +3145,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3168,7 +3168,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3193,7 +3193,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3216,7 +3216,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3241,7 +3241,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3261,7 +3261,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {reflectable: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3284,7 +3284,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3305,7 +3305,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3331,7 +3331,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 35,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3355,7 +3355,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3381,7 +3381,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3412,7 +3412,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3435,7 +3435,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3460,7 +3460,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3501,7 +3501,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3533,7 +3533,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3563,7 +3563,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3583,7 +3583,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3609,7 +3609,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3634,7 +3634,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3658,7 +3658,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3681,7 +3681,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {powder: 1, protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3708,7 +3708,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: -5,
 		flags: {contact: 1, protect: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3718,19 +3718,19 @@ export const Moves: {[moveid: string]: MoveData} = {
 		beforeTurnCallback(pokemon) {
 			pokemon.addVolatile('counter');
 		},
-		onTryHit(target, source, move) {
+		onTryHit(target, source) {
 			if (!source.volatiles['counter']) return false;
 			if (source.volatiles['counter'].position === null) return false;
 		},
 		condition: {
 			duration: 1,
 			noCopy: true,
-			onStart(target, source, move) {
+			onStart() {
 				this.effectData.position = null;
 				this.effectData.damage = 0;
 			},
 			onRedirectTargetPriority: -1,
-			onRedirectTarget(target, source, source2) {
+			onRedirectTarget(target, source) {
 				if (source !== this.effectData.target) return;
 				return source.side.foe.active[this.effectData.position];
 			},
@@ -3753,7 +3753,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3812,7 +3812,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3848,7 +3848,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3868,7 +3868,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 3,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3876,7 +3876,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'craftyshield',
-		onTryHitSide(side, source) {
+		onTryHitSide() {
 			return !!this.queue.willAct();
 		},
 		condition: {
@@ -3904,7 +3904,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3924,7 +3924,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3947,7 +3947,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3971,7 +3971,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -3998,7 +3998,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4018,7 +4018,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4041,7 +4041,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4069,7 +4069,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4077,7 +4077,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		volatileStatus: 'curse',
-		onModifyMove(move, source, target) {
+		onModifyMove(move, source) {
 			if (!source.hasType('Ghost')) {
 				move.target = move.nonGhostTarget as MoveTarget;
 			}
@@ -4117,7 +4117,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4139,7 +4139,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4160,7 +4160,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4181,7 +4181,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {recharge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4203,7 +4203,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, pulse: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4225,7 +4225,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4254,7 +4254,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4273,7 +4273,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4297,7 +4297,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4321,7 +4321,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4348,7 +4348,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4393,7 +4393,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4421,7 +4421,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.debug('removing Destiny Bond before attack');
 				pokemon.removeVolatile('destinybond');
 			},
-			onMoveAborted(pokemon, target, move) {
+			onMoveAborted(pokemon) {
 				pokemon.removeVolatile('destinybond');
 			},
 		},
@@ -4438,7 +4438,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 4,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4466,7 +4466,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4486,7 +4486,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4506,7 +4506,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4533,7 +4533,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, charge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4553,7 +4553,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		condition: {
 			duration: 2,
-			onImmunity(type, pokemon) {
+			onImmunity(type) {
 				if (type === 'sandstorm' || type === 'hail') return false;
 			},
 			onInvulnerability(target, source, move) {
@@ -4580,7 +4580,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4659,7 +4659,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4678,7 +4678,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4700,7 +4700,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, charge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4724,7 +4724,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		condition: {
 			duration: 2,
-			onImmunity(type, pokemon) {
+			onImmunity(type) {
 				if (type === 'sandstorm' || type === 'hail') return false;
 			},
 			onInvulnerability(target, source, move) {
@@ -4754,7 +4754,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4776,7 +4776,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4817,7 +4817,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4837,7 +4837,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4858,7 +4858,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4878,7 +4878,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4898,7 +4898,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4921,7 +4921,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4940,7 +4940,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4964,7 +4964,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -4988,7 +4988,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5010,7 +5010,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5029,7 +5029,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1, dance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5053,7 +5053,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5077,7 +5077,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5096,7 +5096,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5115,7 +5115,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, pulse: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5135,7 +5135,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5154,7 +5154,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5176,7 +5176,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: -6,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5195,14 +5195,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onEffectiveness(typeMod, target, type, move) {
+		onEffectiveness(typeMod, target, type) {
 			return typeMod + this.dex.getEffectiveness('Fire', type);
 		},
 		drain: [1, 2],
@@ -5221,7 +5221,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5241,7 +5241,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5261,7 +5261,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5280,7 +5280,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5303,7 +5303,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5322,7 +5322,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5342,7 +5342,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5366,7 +5366,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5386,7 +5386,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5406,14 +5406,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 2,
 		flags: {contact: 1, protect: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTry(pokemon, target) {
+		onTry(pokemon) {
 			if (pokemon.activeMoveActions > 1) {
 				this.add('-fail', pokemon);
 				this.attrLastMove('[still]');
@@ -5433,7 +5433,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5455,7 +5455,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5479,7 +5479,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5504,7 +5504,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5540,7 +5540,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {snatch: 1, sound: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5563,7 +5563,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5586,7 +5586,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5605,7 +5605,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5615,7 +5615,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		terrain: 'electricterrain',
 		condition: {
 			duration: 5,
-			durationCallback(source, effect) {
+			durationCallback(source) {
 				if (source?.hasItem('terrainextender')) {
 					return 8;
 				}
@@ -5669,7 +5669,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5713,7 +5713,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5733,7 +5733,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5757,7 +5757,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5789,7 +5789,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5818,7 +5818,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5888,7 +5888,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5911,7 +5911,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 4,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5952,7 +5952,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -5976,7 +5976,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6019,7 +6019,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6045,7 +6045,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6070,7 +6070,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 			return move.basePower;
 		},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6085,7 +6085,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			this.hint("Only a Pokemon whose species is Vee and form is not base can use this move.");
 			return null;
 		},
-		onModifyMove(move, pokemon, target) {
+		onModifyMove(move, pokemon) {
 			if (pokemon.species.name !== 'Vee' && pokemon.baseSpecies.name === 'Vee') {
 				move.type = pokemon.types[0];
 			}
@@ -6159,7 +6159,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			let currentBoost = 1;
 			if (pokemon.level> 100) {
 				currentBoost = Math.floor((pokemon.level-100)/10);
@@ -6172,7 +6172,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 			return this.chainModify(currentBoost);
 		},
-		onModifyMove(move, source, target) {
+		onModifyMove(move, source) {
 			if (this.field.isTerrain('psychicterrain') && source.isGrounded()) {
 				move.target = 'allAdjacentFoes';
 			}
@@ -6189,7 +6189,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6209,7 +6209,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6231,7 +6231,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6258,7 +6258,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 2,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6277,7 +6277,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			let currentBoost = 1;
 			if (pokemon.level> 100) {
 				currentBoost = Math.floor((pokemon.level-100)/10);
@@ -6301,7 +6301,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6311,7 +6311,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pseudoWeather: 'fairylock',
 		condition: {
 			duration: 2,
-			onStart(target) {
+			onStart() {
 				this.add('-fieldactivate', 'move: Fairy Lock');
 			},
 			onTrapPokemon(pokemon) {
@@ -6331,7 +6331,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6350,14 +6350,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 3,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTry(pokemon, target) {
+		onTry(pokemon) {
 			if (pokemon.activeMoveActions > 1) {
 				this.attrLastMove('[still]');
 				this.add('-fail', pokemon);
@@ -6380,7 +6380,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6403,7 +6403,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6422,7 +6422,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6442,7 +6442,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1, dance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6465,7 +6465,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 2,
 		flags: {mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6486,7 +6486,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6505,7 +6505,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6527,7 +6527,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, dance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6553,7 +6553,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6575,14 +6575,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, contact: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTryMove(pokemon, target, move) {
+		onTryMove(pokemon) {
 			if (pokemon.hasType('Flying')) return;
 			this.add('-fail', pokemon, 'move: Final Feather');
 			this.attrLastMove('[still]');
@@ -6611,7 +6611,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6632,7 +6632,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6661,7 +6661,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6688,7 +6688,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6719,7 +6719,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6817,7 +6817,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6839,7 +6839,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6859,14 +6859,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 2,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTry(pokemon, target) {
+		onTry(pokemon) {
 			if (pokemon.activeMoveActions > 1) {
 				this.add('-fail', pokemon);
 				this.attrLastMove('[still]');
@@ -6894,7 +6894,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6913,7 +6913,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6929,7 +6929,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 	flail: {
 		accuracy: 100,
 		basePower: 0,
-		basePowerCallback(pokemon, target) {
+		basePowerCallback(pokemon) {
 			const ratio = pokemon.hp * 48 / pokemon.maxhp;
 			if (ratio < 2) {
 				return 200;
@@ -6953,7 +6953,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -6973,14 +6973,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onHit(target, source, move) {
+		onHit(target, source) {
 			if (target.side.active.length === 1) {
 				return;
 			}
@@ -6990,7 +6990,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			}
 		},
-		onAfterSubDamage(damage, target, source, move) {
+		onAfterSubDamage(damage, target, source) {
 			if (target.side.active.length === 1) {
 				return;
 			}
@@ -7017,7 +7017,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7043,7 +7043,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 2,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7062,7 +7062,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, defrost: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7084,7 +7084,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7113,7 +7113,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, defrost: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7143,7 +7143,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7166,7 +7166,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7190,7 +7190,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7214,7 +7214,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7238,7 +7238,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7294,7 +7294,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7314,7 +7314,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, heal: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7346,7 +7346,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7380,7 +7380,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, charge: 1, protect: 1, mirror: 1, gravity: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7423,14 +7423,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Flying Press",
 		pp: 10,
 		flags: {contact: 1, protect: 1, mirror: 1, gravity: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onEffectiveness(typeMod, target, type, move) {
+		onEffectiveness(typeMod, target, type) {
 			return typeMod + this.dex.getEffectiveness('Flying', type);
 		},
 		priority: 0,
@@ -7447,7 +7447,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7471,7 +7471,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7506,7 +7506,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: -3,
 		flags: {contact: 1, protect: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7545,7 +7545,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 2,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7587,7 +7587,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7609,7 +7609,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7647,7 +7647,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7672,7 +7672,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7692,7 +7692,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7717,7 +7717,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {charge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7750,7 +7750,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7772,7 +7772,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {recharge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7794,7 +7794,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7817,7 +7817,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7837,7 +7837,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7863,7 +7863,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7897,7 +7897,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -7917,7 +7917,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			let currentBoost = 1;
 			if (pokemon.level> 100) {
 				currentBoost = Math.floor((pokemon.level-100)/10);
@@ -7942,7 +7942,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, defrost: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			let currentBoost = 1;
 			if (pokemon.level> 100) {
 				currentBoost = Math.floor((pokemon.level-100)/10);
@@ -7972,7 +7972,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8016,7 +8016,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8052,7 +8052,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8073,7 +8073,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8107,7 +8107,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8134,7 +8134,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {charge: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8170,7 +8170,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8190,7 +8190,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, recharge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8212,7 +8212,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8232,7 +8232,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8256,7 +8256,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8302,7 +8302,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8329,7 +8329,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8371,7 +8371,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onEnd(targetSide) {
 				this.add('-sideend', targetSide, 'Grass Pledge');
 			},
-			onModifySpe(spe, pokemon) {
+			onModifySpe( ) {
 				return this.chainModify(0.25);
 			},
 		},
@@ -8387,7 +8387,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8408,14 +8408,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onModifyPriority(priority, source, target, move) {
+		onModifyPriority(priority, source) {
 			if (this.field.isTerrain('grassyterrain') && source.isGrounded()) {
 				return priority + 1;
 			}
@@ -8432,7 +8432,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8442,7 +8442,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		terrain: 'grassyterrain',
 		condition: {
 			duration: 5,
-			durationCallback(source, effect) {
+			durationCallback(source) {
 				if (source?.hasItem('terrainextender')) {
 					return 8;
 				}
@@ -8497,7 +8497,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			let currentBoost = 1;
 			if (pokemon.level> 100) {
 				currentBoost = Math.floor((pokemon.level-100)/10);
@@ -8525,7 +8525,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8602,7 +8602,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8625,7 +8625,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8652,7 +8652,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8707,7 +8707,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8727,7 +8727,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8756,7 +8756,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8791,7 +8791,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8812,7 +8812,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8834,7 +8834,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 35,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8860,7 +8860,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {bullet: 1, contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8880,7 +8880,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8901,7 +8901,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8925,14 +8925,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTryHit(target, source) {
+		onTryHit(target) {
 			this.add('-activate', target, 'move: Happy Hour');
 		},
 		secondary: null,
@@ -8948,7 +8948,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8971,7 +8971,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -8981,7 +8981,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		terrain: 'hauntedterrain',
 		condition: {
 			duration: 5,
-			durationCallback(source, effect) {
+			durationCallback(source) {
 				if (source?.hasItem('terrainextender')) {
 					return 8;
 				}
@@ -9027,7 +9027,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9053,7 +9053,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9075,7 +9075,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9095,7 +9095,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9115,7 +9115,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {snatch: 1, sound: 1, distance: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9144,7 +9144,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9193,7 +9193,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9230,7 +9230,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9251,7 +9251,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, pulse: 1, reflectable: 1, distance: 1, heal: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9285,7 +9285,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9307,7 +9307,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9359,7 +9359,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9379,7 +9379,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9425,7 +9425,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9445,7 +9445,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9455,7 +9455,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		terrain: 'hellfire',
 		condition: {
 			duration: 5,
-			durationCallback(source, effect) {
+			durationCallback(source) {
 				if (source?.hasAbility('hellfield')) {
 					return 99;
 				}
@@ -9543,7 +9543,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 5,
 		flags: {authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9565,7 +9565,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-singleturn', target, 'Helping Hand', '[of] ' + source);
 			},
 			onBasePowerPriority: 10,
-			onBasePower(basePower) {
+			onBasePower() {
 				this.debug('Boosting from Helping Hand: ' + this.effectData.multiplier);
 				return this.chainModify(this.effectData.multiplier);
 			},
@@ -9587,7 +9587,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9607,7 +9607,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9630,7 +9630,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9650,7 +9650,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9670,7 +9670,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9690,7 +9690,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9710,7 +9710,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9730,7 +9730,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9750,7 +9750,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9770,7 +9770,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9790,7 +9790,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9810,7 +9810,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9830,7 +9830,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9850,7 +9850,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9870,7 +9870,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9890,7 +9890,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9910,7 +9910,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9930,7 +9930,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9949,7 +9949,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9968,7 +9968,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, gravity: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -9976,7 +9976,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		hasCrashDamage: true,
-		onMoveFail(target, source, move) {
+		onMoveFail(target, source) {
 			this.damage(source.maxhp / 2, source, source, this.dex.getEffect('High Jump Kick'));
 		},
 		secondary: null,
@@ -9991,7 +9991,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10011,7 +10011,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10031,7 +10031,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10055,7 +10055,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10074,7 +10074,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10095,7 +10095,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10115,7 +10115,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {snatch: 1, sound: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10138,7 +10138,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10172,7 +10172,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {recharge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10194,7 +10194,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10213,7 +10213,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10233,7 +10233,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {recharge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10255,7 +10255,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10277,7 +10277,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level > 100) {
 				let currentBoost = Math.floor((pokemon.level - 100) / 10);
 				currentBoost = currentBoost / 20 + 1;
@@ -10300,12 +10300,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 					this.add('-start', target, 'move: Hyper Scan');
 				}
 			},
-			onRestart(pokemon) {
+			onRestart() {
 				this.effectData.duration = 3;
 			},
 			onModifyMovePriority: -2,
 			onModifyMove(move, source, target) {
-				if (move.category !== "Status") {
+				if (target && move.category !== "Status") {
 					if (this.random(7, 10)) {
 						source.addVolatile('lockon');
 					}
@@ -10339,7 +10339,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10376,7 +10376,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10396,7 +10396,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10415,7 +10415,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10448,7 +10448,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {bullet: 1, contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10486,7 +10486,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10508,7 +10508,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {charge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10541,7 +10541,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10568,7 +10568,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10592,7 +10592,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10614,7 +10614,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 1,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10633,7 +10633,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10655,7 +10655,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10676,7 +10676,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10700,7 +10700,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10742,7 +10742,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10767,15 +10767,15 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onEffectiveness(typeMod, target, type, move) {
-			if(type !== 'Fairy' && target.hasType('Fairy')) return 0;
+		onEffectiveness(typeMod, target, type) {
+			if(type !== 'Fairy' && target?.hasType('Fairy')) return 0;
 			if(type === 'Fairy') return 1;
 		},
 		secondary: {
@@ -10793,7 +10793,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10822,7 +10822,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10842,7 +10842,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10862,7 +10862,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10900,7 +10900,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10938,7 +10938,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 1,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10948,7 +10948,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pseudoWeather: 'iondeluge',
 		condition: {
 			duration: 1,
-			onStart(target) {
+			onStart() {
 				this.add('-fieldactivate', 'move: Ion Deluge');
 			},
 			onModifyTypePriority: -2,
@@ -10972,7 +10972,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -10995,7 +10995,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11017,7 +11017,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11041,7 +11041,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11064,7 +11064,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11090,7 +11090,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, gravity: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11098,7 +11098,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		hasCrashDamage: true,
-		onMoveFail(target, source, move) {
+		onMoveFail(target, source) {
 			this.damage(source.maxhp / 2, source, source, this.dex.getEffect('Jump Kick'));
 		},
 		secondary: null,
@@ -11113,7 +11113,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11133,7 +11133,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11156,7 +11156,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 4,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11253,7 +11253,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, contact: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11297,7 +11297,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11317,7 +11317,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11338,7 +11338,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.effectData.duration = 2;
 				this.add('-start', pokemon, 'move: Laser Focus');
 			},
-			onModifyCritRatio(critRatio) {
+			onModifyCritRatio() {
 				return 5;
 			},
 			onEnd(pokemon) {
@@ -11358,7 +11358,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			let currentBoost = 1;
 			if (pokemon.level> 100) {
 				currentBoost = Math.floor((pokemon.level-100)/10);
@@ -11382,14 +11382,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTry(pokemon, target) {
+		onTry(pokemon) {
 			if (pokemon.moveSlots.length < 2) return false; // Last Resort fails unless the user knows at least 2 moves
 			let hasLastResort = false; // User must actually have Last Resort for it to succeed
 			for (const moveSlot of pokemon.moveSlots) {
@@ -11413,7 +11413,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11435,7 +11435,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11454,7 +11454,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11477,7 +11477,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11501,7 +11501,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11525,7 +11525,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11545,7 +11545,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11586,7 +11586,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11609,7 +11609,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 4,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11657,10 +11657,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onHit(target, source, move) {
 				if (move.isZPowered && move.category === 'Physical') {
-					this.boost({def: 1}, target, target, this.getActiveMove("Legacy Shield"));
+					this.boost({def: 1}, target, target, this.dex.getActiveMove("Legacy Shield"));
 				}
 				if (move.isZPowered && move.category === 'Special') {
-					this.boost({spd: 1}, target, target, this.getActiveMove("Legacy Shield"));
+					this.boost({spd: 1}, target, target, this.dex.getActiveMove("Legacy Shield"));
 				}
 			},
 		},
@@ -11677,7 +11677,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {contact: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11697,7 +11697,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11719,7 +11719,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, heal: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11745,7 +11745,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11765,7 +11765,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11775,7 +11775,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		sideCondition: 'lightscreen',
 		condition: {
 			duration: 5,
-			durationCallback(target, source, effect) {
+			durationCallback(target, source) {
 				if (source?.hasItem('lightclay')) {
 					return 8;
 				}
@@ -11812,7 +11812,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11836,7 +11836,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11860,7 +11860,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {reflectable: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11904,7 +11904,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11942,7 +11942,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -11982,7 +11982,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12002,7 +12002,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12026,7 +12026,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12059,7 +12059,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, heal: 1, dance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12105,7 +12105,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12129,7 +12129,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12153,7 +12153,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 2,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12172,7 +12172,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12191,7 +12191,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 4,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12242,7 +12242,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {powder: 1, protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12265,7 +12265,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12278,7 +12278,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onStart(target, source) {
 				this.add('-fieldstart', 'move: Magic Room', '[of] ' + source);
 			},
-			onRestart(target, source) {
+			onRestart() {
 				this.field.removePseudoWeather('magicroom');
 			},
 			// Item suppression implemented in Pokemon.ignoringItem() within sim/pokemon.js
@@ -12300,7 +12300,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, defrost: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12319,7 +12319,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12339,7 +12339,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12358,7 +12358,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1, distance: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12392,7 +12392,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, gravity: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12427,14 +12427,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onModifyMove(move, pokemon) {
+		onModifyMove(move) {
 			const i = this.random(100);
 			if (i < 5) {
 				move.magnitude = 4;
@@ -12475,7 +12475,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {contact: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12495,7 +12495,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12547,7 +12547,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {contact: 1},
 		forceSTAB: true,
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12587,7 +12587,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12610,7 +12610,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12633,7 +12633,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12658,7 +12658,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 1,
 			onBasePowerPriority: 12,
-			onBasePower(basePower) {
+			onBasePower() {
 				return this.chainModify(1.5);
 			},
 		},
@@ -12675,7 +12675,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12696,7 +12696,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12715,7 +12715,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12734,7 +12734,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12753,7 +12753,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12778,7 +12778,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12803,7 +12803,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12813,23 +12813,23 @@ export const Moves: {[moveid: string]: MoveData} = {
 		beforeTurnCallback(pokemon) {
 			pokemon.addVolatile('metalburst');
 		},
-		onTryHit(target, source, move) {
+		onTryHit(target, source) {
 			if (!source.volatiles['metalburst']) return false;
 			if (source.volatiles['metalburst'].position === null) return false;
 		},
 		condition: {
 			duration: 1,
 			noCopy: true,
-			onStart(target, source, move) {
+			onStart() {
 				this.effectData.position = null;
 				this.effectData.damage = 0;
 			},
 			onRedirectTargetPriority: -1,
-			onRedirectTarget(target, source, source2) {
+			onRedirectTarget(target, source) {
 				if (source !== this.effectData.target) return;
 				return source.side.foe.active[this.effectData.position];
 			},
-			onDamagingHit(damage, target, source, effect) {
+			onDamagingHit(damage, target, source) {
 				if (source.side !== target.side) {
 					this.effectData.position = source.position;
 					this.effectData.damage = 1.5 * damage;
@@ -12848,7 +12848,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 35,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12879,7 +12879,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, sound: 1, authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12902,7 +12902,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12924,7 +12924,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, recharge: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12946,7 +12946,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {charge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -12977,7 +12977,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13003,7 +13003,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13044,7 +13044,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13065,7 +13065,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13107,7 +13107,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13132,7 +13132,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13159,7 +13159,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {reflectable: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13189,7 +13189,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13233,7 +13233,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13275,7 +13275,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: -5,
 		flags: {protect: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13285,19 +13285,19 @@ export const Moves: {[moveid: string]: MoveData} = {
 		beforeTurnCallback(pokemon) {
 			pokemon.addVolatile('mirrorcoat');
 		},
-		onTryHit(target, source, move) {
+		onTryHit(target, source) {
 			if (!source.volatiles['mirrorcoat']) return false;
 			if (source.volatiles['mirrorcoat'].position === null) return false;
 		},
 		condition: {
 			duration: 1,
 			noCopy: true,
-			onStart(target, source, move) {
+			onStart() {
 				this.effectData.position = null;
 				this.effectData.damage = 0;
 			},
 			onRedirectTargetPriority: -1,
-			onRedirectTarget(target, source, source2) {
+			onRedirectTarget(target, source) {
 				if (source !== this.effectData.target) return;
 				return source.side.foe.active[this.effectData.position];
 			},
@@ -13320,7 +13320,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13348,7 +13348,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13372,7 +13372,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13420,7 +13420,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13444,7 +13444,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			let currentBoost = 1;
 			if (pokemon.level> 100) {
 				currentBoost = Math.floor((pokemon.level-100)/10);
@@ -13470,7 +13470,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13480,7 +13480,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		terrain: 'mistyterrain',
 		condition: {
 			duration: 5,
-			durationCallback(source, effect) {
+			durationCallback(source) {
 				if (source?.hasItem('terrainextender')) {
 					return 8;
 				}
@@ -13516,7 +13516,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onResidualOrder: 21,
 			onResidualSubOrder: 2,
-			onEnd(side) {
+			onEnd() {
 				this.add('-fieldend', 'Misty Terrain');
 			},
 		},
@@ -13533,7 +13533,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13557,7 +13557,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13577,7 +13577,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13614,7 +13614,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13651,7 +13651,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13675,7 +13675,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13699,7 +13699,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13723,7 +13723,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13761,14 +13761,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onEffectiveness(typeMod, target, type, move) {
+		onEffectiveness(typeMod, target, type) {
 			return typeMod + this.dex.getEffectiveness('Ground', type);
 		},
 		secondary: {
@@ -13788,7 +13788,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13812,7 +13812,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13836,7 +13836,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13859,7 +13859,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13895,7 +13895,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13937,7 +13937,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13956,7 +13956,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13978,7 +13978,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -13999,7 +13999,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14019,7 +14019,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14043,7 +14043,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14078,7 +14078,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14097,7 +14097,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14120,7 +14120,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14144,7 +14144,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14186,7 +14186,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14208,7 +14208,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, distance: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14228,7 +14228,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 4,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14290,7 +14290,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14310,7 +14310,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14334,7 +14334,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14358,7 +14358,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14388,7 +14388,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, pulse: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14406,7 +14406,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14433,7 +14433,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14452,7 +14452,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14476,7 +14476,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14505,7 +14505,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14525,7 +14525,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14560,7 +14560,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14579,7 +14579,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14601,7 +14601,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 35,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14620,7 +14620,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {sound: 1, distance: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14671,7 +14671,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {reflectable: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14718,7 +14718,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14737,7 +14737,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, dance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14764,7 +14764,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, charge: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14800,7 +14800,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14823,7 +14823,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14849,7 +14849,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14872,7 +14872,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14895,7 +14895,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14916,7 +14916,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14936,7 +14936,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {reflectable: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14959,7 +14959,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -14983,7 +14983,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15013,7 +15013,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15035,7 +15035,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15056,7 +15056,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15078,7 +15078,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 35,
 		priority: 0,
 		flags: {powder: 1, protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15099,7 +15099,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 35,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15121,7 +15121,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15144,7 +15144,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15177,7 +15177,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15191,7 +15191,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return null;
 			}
 		},
-		onTryHit(target, source, move) {
+		onTryHit(target) {
 			this.add('-activate', target, 'move: Poltergeist', this.dex.getItem(target.item).name);
 		},
 		secondary: null,
@@ -15206,7 +15206,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 35,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15225,7 +15225,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 1,
 		flags: {powder: 1, protect: 1, reflectable: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15260,7 +15260,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15282,7 +15282,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15301,7 +15301,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15330,7 +15330,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15365,7 +15365,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15414,7 +15414,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15434,7 +15434,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15460,7 +15460,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15479,7 +15479,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15497,14 +15497,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onModifyMove(move, pokemon, target) {
+		onModifyMove(move) {
 			const rand = this.random(10);
 			if (rand < 2) {
 				move.heal = [1, 4];
@@ -15529,7 +15529,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {recharge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15551,7 +15551,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 4,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15605,7 +15605,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: -1,
 		flags: {protect: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15624,7 +15624,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15646,7 +15646,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15681,7 +15681,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15705,7 +15705,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15732,7 +15732,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15742,7 +15742,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		terrain: 'psychicterrain',
 		condition: {
 			duration: 5,
-			durationCallback(source, effect) {
+			durationCallback(source) {
 				if (source?.hasItem('terrainextender')) {
 					return 8;
 				}
@@ -15797,7 +15797,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15821,7 +15821,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15844,7 +15844,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15874,7 +15874,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15894,7 +15894,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15916,7 +15916,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15935,7 +15935,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {contact: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15960,7 +15960,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -15980,7 +15980,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16012,7 +16012,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16033,7 +16033,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onModifyMove(move, source, target) {
 			if (target?.beingCalledBack) move.accuracy = true;
 		},
-		onTryHit(target, pokemon) {
+		onTryHit(target) {
 			target.side.removeSideCondition('pursuit');
 		},
 		condition: {
@@ -16059,6 +16059,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 							}
 						}
 					}
+					// Run through each action in queue to check if the Pursuit user is supposed to Form Change this turn.
+					// If it is, then Form Change before moving.
+					if (source.canFormChange) {
+						for (const [actionIndex, action] of this.queue.entries()) {
+							if (action.pokemon === source && action.choice === 'formChange') {
+								this.runFormChange(source);
+								this.queue.list.splice(actionIndex, 1);
+								break;
+							}
+						}
+					}
 					this.runMove('pursuit', source, this.getTargetLoc(pokemon, source));
 				}
 			},
@@ -16075,7 +16086,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, defrost: 1, bullet: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16097,7 +16108,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16125,7 +16136,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16144,7 +16155,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 3,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16152,7 +16163,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'quickguard',
-		onTryHitSide(side, source) {
+		onTryHitSide() {
 			return !!this.queue.willAct();
 		},
 		onHitSide(side, source) {
@@ -16196,7 +16207,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1, dance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16221,7 +16232,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16258,7 +16269,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 2,
 		flags: {powder: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16299,7 +16310,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16320,7 +16331,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16374,7 +16385,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16397,7 +16408,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16426,7 +16437,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16449,7 +16460,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {charge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16483,7 +16494,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16504,7 +16515,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16531,7 +16542,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16541,7 +16552,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		sideCondition: 'reflect',
 		condition: {
 			duration: 5,
-			durationCallback(target, source, effect) {
+			durationCallback(target, source) {
 				if (source?.hasItem('lightclay')) {
 					return 8;
 				}
@@ -16577,7 +16588,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16612,7 +16623,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16636,7 +16647,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16669,7 +16680,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16705,7 +16716,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			let currentBoost = 1;
 			if (pokemon.level> 100) {
 				currentBoost = Math.floor((pokemon.level-100)/10);
@@ -16733,7 +16744,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16753,7 +16764,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, dance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16787,7 +16798,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: -4,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16801,7 +16812,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 	reversal: {
 		accuracy: 100,
 		basePower: 0,
-		basePowerCallback(pokemon, target) {
+		basePowerCallback(pokemon) {
 			const ratio = pokemon.hp * 48 / pokemon.maxhp;
 			if (ratio < 2) {
 				return 200;
@@ -16825,7 +16836,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16869,7 +16880,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: -6,
 		flags: {reflectable: 1, mirror: 1, sound: 1, authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16890,7 +16901,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {recharge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16912,7 +16923,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16933,7 +16944,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16955,7 +16966,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -16978,7 +16989,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17000,7 +17011,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17024,7 +17035,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17043,7 +17054,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17067,7 +17078,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {bullet: 1, recharge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17089,7 +17100,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17130,7 +17141,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17164,7 +17175,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17202,7 +17213,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17220,7 +17231,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-singleturn', target, 'move: Roost');
 			},
 			onTypePriority: -1,
-			onType(types, pokemon) {
+			onType(types) {
 				this.effectData.typeWas = types;
 				return types.filter(type => type !== 'Flying');
 			},
@@ -17238,7 +17249,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17284,7 +17295,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17312,7 +17323,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, defrost: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17338,7 +17349,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17359,7 +17370,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17411,7 +17422,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17434,7 +17445,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17478,7 +17489,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17488,7 +17499,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		volatileStatus: 'sandcoffin',
 		condition: {
 			duration: 2,
-			onStart(target) {
+			onStart() {
 				this.add('-fieldactivate', 'move: Sand Coffin');
 			},
 			onTrapPokemon(pokemon) {
@@ -17514,7 +17525,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17535,7 +17546,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17555,7 +17566,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 4,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level > 100) {
 				let currentBoost = Math.floor((pokemon.level - 100) / 10);
 				currentBoost = currentBoost / 20 + 1;
@@ -17564,7 +17575,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		stallingMove: true,
 		volatileStatus: 'satellitedefense',
-		onTryHit(target, source, move) {
+		onTryHit(target) {
 			return !!this.queue.willAct() && this.runEvent('StallMove', target);
 		},
 		onHit(pokemon) {
@@ -17617,7 +17628,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {charge: 1, protect: 1, recharge: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			let currentBoost = 1;
 			if (pokemon.level > 100) {
 				currentBoost = Math.floor((pokemon.level - 100) / 10);
@@ -17656,7 +17667,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17676,7 +17687,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, defrost: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17699,7 +17710,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17726,7 +17737,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17749,7 +17760,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, defrost: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17772,7 +17783,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 35,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17791,7 +17802,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, sound: 1, authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17814,7 +17825,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17843,7 +17854,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {contact: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17864,14 +17875,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onModifyMove(move, pokemon) {
+		onModifyMove(move) {
 			if (this.field.isTerrain('')) return;
 			move.secondaries = [];
 			if (this.field.isTerrain('electricterrain')) {
@@ -17938,7 +17949,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17957,7 +17968,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -17976,7 +17987,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18001,7 +18012,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18020,7 +18031,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18040,7 +18051,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18064,7 +18075,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18088,7 +18099,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18111,7 +18122,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, charge: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18146,7 +18157,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18165,7 +18176,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18184,7 +18195,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18207,7 +18218,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18227,7 +18238,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18248,7 +18259,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18275,7 +18286,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: -3,
 		flags: {protect: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18319,7 +18330,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18343,7 +18354,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {sound: 1, protect: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18370,7 +18381,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18389,7 +18400,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18416,7 +18427,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18438,7 +18449,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18468,7 +18479,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18501,7 +18512,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18522,7 +18533,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18543,7 +18554,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		noPPBoosts: true,
 		priority: 0,
 		flags: {authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18583,7 +18594,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18599,7 +18610,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return false;
 			}
 		},
-		onHit(target, source, move) {
+		onHit(target, source) {
 			const targetAbility = target.getAbility();
 			const sourceAbility = source.getAbility();
 			if (target.side === source.side) {
@@ -18632,7 +18643,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18656,7 +18667,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, charge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18687,7 +18698,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {charge: 1, protect: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18721,7 +18732,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, charge: 1, protect: 1, mirror: 1, gravity: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18764,7 +18775,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return null;
 			}
 		},
-		onHit(target, source) {
+		onHit(target) {
 			if (target.hp) this.add('-end', target, 'Sky Drop');
 		},
 		condition: {
@@ -18778,7 +18789,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				defender.trapped = true;
 			},
 			onFoeBeforeMovePriority: 12,
-			onFoeBeforeMove(attacker, defender, move) {
+			onFoeBeforeMove(attacker) {
 				if (attacker === this.effectData.source) {
 					attacker.activeMoveActions--;
 					this.debug('Sky drop nullifying.');
@@ -18786,7 +18797,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			},
 			onRedirectTargetPriority: 99,
-			onRedirectTarget(target, source, source2) {
+			onRedirectTarget(target, source) {
 				if (source !== this.effectData.target) return;
 				if (this.effectData.source.fainted) return;
 				return this.effectData.source;
@@ -18832,7 +18843,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18851,7 +18862,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18870,7 +18881,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18893,7 +18904,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {powder: 1, protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18914,7 +18925,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18959,7 +18970,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -18981,7 +18992,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19003,7 +19014,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19025,7 +19036,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19076,7 +19087,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19099,7 +19110,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19121,7 +19132,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19143,7 +19154,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19166,7 +19177,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19190,7 +19201,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 4,
 		flags: {authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19229,7 +19240,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19250,7 +19261,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19276,7 +19287,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19305,7 +19316,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19326,7 +19337,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {charge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			let currentBoost = 1;
 			if (pokemon.level> 100) {
 				currentBoost = Math.floor((pokemon.level-100)/10);
@@ -19367,7 +19378,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, charge: 1, protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			let currentBoost = 1;
 			if (pokemon.level> 100) {
 				currentBoost = Math.floor((pokemon.level-100)/10);
@@ -19409,7 +19420,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19428,7 +19439,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {contact: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19448,7 +19459,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19469,7 +19480,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19479,7 +19490,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		terrain: 'soundstage',
 		condition: {
 			duration: 5,
-			durationCallback(source, effect) {
+			durationCallback(source) {
 				if (source?.hasItem('terrainextender')) {
 					return 8;
 				}
@@ -19533,7 +19544,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19553,7 +19564,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19575,7 +19586,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19600,7 +19611,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19621,7 +19632,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19647,7 +19658,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19670,7 +19681,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19690,7 +19701,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {reflectable: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19729,7 +19740,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 4,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19738,7 +19749,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		stallingMove: true,
 		volatileStatus: 'spikyshield',
-		onTryHit(target, source, move) {
+		onTryHit(target) {
 			return !!this.queue.willAct() && this.runEvent('StallMove', target);
 		},
 		onHit(pokemon) {
@@ -19791,7 +19802,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19815,7 +19826,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19843,7 +19854,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19870,7 +19881,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19899,14 +19910,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {gravity: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
 				return this.chainModify(currentBoost);
 			}
 		},
-		onTryHit(target, source) {
+		onTryHit() {
 			this.add('-nothing');
 		},
 		secondary: null,
@@ -19922,7 +19933,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19945,7 +19956,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {powder: 1, protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -19966,7 +19977,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 3,
 		flags: {protect: 1, reflectable: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20003,7 +20014,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20027,7 +20038,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {reflectable: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20058,7 +20069,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, defrost: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20081,7 +20092,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20103,7 +20114,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20128,7 +20139,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20153,7 +20164,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20179,7 +20190,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {reflectable: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20210,7 +20221,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20269,7 +20280,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20292,7 +20303,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20318,7 +20329,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20337,7 +20348,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20360,7 +20371,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20380,7 +20391,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20400,7 +20411,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20419,7 +20430,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20445,7 +20456,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20469,7 +20480,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		noPPBoosts: true,
 		priority: 0,
 		flags: {contact: 1, protect: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20477,7 +20488,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		noSketch: true,
-		onModifyMove(move, pokemon, target) {
+		onModifyMove(move, pokemon) {
 			move.type = '???';
 			this.add('-activate', pokemon, 'move: Struggle');
 		},
@@ -20494,7 +20505,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20518,7 +20529,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {powder: 1, protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20539,7 +20550,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20559,7 +20570,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20641,7 +20652,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20661,7 +20672,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20689,7 +20700,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20708,7 +20719,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20729,7 +20740,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20752,7 +20763,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20771,7 +20782,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {recharge: 1, protect: 1, defrost: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20803,7 +20814,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20828,7 +20839,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20849,7 +20860,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20869,7 +20880,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20888,7 +20899,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, punch: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20910,7 +20921,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20934,7 +20945,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20963,7 +20974,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -20984,7 +20995,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21007,7 +21018,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21026,7 +21037,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21079,7 +21090,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1, dance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21102,7 +21113,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {sound: 1, contact: 1, protect: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21129,7 +21140,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21151,7 +21162,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21188,7 +21199,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21211,7 +21222,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21232,7 +21243,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21245,7 +21256,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onStart(side) {
 				this.add('-sidestart', side, 'move: Tailwind');
 			},
-			onModifySpe(spe, pokemon) {
+			onModifySpe( ) {
 				return this.chainModify(2);
 			},
 			onResidualOrder: 21,
@@ -21267,7 +21278,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21287,7 +21298,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, contact: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21310,7 +21321,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21345,7 +21356,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21394,7 +21405,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21418,7 +21429,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21454,7 +21465,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21509,7 +21520,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21529,7 +21540,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, dance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21550,7 +21561,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, gravity: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21600,7 +21611,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: -6,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21622,7 +21633,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, pulse: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21674,7 +21685,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21709,7 +21720,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21739,7 +21750,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21761,7 +21772,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21788,7 +21799,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21836,7 +21847,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21870,7 +21881,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21892,7 +21903,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21912,7 +21923,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21939,7 +21950,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21963,7 +21974,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -21985,7 +21996,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22007,7 +22018,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22029,7 +22040,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22053,7 +22064,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22074,7 +22085,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22105,7 +22116,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22138,7 +22149,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22157,7 +22168,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22179,7 +22190,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {reflectable: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22225,7 +22236,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22249,7 +22260,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22274,7 +22285,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22305,7 +22316,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22358,7 +22369,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22391,7 +22402,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: -7,
 		flags: {mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22404,7 +22415,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onStart(target, source) {
 				this.add('-fieldstart', 'move: Trick Room', '[of] ' + source);
 			},
-			onRestart(target, source) {
+			onRestart() {
 				this.field.removePseudoWeather('trickroom');
 			},
 			// Speed modification is changed in Pokemon.getActionSpeed() in sim/pokemon.js
@@ -22429,7 +22440,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22454,7 +22465,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22476,7 +22487,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22518,7 +22529,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		noPPBoosts: true,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22538,7 +22549,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22561,7 +22572,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22581,7 +22592,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22603,7 +22614,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22623,7 +22634,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22679,7 +22690,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 1,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22698,7 +22709,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22718,7 +22729,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22745,7 +22756,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22795,7 +22806,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22814,7 +22825,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22833,7 +22844,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: -1,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22852,7 +22863,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22872,7 +22883,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22899,7 +22910,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22921,7 +22932,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22943,7 +22954,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -22969,7 +22980,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23036,7 +23047,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, pulse: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23064,7 +23075,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 1,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23087,7 +23098,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23128,7 +23139,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23147,7 +23158,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23205,7 +23216,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23225,7 +23236,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: -6,
 		flags: {reflectable: 1, mirror: 1, authentic: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23246,7 +23257,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, punch: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23266,7 +23277,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 3,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23274,7 +23285,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		sideCondition: 'wideguard',
-		onTryHitSide(side, source) {
+		onTryHitSide() {
 			return !!this.queue.willAct();
 		},
 		onHitSide(side, source) {
@@ -23319,7 +23330,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23339,7 +23350,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23360,7 +23371,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {mirror: 1, authentic: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23370,12 +23381,11 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pseudoWeather: 'windarena',
 		condition: {
 			duration: 2,
-			onStart(target) {
+			onStart() {
 				this.add('-fieldactivate', 'move: Wind Arena');
 			},
 			onTrapPokemon(pokemon) {
-				if (this.effectData.source && this.effectData.source !== pokemon) return;
-				true;
+				if (this.effectData.source && this.effectData.source !== pokemon) return true;
 			},
 		},
 		secondary: null,
@@ -23391,7 +23401,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 1,
 		flags: {protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23411,7 +23421,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 35,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, distance: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23430,7 +23440,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23464,7 +23474,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 40,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23487,7 +23497,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23500,7 +23510,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onStart(side, source) {
 				this.add('-fieldstart', 'move: Wonder Room', '[of] ' + source);
 			},
-			onRestart(target, source) {
+			onRestart() {
 				this.field.removePseudoWeather('wonderroom');
 			},
 			// Swapping defenses implemented in sim/pokemon.js:Pokemon#calculateStat and Pokemon#getStat
@@ -23522,7 +23532,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23542,7 +23552,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 30,
 		priority: 0,
 		flags: {snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23566,7 +23576,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23585,7 +23595,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23632,7 +23642,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23655,7 +23665,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23675,7 +23685,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23697,7 +23707,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23735,7 +23745,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23757,7 +23767,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23779,7 +23789,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23806,7 +23816,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23828,7 +23838,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 2,
 		flags: {contact: 1, protect: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23857,7 +23867,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23881,7 +23891,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23910,7 +23920,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {charge: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23939,7 +23949,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {bullet: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23960,7 +23970,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -23982,7 +23992,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {charge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -24041,7 +24051,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -24085,7 +24095,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -24112,7 +24122,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {recharge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -24128,7 +24138,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		terrain: 'niflheim',
 		condition: {
 			duration: 5,
-			durationCallback(source, effect) {
+			durationCallback(source) {
 				if (source?.hasItem('terrainextender')) {
 					return 8;
 				}
@@ -24148,7 +24158,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					return null;
 				}
 			},
-			onEffectiveness(typeMod, target, type, move) {
+			onEffectiveness(typeMod, target, type) {
 				return typeMod + this.dex.getEffectiveness('Ice', type);
 			},
 			onResidualOrder: 21,
@@ -24180,7 +24190,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 25,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -24211,7 +24221,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {charge: 1, protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -24241,7 +24251,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -24269,7 +24279,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -24292,7 +24302,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -24320,7 +24330,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -24348,7 +24358,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sword: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -24412,7 +24422,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -24441,7 +24451,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -24470,7 +24480,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {charge: 1, protect: 1, mirror: 1, snatch: 1},
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;
@@ -24508,7 +24518,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sword: 1}, //Sword skill potential tag
-		onBasePower(basePower, pokemon, target) {
+		onBasePower(basePower, pokemon) {
 			if (pokemon.level> 100) {
 				let currentBoost = Math.floor((pokemon.level-100)/10);
 				currentBoost = currentBoost/20+1;

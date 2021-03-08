@@ -6,8 +6,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Abomasnow",
 		itemUser: ["Abomasnow"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	absolite: {
@@ -17,8 +16,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Absol",
 		itemUser: ["Absol"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	absorbbulb: {
@@ -72,8 +70,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Aerodactyl",
 		itemUser: ["Aerodactyl"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	aggronite: {
@@ -83,8 +80,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Aggron",
 		itemUser: ["Aggron"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	aguavberry: {
@@ -122,7 +118,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		// airborneness implemented in sim/pokemon.js:Pokemon#isGrounded
-		onDamagingHit(damage, target, source, move) {
+		onDamagingHit(damage, target) {
 			this.add('-enditem', target, 'Air Balloon');
 			target.item = '';
 			target.itemData = {id: '', target};
@@ -145,8 +141,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Alakazam",
 		itemUser: ["Alakazam"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	aloraichiumz: {
@@ -164,8 +159,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Altaria",
 		itemUser: ["Altaria"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	ampharosite: {
@@ -175,8 +169,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Ampharos",
 		itemUser: ["Ampharos"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	apicotberry: {
@@ -192,7 +185,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				pokemon.eatItem();
 			}
 		},
-		onEat(pokemon) {
+		onEat() {
 			this.boost({spd: 1});
 		},
 	},
@@ -203,8 +196,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Ariados",
 		itemUser: ["Ariados"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	armorfossil: {
@@ -240,7 +232,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 80,
 		},
 		onModifySpDPriority: 1,
-		onModifySpD(spd) {
+		onModifySpD() {
 			return this.chainModify(1.5);
 		},
 		onDisableMove(pokemon) {
@@ -258,8 +250,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Audino",
 		itemUser: ["Audino"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	babiriberry: {
@@ -274,7 +265,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Steel' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -291,8 +281,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Banette",
 		itemUser: ["Banette"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	battlescanner: {
@@ -328,8 +317,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Beartic",
 		itemUser: ["Beartic"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	beastball: {
@@ -344,8 +332,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Beedrill",
 		itemUser: ["Beedrill"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	belueberry: {
@@ -480,8 +467,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Blastoise",
 		itemUser: ["Blastoise"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	blazikenite: {
@@ -491,8 +477,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Blaziken",
 		itemUser: ["Blaziken"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	blueorb: {
@@ -507,8 +492,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			pokemon.formeChange('Kyogre-Primal', this.effect, true);
 		},
 		onTakeItem(item, source) {
-			if (source.baseSpecies.baseSpecies === 'Kyogre') return false;
-			return true;
+			return source.baseSpecies.baseSpecies !== 'Kyogre';
 		},
 		itemUser: ["Kyogre"],
 	},
@@ -527,8 +511,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Breloom",
 		itemUser: ["Breloom"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	brightpowder: {
@@ -560,10 +543,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 673,
 		onMemory: 'Bug',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Bug",
 		itemUser: ["Silvally-Bug"],
@@ -581,10 +561,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Burn Drive",
 		spritenum: 54,
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 633) || pokemon.baseSpecies.num === 633) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 633) || pokemon.baseSpecies.num === 633);
 		},
 		onDrive: 'Fire',
 		forcedForme: "Genesect-Burn",
@@ -597,8 +574,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Butterfree",
 		itemUser: ["Butterfree"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	cameruptite: {
@@ -608,8 +584,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Camerupt",
 		itemUser: ["Camerupt"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	castiumz: {
@@ -655,8 +630,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Charizard",
 		itemUser: ["Charizard"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	charizarditey: {
@@ -666,8 +640,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Charizard",
 		itemUser: ["Charizard"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	chartiberry: {
@@ -682,7 +655,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Rock' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -761,10 +733,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Chill Drive",
 		spritenum: 67,
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 633) || pokemon.baseSpecies.num === 633) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 633) || pokemon.baseSpecies.num === 633);
 		},
 		onDrive: 'Ice',
 		forcedForme: "Genesect-Chill",
@@ -793,7 +762,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			pokemon.addVolatile('choicelock');
 		},
 		onModifyAtkPriority: 1,
-		onModifyAtk(atk, pokemon) {
+		onModifyAtk() {
 			return this.chainModify(1.5);
 		},
 		isChoice: true,
@@ -813,7 +782,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onModifyMove(move, pokemon) {
 			pokemon.addVolatile('choicelock');
 		},
-		onModifySpe(spe, pokemon) {
+		onModifySpe() {
 			return this.chainModify(1.5);
 		},
 		isChoice: true,
@@ -834,7 +803,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			pokemon.addVolatile('choicelock');
 		},
 		onModifySpAPriority: 1,
-		onModifySpA(spa, pokemon) {
+		onModifySpA() {
 			return this.chainModify(1.5);
 		},
 		isChoice: true,
@@ -851,7 +820,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Fighting' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -887,7 +855,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Flying' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -909,7 +876,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Dark' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -933,8 +899,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Cresselia",
 		itemUser: ["Cresselia"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	crackedpot: {
@@ -989,10 +954,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 683,
 		onMemory: 'Dark',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Dark",
 		itemUser: ["Silvally-Dark"],
@@ -1013,8 +975,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Darkrai",
 		itemUser: ["Darkrai"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	dawnstone: {
@@ -1080,8 +1041,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Diancie",
 		itemUser: ["Diancie"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	dinofossil: {
@@ -1107,10 +1067,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Douse Drive",
 		spritenum: 103,
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 633) || pokemon.baseSpecies.num === 633) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 633) || pokemon.baseSpecies.num === 633);
 		},
 		onDrive: 'Water',
 		forcedForme: "Genesect-Douse",
@@ -1127,10 +1084,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Dragon",
 	},
@@ -1163,10 +1117,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 682,
 		onMemory: 'Dragon',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Dragon",
 		itemUser: ["Silvally-Dragon"],
@@ -1198,10 +1149,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Dark",
 	},
@@ -1212,8 +1160,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Druddigon",
 		itemUser: ["Druddigon"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	dubiousdisc: {
@@ -1268,10 +1215,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Ground",
 	},
@@ -1309,7 +1253,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 50,
 		},
-		onAfterBoost(boost, target, source, effect) {
+		onAfterBoost(boost, target) {
 			if (this.activeMove?.id === 'partingshot') return;
 			let eject = false;
 			let i: BoostName;
@@ -1353,10 +1297,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 679,
 		onMemory: 'Electric',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Electric",
 		itemUser: ["Silvally-Electric"],
@@ -1398,8 +1339,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Emboar",
 		itemUser: ["Emboar"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	emporite: {
@@ -1409,8 +1349,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Empoleon",
 		itemUser: ["Empoleon"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	energypowder: {
@@ -1463,7 +1402,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Excalibur",
 		spritenum: 68,
 		onTakeItem: false,
-		onModifyMove(move, pokemon) {
+		onModifyMove(move) {
 			move.ignoreImmunity = true;
 			move.ignoreAbility = true;
 			let chainMod = 1;
@@ -1473,7 +1412,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			if(move.flags['Pulse']) chainMod += 0.3;
 			if(move.flags['Sound']) chainMod += 0.4;
 		},
-		onModifyDamage(damage, source, target, move) {
+		onModifyDamage() {
 			return this.chainModify(1.2);
 		},
 		forcedForme: "Zacian-Crowned",
@@ -1515,10 +1454,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 684,
 		onMemory: 'Fairy',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Fairy",
 		itemUser: ["Silvally-Fairy"],
@@ -1560,8 +1496,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Feraligatr",
 		itemUser: ["Feraligatr"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	fightinggem: {
@@ -1580,10 +1515,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 668,
 		onMemory: 'Fighting',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Fighting",
 		itemUser: ["Silvally-Fighting"],
@@ -1637,10 +1569,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 676,
 		onMemory: 'Fire',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Fire",
 		itemUser: ["Silvally-Fire"],
@@ -1679,10 +1608,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Fighting",
 	},
@@ -1710,10 +1636,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Fire",
 	},
@@ -1741,8 +1664,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Flygon",
 		itemUser: ["Flygon"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	flyinggem: {
@@ -1761,10 +1683,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 669,
 		onMemory: 'Flying',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Flying",
 		itemUser: ["Silvally-Flying"],
@@ -1818,10 +1737,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 676,
 		onMemory: 'Full',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseTemplate.num === 757) || pokemon.baseTemplate.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Full",
 		itemUser: ["Silvally-Full"],
@@ -1833,8 +1749,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Furret",
 		itemUser: ["Furret"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	galladite: {
@@ -1844,8 +1759,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Gallade",
 		itemUser: ["Gallade"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	ganlonberry: {
@@ -1861,7 +1775,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				pokemon.eatItem();
 			}
 		},
-		onEat(pokemon) {
+		onEat() {
 			this.boost({def: 1});
 		},
 	},
@@ -1872,8 +1786,17 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Garchomp",
 		itemUser: ["Garchomp"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
+		},
+	},
+	gardeladite: {
+		name: "Gardeladite",
+		spritenum: 587,
+		megaStone: "Seyzar-Mega",
+		megaEvolves: "Seyzar",
+		itemUser: ["Seyzar", "Seyzar-Tala"],
+		onTakeItem(item, source) {
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	gardevoirite: {
@@ -1883,8 +1806,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Gardevoir",
 		itemUser: ["Gardevoir"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	genesectite: {
@@ -1894,8 +1816,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Genesect",
 		itemUser: ["Genesect"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	gengarite: {
@@ -1905,8 +1826,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Gengar",
 		itemUser: ["Gengar"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	ghostgem: {
@@ -1925,10 +1845,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 674,
 		onMemory: 'Ghost',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Ghost",
 		itemUser: ["Silvally-Ghost"],
@@ -1949,8 +1866,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Glalie",
 		itemUser: ["Glalie"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	grassgem: {
@@ -1970,10 +1886,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 678,
 		onMemory: 'Grass',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Grass",
 		itemUser: ["Silvally-Grass"],
@@ -2020,8 +1933,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Grimmsnarl",
 		itemUser: ["Grimmsnarl"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	gripclaw: {
@@ -2045,10 +1957,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 473) || pokemon.baseSpecies.num === 473) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 473) || pokemon.baseSpecies.num === 473);
 		},
 		forcedForme: "Giratina-Origin",
 		itemUser: ["Giratina-Origin"],
@@ -2069,10 +1978,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 671,
 		onMemory: 'Ground',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Ground",
 		itemUser: ["Silvally-Ground"],
@@ -2093,8 +1999,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Gyarados",
 		itemUser: ["Gyarados"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	habanberry: {
@@ -2109,7 +2014,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Dragon' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -2139,8 +2043,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Haxorus",
 		itemUser: ["Haxorus"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	healball: {
@@ -2174,8 +2077,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Heracross",
 		itemUser: ["Heracross"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	houndoominite: {
@@ -2185,8 +2087,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Houndoom",
 		itemUser: ["Houndoom"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	hypnotite: {
@@ -2196,8 +2097,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Hypno",
 		itemUser: ["Hypno"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	iapapaberry: {
@@ -2239,10 +2139,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 681,
 		onMemory: 'Ice',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Ice",
 		itemUser: ["Silvally-Ice"],
@@ -2265,10 +2162,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Ice",
 	},
@@ -2295,8 +2189,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Zoroark",
 		itemUser: ["Zoroark"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	inciniumz: {
@@ -2314,8 +2207,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Infernape",
 		itemUser: ["Infernape"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	insectplate: {
@@ -2329,10 +2221,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Bug",
 	},
@@ -2348,7 +2237,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Ground' && target.hasType('Flying')) return 0;
 		},
 		// airborneness negation implemented in sim/pokemon.js:Pokemon#isGrounded
-		onModifySpe(spe) {
+		onModifySpe() {
 			return this.chainModify(0.5);
 		},
 	},
@@ -2363,10 +2252,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Steel",
 	},
@@ -2406,7 +2292,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Ghost' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -2428,7 +2313,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Poison' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -2452,7 +2336,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				target.eatItem();
 			}
 		},
-		onEat(pokemon) {
+		onEat() {
 			this.boost({def: 1});
 		},
 	},
@@ -2463,8 +2347,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Kangaskhan",
 		itemUser: ["Kangaskhan"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	kingsrock: {
@@ -2495,8 +2378,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Klefki",
 		itemUser: ["Klefki"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	kommoniumz: {
@@ -2514,8 +2396,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Krookodile",
 		itemUser: ["Krookodile"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	laggingtail: {
@@ -2550,8 +2431,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Latias",
 		itemUser: ["Latias"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	latiosite: {
@@ -2561,8 +2441,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Latios",
 		itemUser: ["Latios"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	laxincense: {
@@ -2656,7 +2535,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				pokemon.eatItem();
 			}
 		},
-		onEat(pokemon) {
+		onEat() {
 			this.boost({atk: 1});
 		},
 	},
@@ -2666,7 +2545,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 30,
 		},
-		onModifyDamage(damage, source, target, move) {
+		onModifyDamage() {
 			return this.chainModify([0x14CC, 0x1000]);
 		},
 		onAfterMoveSecondarySelf(source, target, move) {
@@ -2711,8 +2590,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Lopunny",
 		itemUser: ["Lopunny"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	lovesweet: {
@@ -2729,8 +2607,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Lucario",
 		itemUser: ["Lucario"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	luckypunch: {
@@ -2829,8 +2706,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Machamp",
 		itemUser: ["Machamp"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	machobrace: {
@@ -2840,7 +2716,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 60,
 		},
-		onModifySpe(spe) {
+		onModifySpe() {
 			return this.chainModify(0.5);
 		},
 	},
@@ -2894,8 +2770,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Manectric",
 		itemUser: ["Manectric"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	marangaberry: {
@@ -2911,7 +2786,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				target.eatItem();
 			}
 		},
-		onEat(pokemon) {
+		onEat() {
 			this.boost({spd: 1});
 		},
 	},
@@ -2935,8 +2810,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Mawile",
 		itemUser: ["Mawile"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	meadowplate: {
@@ -2950,10 +2824,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Grass",
 	},
@@ -2964,8 +2835,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Medicham",
 		itemUser: ["Medicham"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	meganiumite: {
@@ -2975,8 +2845,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Meganium",
 		itemUser: ["Meganium"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	mentalherb: {
@@ -3022,8 +2891,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Meowstic",
 		itemUser: ["Meowstic"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	meowsticitef: {
@@ -3033,8 +2901,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Meowstic-F",
 		itemUser: ["Meowstic-F"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	metagrossite: {
@@ -3044,8 +2911,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Metagross",
 		itemUser: ["Metagross"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	metalcoat: {
@@ -3085,7 +2951,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			pokemon.addVolatile('metronome');
 		},
 		condition: {
-			onStart(pokemon) {
+			onStart() {
 				this.effectData.lastMove = '';
 				this.effectData.numConsecutive = 0;
 			},
@@ -3104,7 +2970,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				}
 				this.effectData.lastMove = move.id;
 			},
-			onModifyDamage(damage, source, target, move) {
+			onModifyDamage() {
 				const dmgMod = [0x1000, 0x1333, 0x1666, 0x1999, 0x1CCC, 0x2000];
 				const numConsecutive = this.effectData.numConsecutive > 5 ? 5 : this.effectData.numConsecutive;
 				return this.chainModify([dmgMod[numConsecutive], 0x1000]);
@@ -3126,8 +2992,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Mewtwo",
 		itemUser: ["Mewtwo"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	mewtwonitey: {
@@ -3137,8 +3002,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Mewtwo",
 		itemUser: ["Mewtwo"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	micleberry: {
@@ -3176,8 +3040,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Mightyena",
 		itemUser: ["Mightyena"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	mimikiumz: {
@@ -3199,10 +3062,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Psychic",
 	},
@@ -3303,8 +3163,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Noivern",
 		itemUser: ["Noivern"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	normalgem: {
@@ -3338,7 +3197,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Fire' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -3384,7 +3242,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTryEatItem(item, pokemon) {
 			if (!this.runEvent('TryHeal', pokemon)) return false;
 		},
-		onEat(pokemon) {
+		onEat() {
 			this.heal(10);
 		},
 	},
@@ -3402,8 +3260,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Palossand",
 		itemUser: ["Palossand"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	pamtreberry: {
@@ -3442,8 +3299,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Pangoro",
 		itemUser: ["Pangoro"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	passhoberry: {
@@ -3458,7 +3314,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Water' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -3480,7 +3335,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Psychic' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -3539,7 +3393,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				pokemon.eatItem();
 			}
 		},
-		onEat(pokemon) {
+		onEat() {
 			this.boost({spa: 1});
 		},
 	},
@@ -3550,8 +3404,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Pidgeot",
 		itemUser: ["Pidgeot"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	pikaniumz: {
@@ -3577,8 +3430,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Pinsir",
 		itemUser: ["Pinsir"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	pixieplate: {
@@ -3592,10 +3444,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Fairy",
 	},
@@ -3636,10 +3485,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 670,
 		onMemory: 'Poison',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Poison",
 		itemUser: ["Silvally-Poison"],
@@ -3665,8 +3511,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Porygon-Z",
 		itemUser: ["Porygon-Z"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	poweranklet: {
@@ -3676,7 +3521,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 70,
 		},
-		onModifySpe(spe) {
+		onModifySpe() {
 			return this.chainModify(0.5);
 		},
 	},
@@ -3687,7 +3532,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 70,
 		},
-		onModifySpe(spe) {
+		onModifySpe() {
 			return this.chainModify(0.5);
 		},
 	},
@@ -3698,7 +3543,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 70,
 		},
-		onModifySpe(spe) {
+		onModifySpe() {
 			return this.chainModify(0.5);
 		},
 	},
@@ -3709,7 +3554,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 70,
 		},
-		onModifySpe(spe) {
+		onModifySpe() {
 			return this.chainModify(0.5);
 		},
 	},
@@ -3735,7 +3580,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 70,
 		},
-		onModifySpe(spe) {
+		onModifySpe() {
 			return this.chainModify(0.5);
 		},
 	},
@@ -3746,7 +3591,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 70,
 		},
-		onModifySpe(spe) {
+		onModifySpe() {
 			return this.chainModify(0.5);
 		},
 	},
@@ -3760,7 +3605,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 68,
 		onTakeItem: false,
 		onCriticalHit: false,
-		onSourceModifyDamage(damage, source, target, move) {
+		onSourceModifyDamage() {
 			return this.chainModify(0.75);
 		},
 		onBoost(boost, target, source, effect) {
@@ -3836,7 +3681,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				return false;
 			}
 		},
-		onSetStatus(status, target, source, effect) {
+		onSetStatus(status, target, source) {
 			if (
 				target !== source && target === this.activePokemon &&
 				this.activeMove && this.activeMove.flags['contact']
@@ -3866,10 +3711,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 680,
 		onMemory: 'Psychic',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Psychic",
 		itemUser: ["Silvally-Psychic"],
@@ -4032,8 +3874,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			pokemon.formeChange('Groudon-Primal', this.effect, true);
 		},
 		onTakeItem(item, source) {
-			if (source.baseSpecies.baseSpecies === 'Groudon') return false;
-			return true;
+			return source.baseSpecies.baseSpecies !== 'Groudon';
 		},
 		itemUser: ["Groudon"],
 	},
@@ -4049,8 +3890,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Giracario",
 		itemUser: ["Giracario"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	ribbonsweet: {
@@ -4072,7 +3912,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Grass' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -4119,10 +3958,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 672,
 		onMemory: 'Rock',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Rock",
 		itemUser: ["Silvally-Rock"],
@@ -4196,7 +4032,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Fairy' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -4227,10 +4062,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Rusted Shield",
 		spritenum: 699,
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 842) || pokemon.baseSpecies.num === 842) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 842) || pokemon.baseSpecies.num === 842);
 		},
 		forcedForme: "Zamazenta-Crowned",
 		itemUser: ["Zamazenta-Crowned"],
@@ -4239,10 +4071,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Rusted Sword",
 		spritenum: 698,
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 841) || pokemon.baseSpecies.num === 841) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 841) || pokemon.baseSpecies.num === 841);
 		},
 		forcedForme: "Zacian-Crowned",
 		itemUser: ["Zacian-Crowned"],
@@ -4254,8 +4083,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Sableye",
 		itemUser: ["Sableye"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	sachet: {
@@ -4276,7 +4104,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 80,
 		},
-		onImmunity(type, pokemon) {
+		onImmunity(type) {
 			if (type === 'sandstorm' || type === 'hail' || type === 'powder') return false;
 		},
 		onTryHit(pokemon, source, move) {
@@ -4306,7 +4134,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				pokemon.eatItem();
 			}
 		},
-		onEat(pokemon) {
+		onEat() {
 			this.boost({spe: 1});
 		},
 	},
@@ -4317,8 +4145,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Salamence",
 		itemUser: ["Salamence"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	samurite: {
@@ -4328,8 +4155,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Samurott",
 		itemUser: ["Samurott"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	sceptilite: {
@@ -4339,8 +4165,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Sceptile",
 		itemUser: ["Sceptile"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	scizorite: {
@@ -4350,8 +4175,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Scizor",
 		itemUser: ["Scizor"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	scopelens: {
@@ -4384,8 +4208,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Serperior",
 		itemUser: ["Serperior"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	sevipetite: {
@@ -4395,8 +4218,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Seviper",
 		itemUser: ["Seviper"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	sharpbeak: {
@@ -4419,8 +4241,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Sharpedo",
 		itemUser: ["Sharpedo"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	shedshell: {
@@ -4458,10 +4279,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		name: "Shock Drive",
 		spritenum: 442,
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 633) || pokemon.baseSpecies.num === 633) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 633) || pokemon.baseSpecies.num === 633);
 		},
 		onDrive: 'Electric',
 		forcedForme: "Genesect-Shock",
@@ -4479,7 +4297,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Ground' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -4553,10 +4370,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Flying",
 	},
@@ -4567,8 +4381,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Slowbro",
 		itemUser: ["Slowbro"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	smoothrock: {
@@ -4684,8 +4497,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Spiritomb",
 		itemUser: ["Spiritomb"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	splashplate: {
@@ -4699,10 +4511,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Water",
 	},
@@ -4717,10 +4526,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Ghost",
 	},
@@ -4780,8 +4586,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Steelix",
 		itemUser: ["Steelix"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	steelgem: {
@@ -4800,10 +4605,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 675,
 		onMemory: 'Steel',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Steel",
 		itemUser: ["Silvally-Steel"],
@@ -4848,10 +4650,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Rock",
 	},
@@ -4876,8 +4675,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Swampert",
 		itemUser: ["Swampert"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	sweetapple: {
@@ -4894,8 +4692,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Swellow",
 		itemUser: ["Swellow"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	talonite: {
@@ -4905,8 +4702,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Talonflame",
 		itemUser: ["Talonflane"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	tangaberry: {
@@ -4921,7 +4717,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Bug' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -5001,8 +4796,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Torterra",
 		itemUser: ["Torterra"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	toxicorb: {
@@ -5029,10 +4823,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Poison",
 	},
@@ -5056,8 +4847,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Typhlosion",
 		itemUser: ["Typhlosion"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	tyranitarite: {
@@ -5067,8 +4857,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Tyranitar",
 		itemUser: ["Tyranitar"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	ultimateeviolite: {
@@ -5168,8 +4957,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Venusaur",
 		itemUser: ["Venusaur"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	vespite: {
@@ -5179,8 +4967,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Vespiquen",
 		itemUser: ["Vespiquen"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	wacanberry: {
@@ -5221,10 +5008,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 677,
 		onMemory: 'Water',
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 757) || pokemon.baseSpecies.num === 757);
 		},
 		forcedForme: "Silvally-Water",
 		itemUser: ["Silvally-Water"],
@@ -5253,7 +5037,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 60,
 			type: "Fairy",
 		},
-		onModifyMove(move, pokemon) {
+		onModifyMove(move) {
 			if(move.category !== 'Status') {
 				move.selfSwitch = true;
 			}
@@ -5265,7 +5049,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				return 0.1;
 			}
 		},
-		onEat(pokemon) { },
+		onEat() { },
 	},
 	waveincense: {
 		name: "Wave Incense",
@@ -5303,8 +5087,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Weavile",
 		itemUser: ["Weavile"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	whippeddream: {
@@ -5412,7 +5195,6 @@ export const Items: {[itemid: string]: ItemData} = {
 			if (move.type === 'Ice' && target.getMoveHitData(move).typeMod > 0) {
 				const hitSub = target.volatiles['substitute'] && !move.flags['authentic'] && !(move.infiltrates);
 				if (hitSub) return;
-
 				if (target.eatItem()) {
 					this.debug('-50% reduction');
 					this.add('-enditem', target, this.effect, '[weaken]');
@@ -5429,8 +5211,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		megaEvolves: "Zangoose",
 		itemUser: ["Zangoose"],
 		onTakeItem(item, source) {
-			if (item.megaEvolves === source.baseSpecies.baseSpecies) return false;
-			return true;
+			return item.megaEvolves !== source.baseSpecies.baseSpecies;
 		},
 	},
 	zapplate: {
@@ -5444,10 +5225,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		onTakeItem(item, pokemon, source) {
-			if ((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479) {
-				return false;
-			}
-			return true;
+			return !((source && source.baseSpecies.num === 479) || pokemon.baseSpecies.num === 479);
 		},
 		forcedForme: "Arceus-Electric",
 	},
@@ -5481,10 +5259,10 @@ export const Items: {[itemid: string]: ItemData} = {
 			this.heal(pokemon.maxhp / 3);
 		},
 		onModifyAtkPriority: 1,
-		onModifyAtk(atk, pokemon) {
+		onModifyAtk() {
 			return this.chainModify(1.5);
 		},
-		onTryAddVolatile(status, pokemon) {
+		onTryAddVolatile(status) {
 			if (['confusion', 'attract', 'taunt', 'torment', 'embargo'].includes(status.id)) return null;
 		},
 		onBasePower(basePower, attacker, defender, move) {

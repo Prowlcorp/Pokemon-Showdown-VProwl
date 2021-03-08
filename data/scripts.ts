@@ -1,4 +1,5 @@
 import type {Dex} from '../sim/dex';
+import {Species} from "../sim/dex-species";
 const CHOOSABLE_TARGETS = new Set(['normal', 'any', 'adjacentAlly', 'adjacentAllyOrSelf', 'adjacentFoe']);
 
 export const Scripts: BattleScriptsData = {
@@ -830,7 +831,7 @@ export const Scripts: BattleScriptsData = {
 
 		return [damage, targets];
 	},
-	tryPrimaryHitEvent(damage, targets, pokemon, move, moveData, isSecondary) {
+	tryPrimaryHitEvent(damage, targets, pokemon, move, moveData) {
 		for (const [i, target] of targets.entries()) {
 			if (!target) continue;
 			damage[i] = this.runEvent('TryPrimaryHit', target, pokemon, moveData);
@@ -1161,22 +1162,31 @@ export const Scripts: BattleScriptsData = {
 		const species = pokemon.baseSpecies;
 		const altForme = species.otherFormes && this.dex.getSpecies(species.otherFormes[0]);
 		const item = pokemon.getItem();
-//		if (item.megaEvolves !== pokemon.baseTemplate.baseSpecies || item.megaStone === pokemon.species) {
-//			return null;
-//		}
-		if(altForme?.isMega && pokemon.level >= 200) {
-			return altForme.name;
-		}
 		// Mega Rayquaza and mew
 		if (altForme?.isMega && altForme?.requiredMove &&
 			pokemon.baseMoves.includes(this.toID(altForme.requiredMove))) {
+			return altForme.name;
+		}
+		if (item.name === "MeowsticiteF" && pokemon.baseSpecies.name === "Meowstic-F") {
+			return "Meowstic-F-Mega";
+		}
+		if (item.name === "Gardeladite" && pokemon.baseSpecies.name === "Seyzar-Tala") {
+			return "Seyzar-Tala-Mega";
+		}
+		if (item.name === "Houndoominite" && pokemon.baseSpecies.name === "Houndoom-Hell") {
+			return null;
+		}
+		if(altForme?.isMega && pokemon.level >= 200) {
 			return altForme.name;
 		}
 		// a hacked-in Megazard X can mega evolve into Megazard Y, but not into Megazard X
 		if (item.megaEvolves === species.baseSpecies && item.megaStone !== species.name) {
 			return item.megaStone;
 		}
-		return null;
+		if (item.megaEvolves !== pokemon.baseSpecies.name || item.megaStone === pokemon.species.name) {
+			return null;
+		}
+		return item.megaStone;
 	},
 
 	canUltraBurst(pokemon) {
@@ -1185,6 +1195,40 @@ export const Scripts: BattleScriptsData = {
 			return "Necrozma-Ultra";
 		}
 		return null;
+	},
+
+	canFormChange(pokemon) {
+		if (pokemon.baseSpecies.name === "Seyzar") {
+			return "Seyzar-Tala";
+		}
+		if (pokemon.baseSpecies.name === "Seyzar-Tala") {
+			return "Seyzar";
+		}
+		if (pokemon.baseSpecies.name === "Seyzar-Mega") {
+			return "Seyzar-Tala-Mega";
+		}
+		if (pokemon.baseSpecies.name === "Seyzar-Tala-Mega") {
+			return "Seyzar-Mega";
+		}
+		return null;
+	},
+
+	runFormChange(pokemon) {
+		const speciesid = pokemon.canFormChange;
+		if (!speciesid) return false;
+		const side = pokemon.side;
+
+		// Pokémon affected by Sky Drop cannot mega evolve. Enforce it here for now.
+		for (const foeActive of side.foe.active) {
+			if (foeActive.volatiles['skydrop'] && foeActive.volatiles['skydrop'].source === pokemon) {
+				return false;
+			}
+		}
+
+		pokemon.formeChange(speciesid, undefined, true);
+
+		this.runEvent('AfterFormChange', pokemon);
+		return true;
 	},
 
 	runMegaEvo(pokemon) {
