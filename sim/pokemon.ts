@@ -45,6 +45,10 @@ export class Pokemon {
 	readonly happiness: number;
 	readonly pokeball: string;
 
+	/** Transform keeps the original pre-transformed Hidden Power in Gen 2-4. */
+	readonly baseHpType: string;
+	readonly baseHpPower: number;
+
 
 	readonly baseMoveSlots: MoveSlot[];
 	moveSlots: MoveSlot[];
@@ -326,6 +330,9 @@ export class Pokemon {
 		const hpData = this.battle.dex.getHiddenPower(this.set.ivs);
 		this.hpType = set.hpType || hpData.type;
 		this.hpPower = hpData.power;
+
+		this.baseHpType = this.hpType;
+		this.baseHpPower = this.hpPower;
 
 		// initialized in this.setSpecies(this.baseSpecies)
 		this.baseStoredStats = null!;
