@@ -10146,15 +10146,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onModifyMove(move, pokemon, target) {
-			switch (target?.effectiveWeather()) {
-			case 'raindance':
-			case 'primordialsea':
-				move.accuracy = true;
-				break;
-			case 'sunnyday':
-			case 'desolateland':
-				move.accuracy = 50;
-				break;
+			if(target && target.effectiveWeather()) {
+				switch (target?.effectiveWeather()) {
+					case 'raindance':
+					case 'primordialsea':
+						move.accuracy = true;
+						break;
+					case 'sunnyday':
+					case 'desolateland':
+						move.accuracy = 50;
+						break;
+				}
 			}
 		},
 		secondary: {
@@ -21855,15 +21857,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onModifyMove(move, pokemon, target) {
-			switch (target?.effectiveWeather()) {
-			case 'raindance':
-			case 'primordialsea':
-				move.accuracy = true;
-				break;
-			case 'sunnyday':
-			case 'desolateland':
-				move.accuracy = 50;
-				break;
+			if(target && target.effectiveWeather()) {
+				switch (target?.effectiveWeather()) {
+					case 'raindance':
+					case 'primordialsea':
+						move.accuracy = true;
+						break;
+					case 'sunnyday':
+					case 'desolateland':
+						move.accuracy = 50;
+						break;
+				}
 			}
 		},
 		secondary: {

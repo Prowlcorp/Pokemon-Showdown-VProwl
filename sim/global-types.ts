@@ -87,7 +87,7 @@ type Effect = Ability | Item | ActiveMove | Species | Condition | Format;
 
 interface CommonHandlers {
 	ModifierEffect: (this: Battle, relayVar: number, target: Pokemon, source: Pokemon, effect: Effect) => number | void;
-	ModifierMove: (this: Battle, relayVar: number, target: Pokemon, source: Pokemon, move: ActiveMove) => number | void;
+	ModifierMove: (this: Battle, relayVar: number | true, target: Pokemon, source: Pokemon, move: ActiveMove) => number | true | void;
 	ResultMove: boolean | (
 		(this: Battle, target: Pokemon, source: Pokemon, move: ActiveMove) => boolean | null | "" | void
 	);

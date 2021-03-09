@@ -2502,8 +2502,11 @@ export class Battle {
 				this.runMove(action.move, action.pokemon, action.targetLoc, action.sourceEffect,
 					action.zmove, undefined, action.originalTarget);
 				break;
-			case 'megaEvo'://CHECK
+			case 'megaEvo':
 				this.runMegaEvo(action.pokemon);
+				break;
+			case 'formChange':
+				this.runFormChange(action.pokemon);
 				break;
 			case 'beforeTurnMove': {
 				if (!action.pokemon.isActive) return false;
@@ -2603,6 +2606,18 @@ export class Battle {
 				if (queuedAction.pokemon === action.pokemon && queuedAction.choice === 'move') {
 					this.queue.list.splice(i, 1);
 					queuedAction.mega = 'done';
+					this.queue.insertChoice(queuedAction, true);
+					break;
+				}
+			}
+			return false;
+		} else if (action.choice === 'formChange') {
+			this.eachEvent('Update');
+			// The action order is recalculated for a Pokémon that form changes.
+			for (const [i, queuedAction] of this.queue.list.entries()) {
+				if (queuedAction.pokemon === action.pokemon && queuedAction.choice === 'move') {
+					this.queue.list.splice(i, 1);
+					queuedAction.formChange = 'done';
 					this.queue.insertChoice(queuedAction, true);
 					break;
 				}
