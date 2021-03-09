@@ -21,6 +21,7 @@ export interface ChosenAction {
 	index?: number; // the chosen index in Team Preview
 	side?: Side; // the action's side
 	mega?: boolean | null; // true if megaing or ultra bursting
+	formchange?: boolean | null; // true if megaing or ultra bursting
 	zmove?: string; // if zmoving, the name of the zmove
 	priority?: number; // priority of the action
 }
@@ -35,6 +36,7 @@ export interface Choice {
 	switchIns: Set<number>; // indexes of pokemon chosen to switch in
 	zMove: boolean; // true if a Z-move has already been selected
 	mega: boolean; // true if a mega evolution has already been selected
+	formChange: boolean; // true if a form change has already been selected
 	ultra: boolean; // true if an ultra burst has already been selected
 }
 
@@ -141,6 +143,7 @@ export class Side {
 				let details = ``;
 				if (action.targetLoc && this.active.length > 1) details += ` ${action.targetLoc > 0 ? '+' : ''}${action.targetLoc}`;
 				if (action.mega) details += (action.pokemon!.item === 'ultranecroziumz' ? ` ultra` : ` mega`);
+				if (action.formchange) details += ` formchange`;
 				if (action.zmove) details += ` zmove`;
 				return `move ${action.moveid}${details}`;
 			case 'switch':
@@ -320,7 +323,7 @@ export class Side {
 		return this.choice.actions.length >= this.active.length;
 	}
 
-	chooseMove(moveText?: string | number, targetLoc = 0, megaOrZ: 'mega' | 'zmove' | 'ultra' | '' = '') {
+	chooseMove(moveText?: string | number, targetLoc = 0, megaOrZ: 'mega' | 'zmove' | 'ultra' | '' = '', formChange: 'formchange' | '' = '') {
 		if (this.requestState !== 'move') {
 			return this.emitChoiceError(`Can't move: You need a ${this.requestState} response`);
 		}
@@ -484,6 +487,10 @@ export class Side {
 		if (ultra && this.choice.ultra) {
 			return this.emitChoiceError(`Can't move: You can only ultra burst once per battle`);
 		}
+		const formchange = (formChange === 'formchange');
+		if (formchange && !pokemon.canFormChange) {
+			return this.emitChoiceError(`Can't move: ${pokemon.name} can't form change`);
+		}
 
 		this.choice.actions.push({
 			choice: 'move',
@@ -492,6 +499,7 @@ export class Side {
 			moveid,
 			mega: mega || ultra,
 			zmove: zMove,
+			formchange: formchange,
 		});
 
 		if (pokemon.maybeDisabled) {
@@ -501,6 +509,7 @@ export class Side {
 		if (mega) this.choice.mega = true;
 		if (ultra) this.choice.ultra = true;
 		if (zMove) this.choice.zMove = true;
+		if	(formchange) this.choice.formChange = true;
 
 		return true;
 	}
@@ -722,6 +731,7 @@ export class Side {
 				const error = () => this.emitChoiceError(`Conflicting arguments for "move": ${original}`);
 				let targetLoc: number | undefined;
 				let megaOrZ: 'mega' | 'zmove' | 'ultra' | '' = '';
+				let formChange: 'formchange' | '' = '';
 				while (true) {
 					// If data ends with a number, treat it as a target location.
 					// We need to special case 'Conversion 2' so it doesn't get
@@ -743,11 +753,18 @@ export class Side {
 						if (megaOrZ) return error();
 						megaOrZ = 'ultra';
 						data = data.slice(0, -6);
+					} else if (data.endsWith(' ultra')) {
+						if (megaOrZ) return error();
+						megaOrZ = 'ultra';
+						data = data.slice(0, -6);
+					} else if (data.endsWith(' formchange')) {
+						formChange = 'formchange';
+						data = data.slice(0, -11);
 					} else {
 						break;
 					}
 				}
-				if (!this.chooseMove(data, targetLoc, megaOrZ)) return false;
+				if (!this.chooseMove(data, targetLoc, megaOrZ, formChange)) return false;
 				break;
 			case 'switch':
 				this.chooseSwitch(data);
