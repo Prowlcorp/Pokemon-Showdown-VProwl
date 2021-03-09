@@ -145,6 +145,7 @@ export const Conditions: {[id: string]: ConditionData} = {
 			if (this.effectData.stage < 15) {
 				this.effectData.stage++;
 			}
+			this.damage(this.clampIntRange(pokemon.baseMaxhp / 16, 1) * this.effectData.stage);
 		},
 	},
 	bld: {
