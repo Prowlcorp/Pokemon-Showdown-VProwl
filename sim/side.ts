@@ -21,7 +21,7 @@ export interface ChosenAction {
 	index?: number; // the chosen index in Team Preview
 	side?: Side; // the action's side
 	mega?: boolean | null; // true if megaing or ultra bursting
-	formchange?: boolean | null; // true if megaing or ultra bursting
+	formchange?: boolean | null; // true if form changing
 	zmove?: string; // if zmoving, the name of the zmove
 	priority?: number; // priority of the action
 }
@@ -118,6 +118,7 @@ export class Side {
 			switchIns: new Set(),
 			zMove: false,
 			mega: false,
+			formChange: false,
 			ultra: false,
 		};
 	}
@@ -323,7 +324,7 @@ export class Side {
 		return this.choice.actions.length >= this.active.length;
 	}
 
-	chooseMove(moveText?: string | number, targetLoc = 0, megaOrZ: 'mega' | 'zmove' | 'ultra' | '' = '', formChange: 'formchange' | '' = '') {
+	chooseMove(moveText?: string | number, targetLoc = 0, megaOrZ: 'mega' | 'zmove' | 'ultra' | '' = '', doFormChange: 'formchange' | '' = '') {
 		if (this.requestState !== 'move') {
 			return this.emitChoiceError(`Can't move: You need a ${this.requestState} response`);
 		}
@@ -487,7 +488,7 @@ export class Side {
 		if (ultra && this.choice.ultra) {
 			return this.emitChoiceError(`Can't move: You can only ultra burst once per battle`);
 		}
-		const formchange = (formChange === 'formchange');
+		const formchange = (doFormChange === 'formchange');
 		if (formchange && !pokemon.canFormChange) {
 			return this.emitChoiceError(`Can't move: ${pokemon.name} can't form change`);
 		}
@@ -696,6 +697,7 @@ export class Side {
 			switchIns: new Set(),
 			zMove: false,
 			mega: false,
+			formChange: false,
 			ultra: false,
 		};
 	}
@@ -731,7 +733,7 @@ export class Side {
 				const error = () => this.emitChoiceError(`Conflicting arguments for "move": ${original}`);
 				let targetLoc: number | undefined;
 				let megaOrZ: 'mega' | 'zmove' | 'ultra' | '' = '';
-				let formChange: 'formchange' | '' = '';
+				let doFormChange: 'formchange' | '' = '';
 				while (true) {
 					// If data ends with a number, treat it as a target location.
 					// We need to special case 'Conversion 2' so it doesn't get
@@ -753,18 +755,14 @@ export class Side {
 						if (megaOrZ) return error();
 						megaOrZ = 'ultra';
 						data = data.slice(0, -6);
-					} else if (data.endsWith(' ultra')) {
-						if (megaOrZ) return error();
-						megaOrZ = 'ultra';
-						data = data.slice(0, -6);
 					} else if (data.endsWith(' formchange')) {
-						formChange = 'formchange';
+						doFormChange = 'formchange';
 						data = data.slice(0, -11);
 					} else {
 						break;
 					}
 				}
-				if (!this.chooseMove(data, targetLoc, megaOrZ, formChange)) return false;
+				if (!this.chooseMove(data, targetLoc, megaOrZ, doFormChange)) return false;
 				break;
 			case 'switch':
 				this.chooseSwitch(data);

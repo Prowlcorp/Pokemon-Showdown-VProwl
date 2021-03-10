@@ -227,6 +227,7 @@ export class BattleQueue {
 		}
 
 		const deferPriority = action.mega && action.mega !== 'done';
+		const deferPriority2 = action.formChange && action.formChange !== 'done';
 		if (action.move) {
 			let target = null;
 			action.move = this.battle.dex.getActiveMove(action.move);
@@ -238,7 +239,7 @@ export class BattleQueue {
 			}
 			action.originalTarget = this.battle.getAtLoc(action.pokemon, action.targetLoc);
 		}
-		if (!deferPriority) this.battle.getActionSpeed(action);
+		if (!deferPriority && !deferPriority2) this.battle.getActionSpeed(action);
 		return actions as any;
 	}
 
