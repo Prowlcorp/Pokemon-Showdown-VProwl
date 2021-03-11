@@ -1210,6 +1210,18 @@ export const Scripts: BattleScriptsData = {
 		if (pokemon.baseSpecies.name === "Seyzar-Tala-Mega") {
 			return "Seyzar-Mega";
 		}
+		if (pokemon.baseSpecies.name === "Agito") {
+			return "Zen";
+		}
+		if (pokemon.baseSpecies.name === "Agito-Mega") {
+			return "Zen-Mega";
+		}
+		if (pokemon.baseSpecies.name === "Zen") {
+			return "Agito";
+		}
+		if (pokemon.baseSpecies.name === "Zen-Mega") {
+			return "Agito-Mega";
+		}
 		return null;
 	},
 
