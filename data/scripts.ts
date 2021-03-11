@@ -1237,7 +1237,7 @@ export const Scripts: BattleScriptsData = {
 			}
 		}
 
-		pokemon.formeChange(speciesid, undefined, true);
+		pokemon.formeChange(speciesid);
 
 		this.runEvent('AfterFormChange', pokemon);
 		return true;
