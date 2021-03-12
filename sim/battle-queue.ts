@@ -210,6 +210,7 @@ export class BattleQueue {
 					}));
 				}
 				if (action.formChange) {
+					this.debug('form change skydrop check');
 					// TODO: Check that the Pokémon is not affected by Sky Drop.
 					// (This is currently being done in `runFormChange`).
 					actions.unshift(...this.resolveAction({

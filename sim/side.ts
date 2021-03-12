@@ -490,6 +490,7 @@ export class Side {
 		}
 		const formchange = (doFormChange === 'formchange');
 		if (formchange && !pokemon.canFormChange) {
+			this.debug('reached cant formchange in choosemove variable is ' + doFormChange);
 			return this.emitChoiceError(`Can't move: ${pokemon.name} can't form change`);
 		}
 
@@ -756,6 +757,7 @@ export class Side {
 						megaOrZ = 'ultra';
 						data = data.slice(0, -6);
 					} else if (data.endsWith(' formchange')) {
+						this.debug('reached side ts choose function');
 						doFormChange = 'formchange';
 						data = data.slice(0, -11);
 					} else {

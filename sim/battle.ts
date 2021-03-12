@@ -2506,6 +2506,7 @@ export class Battle {
 				this.runMegaEvo(action.pokemon);
 				break;
 			case 'formChange':
+				this.debug('before running formchange in battle ts');
 				this.runFormChange(action.pokemon);
 				break;
 			case 'beforeTurnMove': {
@@ -2612,6 +2613,7 @@ export class Battle {
 			}
 			return false;
 		} else if (action.choice === 'formChange') {
+			this.debug('updating turn order in battle ts');
 			this.eachEvent('Update');
 			// The action order is recalculated for a Pokémon that form changes.
 			for (const [i, queuedAction] of this.queue.list.entries()) {
