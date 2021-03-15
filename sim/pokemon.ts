@@ -1098,9 +1098,11 @@ export class Pokemon {
 					} else {
 						this.battle.add('-primal', this);
 					}
-				} else {
+				} else if (source.megaEvolves) {
 					this.battle.add('-mega', this, apparentSpecies, species.requiredItem);
 					this.moveThisTurnResult = true; // Mega Evolution counts as an action for Truant
+				} else {
+					this.battle.add('-formechange', this, species.name, message);
 				}
 			} else if (source.effectType === 'Status') {
 				// Shaymin-Sky -> Shaymin

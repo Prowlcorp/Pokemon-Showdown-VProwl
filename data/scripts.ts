@@ -1198,6 +1198,7 @@ export const Scripts: BattleScriptsData = {
 	},
 
 	canFormChange(pokemon) {
+		const item = pokemon.getItem();
 		if (pokemon.baseSpecies.name === "Seyzar") {
 			return "Seyzar-Tala";
 		}
@@ -1222,6 +1223,12 @@ export const Scripts: BattleScriptsData = {
 		if (pokemon.baseSpecies.name === "Zen-Mega") {
 			return "Agito-Mega";
 		}
+		if (item.name === "Griseous Orb" && pokemon.baseSpecies.name === "Giratina") {
+			return "Giratina-Origin";
+		}
+		if (item.name === "Griseous Orb" && pokemon.baseSpecies.name === "Giratina-Origin") {
+			return "Giratina";
+		}
 		return null;
 	},
 
@@ -1236,7 +1243,7 @@ export const Scripts: BattleScriptsData = {
 			}
 		}
 
-		pokemon.formeChange(speciesid, undefined, true);
+		pokemon.formeChange(speciesid, pokemon.getItem(), true);
 
 		this.runEvent('AfterFormChange', pokemon);
 		return true;

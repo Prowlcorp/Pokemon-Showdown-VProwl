@@ -1959,8 +1959,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem(item, pokemon, source) {
 			return !((source && source.baseSpecies.num === 473) || pokemon.baseSpecies.num === 473);
 		},
-		forcedForme: "Giratina-Origin",
-		itemUser: ["Giratina-Origin"],
+		itemUser: ["Giratina", "Giratina-Origin"],
 	},
 	groundgem: {
 		name: "Ground Gem",
