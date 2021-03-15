@@ -1229,14 +1229,12 @@ export const Scripts: BattleScriptsData = {
 		const speciesid = pokemon.canFormChange;
 		if (!speciesid) return false;
 		const side = pokemon.side;
-		this.debug('beforw form change');
 		// Pokémon affected by Sky Drop cannot mega evolve. Enforce it here for now.
 		for (const foeActive of side.foe.active) {
 			if (foeActive.volatiles['skydrop'] && foeActive.volatiles['skydrop'].source === pokemon) {
 				return false;
 			}
 		}
-		this.debug('beforw form change second');
 
 		pokemon.formeChange(speciesid, undefined, true);
 

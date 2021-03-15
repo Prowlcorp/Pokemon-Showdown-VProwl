@@ -756,6 +756,7 @@ export class Side {
 						megaOrZ = 'ultra';
 						data = data.slice(0, -6);
 					} else if (data.endsWith(' formchange')) {
+						if (doFormChange) return error();
 						doFormChange = 'formchange';
 						data = data.slice(0, -11);
 					} else {

@@ -92,7 +92,7 @@ export interface FieldAction {
 /** A generic action done by a single pokemon */
 export interface PokemonAction {
 	/** action type */
-	choice: 'megaEvo' | 'formChange' | 'shift' | 'runPrimal' | 'runSwitch' | 'event' | 'runUnnerve';
+	choice: 'megaEvo' | 'formChanging' | 'shift' | 'runPrimal' | 'runSwitch' | 'event' | 'runUnnerve';
 	/** priority of the action (lower first) */
 	priority: number;
 	/** speed of pokemon doing action (higher first if priority tie) */
@@ -178,7 +178,7 @@ export class BattleQueue {
 				runPrimal: 102,
 				switch: 103,
 				megaEvo: 104,
-				formChange: 105,
+				formChanging: 105,
 
 				shift: 200,
 				// default is 200 (for moves)
@@ -210,11 +210,10 @@ export class BattleQueue {
 					}));
 				}
 				if (action.formChange) {
-					this.debug('form change skydrop check');
 					// TODO: Check that the Pokémon is not affected by Sky Drop.
 					// (This is currently being done in `runFormChange`).
 					actions.unshift(...this.resolveAction({
-						choice: 'formChange',
+						choice: 'formChanging',
 						pokemon: action.pokemon,
 					}));
 				}

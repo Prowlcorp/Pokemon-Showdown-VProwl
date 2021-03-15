@@ -16065,7 +16065,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					// If it is, then Form Change before moving.
 					if (source.canFormChange) {
 						for (const [actionIndex, action] of this.queue.entries()) {
-							if (action.pokemon === source && action.choice === 'formChange') {
+							if (action.pokemon === source && action.choice === 'formChanging') {
 								this.runFormChange(source);
 								this.queue.list.splice(actionIndex, 1);
 								break;
