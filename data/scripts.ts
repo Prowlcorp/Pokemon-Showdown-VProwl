@@ -1162,6 +1162,18 @@ export const Scripts: BattleScriptsData = {
 		const species = pokemon.baseSpecies;
 		const altForme = species.otherFormes && this.dex.getSpecies(species.otherFormes[0]);
 		const item = pokemon.getItem();
+		if (pokemon.baseSpecies.name === "Seyzar") {
+			return "Seyzar-Tala";
+		}
+		if (pokemon.baseSpecies.name === "Seyzar-Tala") {
+			return "Seyzar";
+		}
+		if (pokemon.baseSpecies.name === "Seyzar-Mega") {
+			return "Seyzar-Tala-Mega";
+		}
+		if (pokemon.baseSpecies.name === "Seyzar-Tala-Mega") {
+			return "Seyzar-Mega";
+		}
 		// Mega Rayquaza and mew
 		if (altForme?.isMega && altForme?.requiredMove &&
 			pokemon.baseMoves.includes(this.toID(altForme.requiredMove))) {
@@ -1199,18 +1211,6 @@ export const Scripts: BattleScriptsData = {
 
 	canFormChange(pokemon) {
 		const item = pokemon.getItem();
-		if (pokemon.baseSpecies.name === "Seyzar") {
-			return "Seyzar-Tala";
-		}
-		if (pokemon.baseSpecies.name === "Seyzar-Tala") {
-			return "Seyzar";
-		}
-		if (pokemon.baseSpecies.name === "Seyzar-Mega") {
-			return "Seyzar-Tala-Mega";
-		}
-		if (pokemon.baseSpecies.name === "Seyzar-Tala-Mega") {
-			return "Seyzar-Mega";
-		}
 		if (pokemon.baseSpecies.name === "Agito") {
 			return "Zen";
 		}
