@@ -1250,7 +1250,7 @@ export const Scripts: BattleScriptsData = {
 	},
 
 	runMegaEvo(pokemon) {
-		const speciesid = pokemon.canMegaEvo || pokemon.canUltraBurst;
+		const speciesid = pokemon.canFormChange;
 		if (!speciesid) return false;
 		const side = pokemon.side;
 
@@ -1261,10 +1261,9 @@ export const Scripts: BattleScriptsData = {
 			}
 		}
 
-		pokemon.formeChange(speciesid, pokemon.getItem(), true);
+		pokemon.formeChange(speciesid);
 
-		pokemon.canMegaEvo = null;
-		this.runEvent('AfterMega', pokemon);
+		this.runEvent('AfterFormChange', pokemon);
 		return true;
 	},
 
