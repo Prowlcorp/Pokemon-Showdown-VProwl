@@ -761,5 +761,29 @@ export const Formats: FormatList = [
 			}
 		},
 	},
-
+	// Special Modes
+	///////////////////////////////////////////////////////////////////
+	{
+		section: "Special Modes",
+		column: 3,
+	},
+	{
+		name: "Abandoned Plant (Dungeon)",
+		debug: true,
+		maxForcedLevel: 50,
+		defaultLevel: 50,
+		teamLength: {
+			validate: [1, 6],
+			battle: 2,
+		},
+		onResidual(pokemon) {
+			if (!pokemon.isSemiInvulnerable() && !pokemon.hasType('Electric') && !pokemon.hasType('Ground')) {
+				let rand = this.random(1, 5);
+				if (rand === 1) pokemon.trySetStatus('par');
+				rand = this.random(1,5);
+				if (rand === 1) this.damage(pokemon.baseMaxhp / 10);
+			}
+		},
+		ruleset: ['Team Preview', 'Cancel Mod', 'Species Clause', 'Item Clause', '2 Ability Clause', 'OHKO Clause'],
+	},
 ];

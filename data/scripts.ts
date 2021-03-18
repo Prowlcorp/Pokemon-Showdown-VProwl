@@ -1162,18 +1162,6 @@ export const Scripts: BattleScriptsData = {
 		const species = pokemon.baseSpecies;
 		const altForme = species.otherFormes && this.dex.getSpecies(species.otherFormes[0]);
 		const item = pokemon.getItem();
-		if (pokemon.baseSpecies.name === "Seyzar") {
-			return "Seyzar-Tala";
-		}
-		if (pokemon.baseSpecies.name === "Seyzar-Tala") {
-			return "Seyzar";
-		}
-		if (pokemon.baseSpecies.name === "Seyzar-Mega") {
-			return "Seyzar-Tala-Mega";
-		}
-		if (pokemon.baseSpecies.name === "Seyzar-Tala-Mega") {
-			return "Seyzar-Mega";
-		}
 		// Mega Rayquaza and mew
 		if (altForme?.isMega && altForme?.requiredMove &&
 			pokemon.baseMoves.includes(this.toID(altForme.requiredMove))) {
@@ -1210,25 +1198,37 @@ export const Scripts: BattleScriptsData = {
 	},
 
 	canFormChange(pokemon) {
-		const item = pokemon.getItem();
-		if (pokemon.baseSpecies.name === "Agito") {
+//		const item = pokemon.getItem();
+		if (pokemon.species.name === "Seyzar") {
+			return "Seyzar-Tala";
+		}
+		if (pokemon.species.name === "Seyzar-Tala") {
+			return "Seyzar";
+		}
+		if (pokemon.species.name === "Seyzar-Mega") {
+			return "Seyzar-Tala-Mega";
+		}
+		if (pokemon.species.name === "Seyzar-Tala-Mega") {
+			return "Seyzar-Mega";
+		}
+		if (pokemon.species.name === "Agito") {
 			return "Zen";
 		}
-		if (pokemon.baseSpecies.name === "Agito-Mega") {
+		if (pokemon.species.name === "Agito-Mega") {
 			return "Zen-Mega";
 		}
-		if (pokemon.baseSpecies.name === "Zen") {
+		if (pokemon.species.name === "Zen") {
 			return "Agito";
 		}
-		if (pokemon.baseSpecies.name === "Zen-Mega") {
+		if (pokemon.species.name === "Zen-Mega") {
 			return "Agito-Mega";
 		}
-		if (item.name === "Griseous Orb" && pokemon.baseSpecies.name === "Giratina") {
+/*		if (item.name === "Griseous Orb" && pokemon.species.name === "Giratina") {
 			return "Giratina-Origin";
 		}
-		if (item.name === "Griseous Orb" && pokemon.baseSpecies.name === "Giratina-Origin") {
+		if (item.name === "Griseous Orb" && pokemon.species.name === "Giratina-Origin") {
 			return "Giratina";
-		}
+		}*/
 		return null;
 	},
 
@@ -1261,9 +1261,9 @@ export const Scripts: BattleScriptsData = {
 			}
 		}
 
-		pokemon.formeChange(speciesid);
+		pokemon.formeChange(speciesid, pokemon.getItem(), true);
 
-
+		pokemon.canMegaEvo = null;
 		this.runEvent('AfterMega', pokemon);
 		return true;
 	},
