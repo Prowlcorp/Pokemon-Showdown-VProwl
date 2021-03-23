@@ -109,7 +109,7 @@ export const Formats: FormatList = [
 		defaultLevel: 100,
 		debug: true,
 		teamLength: {
-			validate: [1, 24],
+			validate: [3, 24],
 			battle: 24,
 		},
 		// no restrictions, for serious (other than team preview)
@@ -776,12 +776,18 @@ export const Formats: FormatList = [
 			validate: [1, 6],
 			battle: 2,
 		},
-		onResidual(pokemon) {
-			if (!pokemon.isSemiInvulnerable() && !pokemon.hasType('Electric') && !pokemon.hasType('Ground')) {
-				let rand = this.random(1, 5);
-				if (rand === 1) pokemon.trySetStatus('par');
-				rand = this.random(1,5);
-				if (rand === 1) this.damage(pokemon.baseMaxhp / 10);
+		onResidual() {
+			for (const side of this.sides) {
+				for (const pokemon of side.active) {
+					if (pokemon && !pokemon.fainted) {
+						if (!pokemon.isSemiInvulnerable() && !pokemon.hasType('Electric') && !pokemon.hasType('Ground')) {
+							let rand = this.random(1, 5);
+							if (rand === 1) pokemon.trySetStatus('par');
+							rand = this.random(1,5);
+							if (rand === 1) this.damage(pokemon.baseMaxhp / 10);
+						}
+					}
+				}
 			}
 		},
 		ruleset: ['Team Preview', 'Cancel Mod', 'Species Clause', 'Item Clause', '2 Ability Clause', 'OHKO Clause'],

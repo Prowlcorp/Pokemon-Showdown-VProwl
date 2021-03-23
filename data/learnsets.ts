@@ -20052,6 +20052,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			roar: ["999M", "999L15"],
 			round: ["999M"],
 			sandstorm: ["999M"],
+			scald: ["999M"],
 			shadowball: ["999M"],
 			shockwave: ["999T"],
 			signalbeam: ["999T"],
