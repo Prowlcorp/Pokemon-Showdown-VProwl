@@ -784,7 +784,7 @@ export const Formats: FormatList = [
 							let rand = this.random(1, 5);
 							if (rand === 1) pokemon.trySetStatus('par');
 							rand = this.random(1,5);
-							if (rand <= 4) this.damage(pokemon.baseMaxhp / 10, pokemon);
+							if (rand === 1) this.damage(pokemon.baseMaxhp / 10, pokemon);
 						}
 					}
 				}
