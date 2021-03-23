@@ -338,7 +338,7 @@ export const DefaultText: {[k: string]: DefaultText} = {
 	hellfire: {
 		start: "  The battlefield set on fire!",
 		end: "  The flames from the battlefield!",
-		damage: "  [POKEMON] is hurt by the Hell Fire!",
+		damage: "  [POKEMON] is hurt by Hell Fire!",
 	},
 	hauntedterrain: {
 		start: "  The battlefield got creepy!",
