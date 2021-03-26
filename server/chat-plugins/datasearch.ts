@@ -96,6 +96,7 @@ export const commands: ChatCommands = {
 						if (toID(a) === 'pu') {
 							orArray.splice(j, 1);
 							orArray.push('untiered');
+							continue;
 						}
 					}
 					targArray[i] = orArray.join('|');
@@ -408,8 +409,8 @@ export const commands: ChatCommands = {
 
 function runDexsearch(target: string, cmd: string, canAll: boolean, message: string) {
 	const searches: DexOrGroup[] = [];
-	const allTiers: {[k: string]: TierTypes.Singles} = Object.assign(Object.create(null), {filler: 'Filler'});
-	const allDoublesTiers: {[k: string]: TierTypes.Doubles} = Object.assign(Object.create(null), {filler: 'Filler'});
+	const allTiers: {[k: string]: TierTypes.Singles | TierTypes.Other} = Object.assign(Object.create(null), {filler: 'Filler'});
+	const allDoublesTiers: {[k: string]: TierTypes.Singles | TierTypes.Other} = Object.assign(Object.create(null), {filler: 'Filler'});
 	const allTypes = Object.create(null);
 	for (const i in Dex.data.TypeChart) {
 		allTypes[toID(i)] = i;
@@ -2110,6 +2111,7 @@ function runLearn(target: string, cmd: string, canAll: boolean, message: string)
 		const sourceNames: {[k: string]: string} = {
 			E: "", S: "event",
 		};
+		const sourcesBefore = setSources.sourcesBefore;
 		if (sources.length) buffer += " only when obtained";
 		buffer += " from:<ul class=\"message-learn-list\">";
 		if (sources.length) {
@@ -2134,7 +2136,24 @@ function runLearn(target: string, cmd: string, canAll: boolean, message: string)
 				}
 			}
 		}
-		if (setSources.babyOnly) {
+		if (sourcesBefore) {
+			const sourceGen = sourcesBefore < gen ? `Gen ${sourcesBefore} or earlier` : `anywhere`;
+			if (moveNames.length === 1) {
+				if (sourcesBefore >= 8) {
+					buffer += `<li>${sourceGen} (move is level-up/tutor/TM/HM/egg in Gen ${sourcesBefore})`;
+				} else {
+					buffer += `<li>${sourceGen} (move is level-up/tutor/TM/HM in Gen ${sourcesBefore})`;
+				}
+			} else if (gen >= 8) {
+				const orEarlier = sourcesBefore < gen ? ` or level-up/tutor/TM/HM in Gen ${sourcesBefore}${
+					sourcesBefore < 7 ? " to 7" : ""
+				}` : ``;
+				buffer += `<li>${sourceGen} (all moves are level-up/tutor/TM/HM/egg in Gen ${sourcesBefore}${orEarlier})`;
+			} else {
+				buffer += `<li>${sourceGen} (all moves are level-up/tutor/TM/HM in Gen ${Math.min(gen, sourcesBefore)}${sourcesBefore < gen ? " to " + gen : ""})`;
+			}
+		}
+		if (setSources.babyOnly && sourcesBefore) {
 			buffer += `<li>must be obtained as ` + Dex.getSpecies(setSources.babyOnly).name;
 		}
 		buffer += "</ul>";
