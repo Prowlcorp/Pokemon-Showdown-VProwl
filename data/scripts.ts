@@ -1199,28 +1199,29 @@ export const Scripts: BattleScriptsData = {
 
 	canFormChange(pokemon) {
 //		const item = pokemon.getItem();
-		if (pokemon.species.name === "Seyzar") {
+		if (pokemon.baseSpecies.name === "Ditto") return null;
+		if (pokemon.species.name === "Seyzar" && pokemon.baseSpecies.name === "Seyzar") {
 			return "Seyzar-Tala";
 		}
-		if (pokemon.species.name === "Seyzar-Tala") {
+		if (pokemon.species.name === "Seyzar-Tala" && pokemon.baseSpecies.name === "Seyzar") {
 			return "Seyzar";
 		}
-		if (pokemon.species.name === "Seyzar-Mega") {
+		if (pokemon.species.name === "Seyzar-Mega" && pokemon.baseSpecies.name === "Seyzar") {
 			return "Seyzar-Tala-Mega";
 		}
-		if (pokemon.species.name === "Seyzar-Tala-Mega") {
+		if (pokemon.species.name === "Seyzar-Tala-Mega" && pokemon.baseSpecies.name === "Seyzar") {
 			return "Seyzar-Mega";
 		}
-		if (pokemon.species.name === "Agito") {
+		if (pokemon.species.name === "Agito" && pokemon.baseSpecies.name === "Agito") {
 			return "Zen";
 		}
-		if (pokemon.species.name === "Agito-Mega") {
+		if (pokemon.species.name === "Agito-Mega" && pokemon.baseSpecies.name === "Agito") {
 			return "Zen-Mega";
 		}
-		if (pokemon.species.name === "Zen") {
+		if (pokemon.species.name === "Zen" && pokemon.baseSpecies.name === "Zen") {
 			return "Agito";
 		}
-		if (pokemon.species.name === "Zen-Mega") {
+		if (pokemon.species.name === "Zen-Mega" && pokemon.baseSpecies.name === "Zen") {
 			return "Agito-Mega";
 		}
 /*		if (item.name === "Griseous Orb" && pokemon.species.name === "Giratina") {
@@ -1233,17 +1234,22 @@ export const Scripts: BattleScriptsData = {
 	},
 
 	runFormChange(pokemon) {
+		this.debug('reaching in runformchange');
 		const speciesid = pokemon.canFormChange;
+		this.debug('reaching in runformchange2');
 		if (!speciesid) return false;
 		const side = pokemon.side;
 		// Pokémon affected by Sky Drop cannot mega evolve. Enforce it here for now.
+		this.debug('reaching in runformchange3');
 		for (const foeActive of side.foe.active) {
+			this.debug('reaching in runformchange3.5');
 			if (foeActive.volatiles['skydrop'] && foeActive.volatiles['skydrop'].source === pokemon) {
 				return false;
 			}
 		}
 
-		pokemon.formeChange(speciesid);
+		this.debug('reaching in runformchange4');
+		pokemon.formeChange(speciesid, pokemon.species, true);
 
 		this.runEvent('AfterFormChange', pokemon);
 		return true;

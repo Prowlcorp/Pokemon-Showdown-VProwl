@@ -1078,16 +1078,18 @@ export class Pokemon {
 
 		const species = this.setSpecies(rawSpecies, source);
 		if (!species) return false;
-
+		this.battle.debug('reaching from runformchange');
 		// The species the opponent sees
 		const apparentSpecies =
 			this.illusion ? this.illusion.species.name : species.baseSpecies;
 		if (isPermanent) {
+			this.battle.debug('reaching from runformchange2');
 			this.baseSpecies = rawSpecies;
 			this.details = species.name + (this.level === 100 ? '' : ', L' + this.level) +
 				(this.gender === '' ? '' : ', ' + this.gender) + (this.set.shiny === "Albino" ? ', albino' : this.set.shiny === "Shiny" ? ', shiny' : '') + (this.set.card === "Albino" ? ', albino' : this.set.card === "Shiny" ? ', shiny' : this.set.card === "Normal" ? ', normal' : '');
 			this.battle.add('detailschange', this, (this.illusion || this).details);
 			if (source.effectType === 'Item') {
+				this.battle.debug('reaching from runformchange3');
 				if (source.zMove) {
 					this.battle.add('-burst', this, apparentSpecies, species.requiredItem);
 					this.moveThisTurnResult = true; // Ultra Burst counts as an action for Truant
@@ -1107,6 +1109,10 @@ export class Pokemon {
 			} else if (source.effectType === 'Status') {
 				// Shaymin-Sky -> Shaymin
 				this.battle.add('-formechange', this, species.name, message);
+			} else {
+				this.battle.debug('reaching from runformchange4');
+				// canFormChange and runFormChange
+				this.battle.add('-formechange', this, species.name, message);
 			}
 		} else {
 			if (source.effectType === 'Ability') {
@@ -1122,6 +1128,7 @@ export class Pokemon {
 			this.setAbility(species.abilities['0'], null, true);
 			this.baseAbility = this.ability;
 		}
+		this.battle.debug('reaching from runformchange5');
 		return true;
 	}
 
