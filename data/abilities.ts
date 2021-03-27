@@ -1371,6 +1371,24 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		name: "Forecast",
 	},
+	foreverstorage: {
+		onAfterUseItem(item, pokemon) {
+			if (pokemon.hp && !pokemon.item && pokemon.lastItem) {
+				pokemon.setItem(pokemon.lastItem);
+				pokemon.lastItem = '';
+				this.add('-item', pokemon, pokemon.getItem(), '[from] ability: Forever Storage');
+			}
+		},
+		onTakeItem(item, pokemon, source) {
+			if (this.suppressingAttackEvents(pokemon) || !pokemon.hp || pokemon.item === 'stickybarb') return;
+			if (!this.activeMove) throw new Error("Battle.activeMove is null");
+			if ((source && source !== pokemon) || this.activeMove.id === 'knockoff') {
+				this.add('-activate', pokemon, 'ability: Sticky Hold');
+				return false;
+			}
+		},
+		name: "Forever Storage"
+	}
 	forewarn: {
 		onStart(pokemon) {
 			let warnMoves: (Move | Pokemon)[][] = [];

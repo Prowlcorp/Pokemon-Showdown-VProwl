@@ -4435,6 +4435,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublesTier: "Filler",
 	},
+	dungeonmimic: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
 	drake: {
 		tier: "Filler",
 		doublesTier: "Filler",

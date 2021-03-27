@@ -15364,6 +15364,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Gains a tail 22 levels since the last. Reach 9 tails.",
 		eggGroups: ["Undiscovered"],
 	},
+	dungeonmimic: {
+		num: 866,
+		name: "Dungeon Mimic",
+		types: ["Normal", "Steel"],
+		gender: "N",
+		baseStats: {hp: 150, atk: 70, def: 110, spa: 100, spd: 80, spe: 40},
+		abilities: {0: "Magic Guard", 1: "Serene Grace", H: "Forever Storage"},
+		heightm: 0.3,
+		weightkg: 4.3,
+		color: "Black",
+		eggGroups: ["Undiscovered"],
+	},
 	giracario: {
 		num: -1,
 		name: "Giracario",

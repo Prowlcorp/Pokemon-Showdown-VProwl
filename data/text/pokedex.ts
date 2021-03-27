@@ -3311,6 +3311,9 @@ export const PokedexText: {[k: string]: PokedexText} = {
 	kerberos: {
 		name: "Kerberos",
 	},
+	dungeonmimic: {
+		name: "Dungeon Mimic",
+	},
 	vee: {
 		name: "Vee",
 	},
@@ -3382,6 +3385,21 @@ export const PokedexText: {[k: string]: PokedexText} = {
 	},
 	draceusfolf: {
 		name: "Draceus Folf",
+	},
+	kyozen: {
+		name: "Kyozen",
+	},
+	seyzar: {
+		name: "Seyzar",
+	},
+	seyzartala: {
+		name: "Seyzar-Tala",
+	},
+	seyzarmega: {
+		name: "Seyzar-Mega",
+	},
+	seyzartalamega: {
+		name: "Seyzar-Tala-Mega",
 	},
 	missingno: {
 		name: "MissingNo.",

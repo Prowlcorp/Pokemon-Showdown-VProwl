@@ -432,6 +432,10 @@ export const AbilitiesText = {
 		desc: "If this Pokemon is a Castform, its type changes to the current weather condition's type. If this Pokemon is holding Utility Umbrella and the weather condition is Sunny Day, Desolate Land, Rain Dance, or Primordial Sea, it will not change types.",
 		shortDesc: "Castform's type changes to the current weather condition's type.",
 	},
+	foreverstorage: {
+		name: "Forever Storage",
+		shortDesc: "This pokemon's item can not be taken or used up.",
+	},
 	forewarn: {
 		name: "Forewarn",
 		desc: "On switch-in, this Pokemon is alerted to the move with the highest power, at random, known by an opposing Pokemon.",

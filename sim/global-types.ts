@@ -215,7 +215,7 @@ interface BattleScriptsData {
 	calcRecoilDamage?: (this: Battle, damageDealt: number, move: Move) => number;
 	canMegaEvo?: (this: Battle, pokemon: Pokemon) => string | undefined | null;
 	canUltraBurst?: (this: Battle, pokemon: Pokemon) => string | null;
-	canFormChange?: (this: Battle, pokemon: Pokemon) => string | null;
+	canFormChange?: (this: Battle, pokemon: Pokemon) => string | undefined | null;
 	canZMove?: (this: Battle, pokemon: Pokemon) => ZMoveOptions | void;
 	forceSwitch?: (
 		this: Battle, damage: SpreadMoveDamage, targets: SpreadMoveTargets, source: Pokemon,
