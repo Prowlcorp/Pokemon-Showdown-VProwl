@@ -5578,6 +5578,37 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Electric",
 		zMove: {boost: {spd: 1}},
 	},
+	eeriespell: {
+		accuracy: 100,
+		basePower: 80,
+		category: "Special",
+		name: "Eerie Spell",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
+		onBasePower(basePower, pokemon) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		secondary: {
+			chance: 100,
+			onHit(target) {
+				if (!target.hp) return;
+				let move: Move | ActiveMove | null = target.lastMove;
+				if (!move || move.isZ) return;
+				if (move.isMax && move.baseMove) move = this.dex.getMove(move.baseMove);
+
+				const ppDeducted = target.deductPP(move.id, 3);
+				if (!ppDeducted) return;
+				this.add('-activate', target, 'move: Eerie Spell', move.name, ppDeducted);
+			},
+		},
+		target: "normal",
+		type: "Psychic",
+	},
 	eggbomb: {
 		accuracy: 75,
 		basePower: 100,
