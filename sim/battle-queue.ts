@@ -39,7 +39,7 @@ export interface MoveAction {
 	/** true if megaing or ultra bursting */
 	mega: boolean | 'done';
 	/** true if form changing */
-	formChange: boolean | 'done';
+	formchange: boolean | 'done';
 	/** if zmoving, the name of the zmove */
 	zmove?: string;
 	/** effect that called the move (eg Instruct) if any */
@@ -209,7 +209,7 @@ export class BattleQueue {
 						pokemon: action.pokemon,
 					}));
 				}
-				if (action.formChange) {
+				if (action.formchange) {
 					// TODO: Check that the Pokémon is not affected by Sky Drop.
 					// (This is currently being done in `runFormChange`).
 					actions.unshift(...this.resolveAction({
@@ -227,7 +227,7 @@ export class BattleQueue {
 		}
 
 		const deferPriority = action.mega && action.mega !== 'done';
-		const deferPriority2 = action.formChange && action.formChange !== 'done';
+		const deferPriority2 = action.formchange && action.formchange !== 'done';
 		if (action.move) {
 			let target = null;
 			action.move = this.battle.dex.getActiveMove(action.move);

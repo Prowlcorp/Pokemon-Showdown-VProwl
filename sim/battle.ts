@@ -2617,7 +2617,7 @@ export class Battle {
 			for (const [i, queuedAction] of this.queue.list.entries()) {
 				if (queuedAction.pokemon === action.pokemon && queuedAction.choice === 'move') {
 					this.queue.list.splice(i, 1);
-					queuedAction.formChange = 'done';
+					queuedAction.formchange = 'done';
 					this.queue.insertChoice(queuedAction, true);
 					break;
 				}
