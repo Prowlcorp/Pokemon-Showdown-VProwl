@@ -36,7 +36,7 @@ export interface Choice {
 	switchIns: Set<number>; // indexes of pokemon chosen to switch in
 	zMove: boolean; // true if a Z-move has already been selected
 	mega: boolean; // true if a mega evolution has already been selected
-	formChange: boolean; // true if a form change has already been selected
+	formchange: boolean; // true if a form change has already been selected
 	ultra: boolean; // true if an ultra burst has already been selected
 }
 
@@ -118,7 +118,7 @@ export class Side {
 			switchIns: new Set(),
 			zMove: false,
 			mega: false,
-			formChange: false,
+			formchange: false,
 			ultra: false,
 		};
 	}
@@ -510,7 +510,7 @@ export class Side {
 		if (mega) this.choice.mega = true;
 		if (ultra) this.choice.ultra = true;
 		if (zMove) this.choice.zMove = true;
-		if	(formchange) this.choice.formChange = true;
+		if	(formchange) this.choice.formchange = true;
 
 		return true;
 	}
@@ -697,7 +697,7 @@ export class Side {
 			switchIns: new Set(),
 			zMove: false,
 			mega: false,
-			formChange: false,
+			formchange: false,
 			ultra: false,
 		};
 	}
