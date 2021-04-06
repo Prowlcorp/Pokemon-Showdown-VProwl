@@ -792,4 +792,150 @@ export const Formats: FormatList = [
 		},
 		ruleset: ['Team Preview', 'Cancel Mod', 'Species Clause', 'Item Clause', '2 Ability Clause', 'OHKO Clause'],
 	},
+	{
+		name: "Abandoned Cinema (Dungeon)", //TEST
+		debug: true,
+		maxForcedLevel: 50,
+		defaultLevel: 50,
+		teamLength: {
+			validate: [1, 6],
+			battle: 2,
+		},
+		onAnyAfterMove(source) {
+			let rand = this.random(1, 8);
+			if (rand === 1) {
+				if (!source.lastMove) return false;
+				const lastMove = source.lastMove;
+				const moveIndex = source.moves.indexOf(lastMove.id);
+				if (
+					lastMove.isZ || lastMove.flags['charge'] || source.volatiles['beakblast'] ||
+					source.volatiles['focuspunch'] || source.volatiles['shelltrap'] ||
+					(source.moveSlots[moveIndex] && source.moveSlots[moveIndex].pp <= 0)
+				) {
+					return false;
+				}
+				this.hint('Movie Magic: Instant Replay!');
+				this.runMove(source.lastMove.id, source, source.lastMoveTargetLoc!);
+			}
+		},
+		onAnyDamage(damage, target, source, effect) {
+			if (effect && effect.effectType === 'Move') {
+				if (this.randomChance(1, 10)) {
+					this.hint('Movie Magic: Stunt Double!');
+					return 0;
+				}
+			}
+		},
+		ruleset: ['Team Preview', 'Cancel Mod', 'Species Clause', 'Item Clause', '2 Ability Clause', 'OHKO Clause'],
+	},
+	{
+		name: "Cryo Cave (Dungeon)",
+		debug: true,
+		maxForcedLevel: 50,
+		defaultLevel: 50,
+		teamLength: {
+			validate: [1, 6],
+			battle: 2,
+		},
+		onResidual() {
+			for (const side of this.sides) {
+				for (const pokemon of side.active) {
+					if (pokemon && !pokemon.fainted) {
+						if (!pokemon.isSemiInvulnerable() && !pokemon.hasType('Ice')) {
+							let rand = this.random(1, 10);
+							if (rand === 1) pokemon.trySetStatus('frz');
+							rand = this.random(1, 4);
+							if (rand === 1) this.damage(pokemon.baseMaxhp / 10, pokemon);
+						}
+					}
+				}
+			}
+		},
+		ruleset: ['Team Preview', 'Cancel Mod', 'Species Clause', 'Item Clause', '2 Ability Clause', 'OHKO Clause'],
+	},
+	{
+		name: "Haunted Castle (Dungeon)",
+		debug: true,
+		maxForcedLevel: 50,
+		defaultLevel: 50,
+		teamLength: {
+			validate: [1, 6],
+			battle: 2,
+		},
+		onResidual() {
+			for (const side of this.sides) {
+				for (const pokemon of side.active) {
+					let statName = 'atk';
+					let bestStat = 0;
+					let s: StatNameExceptHP;
+					for (s in pokemon.storedStats) {
+						if (pokemon.storedStats[s] > bestStat) {
+							statName = s;
+							bestStat = pokemon.storedStats[s];
+						}
+					}
+					this.boost({[statName]: 2}, pokemon);
+				}
+			}
+		},
+		ruleset: ['Team Preview', 'Cancel Mod', 'Species Clause', 'Item Clause', '2 Ability Clause', 'OHKO Clause'],
+	},
+	{
+		name: "Dragon Den (Dungeon)",
+		debug: true,
+		maxForcedLevel: 50,
+		defaultLevel: 50,
+		teamLength: {
+			validate: [1, 6],
+			battle: 2,
+		},
+		onAnyEffectiveness(typeMod, target, type) {
+			if (type === 'Dragon') return 0;
+		},
+		onSetStatus(status, target, source) {
+			if (source && source.side === target.side) {
+				return;
+			}
+			if (target.hasType('Dragon')) {
+				this.add('-message', 'Dragon blood prevents statusing.');
+				return false;
+			}
+		},
+		ruleset: ['Team Preview', 'Cancel Mod', 'Species Clause', 'Item Clause', '2 Ability Clause', 'OHKO Clause'],
+	},
+	{
+		name: "Angel Tower (Dungeon)",
+		debug: true,
+		maxForcedLevel: 50,
+		defaultLevel: 50,
+		teamLength: {
+			validate: [1, 6],
+			battle: 2,
+		},
+		onBegin() {
+			for (const pokemon of this.getAllPokemon()) {
+				if (pokemon.side.id === 'p1') {
+					const species = pokemon.species;
+					const level = pokemon.level + 5;
+					(pokemon as any).level = level;
+					pokemon.set.level = level;
+					pokemon.formeChange(species);
+					pokemon.details = species.name + (level === 100 ? '' : ', L' + level) +
+						(pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny === "Albino" ? ', albino' :
+							pokemon.set.shiny === "Shiny" ? ', shiny' : '') + (pokemon.set.card === "Albino" ? ', albino' :
+							pokemon.set.card === "Shiny" ? ', shiny' : pokemon.set.card === "Normal" ? ', normal' : '');
+
+					this.add('detailschange', pokemon, pokemon.details);
+
+					const newHP = Math.floor(Math.floor(
+						2 * species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100
+					) * level / 100 + 10);
+					pokemon.hp = newHP - (pokemon.maxhp - pokemon.hp);
+					pokemon.maxhp = newHP;
+					this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
+				}
+			}
+		},
+		ruleset: ['Team Preview', 'Cancel Mod', 'Species Clause', 'Item Clause', '2 Ability Clause', 'OHKO Clause'],
+	},
 ];

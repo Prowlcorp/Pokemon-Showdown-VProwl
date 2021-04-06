@@ -309,6 +309,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		end: "  [POKEMON] unleashed its energy!",
 		activate: "  [POKEMON] is storing energy!",
 	},
+	bigbang: {
+		name: "Big Bang",
+		desc: "The user loses HP equal to 33% of the damage dealt by this attack. Resets the field by clearing all hazards, terrains, screens, and weather.",
+		shortDesc: "33% recoil; removes field conditions.",
+	},
 	bijuubomb: {
 		name: "Bijuu Bomb",
 		desc: "This move becomes a Special attack if the user's Special Attack is greater than its Attack, including stat stage changes. Hits physical defense. If this move is successful, the user must recharge on the following turn and cannot select a move.",
@@ -325,6 +330,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Bite",
 		desc: "Has a 30% chance to make the target flinch.",
 		shortDesc: "30% chance to make the target flinch.",
+	},
+	blackbird: {
+		name: "Blackbird",
+		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members, or if the target switched out using an Eject Button or through the effect of the Emergency Exit or Wimp Out Abilities.",
+		shortDesc: "User switches out after damaging the target.",
 	},
 	blackholeeclipse: {
 		name: "Black Hole Eclipse",
@@ -1378,7 +1388,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	flipturn: {
 		name: "Flip Turn",
-		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members, or if the target switched out using an Eject Button or through the effect of the Emergency Exit or Wimp Out Abilities.",
+		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members, or if the target switched out using an Eject Button or through the effect of the Emergency Exit Ability.",
 		shortDesc: "User switches out after damaging the target.",
 	},
 	floralhealing: {
@@ -3125,6 +3135,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "The user cures its burn, poison, or paralysis. Fails if the user is not burned, poisoned, or paralyzed.",
 		shortDesc: "User cures its burn, poison, or paralysis.",
 	},
+	relicdance: {
+		name: "Relic Dance",
+		desc: "Hits twice and ignores type immunities. Before the second hit, the user switches to its Pirouette forme, and this move's second hit deals physical Fighting-type damage. After the second hit, the user reverts to its Aria forme. Fails unless the user is Meloetta.",
+		shortDesc: "Attacks in Aria forme, then in Pirouette forme.",
+	},
 	relicsong: {
 		name: "Relic Song",
 		desc: "Has a 10% chance to cause the target to fall asleep. If this move is successful on at least one target and the user is a Meloetta, it changes to Pirouette Forme if it is currently in Aria Forme, or changes to Aria Forme if it is currently in Pirouette Forme. This forme change does not happen if the Meloetta has the Sheer Force Ability. The Pirouette Forme reverts to Aria Forme when Meloetta is not active.",
@@ -3923,6 +3938,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Deals damage to the target equal to half of its current HP, rounded down, but not less than 1 HP.",
 		shortDesc: "Does damage equal to 1/2 target's current HP.",
 	},
+	supermetronome: {
+		name: "Super Metronome",
+		desc: "Uses 2-5 random moves. Does not include 1-Base Power Z-Moves, Super Metronome, Metronome, or 10-Base Power Max moves.",
+		shortDesc: "Uses 2-5 random moves.",
+	},
 	supernova: {
 		name: "Supernova",
 		desc: "If this move is successful, the user must recharge on the following turn and cannot make a move. Has a 20% chance to burn. Has a 20% chance to cauterize wounds.",
@@ -4268,7 +4288,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	uturn: {
 		name: "U-turn",
-		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members, or if the target switched out using an Eject Button or through the effect of the Emergency Exit or Wimp Out Abilities.",
+		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members, or if the target switched out using an Eject Button or through the effect of the Emergency Exit Ability.",
 		shortDesc: "User switches out after damaging the target.",
 
 		switchOut: "[POKEMON] went back to [TRAINER]!",
@@ -4324,7 +4344,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	voltswitch: {
 		name: "Volt Switch",
-		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members, or if the target switched out using an Eject Button or through the effect of the Emergency Exit or Wimp Out Abilities.",
+		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members, or if the target switched out using an Eject Button or through the effect of the Emergency Exit Ability.",
 		shortDesc: "User switches out after damaging the target.",
 
 		switchOut: "#uturn",

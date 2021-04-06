@@ -221,7 +221,6 @@ export const Formats: {[k: string]: FormatData} = {
 				battlearmor: 'shellarmor',
 				clearbody: 'whitesmoke',
 				dazzling: 'queenlymajesty',
-				emergencyexit: 'wimpout',
 				filter: 'solidrock',
 				gooey: 'tanglinghair',
 				insomnia: 'vitalspirit',

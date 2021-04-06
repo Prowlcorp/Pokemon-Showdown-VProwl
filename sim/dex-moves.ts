@@ -282,6 +282,7 @@ export interface ActiveMove extends MutableMove {
 	stab?: number;
 	statusRoll?: string;
 	totalDamage?: number | false;
+	venomizeBoosted?: boolean;
 	willChangeForme?: boolean;
 	infiltrates?: boolean;
 

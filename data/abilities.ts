@@ -755,6 +755,50 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		name: "Death Stare",
 	},
+	devilsdeal: {
+		onStart(pokemon) {
+			const stats: BoostName[] = [];
+			let stat: BoostName;
+			for (stat in pokemon.boosts) {
+				const noBoost: string[] = ['accuracy', 'evasion'];
+				if (!noBoost.includes(stat) && pokemon.boosts[stat] < 6) {
+					stats.push(stat);
+				}
+			}
+			if (stats.length) {
+				const randomStat = this.sample(stats);
+				const boost: SparseBoostsTable = {};
+				boost[randomStat] = 1;
+				this.boost(boost);
+			}
+			if (this.effectData.immunities) return;
+			const typeList = Object.keys(this.dex.data.TypeChart);
+			for(let type of typeList) {
+				if (pokemon.runImmunity(type)) {
+					typeList.splice(typeList.indexOf(type), 1);
+				}
+			}
+			const firstTypeIndex = this.random(typeList.length);
+			const secondType = this.sample(typeList.slice(0, firstTypeIndex).concat(typeList.slice(firstTypeIndex + 1)));
+			this.effectData.immunities = [typeList[firstTypeIndex], secondType];
+			this.add('-start', pokemon, `${this.effectData.immunities[0]} Immunity`, '[silent]');
+			this.add('-start', pokemon, `${this.effectData.immunities[1]} Immunity`, '[silent]');
+			this.add("-message", `${pokemon.name} is now immune to ${this.effectData.immunities[0]} and ${this.effectData.immunities[1]} type attacks!`);
+		},
+		onTryHit(target, source, move) {
+			if (target !== source && this.effectData.immunities?.includes(move.type)) {
+				this.add('-immune', target, '[from] ability: Devil\'s Deal');
+				return null;
+			}
+		},
+		onEnd(pokemon) {
+			if (!this.effectData.immunities) return;
+			this.add('-end', pokemon, `${this.effectData.immunities[0]} Immunity`, '[silent]');
+			this.add('-end', pokemon, `${this.effectData.immunities[1]} Immunity`, '[silent]');
+			delete this.effectData.immunities;
+		},
+		name: "Devil's Deal",
+	},
 	deepfreeze: {
 		onDamagingHit(damage, target, source, move) {
 			if (move?.flags['contact']) {
@@ -1370,6 +1414,29 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 		},
 		name: "Forecast",
+	},
+	foreverblizzard: {
+		desc: "On switch-in, this Pokemon summons Winter Hail. Winter Hail is hail that also lowers the Speed of non-Ice-type Pokemon by 50%. This weather remains in effect until this Ability is no longer active for any Pokemon, or the weather is changed by Delta Stream, Desolate Land, or Primordial Sea.",
+		shortDesc: "Sets permahail until this Pokemon switches out. Non-Ice: 1/2 Speed",
+		onStart() {
+			this.field.setWeather('winterhail');
+		},
+		onAnySetWeather(target, source, weather) {
+			const strongWeathers = ['desolateland', 'primordialsea', 'deltastream'];
+			if (this.field.getWeather().id === 'winterhail' && !strongWeathers.includes(weather.id)) return false;
+		},
+		onEnd(pokemon) {
+			if (this.field.weatherData.source !== pokemon) return;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (target.hasAbility('winterhail')) {
+					this.field.weatherData.source = target;
+					return;
+				}
+			}
+			this.field.clearWeather();
+		},
+		name: "Forever Blizzard",
 	},
 	foreverstorage: {
 		onAfterUseItem(item, pokemon) {
@@ -2431,6 +2498,17 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		name: "Living Castle",
 	},
+	logia: {
+		// Logia's type-changing itself is implemented in conditions.ts
+		name: "Logia",
+		onTryHit(target, source, move) {
+			const plateType = this.dex.getItem(target.item).onPlate;
+			if (target !== source && (move.type === 'Normal' || plateType === move.type)) {
+				this.add('-immune', target, '[from] ability: Logia');
+				return null;
+			}
+		},
+	},
 	longreach: {
 		onModifyMove(move) {
 			delete move.flags['contact'];
@@ -2720,7 +2798,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 		},
 		onBasePower(basePower, pokemon, target, move) {
-			if (move.multihitType === 'parentalbond' && move.hit > 1) return this.chainModify(0.25);
+			if ((move.multihitType === 'parentalbond' || move.multihitType === 'shadowstrikesealed') && move.hit > 1) return this.chainModify(0.25);
 		},
 	},
 	naturalcure: {
@@ -4829,6 +4907,25 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (move.flags['contact']) delete move.flags['protect'];
 		},
 		name: "Unseen Fist",
+	},
+	venomize: {
+		onModifyTypePriority: -1,
+		onModifyType(move) {
+			const noModifyType = [
+				'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'technoblast', 'terrainpulse', 'weatherball',
+			];
+			if (move.type === 'Normal' && !noModifyType.includes(move.id) && !(move.isZ && move.category !== 'Status')) {
+				move.type = 'Poison';
+				// @ts-ignore
+				move.venomizeBoosted = true;
+			}
+		},
+		onBasePowerPriority: 23,
+		onBasePower(basePower, pokemon, target, move) {
+			// @ts-ignore
+			if (move.venomizeBoosted) return this.chainModify([4915, 4096]);
+		},
+		name: "Venomize",
 	},
 	victorystar: {
 		onAllyModifyMove(move) {

@@ -1,5 +1,6 @@
 import type {Dex} from '../sim/dex';
 import {Species} from "../sim/dex-species";
+import {namefilter} from "../server/chat-plugins/chat-monitor";
 const CHOOSABLE_TARGETS = new Set(['normal', 'any', 'adjacentAlly', 'adjacentAllyOrSelf', 'adjacentFoe']);
 
 export const Scripts: BattleScriptsData = {
@@ -1162,18 +1163,25 @@ export const Scripts: BattleScriptsData = {
 		const species = pokemon.baseSpecies;
 		const altForme = species.otherFormes && this.dex.getSpecies(species.otherFormes[0]);
 		const item = pokemon.getItem();
+		if (pokemon.transformed) return null
 		// Mega Rayquaza and mew
 		if (altForme?.isMega && altForme?.requiredMove &&
 			pokemon.baseMoves.includes(this.toID(altForme.requiredMove))) {
 			return altForme.name;
 		}
-		if (item.name === "MeowsticiteF" && pokemon.baseSpecies.name === "Meowstic-F") {
+		if (item.name === "MeowsticiteF" && pokemon.species.name === "Meowstic-F") {
 			return "Meowstic-F-Mega";
 		}
-		if (item.name === "Gardeladite" && pokemon.baseSpecies.name === "Seyzar-Tala") {
+		if (item.name === "Gardeladite" && pokemon.species.name === "Seyzar-Tala") {
 			return "Seyzar-Tala-Mega";
 		}
-		if (item.name === "Houndoominite" && pokemon.baseSpecies.name === "Houndoom-Hell") {
+		if (item.name === "Lucarionite" && pokemon.species.name === "Agito") {
+			return "Agito-Mega";
+		}
+		if (item.name === "Lucarionite" && pokemon.species.name === "Zen") {
+			return "Zen-Mega";
+		}
+		if (item.name === "Houndoominite" && pokemon.species.name === "Houndoom-Hell") {
 			return null;
 		}
 		if(altForme?.isMega && pokemon.level >= 200) {
@@ -1199,29 +1207,29 @@ export const Scripts: BattleScriptsData = {
 
 	canFormChange(pokemon) {
 //		const item = pokemon.getItem();
-		if (pokemon.baseSpecies.name === "Ditto") return null;
-		if (pokemon.species.name === "Seyzar" && pokemon.baseSpecies.name === "Seyzar") {
+		if (pokemon.transformed) return null
+		if (pokemon.species.id === 'seyzar') {
 			return "Seyzar-Tala";
 		}
-		if (pokemon.species.name === "Seyzar-Tala" && pokemon.baseSpecies.name === "Seyzar") {
+		if (pokemon.species.id === 'seyzartala') {
 			return "Seyzar";
 		}
-		if (pokemon.species.name === "Seyzar-Mega" && pokemon.baseSpecies.name === "Seyzar") {
+		if (pokemon.species.id === 'seyzarmega') {
 			return "Seyzar-Tala-Mega";
 		}
-		if (pokemon.species.name === "Seyzar-Tala-Mega" && pokemon.baseSpecies.name === "Seyzar") {
+		if (pokemon.species.id === 'seyzartalamega') {
 			return "Seyzar-Mega";
 		}
-		if (pokemon.species.name === "Agito" && pokemon.baseSpecies.name === "Agito") {
+		if (pokemon.species.name === "Agito") {
 			return "Zen";
 		}
-		if (pokemon.species.name === "Agito-Mega" && pokemon.baseSpecies.name === "Agito") {
+		if (pokemon.species.name === "Agito-Mega") {
 			return "Zen-Mega";
 		}
-		if (pokemon.species.name === "Zen" && pokemon.baseSpecies.name === "Zen") {
+		if (pokemon.species.name === "Zen") {
 			return "Agito";
 		}
-		if (pokemon.species.name === "Zen-Mega" && pokemon.baseSpecies.name === "Zen") {
+		if (pokemon.species.name === "Zen-Mega") {
 			return "Agito-Mega";
 		}
 /*		if (item.name === "Griseous Orb" && pokemon.species.name === "Giratina") {
@@ -1249,7 +1257,7 @@ export const Scripts: BattleScriptsData = {
 		}
 
 		this.debug('reaching in runformchange4');
-		pokemon.formeChange(speciesid, pokemon.species, true);
+		pokemon.formeChange(speciesid, pokemon.species, true, '[msg]');
 
 		this.runEvent('AfterFormChange', pokemon);
 		return true;

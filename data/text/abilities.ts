@@ -66,6 +66,18 @@ export const AbilitiesText = {
 
 		block: "  [POKEMON] is protected by an aromatic veil!",
 	},
+	asoneseyzar: {
+		name: "As One (Seyzar)",
+		shortDesc: "Element Negate + Beast Boost",
+	},
+	asoneseyzarh: {
+		name: "As One (Seyzar)-H",
+		shortDesc: "Moxie + Soul Heart",
+	},
+	asoneseyzarm: {
+		name: "As One (Seyzar)-M",
+		shortDesc: "Inner Focus + Pixelate",
+	},
 	assassinate: {
 		name: "Assassinate",
 		desc: "This Pokemon deals double damage to a pokemon below half health.",
@@ -292,6 +304,11 @@ export const AbilitiesText = {
 		desc: "While this Pokemon has 1/2 or less of its maximum HP, its Attack and Special Attack are 1.5X and it's speed is doubled.",
 		shortDesc: "While this Pokemon has 1/2 or less of its max HP, its Atk and Sp. Atk are 1.5X and its Spe is doubled.",
 	},
+	devilsdeal: {
+		name: "Devil\'s Deal",
+		desc: "On switch-in, this Pokemon boosts a random stat by 1 stage and gains 2 random type immunities that are displayed to the opponent.",
+		shortDesc: "On switch-in, gains random +1 to stat, 2 random immunities.",
+	},
 	direweb: {
 		name: "Dire Web",
 		desc: "Causes adjacent opposing Pokemon to lose 1/8 of their maximum HP, rounded down, at the end of each turn if they are asleep.",
@@ -431,6 +448,11 @@ export const AbilitiesText = {
 		name: "Forecast",
 		desc: "If this Pokemon is a Castform, its type changes to the current weather condition's type. If this Pokemon is holding Utility Umbrella and the weather condition is Sunny Day, Desolate Land, Rain Dance, or Primordial Sea, it will not change types.",
 		shortDesc: "Castform's type changes to the current weather condition's type.",
+	},
+	foreverblizzard: {
+		name: "Forever Blizzard",
+		desc: "On switch-in, this Pokemon summons Winter Hail. Winter Hail is hail that also lowers the Speed of non-Ice-type Pokemon by 50%. This weather remains in effect until this Ability is no longer active for any Pokemon, or the weather is changed by Delta Stream, Desolate Land, or Primordial Sea.",
+		shortDesc: "Sets permahail until this Pokemon switches out. Non-Ice: 1/2 Speed",
 	},
 	foreverstorage: {
 		name: "Forever Storage",
@@ -729,6 +751,11 @@ export const AbilitiesText = {
 		name: "Living Castle",
 		desc: "This Pokemon cannot be struck by a critical hit and receives 3/4th damage from Super-Effective moves. Rock type moves used by this pokemon get STAB",
 		shortDesc: "This Pokemon cannot be crit and receives 3/4th damage from SE moves. +Rock STAB",
+	},
+	logia: {
+		name: "Logia",
+		desc: "If this Pokemon is an Arceus, its type changes to match its held Plate or Z-Crystal, and it is immune to Normal and same-type moves.",
+		shortDesc: "Arceus: type matches held Plate or Z-Crystal; immunity to Normal and its own type.",
 	},
 	longreach: {
 		name: "Long Reach",
@@ -1183,7 +1210,7 @@ export const AbilitiesText = {
 	},
 	sheerforce: {
 		name: "Sheer Force",
-		desc: "This Pokemon's attacks with secondary effects have their power multiplied by 1.3, but the secondary effects are removed. If a secondary effect was removed, it also removes the user's Life Orb recoil and Shell Bell recovery, and prevents the target's Berserk, Color Change, Emergency Exit, Pickpocket, Wimp Out, Red Card, Eject Button, Kee Berry, and Maranga Berry from activating.",
+		desc: "This Pokemon's attacks with secondary effects have their power multiplied by 1.3, but the secondary effects are removed. If a secondary effect was removed, it also removes the user's Life Orb recoil and Shell Bell recovery, and prevents the target's Berserk, Color Change, Emergency Exit, Pickpocket, Red Card, Eject Button, Kee Berry, and Maranga Berry from activating.",
 		shortDesc: "This Pokemon's attacks with secondary effects have 1.3x power; nullifies the effects.",
 	},
 	shellarmor: {
@@ -1533,6 +1560,11 @@ export const AbilitiesText = {
 		desc: "All of this Pokemon's moves that make contact bypass protection.",
 		shortDesc: "All contact moves hit through protection.",
 	},
+	venomize: {
+		name: "Venomize",
+		desc: "This Pokemon's Normal-type moves become Poison-type moves and have their power multiplied by 1.2. This effect comes after other effects that change a move's type, but before Ion Deluge and Electrify's effects.",
+		shortDesc: "This Pokemon's Normal-type moves become Poison type and have 1.2x power.",
+	},
 	victorystar: {
 		name: "Victory Star",
 		shortDesc: "This Pokemon and its allies' moves have their accuracy multiplied by 1.1.",
@@ -1589,11 +1621,6 @@ export const AbilitiesText = {
 	whitesmoke: {
 		name: "White Smoke",
 		shortDesc: "Prevents other Pokemon from lowering this Pokemon's stat stages.",
-	},
-	wimpout: {
-		name: "Wimp Out",
-		desc: "When this Pokemon has more than 1/2 its maximum HP and takes damage bringing it to 1/2 or less of its maximum HP, it immediately switches out to a chosen ally. This effect applies after all hits from a multi-hit move; Sheer Force prevents it from activating if the move has a secondary effect. This effect applies to both direct and indirect damage, except Curse and Substitute on use, Belly Drum, Pain Split, and confusion damage.",
-		shortDesc: "This Pokemon switches out when it reaches 1/2 or less of its maximum HP.",
 	},
 	wonderguard: {
 		name: "Wonder Guard",

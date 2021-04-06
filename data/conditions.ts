@@ -716,6 +716,30 @@ export const Conditions: {[id: string]: ConditionData} = {
 			this.add('-weather', 'none');
 		},
 	},
+	winterhail: {
+		name: 'Winter Hail',
+		effectType: 'Weather',
+		duration: 0,
+		onStart(battle, source, effect) {
+			this.add('-weather', 'Hail', '[from] ability: ' + effect, '[of] ' + source);
+			this.add('-message', 'It became winter!');
+		},
+		onModifySpe(spe, pokemon) {
+			if (!pokemon.hasType('Ice')) return this.chainModify(0.5);
+		},
+		onResidualOrder: 1,
+		onResidual() {
+			this.add('-weather', 'Hail', '[upkeep]');
+			if (this.field.isWeather('winterhail')) this.eachEvent('Weather');
+		},
+		onWeather(target) {
+			if (target.hasType('Ice')) return;
+			this.damage(target.baseMaxhp / 16);
+		},
+		onEnd() {
+			this.add('-weather', 'none');
+		},
+	},
 	deltastream: {
 		name: 'DeltaStream',
 		effectType: 'Weather',
@@ -742,7 +766,7 @@ export const Conditions: {[id: string]: ConditionData} = {
 
 	// Arceus and Silvally's actual typing is implemented here.
 	// Their true typing for all their formes is Normal, and it's only
-	// Multitype and RKS System, respectively, that changes their type,
+	// Multitype, Logia, and RKS System, respectively, that changes their type,
 	// but their formes are specified to be their corresponding type
 	// in the Pokedex, so that needs to be overridden.
 	// This is mainly relevant for Hackmons Cup and Balanced Hackmons.
@@ -750,9 +774,9 @@ export const Conditions: {[id: string]: ConditionData} = {
 		name: 'Arceus',
 		onTypePriority: 1,
 		onType(types, pokemon) {
-			if (pokemon.transformed || pokemon.ability !== 'multitype') return types;
+			if (pokemon.transformed || (pokemon.ability !== 'multitype' && pokemon.ability !== 'logia')) return types;
 			let type: string | undefined = 'Normal';
-			if (pokemon.ability === 'multitype') {
+			if (pokemon.ability === 'multitype' || pokemon.ability === 'logia') {
 				type = pokemon.getItem().onPlate;
 				if (!type) {
 					type = 'Normal';

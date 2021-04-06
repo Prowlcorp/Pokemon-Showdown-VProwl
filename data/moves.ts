@@ -804,7 +804,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onHit(target) {
 			const noAssist = [
-				'assist', 'banefulbunker', 'beakblast', 'belch', 'bestow', 'bounce', 'celebrate', 'chatter', 'circlethrow', 'copycat', 'counter', 'covet', 'destinybond', 'detect', 'dig', 'dive', 'dragontail', 'endure', 'feint', 'fly', 'focuspunch', 'followme', 'helpinghand', 'holdhands', 'kingsshield', 'legacy shield', 'matblock', 'mefirst', 'metronome', 'mimic', 'mirrorcoat', 'mirrormove', 'naturepower', 'phantomforce', 'protect', 'ragepowder', 'roar', 'satellitedefense', 'shadowforce', 'shelltrap', 'sketch', 'skydrop', 'sleeptalk', 'snatch', 'spikyshield', 'spotlight', 'struggle', 'switcheroo', 'thief', 'transform', 'trick', 'whirlwind',
+				'assist', 'banefulbunker', 'beakblast', 'belch', 'bestow', 'bounce', 'celebrate', 'chatter', 'circlethrow', 'copycat', 'counter', 'covet', 'destinybond', 'detect', 'dig', 'dive', 'dragontail', 'endure', 'feint', 'fly', 'focuspunch', 'followme', 'helpinghand', 'holdhands', 'kingsshield', 'legacy shield', 'matblock', 'mefirst', 'metronome', 'mimic', 'mirrorcoat', 'mirrormove', 'naturepower', 'phantomforce', 'protect', 'ragepowder', 'roar', 'satellitedefense', 'shadowforce', 'shelltrap', 'sketch', 'skydrop', 'sleeptalk', 'snatch', 'spikyshield', 'spotlight', 'struggle', 'supermetronome', 'switcheroo', 'thief', 'transform', 'trick', 'whirlwind',
 			];
 
 			const moves = [];
@@ -1769,6 +1769,53 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "self",
 		type: "Normal",
 	},
+	bigbang: {
+		accuracy: 100,
+		basePower: 120,
+		category: "Special",
+		name: "Big Bang",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onTryMove() {
+			this.attrLastMove('[still]');
+		},
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Extreme Evoboost', source);
+			this.add('-anim', source, 'Light of Ruin', target);
+			this.add('-anim', source, 'Dark Void', target);
+		},
+		onHit(target, source) {
+			let success = false;
+			const removeAll = [
+				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist',
+				'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'minedeploy',
+				'livewire', 'permafrost',
+			];
+			const silentRemove = ['reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist'];
+			for (const sideCondition of removeAll) {
+				if (target.side.removeSideCondition(sideCondition)) {
+					if (!silentRemove.includes(sideCondition)) {
+						this.add('-sideend', target.side, this.dex.getEffect(sideCondition).name, '[from] move: Big Bang', '[of] ' + source);
+					}
+					success = true;
+				}
+				if (source.side.removeSideCondition(sideCondition)) {
+					if (!silentRemove.includes(sideCondition)) {
+						this.add('-sideend', source.side, this.dex.getEffect(sideCondition).name, '[from] move: Big Bang', '[of] ' + source);
+					}
+					success = true;
+				}
+			}
+			this.field.clearTerrain();
+			this.field.clearWeather();
+			return success;
+		},
+		recoil: [33, 100],
+		secondary: null,
+		target: "normal",
+		type: "Fairy",
+	},
 	bijuubomb: {
 		accuracy: 85,
 		basePower: 200,
@@ -1847,6 +1894,26 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Dark",
+	},
+	blackbird: {
+		accuracy: 100,
+		basePower: 70,
+		category: "Special",
+		name: "Blackbird",
+		pp: 20,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		selfSwitch: true,
+		onTryMove() {
+			this.attrLastMove('[still]');
+		},
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Gust', target);
+			this.add('-anim', source, 'Parting Shot', target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "Flying",
 	},
 	blackholeeclipse: {
 		accuracy: true,
@@ -3510,7 +3577,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onHit(pokemon) {
 			const noCopycat = [
-				'assist', 'banefulbunker', 'beakblast', 'behemothbash', 'behemothblade', 'belch', 'bestow', 'celebrate', 'chatter', 'circlethrow', 'copycat', 'counter', 'covet', 'craftyshield', 'destinybond', 'detect', 'dragontail', 'endure', 'feint', 'focuspunch', 'followme', 'helpinghand', 'holdhands', 'kingsshield', 'matblock', 'mefirst', 'metronome', 'mimic', 'mirrorcoat', 'mirrormove', 'naturepower', 'obstruct', 'protect', 'ragepowder', 'roar', 'shelltrap', 'sketch', 'sleeptalk', 'snatch', 'spikyshield', 'spotlight', 'struggle', 'switcheroo', 'thief', 'transform', 'trick', 'whirlwind',
+				'assist', 'banefulbunker', 'beakblast', 'behemothbash', 'behemothblade', 'belch', 'bestow', 'celebrate', 'chatter', 'circlethrow', 'copycat', 'counter', 'covet', 'craftyshield', 'destinybond', 'detect', 'dragontail', 'endure', 'feint', 'focuspunch', 'followme', 'helpinghand', 'holdhands', 'kingsshield', 'matblock', 'mefirst', 'metronome', 'mimic', 'mirrorcoat', 'mirrormove', 'naturepower', 'obstruct', 'protect', 'ragepowder', 'roar', 'shelltrap', 'sketch', 'sleeptalk', 'snatch', 'spikyshield', 'spotlight', 'struggle', 'supermetronome', 'switcheroo', 'thief', 'transform', 'trick', 'whirlwind',
 			];
 			let move: Move | ActiveMove | null = this.lastMove;
 			if (!move) return;
@@ -5599,7 +5666,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (!target.hp) return;
 				let move: Move | ActiveMove | null = target.lastMove;
 				if (!move || move.isZ) return;
-				if (move.isMax && move.baseMove) move = this.dex.getMove(move.baseMove);
 
 				const ppDeducted = target.deductPP(move.id, 3);
 				if (!ppDeducted) return;
@@ -5862,7 +5928,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			noCopy: true, // doesn't get copied by Z-Baton Pass
 			onStart(target) {
 				const noEncore = [
-					'assist', 'copycat', 'encore', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'sketch', 'sleeptalk', 'struggle', 'transform',
+					'assist', 'copycat', 'encore', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'sketch', 'sleeptalk', 'struggle', 'supermetronome', 'transform',
 				];
 				let move: Move | ActiveMove | null = target.lastMove;
 				if (!move) return false;
@@ -10945,7 +11011,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			const lastMove = target.lastMove;
 			const moveIndex = target.moves.indexOf(lastMove.id);
 			const noInstruct = [
-				'assist', 'beakblast', 'bide', 'celebrate', 'copycat', 'focuspunch', 'iceball', 'instruct', 'kingsshield', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'outrage', 'petaldance', 'rollout', 'shelltrap', 'sketch', 'sleeptalk', 'thrash', 'transform',
+				'assist', 'beakblast', 'bide', 'celebrate', 'copycat', 'focuspunch', 'iceball', 'instruct', 'kingsshield', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'outrage', 'petaldance', 'rollout', 'shelltrap', 'sketch', 'sleeptalk', 'supermetronome', 'thrash', 'transform',
 			];
 			if (
 				noInstruct.includes(lastMove.id) || lastMove.isZ ||
@@ -13044,7 +13110,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		noMetronome: [
-			"After You", "Apple Acid", "Assist", "Axe Strike", "Baneful Bunker", "Beak Blast", "Behemoth Bash", "Behemoth Blade", "Belch", "Bestow", "Bijuu Bomb", "Body Press", "Branch Poke", "Breaking Swipe", "Brutal Slice", "Celebrate", "Chatter", "Clangorous Soul", "Copycat", "Counter", "Covet", "Crafty Shield", "Dark Void", "Decorate", "Destiny Bond", "Detect", "Diamond Storm", "Dragon Ascent", "Dragon Energy", "Drum Beating", "Endure", "Evo-Wave Destruction", "False Surrender", "Feint", "Fiery Wrath", "Fleur Cannon", "Focus Punch", "Follow Me", "Freeze Shock", "Freezing Glare", "Grav Apple", "Helping Hand", "Hold Hands", "Hyperspace Fury", "Hyperspace Hole", "Ice Burn", "Instruct", "King's Shield", "Legacy Shield", "Life Dew", "Light of Ruin", "Mat Block", "Me First", "Meteor Assault", "Metronome", "Mimic", "Mind Blown", "Mirror Coat", "Mirror Move", "Moongeist Beam", "Nature Power", "Nature's Madness", "Obstruct", "Origin Pulse", "Overdrive", "Photon Geyser", "Plasma Fists", "Precipice Blades", "Protect", "Pyro Ball", "Quash", "Quick Guard", "Rage Powder", "Relic Song", "Satellite Defense", "Secret Sword", "Shell Trap", "Sketch", "Sleep Talk", "Snarl", "Snatch", "Snore", "Spectral Thief", "Spiky Shield", "Spirit Break", "Spotlight", "Steam Eruption", "Steel Beam", "Struggle", "Sunsteel Strike", "Surging Strikes", "Switcheroo", "Techno Blast", "Thief", "Thousand Arrows", "Thousand Waves", "Thunder Cage", "Thunderous Kick", "Transform", "Trick", "V-create", "Wicked Blow", "Wide Guard",
+			"After You", "Apple Acid", "Assist", "Axe Strike", "Baneful Bunker", "Beak Blast", "Behemoth Bash", "Behemoth Blade", "Belch", "Bestow", "Bijuu Bomb", "Body Press", "Branch Poke", "Breaking Swipe", "Brutal Slice", "Celebrate", "Chatter", "Clangorous Soul", "Copycat", "Counter", "Covet", "Crafty Shield", "Dark Void", "Decorate", "Destiny Bond", "Detect", "Diamond Storm", "Dragon Ascent", "Dragon Energy", "Drum Beating", "Endure", "Evo-Wave Destruction", "False Surrender", "Feint", "Fiery Wrath", "Fleur Cannon", "Focus Punch", "Follow Me", "Freeze Shock", "Freezing Glare", "Grav Apple", "Helping Hand", "Hold Hands", "Hyperspace Fury", "Hyperspace Hole", "Ice Burn", "Instruct", "King's Shield", "Legacy Shield", "Life Dew", "Light of Ruin", "Mat Block", "Me First", "Meteor Assault", "Metronome", "Mimic", "Mind Blown", "Mirror Coat", "Mirror Move", "Moongeist Beam", "Nature Power", "Nature's Madness", "Obstruct", "Origin Pulse", "Overdrive", "Photon Geyser", "Plasma Fists", "Precipice Blades", "Protect", "Pyro Ball", "Quash", "Quick Guard", "Rage Powder", "Relic Song", "Satellite Defense", "Secret Sword", "Shell Trap", "Sketch", "Sleep Talk", "Snarl", "Snatch", "Snore", "Spectral Thief", "Spiky Shield", "Spirit Break", "Spotlight", "Steam Eruption", "Steel Beam", "Struggle", "Sunsteel Strike", "Super Metronome", "Surging Strikes", "Switcheroo", "Techno Blast", "Thief", "Thousand Arrows", "Thousand Waves", "Thunder Cage", "Thunderous Kick", "Transform", "Trick", "V-create", "Wicked Blow", "Wide Guard",
 		],
 		onHit(target, source, effect) {
 			const moves: MoveData[] = [];
@@ -13067,7 +13133,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		secondary: null,
 		target: "self",
-		type: "Normal",
+		type: "???",
 	},
 	milkdrink: {
 		accuracy: true,
@@ -16672,6 +16738,54 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Normal",
 		zMove: {effect: 'heal'},
 	},
+	relicdance: {
+		accuracy: 100,
+		basePower: 60,
+		multihit: 2,
+		category: "Special",
+		name: "Relic Dance",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
+		ignoreImmunity: true,
+		onTryMove() {
+			this.attrLastMove('[still]');
+		},
+		onTryHit(target, pokemon) {
+			this.attrLastMove('[still]');
+			const move = pokemon.species.id === 'meloettapirouette' ? 'Brick Break' : 'Relic Song';
+			this.add('-anim', pokemon, move, target);
+		},
+		onHit(target, pokemon, move) {
+			if (pokemon.species.id === 'meloettapirouette') {
+				pokemon.formeChange('Meloetta');
+			} else if (pokemon.formeChange('Meloetta-Pirouette')) {
+				move.category = 'Physical';
+				move.type = 'Fighting';
+			}
+		},
+		onAfterMove(pokemon) {
+			// Ensure Meloetta goes back to standard form after using the move
+			if (pokemon.species.id === 'meloettapirouette') {
+				pokemon.formeChange('Meloetta');
+			}
+		},
+		condition: {
+			duration: 1,
+			onAfterMoveSecondarySelf(pokemon) {
+				if (pokemon.species.id === 'meloettapirouette') {
+					pokemon.formeChange('Meloetta');
+				} else {
+					pokemon.formeChange('Meloetta-Pirouette');
+				}
+				pokemon.removeVolatile('relicsong');
+			},
+		},
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "Psychic",
+	},
+
 	relicsong: {
 		accuracy: 100,
 		basePower: 75,
@@ -18971,7 +19085,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onHit(pokemon) {
 			const noSleepTalk = [
-				'assist', 'beakblast', 'belch', 'bide', 'celebrate', 'chatter', 'copycat', 'focuspunch', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'shelltrap', 'sketch', 'sleeptalk', 'uproar',
+				'assist', 'beakblast', 'belch', 'bide', 'celebrate', 'chatter', 'copycat', 'focuspunch', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'shelltrap', 'sketch', 'sleeptalk', 'supermetronome', 'uproar',
 			];
 			const moves = [];
 			for (const moveSlot of pokemon.moveSlots) {
@@ -20806,6 +20920,55 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Normal",
+	},
+	supermetronome: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Super Metronome",
+		pp: 10,
+		noPPBoosts: true,
+		priority: 0,
+		flags: {},
+		onBasePower(basePower, pokemon) {
+			if (pokemon.level> 100) {
+				let currentBoost = Math.floor((pokemon.level-100)/10);
+				currentBoost = currentBoost/20+1;
+				return this.chainModify(currentBoost);
+			}
+		},
+		noMetronome: [
+			"After You", "Apple Acid", "Assist", "Axe Strike", "Baneful Bunker", "Beak Blast", "Behemoth Bash", "Behemoth Blade", "Belch", "Bestow", "Bijuu Bomb", "Body Press", "Branch Poke", "Breaking Swipe", "Brutal Slice", "Celebrate", "Chatter", "Clangorous Soul", "Copycat", "Counter", "Covet", "Crafty Shield", "Dark Void", "Decorate", "Destiny Bond", "Detect", "Diamond Storm", "Dragon Ascent", "Dragon Energy", "Drum Beating", "Endure", "Evo-Wave Destruction", "False Surrender", "Feint", "Fiery Wrath", "Fleur Cannon", "Focus Punch", "Follow Me", "Freeze Shock", "Freezing Glare", "Grav Apple", "Helping Hand", "Hold Hands", "Hyperspace Fury", "Hyperspace Hole", "Ice Burn", "Instruct", "King's Shield", "Legacy Shield", "Life Dew", "Light of Ruin", "Mat Block", "Me First", "Meteor Assault", "Metronome", "Mimic", "Mind Blown", "Mirror Coat", "Mirror Move", "Moongeist Beam", "Nature Power", "Nature's Madness", "Obstruct", "Origin Pulse", "Overdrive", "Photon Geyser", "Plasma Fists", "Precipice Blades", "Protect", "Pyro Ball", "Quash", "Quick Guard", "Rage Powder", "Relic Song", "Satellite Defense", "Secret Sword", "Shell Trap", "Sketch", "Sleep Talk", "Snarl", "Snatch", "Snore", "Spectral Thief", "Spiky Shield", "Spirit Break", "Spotlight", "Steam Eruption", "Steel Beam", "Struggle", "Sunsteel Strike", "Super Metronome", "Surging Strikes", "Switcheroo", "Techno Blast", "Thief", "Thousand Arrows", "Thousand Waves", "Thunder Cage", "Thunderous Kick", "Transform", "Trick", "V-create", "Wicked Blow", "Wide Guard",
+		],
+		onTryMove() {
+			this.attrLastMove('[still]');
+		},
+		onPrepareHit(target, source) {
+			this.add('-anim', source, "Metronome", source);
+		},
+		onHit(target, source, effect) {
+			const moves: MoveData[] = [];
+			for (const id in Moves) {
+				const move = Moves[id];
+				if (move.realMove) continue;
+				if (move.isZ && move.basePower === 1) continue;
+				if (effect.noMetronome!.includes(move.name)) continue;
+				moves.push(move);
+			}
+			let randomMove = '';
+			if (moves.length) {
+				moves.sort((a, b) => a.num! - b.num!);
+				randomMove = this.sample(moves).name;
+			}
+			if (!randomMove) {
+				return false;
+			}
+			this.useMove(randomMove, target);
+		},
+		multihit: [2, 5],
+		secondary: null,
+		target: "self",
+		type: "???",
 	},
 	supernova: {
 		accuracy: 100,
@@ -24597,4 +24760,90 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Flying",
 	},
+/*
+	// Level 51
+	nextlevelstrats: {
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		desc: "The user gains 5 levels upon using this move, which persist upon switching out.",
+		shortDesc: "User gains 5 levels.",
+		name: "Next Level Strats",
+		isNonstandard: "Custom",
+		pp: 5,
+		priority: 0,
+		flags: {snatch: 1},
+		onTryMove() {
+			this.attrLastMove('[still]');
+		},
+		onPrepareHit(target, source) {
+			this.add('-anim', source, "Nasty Plot", target);
+		},
+		onHit(pokemon) {
+			const species = pokemon.species;
+			const level = pokemon.level + 5;
+			(pokemon as any).level = level;
+			pokemon.set.level = level;
+			pokemon.formeChange(species);
+
+			pokemon.details = species.name + (level === 100 ? '' : ', L' + level) +
+				(pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny ? ', shiny' : '');
+			this.add('detailschange', pokemon, pokemon.details);
+
+			const newHP = Math.floor(Math.floor(
+				2 * species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100
+			) * level / 100 + 10);
+			pokemon.hp = newHP - (pokemon.maxhp - pokemon.hp);
+			pokemon.maxhp = newHP;
+			this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
+
+			this.add('-message', `${pokemon.name} advanced 5 levels! It is now level ${level}!`);
+		},
+		secondary: null,
+		target: "self",
+		type: "Normal",
+
+	},
+
+	// Coconut
+	devolutionbeam: {
+		accuracy: 100,
+		basePower: 80,
+		category: "Special",
+		desc: "If the target Pokemon is evolved, this move will reduce the target to its first-stage form. If the target Pokemon is single-stage or is already in its first-stage form, this move lowers all of the opponent's stats by 1. Hits Ghost types.",
+		shortDesc: "Devolves evolved mons;-1 all stats to LC.",
+		name: "Devolution Beam",
+		gen: 8,
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1},
+		ignoreImmunity: {'Normal': true},
+		onTryMove() {
+			this.attrLastMove('[still]');
+		},
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Psywave', target);
+		},
+		onHit(target, source, move) {
+			let species = target.species;
+			if (species.isMega) species = this.dex.getSpecies(species.baseSpecies);
+			const ability = target.ability;
+			const isSingleStage = (species.nfe && !species.prevo) || (!species.nfe && !species.prevo);
+			if (!isSingleStage) {
+				let prevo = species.prevo;
+				if (this.dex.getSpecies(prevo).prevo) {
+					prevo = this.dex.getSpecies(prevo).prevo;
+				}
+				target.formeChange(prevo, this.effect);
+				target.canMegaEvo = null;
+				target.setAbility(ability);
+			} else {
+				this.boost({atk: -1, def: -1, spa: -1, spd: -1, spe: -1}, target, source);
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Normal",
+	},
+ */
 };
