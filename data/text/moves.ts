@@ -421,6 +421,11 @@ export const MovesText: {[k: string]: MoveText} = {
 
 		prepare: "[POKEMON] sprang up!",
 	},
+	brace: {
+		name: "Brace",
+		desc: "Lowers the user's Attack and Special Attack and raises the user's Defense and Special Defense. Until the end of the next turn the user is immune to critical hits",
+		shortDesc: "Immune to critical hits for 2 turns. Lowers Atk and Sp. Atk, raises Def and Sp. Def.",
+	},
 	branchpoke: {
 		name: "Branch Poke",
 		desc: "No additional effect.",
@@ -940,6 +945,16 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Lowers the user's Special Attack by 2 stages.",
 		shortDesc: "Lowers the user's Sp. Atk by 2.",
 	},
+	draflame: {
+		name: "Draflame",
+		desc: "This move combines Fire in its type effectiveness against the target. Has a 10% chance to burn the target.",
+		shortDesc: "Combines Fire in its type effectiveness. 10% brn chance",
+	},
+	drafrost: {
+		name: "Drafrost",
+		desc: "This move combines Ice in its type effectiveness against the target. Has a 10% chance to freeze the target.",
+		shortDesc: "Combines Ice in its type effectiveness. 10% frz chance",
+	},
 	dragonascent: {
 		name: "Dragon Ascent",
 		desc: "Lowers the user's Defense and Special Defense by 1 stage.",
@@ -1280,11 +1295,6 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Has a 10% chance to burn the target and a 10% chance to make it flinch.",
 		shortDesc: "10% chance to burn. 10% chance to make the target flinch.",
 	},
-	firelash: {
-		name: "Fire Lash",
-		desc: "Has a 100% chance to lower the target's Defense by 1 stage.",
-		shortDesc: "100% chance to lower the target's Defense by 1.",
-	},
 	firepledge: {
 		name: "Fire Pledge",
 		desc: "If one of the user's allies chose to use Grass Pledge or Water Pledge this turn and has not moved yet, it takes its turn immediately after the user and the user's move does nothing. If combined with Grass Pledge, the ally uses Fire Pledge with 150 power and a sea of fire appears on the target's side for 4 turns, which causes damage to non-Fire types equal to 1/8 of their maximum HP, rounded down, at the end of each turn during effect, including the last turn. If combined with Water Pledge, the ally uses Water Pledge with 150 power and a rainbow appears on the user's side for 4 turns, which doubles secondary effect chances but does not stack with the Serene Grace Ability. When used as a combined move, this move gains STAB no matter what the user's type is. This move does not consume the user's Fire Gem.",
@@ -1343,6 +1353,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Flame Impact",
 		desc: "No additional effect.",
 		shortDesc: "Usually goes first.",
+	},
+	flamelash: {
+		name: "Flame Lash",
+		desc: "Has a 10% chance to burn the opponent or cause them to flinch.",
+		shortDesc: "10% chance to brn or flinch.",
 	},
 	flamewheel: {
 		name: "Flame Wheel",
@@ -1429,7 +1444,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	focuspunch: {
 		name: "Focus Punch",
-		desc: "The user loses its focus and does nothing if it is hit by a damaging attack this turn before it can execute the move.",
+		desc: "The user loses its focus and does nothing if it is hit by an attack that does atleast 10% damage this turn before it can execute the move.",
 		shortDesc: "Fails if the user takes damage before it hits.",
 
 		start: "  [POKEMON] is tightening its focus!",
@@ -1491,6 +1506,16 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Frost Breath",
 		desc: "This move is always a critical hit unless the target is under the effect of Lucky Chant or has the Battle Armor or Shell Armor Abilities.",
 		shortDesc: "Always results in a critical hit.",
+	},
+	frostflame: {
+		name: "Frostflame",
+		desc: "This move combines Ice in its type effectiveness against the target. Has a 30% chance to burn and a 10% chance to freeze the target.",
+		shortDesc: "Combines Ice in its type effectiveness. 30% brn, 10% frz",
+	},
+	frostlash: {
+		name: "Frost Lash",
+		desc: "Has a 10% chance to freeze the opponent or cause them to flinch.",
+		shortDesc: "10% chance to frz or flinch.",
 	},
 	frustration: {
 		name: "Frustration",
@@ -2093,6 +2118,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Prevents the user and the target from switching out. The user and the target can still switch out if either of them is holding Shed Shell or uses Baton Pass, Flip Turn, Parting Shot, Teleport, U-turn, or Volt Switch. If the target leaves the field using Baton Pass, the replacement will remain trapped. The effect ends if either the user or the target leaves the field.",
 		shortDesc: "Prevents both user and target from switching out.",
 	},
+	jetstrike: {
+		name: "Jet Strike",
+		desc: "No additional effect.",
+		shortDesc: "Usually goes first.",
+	},
 	judgment: {
 		name: "Judgment",
 		desc: "This move's type depends on the user's held Plate.",
@@ -2109,6 +2139,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Karate Chop",
 		desc: "Has a higher chance for a critical hit.",
 		shortDesc: "High critical hit ratio.",
+	},
+	karmabeam: {
+		name: "Karma Beam",
+		desc: "If the user was struck by a super-effective move immediately prior to its use, Karma Beam will deal double damage.",
+		shortDesc: "Last received hit S.E: Double damage.",
 	},
 	kinesis: {
 		name: "Kinesis",
@@ -2167,6 +2202,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Leaf Blade",
 		desc: "Has a higher chance for a critical hit. Has a 20% chance to cause bleeding.",
 		shortDesc: "High critical hit ratio. 20% chance to cause bleed.",
+	},
+	leafshield: {
+		name: "Leaf Shield",
+		desc: "Raises the user's Defense and Special Defense by 1 stage. If the weather is Sunny Day or Desolate Land, this move raises the user's Defense and Special Defense by 2 stages. If the user is holding Utility Umbrella, this move will only raise the user's Attack and Special Attack by 1 stage, even if the weather is Sunny Day or Desolate Land.",
+		shortDesc: "Raises user's Defense and Sp. Def by 1; 2 in Sun.",
 	},
 	leafstorm: {
 		name: "Leaf Storm",
@@ -2870,6 +2910,11 @@ export const MovesText: {[k: string]: MoveText} = {
 
 		activate: "  [POKEMON] is about to be attacked by its [ITEM]!",
 	},
+	possession: {
+		name: "Possession",
+		desc: "Damage is calculated using the target's Attack stat, including stat stage changes. The user's Ability and item, are used as normal.",
+		shortDesc: "Uses target's Attack stat in damage calculation.",
+	},
 	pound: {
 		name: "Pound",
 		shortDesc: "No additional effect.",
@@ -3175,6 +3220,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "The power of this move is 20 if X is 33 to 48, 40 if X is 17 to 32, 80 if X is 10 to 16, 100 if X is 5 to 9, 150 if X is 2 to 4, and 200 if X is 0 or 1, where X is equal to (user's current HP * 48 / user's maximum HP), rounded down.",
 		shortDesc: "More power the less HP the user has left.",
 	},
+	risingdragon: {
+		name: "Rising Dragon",
+		desc: "This move combines Fighting in its type effectiveness against the target. This move can hit a target using Bounce, Fly, or Sky Drop, or is under the effect of Sky Drop. 20% chance to lower the target's Defense.",
+		shortDesc: "20% chance -Def. Combines Fighting in its type effectiveness. Can hit Pokemon using Bounce, Fly, or Sky Drop.",
+	},
 	risingvoltage: {
 		name: "Rising Voltage",
 		desc: "If the current terrain is Electric Terrain and the target is grounded, this move's power is doubled.",
@@ -3465,6 +3515,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Shivering Conduct",
 		desc: "Has a 10% chance to burn the target and a 10% chance to make it flinch.",
 		shortDesc: "10% chance to burn. 10% chance to make the target flinch.",
+	},
+	shocklash: {
+		name: "Shock Lash",
+		desc: "Has a 10% chance to paralyze the opponent or cause them to flinch.",
+		shortDesc: "10% chance to para or flinch.",
 	},
 	shockwave: {
 		name: "Shock Wave",
@@ -4108,6 +4163,10 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Power doubles if the user is grounded and a terrain is active, and this move's type changes to match. Electric type during Electric Terrain, Grass type during Grassy Terrain, Fairy type during Misty Terrain, and Psychic type during Psychic Terrain.",
 		shortDesc: "User on terrain: power doubles, type varies.",
 	},
+	terrorize: {
+		name: "Terrorize",
+		shortDesc: "Terrorize inflicts damage and has a 10% chance of causing confusion.",
+	},
 	thief: {
 		name: "Thief",
 		desc: "If this attack was successful and the user has not fainted, it steals the target's held item if the user is not holding one. The target's item is not stolen if it is a Mail or Z-Crystal, or if the target is a Kyogre holding a Blue Orb, a Groudon holding a Red Orb, a Giratina holding a Griseous Orb, an Arceus holding a Plate, a Genesect holding a Drive, a Silvally holding a Memory, or a Pokemon that can Mega Evolve holding the Mega Stone for its species. Items lost to this move cannot be regained with Recycle or the Harvest Ability.",
@@ -4172,10 +4231,22 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Has a 10% chance to paralyze the target.",
 		shortDesc: "10% chance to paralyze the target.",
 	},
+	thundervice: {
+		name: "Thunder Vice",
+		desc: "Prevents the target from switching. 10% chance to paralyze and/or flinch the target.",
+		shortDesc: "Traps the target. May paralyze or flinch the target.",
+
+		start: "  [SOURCE] trapped [POKEMON]!",
+	},
 	thunderwave: {
 		name: "Thunder Wave",
 		desc: "Paralyzes the target. This move does not ignore type immunity.",
 		shortDesc: "Paralyzes the target.",
+	},
+	thundrill: {
+		name: "Thundrill",
+		desc: "Ignores the target's stat stage changes, including evasiveness. Has a 10% chance to paralyze the target.",
+		shortDesc: "Ignores the target's stat stage changes. 10% chance to paralyze the target.",
 	},
 	tickle: {
 		name: "Tickle",

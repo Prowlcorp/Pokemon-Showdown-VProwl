@@ -4439,6 +4439,127 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Filler",
 		doublesTier: "Filler",
 	},
+	desoula: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	necrow: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	vultergyst: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	cubzero: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	avalynx: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	necronite: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	gravollum: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	shibalbat: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	coltergeist: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	fantasmare: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	foliat: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	florabri: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	floressum: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	kidling: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	pyroat: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	flairees: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	tazeel: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	thundrunag: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	thundrunagf: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	drakid: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	draciple: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	drathero: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	phlask: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	noxial: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	noxialexothermic: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	fumighast: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	chihaha: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	howlequin: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	quetzar: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+	quetzarspace: {
+		tier: "Filler",
+		doublesTier: "Filler",
+	},
+
 	drake: {
 		tier: "Filler",
 		doublesTier: "Filler",

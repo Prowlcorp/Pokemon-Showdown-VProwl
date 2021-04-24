@@ -642,7 +642,6 @@ export const commands: ChatCommands = {
 						Height: `${pokemon.heightm} m`,
 					};
 					details["Weight"] = `${pokemon.weighthg / 10} kg <em>(${weighthit} BP)</em>`;
-					if (pokemon.color) details["Dex Colour"] = pokemon.color;
 					if (pokemon.eggGroups) details["Egg Group(s)"] = pokemon.eggGroups.join(", ");
 					const evos: string[] = [];
 					for (const evoName of pokemon.evos) {

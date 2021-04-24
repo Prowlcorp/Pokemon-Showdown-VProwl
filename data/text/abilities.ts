@@ -211,6 +211,15 @@ export const AbilitiesText = {
 		desc: "If this Pokemon has a stat stage raised it is lowered instead, and vice versa. This Ability does not affect stat stage increases received from Z-Power effects that happen before a Z-Move is used.",
 		shortDesc: "If this Pokemon has a stat stage raised it is lowered instead, and vice versa.",
 	},
+	conundrum: {
+		name: "Conundrum",
+		desc: "When a Pokémon with Conundrum is hit by a move that makes contact, there is a 30% chance that the attacking foe will become confused.",
+		shortDesc: "Contact: 30% confuse",
+	},
+	convergence: {
+		name: "Convergence",
+		shortDesc: "Moves with secondary effectiveness get 1.5X power.",
+	},
 	corrosion: {
 		name: "Corrosion",
 		shortDesc: "This Pokemon can poison or badly poison other Pokemon regardless of their typing.",
@@ -332,6 +341,11 @@ export const AbilitiesText = {
 		desc: "On switch-in, this Pokemon's Attack or Special Attack is raised by 1 stage based on the weaker combined defensive stat of all opposing Pokemon. Attack is raised if their Defense is lower, and Special Attack is raised if their Special Defense is the same or lower.",
 		shortDesc: "On switch-in, Attack or Sp. Atk is raised 1 stage based on the foes' weaker Defense.",
 	},
+	draconate: {
+		name: "Draconate",
+		desc: "This Pokemon's Normal-type moves become Dragon-type moves and have their power multiplied by 1.2. This effect comes after other effects that change a move's type, but before Ion Deluge and Electrify's effects.",
+		shortDesc: "This Pokemon's Normal-type moves become Dragon-type and have 1.2x power.",
+	},
 	dragonforce: {
 		name: "Dragon Force",
 		desc: "This Pokemon's dragon-type attacks have their power multiplied by 1.5.",
@@ -363,6 +377,11 @@ export const AbilitiesText = {
 		name: "Early Bird",
 		shortDesc: "This Pokemon's sleep counter drops by 2 instead of 1.",
 	},
+	eccentric: {
+		name: "Eccentric",
+		desc: "This Pokemon's Special Attack is multiplied by 1.5 and the accuracy of its special attacks is multiplied by 0.8.",
+		shortDesc: "This Pokemon's Special Attack is 1.5x and accuracy of its special attacks is 0.8x.",
+	},
 	effectspore: {
 		name: "Effect Spore",
 		desc: "30% chance a Pokemon making contact with this Pokemon will be poisoned, paralyzed, or fall asleep.",
@@ -392,6 +411,14 @@ export const AbilitiesText = {
 		desc: "Prevents adjacent opposing Pokemon from choosing to switch out unless they are immune to trapping or are airborne.",
 		shortDesc: "Non-Airborne foes can't switch. +2 Def, SpD if damaged by a Water-type move.",
 	},
+	eventide: {
+		name: "Eventide",
+		shortDesc: "Day: 2X Def. Night: 2X Sp. Atk",
+	},
+	eventidenight: {
+		name: "Eventide (Night)",
+		shortDesc: "Day: 2X Def. Night: 2X Sp. Atk",
+	},
 	fairyaura: {
 		name: "Fairy Aura",
 		desc: "While this Pokemon is active, the power of Fairy-type moves used by active Pokemon is multiplied by 1.33.",
@@ -402,6 +429,13 @@ export const AbilitiesText = {
 	fastlearner: {
 		name: "Fast Learner",
 		shortDesc: "No competitive use. Double exp gain.",
+	},
+	feedback: {
+		name: "Feedback",
+		desc: "Pokemon attacking this Pokemon from a distance lose 1/8 of their maximum HP, rounded down.",
+		shortDesc: "Non-Contact damage with this Pokemon lose 1/8 of their max HP.",
+
+		damage: "  [POKEMON] was hurt!",
 	},
 	filter: {
 		name: "Filter",
@@ -928,6 +962,10 @@ export const AbilitiesText = {
 		name: "Pastel Veil",
 		shortDesc: "This Pokemon and its allies cannot be poisoned. On switch-in, cures poisoned allies.",
 	},
+	perforate: {
+		name: "Perforate",
+		shortDesc: "STAB attacks by this pokemon are not resisted and ignore immunity.",
+	},
 	pickpocket: {
 		name: "Pickpocket",
 		desc: "If this Pokemon has no item and is hit by a contact move, it steals the attacker's item. This effect applies after all hits from a multi-hit move; Sheer Force prevents it from activating if the move has a secondary effect.",
@@ -1165,6 +1203,10 @@ export const AbilitiesText = {
 		name: "Savage Strike",
 		desc: "This pokemon's moves power up the lower its health gets.",
 		shortDesc: "The more hurt this pokemon is the stronger its moves are.",
+	},
+	scavenger: {
+		name: "Scavenger",
+		shortDesc: "KO: Recover 25% max hp",
 	},
 	schooling: {
 		name: "Schooling",

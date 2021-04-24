@@ -379,6 +379,30 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		name: "Blaze",
 	},
+/*	braveheart: {
+		//intended to be +1 atk when foe boosts each stage
+		//Raises the Pokémon's Attack each time it's foe raises one of its stats. Increased the attack by one stage for each stat increased.
+		onAfterEachBoost(boost, target, source, effect) {
+			if (!source || target.side === source.side) {
+				if (effect.id === 'stickyweb') {
+					this.hint("Court Change Sticky Web counts as lowering your own Speed, and Competitive only affects stats lowered by foes.", true, source.side);
+				}
+				return;
+			}
+			let statsLowered = false;
+			let i: BoostName;
+			for (i in boost) {
+				if (boost[i]! < 0) {
+					statsLowered = true;
+				}
+			}
+			if (statsLowered) {
+				this.add('-ability', target, 'Brave Heart');
+				this.boost({atk: 1}, target, target, null, true);
+			}
+		},
+		name: "Brave Heart",
+	},*/
 	bulletproof: {
 		onTryHit(pokemon, target, move) {
 			if (move.flags['bullet']) {
@@ -602,6 +626,28 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 		},
 		name: "Contrary",
+	},
+	conundrum: {
+		onDamagingHit(damage, target, source, move) {
+			if (move.flags['contact']) {
+				if (this.randomChance(3, 10)) {
+					source.addVolatile('confusion', this.effectData.target);
+				}
+			}
+		},
+		name: "Conundrum",
+	},
+	convergence: {
+		onBasePowerPriority: 21,
+		onBasePower(basePower, attacker, defender, move) {
+			if (['axestrike', 'bijuubomb', 'bloodscythe', 'draininghold', 'flyingpress',  'muddywater',
+			'drafrost', 'draflame', 'frostflame', 'risingdragon'].includes(move.id)) {
+				return this.chainModify(1.5);
+			} else if (this.field.isTerrain('niflheim')) {
+				return this.chainModify(1.5);
+			}
+		},
+		name: "Convergence",
 	},
 	corrosion: {
 		// Implemented in sim/pokemon.js:Pokemon#setStatus
@@ -1019,6 +1065,23 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		name: "Download",
 	},
+	draconate: {
+		onModifyTypePriority: -1,
+		onModifyType(move) {
+			const noModifyType = [
+				'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'technoblast', 'terrainpulse', 'weatherball',
+			];
+			if (move.type === 'Normal' && !noModifyType.includes(move.id) && !(move.isZ && move.category !== 'Status')) {
+				move.type = 'Dragon';
+				move.draconateBoosted = true;
+			}
+		},
+		onBasePowerPriority: 23,
+		onBasePower(basePower, pokemon, target, move) {
+			if (move.draconateBoosted) return this.chainModify([0x1333, 0x1000]);
+		},
+		name: "Draconate",
+	},
 	dragonforce: {
 		onBasePowerPriority: 8,
 		onBasePower(basePower, attacker, defender, move) {
@@ -1110,6 +1173,20 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Early Bird",
 		// Implemented in statuses.js
 	},
+	eccentric: {
+		// This should be applied directly to the stat as opposed to chaining with the others
+		onModifyAtkPriority: 5,
+		onModifySpA(spa) {
+			return this.modify(spa, 1.5);
+		},
+		onSourceModifyAccuracyPriority: 7,
+		onSourceModifyAccuracy(accuracy, target, source, move) {
+			if (move.category === 'Special' && typeof accuracy === 'number') {
+				return accuracy * 0.8;
+			}
+		},
+		name: "Eccentric",
+	},
 	effectspore: {
 		onDamagingHit(damage, target, source, move) {
 			if (move.flags['contact'] && !source.status && source.runStatusImmunity('powder')) {
@@ -1198,6 +1275,20 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		name: "Eternal Beach",
 	},
+	eventide: {
+		onModifyDefPriority: 5,
+		onModifyDef() {
+			return this.chainModify(2);
+		},
+		name: "Eventide",
+	},
+	eventidenight: {
+		onModifySpAPriority: 5,
+		onModifySpA() {
+			return this.chainModify(2);
+		},
+		name: "Eventide (Night)",
+	},
 	fairyaura: {
 		onStart(pokemon) {
 			this.add('-ability', pokemon, 'Fairy Aura');
@@ -1214,6 +1305,15 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	fastlearner: {
 		name: "Fast Learner",
+	},
+	feedback: {
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!move.flags['contact']) {
+				this.damage(source.maxhp / 8, source, target);
+			}
+		},
+		name: "Feed Back",
 	},
 	filter: {
 		onSourceModifyDamage(damage, source, target, move) {
@@ -3109,6 +3209,15 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		name: "Pastel Veil",
 	},
+	perforate: {
+		onEffectiveness(typeMod, target, type, move) {
+			move.ignoreImmunity = true;
+			if (target && target.runEffectiveness(move) >= 2) {
+				return 0;
+			}
+		},
+		name: "Perforate",
+	},
 	pickpocket: {
 		onAfterMoveSecondary(target, source, move) {
 			if (source && source !== target && move?.flags['contact']) {
@@ -3804,6 +3913,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 		},
 		name: "Savage Strike",
+	},
+	scavenger: {
+		onSourceAfterFaint(length, target, source, effect) {
+			if (effect && effect.effectType === 'Move') {
+				this.heal(source.baseMaxhp / 4);
+			}
+		},
+		name: "Scavenger",
 	},
 	schooling: {
 		onStart(pokemon) {
@@ -5184,3 +5301,16 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Zen Mode",
 	},
 };
+
+/* Added abilities:
+acceleration, alluring garden, asoneseyzar(seyzar), assassinate, bijuu boost, brave heart(broken), chillingsonata, 
+climate zero, colonize, contradict, conundrum, convergence, crisis evolution(vee), death stare, devils deal, 
+deep freeze, deepsea mine, dire web, diva shock, draconate, dragon force, dreams embrace, eccentric, elementalist, 
+element negate, eternal beach, eventide, fast learner, feedback, first forge, forever blizzard, forever storage, 
+gigaton force, gracidea mastery, haunted house, healer heart, heated combat, heavens guidance, hell field, 
+holy toxin, hyper subwoofer, living castle, logia, mine deployment, misdirection, molten scale, otherworld lure, 
+perforate, polarity surge, power chord, regality, relentless attack, restrained rage, sand defense, savage strike, 
+scavenger, shadow strike(sealed), shatter strike, shining aria, silent killer, speed formation, steel breaker, 
+super brain, super download, suresword, temperamental, third eye, trance touch, triple threat, twin terror, 
+ultimate sparring, unbending blade, venomize, volt conduit, war cry
+*/

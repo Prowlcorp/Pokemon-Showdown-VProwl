@@ -164,7 +164,6 @@ export const commands: ChatCommands = {
 			Gen: '' + mixedSpecies.gen,
 			Height: mixedSpecies.heightm + " m",
 			Weight: mixedSpecies.weighthg / 10 + " kg <em>(" + weighthit + " BP)</em>",
-			"Dex Colour": mixedSpecies.color,
 		};
 		if (mixedSpecies.eggGroups) details["Egg Group(s)"] = mixedSpecies.eggGroups.join(", ");
 		details['<font color="#686868">Does Not Evolve</font>'] = "";
@@ -360,7 +359,6 @@ export const commands: ChatCommands = {
 			"Dex#": mixedSpecies.num,
 			Height: mixedSpecies.heightm + " m",
 			Weight: mixedSpecies.weighthg / 10 + " kg <em>(" + weighthit + " BP)</em>",
-			"Dex Colour": mixedSpecies.color,
 		};
 		if (mixedSpecies.eggGroups) details["Egg Group(s)"] = mixedSpecies.eggGroups.join(", ");
 		details['<font color="#686868">Does Not Evolve</font>'] = "";

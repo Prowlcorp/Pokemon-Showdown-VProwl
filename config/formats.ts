@@ -769,6 +769,7 @@ export const Formats: FormatList = [
 	},
 	{
 		name: "Abandoned Plant (Dungeon)",
+		desc: `Special field: Paralysis and damage`,
 		debug: true,
 		maxForcedLevel: 50,
 		defaultLevel: 50,
@@ -794,6 +795,7 @@ export const Formats: FormatList = [
 	},
 	{
 		name: "Abandoned Cinema (Dungeon)", //TEST
+		desc: `Special field: Attack replays and decoys`,
 		debug: true,
 		maxForcedLevel: 50,
 		defaultLevel: 50,
@@ -830,6 +832,7 @@ export const Formats: FormatList = [
 	},
 	{
 		name: "Cryo Cave (Dungeon)",
+		desc: `Special field: Freeze and damage`,
 		debug: true,
 		maxForcedLevel: 50,
 		defaultLevel: 50,
@@ -855,6 +858,7 @@ export const Formats: FormatList = [
 	},
 	{
 		name: "Haunted Castle (Dungeon)",
+		desc: `Special field: Lower stat each turn`,
 		debug: true,
 		maxForcedLevel: 50,
 		defaultLevel: 50,
@@ -882,6 +886,7 @@ export const Formats: FormatList = [
 	},
 	{
 		name: "Dragon Den (Dungeon)",
+		desc: `Special field: Dragons cannot be hit by SE or statused. Priestess challenge`,
 		debug: true,
 		maxForcedLevel: 50,
 		defaultLevel: 50,
@@ -905,6 +910,7 @@ export const Formats: FormatList = [
 	},
 	{
 		name: "Angel Tower (Dungeon)",
+		desc: `Special field: Dungeon is camomons`,
 		debug: true,
 		maxForcedLevel: 50,
 		defaultLevel: 50,
@@ -912,7 +918,7 @@ export const Formats: FormatList = [
 			validate: [1, 6],
 			battle: 2,
 		},
-		onBegin() {
+/*		onBegin() {
 			for (const pokemon of this.getAllPokemon()) {
 				if (pokemon.side.id === 'p1') {
 					const species = pokemon.species;
@@ -935,6 +941,21 @@ export const Formats: FormatList = [
 					this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
 				}
 			}
+		},*/
+		onModifySpecies(species, target, source, effect) {
+			if (!target) return; // Chat command
+			if (effect && ['imposter', 'transform'].includes(effect.id)) return;
+			if (target.side.id !== 'p1') return;
+			const types = [...new Set(target.baseMoveSlots.slice(0, 2).map(move => this.dex.getMove(move.id).type))];
+			return {...species, types: types};
+		},
+		onSwitchIn(pokemon) {
+			if (pokemon.side.id !== 'p1') return;
+			this.add('-start', pokemon, 'typechange', pokemon.getTypes(true).join('/'), '[silent]');
+		},
+		onAfterMega(pokemon) {
+			if (pokemon.side.id !== 'p1') return;
+			this.add('-start', pokemon, 'typechange', pokemon.getTypes(true).join('/'), '[silent]');
 		},
 		ruleset: ['Team Preview', 'Cancel Mod', 'Species Clause', 'Item Clause', '2 Ability Clause', 'OHKO Clause'],
 	},

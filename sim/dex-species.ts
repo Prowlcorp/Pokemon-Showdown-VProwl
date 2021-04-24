@@ -139,8 +139,6 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	readonly weighthg: number;
 	/** Height (in m). */
 	readonly heightm: number;
-	/** Color. */
-	readonly color: string;
 	/** True if a pokemon is mega. */
 	readonly isMega?: boolean;
 	/** True if a pokemon is primal. */
@@ -231,7 +229,6 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.weightkg = data.weightkg || 0;
 		this.weighthg = this.weightkg * 10;
 		this.heightm = data.heightm || 0;
-		this.color = data.color || '';
 		this.maxHP = data.maxHP || undefined;
 		this.isMega = !!(this.forme && ['Mega', 'Mega-X', 'Mega-Y'].includes(this.forme)) || undefined;
 		this.battleOnly = data.battleOnly || (this.isMega ? this.baseSpecies : undefined);
